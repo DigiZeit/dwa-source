@@ -1765,15 +1765,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 		                    }
 		                  });
 		  				
-		  				  DigiWebApp.ServiceAppController.deleteBookings(
-		  						    deleteBuchungsIds
-		  						  , function() {
-		  						    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.");
-		  						  }
-		  						  , function() {
-		  							  	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.");
-		  						  }
-		  				  );
+		  				if (DigiWebApp.SettingsController.featureAvailable('417')) {
+							DigiWebApp.ServiceAppController.deleteBookings(
+								    deleteBuchungsIds
+								  , function() {
+								    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.");
+								  }
+								  , function() {
+									  	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.");
+									  }
+							);
+		  				}
 
 		  				  // Buchungsselektion erneuern
 		                  DigiWebApp.SelectionController.resetSelection();
