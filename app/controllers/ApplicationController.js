@@ -594,7 +594,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
 	    	alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-	    	//alert("nach ApplicationController.init");
+	    	alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
 	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
@@ -874,6 +874,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         alert("suche nach offener Buchung");
         // gibt es eine offene Buchung?
         var bookings = DigiWebApp.Booking.find();
+        alert("typeof(bookings)=" + typeof(bookings));
+        alert("bookings.length=" + bookings.length);
         if(bookings.length > 0) {
             var isCurrentBookingAvailable = NO;
             for(var i = 0; i < bookings.length; i++) {
