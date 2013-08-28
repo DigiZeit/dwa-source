@@ -876,11 +876,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         var bookings = DigiWebApp.Booking.find();
         alert("typeof(bookings)=" + typeof(bookings));
         alert("bookings.length=" + bookings.length);
-        if(bookings.length > 0) {
+        if (bookings.length > 0) {
             var isCurrentBookingAvailable = NO;
-            for(var i = 0; i < bookings.length; i++) {
+            for (var i = 0; i < bookings.length; i++) {
+            	alert("in for i=" + i);
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
-                if(bookings[i].get('isCurrent') === YES) {
+                if (bookings[i].get('isCurrent') === YES) {
+                	alert("currentBooking found");
                 	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
                 	isCurrentBookingAvailable = YES;
                     break;
@@ -888,11 +890,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
             if(isCurrentBookingAvailable === YES) {
+            	alert("go to BookTimePage");
             	DigiWebApp.NavigationController.toBookTimePage();
                 return;
             }
         }
-
+        
+        alert("startsync");
 		this.startsync();
         
     }
