@@ -592,7 +592,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	});
 	
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
-	    	alert("vor ApplicationController.init");
+	    	alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
