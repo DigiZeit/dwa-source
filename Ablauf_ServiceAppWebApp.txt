@@ -1,0 +1,32 @@
+1. KnockKnock: implementiert OK (evtl. später "RequestInterval" als Antwort der ServiceApp auswerten (Zukunftsmusik))
+
+2. Alle WAIT-Buchungen von ServiceApp Aktualisierungen GETen
+
+3. Übergabeverzeichnis leeren (alte ServiceAppWebApp-Files löschen)
+
+4. Falls: Start einer Buchung:
+	a. falls GPS-Enabled && ServiceApp_availabe && ServiceApp_getGPS:
+		a.1. PUT Buchung ohne <status> - Antwort: WAIT oder OK (dann mit oder ohne location)
+	    a.2. falls engeKopplung GET Buchung mit Koordinaten bis GPS-Timeout, dann weiter ohne location (bis <status> != WAIT)
+		     sonst weiter ohne location, aber mit Status WAIT in Buchung, dass ServiceApp Koordinaten liefert
+	b. fertig
+	
+5. Falls: Beende Buchung:
+	a. POST Buchung ohne <status>: Antwort: WAIT oder OK (mit oder ohne location)
+		a.1 falls (Arbeitsende && AutoÜbertragungNachFeierabend) || AutoÜbertragungNachBuchung || engeKopplung:
+				GET bis GPS-Timeout
+					falls nach TimeOut immernoch WAIT: ohne Location auf OK setzen
+
+6. If !Arbeitsende 
+		GoTo 4.
+   Else
+		GoTo 7.
+   Fi
+   
+7. GET WAIT-Buchungen
+
+8. Datenübertragung
+	falls allo OK: senden und GoTo 9.
+	sonst: Meldung "Mind. eine Buchung ist noch unvollständig und wartet auf Daten der ServiceApp."
+	
+9. nach Datenübertragung: Alle SentBookings mit DELETE zur ServiceApp

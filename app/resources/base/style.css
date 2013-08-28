@@ -1,0 +1,1284 @@
+
+body {
+    background: #003366 !important;
+    background-color: #003366 !important;
+    background-position:right bottom !important;
+    background-repeat:repeat-y !important;
+    background-attachment:fixed !important; 
+}
+
+/*
+
+.ui-mobile-viewport-transitioning,
+.ui-mobile-viewport-transitioning .ui-page {
+    overflow: visible !important;
+}
+
+.ui-page * {    
+		-webkit-backface-visibility: hidden !important;
+		   -moz-backface-visibility: hidden !important;
+		    -ms-backface-visibility: hidden !important;
+		     -o-backface-visibility: hidden !important;
+		        backface-visibility: hidden !important;
+}
+
+.ui-page * {    
+		-webkit-backface-visibility: visible !important;
+		   -moz-backface-visibility: visible !important;
+		    -ms-backface-visibility: visible !important;
+		     -o-backface-visibility: visible !important;
+		        backface-visibility: visible !important;
+}
+
+*/
+
+/* TextShadows
+.ui-body-c, .ui-dialog.ui-overlay-c {
+	color: #333;
+	text-shadow: 1px 1px 0 #aaa !important;
+}
+
+.ui-btn-text .ui-btn-c {
+	text-shadow: 1px 1px 0 #ccc!important;
+}
+*/
+
+.ui-header .ui-btn-left {
+	margin-top: 0px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
+}
+
+.ui-li-has-arrow .ui-btn-inner a.ui-link-inherit, 
+.ui-li-static.ui-li-has-arrow {
+	padding-right: 0px;
+}
+
+/*.ui-icon-loading{
+	background:url(images/ajax-loader_digi-transparent.gif) !important;
+}*/
+
+.ui-page {    
+	background: url('images/320x480_90_DIGI-WebApp.png');
+    background-color: #003366 !important;
+    background-position:right bottom !important;
+    background-repeat:repeat-y !important;
+	background-attachment:fixed !important; 
+
+	/*  funktioniert leider nicht mit transitions:    
+    top: 40px !important;
+	*/
+
+}
+
+.w320 { background: url('images/320x480_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w480 { background: url('images/480x800_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w640 { background: url('images/640x960_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w800 { background: url('images/800x1280_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w1024 { background: url('images/1024x1024_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w1080 { background: url('images/1080x1920_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w1536 { background: url('images/1536x2048_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.w5000 { background: url('images/5000x5000_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+
+/* SCHOLPP-Branding */
+.SCHOLPP_w320 { background: url('images/320x480_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w480 { background: url('images/480x800_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w640 { background: url('images/640x960_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w800 { background: url('images/800x1280_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1024 { background: url('images/1024x1024_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1080 { background: url('images/1080x1920_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1536 { background: url('images/1536x2048_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w5000 { background: url('images/5000x5000_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+
+.infoLabel a, 
+.infoLabel a:hover, 
+.infoLabel a:active, 
+.infoLabel a:visited {
+    text-decoration: underline;
+    color: #FFFFFF !important;
+    font-weight: normal !important;
+}
+
+/* SPLASH SCREEN STYLES */
+.appTitle {
+    font-size: 3.0em;
+    font-weight:800;
+    text-align: center;
+    margin-top:20%;
+}
+
+.infoBox {
+    text-align: center;
+}
+
+.infoMsg {
+}
+
+.logoInfoPage {
+    width: 100%;
+}
+
+.logoSplashPage {
+	display: block;
+    width: 92%;
+    margin-top: 14px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+/* END OF SPLASH SCREEN STYLES */
+
+img.photo {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 75%;
+}
+
+img.audioIcon {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 75%
+}
+
+[data-role="content"] {
+    text-shadow: none;
+}
+
+/* custom button */
+[data-theme="digiButton"] {
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #000000;
+}
+
+[data-theme="digiButton"] span.ui-btn-inner {
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.ui-content .digiButton {
+    position: relative;
+    height: 40px;
+}
+
+.ui-content .digiButton .icon {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.ui-content .digiButton .icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.ui-content .digiButton.hack .icon {
+    top: -25px;
+}
+
+/* custom scholppButton */
+[data-theme="scholppButton"] 
+{
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    font-weight: bold;
+    font-size: 10px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #000000;
+    height: 70px;
+    opacity: 0.7;
+}
+
+[data-theme="scholppButton"] span.ui-btn-inner
+{
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.ui-content .scholppButton {
+    position: relative;
+    height: 60px;
+    padding-bottom: 15px;
+}
+
+.ui-content .scholppButton .buttonSelected {
+    background: green;
+    color: #ffffff;
+		/* frei gewaehlter Name*/
+        -webkit-animation-name: white_to_green;   
+        /* Abspieldauer  in Sekunden*/
+        -webkit-animation-duration: .5s;
+        /* Wiederholungen in Zahlen*/   
+        -webkit-iteration-count: 1; 
+        /* Verhalten am Ende bei Wiederholungen mit: normal / reverse / alternate / alternate-reverse */
+        -webkit-animation-direction: normal; 
+        /* Animatioskurve mit: ease / ease-in / ease-out / ease-in-out / liner / bezier */
+        -webkit-animation-timing-function: linear;
+        /* Fill-Mode für den Effekt bei einem Delay sichtbar mit: none / forwards / backwards / both */
+        animation-fill-mode: forwards;
+}
+
+.ui-content .scholppButton .icon img 
+{
+    width: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: -58px;
+    position: relative;
+}
+
+.scholppButtonMenuIcon.ui-li-thumb
+{ 
+    width: 48px;
+    top: 15px;
+    left: 15px;
+}
+
+.buttonDashboardPage [data-theme="scholppButton"] span.ui-btn-inner {
+	font-size: 25px;
+	top: 5px;
+	text-align: right;
+	margin-right: 15px;
+}
+
+.ui-content .scholppButton.hack .icon {
+    top: -25px;
+}
+
+@-webkit-keyframes white_to_green {
+        0% {
+            background-color:white;
+        }
+        50% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        100% {
+            border-width: 0px;
+            background-color:green;
+        }
+ }
+ 
+/* end custom scholppButton */
+
+label.ui-input-text, .ui-controlgroup-label {
+	color: #ffffff;
+}
+
+.header {
+    font-size: 20px;
+    border: 0px;
+    height: 40px;
+    padding-top: 5px;
+	/*  funktioniert leider nicht mit transitions:    
+    position: fixed !important;
+    top: 0px !important;
+    margin-bottom: 40px;
+    */
+}
+
+.dashboardPage .ui-content .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.dashboardPage .ui-content .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.dashboardPage .ui-content li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.dashboardPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.dashboardPage .ui-content .ui-grid-b:nth-child(3) {
+    margin-top: 20px;
+}
+
+/*.dashboardPage .ui-content li:nth-child(1), 
+.dashboardPage .ui-content li:nth-child(2) {
+    background: none;
+}
+
+.dashboardPage .ui-content li:nth-child(1).selected, 
+.dashboardPage .ui-content li:nth-child(2).selected {
+    background: #BCBCBC;
+}*/
+
+.dashboardPage .ui-content li.selected {
+    background: #BCBCBC;
+}
+
+.dashboardPage .ui-content li img {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.buttonDashboardPage .ui-content {
+    overflow: hidden;
+}
+.buttonDashboardPage .ui-content li {
+    border:  none;
+    padding: 0px;
+    margin: 0px;
+    min-height: 77px;
+    height: 77px;
+    text-shadow: none;
+    background: none;
+}
+
+/* Feierabend-Icon oben rechts */
+.bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; }
+.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 5px; }
+
+/* Feierabend-Icon oben rechts */
+.bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; }
+.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 5px; }
+
+/* mediaListPage */
+.actionsList .ui-content {
+    background: url('images/arrow_white.png') 100% 50% no-repeat !important;
+    background-image: url('images/arrow_white.png') 100% 50% no-repeat !important;
+}
+
+.actionsList .ui-body-c {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.actionsList .ui-body-c li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.actionsList .ui-li-thumb {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.actionsList .ui-body-c li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.actionsList .ui-body-c .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.actionsList .ui-body-c .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.mediaListPage .mediafilesList .ui-listview li {
+    padding-left: 0.7em;
+}
+
+.mediaListPage .mediafilesList .ui-listview .icon {
+    width: 32px;
+    margin-left: 10px;
+    margin-top: 37px;
+    margin-right: -40px;
+}
+
+.mediaListPage .mediafilesList .ui-listview .date {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #000000 !important;
+    margin-left: -100px;
+}
+
+.mediaListPage .mediafilesList .ui-listview .application, 
+.mediaListPage .mediafilesList .ui-listview .position, 
+.mediaListPage .mediafilesList .ui-listview .activity, 
+.mediaListPage .mediafilesList .ui-listview .remark, 
+.mediaListPage .mediafilesList .ui-listview .location {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000;
+	margin-left: -40px;
+}
+
+/* demoMediaPage */
+.demoMediaPage .ui-content li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.demoMediaPage .ui-content li img {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.demoMediaPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.demoMediaPage .ui-content .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.demoMediaPage .ui-content .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+/* bookTimePage */
+.bookTimePage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-b {
+    width: 15%;
+    padding-top: 28px;
+    text-align: right;
+}
+
+.bookTimePage .ui-content .ui-grid-a:nth-child(3) {
+    margin-bottom: 20px;
+}
+
+.bookTimePageWithIcons .ui-content .ui-grid-a:nth-child(3) {
+    margin-bottom: 20px;
+}
+
+/*.ui-btn-inner.ui-btn-corner-all:not(.ui-select) {
+	padding-left: 0px;
+	padding-right: 0px;
+}*/
+
+/* employeePage */
+.employeePage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.employeePage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.employeePage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+/* infoPage */
+.infoPage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.infoPage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.infoPage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+  .infoLabel 
+, .infoPage label.ui-select 
+{
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+/* handApplicationPage */
+.handApplicationPage [data-role="content"] div:nth-child(2) {
+    margin-top: 20px;
+}
+.handApplicationPage .ui-content input {
+    margin-bottom: 50px;
+}
+
+/* timeDataPage & remarkPage */
+.timeDataPage .sentBookings .ui-listview {
+	background: #003366 !important;
+	font-style: italic !important;
+    padding-left: 0.7em;
+}
+
+.remarkPage .ui-listview li {
+    padding-left: 0.7em;
+    margin-bottom: 30px;
+}
+
+.timeDataPage .ui-listview li {
+    padding-left: 0.7em;
+}
+
+.timeDataPage .ui-listview .date, 
+.remarkPage .ui-listview .date {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #000000 !important;
+}
+
+.timeDataPage .ui-listview .application, 
+.timeDataPage .ui-listview .position, 
+.timeDataPage .ui-listview .activity, 
+.timeDataPage .ui-listview .location, 
+.timeDataPage .ui-listview .remark, 
+.timeDataPage .ui-listview .tagLabel, 
+.remarkPage .ui-listview .application, 
+.remarkPage .ui-listview .position, 
+.remarkPage .ui-listview .activity, 
+.remarkPage .ui-listview .location, 
+.remarkPage .ui-listview .remark,
+.timeDataPage .ui-listview .tagLabel {
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 25px;
+    color: #000000;
+}
+
+/* orderInfoPage */
+.orderInfoPage .ui-listview li {
+    padding-left: 0.7em;
+    margin-left: 20px;
+    margin-right: 20px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.orderInfoPage .ui-listview .orderName, 
+.orderInfoPage .ui-listview .positionName {
+    font-weight: bold;
+    margin-left: 20px;
+    color: #000000 !important;
+}
+
+.orderInfoPage .ui-listview .orderName {
+    font-size: 18px;
+}
+
+  .orderInfoPage .ui-listview .positionName
+, .orderInfoPage .ui-listview .positionEmail
+, .orderInfoPage .ui-listview .positionEmail a
+, .orderInfoPage .ui-listview .positionEmail a:hover
+, .orderInfoPage .ui-listview .positionEmail a:active
+, .orderInfoPage .ui-listview .positionEmail a:visited
+{
+    font-size: 12px !important;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.orderInfoPage div.ui-btn-text {
+	margin-top: 10px;
+}
+
+/* anwesenheitslistePage */
+.anwesenheitslistePage .ui-listview { 
+    font-size: 12px;
+    color: #000000 !important;
+}
+
+.anwesenheitslistePage .ui-listview .bold {
+    font-weight: bold;
+}
+
+.anwesenheitslistePage .ui-listview .normal { 
+    font-weight: normal;
+}
+
+/* zeitbuchungenPage */
+.zeitbuchungenPage .ui-listview { 
+/*    padding-left: 0.7em; */
+    font-size: 12px;
+    color: #000000 !important;
+}
+
+.zeitbuchungenPage .ui-listview .bold {
+    font-weight: bold;
+}
+
+.zeitbuchungenPage .ui-listview .normal { 
+    font-weight: normal;
+}
+
+.zeitbuchungenPage .ui-title {
+	margin-top: 0px;
+}
+
+/* zeitbuchungDetailsPage */
+
+.zeitbuchungDetailsPage .content {
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border: 1px solid #B3B3B3;
+	background: #F0F0F0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+  .zeitbuchungDetailsPage .datum 
+, .zeitbuchungDetailsPage .von 
+, .zeitbuchungDetailsPage .bis 
+, .zeitbuchungDetailsPage .dauer 
+{
+    font-size: 16px;
+    font-weight: bold;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage .smallDetail 
+{
+    font-size: 12px;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage .normalDetail 
+{
+    font-size: 15px;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage [data-theme="posInfoButton"] 
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #bbb;
+    margin-left: 0px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FDFDFD),to(#EEE));
+	background-image: -webkit-linear-gradient(#FDFDFD,#EEE);
+	background-image: -moz-linear-gradient(#FDFDFD,#EEE);
+	background-image: -ms-linear-gradient(#FDFDFD,#EEE);
+	background-image: -o-linear-gradient(#FDFDFD,#EEE);
+	background-image: linear-gradient(#FDFDFD,#EEE);
+}
+.zeitbuchungDetailsPage .ui-btn-hover-posInfoButton {
+	border:1px solid #bbb;
+	background:#dadada;
+    font-weight: bold;
+	color:#101010;
+	text-shadow:0 1px 1px #fff;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#ededed),to(#dadada));
+	background-image:-webkit-linear-gradient(#ededed,#dadada);
+	background-image:-moz-linear-gradient(#ededed,#dadada);
+	background-image:-ms-linear-gradient(#ededed,#dadada);
+	background-image:-o-linear-gradient(#ededed,#dadada);
+	background-image:linear-gradient(#ededed,#dadada);
+}
+
+.zeitbuchungDetailsPage [data-theme="posInfoButton"] span.ui-btn-inner 
+{
+    padding: .6em 10px;
+}
+
+/* settingsPage */
+.settingsPage input[type="text"], 
+.settingsPage input[type="password"], 
+.settingsPasswordPage input[type="text"], 
+.settingsPasswordPage input[type="password"] {
+    width: 90%;
+}
+
+.settingsPage .ui-content .ui-block-a, 
+.settingsPasswordPage .ui-content .ui-block-a {
+    font-size: 14px;
+    padding-top: 10px;
+    color: #FFFFFF;
+    margin-top: 0px;
+}
+
+.settingsPage .ui-content .ui-grid-a, 
+.settingsPasswordPage .ui-content .ui-grid-a {
+    margin-bottom: 10px;
+}
+
+.settingsPage .ui-content .lastSelectBox_container, 
+.settingsPasswordPage .ui-content .lastSelectBox_container {
+    margin-bottom: 10px;
+}
+
+.settingsPage .daysToHoldBookingsOnDeviceLabel {
+    font-size: 14px;
+    padding-top: 10px;
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.settingsPage .daysToHoldBookingsOnDeviceSlider {
+    margin-bottom: 10px;
+}
+
+.fileChooserPage .inputfile {
+	text-align: center;
+	background: #fff;
+}
+
+  .bautagebuchWetterPage .whiteText 
+, .bautagebuchBautageberichtDetailsPage .whiteText 
+, .bautagebuchZeitenDetailsPage .whiteText 
+, .bautagebuchNotizenDetailsPage .whiteText 
+, .bautagebuchMedienDetailsPage .whiteText 
+, .bautagebuchMaterialienDetailsPage .whiteText 
+{
+    color: #FFFFFF;
+}
+
+
+.bautagebuchListePage .small
+{
+    font-size: 12px;
+	color: #000000;
+	white-space: normal !important;
+}
+
+  .bautagebuchZeitenDetailsPage .ui-content .ui-block-a 
+, .bautagebuchZeitenDetailsPage .ui-content .ui-block-b 
+{
+    padding-top: 10px;
+    padding-bottom: 20px;
+	width: 47.5%;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+.tmp-dialog-footer .ui-btn.ui-btn-up-c.ui-btn-corner-all.ui-shadow {
+	height: 60px;
+}
+
+.tmp-dialog-footer .ui-btn-up-c .ui-btn-inner.ui-btn-corner-all
+{
+	margin-top: 10px;
+}
+
+  .bautagebuchZeitenDetailsPage input.ui-input-text
+, .bautagebuchBautageberichtDetailsPage input.ui-input-text
+{
+	text-align: center !important;
+	width: 98% !important;
+}
+
+  .bautagebuchZeitenDetailsPage .dauerInput_container
+{
+    padding-bottom: 20px;
+}
+
+  .bautagebuchWetterPage .centerText
+, .bautagebuchZeitenDetailsPage .ui-grid-a 
+{
+    text-align: center;
+}
+
+.bautagebuchWetterPage .marginBottom5px {
+    margin-bottom: 5px;
+}
+
+.bautagebuchNotizenDetailsPage .dataInput {
+	margin-bottom: 20px;
+	height: 400px;
+}
+
+.bautagebuchNotizenDetailsPage .remarkInput {
+	margin-bottom: 20px;
+	height: 50px;
+}
+
+.bautagebuchNotizenDetailsPage .dataInputInitial {
+	margin-bottom: 20px;
+	height: 400px;
+	vertical-align: middle; 
+	text-align: center;
+	font-weight: bold;
+	background: #F3E2A9;
+}
+
+.bautagebuchMedienDetailsPage .remarkInputInitial {
+	margin-bottom: 20px;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+	background: #F3E2A9;
+}
+
+.tmp-slider-container.tmp-slider-is-slider-only {
+	padding-top: 4px !important; 
+}
+  .bautagebuchWetterPage .temperaturView
+, .bautagebuchWetterPage .luftfeuchteView
+, .bautagebuchWetterPage .bewoelkungView
+, .bautagebuchWetterPage .niederschlagView
+, .bautagebuchWetterPage .windView
+{
+    margin-top: 20px;
+}
+
+.bautagebuchWetterPage .wechselhaftCheckbox
+{
+    margin-bottom: 40px;
+}
+
+  .bautagebuchWetterPage .temperaturView .u-grid-a
+, .bautagebuchWetterPage .luftfeuchteView .u-grid-a
+, .bautagebuchWetterPage .bewoelkungView .u-grid-a
+, .bautagebuchWetterPage .niederschlagView .u-grid-a
+, .bautagebuchWetterPage .windView .u-grid-a
+{
+    margin-top: 5px;
+}
+
+  .bautagebuchZeitenListePage .ui-listview .location
+, .bautagebuchZeitenListePage .ui-listview .small
+{
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 25px;
+    color: #000000;
+}
+
+.bautagebuchZusammenfassungScrollView {
+	background: #fff;
+	opacity: 0.75;
+	padding: 15px;
+}
+
+
+.bautagebuchZusammenfassungScrollView li.ui-li-static {
+	color: #000;
+}
+
+.bautagebuchZusammenfassungScrollView .hugeLabel {
+	font-size: 24px;
+}
+.bautagebuchZusammenfassungScrollView .bigLabel {
+	font-size: 18px;
+}
+.bautagebuchZusammenfassungScrollView .normalLabel {
+	font-size: 12px;
+}
+.bautagebuchZusammenfassungScrollView .bold {
+	font-weight: bold;
+}
+.bautagebuchZusammenfassungScrollView .right {
+	right: 60px;
+	position: absolute;
+	text-align: right;
+}
+.bautagebuchZusammenfassungScrollView .underline {
+	text-decoration: underline;
+}
+
+  .bautagebuchZusammenfassungScrollView .leistungsnachweisList
+, .bautagebuchZusammenfassungScrollView .materialienList
+, .bautagebuchZusammenfassungScrollView .medienList
+, .bautagebuchZusammenfassungScrollView .notizenList
+{
+	border-top-color: #999;
+	border-top-style: solid;
+	border-top-width: 2px;
+	padding-top: 20px;
+}
+
+.bautagebuchZusammenfassungScrollView .borderBottom
+{
+	border-bottom-color: #999;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	padding-bottom: 20px;
+}
+
+.bautagebuchZusammenfassungScrollView .ui-listview {
+	margin: 10px;
+}
+
+.bautagebuchZusammenfassungScrollView .wetterBlock {
+ 	right: 30px;
+}
+
+.bigButton {
+	padding-top: 20px;
+	height: 60px;
+}
+
+.bigButton .left {
+	margin-right: 5px;
+}
+
+.bigButton .right {
+	margin-left: 5px;
+}
+
+.detailsGrid .ui-block-a {
+	width: 65%;
+}
+.detailsGrid .ui-block-b {
+	width: 35%;
+}
+
+.wetterBlock .ui-block-a {
+	width: 70% !important;
+}
+.wetterBlock .ui-block-b {
+	width: 30% !important;
+	text-align: right;
+}
+
+/* IOS LIKE FOOTER / TABBAR */
+.ui-footer {
+    border-color: #0d0d0d;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #000000), color-stop(0.51, #000000), color-stop(0.5, #151515), color-stop(0, #2d2d2d));
+}
+
+.ui-footer .ui-btn {
+    border: 0 none;
+    background: transparent;
+}
+
+.ui-footer .ui-btn-active {
+    -webkit-border-radius: 4px !important;
+    border-radius: 4px !important;
+    background: none rgba(255, 255, 255, 0.14);
+}
+
+.ui-footer .ui-btn-inner {
+    border-color: #434343;
+    padding: 0px !important;
+    padding-top: 32px !important;
+}
+
+.ui-footer .ui-btn-text {
+    font-size: 10px;
+    text-shadow: 0 none;
+}
+
+/*
+.ui-footer .ui-icon 
+{
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+*/
+
+.ui-icon-book:after,
+.ui-icon-book,
+[data-icon=book] .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) 0 0 no-repeat;
+}
+
+.ui-btn-active .ui-icon-book:after,
+.ui-btn-active .ui-icon-book,
+[data-icon=book].ui-btn-active .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) -32px 0 no-repeat;
+}
+
+.ui-icon-menu:after,
+.ui-icon-menu,
+[data-icon=menu] .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) 0 -32px no-repeat;
+}
+
+.ui-btn-active .ui-icon-menu:after,
+.ui-btn-active .ui-icon-menu,
+[data-icon=menu].ui-btn-active .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) -32px -32px no-repeat;
+}
+
+.hiddenLabel {
+	opacity: 0;
+}
+
+.zeitenAendernButton {
+	float: right;
+	top: -17px;
+	margin-right: 0px !important;
+}
+
+/* allgemeine Klassen */
+div.ui-select {
+    margin-bottom: 10px;
+}
+
+label.ui-select {
+	color: #ffffff;
+}
+
+option.ui-select {
+	color: #00000 !important;
+}
+
+li.ui-li {
+	color: #ffffff;
+}
+
+.whiteLabel {
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+.whiteLabel16px {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.marginTop40 {
+    margin-top: 40px;
+}
+
+.marginTop12 {
+    margin-top: 12px;
+}
+
+.marginTop20 {
+    margin-top: 20px;
+}
+
+.marginTop25 {
+    margin-top: 25px;
+}
+
+.marginTop25important {
+    margin-top: 25px !important;
+}
+
+.marginBottom50 {
+    margin-bottom: 50px;
+}
+
+.marginBottom25 {
+    margin-bottom: 25px;
+}
+
+.marginBottom20 {
+    margin-bottom: 20px;
+}
+
+.marginBottom12 {
+    margin-bottom: 12px;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+.marginLeft20 {
+    margin-left: 20px;
+}
+
+.marginLeft35 {
+    margin-left: 35px;
+}
+
+.marginRight40 {
+	margin-right: 40px;
+}
+
+.moveUp38 {
+    margin-top: -38px;
+}
+
+.marginTop0 {
+	margin-top: 0px;
+}
+
+.ui-navbar {
+    height: 47px;
+}
+
+.bautagebuchZusammenfassungScrollView .signaturecanvaslabel {
+	color: #000 !important;
+	font-weight: bold;
+	font-size: 18px !important;
+}
+
+.signaturecanvaslabel {
+	font-size: 16px !important;
+    color: #FFFFFF !important;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	font-style: normal !important;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.signaturecanvas {
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 150px;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   margin-bottom: 50px;
+}
+
+.signaturecanvas2 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+	height: 320px;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.sigWrapper.current {
+	border-color: transparent !important;
+}
+
+.tmp-dialog {
+	background-color: #003366; 
+}
+
+.tmp-dialog-header {
+	height: 15%;
+}
+
+.tmp-dialog-content {
+	height: 45%;
+}
+
+*.unselectable, 
+.unselectable_container {
+/*   
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+*/
+}
+
+.imageCanvas {
+	border: 3px solid #fff;
+	display: block;
+    margin-left: auto;
+    margin-right: auto; /**/
+}
+
+.imageContainer {
+/*	border: 3px solid #fff; 
+	display: block;
+    margin-left: auto;
+    margin-right: auto; */
+}
+
+.demophoto {
+	width: 80%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

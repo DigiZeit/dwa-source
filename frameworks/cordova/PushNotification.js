@@ -1,0 +1,1 @@
+https://github.com/phonegap-build/PushPlugin/blob/master/README.md

@@ -1,0 +1,1 @@
+//https://github.com/phonegap-build/BarcodeScanner/blob/master/README.md

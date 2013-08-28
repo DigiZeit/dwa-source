@@ -1,0 +1,42 @@
+http://purplecabbage.github.com/GloveBox
+
+online/offline-Lämpchen:
+	http://docs.phonegap.com/en/1.6.1/cordova_events_events.md.html#Events
+
+Kontakte (Auftragsinfo als Kontakt hinzufügen um Navigation zu nutzen):
+d	<feature name="http://api.phonegap.com/1.0/contacts"/>
+	http://docs.phonegap.com/en/1.6.1/cordova_contacts_contacts.md.html#Contacts 
+
+CameraFeature:
+d	<feature name="http://api.phonegap.com/1.0/camera"/>
+d	<feature name="http://api.phonegap.com/1.0/file"/>
+	http://docs.phonegap.com/en/1.6.1/cordova_media_capture_capture.md.html#Capture
+	http://docs.phonegap.com/en/1.6.1/cordova_camera_camera.md.html#Camera
+	http://metabates.com/2012/04/15/capturing-and-uploading-photos-on-ios-with-phonegap/
+	http://www.digitalnoiz.com/cocoa/capture-image-video-and-crop/
+	http://thinkvitamin.com/code/how-to-draw-with-html-5-canvas/
+	http://blog.nihilogic.dk/2009/02/html5-canvas-cheat-sheet.html
+
+Barcode-Erkennung:
+	https://bitbucket.org/jrosskopf/balkenkode/src
+
+Autocomplete:
+	http://jqueryui.com/demos/autocomplete/
+	http://jquery-ui.googlecode.com/svn/trunk/demos/autocomplete/combobox.html
+	
+Feature Auftragsinfo:
+d	406
+	weitere Felder für den empfangePositionen-Webservice:
+		positionStrasse
+		positionHausnummer
+        positionPlz
+        positionOrt
+        positionLand
+        positionLongitude
+        positionLatitude
+    dann getPositionsFromRemoteSuccess anpassen
+	http://softwareas.com/vcard-for-developers
+        
+Feature Tagescheckliste:
+d	407
+	
