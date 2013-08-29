@@ -197,7 +197,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4114'
+              value: 'Build: 4115'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -334,7 +334,7 @@ DigiWebApp.InfoPage = M.PageView.design({
               computedValue: {
                   value: ''
                 , operation: function(v) {
-					if (typeof(navigator.connection) !== "undefined" && typeof(Connection) !== "undefined) {
+					if (typeof(navigator.connection) !== "undefined" && typeof(Connection) !== "undefined") {
 					
 						var networkState = navigator.connection.type;
 				
