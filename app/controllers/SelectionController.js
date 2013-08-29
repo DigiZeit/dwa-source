@@ -330,8 +330,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 //            if (wp) return wp.get('id') == positionId;
 //        });
 //
-//        var itemSelected = NO;
-//
 //        /* if a workplan exists, only use those activities that are in the workplan */
 //        if(workPlans.length > 0) {
 //            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
@@ -339,6 +337,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 //            activities = DigiWebApp.SelectionController.getActivities();
 //        }
 
+        var itemSelected = NO;
         var activityArray = _.map(this.get('activities'), function(act) {
         	if ( typeof(act) === "undefined" ) {
         		console.log("UNDEFINED ACTIVITY");
