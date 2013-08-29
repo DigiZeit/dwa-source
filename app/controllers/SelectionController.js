@@ -39,6 +39,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , setSelectionByPreviousSelection: function() {
         var that = this;
+        var mySelection = that.selections;
         
         this.resetSelection();
 
@@ -53,7 +54,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orderArray = _.map(orders, function(order) {
         	if (order) {
 	            var obj =  { label: order.get('name'), value: order.get('id') };
-	            if(obj.value === that.selections.order) {
+	            if(obj.value === mySelection.order) {
 	                obj.isSelected = YES;
 	                itemSelected = YES;
 	            }
@@ -79,7 +80,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var positionArray = _.map(this.get('positions'), function(pos) {
         	if (pos) {
 	            var obj = { label: pos.label, value: pos.value };
-	            if(obj.value === that.selections.position) {
+	            if(obj.value === mySelection.position) {
 	                obj.isSelected = YES;
 	                itemSelected = YES;
 	            }
@@ -87,12 +88,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	}
         });
         positionArray = _.compact(positionArray);
-        // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-            positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:!itemSelected});
-        } else {
-            positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-        }
+//        // push "Bitte wählen Option"
+//        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+//            positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:!itemSelected});
+//        } else {
+//            positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+//        }
 
         // set selection arrays to start content binding process
         this.set('positions', positionArray);
@@ -107,7 +108,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		console.log("UNDEFINED ACTIVITY");
         	} else {        	
         		var obj = { label: act.label, value: act.value };
-        		if(obj.value === that.selections.activity) {
+        		if(obj.value === mySelection.activity) {
         			obj.isSelected = YES;
         			itemSelected = YES;
         		}
@@ -115,12 +116,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	}
         });
         activityArray = _.compact(activityArray);
-        // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-        	activityArray.push({label: M.I18N.l('activity'), value: '0', isSelected:!itemSelected});
-        } else {
-        	activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-        }
+//        // push "Bitte wählen Option"
+//        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+//        	activityArray.push({label: M.I18N.l('activity'), value: '0', isSelected:!itemSelected});
+//        } else {
+//        	activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+//        }
 
         // set selection arrays to start content binding process
         this.set('activities', activityArray);
