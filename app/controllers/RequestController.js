@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4098
+    , softwareVersion: 4099
 
 
     /**
@@ -480,7 +480,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 
     , sendConfiguration: function(obj) {
     	// all callbacks lead to DigiWebApp.ApplicationController.authenticate()
-    	alert("in RequestController.sendConfiguration");
+    	//alert("in RequestController.sendConfiguration");
         // call authenticate
         this.authenticate({
               success: {  // send configuration in success callback
