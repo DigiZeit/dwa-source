@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webapp"
-	versionCode = "4117"
-	version 	= "1.6.1.4117">
+	versionCode = "4118"
+	version 	= "1.6.1.4118">
 
 	<name>DIGI-WebApp</name>
 
@@ -87,7 +87,7 @@ which PhoneGap requires. -->
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" />
+    <!-- <gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" /> -->
 
 	<gap:splash src="theme/images/splash.png" gap:platform="blackberry" />
 	
