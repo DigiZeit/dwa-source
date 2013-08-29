@@ -39,7 +39,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , setSelectionByPreviousSelection: function() {
         var that = this;
-        var mySelection = that.selections;
+        var mySelection = JSON.parse(JSON.stringify(that.selections));
         
         this.resetSelection();
 
