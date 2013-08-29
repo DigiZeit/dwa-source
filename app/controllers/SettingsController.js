@@ -1003,12 +1003,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	}
 
     , sendConfiguration: function() {
-    	alert("in sendConfiguration");
+    	//alert("in sendConfiguration");
         var settings = DigiWebApp.Settings.find();    		
-    	alert("typeof(settings)=" + typeof(settings));
+    	//alert("typeof(settings)=" + typeof(settings));
     	var MitarbeiterWebAppID = "0"
     	try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
-    	alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
+    	//alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
         DigiWebApp.RequestController.sendConfiguration({
               settings: settings
             , success: {
