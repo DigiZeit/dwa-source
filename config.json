@@ -31,7 +31,7 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.6.1.4113 beta",
+        "version": "1.6.1.4114 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",

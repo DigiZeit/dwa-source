@@ -334,7 +334,7 @@ DigiWebApp.InfoPage = M.PageView.design({
               computedValue: {
                   value: ''
                 , operation: function(v) {
-					if (typeof(navigator.connection) !== "undefined") {
+					if (typeof(navigator.connection) !== "undefined" && typeof(Connection) !== "undefined) {
 					
 						var networkState = navigator.connection.type;
 				
