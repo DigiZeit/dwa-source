@@ -949,7 +949,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , startsync: function(isFirstLoad) {
-    	alert("in startsync");
+    	//alert("in startsync");
     	DigiWebApp.ApplicationController.syncStartTimestamp = D8.now().getTimestamp();
 
         // authentication data
@@ -967,7 +967,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	DigiWebApp.ApplicationController.syncRunning = YES;
 
-    	alert("vor sendConfiguration");
+    	//alert("vor sendConfiguration");
         // sendConfiguration => authenticate => getOrders => getPositions => getActivities => proceed to next page.
         DigiWebApp.SettingsController.sendConfiguration();
         
