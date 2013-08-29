@@ -298,7 +298,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
          */
         var positionArray = _.map(this.get('positions'), function(pos) {
         	if (pos) {
-	            if(pos.get('orderId') === orderId) {
+	            if(pos.value === orderId) {
 	            	var obj = null;
 	                if(pos.value === positionId) {
 	                    obj = { label: pos.label, value: pos.value, isSelected: YES };
