@@ -592,9 +592,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	});
 	
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
-	    	alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
+	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-	    	alert("nach ApplicationController.init");
+	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
 	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
@@ -784,9 +784,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * first time during this application life cycle
      */
     , init: function(isFirstLoad) {
-    	alert("in DigiWebApp.ApplicationController.init");
-    	/*
-    	alert("vor DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function ()");
+    	//alert("in DigiWebApp.ApplicationController.init");
+    	//alert("vor DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function ()");
     	DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
     		//console.log("tabItem1");
             if(this.page) {
@@ -795,7 +794,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 this.parentView.setActiveTab(this);
             }
         };
-    	alert("vor DigiWebApp.TabBar.tabItem2.internalEvents.tap.action = function ()");
+    	//alert("vor DigiWebApp.TabBar.tabItem2.internalEvents.tap.action = function ()");
     	DigiWebApp.TabBar.tabItem2.internalEvents.tap.action = function () {
     		//console.log("tabItem2");
             if(this.page) {
@@ -804,7 +803,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 this.parentView.setActiveTab(this);
             }
         };
-        */
         /*
         $('#' + DigiWebApp.app.pages.bookingPage.id).touchwipe({
               wipeLeft: function() { alert("bookingPageleft"); }
@@ -825,8 +823,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , preventDefaultEvents: true
        });
        */
-       console.warn("ApplicationController.init at timestamp " + M.Date.now().date.valueOf());
-       alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
+       //console.warn("ApplicationController.init at timestamp " + M.Date.now().date.valueOf());
+       //alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
        
        DigiWebApp.ApplicationController.callbackStatus = {
             position: {
@@ -859,7 +857,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
-        alert("vor SettingsController.init");
+        //alert("vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
         
@@ -871,18 +869,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
-        alert("suche nach offener Buchung");
+        //alert("suche nach offener Buchung");
         // gibt es eine offene Buchung?
         var bookings = DigiWebApp.Booking.find();
-        alert("typeof(bookings)=" + typeof(bookings));
-        alert("bookings.length=" + bookings.length);
+        //alert("typeof(bookings)=" + typeof(bookings));
+        //alert("bookings.length=" + bookings.length);
         if (bookings.length > 0) {
             var isCurrentBookingAvailable = NO;
             for (var i = 0; i < bookings.length; i++) {
-            	alert("in for i=" + i);
+            	//alert("in for i=" + i);
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
                 if (bookings[i].get('isCurrent') === YES) {
-                	alert("currentBooking found");
+                	//alert("currentBooking found");
                 	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
                 	isCurrentBookingAvailable = YES;
                     break;
@@ -890,13 +888,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
             if(isCurrentBookingAvailable === YES) {
-            	alert("go to BookTimePage");
+            	//alert("go to BookTimePage");
             	DigiWebApp.NavigationController.toBookTimePage();
                 return;
             }
         }
         
-        alert("startsync");
+        //alert("startsync");
 		this.startsync();
         
     }
