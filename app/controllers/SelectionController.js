@@ -368,7 +368,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		}
     	}
 
-
         this.resetSelection();
 
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
