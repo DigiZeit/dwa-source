@@ -91,10 +91,12 @@ screen -->
 
 	<gap:splash src="theme/images/splash.png" gap:platform="blackberry" />
 	
-	<gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" />
-	<gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
+	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
+	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
 	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="theme/images/720x1280_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
