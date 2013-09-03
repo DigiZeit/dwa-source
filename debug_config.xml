@@ -90,7 +90,7 @@ which PhoneGap requires. -->
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" />
+    <gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" />
 
 	<gap:splash src="theme/images/splash.png" gap:platform="blackberry" />
 	
