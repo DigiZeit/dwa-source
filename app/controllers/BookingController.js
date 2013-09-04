@@ -475,7 +475,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    // reset remark
 	    try {
 	    	M.ViewManager.getView('remarkPage', 'remarkInput').value = '';
-	    } catch(e) { console.error(e); }
+	    } catch(e) { }
 	    remarkStr = '';
 
 	    var newOpenBooking = that.openBooking({
