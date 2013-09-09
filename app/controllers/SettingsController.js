@@ -379,6 +379,59 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 
         that.set('settings', settings);
 
+        hideShowSettingsServiceApp = function () {
+        	if (DigiWebApp.SettingsController.featureAvailable('417')) {
+	         	 $('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).show();
+	             DigiWebApp.ServiceAppController.knockknock(function(data) {
+	            	 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
+	            		         	//$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).show();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).show();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).show();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).show();
+	            		         	if (JSON.parse(data) !== null) {
+	            		         		try {
+			            		         	var deleteBookingsInServiceappIDs = [];
+			            		         	var allBookings = DigiWebApp.Booking.find();
+			            		         	_.each(JSON.parse(data).GET.buchungen, function(buchung){
+			            		         		var found = false;
+			            		         		var datensatzObj = buchung.datensatz;
+			            		         		_.each(allBookings, function(modelBooking){
+			            		         			if (modelBooking.m_id === datensatzObj.m_id) {
+			            		         				found = true;
+			            		         			}
+			            		         		});
+			            		         		if (!found) {
+			            		         			deleteBookingsInServiceappIDs.push(datensatzObj.m_id);
+			            		         		}
+			            		         	});
+			            		         	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
+			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory)
+	            		         		} catch(e) {
+	            		         			if (interactWithServiceApp) cleanDataDirectory();
+	            		         		}
+	            		         	} else {
+	            		         		if (interactWithServiceApp) cleanDataDirectory();
+	            		         	}
+	            			   }, function() {
+	            				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
+	            		         	if (interactWithServiceApp) cleanDataDirectory();
+	            			   }
+	            );
+	        } else {
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).hide();
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
+	         	if (interactWithServiceApp) cleanDataDirectory();
+	        }
+	    }
+        
         if (interactWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417')) {
 	        // check for ServiceApp
 			var cleanDataDirectory = function() {
@@ -405,56 +458,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				}
 			}
         }
-        if (DigiWebApp.SettingsController.featureAvailable('417')) {
-         	 $('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).show();
-             DigiWebApp.ServiceAppController.knockknock(function(data) {
-            	 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
-            		         	//$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).show();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).show();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).show();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).show();
-            		         	if (JSON.parse(data) !== null) {
-            		         		try {
-		            		         	var deleteBookingsInServiceappIDs = [];
-		            		         	var allBookings = DigiWebApp.Booking.find();
-		            		         	_.each(JSON.parse(data).GET.buchungen, function(buchung){
-		            		         		var found = false;
-		            		         		var datensatzObj = buchung.datensatz;
-		            		         		_.each(allBookings, function(modelBooking){
-		            		         			if (modelBooking.m_id === datensatzObj.m_id) {
-		            		         				found = true;
-		            		         			}
-		            		         		});
-		            		         		if (!found) {
-		            		         			deleteBookingsInServiceappIDs.push(datensatzObj.m_id);
-		            		         		}
-		            		         	});
-		            		         	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
-		      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory)
-            		         		} catch(e) {
-            		         			cleanDataDirectory();
-            		         		}
-            		         	} else {
-            		         		cleanDataDirectory();
-            		         	}
-            			   }, function() {
-            				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
-            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
-            		         	cleanDataDirectory();
-            			   }
-            );
-        } else {
-         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
-         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
-         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
-         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).hide();
-         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
-         	cleanDataDirectory();
-        }
+        hideShowSettingsServiceApp();
 	}
 	
 	, saveDone: YES 
