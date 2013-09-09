@@ -699,6 +699,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
             var orderValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
             var positionValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection();
             var activityValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection();
+            var uebernachtungskennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').getSelection();
+            var spesenkennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'spesenkennzeichen').getSelection();
     	} else {
             var orderValue = M.ViewManager.getView('bookingPage', 'order').getSelection();
             var positionValue = M.ViewManager.getView('bookingPage', 'position').getSelection();
@@ -708,6 +710,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         this.selections.order = orderValue;
         this.selections.position = positionValue;
         this.selections.activity = activityValue;
+        this.selections.uebernachtungskennzeichenScholpp = uebernachtungskennzeichenScholpp;
+        this.selections.spesenkennzeichenScholpp = spesenkennzeichenScholpp;
 
         this.useSelections = YES;
     }
