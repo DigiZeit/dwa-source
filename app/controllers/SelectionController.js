@@ -710,8 +710,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         this.selections.order = orderValue;
         this.selections.position = positionValue;
         this.selections.activity = activityValue;
-        this.selections.uebernachtungskennzeichenScholpp = uebernachtungskennzeichenScholpp;
-        this.selections.spesenkennzeichenScholpp = spesenkennzeichenScholpp;
+        this.selections.uebernachtungskennzeichenScholpp = uebernachtungskennzeichenScholppValue;
+        this.selections.spesenkennzeichenScholpp = spesenkennzeichenScholppValue;
 
         this.useSelections = YES;
     }
