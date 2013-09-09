@@ -148,6 +148,31 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		}
         
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+    		if (typeof(activitySelection) !== "undefined") {
+	    		var activitySelected = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
+	    		if (typeof(activitySelected) === "undefined") {
+	    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+	    		} else {
+		    		var activityName = activitySelected.get("name");
+		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
+		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
+		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
+		    		} else if (activityName.indexOf("Pause") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectPause();
+		    		} else {
+		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+		    		}
+	    		}
+    		} else {
+    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+    		}
+    	}
+
     }
 
     , setSelectionWithCurrentHandOrderFirst: function() {
@@ -250,6 +275,32 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             M.ViewManager.getView('bookingPage', 'position').setSelection('0');
     	}
+    	
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+    		if (typeof(activitySelection) !== "undefined") {
+	    		var activitySelected = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
+	    		if (typeof(activitySelected) === "undefined") {
+	    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+	    		} else {
+		    		var activityName = activitySelected.get("name");
+		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
+		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
+		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
+		    		} else if (activityName.indexOf("Pause") >= 0) {
+		    			DigiWebApp.ScholppBookingController.selectPause();
+		    		} else {
+		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+		    		}
+	    		}
+    		} else {
+    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+    		}
+    	}
+
     }
 
     , setSelectionByCurrentBooking: function() {
