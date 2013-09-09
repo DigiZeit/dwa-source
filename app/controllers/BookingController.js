@@ -227,57 +227,69 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     	var that = DigiWebApp.BookingController;
     	
-    	// Get GPS-Position if set in Settings
+		// Get GPS-Position if set in Settings
     	if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
-    		if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
-    			// hier erstmal gar nichts machen (wird in proceedBooking gemacht, weil erst dort die zu übertragenden Buchungen erzeugt werden)
-    			successCallback();
-    		} else {
-	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'));
-	
-	            /*var getLocationOptions =  { 
-	            		enableHighAccuracy: YES, 
-	            		maximumAge: 0, 
-	            		timeout: 240000 
-	            	};*/
-	            var getLocationOptions =  { enableHighAccuracy: true, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
-	
-	            M.LocationManager.getLocation(that, successCallback, function(error) {
-	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-	
-	            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-	                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-	                	/*
-	                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
-	                    */
-	                	if ( error === "POSITION_UNAVAILABLE" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunavailable')
-	                		});
-	                	} else if ( error === "TIMEOUT" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPStimeout')
-	                		});
-	                	} else if ( error === "PERMISSION_DENIED" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSmissingPermission')
-	                		});
-	                	} else {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunknownError') + error
-	                		});
-	                	}
-	                    //M.LocationManager.getLocation(that, successCallback, successCallback);
-	                	successCallback();
-	            }, getLocationOptions);
-        	}
-		} else {
-			successCallback();
-		}
+	    	getLocationNow = function() {
+		            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'));
+		
+		            /*var getLocationOptions =  { 
+		            		enableHighAccuracy: YES, 
+		            		maximumAge: 0, 
+		            		timeout: 240000 
+		            	};*/
+		            var getLocationOptions =  { enableHighAccuracy: true, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
+		
+		            M.LocationManager.getLocation(that, successCallback, function(error) {
+		            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		
+		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
+		                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		                	/*
+		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
+		                    */
+		                	if ( error === "POSITION_UNAVAILABLE" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunavailable')
+		                		});
+		                	} else if ( error === "TIMEOUT" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPStimeout')
+		                		});
+		                	} else if ( error === "PERMISSION_DENIED" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSmissingPermission')
+		                		});
+		                	} else {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunknownError') + error
+		                		});
+		                	}
+		                    //M.LocationManager.getLocation(that, successCallback, successCallback);
+		                	successCallback();
+		            }, getLocationOptions);
+	        	};
+	    	}
+	    	
+			if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
+				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
+		            DigiWebApp.ServiceAppController.knockknock(function(data) {
+		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
+						successCallback();
+		            }, function() {
+		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
+		            	getLocationNow();
+		            });
+				} else {
+					successCallback();
+				}
+			} else {
+				getLocationNow();
+			}
+
    	}
     
     , checkBooking: function(skipSelection) {
@@ -557,7 +569,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
-							var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id});
+							var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id; } );
 							var datensatz = datensatzObj.record;
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
@@ -575,17 +587,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 						});
 						finishBooking();
-					}
+					};
 					var idsToPoll = [];
 					if (that.currentBooking !== null) { idsToPoll.push(that.currentBooking.m_id); }
 					if (that.currentBookingClosed !== null) { idsToPoll.push(that.currentBookingClosed.m_id); }
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
-				}
+				};
 				if (that.currentBookingClosed !== null) {
 					var continueFunc = function() {
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 						DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, pullBooking);
-					}
+					};
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {

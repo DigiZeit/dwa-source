@@ -305,11 +305,12 @@ M.I18N.en_us = {
 	, notActivated: 'Missing feature activation!'
 	, notActivatedMsg: 'This feature has not been activated!'
 
-    , ServiceApp_ermittleGeokoordinate: 'ServiceApp: Geocoordinates'
-    , ServiceApp_datenUebertragen: 'ServiceApp: Datatransfer'
+    , ServiceApp_ermittleGeokoordinate: 'ServiceApp: get geocoordinates'
+    , ServiceApp_datenUebertragen: 'ServiceApp: do datatransfer'
 	, ServiceApp_engeKopplung: 'ServiceApp: tight coupling'
 	, ServiceApp_PORT: 'ServiceApp: Port'
 	, ServiceAppKommunikation: 'ServiceApp-Communication'
+	, ServiceApp_FallBack: 'check for active ServiceApp'
 
 	, Spesen_Ausloese: 'Expenses'
 	, Spesen: 'Expenses'

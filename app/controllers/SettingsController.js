@@ -52,6 +52,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , ServiceApp_datenUebertragen: false
         , ServiceApp_engeKopplung: false
         , ServiceApp_PORT: '60000'
+        , ServiceApp_FallBack: true
         , debugDatabaseServer: null
         , mitarbeiterVorname: ""
         , mitarbeiterNachname: ""
@@ -261,6 +262,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('ServiceApp_engeKopplung')
 	                 , isSelected: record.get('ServiceApp_engeKopplung')
 	            }]
+               , ServiceApp_FallBack: [{
+	                   value: record.get('ServiceApp_FallBack')
+	                 , label: M.I18N.l('ServiceApp_FallBack')
+	                 , isSelected: record.get('ServiceApp_FallBack')
+	            }]
                , ServiceApp_PORT: record.get('ServiceApp_PORT')
                , debugDatabaseServer: record.get('debugDatabaseServer')
                , mitarbeiterVorname: record.get('mitarbeiterVorname')
@@ -353,6 +359,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("ServiceApp_engeKopplung")
 	                , label: M.I18N.l('ServiceApp_engeKopplung')
 	            }]
+	            , ServiceApp_FallBack: [{
+  	                  value: DigiWebApp.SettingsController.defaultsettings.get("ServiceApp_FallBack")
+  	                , label: M.I18N.l('ServiceApp_FallBack')
+  	            }]
 	            , ServiceApp_PORT: DigiWebApp.SettingsController.defaultsettings.get('ServiceApp_PORT')
 	            , debugDatabaseServer: DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer')
 	            , mitarbeiterVorname: DigiWebApp.SettingsController.defaultsettings.get('mitarbeiterVorname')
@@ -402,6 +412,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).show();
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).show();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).show();
 	            		         	if (JSON.parse(data) !== null) {
 	            		         		try {
 			            		         	var deleteBookingsInServiceappIDs = [];
@@ -431,6 +442,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
 	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
+	            		         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
 	            		         	cleanDataDirectory();
 	            			   }
 	            );
@@ -439,6 +451,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
 	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
 	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).hide();
+	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
 	         	cleanDataDirectory();
 	        }
         }
@@ -521,6 +534,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var ServiceApp_engeKopplung          = DigiWebApp.SettingsController.getSetting('ServiceApp_engeKopplung');
         if (M.ViewManager.getView('settingsPage', 'ServiceApp_engeKopplung') !== null) {
         	ServiceApp_engeKopplung = $('#' + M.ViewManager.getView('settingsPage', 'ServiceApp_engeKopplung').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        }
+        var ServiceApp_FallBack          	 = DigiWebApp.SettingsController.getSetting('ServiceApp_FallBack');
+        if (M.ViewManager.getView('settingsPage', 'ServiceApp_FallBack') !== null) {
+        	ServiceApp_FallBack = $('#' + M.ViewManager.getView('settingsPage', 'ServiceApp_FallBack').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         }
         var ServiceApp_PORT                  = DigiWebApp.SettingsController.getSetting('ServiceApp_PORT');
         if (M.ViewManager.getView('settingsPage', 'ServiceApp_PORTInput') !== null) {
@@ -632,6 +649,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('ServiceApp_datenUebertragen', ServiceApp_datenUebertragen);
                                                     record.set('ServiceApp_engeKopplung', ServiceApp_engeKopplung);
                                                     record.set('ServiceApp_PORT', ServiceApp_PORT);
+                                                    record.set('ServiceApp_FallBack', ServiceApp_FallBack);
                                                     record.set('debugDatabaseServer', debugDatabaseServer);
                                                     record.set('mitarbeiterVorname', mitarbeiterVorname);
                                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
@@ -702,6 +720,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('ServiceApp_datenUebertragen', ServiceApp_datenUebertragen);
                                     record.set('ServiceApp_engeKopplung', ServiceApp_engeKopplung);
                                     record.set('ServiceApp_PORT', ServiceApp_PORT);
+                                    record.set('ServiceApp_FallBack', ServiceApp_FallBack);
                                     record.set('debugDatabaseServer', debugDatabaseServer);
                                     record.set('mitarbeiterVorname', mitarbeiterVorname);
                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
@@ -746,6 +765,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('ServiceApp_datenUebertragen', ServiceApp_datenUebertragen);
                                 record.set('ServiceApp_engeKopplung', ServiceApp_engeKopplung);
                                 record.set('ServiceApp_PORT', ServiceApp_PORT);
+                                record.set('ServiceApp_FallBack', ServiceApp_FallBack);
                                 record.set('debugDatabaseServer', debugDatabaseServer);
                                 record.set('mitarbeiterVorname', mitarbeiterVorname);
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
@@ -790,6 +810,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('ServiceApp_datenUebertragen', ServiceApp_datenUebertragen);
                                 record.set('ServiceApp_engeKopplung', ServiceApp_engeKopplung);
                                 record.set('ServiceApp_PORT', ServiceApp_PORT);
+                                record.set('ServiceApp_FallBack', ServiceApp_FallBack);
                                 record.set('debugDatabaseServer', debugDatabaseServer);
                                 record.set('mitarbeiterVorname', mitarbeiterVorname);
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
@@ -836,6 +857,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , ServiceApp_datenUebertragen: ServiceApp_datenUebertragen
                                 , ServiceApp_engeKopplung: ServiceApp_engeKopplung
                                 , ServiceApp_PORT: ServiceApp_PORT
+                                , ServiceApp_FallBack: ServiceApp_FallBack
                                 , debugDatabaseServer: debugDatabaseServer
                                 , mitarbeiterVorname: mitarbeiterVorname
                                 , mitarbeiterNachname: mitarbeiterNachname

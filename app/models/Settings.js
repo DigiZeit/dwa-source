@@ -72,6 +72,8 @@ DigiWebApp.Settings = M.Model.create({
     
     , ServiceApp_PORT: M.Model.attr('String')
 
+    , ServiceApp_FallBack: M.Model.attr('Boolean')
+
     , currentTimezoneOffset: M.Model.attr('String')
     
     , currentTimezone: M.Model.attr('String')

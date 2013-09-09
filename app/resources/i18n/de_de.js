@@ -310,6 +310,7 @@ M.I18N.de_de = {
 	, ServiceApp_engeKopplung: 'ServiceApp: enge Kopplung'
 	, ServiceApp_PORT: 'ServiceApp: Port'
 	, ServiceAppKommunikation: 'Kommunikation mit ServiceApp'
+	, ServiceApp_FallBack: 'auf aktive ServiceApp prüfen'
 	
 	, Spesen_Ausloese: 'Spesen/Auslöse'
 	, Spesen: 'Spesen'
