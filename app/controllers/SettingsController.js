@@ -380,6 +380,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
         that.set('settings', settings);
 
         hideShowSettingsServiceApp = function () {
+         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
+         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
+         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
+         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).hide();
+         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
         	if (DigiWebApp.SettingsController.featureAvailable('417')) {
 	         	 $('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).show();
 	             DigiWebApp.ServiceAppController.knockknock(function(data) {
