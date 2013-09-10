@@ -387,7 +387,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 					DigiWebApp.BookingController.init(YES);
 				},function(err){console.error(err);});
 			}
-			if (true) {
+			if (false) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
 					_.each(results, function(fileName) {
