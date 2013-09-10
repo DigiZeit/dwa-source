@@ -379,7 +379,31 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 
         that.set('settings', settings);
 
-        hideShowSettingsServiceApp = function () {
+		var cleanDataDirectory = function() {
+			var refreshWAIT = function() {
+				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
+				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
+					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
+					DigiWebApp.BookingController.init(YES);
+				},function(err){console.error(err);});
+			}
+			if (true) {
+				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
+				DigiWebApp.ServiceAppController.listDirectory(function(results) {
+					_.each(results, function(fileName) {
+						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
+							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
+						}
+					});
+					refreshWAIT();
+				});
+			} else {
+				refreshWAIT();
+			}
+		}
+
+		hideShowSettingsServiceApp = function () {
          	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
@@ -439,29 +463,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         
         if (interactWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417')) {
 	        // check for ServiceApp
-			var cleanDataDirectory = function() {
-				var refreshWAIT = function() {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
-					DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
-						DigiWebApp.BookingController.init(YES);
-					},function(err){console.error(err);});
-				}
-				if (true) {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
-					DigiWebApp.ServiceAppController.listDirectory(function(results) {
-						_.each(results, function(fileName) {
-							if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
-								DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
-							}
-						});
-						refreshWAIT();
-					});
-				} else {
-					refreshWAIT();
-				}
-			}
+        	cleanDataDirectory();
         }
         hideShowSettingsServiceApp();
 	}
