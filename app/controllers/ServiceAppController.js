@@ -37,6 +37,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		this.workerId = DigiWebApp.SettingsController.getSetting("workerId");
 		this.company = DigiWebApp.SettingsController.getSetting("company");
 		this.WebAppVersion = DigiWebApp.app.config.version;
+		this.WebAppGPSTimeout = DigiWebApp.SettingsController.getSetting("GPSTimeOut");
 	
 		this.sendData.parameter = {}
 	
@@ -52,6 +53,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			      , "GeraeteId": this.workerId
 			      , "firmenId": this.company
 			      , "WebAppVersion": this.WebAppVersion
+			      , "WebAppGPSTimeout": this.WebAppGPSTimeout
 				}
 		    $.ajax({
 		        dataType: "json"
