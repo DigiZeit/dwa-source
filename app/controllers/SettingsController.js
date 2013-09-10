@@ -389,7 +389,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				},function(err){console.error(err);}
 				, fileNamesToDelete);
 			}
-			if (false) {
+			if (true) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
 					fileNamesToDelete = [];
