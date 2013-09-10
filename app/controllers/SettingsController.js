@@ -379,21 +379,25 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 
         that.set('settings', settings);
 
+        var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
 				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
 					DigiWebApp.BookingController.init(YES);
-				},function(err){console.error(err);});
+				},function(err){console.error(err);}
+				, fileNamesToDelete);
 			}
 			if (false) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
+					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
-							DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
+							fileNamesToDelete.push(fileName);
+							//DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
 						}
 					});
 					refreshWAIT();

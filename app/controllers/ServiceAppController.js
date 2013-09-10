@@ -454,6 +454,24 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	    myServiceApp.engeKopplung = (typeof(engeKopplungOverride) !== "undefined" && engeKopplungOverride === true);
 	    myServiceApp.send();
 	}
+
+	, deleteFilesInServiceApp: function(fileNames, successCallback, errorCallback, timeout, engeKopplungOverride) {
+		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
+		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in deleteFilesInServiceApp");
+	    var payloadData = { "DELETEFILES": { "files": [] , "queryParameter": {"fileNames": fileNames} } };
+	    var callback = function(data) {
+			   if (this.available) {
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
+				   successCallback(data);
+			   } else {
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
+				   errorCallback();
+			   }
+	    };
+	    var myServiceApp = new DigiWebApp.ServiceAppController.ServiceAppCommunication(payloadData, callback, timeout);
+	    myServiceApp.engeKopplung = (typeof(engeKopplungOverride) !== "undefined" && engeKopplungOverride === true);
+	    myServiceApp.send();
+	}
 	
 	, pollBookings: function(ids, successCallback, errorCallback, timeout) {
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
@@ -531,7 +549,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	    myServiceApp.send();
 	}
 
-	, refreshWAITBookings: function(successCallback, errorCallback) {
+	, refreshWAITBookings: function(successCallback, errorCallback, fileNamesToDelete) {
 		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in refreshWAITBookings");
 		var that = this;
@@ -600,6 +618,11 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			}, function(){
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				errorCallback("getBookings: ServiceApp hat nicht geantwortet!");
+			});
+		}
+		if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
+			that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+			}, function(){
 			});
 		}
 	}
