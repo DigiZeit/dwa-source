@@ -629,6 +629,13 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				}
 				errorCallback("getBookings: ServiceApp hat nicht geantwortet!");
 			});
+		} else {
+			// es gibt keine Buchungen zu aktialisieren
+			if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
+				that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+				}, function(){
+				});
+			}
 		}
 	}
 	
