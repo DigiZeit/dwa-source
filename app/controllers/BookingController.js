@@ -562,7 +562,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
-				var pullBooking = function() {
+				var pollBooking = function() {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
 					// getBookings mit timeout
 					var checkForOK = function(datensaetze) {
@@ -595,14 +595,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 				};
 				var continueFunc = function() {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
-					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, finishBooking);
+					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pollBooking, finishBooking);
 				};
 				if (that.currentBookingClosed !== null) {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
-					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, continueFunc);	
+					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pollBooking, continueFunc);	
 				}
 			} else {
 				if (that.currentBookingClosed !== null) {
@@ -1192,7 +1192,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
-				var pullBooking = function() {
+				var pollBooking = function() {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
 					// getBookings mit timeout
 					var checkForOK = function(datensaetze) {
@@ -1225,7 +1225,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				}
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
-				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pullBooking, finishBooking);
+				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pollBooking, finishBooking);
 			} else {
 				if (that.currentBookingClosed !== null) {
 					var getWAITFunc = function() {
