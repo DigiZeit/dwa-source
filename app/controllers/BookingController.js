@@ -1225,7 +1225,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				}
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
-				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pullBooking, pullBooking);
+				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pullBooking, finishBooking);
 			} else {
 				if (that.currentBookingClosed !== null) {
 					var getWAITFunc = function() {
