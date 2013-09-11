@@ -1,6 +1,6 @@
 {
     "name" : "DigiWebApp",
-    "mode": "production",
+    "mode": "debug",
     "debugLevel": 1,
     "eliminate": false,
     "minify": false,
@@ -8,6 +8,10 @@
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
             "proxyAlias": "Handy2WebServices"
+        },
+        {
+            "baseUrl": "http://www.digi-gps.de:81/RemoteMediaFile",
+            "proxyAlias": "RemoteMediaFile"
         }
     ],
     "supportedLanguages": [
@@ -27,19 +31,20 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.6.1.4156",
-        "debugMode": "false",
+        "version": "1.6.1.4157 beta",
+        "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
         "timeStampCreated": "created_at",
         "timeStampUpdated": "updated_at",
         "m_id": "m_id"
     },
-    "defaultDeployTarget": "digi-gps.de-latest",
+    "defaultDeployTarget": "digi-gps.de-testing",
     "deploy": {
         "digi-gps.de-testing": {
             "method": "ftp",
             "ftp": {
+                "deleteTargetPath": true,
                 "host": "digi-gps.de",
                 "port": 21,
                 "username": "digiwebapp",
@@ -59,10 +64,10 @@
                 "debugLevel": 0
             }
         }
-    },    
+    },
     "libraries": [
           {"name": "xml2json", "refs": ["jquery.xml2json_1.1.js"]}
-        , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js"]}
+        , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}
     ]

@@ -461,10 +461,10 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	    var payloadData = { "DELETEFILES": { "files": [] , "queryParameter": {"fileNames": fileNames} } };
 	    var callback = function(data) {
 			   if (this.available) {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
+				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
+				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
 				   errorCallback();
 			   }
 	    };
@@ -615,14 +615,19 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					errorCallback("getBookings: " + e.message);
 				}
+				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
+					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+					}, function(){
+					});
+				}
 			}, function(){
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
+					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+					}, function(){
+					});
+				}
 				errorCallback("getBookings: ServiceApp hat nicht geantwortet!");
-			});
-		}
-		if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
-			that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-			}, function(){
 			});
 		}
 	}
