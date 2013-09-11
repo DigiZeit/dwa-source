@@ -563,6 +563,11 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		if (bookingIdsRefresh.length > 0) {
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("bookingIdsRefresh: " + JSON.stringify(bookingIdsRefresh));
 			that.getBookings(bookingIdsRefresh, function(data){
+				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
+					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+					}, function(){
+					});
+				}
 				try {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("data: ", data);
 					var recievedBookings = JSON.parse(data).GET.buchungen;
@@ -613,12 +618,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				} catch(e) {
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-					errorCallback("getBookings: " + e.message);
-				}
-				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
-					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-					}, function(){
-					});
+					errorCallback("ERROR in getBookings: " + e.message);
 				}
 			}, function(){
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
