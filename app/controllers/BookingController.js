@@ -568,7 +568,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					var checkForOK = function(datensaetze) {
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
+							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
 							var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id; } );
 							var datensatz = datensatzObj.record;
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
