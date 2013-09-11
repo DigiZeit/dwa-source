@@ -347,6 +347,9 @@ DigiWebApp.DashboardController = M.Controller.extend({
     		DigiWebApp.DashboardController.set("lastTimestampDatatransfer", D8.now().getTimestamp());
 	        var bookings = DigiWebApp.Booking.find();
 	        if(bookings.length > 0) {
+	    	    var finishBooking = function() {
+	    	    	DigiWebApp.BookingController.sendBookings(isClosingDay, true);
+	    	    }
 	        	if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 					var pollBooking = function() {
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
@@ -372,15 +375,16 @@ DigiWebApp.DashboardController = M.Controller.extend({
 								modelBooking.save();
 								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 							});
-							DigiWebApp.BookingController.sendBookings(isClosingDay, true);
+							finishBooking();
 						};
 						var idsToPoll = [];
-						if (that.currentBooking !== null) { idsToPoll.push(that.currentBooking.m_id); }
-						if (that.currentBookingClosed !== null) { idsToPoll.push(that.currentBookingClosed.m_id); }
+						if (DigiWebApp.BookingController.currentBooking !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBooking.m_id); }
+						if (DigiWebApp.BookingController.currentBookingClosed !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBookingClosed.m_id); }
 						DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 					};
+					pollBookings();
 	        	} else {
-	        		DigiWebApp.BookingController.sendBookings(isClosingDay, true);
+	        		finishBooking();
 	        	}
 	        } else {
 	            // calling startsync here
