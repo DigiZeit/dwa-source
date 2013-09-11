@@ -560,7 +560,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    }
 	    
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
-			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime') || DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
+			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
 				var pollBooking = function() {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
