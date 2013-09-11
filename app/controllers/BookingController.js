@@ -593,16 +593,16 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (that.currentBookingClosed !== null) { idsToPoll.push(that.currentBookingClosed.m_id); }
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				};
+				var continueFunc = function() {
+					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
+					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, finishBooking);
+				};
 				if (that.currentBookingClosed !== null) {
-					var continueFunc = function() {
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
-						DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, pullBooking);
-					};
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
-					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, pullBooking);	
+					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pullBooking, continueFunc);	
 				}
 			} else {
 				if (that.currentBookingClosed !== null) {
