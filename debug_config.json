@@ -8,10 +8,6 @@
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
             "proxyAlias": "Handy2WebServices"
-        },
-        {
-            "baseUrl": "http://www.digi-gps.de:81/RemoteMediaFile",
-            "proxyAlias": "RemoteMediaFile"
         }
     ],
     "supportedLanguages": [
