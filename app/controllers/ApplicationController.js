@@ -328,11 +328,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             var img2 = M.ViewManager.getView('infoPage', 'logo');    // info page logo
 
             $('#'+ img2.id).bind('touchstart', function(ev) {
-                that.showConfirmDialog();
+                if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) that.showConfirmDialog();
             });
 
             $('#'+ img2.id).bind('mousedown', function(ev) {
-                that.showConfirmDialog();
+            	if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) that.showConfirmDialog();
             });
 
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
