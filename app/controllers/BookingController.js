@@ -688,12 +688,16 @@ DigiWebApp.BookingController = M.Controller.extend({
     		}
     	} catch(e) { console.error(e); }
     	try {
-    		var myPositionLoad = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId}})[0];
-    		if (myPositionLoad && obj.pId !== 0) myPositionName = myPositionLoad.get('name');
+    		if (obj.pId != null) {
+    			var myPositionLoad = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId}})[0];
+    			if (myPositionLoad && obj.pId !== 0) myPositionName = myPositionLoad.get('name');
+    		}
     	} catch(e) { console.error(e); }
     	try {
-    		var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId}})[0];
-    		if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
+    		if (obj.aId != null) {
+    			var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId}})[0];
+    			if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
+    		}
     	} catch(e) { console.error(e); }
     	
     	var timeStart = new Date();
