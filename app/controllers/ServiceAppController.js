@@ -35,7 +35,13 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		this.debug = DigiWebApp.SettingsController.getSetting("debug");
 		this.password = DigiWebApp.SettingsController.getSetting("password");
 		this.workerId = DigiWebApp.SettingsController.getSetting("workerId");
+		if (this.workerId === "") {
+			this.workerId = 0;
+		}
 		this.company = DigiWebApp.SettingsController.getSetting("company");
+		if (this.company === "") {
+			this.company = 0;
+		}
 		this.WebAppVersion = DigiWebApp.app.config.version;
 		this.WebAppGPSTimeout = DigiWebApp.SettingsController.getSetting("GPSTimeOut");
 	
