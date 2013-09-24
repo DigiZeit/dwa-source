@@ -383,7 +383,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 						    && parseInt(DigiWebApp.BookingController.currentBooking.get("timeStampEnd")) > 0)
 						) { idsToPoll.push(DigiWebApp.BookingController.currentBooking.m_id); }
 						if (DigiWebApp.BookingController.currentBookingClosed !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBookingClosed.m_id); }
-						alert(idsToPoll);
+						//alert(idsToPoll);
 						DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 					};
 					pollBooking();
