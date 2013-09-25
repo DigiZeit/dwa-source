@@ -1161,7 +1161,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             //M.DialogView.alert({
     		DigiWebApp.ApplicationController.DigiLoaderView.hide();
             DigiWebApp.ApplicationController.nativeAlertDialogView({
-                  title: M.I18N.l('error')
+                  title: M.I18N.l('information')
                 , message: M.I18N.l('noOpenBookings')
             });
             return;
