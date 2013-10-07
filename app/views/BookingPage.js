@@ -60,7 +60,7 @@ DigiWebApp.BookingPage = M.PageView.design({
             , anchorLocation: M.CENTER
         })
         , feierabendButton: M.ButtonView.design({
-              value: ''
+              value: '&nbsp;&nbsp;&nbsp;'
             , icon: 'home'
             , anchorLocation: M.RIGHT
             , events: {
