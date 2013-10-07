@@ -187,7 +187,7 @@ DigiWebApp.Booking = M.Model.create({
     , closeBooking: function(location) {
 		//var timeEnd = new Date();
         //this.set('timeStampEnd', timeEnd.getTime());
-		this.set('timeStampEnd', DigiWebApp.BookingController.currentBookingTimesStampBook);
+		this.set('timeStampEnd', DigiWebApp.BookingController.currentBookingTimesStampBook.getTime());
         if (location) {
         	this.set('latitude_bis',  location.latitude);
         	this.set('longitude_bis', location.longitude);
