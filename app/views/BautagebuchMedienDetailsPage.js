@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMedienListePageTransition'
-        			action: function() {navigator.notification.vibrate(200); history.back();}
+        			action: function() {try{navigator.notification.vibrate(200);}catch(e){} history.back();}
                 }
             }
         })

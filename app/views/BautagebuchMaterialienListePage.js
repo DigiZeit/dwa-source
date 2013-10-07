@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchMaterialienListePage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {navigator.notification.vibrate(200); this.backToBautagebuchBautageberichtDetailsPageTransition();}
+                    , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.backToBautagebuchBautageberichtDetailsPageTransition();}
                 }
             }
         })

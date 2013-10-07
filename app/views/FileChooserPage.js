@@ -53,7 +53,7 @@ DigiWebApp.FileChooserPage = M.PageView.design({
 	              	//  target: DigiWebApp.NavigationController
 	              	//, action: DigiWebApp.FileChooserPage.NavigationControllerMethodToReturnTo
 	    			action: function() {
-	    				navigator.notification.vibrate(200); 
+	    				try{navigator.notification.vibrate(200);}catch(e){} 
 	    				history.back();
 	    			}
 	          	}

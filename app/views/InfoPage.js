@@ -54,7 +54,7 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {navigator.notification.vibrate(200); this.backToDashboardPage();}
+                    , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.backToDashboardPage();}
                 }
             }
         })
@@ -197,7 +197,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4196'
+              value: 'Build: 4197'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 

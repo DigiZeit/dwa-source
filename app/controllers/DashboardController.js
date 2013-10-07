@@ -291,7 +291,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , itemSelected: function(id, m_id) {
-    	navigator.notification.vibrate(200);
+    	try{navigator.notification.vibrate(200);}catch(e){}
     	var that = this;
         if(this.latestId) {
             $('#' + this.latestId).removeClass('selected');

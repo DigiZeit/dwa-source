@@ -162,7 +162,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     , book: function() {
     	this.currentBookingTimesStampBook = new Date();
-    	navigator.notification.vibrate(200);
+    	try{navigator.notification.vibrate(200);}catch(e){}
     	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
 			if (this.currentBooking) {
@@ -1108,7 +1108,7 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , closeDay: function() {
     	this.currentBookingTimesStampBook = new Date();
-    	navigator.notification.vibrate(200);
+    	try{navigator.notification.vibrate(200);}catch(e){}
     	var that = DigiWebApp.BookingController;
         if (that.currentBooking) {
         	
