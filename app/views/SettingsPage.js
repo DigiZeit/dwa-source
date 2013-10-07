@@ -35,6 +35,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToDashboardPage'
         			action: function() {
+        				navigator.notification.vibrate(200);
         				if (!DigiWebApp.SettingsController.showCredentialsAlert) {
         					DigiWebApp.NavigationController.backToDashboardPage();
         				}

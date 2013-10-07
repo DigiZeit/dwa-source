@@ -120,7 +120,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: 'backToBautagebuchBautageberichteListePageTransition'
+                    , action: function() {navigator.notification.vibrate(200); this.backToBautagebuchBautageberichteListePageTransition();}
                 }
             }
         })

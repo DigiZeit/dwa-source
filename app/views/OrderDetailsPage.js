@@ -33,7 +33,7 @@ DigiWebApp.OrderDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                     target: DigiWebApp.NavigationController,
-                    action: 'backToZeitbuchungDetailsPageTransition'
+                    action: function() {navigator.notification.vibrate(200); this.backToZeitbuchungDetailsPageTransition();}
                 }
             }
         })

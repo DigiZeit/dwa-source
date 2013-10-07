@@ -33,7 +33,7 @@ DigiWebApp.ZeitbuchungenPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: 'backToAnwesenheitslistePageTransition'
+                    , action: function() {navigator.notification.vibrate(200); this.backToAnwesenheitslistePageTransition();}
                 }
             }
         })

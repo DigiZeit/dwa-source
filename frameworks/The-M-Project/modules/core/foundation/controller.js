@@ -52,6 +52,7 @@ M.Controller = M.Object.extend(
      * @param {M.TabBarItemView} tab The tab to be activated.
      */
     switchToTab: function(tab,back) {
+		navigator.notification.vibrate(200);
 		if (!back) back = NO;
         if(!(tab.parentView && tab.parentView.type === 'M.TabBarView')) {
             M.Logger.log('Please provide a valid tab bar item to the switchToTab method.', M.WARN);

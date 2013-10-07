@@ -33,7 +33,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
             , events: {
                 tap: {
                     target: DigiWebApp.NavigationController,
-                    action: 'backToDashboardPage'
+                    action: function() {navigator.notification.vibrate(200); this.backToDashboardPage();}
                 }
             }
         })

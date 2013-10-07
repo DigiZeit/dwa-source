@@ -90,7 +90,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
-        			action: function() {history.back();}
+        			action: function() {navigator.notification.vibrate(200); history.back();}
                 }
             }
         })

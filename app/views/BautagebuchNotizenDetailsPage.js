@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchNotizenListePageTransition'
-        			action: function() {history.back();}
+        			action: function() {navigator.notification.vibrate(200); history.back();}
                 }
             }
         })

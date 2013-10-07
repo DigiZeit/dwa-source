@@ -36,6 +36,7 @@ DigiWebApp.SettingsPasswordPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToDashboardPagePOP'
         			action: function() {
+        				navigator.notification.vibrate(200);
 						if (DigiWebApp.SettingsController.featureAvailable('404')) {
 			        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
 						} else {

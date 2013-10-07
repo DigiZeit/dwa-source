@@ -56,7 +56,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 	    	, events: {
 	          	tap: {
 	              	  target: DigiWebApp.NavigationController
-	              	, action: 'backToMediaListPageTransition'
+	              	, action: function() {navigator.notification.vibrate(200); this.backToMediaListPageTransition();}
 	          	}
 	      	  }
 	    })
