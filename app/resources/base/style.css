@@ -359,12 +359,12 @@ label.ui-input-text, .ui-controlgroup-label {
 }
 
 /* Feierabend-Icon oben rechts */
-.bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; }
-.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 5px; }
+.bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
+.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 18px; }
 
 /* Feierabend-Icon oben rechts */
-.bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; }
-.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 5px; }
+.bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
+.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 18px; }
 
 /* mediaListPage */
 .actionsList .ui-content {
