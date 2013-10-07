@@ -31,6 +31,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      * setting a new value to this property will change the label's value
      */
     , currentBookingStr: ''
+    	
+    /**
+     * Der Zeitstempel zum Zeitpunkt des Buchens durch den Benutzer
+     */
+    , currentBookingTimesStampBook: null
 
     /**
      * Flag indicating whether a switch to the bookingPage is back from employee selection page
@@ -156,7 +161,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , book: function() {
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in bookWithRemark");
+    	this.currentBookingTimesStampBook = new Date().getTime();
+    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
 			if (this.currentBooking) {
 				// Start::Bemerkungsfeld (403)
@@ -700,7 +706,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     		}
     	} catch(e) { console.error(e); }
     	
-    	var timeStart = new Date();
+    	//var timeStart = new Date();
+    	var timeStart = DigiWebApp.BookingController.currentBookingTimesStampBook;
     	
         return DigiWebApp.Booking.createRecord({
               orderId: obj.oId ? obj.oId : null
@@ -1099,6 +1106,7 @@ DigiWebApp.BookingController = M.Controller.extend({
      *  6) If not, the employee selection is cleared
      */
     , closeDay: function() {
+    	this.currentBookingTimesStampBook = new Date().getTime();
     	var that = DigiWebApp.BookingController;
         if (that.currentBooking) {
         	
