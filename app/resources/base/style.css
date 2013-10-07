@@ -360,11 +360,11 @@ label.ui-input-text, .ui-controlgroup-label {
 
 /* Feierabend-Icon oben rechts */
 .bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
-.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 18px; }
+.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
 
 /* Feierabend-Icon oben rechts */
 .bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
-.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 18px; }
+.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
 
 /* mediaListPage */
 .actionsList .ui-content {
