@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4193"
-	version 	= "1.6.1.4193">
+	versionCode = "4194"
+	version 	= "1.6.1.4194">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -55,6 +55,7 @@ which PhoneGap requires. -->
 	<feature name="http://api.phonegap.com/1.0/camera" />
 	<feature name="http://api.phonegap.com/1.0/file" />
 	<feature name="http://api.phonegap.com/1.0/contacts" />
+	<feature name="http://api.phonegap.com/1.0/notification"/>
 
 <!-- include PhonegapPlugIns -->
 	<gap:plugin name="com.phonegap.plugins.childbrowser" />
