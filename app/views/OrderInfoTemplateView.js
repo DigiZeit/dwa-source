@@ -222,7 +222,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , events: {
 	            tap: {
 	                target: DigiWebApp.OrderInfoController,
-	                action: 'saveAsContact'
+	                action: function() {try{navigator.notification.vibrate(200);}catch(e){}; this.saveAsContact();}
 	            }
 	          }
 	    })
@@ -234,6 +234,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , events: {
 	            tap: {
 	                action: function(buttonid, ev) {
+	    				try{navigator.notification.vibrate(200);}catch(e){}
 	    				if (DigiWebApp.OrderInfoController.items.length === 0) {
 	    					DigiWebApp.OrderInfoController.set('items', DigiWebApp.OrderDetailsController.positionForDetails);
 	    				}
@@ -303,6 +304,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
+	    				try{navigator.notification.vibrate(200);}catch(e){}
 						if (DigiWebApp.OrderInfoController.items.length === 0) {
 							DigiWebApp.OrderInfoController.set('items', DigiWebApp.OrderDetailsController.positionForDetails);
 						}

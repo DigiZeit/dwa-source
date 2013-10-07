@@ -257,7 +257,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.SettingsController
-                        , action: 'save'
+                        , action: function() {try{navigator.notification.vibrate(200);}catch(e){}; this.save();}
                     }
                 }
             })
