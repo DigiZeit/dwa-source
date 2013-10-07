@@ -331,6 +331,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , closingTime: function() {
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('bucheFeierabend'));
         DigiWebApp.BookingController.closeDay();
     }
 
@@ -345,6 +346,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     		}
     	}
     	if (startTransfer === YES || DigiWebApp.DashboardController.lastTimestampDatatransfer === null) {
+    		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('starteDatenuebertragung'));
     		DigiWebApp.DashboardController.set("lastTimestampDatatransfer", D8.now().getTimestamp());
 	        var bookings = DigiWebApp.Booking.find();
 	        if(bookings.length > 0) {

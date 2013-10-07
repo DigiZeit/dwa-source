@@ -304,6 +304,8 @@ M.I18N.en_us = {
 	, ungueltigeZahlMsg: 'You cannot use . and , at the same time!'
 	, notActivated: 'Missing feature activation!'
 	, notActivatedMsg: 'This feature has not been activated!'
+	, starteDatenuebertragung: "starting datatransfer"
+	, bucheFeierabend: "closing day"
 
     , ServiceApp_ermittleGeokoordinate: 'ServiceApp: get geocoordinates'
     , ServiceApp_datenUebertragen: 'ServiceApp: do datatransfer'

@@ -304,6 +304,8 @@ M.I18N.de_de = {
 	, ungueltigeZahlMsg: 'Sie können nicht . und , gleichzeitig verwenden!'
 	, notActivated: 'Fehlende Freischaltung!'
 	, notActivatedMsg: 'Diese Funktion ist nicht freigeschaltet!'
+	, starteDatenuebertragung: "starte Datenübertragung"
+	, bucheFeierabend: "buche Feierabend"
 		
     , ServiceApp_ermittleGeokoordinate: 'ServiceApp: Geokoordinaten'
     , ServiceApp_datenUebertragen: 'ServiceApp: Datenübertragung'
