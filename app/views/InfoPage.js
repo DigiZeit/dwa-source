@@ -69,6 +69,7 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
+        				try{navigator.notification.vibrate(200);}catch(e){} 
 			        	DigiWebApp.SettingsController.mitarbeiterNameVorname = "";
 				        var settings = DigiWebApp.Settings.find();    		
 				    	var MitarbeiterWebAppID = "0"
@@ -197,7 +198,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4197'
+              value: 'Build: 4198'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 

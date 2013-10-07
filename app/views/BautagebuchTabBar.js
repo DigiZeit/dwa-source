@@ -23,6 +23,7 @@ DigiWebApp.BautagebuchTabBar = M.TabBarView.design({
         , page: 'zeitbuchungenPage'
         , icon: 'arrow-l'
         , switchPage: function() {
+    		try{navigator.notification.vibrate(200);}catch(e){} 
 			that.backwardHandler();
     	}
     })
@@ -42,6 +43,7 @@ DigiWebApp.BautagebuchTabBar = M.TabBarView.design({
         , page: 'zeitbuchungenPage'
         , icon: 'arrow-r'
         , switchPage: function() {
+			try{navigator.notification.vibrate(200);}catch(e){} 
     		that.forwardHandler();
     	}
     })

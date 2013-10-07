@@ -144,7 +144,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , action: 'deleteMaterialbuchung'
+                    , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.deleteMaterialbuchung();}
                 }
             }
         })

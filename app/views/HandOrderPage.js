@@ -66,7 +66,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.HandOrderController
-                        , action: 'save'
+                        , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.save();}
                     }
                 }
             })

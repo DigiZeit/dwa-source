@@ -48,6 +48,7 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
+        				try{navigator.notification.vibrate(200);}catch(e){}
         				DigiWebApp.BautagebuchBautageberichteListeController.neu();
 					}
                 }

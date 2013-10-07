@@ -102,7 +102,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchNotizenDetailsController
-                    , action: 'deleteNotiz'
+                    , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.deleteNotiz();}
                 }
             }
         })

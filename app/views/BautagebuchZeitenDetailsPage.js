@@ -125,7 +125,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchZeitenDetailsController
-                    , action: 'deleteZeitbuchung'
+                    , action: function() {try{navigator.notification.vibrate(200);}catch(e){} this.deleteZeitbuchung();}
                 }
             }
         })
