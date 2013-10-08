@@ -332,7 +332,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
     , closingTime: function() {
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('bucheFeierabend'));
-        DigiWebApp.BookingController.closeDay();
+		setTimeout(DigiWebApp.BookingController.closeDay,100)
     }
 
     , dataTransfer: function(isClosingDay) {
