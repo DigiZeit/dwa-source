@@ -124,6 +124,11 @@ DigiWebApp.InfoPage = M.PageView.design({
                             M.I18N.setLanguage(selectedLanguage);
                         }
                     }
+			        , tap: {
+						action: function() {
+			        		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+							}
+			        }
                 }
         })
 
