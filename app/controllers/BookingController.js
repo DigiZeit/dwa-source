@@ -550,18 +550,18 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    	that.sendCurrentBookings();
 		    } else {
 				//M.DialogView.alert({
-		    	if (!DigiWebApp.SettingsController.featureAvailable("416")) {
-					DigiWebApp.ApplicationController.nativeAlertDialogView({
-					      title: M.I18N.l('bookingSaved')
-					    , message: M.I18N.l('bookingSavedMsg')
-					    , callbacks: {
-			                confirm: {
-			                      target: DigiWebApp.NavigationController
-			                    , action: 'backToBookTimePagePOP'
-			                }
-			            }
-					});
-		    	}
+//		    	if (!DigiWebApp.SettingsController.featureAvailable("416")) {
+//					DigiWebApp.ApplicationController.nativeAlertDialogView({
+//					      title: M.I18N.l('bookingSaved')
+//					    , message: M.I18N.l('bookingSavedMsg')
+//					    , callbacks: {
+//			                confirm: {
+//			                      target: DigiWebApp.NavigationController
+//			                    , action: 'backToBookTimePagePOP'
+//			                }
+//			            }
+//					});
+//		    	}
 				try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
 		    }
 	    }
