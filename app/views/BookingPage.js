@@ -95,6 +95,11 @@ DigiWebApp.BookingPage = M.PageView.design({
                             this.setPositions();
                         }
                     }
+	                , tap: {
+	    				action: function() {
+	                		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+		  				}
+	                }
                 }
         })
             
@@ -115,6 +120,11 @@ DigiWebApp.BookingPage = M.PageView.design({
                         this.setActivities(YES);
                     }
                 }
+	            , tap: {
+					action: function() {
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+	  				}
+	            }
             }
         })
 
@@ -135,6 +145,11 @@ DigiWebApp.BookingPage = M.PageView.design({
                         this.saveSelection();
                     }
                 }
+	            , tap: {
+					action: function() {
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+	  				}
+	            }
             }
         })
 
