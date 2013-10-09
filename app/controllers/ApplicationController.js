@@ -15,6 +15,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 	, CONSTApplicationQuota: 10*1024*1024
 	
+	, CONSTVibrateDuration: 100
+	
 	// Namespace for XML-Results in IE
 	// gets reset in getOrdersFromRemoteSuccess
 	, myns: "ax21"

@@ -92,7 +92,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	}
 
 	, itemSelected: function(id, m_id) {
-		try{navigator.notification.vibrate(200);}catch(e){} 
+		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
         if(this.latestId) {
             $('#' + this.latestId).removeClass('selected');
         }
