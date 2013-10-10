@@ -10,7 +10,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
 
       isSelectable: NO
 
-    , childViews: 'label comboBox comboBoxView'
+    , childViews: 'comboBoxView'
 
     , events: {
         tap: {
