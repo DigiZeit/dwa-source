@@ -238,7 +238,26 @@ M.DigiSelectionListView = M.View.extend(
                 }
             }
         } else if(this.computedValue) {
-        	this.renderUpdate();
+        	//this.renderUpdate();
+            var childViews = this.value;
+
+            for(var i in childViews) {
+                var view = this[childViews[i]];
+                if(view.type === 'M.DigiSelectionListItemView') {
+                    view.parentView = this;
+                    view._name = childViews[i];
+                    this.html += view.render();
+
+                    /* store list item in initialState property */
+                    this.initialState.push({
+                        value: view.value,
+                        label: view.label,
+                        isSelected: view.isSelected
+                    });
+                } else {
+                    M.Logger.log('Invalid child views specified for SelectionListView. Only DigiSelectionListItemViews accepted.', M.WARN);
+                }
+            }
     	} else if(!this.contentBinding && !this.computedValue && !this.value.length > 0) {
             M.Logger.log('No DigiSelectionListItemViews specified.', M.WARN);
         }
