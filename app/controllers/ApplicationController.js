@@ -897,7 +897,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }
         
         //alert("startsync");
-		this.startsync();
+		//this.startsync();
+        DigiWebApp.BookingController.sendBookings(NO, YES);
         
     }
     
