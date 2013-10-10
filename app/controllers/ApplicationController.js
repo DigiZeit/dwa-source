@@ -893,12 +893,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	//alert("go to BookTimePage");
             	DigiWebApp.NavigationController.toBookTimePage();
                 return;
+            } else {
+            	DigiWebApp.NavigationController.toBookTimePage();
+                DigiWebApp.BookingController.sendBookings(NO, YES);
             }
+        } else {
+        	DigiWebApp.NavigationController.toBookTimePage();
+        	this.startsync();
         }
         
         //alert("startsync");
 		//this.startsync();
-        DigiWebApp.BookingController.sendBookings(NO, YES);
+        //DigiWebApp.BookingController.sendBookings(NO, YES);
         
     }
     
