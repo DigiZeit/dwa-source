@@ -400,6 +400,9 @@ M.DigiListView = M.View.extend(
                         case 'M.TextFieldView':
                             obj[childViewsArray[i]].value = record[regexResult[1]];
                             break;
+                        case 'M.SelectionListView':
+                            obj[childViewsArray[i]].value = record[regexResult[1]];
+                        	break;
                     }
                 }
             }
