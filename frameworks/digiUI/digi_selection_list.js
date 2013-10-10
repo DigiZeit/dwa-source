@@ -301,7 +301,7 @@ M.DigiSelectionListView = M.View.extend(
         /* remove selection before applying new content */
         this.removeSelection();
 
-        if(this.contentBinding) {
+        if(this.contentBinding || this.computedValue) {
             /* assign the value property to 'items' since this was automatically set by contentDidChange of M.View */
             var items = this.value;
             for(var i in items) {
