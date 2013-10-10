@@ -199,18 +199,18 @@ DigiWebAppOrdinaryDesign = {
 };
 
 if (searchForFeature(400)) { // Camera
-	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage // für 400 & 401
-	DigiWebAppOrdinaryDesign.cameraPage = DigiWebApp.CameraPage
-	DigiWebAppOrdinaryDesign.editPicturePage = DigiWebApp.EditPicturePage
-	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage
+	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
+	DigiWebAppOrdinaryDesign.cameraPage = DigiWebApp.CameraPage;
+	DigiWebAppOrdinaryDesign.editPicturePage = DigiWebApp.EditPicturePage;
+	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
 if (searchForFeature(401)) { // Audio
-	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage // für 400 & 401
-	DigiWebAppOrdinaryDesign.audioPage = DigiWebApp.AudioPage
-	DigiWebAppOrdinaryDesign.demoaudioPage = DigiWebApp.DemoAudioPage
-	DigiWebAppOrdinaryDesign.demomediaPage = DigiWebApp.DemoMediaPage
-	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage
+	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
+	DigiWebAppOrdinaryDesign.audioPage = DigiWebApp.AudioPage;
+	DigiWebAppOrdinaryDesign.demoaudioPage = DigiWebApp.DemoAudioPage;
+	DigiWebAppOrdinaryDesign.demomediaPage = DigiWebApp.DemoMediaPage;
+	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
 if (searchForFeature(402)) { // Materialerfassung
@@ -218,31 +218,31 @@ if (searchForFeature(402)) { // Materialerfassung
 }
 
 if (searchForFeature(403) && !(searchForFeature(409))) { // Bemerkungsfeld
-	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage // für 405 & 403
-	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage
+	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
+	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
 if (searchForFeature(404)) { // Button-Menü (mit Icons alá DTC6) (aktuell nur bei Scholpp; diese Freischaltung deaktiviert auch die Animationen)
-	DigiWebAppOrdinaryDesign.buttonsDashboard = DigiWebApp.ButtonDashboardPage
+	DigiWebAppOrdinaryDesign.buttonsDashboard = DigiWebApp.ButtonDashboardPage;
 }
 
 if (searchForFeature(405) && !(searchForFeature(409))) { // Unterschrift
-	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage // für 405 & 403
+	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
 }
 
 if (searchForFeature(406) && !(searchForFeature(409))) { // Auftragsinfo
-	DigiWebAppOrdinaryDesign.orderInfoPage = DigiWebApp.OrderInfoPage
+	DigiWebAppOrdinaryDesign.orderInfoPage = DigiWebApp.OrderInfoPage;
 }
 
 if (searchForFeature(407)) { // Tagescheckliste
-	// hat (noch) keine eigenen Views
+	DigiWebApp.studieChecklistePage = DigiWebApp.StudieChecklistePage;
 }
 
 if (searchForFeature(408)) { // Anwesenheitsliste
-	DigiWebAppOrdinaryDesign.anwesenheitslistePage = DigiWebApp.AnwesenheitslistePage
-	DigiWebAppOrdinaryDesign.zeitbuchungenPage = DigiWebApp.ZeitbuchungenPage
-	DigiWebAppOrdinaryDesign.zeitbuchungDetailsPage = DigiWebApp.ZeitbuchungDetailsPage
-	DigiWebAppOrdinaryDesign.orderDetailsPage = DigiWebApp.OrderDetailsPage
+	DigiWebAppOrdinaryDesign.anwesenheitslistePage = DigiWebApp.AnwesenheitslistePage;
+	DigiWebAppOrdinaryDesign.zeitbuchungenPage = DigiWebApp.ZeitbuchungenPage;
+	DigiWebAppOrdinaryDesign.zeitbuchungDetailsPage = DigiWebApp.ZeitbuchungDetailsPage;
+	DigiWebAppOrdinaryDesign.orderDetailsPage = DigiWebApp.OrderDetailsPage;
 }
 
 if (searchForFeature(409)) { // ChefTool-Only
@@ -255,36 +255,36 @@ if (searchForFeature(409)) { // ChefTool-Only
 
 if ( !(searchForFeature(410)) && !(searchForFeature(409)) ) { // Menüeintrag "Handauftrag" ausblenden
 	// soll heißen, füge den View nur hinzu, wenn dieses Feature NICHT gesetzt ist.
-	DigiWebAppOrdinaryDesign.handOrderPage = DigiWebApp.HandOrderPage
+	DigiWebAppOrdinaryDesign.handOrderPage = DigiWebApp.HandOrderPage;
 }
 
 if ( (searchForFeature(411)) && !(searchForFeature(409)) ) { // Buchungen X Tage vorhalten
-	DigiWebAppOrdinaryDesign.timeDataArchivePage = DigiWebApp.TimeDataArchivePage
+	DigiWebAppOrdinaryDesign.timeDataArchivePage = DigiWebApp.TimeDataArchivePage;
 }
 	
 if ( (searchForFeature(412)) && !(searchForFeature(409)) ) { // Bautagebuch
-	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage
-	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage
-	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage
-	DigiWebAppOrdinaryDesign.bautagebuchMaterialienDetailsPage = DigiWebApp.BautagebuchMaterialienDetailsPage
-	DigiWebAppOrdinaryDesign.bautagebuchMedienListePage = DigiWebApp.BautagebuchMedienListePage
-	DigiWebAppOrdinaryDesign.bautagebuchMedienDetailsPage = DigiWebApp.BautagebuchMedienDetailsPage
-	DigiWebAppOrdinaryDesign.bautagebuchNotizenListePage = DigiWebApp.BautagebuchNotizenListePage
-	DigiWebAppOrdinaryDesign.bautagebuchNotizenDetailsPage = DigiWebApp.BautagebuchNotizenDetailsPage
-	DigiWebAppOrdinaryDesign.bautagebuchZeitenListePage = DigiWebApp.BautagebuchZeitenListePage
-	DigiWebAppOrdinaryDesign.bautagebuchZeitenDetailsPage = DigiWebApp.BautagebuchZeitenDetailsPage
-	DigiWebAppOrdinaryDesign.bautagebuchEinstellungenPage = DigiWebApp.BautagebuchEinstellungenPage
-	DigiWebAppOrdinaryDesign.bautagebuchWetterPage = DigiWebApp.BautagebuchWetterPage
-	DigiWebAppOrdinaryDesign.bautagebuchZusammenfassungPage = DigiWebApp.BautagebuchZusammenfassungPage
-	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage
+	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchMaterialienDetailsPage = DigiWebApp.BautagebuchMaterialienDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchMedienListePage = DigiWebApp.BautagebuchMedienListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchMedienDetailsPage = DigiWebApp.BautagebuchMedienDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchNotizenListePage = DigiWebApp.BautagebuchNotizenListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchNotizenDetailsPage = DigiWebApp.BautagebuchNotizenDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchZeitenListePage = DigiWebApp.BautagebuchZeitenListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchZeitenDetailsPage = DigiWebApp.BautagebuchZeitenDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchEinstellungenPage = DigiWebApp.BautagebuchEinstellungenPage;
+	DigiWebAppOrdinaryDesign.bautagebuchWetterPage = DigiWebApp.BautagebuchWetterPage;
+	DigiWebAppOrdinaryDesign.bautagebuchZusammenfassungPage = DigiWebApp.BautagebuchZusammenfassungPage;
+	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
 if ( (searchForFeature(416)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
-	DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp = DigiWebApp.BookingPageWithIconsScholpp
+	DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp = DigiWebApp.BookingPageWithIconsScholpp;
 }
 
 if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
-	DigiWebAppOrdinaryDesign.spesenPage = DigiWebApp.SpesenPage
+	DigiWebAppOrdinaryDesign.spesenPage = DigiWebApp.SpesenPage;
 }
 
 var restartOnBlackBerry = true;
@@ -322,4 +322,4 @@ parseBool = function(val) {
 	} else if (val === false) {
 		return NO;
 	}
-}
+};

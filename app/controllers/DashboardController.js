@@ -456,7 +456,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, tagescheckliste: function() {
-	    //DigiWebApp.NavigationController.toOrderInfoPageTransition();
+	    DigiWebApp.NavigationController.toStudieChecklistePage();
 	}
         
 	, anwesenheitsliste: function() {
