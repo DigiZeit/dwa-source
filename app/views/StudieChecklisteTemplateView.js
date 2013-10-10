@@ -10,7 +10,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
 
       isSelectable: NO
 
-    , childViews: 'label comboBox'
+    , childViews: 'label comboBox comboBoxView'
 
     , events: {
         tap: {
@@ -31,8 +31,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
         }
     })
 
-//	, comboBox: M.LabelView.design({
-	, comboBox: M.SelectionListView.design({
+	, comboBox: M.LabelView.design({
           cssClass: 'unselectable'
         , computedValue: {
               valuePattern: '<%= comboBox %>'
@@ -40,7 +39,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
             , operation: function(v) {
 				if (v && typeof(v) === "object" && v.length > 0) {
 					// comboBoxView befüllen und anzeigen
-					console.log(this);
+					console.log($(this));
 				} else {
 					// comboBoxView verstecken
 					console.log(this);
@@ -48,6 +47,29 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
 				return '';
             }
         }
+    })
+
+    , comboBoxView: M.SelectionListView.design({
+              selectionMode: M.SINGLE_SELECTION_DIALOG
+            , initialText: M.I18N.l('noData')
+            , applyTheme: NO
+            , contentBinding: {
+			        target: DigiWebApp.StudieChecklisteController
+			      , property: 'listData'
+			  }
+			  , events: {
+			      change: {
+			            target: DigiWebApp.StudieChecklisteController
+			          , action: function() {
+			              //this.setPositions();
+			          }
+			      }
+			      , tap: {
+						action: function() {
+			      		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+						}
+			      }
+			  }
     })
 
 });
