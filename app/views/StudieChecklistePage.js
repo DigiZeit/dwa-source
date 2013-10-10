@@ -11,12 +11,12 @@ m_require('app/views/StudieChecklisteTemplateView');
 DigiWebApp.StudieChecklistePage = M.PageView.design({
 
     /* Use the 'events' property to bind events like 'pageshow' */
-//      events: {
-//		pagebeforeshow: {
-//            target: DigiWebApp.DemoAudioController,
-//            action: 'init'
-//        }
-//    }
+      events: {
+		pagebeforeshow: {
+            target: DigiWebApp.StudieChecklisteController,
+            action: 'init'
+        }
+    }
 
       childViews: 'header content'
 
