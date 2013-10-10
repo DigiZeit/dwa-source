@@ -237,7 +237,9 @@ M.DigiSelectionListView = M.View.extend(
                     M.Logger.log('Invalid child views specified for SelectionListView. Only DigiSelectionListItemViews accepted.', M.WARN);
                 }
             }
-        } else if(!this.contentBinding && !this.computedValue && !this.value.length > 0) {
+        } else if(this.computedValue) {
+        	this.renderUpdate();
+    	} else if(!this.contentBinding && !this.computedValue && !this.value.length > 0) {
             M.Logger.log('No DigiSelectionListItemViews specified.', M.WARN);
         }
     },

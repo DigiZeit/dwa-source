@@ -21,9 +21,9 @@ DigiWebApp.StudieChecklisteController = M.Controller.extend({
         }
         
         this.set("listData", [
-                              {label: "Test 1", comboBox: [{label: "eintrag 1", value: 1},{label: "eintrag 2", value: 2}]}
-                              , {label: "Test 2", comboBox: [{label: "eintrag 3", value: 3},{label: "eintrag 4", value: 4}]}
-                              , {label: "Test 3", comboBox: [{label: "eintrag 5", value: 5},{label: "eintrag 6", value: 6}]}
+                              {label: "Test 1", comboBox: [{label: "eintrag 1", value: "1"},{label: "eintrag 2", value: "2"}]}
+                              , {label: "Test 2", comboBox: [{label: "eintrag 3", value: "3"},{label: "eintrag 4", value: "4"}]}
+                              , {label: "Test 3", comboBox: [{label: "eintrag 5", value: "5"},{label: "eintrag 6", value: "6"}]}
                      	]);	
 
     }
