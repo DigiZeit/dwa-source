@@ -676,7 +676,7 @@ M.DigiSelectionListView = M.View.extend(
                 $(this).removeAttr('disabled');
             });
         }
-    }
+    },
 
     /**
      * This method sets the label's value and initiates its re-rendering.
