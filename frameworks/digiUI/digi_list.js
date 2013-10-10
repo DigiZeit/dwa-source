@@ -403,7 +403,7 @@ M.DigiListView = M.View.extend(
                             obj[childViewsArray[i]].value = record[regexResult[1]];
                         	break;
                     }
-                	console.log(obj, obj[childViewsArray[i]]);
+                	//console.log(obj, obj[childViewsArray[i]]);
                 }
             }
 
