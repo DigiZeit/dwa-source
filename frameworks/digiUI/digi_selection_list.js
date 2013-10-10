@@ -239,24 +239,28 @@ M.DigiSelectionListView = M.View.extend(
             }
         } else if(this.computedValue) {
         	//this.renderUpdate();
-            var childViews = this.value;
-
-            for(var i in childViews) {
-                var view = this[childViews[i]];
-                if(view.type === 'M.DigiSelectionListItemView') {
-                    view.parentView = this;
-                    view._name = childViews[i];
-                    this.html += view.render();
-
-                    /* store list item in initialState property */
-                    this.initialState.push({
-                        value: view.value,
-                        label: view.label,
-                        isSelected: view.isSelected
-                    });
-                } else {
-                    M.Logger.log('Invalid child views specified for SelectionListView. Only DigiSelectionListItemViews accepted.', M.WARN);
+            var items = this.value;
+            for(var i in items) {
+                var item  = items[i];
+                var obj = null;
+                obj = M.DigiSelectionListItemView.design({
+                    value: (item.value !== undefined && item.value !== null) ? item.value : '',
+                    label: item.label ? item.label : ((item.value !== undefined && item.value !== null) ? item.value : ''),
+                    parentView: this,
+                    isSelected: item.isSelected
+                });
+                if(this.selectionMode !== M.SINGLE_SELECTION_DIALOG && this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
+                    obj.name = item.name ? item.name : (item.label ? item.label : (item.value ? item.value : ''));
                 }
+                obj._name = items[i];
+                this.html += obj.render();
+
+                /* store list item in initialState property */
+                this.initialState.push({
+                    value: obj.value,
+                    label: obj.label,
+                    isSelected: obj.isSelected
+                });
             }
     	} else if(!this.contentBinding && !this.computedValue && !this.value.length > 0) {
             M.Logger.log('No DigiSelectionListItemViews specified.', M.WARN);
