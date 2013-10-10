@@ -6,6 +6,8 @@
 // View: StudieChecklistePage
 // ==========================================================================
 
+m_require('app/views/StudieChecklisteTemplateView');
+
 DigiWebApp.StudieChecklistePage = M.PageView.design({
 
     /* Use the 'events' property to bind events like 'pageshow' */
