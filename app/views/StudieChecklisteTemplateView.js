@@ -66,6 +66,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
 //						// comboBoxView verstecken
 //						console.log(this);
 //					}
+    				console.log(v);
 					return v;
 		      }
 		  }
