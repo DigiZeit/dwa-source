@@ -6,7 +6,7 @@
 // View: StudieChecklisteTemplateView
 // ==========================================================================
 
-DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
+DigiWebApp.StudieChecklisteTemplateView = M.DigiListItemView.design({
 
       isSelectable: NO
 
