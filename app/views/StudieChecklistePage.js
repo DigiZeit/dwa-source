@@ -47,7 +47,7 @@ DigiWebApp.StudieChecklistePage = M.PageView.design({
     , content: M.ScrollView.design({
           childViews: 'list'
         
-              , list: M.ListView.design({
+              , list: M.DigiListView.design({
                   contentBinding: {
                       target: DigiWebApp.StudieChecklisteController
                     , property: 'listData'
