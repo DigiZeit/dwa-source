@@ -25,7 +25,7 @@ M.DigiSelectionListItemView = M.View.extend(
      *
      * @type String
      */
-    type: 'M.SelectionListItemView',
+    type: 'M.DigiSelectionListItemView',
 
     /**
      * This property can be used to specify a label for a selection list item. If

@@ -27,7 +27,7 @@ M.DigiListItemView = M.View.extend(
      *
      * @type String
      */
-    type: 'M.ListItemView',
+    type: 'M.DigiListItemView',
 
     /**
      * States whether the list view item is currently in edit mode or not. This is mainly used by

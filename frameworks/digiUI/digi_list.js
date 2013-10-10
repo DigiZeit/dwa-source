@@ -28,7 +28,7 @@ M.DigiListView = M.View.extend(
      *
      * @type String
      */
-    type: 'M.ListView',
+    type: 'M.DigiListView',
 
     /**
      * Determines whether to remove all item if the list is updated or not.
@@ -392,7 +392,7 @@ M.DigiListView = M.View.extend(
 
                 /* ... if a match was found, the variable is replaced by the corresponding value inside the record */
                 if(regexResult) {
-                	console.log(obj[childViewsArray[i]].type);
+                	console.log(record[regexResult[1]]);
                     switch (obj[childViewsArray[i]].type) {
                         case 'M.LabelView':
                         case 'M.ButtonView':
@@ -400,7 +400,7 @@ M.DigiListView = M.View.extend(
                         case 'M.TextFieldView':
                             obj[childViewsArray[i]].value = record[regexResult[1]];
                             break;
-                        case 'M.SelectionListView':
+                        case 'M.DigiSelectionListView':
                             obj[childViewsArray[i]].value = record[regexResult[1]];
                         	break;
                     }
