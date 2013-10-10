@@ -54,7 +54,7 @@ M.DigiSelectionListItemView = M.View.extend(
      * @returns {String} The selection list item view's html representation.
      */
     render: function() {
-		this.computeValue();
+		//this.computeValue();
         if(this.parentView && (this.parentView.selectionMode === M.SINGLE_SELECTION_DIALOG || this.parentView.selectionMode === M.MULTIPLE_SELECTION_DIALOG)) {
             this.html += '<option id="' + this.id + '" value="' + this.value + '"';
 

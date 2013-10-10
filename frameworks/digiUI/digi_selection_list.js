@@ -29,7 +29,7 @@ M.DigiSelectionListView = M.View.extend(
      *
      * @type String
      */
-    type: 'M.SelectionListView',
+    type: 'M.DigiSelectionListView',
 
     /**
      * Determines whether to remove all item if the list is updated or not.
@@ -222,7 +222,7 @@ M.DigiSelectionListView = M.View.extend(
 
             for(var i in childViews) {
                 var view = this[childViews[i]];
-                if(view.type === 'M.SelectionListItemView') {
+                if(view.type === 'M.DigiSelectionListItemView') {
                     view.parentView = this;
                     view._name = childViews[i];
                     this.html += view.render();
@@ -234,11 +234,11 @@ M.DigiSelectionListView = M.View.extend(
                         isSelected: view.isSelected
                     });
                 } else {
-                    M.Logger.log('Invalid child views specified for SelectionListView. Only SelectionListItemViews accepted.', M.WARN);
+                    M.Logger.log('Invalid child views specified for SelectionListView. Only DigiSelectionListItemViews accepted.', M.WARN);
                 }
             }
-        } else if(!this.contentBinding) {
-            M.Logger.log('No SelectionListItemViews specified.', M.WARN);
+        } else if(!this.contentBinding && !this.computedValue && !this.value.length > 0) {
+            M.Logger.log('No DigiSelectionListItemViews specified.', M.WARN);
         }
     },
 
@@ -305,7 +305,7 @@ M.DigiSelectionListView = M.View.extend(
             for(var i in items) {
                 var item  = items[i];
                 var obj = null;
-                obj = M.SelectionListItemView.design({
+                obj = M.DigiSelectionListItemView.design({
                     value: (item.value !== undefined && item.value !== null) ? item.value : '',
                     label: item.label ? item.label : ((item.value !== undefined && item.value !== null) ? item.value : ''),
                     parentView: this,

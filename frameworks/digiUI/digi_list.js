@@ -392,7 +392,6 @@ M.DigiListView = M.View.extend(
 
                 /* ... if a match was found, the variable is replaced by the corresponding value inside the record */
                 if(regexResult) {
-                	console.log(obj[childViewsArray[i]]);
                     switch (obj[childViewsArray[i]].type) {
                         case 'M.LabelView':
                         case 'M.ButtonView':
@@ -404,6 +403,7 @@ M.DigiListView = M.View.extend(
                             obj[childViewsArray[i]].value = record[regexResult[1]];
                         	break;
                     }
+                	console.log(obj, obj[childViewsArray[i]]);
                 }
             }
 
