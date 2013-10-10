@@ -50,27 +50,43 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
         }
     })
 
-    , comboBoxView: M.SelectionListView.design({
+    , comboBoxView: M.DigiSelectionListView.design({
               selectionMode: M.SINGLE_SELECTION_DIALOG
             , initialText: M.I18N.l('noData')
             , applyTheme: NO
-            , contentBinding: {
-			        target: DigiWebApp.StudieChecklisteController
-			      , property: 'listData'
-			  }
-			  , events: {
-			      change: {
-			            target: DigiWebApp.StudieChecklisteController
-			          , action: function() {
-			              //this.setPositions();
-			          }
-			      }
-			      , tap: {
-						action: function() {
-			      		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
-						}
-			      }
-			  }
+            , computedValue: {
+		        valuePattern: '<%= comboBox %>'
+		      //  value: [{label: "eintrag 1", value: 1},{label: "eintrag 2", value: 2}]
+		      , operation: function(v) {
+//					if (v && typeof(v) === "object" && v.length > 0) {
+//						// comboBoxView befüllen und anzeigen
+//						DigiWebApp.StudieChecklisteController.set("t1", $(this));
+//						DigiWebApp.StudieChecklisteController.set("t2", this);
+//					} else {
+//						// comboBoxView verstecken
+//						console.log(this);
+//					}
+					return v;
+		      }
+		  }
+
+//            , contentBinding: {
+//			        target: DigiWebApp.StudieChecklisteController
+//			      , property: 'listData'
+//			  }
+//			  , events: {
+//			      change: {
+//			            target: DigiWebApp.StudieChecklisteController
+//			          , action: function() {
+//			              //this.setPositions();
+//			          }
+//			      }
+//			      , tap: {
+//						action: function() {
+//			      		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+//						}
+//			      }
+//			  }
     })
 
 });
