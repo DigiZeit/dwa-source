@@ -157,6 +157,7 @@ M.DigiSelectionListView = M.View.extend(
      * @returns {String} The selection list view's html representation.
      */
     render: function() {
+		this.computeValue();
 
         /* initialize the initialState property as new array */
         this.initialState = [];
@@ -285,6 +286,7 @@ M.DigiSelectionListView = M.View.extend(
      * @private
      */
     renderUpdate: function() {
+        this.computeValue();
         if(this.removeItemsOnUpdate || this.selectionMode === M.SINGLE_SELECTION_DIALOG || this.selectionMode === M.MULTIPLE_SELECTION_DIALOG) {
             this.removeAllItems();
 
