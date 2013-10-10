@@ -9,7 +9,9 @@
 DigiWebApp.StudieChecklisteController = M.Controller.extend({
 	
 	  listData: null
-	, t: null
+
+	, t1: null
+	, t2: null
 
 	, comboBoxData: null
 			

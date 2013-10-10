@@ -39,7 +39,8 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
             , operation: function(v) {
 				if (v && typeof(v) === "object" && v.length > 0) {
 					// comboBoxView befüllen und anzeigen
-					DigiWebApp.StudieChecklisteController.set("t", $(this));
+					DigiWebApp.StudieChecklisteController.set("t1", $(this));
+					DigiWebApp.StudieChecklisteController.set("t2", $(this));
 				} else {
 					// comboBoxView verstecken
 					console.log(this);
