@@ -18,7 +18,7 @@ DigiWebApp.StudieChecklistePage = M.PageView.design({
         }
     }
 
-      childViews: 'header content'
+    , childViews: 'header content'
 
     , cssClass: 'studieChecklistePage'
 
