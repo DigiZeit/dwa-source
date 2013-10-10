@@ -31,7 +31,8 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
         }
     })
 
-	, comboBox: M.LabelView.design({
+//	, comboBox: M.LabelView.design({
+	, comboBox: M.SelectionListView.design({
           cssClass: 'unselectable'
         , computedValue: {
               valuePattern: '<%= comboBox %>'
@@ -39,20 +40,14 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
             , operation: function(v) {
 				if (v && typeof(v) === "object" && v.length > 0) {
 					// comboBoxView befüllen und anzeigen
-					console.log(this.parent);
+					console.log(this);
 				} else {
 					// comboBoxView verstecken
-					console.log(this.parent);
+					console.log(this);
 				}
 				return '';
             }
         }
-    })
-
-    , comboBoxView: M.SelectionListView.design({
-              selectionMode: M.SINGLE_SELECTION_DIALOG
-            , initialText: M.I18N.l('noData')
-            , applyTheme: NO
     })
 
 });
