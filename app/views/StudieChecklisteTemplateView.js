@@ -39,6 +39,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.ListItemView.design({
             , operation: function(v) {
 				if (v && typeof(v) === "object" && v.length > 0) {
 					// comboBoxView befüllen und anzeigen
+					console.log(this);
 				} else {
 					// comboBoxView verstecken
 					console.log(this);
