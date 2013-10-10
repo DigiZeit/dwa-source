@@ -235,7 +235,7 @@ if (searchForFeature(406) && !(searchForFeature(409))) { // Auftragsinfo
 }
 
 if (searchForFeature(407)) { // Tagescheckliste
-	DigiWebApp.studieChecklistePage = DigiWebApp.StudieChecklistePage;
+	DigiWebAppOrdinaryDesign.studieChecklistePage = DigiWebApp.StudieChecklistePage;
 }
 
 if (searchForFeature(408)) { // Anwesenheitsliste
