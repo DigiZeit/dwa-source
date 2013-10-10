@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		    = "com.digi.webappbeta"
-	versionCode = "4239"
-	version 	= "1.6.1.4239">
+	id		    = "com.digi.webapp"
+	versionCode = "4240"
+	version 	= "1.6.1.4240">
 
-	<name>DIGI-WebApp Beta</name>
+	<name>DIGI-WebApp</name>
 
 	<description>
 		Die mobile Zeiterfassung für das Handwerk!
