@@ -707,8 +707,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     		}
     	} catch(e) { console.error(e); }
     	
-    	//var timeStart = new Date();
-    	var timeStart = DigiWebApp.BookingController.currentBookingTimesStampBook;
+		try {
+	    	var timeStart = DigiWebApp.BookingController.currentBookingTimesStampBook;
+		} catch (e) {
+	    	var timeStart = new Date();
+		}
     	
         return DigiWebApp.Booking.createRecord({
               orderId: obj.oId ? obj.oId : null
