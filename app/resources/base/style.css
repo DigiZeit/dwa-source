@@ -69,6 +69,15 @@ body {
 
 }
 
+.splashViewPage .w320 { background: #003366 !important }
+.splashViewPage .w480 { background: #003366 !important }
+.splashViewPage .w640 { background: #003366 !important }
+.splashViewPage .w800 { background: #003366 !important }
+.splashViewPage .w1024 { background: #003366 !important }
+.splashViewPage .w1080 { background: #003366 !important }
+.splashViewPage .w1536 { background: #003366 !important }
+.splashViewPage .w5000 { background: #003366 !important }
+
 .w320 { background: url('images/320x480_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .w480 { background: url('images/480x800_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .w640 { background: url('images/640x960_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
