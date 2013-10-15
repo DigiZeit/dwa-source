@@ -562,7 +562,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //			            }
 //					});
 //		    	}
-				//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
+				try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
 		    }
 	    }
 	    

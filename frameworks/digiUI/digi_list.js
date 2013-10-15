@@ -329,7 +329,7 @@ M.DigiListView = M.View.extend(
         this.themeUpdate();
 
         /* At last fix the toolbar */
-        //$.mobile.fixedToolbars.show();
+        $.mobile.fixedToolbars.show();
     },
 
     /**
