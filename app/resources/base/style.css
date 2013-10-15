@@ -825,7 +825,7 @@ label.ui-input-text, .ui-controlgroup-label {
 }
 
 .tmp-dialog-footer .ui-btn.ui-btn-up-c.ui-btn-corner-all.ui-shadow {
-	height: 60px;
+	/*height: 60px;*/
 }
 
 .tmp-dialog-footer .ui-btn-up-c .ui-btn-inner.ui-btn-corner-all

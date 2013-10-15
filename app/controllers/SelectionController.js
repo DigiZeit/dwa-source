@@ -535,6 +535,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
                 posId = posObj.value;
             }
         }
+		if (!posId) {
+			return;
+		}
 
 		if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 			if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
