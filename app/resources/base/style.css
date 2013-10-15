@@ -370,6 +370,7 @@ label.ui-input-text, .ui-controlgroup-label {
 /* Feierabend-Icon oben rechts */
 .bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
 .bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
+.bookTimePage .ui-btn-right { width: 80px; }
 
 /* Feierabend-Icon oben rechts */
 .bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
