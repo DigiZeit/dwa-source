@@ -61,7 +61,7 @@
         }
     },    
     "libraries": [
-          {"name": "xml2json", "refs": ["jquery.xml2json_1.1.js"]}
+          {"name": "xml2json", "refs": ["jquery.xml2json_1.3.js"]}
         , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}
