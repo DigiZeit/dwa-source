@@ -23,37 +23,140 @@ M.Application.useTransitions = NO;
 
 var DigiWebApp  = DigiWebApp || {};
 
-/*
- function trackError(ex) {
-	var exceptionAlert = "";
-	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
+function writeToLog(myWriteContent) {		
+	
+	var successCallback = function(){};
+	var errorCallback = function(){};
+	
+	var writeContent = new String(myWriteContent);
+	
+	var a = new Date();
+	var fileName = a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2) + ".log";
+		
+	// check if LocalFileSystem is defined
+	if (typeof window.requestFileSystem === "undefined") {
+		console.error("saveToFileError: no LocalFileSystem available");
+		successCallback("");
+        return true;
+    }
+
 	try {
-		if (ex.indexOf("Line Number: 0") !== -1) {
-			return true;
+		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
+	    // open filesystem
+		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
+			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
+			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    	
+			    	// get dataDirectory from filesystem (create if not exists)
+			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+			
+				    	// get fileEntry from filesystem (create if not exists)
+				    	dataDirectory.getFile(that.get("fileName"), {create: true, exclusive: false}, function(fileEntry) {
+			
+				    		fileEntry.createWriter(function(writer) {
+				    				
+				    			writer.onerror = function(evt) {
+				    				console.error("writeError", evt);
+				    				errorCallback(evt);
+				    			};
+				    			
+				    			writer.onwriteend = function(evt) {
+					    			writer.onwriteend = function(ev) {
+				    					successCallback(ev);
+					    			};
+				    				writer.truncate(writeContent.length);
+				    	        };
+				    	        // Create a new Blob and write it to log.txt.
+				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+				    	        
+			    	        	writer.write(blob);
+			
+				    		}, errorCallback); // fileEntry.createWriter
+				   		}, errorCallback);     // dataDirectory.getFile
+				   	}, errorCallback);         // fileSystem.root.getDirectory
+			    }, errorCallback);             // window.requestFileSystem
+			}, function(e) {
+				  console.error('Error while requesting Quota', e);
+  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('error')
+		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+		            });	    		        					
+			});
+
+		} else {
+	    
+		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    	
+		    	// get dataDirectory from filesystem (create if not exists)
+		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+		
+			    	// get fileEntry from filesystem (create if not exists)
+			    	dataDirectory.getFile(that.get("fileName"), {create: true, exclusive: false}, function(fileEntry) {
+		
+			    		fileEntry.createWriter(function(writer) {
+			    				
+			    			writer.onerror = function(evt) {
+			    				console.error("writeError", evt);
+			    				errorCallback(evt);
+			    			};
+			    			
+			    			writer.onwriteend = function(evt) {
+				    			writer.onwriteend = function(ev) {
+			    					successCallback(ev);
+				    			};
+			    				writer.truncate(writeContent.length);
+			    	        };
+			    	        
+		    	        	writer.write(writeContent.toString());
+		
+			    		}, errorCallback); // fileEntry.createWriter
+			   		}, errorCallback);     // dataDirectory.getFile
+			   	}, errorCallback);         // fileSystem.root.getDirectory
+		    }, errorCallback);             // window.requestFileSystem
 		}
 	} catch(e) {
+		errorCallback(e);
 	}
-	if (typeof(ex.message === "undefined")) {
-		exceptionAlert = exceptionAlert + "'" + ex + "'";
-	} else {
-		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
-	}
-	if (typeof(ex.stack) !== "undefined") {
-		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
-	} else if (typeof(ex.lineNumber) !== "undefined") {
-		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
-			return true;
-		}
-		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
-	} else if (typeof(ex.line) !== "undefined") {
-		if (ex.line === "0" || ex.line === 0) {
-			return true;
-		}
-		exceptionAlert = exceptionAlert + " at " + ex.line;
-	}
-	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
+
+}
+
+
+ function trackError(ex) {
+//	var exceptionAlert = "";
+//	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
+//	try {
+//		if (ex.indexOf("Line Number: 0") !== -1) {
+//			return true;
+//		}
+//	} catch(e) {
+//	}
+//	if (typeof(ex.message === "undefined")) {
+//		exceptionAlert = exceptionAlert + "'" + ex + "'";
+//	} else {
+//		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
+//	}
+//	if (typeof(ex.stack) !== "undefined") {
+//		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
+//	} else if (typeof(ex.lineNumber) !== "undefined") {
+//		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
+//			return true;
+//		}
+//		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
+//	} else if (typeof(ex.line) !== "undefined") {
+//		if (ex.line === "0" || ex.line === 0) {
+//			return true;
+//		}
+//		exceptionAlert = exceptionAlert + " at " + ex.line;
+//	}
+//	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
+//	alert(exceptionAlert);
+	
+	try {
+		var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
+		writeToLog(logText);
+	} catch(ex) {}
+	 
 	console.log(ex);
-	alert(exceptionAlert);
 	if (typeof(ex.stack) !== "undefined") {
 		console.log(ex.stack);
 	}
@@ -61,34 +164,34 @@ var DigiWebApp  = DigiWebApp || {};
 }
 
 window.onerror = function (msg, url, line) {
-	trackError('Error: ' + msg + '\nURL: ' + url + '\nLine Number: ' + line);
+	writeToLog('window.onerror: ' + msg + '\nURL: ' + url + '\nLine Number: ' + line);
 	return true;
 }
-*/
 
-////override jQuery.fn.bind to wrap every provided function in try/catch
-//var jQueryBind = jQuery.fn.bind;
-//jQuery.fn.bind = function( type, data, fn ) {
-//	if ( !fn && data && typeof data == 'function' ) {
-//		fn = data;
-//		data = null;
-//	}
-//	if ( fn ) {
-//		var origFn = fn;
-//		var wrappedFn = function() { 
-//			try {
-//				//console.log("jQuery.fn.bind: applying function for type '" + type + "'");
-//				origFn.apply( this, arguments );
-//			} catch ( ex ) {
-//				trackError( ex );
-//				// re-throw ex iff error should propogate
-//				//throw ex;
-//			}
-//		};
-//		fn = wrappedFn;
-//	}
-//	return jQueryBind.call( this, type, data, fn );
-//};
+
+//override jQuery.fn.bind to wrap every provided function in try/catch
+var jQueryBind = jQuery.fn.bind;
+jQuery.fn.bind = function( type, data, fn ) {
+	if ( !fn && data && typeof data == 'function' ) {
+		fn = data;
+		data = null;
+	}
+	if ( fn ) {
+		var origFn = fn;
+		var wrappedFn = function() { 
+			try {
+				//console.log("jQuery.fn.bind: applying function for type '" + type + "'");
+				origFn.apply( this, arguments );
+			} catch ( ex ) {
+				trackError( ex );
+				// re-throw ex iff error should propogate
+				//throw ex;
+			}
+		};
+		fn = wrappedFn;
+	}
+	return jQueryBind.call( this, type, data, fn );
+};
 
 
 
