@@ -29,7 +29,7 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 	if (typeof(errorCallback) !== "function") errorCallback = function(){};
 
 	var now = new Date();
-	var writeContent = new String("\n\n" + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent);
+	var writeContent = new String("\n----------------------------------------------------------\n" + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent + "\n");
 	
 	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 		
@@ -125,45 +125,48 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 
 
  function trackError(ex) {
-	var exceptionAlert = "";
-	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
-	try {
-		if (ex.indexOf("Line Number: 0") !== -1) {
-			return true;
-		}
-	} catch(e) {
-	}
-	if (typeof(ex.message === "undefined")) {
-		exceptionAlert = exceptionAlert + "'" + ex + "'";
-	} else {
-		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
-	}
-	if (typeof(ex.stack) !== "undefined") {
-		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
-	} else if (typeof(ex.lineNumber) !== "undefined") {
-		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
-			return true;
-		}
-		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
-	} else if (typeof(ex.line) !== "undefined") {
-		if (ex.line === "0" || ex.line === 0) {
-			return true;
-		}
-		exceptionAlert = exceptionAlert + " at " + ex.line;
-	}
-	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
-	alert(exceptionAlert);
+//	var exceptionAlert = "";
+//	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
+//	try {
+//		if (ex.indexOf("Line Number: 0") !== -1) {
+//			return true;
+//		}
+//	} catch(e) {
+//	}
+//	if (typeof(ex.message === "undefined")) {
+//		exceptionAlert = exceptionAlert + "'" + ex + "'";
+//	} else {
+//		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
+//	}
+//	if (typeof(ex.stack) !== "undefined") {
+//		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
+//	} else if (typeof(ex.lineNumber) !== "undefined") {
+//		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
+//			return true;
+//		}
+//		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
+//	} else if (typeof(ex.line) !== "undefined") {
+//		if (ex.line === "0" || ex.line === 0) {
+//			return true;
+//		}
+//		exceptionAlert = exceptionAlert + " at " + ex.line;
+//	}
+//	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
+//	alert(exceptionAlert);
 	
 	try {
 		var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
 		writeToLog(logText);
-	} catch(ex) {}
 	 
-	console.error(ex);
-	if (typeof(ex.stack) !== "undefined") {
-		console.log(ex.stack);
-	}
+		console.log(ex);
+		if (typeof(ex.stack) !== "undefined") {
+			console.log(ex.stack);
+		}
+
+	} catch(ex) {}
+	
 	return true;
+
 }
 
 window.onerror = function (msg, url, line) {

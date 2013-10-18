@@ -161,7 +161,6 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , book: function() {
-    	gnarf.fail();
     	this.currentBookingTimesStampBook = new Date();
     	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
     	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
