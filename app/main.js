@@ -31,11 +31,12 @@ function writeToLog(myWriteContent) {
 	var writeContent = new String(myWriteContent);
 	
 	var a = new Date();
-	var fileName = a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2) + ".log";
+	var fileName = a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2) + "_DIGI-WebApp.log";
 		
 	// check if LocalFileSystem is defined
 	if (typeof window.requestFileSystem === "undefined") {
-		console.error("saveToFileError: no LocalFileSystem available");
+		console.error("writeToLog: no LocalFileSystem available");
+		alert("writeToLog: no LocalFileSystem available");
 		successCallback("");
         return true;
     }
@@ -51,7 +52,7 @@ function writeToLog(myWriteContent) {
 			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 			
 				    	// get fileEntry from filesystem (create if not exists)
-				    	dataDirectory.getFile(that.get("fileName"), {create: true, exclusive: false}, function(fileEntry) {
+				    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
 			
 				    		fileEntry.createWriter(function(writer) {
 				    				
@@ -91,7 +92,7 @@ function writeToLog(myWriteContent) {
 		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 		
 			    	// get fileEntry from filesystem (create if not exists)
-			    	dataDirectory.getFile(that.get("fileName"), {create: true, exclusive: false}, function(fileEntry) {
+			    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
 		
 			    		fileEntry.createWriter(function(writer) {
 			    				
@@ -122,41 +123,41 @@ function writeToLog(myWriteContent) {
 
 
  function trackError(ex) {
-//	var exceptionAlert = "";
-//	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
-//	try {
-//		if (ex.indexOf("Line Number: 0") !== -1) {
-//			return true;
-//		}
-//	} catch(e) {
-//	}
-//	if (typeof(ex.message === "undefined")) {
-//		exceptionAlert = exceptionAlert + "'" + ex + "'";
-//	} else {
-//		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
-//	}
-//	if (typeof(ex.stack) !== "undefined") {
-//		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
-//	} else if (typeof(ex.lineNumber) !== "undefined") {
-//		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
-//			return true;
-//		}
-//		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
-//	} else if (typeof(ex.line) !== "undefined") {
-//		if (ex.line === "0" || ex.line === 0) {
-//			return true;
-//		}
-//		exceptionAlert = exceptionAlert + " at " + ex.line;
-//	}
-//	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
-//	alert(exceptionAlert);
+	var exceptionAlert = "";
+	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
+	try {
+		if (ex.indexOf("Line Number: 0") !== -1) {
+			return true;
+		}
+	} catch(e) {
+	}
+	if (typeof(ex.message === "undefined")) {
+		exceptionAlert = exceptionAlert + "'" + ex + "'";
+	} else {
+		exceptionAlert = exceptionAlert + "'" + ex.message + "'";
+	}
+	if (typeof(ex.stack) !== "undefined") {
+		exceptionAlert = exceptionAlert + "\n" + ex.stack.split("\n")[1];
+	} else if (typeof(ex.lineNumber) !== "undefined") {
+		if (ex.lineNumber === "0" || ex.lineNumber === 0) {
+			return true;
+		}
+		exceptionAlert = exceptionAlert + " at " + ex.lineNumber;
+	} else if (typeof(ex.line) !== "undefined") {
+		if (ex.line === "0" || ex.line === 0) {
+			return true;
+		}
+		exceptionAlert = exceptionAlert + " at " + ex.line;
+	}
+	exceptionAlert = exceptionAlert + "\n\n" + "Bitte melden Sie dies bei DIGI-Zeiterfassung GmbH, damit dieser Fehler behoben werden kann." + "\n\n" + "Herzlichen Dank!";
+	alert(exceptionAlert);
 	
 	try {
 		var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
 		writeToLog(logText);
 	} catch(ex) {}
 	 
-	console.log(ex);
+	console.error(ex);
 	if (typeof(ex.stack) !== "undefined") {
 		console.log(ex.stack);
 	}
