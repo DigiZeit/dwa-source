@@ -29,9 +29,9 @@ function writeToLog(myWriteContent) {
 	var errorCallback = function(){};
 	
 	var now = new Date();
-	var writeContent = new String(now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent);
+	var writeContent = new String("\n" + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent);
 	
-	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log";
+	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 		
 	// check if LocalFileSystem is defined
 	if (typeof window.requestFileSystem === "undefined") {
@@ -70,6 +70,7 @@ function writeToLog(myWriteContent) {
 				    	        // Create a new Blob and write it to log.txt.
 				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
 				    	        
+				    	        writer.seek(writer.length);
 			    	        	writer.write(blob);
 			
 				    		}, errorCallback); // fileEntry.createWriter
@@ -108,6 +109,7 @@ function writeToLog(myWriteContent) {
 			    				writer.truncate(writeContent.length);
 			    	        };
 			    	        
+			    	        writer.seek(writer.length);
 		    	        	writer.write(writeContent.toString());
 		
 			    		}, errorCallback); // fileEntry.createWriter
