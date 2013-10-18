@@ -28,15 +28,15 @@ function writeToLog(myWriteContent) {
 	var successCallback = function(){};
 	var errorCallback = function(){};
 	
-	var writeContent = new String(myWriteContent);
+	var now = new Date();
+	var writeContent = new String(now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent);
 	
-	var a = new Date();
-	var fileName = a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2) + "_DIGI-WebApp.log";
+	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log";
 		
 	// check if LocalFileSystem is defined
 	if (typeof window.requestFileSystem === "undefined") {
-		console.error("writeToLog: no LocalFileSystem available");
-		alert("writeToLog: no LocalFileSystem available");
+		//console.error("writeToLog: no LocalFileSystem available");
+		//alert("writeToLog: no LocalFileSystem available");
 		successCallback("");
         return true;
     }
