@@ -562,7 +562,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //			            }
 //					});
 //		    	}
-				try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
+				//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
 		    }
 	    }
 	    
@@ -1110,9 +1110,9 @@ DigiWebApp.BookingController = M.Controller.extend({
      *  6) If not, the employee selection is cleared
      */
     , closeDay: function() {
-    	var that = DigiWebApp.BookingController;
-    	that.currentBookingTimesStampBook = new Date();
+    	this.currentBookingTimesStampBook = new Date();
     	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+    	var that = DigiWebApp.BookingController;
         if (that.currentBooking) {
         	
         	spesencallback = function() {
