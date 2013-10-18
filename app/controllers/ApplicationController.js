@@ -318,6 +318,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
 	, regSecEv: function(isFirstLoad) {
+    	
+    	writeToLog("DIGI-WebApp gestartet " + new Date().toString());
 
         DigiWebApp.ApplicationController.setImageClass();
         
