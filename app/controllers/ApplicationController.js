@@ -319,8 +319,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
 	, regSecEv: function(isFirstLoad) {
     	
-    	writeToLog("DIGI-WebApp gestartet " + new Date().toString());
-
         DigiWebApp.ApplicationController.setImageClass();
         
         M.I18N.defaultLanguage = "de_de";
@@ -559,6 +557,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	, devicereadyhandler: function() {
 		
+    	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
+
 //		try {
 		
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
