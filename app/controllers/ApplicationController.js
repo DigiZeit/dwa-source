@@ -789,7 +789,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * first time during this application life cycle
      */
     , init: function(isFirstLoad) {
-    	alert("in DigiWebApp.ApplicationController.init");
+    	//alert("in DigiWebApp.ApplicationController.init");
     	//alert("vor DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function ()");
     	DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
     		//console.log("tabItem1");
@@ -829,7 +829,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
        });
        */
        //console.warn("ApplicationController.init at timestamp " + M.Date.now().date.valueOf());
-       //alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
+       alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
        
        DigiWebApp.ApplicationController.callbackStatus = {
             position: {
