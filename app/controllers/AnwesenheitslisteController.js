@@ -5,14 +5,14 @@
 // Project: DigiWebApp
 // Controller: AnwesenheitslisteController
 // ==========================================================================
-
+//var-checked
 DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 
 	  items: null
 	
 	, init: function(isFirstLoad) {
 		var that = DigiWebApp.AnwesenheitslisteController;
-		if(that.items === null) {
+		if (that.items === null) {
 			DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.AnwesenheitslisteController.initWithServer, isFirstLoad);
 		} else {
 			DigiWebApp.AnwesenheitslisteController.initWithServer(isFirstLoad);
@@ -21,7 +21,7 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 
     , initWithServer: function(isFirstLoad) {
     	var that = DigiWebApp.AnwesenheitslisteController;
-		if(that.items === null) {
+		if (that.items === null) {
 			//console.log("Anwesenheitsliste: showing Loader");		
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('AnwesenheitslisteLaden'));
 

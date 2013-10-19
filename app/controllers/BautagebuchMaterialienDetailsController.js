@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMaterialienDetailsController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 	  item: null
@@ -29,7 +29,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, menge: null // in model
 	  	
 	, init: function(isFirstLoad) {
-		var that = this;
+		//var that = this;
 	}
 
 	, load: function(myItem) {
@@ -161,7 +161,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	        var itemSelected = NO;
 
 	        /* if a workplan exists, only use those activities that are in the workplan */
-	        if(workPlans.length > 0) {
+	        if (workPlans.length > 0) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
@@ -182,7 +182,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		    });
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomethingOptional'), value: '0', isSelected: !itemSelected});
-			that.set("activityList", taetigkeitenArray)
+			that.set("activityList", taetigkeitenArray);
 		}
 	}
 

@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BookingController
 // ==========================================================================
-
+// manuell var-checked
 
 /*
 * The controller that handles everything booking related.
@@ -103,22 +103,22 @@ DigiWebApp.BookingController = M.Controller.extend({
 			this.refreshCurrentBooking(true);
 		}
 
-        if(this.isBackFromEmployeePage) {
+        if (this.isBackFromEmployeePage) {
             DigiWebApp.BookingController.set('isBackFromEmployeePage', NO);
-        } else if(this.isBackFromRemarkPage) {
+        } else if (this.isBackFromRemarkPage) {
             DigiWebApp.BookingController.set('isBackFromRemarkPage', NO);
             //console.log("isBackFromRemarkPage");
         } else {
 			//this.refreshCurrentBooking(true);
-            if(DigiWebApp.SelectionController.useSelections) {
+            if (DigiWebApp.SelectionController.useSelections) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
                 DigiWebApp.SelectionController.setSelectionByPreviousSelection();
-            } else if(DigiWebApp.SelectionController.showHandOrderFirst) {
+            } else if (DigiWebApp.SelectionController.showHandOrderFirst) {
                 //if (DigiWebApp.SettingsController.globalDebugMode) console.log('showHandOrderFirst');
                 DigiWebApp.SelectionController.showHandOrderFirst = NO;
                 DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
             } else {
-                if(this.currentBooking) {
+                if (this.currentBooking) {
                     //if (DigiWebApp.SettingsController.globalDebugMode) console.log('useCurrentBooking');
                     DigiWebApp.SelectionController.setSelectionByCurrentBooking();
                 } else {
@@ -139,13 +139,13 @@ DigiWebApp.BookingController = M.Controller.extend({
         var bookings = DigiWebApp.Booking.find();
         var openBookings = null;
 
-        if(bookings.length > 0) {
+        if (bookings.length > 0) {
             openBookings = _.select(bookings, function(b) {
                 if (b) return b.get('isCurrent') === true;
             });
         }
 
-        if(openBookings && openBookings.length > 0) {
+        if (openBookings && openBookings.length > 0) {
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr was ' + this.get('currentBookingStr'));
 
@@ -235,7 +235,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var that = DigiWebApp.BookingController;
     	
 		// Get GPS-Position if set in Settings
-    	getLocationNow = function() {
+    	var getLocationNow = function() {
 	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'));
 	
 	            /*var getLocationOptions =  { 
@@ -305,12 +305,13 @@ DigiWebApp.BookingController = M.Controller.extend({
         //var booking = null;
 
         // check if order chosen
+    	var orderId;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            var orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
+            orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
     	} else {
-            var orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
+            orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
     	}
-        if(!orderId || (orderId && orderId === "0")) {
+        if (!orderId || (orderId && orderId === "0")) {
             //M.DialogView.alert({
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                   title: M.I18N.l('noOrderSelected')
@@ -319,7 +320,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             return false;
         } else {
             // check if hand order
-            if(!this.isHandOrder(orderId)) {// if it is not a hand order position and activity must be selected
+            if (!this.isHandOrder(orderId)) {// if it is not a hand order position and activity must be selected
                 // check if position is set
                 if (!DigiWebApp.SelectionController.isPositionSelected()) {
                     //M.DialogView.alert({
@@ -350,32 +351,34 @@ DigiWebApp.BookingController = M.Controller.extend({
                     return false;
                 }
             } // else of: if(!this.isHandOrder(orderId))
-                        
+            
+            var posObj;
+            var actObj;
             if (typeof(skipSelection) === "undefined") {
 	        	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-	                var posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+	                posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
 	        	} else {
-	                var posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+	                posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
 	        	}
 	            var posId = posObj ? posObj.value : null;
 	
 	        	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-	                var actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+	                actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
 	        	} else {
-	                var actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
+	                actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
 	        	}
 	            var actId = actObj ? actObj.value : null;
 	
 	            // check if open booking
-	            if(this.currentBooking) {
+	            if (this.currentBooking) {
 	                var curBookingOrderId = this.currentBooking.get('orderId');
 	                var curBookingHandOrderId = this.currentBooking.get('handOrderId');
 	                var curBookingPosId = this.currentBooking.get('positionId');
 	                var curBookingActId = this.currentBooking.get('activityId');
 	
-	                if(curBookingOrderId === orderId || curBookingHandOrderId === orderId) {
+	                if (curBookingOrderId === orderId || curBookingHandOrderId === orderId) {
 	
-	                    if((!this.isHandOrder(orderId)) && (curBookingPosId === posId) && (curBookingActId === actId)) {
+	                    if ((!this.isHandOrder(orderId)) && (curBookingPosId === posId) && (curBookingActId === actId)) {
 	                        //M.DialogView.alert({
 	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                              title: M.I18N.l('doubleBooking')
@@ -384,7 +387,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                        return false;
 	                    }
 	
-	                    if(this.isHandOrder(orderId) && (curBookingActId === actId)) {
+	                    if (this.isHandOrder(orderId) && (curBookingActId === actId)) {
 	                        //M.DialogView.alert({
 	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                              title: M.I18N.l('doubleBooking')
@@ -425,29 +428,32 @@ DigiWebApp.BookingController = M.Controller.extend({
         //DigiWebApp.ApplicationController.DigiLoaderView.hide();
         //var booking = null;
 
+    	var orderId;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
+    		orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
     	} else {
-    		var orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
+    		orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
     	}
 	
+    	var posObj;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+    		posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
     	} else {
-    		var posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+    		posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
     	}
 		var posId = posObj ? posObj.value : null;
 	
+		var actObj;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+    		actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
     	} else {
-    		var actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
+    		actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
     	}
 		var actId = actObj ? actObj.value : null;
 
 	    // close open booking 
-	    if(that.currentBooking) {
-			var curBookingOrderId = that.currentBooking.get('orderId');
+	    if (that.currentBooking) {
+			//var curBookingOrderId = that.currentBooking.get('orderId');
 			//var curBookingHandOrderId = this.currentBooking.get('handOrderId');
 			//var curBookingPosId = this.currentBooking.get('positionId');
 			//var curBookingActId = this.currentBooking.get('activityId');
@@ -469,7 +475,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    // setup new booking
 	    var handOrderId = null;
 	    var handOrderName = null;
-	    if(that.isHandOrder(orderId)) {
+	    if (that.isHandOrder(orderId)) {
 			handOrderId = orderId;
 			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 				if (ord) return ord.get('id') === orderId || ord.get('name') === orderId;
@@ -482,11 +488,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    
 	    var lat = null;
 	    var lon = null;
-	    if(location) {
+	    if (location) {
 			if (location.latitude) {
 			    lat = location.latitude;
 			}
-			if(location.longitude) {
+			if (location.longitude) {
 			    lon = location.longitude;
 			}
 	    }
@@ -495,7 +501,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    try {
 	    	M.ViewManager.getView('remarkPage', 'remarkInput').value = '';
 	    } catch(e) { }
-	    remarkStr = '';
+	    var remarkStr = '';
 
 	    var newOpenBooking = that.openBooking({
 			  oId: orderId
@@ -546,7 +552,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    var finishBooking = function() {
 	    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Kommunikation mit ServiceApp beendet");
-		    if(that.autoSend()) {
+		    if (that.autoSend()) {
 		    	that.sendCurrentBookings();
 		    } else {
 				//M.DialogView.alert({
@@ -564,7 +570,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //		    	}
 				//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
 		    }
-	    }
+	    };
 	    
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime')) {
@@ -623,10 +629,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 								DigiWebApp.ApplicationController.DigiLoaderView.hide();
 								console.error(err);
 							});
-						}
+						};
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 						DigiWebApp.ServiceAppController.putBookings([that.currentBooking], getWAITFunc, getWAITFunc);
-					}
+					};
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {
@@ -688,7 +694,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         				return myO_id == myGetO_id || myHO_id == myGetO_id; // || get('name') is for checking handOrders also
         			}
                 });
-                if(order && order.length > 0) {
+                if (order && order.length > 0) {
                     order = order[0];
                     myOrderName = order.get('name');
                 }
@@ -707,10 +713,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     		}
     	} catch(e) { console.error(e); }
     	
+    	var timeStart;
 		try {
-	    	var timeStart = DigiWebApp.BookingController.currentBookingTimesStampBook;
+	    	timeStart = DigiWebApp.BookingController.currentBookingTimesStampBook;
 		} catch (e) {
-	    	var timeStart = new Date();
+	    	timeStart = new Date();
 		}
     	
         return DigiWebApp.Booking.createRecord({
@@ -766,7 +773,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             				return myO_id == myGetO_id || myHO_id == myGetO_id;
             			}
                     });
-                    if(order && order.length > 0) {
+                    if (order && order.length > 0) {
                         order = order[0];
                         myOrderName = order.get('name');
                     }
@@ -846,7 +853,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             				return myO_id == myGetO_id || myHO_id == myGetO_id;
             			}
             		});
-                    if(order && order.length > 0) {
+                    if (order && order.length > 0) {
                         order = order[0];
                         myOrderName = order.get('name');
                     }
@@ -911,7 +918,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , setNotBookedBookings: function() {
     	try {
 	        var bookings = DigiWebApp.Booking.find();
-	        if(bookings.length > 0) {
+	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
@@ -920,7 +927,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if(booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -951,7 +958,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , setBookedBookings: function() {
     	try {
 	        var bookings = DigiWebApp.SentBooking.find();
-	        if(bookings.length > 0) {
+	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
@@ -960,7 +967,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if(booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -981,7 +988,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , setArchivedDays: function() {
     	try {
 	        var days = DigiWebApp.SentTimeDataDays.find();
-	        if(days.length > 0) {
+	        if (days.length > 0) {
 	            // newest day at the top => first sort than reverse order
 	        	days = _.sortBy(days, function(day) {
 	                return parseInt(D8.create(day.get('tagLabel')).getTimestamp());
@@ -1005,7 +1012,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        		, value: DigiWebApp.BookingController.dayToDisplay.get("tagLabel")
 		        	}
 		        });
-		        if(bookings.length > 0) {
+		        if (bookings.length > 0) {
 		            _.each(bookings, function(booking) {
 		            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 		            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
@@ -1014,7 +1021,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	}
 		
 		                // set the handOrderId as orderId for correct display in list item view
-		                if(booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+		                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
 		                    booking.set('orderId', booking.get('handOrderId'));
 		                }
 		
@@ -1039,7 +1046,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
 	    	if ( DigiWebApp.BookingController.currentBooking === null ) { return; }
 	        var bookings = [DigiWebApp.BookingController.currentBooking];
-	        if(bookings.length > 0) {
+	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
@@ -1048,7 +1055,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if(booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1070,7 +1077,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
 	    	if ( DigiWebApp.EditTimeDataPage.bookingToEdit === null ) { return; }
 	        var bookings = [DigiWebApp.EditTimeDataPage.bookingToEdit];
-	        if(bookings.length > 0) {
+	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
@@ -1079,7 +1086,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if(booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1115,7 +1122,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var that = DigiWebApp.BookingController;
         if (that.currentBooking) {
         	
-        	spesencallback = function() {
+        	var spesencallback = function() {
 		        // Start::Bemerkungsfeld (403)
 				if (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
 					// if remark-feature active: go to remarkpage
@@ -1133,7 +1140,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        	that.closeDayWithRemark();           					
 		        }
 		        // End::Bemerkungsfeld
-        	}
+        	};
 
         	if (DigiWebApp.SettingsController.featureAvailable('418')) {
         		DigiWebApp.NavigationController.toSpesenPage(function() {
@@ -1154,14 +1161,13 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
     
     , closeDayWithRemark: function() {
-    	var that = DigiWebApp.BookingController;
-    	that.getBookingLocation(that.closeDayWithRemarkWithPosition);
+    	DigiWebApp.BookingController.getBookingLocation(that.closeDayWithRemarkWithPosition);
     }
             
     , closeDayWithRemarkWithPosition: function(location) {
     	var that = DigiWebApp.BookingController;
         // close current booking
-        if(that.currentBooking) {
+        if (that.currentBooking) {
         	that.currentBooking.set("istFeierabend", true);
         	that.currentBooking.closeBooking(location);
         	that.currentBooking.removeAsCurrent();
@@ -1189,7 +1195,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
         var finishBooking = function() {
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
-        	if(DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
+        	if (DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
 	            DigiWebApp.DashboardController.dataTransfer(YES); // yes means: is closing day
 	        } else {
 	            // clear employee selection, but only if not auto data transfer and save it before to have it while sending the data
@@ -1206,7 +1212,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                , message: M.I18N.l('closingDaySuccessWithoutMsg')
 	            });
 	        }
-        }
+        };
         
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
@@ -1218,7 +1224,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
-							var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id});
+							var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return (b.m_id === datensatzObj.m_id);});
 							var datensatz = datensatzObj.record;
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
@@ -1237,12 +1243,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 						});
 						that.currentBookingClosed = null;
 						finishBooking();
-					}
+					};
 					var idsToPoll = [];
 					if (that.currentBooking !== null) { idsToPoll.push(that.currentBooking.m_id); }
 					if (that.currentBookingClosed !== null) { idsToPoll.push(that.currentBookingClosed.m_id); }
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
-				}
+				};
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pollBooking, finishBooking);
 			} else {
@@ -1252,8 +1258,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 						DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
 							finishBooking();
-						},function(err){console.error(err);finishBooking()});
-					}
+						},function(err){console.error(err);finishBooking();});
+					};
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], getWAITFunc, getWAITFunc);
 				} else {
@@ -1272,7 +1278,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		if (typeof successCallback !== "function") {
 			console.error("loadSignaturesError: successCallback is not a function");
 	        return;
-	    };
+	    }
 		
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadSignatures'));
 
@@ -1366,27 +1372,29 @@ DigiWebApp.BookingController = M.Controller.extend({
 		});
 		
 		if (items.length !== 0) {
-			var data = {"unterschriften": items}
 			
-			var internalSuccessCallback = function(data, msg, request) {
+			var data = {"unterschriften": items};
+			
+			var internalSuccessCallback = function(data2, msg, request) {
 				// verarbeite empfangene Daten
 				//console.log("sendSignatures Status: " + request.status);										
 				// weiter in der Verarbeitungskette
-				DigiWebApp.BookingController.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
+				that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
 			};
 			DigiWebApp.JSONDatenuebertragungController.sendData(data, "medien/unterschrift", M.I18N.l('sendSignatures'), internalSuccessCallback, internalSuccessCallback);
 			
 		} else {
-			DigiWebApp.BookingController.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
+			that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
 		}
 		
     }
     
-    , sendBookingsWithoutSignatures: function(bookings, isClosingDay, doSync) {
+    , sendBookingsWithoutSignatures: function(bookings, isClosingDay, myDoSync) {
 
-        if (typeof(doSync) === "undefined") doSync = false;
+    	var doSync = false;
+        if (typeof(myDoSync) !== "undefined") doSync = myDoSync;
 
-        if(bookings.length > 0) {
+        if (bookings.length > 0) {
         	
         	DigiWebApp.JSONDatenuebertragungController.sendeZeitdaten(
         		  bookings
@@ -1394,7 +1402,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         			  var that = DigiWebApp.BookingController;
         			  var CurrentAvailable = false;
         			  _.each(DigiWebApp.Booking.find(), function(el) {
-        				  if(el.get('isCurrent')) {
+        				  if (el.get('isCurrent')) {
         					  CurrentAvailable = true;
         				  }
     				  });
@@ -1409,7 +1417,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 							try {
 								// move Bookings to SentBookingArchived
 							      _.each(DigiWebApp.Booking.find(), function(el) {
-							          if(!el.get('isCurrent')) {
+							          if (!el.get('isCurrent')) {
 							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
 							      		  sentBookingArchivedEl.save();
 							      		  // check if that day is already in archive
@@ -1446,7 +1454,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						// Buchungen aufräumen
 						var deleteBuchungsIds = [];
 		  				_.each(DigiWebApp.Booking.find(), function(el) {
-		                    if(!el.get('isCurrent')) {
+		                    if (!el.get('isCurrent')) {
 		                  	  if (CurrentAvailable) {
 			                  		  try {
 			                      		  // save booking as sentBooking for later view in sentBookingsListView
@@ -1463,21 +1471,30 @@ DigiWebApp.BookingController = M.Controller.extend({
 		                      el.del();
 		                    }
 		                  });
-		  				  DigiWebApp.ServiceAppController.deleteBookings(deleteBuchungsIds, function(){if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.")}, function(){if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.")})
+		  				
+		  				  DigiWebApp.ServiceAppController.deleteBookings(
+		  						    deleteBuchungsIds
+		  						  , function() {
+		  						    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.");
+		  						  }
+		  						  , function() {
+		  							  	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.");
+		  						  }
+		  				  );
 
 		  				  // Buchungsselektion erneuern
 		                  DigiWebApp.SelectionController.resetSelection();
-		                  if(CurrentAvailable) {
+		                  if (CurrentAvailable) {
 		                      DigiWebApp.SelectionController.setSelectionByCurrentBooking();
 		                  } else {
 		                      DigiWebApp.SelectionController.initSelection();
 		                  }
 
 		                  // falls Feierabend gebucht wurde: aufräumen
-		                  if(isClosingDay) {
+		                  if (isClosingDay) {
 		                	  that.set('currentBookingStr', '');
 		
-		                      if(DigiWebApp.EmployeeController.getEmployeeState() == 2) {
+		                      if (DigiWebApp.EmployeeController.getEmployeeState() == 2) {
 		                          DigiWebApp.EmployeeController.setEmployeeState(1);
 		                      }
 		                      // clear employee selection
@@ -1488,7 +1505,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
                           // now call startsync again
                           if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
-                          	DigiWebApp.ApplicationController.startsync(YES);
+                          		DigiWebApp.ApplicationController.startsync(YES);
                           }
                   
         		  }
@@ -1620,10 +1637,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , buildBookingStr: function(booking) {
         var bookingStr = '';
+        var myDisplayTimestamp;
         if (typeof(this.currentBooking.get("timezoneOffset")) === "undefined") {
-        	var myDisplayTimestamp = new Date(this.currentBooking.get('timeStampStart')).getTime();
+        	myDisplayTimestamp = new Date(this.currentBooking.get('timeStampStart')).getTime();
         } else {
-        	var myDisplayTimestamp = new Date(this.currentBooking.get('timeStampStart') - (1000 * 60 * (this.currentBooking.get("timezoneOffset") - new Date().getTimezoneOffset()))).getTime();
+        	myDisplayTimestamp = new Date(this.currentBooking.get('timeStampStart') - (1000 * 60 * (this.currentBooking.get("timezoneOffset") - new Date().getTimezoneOffset()))).getTime();
         }
         //bookingStr = M.Date.create(this.currentBooking.get('timeStampStart')).format('dd.mm.yy HH:MM');
         bookingStr = M.Date.create(myDisplayTimestamp).format('dd.mm.yy HH:MM');

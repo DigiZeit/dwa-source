@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: NavigationController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.NavigationController = M.Controller.extend({
 
 	  toSplashViewPage: function() {
@@ -27,7 +27,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -39,14 +39,14 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e2) { console.error(e2); }
     	}
     }
 
     , backToBookTimePagePOP: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -65,7 +65,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -84,7 +84,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePageTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -103,7 +103,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -122,7 +122,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
