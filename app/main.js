@@ -6,6 +6,25 @@
 // Project: DigiWebApp 
 // ==========================================================================
 
+function parseBool(val) {
+	       if (val === "YES") {
+		return YES;
+	} else if (val === YES) {
+		return YES;
+	} else if (val === "true") {
+		return YES;
+	} else if (val === true) {
+		return YES;
+	} else if (val === "NO") {
+		return NO;
+	} else if (val === NO) {
+		return NO;
+	} else if (val === "false") {
+		return NO;
+	} else if (val === false) {
+		return NO;
+	}
+};
 
 if (!window.console) {
 	window.console = {
@@ -275,9 +294,10 @@ $(window).bind('load', function(e) {
 });
 
 function searchForFeature(featureId) {
+	//console.log(featureId);
     for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
-        regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Features_').exec(k);
+        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Features_').exec(k);
         if (regexResult) {
             var record = JSON.parse(localStorage.getItem(k));
         	if (featureId.toString() === record.id.toString()) {
@@ -408,8 +428,6 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 	DigiWebAppOrdinaryDesign.spesenPage = DigiWebApp.SpesenPage;
 }
 
-console.log("---hier---");
-
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {
@@ -426,22 +444,3 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 };
 
-function parseBool(val) {
-	       if (val === "YES") {
-		return YES;
-	} else if (val === YES) {
-		return YES;
-	} else if (val === "true") {
-		return YES;
-	} else if (val === true) {
-		return YES;
-	} else if (val === "NO") {
-		return NO;
-	} else if (val === NO) {
-		return NO;
-	} else if (val === "false") {
-		return NO;
-	} else if (val === false) {
-		return NO;
-	}
-};
