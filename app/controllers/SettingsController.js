@@ -136,7 +136,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::Bautagebuch
 
-        
+        console.log("vor enforceChefToolOnly");
         DigiWebApp.ApplicationController.enforceChefToolOnly();
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();

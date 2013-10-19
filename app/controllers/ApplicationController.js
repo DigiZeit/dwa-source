@@ -862,7 +862,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
-        //alert("vor SettingsController.init");
+        alert("vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
         
