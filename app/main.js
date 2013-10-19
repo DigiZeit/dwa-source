@@ -288,6 +288,8 @@ function searchForFeature(featureId) {
     return false;    
 }
 
+console.log("---hier---");
+
 // reduce pre-rendering on BlackBerry to reduce time spent on native-splash
 var DigiWebAppBlackBerryDesign = {
 
@@ -409,7 +411,6 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 }
 
 var restartOnBlackBerry = true;
-console.log("t");
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {
 		// disable restartOnBlackBerry if version > 6
