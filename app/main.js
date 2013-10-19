@@ -65,7 +65,7 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 				    		fileEntry.createWriter(function(writer) {
 				    				
 				    			writer.onerror = function(evt) {
-				    				console.error("writeError", evt);
+				    				//console.error("writeError", evt);
 				    				errorCallback(evt);
 				    			};
 				    			
@@ -106,7 +106,7 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 			    		fileEntry.createWriter(function(writer) {
 			    				
 			    			writer.onerror = function(evt) {
-			    				console.error("writeError", evt);
+			    				//console.error("writeError", evt);
 			    				errorCallback(evt);
 			    			};
 			    			
