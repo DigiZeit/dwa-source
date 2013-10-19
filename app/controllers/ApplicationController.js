@@ -829,7 +829,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
        });
        */
        //console.warn("ApplicationController.init at timestamp " + M.Date.now().date.valueOf());
-       alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
+       //alert("vor DigiWebApp.ApplicationController.callbackStatus = {");
        
        DigiWebApp.ApplicationController.callbackStatus = {
             position: {
@@ -874,7 +874,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
-        //alert("suche nach offener Buchung");
+        alert("suche nach offener Buchung");
         // gibt es eine offene Buchung?
         var bookings = DigiWebApp.Booking.find();
         //alert("typeof(bookings)=" + typeof(bookings));
