@@ -138,7 +138,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
         //console.log("vor enforceChefToolOnly");
         DigiWebApp.ApplicationController.enforceChefToolOnly();
-        console.log("nach enforceChefToolOnly");
+        //console.log("nach enforceChefToolOnly");
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();
         // Start::TransitionsAvailable
@@ -170,7 +170,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var bautagebuchLimit_autoStartUhrzeit = record.get('bautagebuchLimit_autoStartUhrzeit');
             if (!bautagebuchLimit_autoStartUhrzeit) bautagebuchLimit_autoStartUhrzeit = DigiWebApp.SettingsController.defaultsettings.get("bautagebuchLimit_autoStartUhrzeit");
 
-            settings = {
+            var settings = {
             	  debug: [{
                       value: record.get('debug')
                     , label: 'debug'
@@ -282,7 +282,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         /* default values */
         } else {
         	//console.log("using default settings");
-            settings = {
+            var settings = {
                   debug: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("debug")
                     , label: 'debug'
@@ -408,7 +408,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			}
 		}
 
-		hideShowSettingsServiceApp = function () {
+		var hideShowSettingsServiceApp = function () {
          	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
