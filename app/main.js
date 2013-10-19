@@ -319,8 +319,6 @@ var DigiWebAppOrdinaryDesign = {
             
 };
 
-console.log("---hier---");
-
 if (searchForFeature(400)) { // Camera
 	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
 	DigiWebAppOrdinaryDesign.cameraPage = DigiWebApp.CameraPage;
@@ -409,6 +407,8 @@ if ( (searchForFeature(416)) && !(searchForFeature(409)) ) { // Buchungsscreen m
 if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 	DigiWebAppOrdinaryDesign.spesenPage = DigiWebApp.SpesenPage;
 }
+
+console.log("---hier---");
 
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
