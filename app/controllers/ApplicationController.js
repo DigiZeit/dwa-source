@@ -874,7 +874,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
-        alert("suche nach offener Buchung");
+        //alert("suche nach offener Buchung");
         // gibt es eine offene Buchung?
         var bookings = DigiWebApp.Booking.find();
         //alert("typeof(bookings)=" + typeof(bookings));
