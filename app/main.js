@@ -155,8 +155,13 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 //	alert(exceptionAlert);
 	
 	try {
-		var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
-		writeToLog(logText);
+		if (typeof(ex) === "string") {
+			var logText = "Exception " + ex;
+			writeToLog(logText);
+		} else {
+			var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
+			writeToLog(logText);
+		}
 	 
 		console.log(ex);
 		if (typeof(ex.stack) !== "undefined") {
