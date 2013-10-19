@@ -318,6 +318,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
 	, regSecEv: function(isFirstLoad) {
+    	console.log("in regSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
