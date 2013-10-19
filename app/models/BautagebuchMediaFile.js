@@ -1,3 +1,4 @@
+"use strict";
 // ==========================================================================
 // The M-Project - Mobile HTML5 Application Framework
 // Generated with: Espresso 
