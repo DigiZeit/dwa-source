@@ -18,6 +18,7 @@ DigiWebApp.AnwesenheitslisteTemplateView = M.ListItemView.design({
 				var doShow = NO;
 			    var view = M.ViewManager.getViewById(id);
 			    var mitarbeiter_modelId = view.modelId;
+			    var doShow = NO;
 			    _.each(DigiWebApp.AnwesenheitslisteController.items, function(AnwesenheitslisteItem) {
 					if (AnwesenheitslisteItem.m_id === mitarbeiter_modelId) {
 						if (AnwesenheitslisteItem.get("datum") !== "-") {
