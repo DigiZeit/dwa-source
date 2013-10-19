@@ -29,7 +29,13 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 	if (typeof(errorCallback) !== "function") errorCallback = function(){};
 
 	var now = new Date();
-	var writeContent = new String("\n----------------------------------------------------------\n" + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + myWriteContent + "\n");
+	var writeContent = "";
+	if (typeof(myWriteContent) === "string") {
+		writeContent = myWriteContent;
+	} else {
+		writeContent = JSON.stringify(myWriteContent);
+	}
+	writeContent = new String("\n----------------------------------------------------------\n" + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " + writeContent + "\n");
 	
 	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 		
