@@ -29,9 +29,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		M.Request.init({
 			  url: myURL
-			, beforeSend: function(request) {
-                DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
-            }
 			, method: 'POST'
             , data: JSON.stringify(data)
             , timeout: 15000
