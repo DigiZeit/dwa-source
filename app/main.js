@@ -410,7 +410,7 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 }
 
 var restartOnBlackBerry = true;
-
+console.log("t");
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {
 		// disable restartOnBlackBerry if version > 6
