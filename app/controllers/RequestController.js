@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4282
+    , softwareVersion: 4283
 
 
     /**
@@ -207,7 +207,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 				}
             }
             , onError: function(xhr, err) {
-            	trackError(err, function(){writeToLog(xhr);}, function(){writeToLog(xhr);});
+            	writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
             	//alert("Error in getDatabaseServer: " + err.message);
             	console.error("Error in getDatabaseServer: " + err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
