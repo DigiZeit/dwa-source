@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: SettingsController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.SettingsController = M.Controller.extend({
 
       showCredentialsAlert: NO
@@ -69,7 +69,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	
-        if(that.showCredentialsAlert && !that.credentialsAlertShown) {
+        if (that.showCredentialsAlert && !that.credentialsAlertShown) {
             if (
             	  (    ( M.Environment.getPlatform().substr(0,4) === "iPad"   )
             	    || ( M.Environment.getPlatform().substr(0,6) === "iPhone" )
@@ -389,7 +389,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 					DigiWebApp.BookingController.init(YES);
 				},function(err){console.error(err);}
 				, fileNamesToDelete);
-			}
+			};
 			if (true) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
@@ -566,7 +566,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var auftragsDetailsKoppeln			 = $('#' + M.ViewManager.getView('settingsPage', 'auftragsDetailsKoppeln').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var numberRegex = /^[0-9]+$/;
-        if(company) {
+        if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -576,7 +576,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 return;
             }
         }
-        if(workerId) {
+        if (workerId) {
             if(!numberRegex.test(workerId)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -586,7 +586,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 return;
             }
         }
-        if(daysToHoldBookingsOnDevice) {
+        if (daysToHoldBookingsOnDevice) {
             if(!numberRegex.test(daysToHoldBookingsOnDevice)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -747,7 +747,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     DigiWebApp.SettingsController.saveSettings(record, YES);
                             		DigiWebApp.SettingsController.saveDone = YES;
                                 }
-                            } else if(isNew) {
+                            } else if (isNew) {
                             	record.set('debug', debug);
                             	record.set('treatAllAsTablet', treatAllAsTablet);
                             	record.set('treatAllAsPhone', treatAllAsPhone);
@@ -901,7 +901,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     , saveSettings: function(record, reloadApplication, silent, superSilent) {
 
         /* clear the LS if its a reload */
-        if(reloadApplication) {
+        if (reloadApplication) {
 			DigiWebApp.ApplicationController.deleteAllData(); 
         	DigiWebApp.BookingController.currentBooking = null;
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
@@ -911,12 +911,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	}
         }
 
-        if(record.save()) {
+        if (record.save()) {
         	DigiWebApp.SettingsController.mitarbeiterNameVorname = "";
         	//console.log("record saved");
         	//console.log(record);
         	if (!superSilent) {
-	            if(!reloadApplication) {
+	            if (!reloadApplication) {
 	                // switch back to dashboard
 	            	if (silent) {
 	                    if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {

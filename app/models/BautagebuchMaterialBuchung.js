@@ -75,7 +75,7 @@ DigiWebApp.BautagebuchMaterialBuchung = M.Model.create({
 	    } catch(e) {
 	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e);
 	    }
-	    if(keys){
+	    if (keys) {
 	        _.each(keys, function(k) {
 	        	if (k !== that.m_id) {
 	        		newKeys.push(k);
@@ -124,7 +124,7 @@ DigiWebApp.BautagebuchMaterialBuchung = M.Model.create({
 	
 	    var records = [];
 	
-	    if(keys){
+	    if (keys) {
 	        _.each(keys, function(k) {
 	        	var loadedItem = that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k});
 	        	if ( (bautagesberichtId && loadedItem.get("bautagesberichtId") === bautagesberichtId) || (typeof(bautagesberichtId) === "undefined") ) {

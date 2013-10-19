@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: SelectionController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.SelectionController = M.Controller.extend({
 
     // arrays for selection lists
@@ -54,7 +54,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orderArray = _.map(orders, function(order) {
         	if (order) {
 	            var obj =  { label: order.get('name'), value: order.get('id') };
-	            if(obj.value === mySelection.order) {
+	            if (obj.value === mySelection.order) {
 	                obj.isSelected = YES;
 	                itemSelected = YES;
 	            }
@@ -80,7 +80,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var positionArray = _.map(this.get('positions'), function(pos) {
         	if (pos) {
 	            var obj = { label: pos.label, value: pos.value };
-	            if(obj.value === mySelection.position) {
+	            if (obj.value === mySelection.position) {
 	                obj.isSelected = YES;
 	                itemSelected = YES;
 	            }
@@ -108,7 +108,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		console.log("UNDEFINED ACTIVITY");
         	} else {        	
         		var obj = { label: act.label, value: act.value };
-        		if(obj.value === mySelection.activity) {
+        		if (obj.value === mySelection.activity) {
         			obj.isSelected = YES;
         			itemSelected = YES;
         		}
@@ -136,7 +136,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
 	        	} else {        	
 	        		var obj = { label: ueK.label, value: ueK.value };
-	        		if(obj.value === that.selections.uebernachtungskennzeichenScholpp) {
+	        		if (obj.value === that.selections.uebernachtungskennzeichenScholpp) {
 	        			obj.isSelected = YES;
 	        			itemSelected = YES;
 	        		}
@@ -391,7 +391,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		return null;
         	} else {
         		var obj = null;
-        		if(act.value == activityId) {
+        		if (act.value == activityId) {
         			obj = { label: act.label, value: act.value, isSelected: YES };
         			//console.log("ACTIVITY " + i + " = " + act.get('name') + " in setSelectionByCurrentBooking isSelected");
         			itemSelected = YES;
@@ -447,7 +447,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
 	        	} else {        	
 	        		var obj = { label: ueK.label, value: ueK.value };
-	        		if(obj.value === uebernachtungAuswahl) {
+	        		if (obj.value === uebernachtungAuswahl) {
 	        			obj.isSelected = YES;
 	        			itemSelected = YES;
 	        		}
@@ -505,10 +505,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         positions = _.compact(positions);/* remove falsy values from positions with _.compact() */
 
-        if(positions.length < 1) {
+        if (positions.length < 1) {
             positions.push({label: M.I18N.l('noData'), value: '0'});
         }
-
 
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').resetSelection();
@@ -527,13 +526,14 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var activities = [];
 
-		if(checkForWorkPlan) {
+        var posObj;
+		if (checkForWorkPlan) {
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-                var posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+                posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
         	} else {
-                var posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+                posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
         	}
-            if(posObj) {
+            if (posObj) {
                 posId = posObj.value;
             }
         }
@@ -600,7 +600,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         activities = _.compact(activities);
 
         // new to show this when closing day is pressed (corresponds to a reset)
-        if(activities.length > 0) {
+        if (activities.length > 0) {
             if (DigiWebApp.SettingsController.featureAvailable('419')) {
             	activities.push({label: M.I18N.l('activity'), value: '0', isSelected:NO});
             } else {
@@ -685,7 +685,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	   activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
        }
 
-
         this.resetSelection();
         // set selection arrays to start content binding process
         this.set('orders', orderArray);
@@ -724,10 +723,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , isPositionSelected: function() {
         // implemented adjustment to M.SeletionListView to return null if no item is available
+    	var posObj;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            var posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+            posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
     	} else {
-            var posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+            posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
     	}
         if (posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
@@ -737,10 +737,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
 
     , isActivitySelected: function() {
+    	var actObj;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            var actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+            actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
     	} else {
-            var actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
+            actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
     	}
         if (actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;

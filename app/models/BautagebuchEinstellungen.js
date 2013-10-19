@@ -43,7 +43,7 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
 	    } catch(e) {
 	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e);
 	    }
-	    if(keys){
+	    if (keys){
 	        _.each(keys, function(k) {
 	        	if (k !== that.m_id) {
 	        		newKeys.push(k);
@@ -91,7 +91,7 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
 	
 	    var records = [];
 	
-	    if(keys){
+	    if (keys) {
 	        _.each(keys, function(k) {
 	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
 	        });

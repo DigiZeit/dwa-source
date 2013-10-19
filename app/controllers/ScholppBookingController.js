@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: ScholppBookingController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.ScholppBookingController = M.Controller.extend({
 
 	  resetButtons: function() {
@@ -43,7 +43,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        		var obj = null;
 		        		if(act.get('name').indexOf("Reisezeit") >= 0 || act.get('name').indexOf("Fahrzeit") >= 0) {
 		        			obj = { label: act.get('name'), value: act.get('id'), isSelected: YES };
-		        			itemSelected = YES;
+		        			//itemSelected = YES;
 		        		} else {
 		        			obj = { label: act.get('name'), value: act.get('id') };
 		        		}
@@ -72,7 +72,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        		var obj = null;
 		        		if(act.get('name').indexOf("Arbeitszeit") >= 0) {
 		        			obj = { label: act.get('name'), value: act.get('id'), isSelected: YES };
-		        			itemSelected = YES;
+		        			//itemSelected = YES;
 		        		} else {
 		        			obj = { label: act.get('name'), value: act.get('id') };
 		        		}
@@ -101,7 +101,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        		var obj = null;
 		        		if(act.get('name').indexOf("Unterbrechung") >= 0) {
 		        			obj = { label: act.get('name'), value: act.get('id'), isSelected: YES };
-		        			itemSelected = YES;
+		        			//itemSelected = YES;
 		        		} else {
 		        			obj = { label: act.get('name'), value: act.get('id') };
 		        		}
@@ -130,7 +130,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        		var obj = null;
 		        		if(act.get('name').indexOf("Pause") >= 0) {
 		        			obj = { label: act.get('name'), value: act.get('id'), isSelected: YES };
-		        			itemSelected = YES;
+		        			//itemSelected = YES;
 		        		} else {
 		        			obj = { label: act.get('name'), value: act.get('id') };
 		        		}

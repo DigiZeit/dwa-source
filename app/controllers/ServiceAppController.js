@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: ServiceAppController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.ServiceAppController = M.Controller.extend({
 
 	ServiceAppCommunication: function(data, callback, timeout) {

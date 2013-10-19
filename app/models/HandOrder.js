@@ -56,7 +56,7 @@ DigiWebApp.HandOrder = M.Model.create({
 
         var records = [];
 
-        if(keys){
+        if (keys) {
             _.each(keys, function(k) {
             	var myKey = M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + that.name + '_' + k
                	console.log(myKey);
