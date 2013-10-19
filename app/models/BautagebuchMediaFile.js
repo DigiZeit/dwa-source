@@ -1,4 +1,3 @@
-"use strict";
 // ==========================================================================
 // The M-Project - Mobile HTML5 Application Framework
 // Generated with: Espresso 
@@ -6,7 +5,7 @@
 // Project: DigiWebApp
 // Model: BautagebuchMediaFile
 // ==========================================================================
-
+"use strict";
 DigiWebApp.BautagebuchMediaFile = M.Model.create({
 
     /* Define the name of your model. Do not delete this property! */
