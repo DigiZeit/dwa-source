@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4286
+    , softwareVersion: 4287
 
 
     /**
@@ -207,9 +207,11 @@ DigiWebApp.RequestController = M.Controller.extend({
 				}
             }
             , onError: function(xhr, err) {
-            	writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
+            	//writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
+            	//writeToLog(xhr);
+            	trackError("Error in getDatabaseServer: " + err);
             	//alert("Error in getDatabaseServer: " + err.message);
-            	console.error("Error in getDatabaseServer: " + err);
+            	//console.error("Error in getDatabaseServer: " + err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
 			}
