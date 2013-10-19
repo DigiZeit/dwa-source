@@ -68,9 +68,9 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 				    			};
 				    			
 				    			writer.onwriteend = function(evt) {
-					    			writer.onwriteend = function(ev) {
+					    			//writer.onwriteend = function(ev) {
 				    					successCallback(ev);
-					    			};
+					    			//};
 				    				//writer.truncate(writeContent.length);
 				    	        };
 				    	        // Create a new Blob and write it to log.txt.
@@ -109,9 +109,9 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 			    			};
 			    			
 			    			writer.onwriteend = function(evt) {
-				    			writer.onwriteend = function(ev) {
+				    			//writer.onwriteend = function(ev) {
 			    					successCallback(ev);
-				    			};
+				    			//};
 			    				//writer.truncate(writeContent.length);
 			    	        };
 			    	        
