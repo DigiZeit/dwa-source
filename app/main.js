@@ -288,8 +288,6 @@ function searchForFeature(featureId) {
     return false;    
 }
 
-console.log("---hier---");
-
 // reduce pre-rendering on BlackBerry to reduce time spent on native-splash
 var DigiWebAppBlackBerryDesign = {
 
@@ -320,6 +318,8 @@ var DigiWebAppOrdinaryDesign = {
     , infoPage: DigiWebApp.InfoPage
             
 };
+
+console.log("---hier---");
 
 if (searchForFeature(400)) { // Camera
 	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
