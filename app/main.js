@@ -1,4 +1,3 @@
-"use strict";
 
 // ==========================================================================
 // The M-Project - Mobile HTML5 Application Framework
@@ -19,11 +18,11 @@ if (!window.console) {
 }
 
 
-window.newAppVersionAvailable = NO;
+var newAppVersionAvailable = NO;
 
 M.Application.useTransitions = NO;
 
-var DigiWebApp  = DigiWebApp || {};
+var DigiWebApp = DigiWebApp || {app: null};
 
 function writeToLog(myWriteContent, successCallback, errorCallback) {		
 	
