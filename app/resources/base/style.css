@@ -377,56 +377,17 @@ label.ui-input-text, .ui-controlgroup-label {
 .bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
 
 /* mediaListPage */
-.actionsList .ui-content {
-    background: url('images/arrow_white.png') 100% 50% no-repeat !important;
-    background-image: url('images/arrow_white.png') 100% 50% no-repeat !important;
-}
-
-.actionsList .ui-body-c {
-    border:  none;
-    font-size: 20px;
-    padding: 0px;
-    margin: 0px;
-    padding-left: 64px;
-    min-height: 36px;
-    height: 36px;
-    padding-top: 16px;
-    text-shadow: none;
-    background: url('images/arrow_white.png') 100% 50% no-repeat;
-}
-
-.actionsList .ui-body-c li {
-    border:  none;
-    font-size: 20px;
-    padding: 0px;
-    margin: 0px;
-    padding-left: 64px;
-    min-height: 36px;
-    height: 36px;
-    padding-top: 16px;
-    text-shadow: none;
-    background: url('images/arrow_white.png') 100% 50% no-repeat;
-}
 
 .actionsList .ui-li-thumb {
     width: 32px;
     margin-left: 15px;
     margin-top: 10px;
 }
-
-.actionsList .ui-body-c li.selected {
-    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
-    color: #FFFFFF;
-}
-
-.actionsList .ui-body-c .ui-grid-b {
-    text-align: center;
-    font-size: 12px;
-}
-
-.actionsList .ui-body-c .ui-grid-b img {
-    max-width: 64px;
-    max-height: 64px;
+.actionsList .ui-li.ui-li-static.ui-btn-up-c.ui-li-has-thumb.ui-first-child.ui-last-child {
+	background: transparent;	
+	border: transparent;
+	text-shadow: 0 0;
+	padding-top: 15px;
 }
 
 .mediaListPage .mediafilesList .ui-listview li {
@@ -716,7 +677,7 @@ label.ui-input-text, .ui-controlgroup-label {
 	color: #000000;
 }
 
-.zeitbuchungDetailsPage [data-theme="posInfoButton"] 
+.zeitbuchungDetailsPage .posInfoButton 
 {
     moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -748,7 +709,7 @@ label.ui-input-text, .ui-controlgroup-label {
 	background-image:linear-gradient(#ededed,#dadada);
 }
 
-.zeitbuchungDetailsPage [data-theme="posInfoButton"] span.ui-btn-inner 
+.zeitbuchungDetailsPage .posInfoButton span.ui-btn-inner 
 {
     padding: .6em 10px;
 }
