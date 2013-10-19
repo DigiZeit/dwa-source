@@ -290,7 +290,7 @@ function searchForFeature(featureId) {
 }
 
 // reduce pre-rendering on BlackBerry to reduce time spent on native-splash
-DigiWebAppBlackBerryDesign = {
+var DigiWebAppBlackBerryDesign = {
 
     entryPage : 'splashView',
 
@@ -298,7 +298,7 @@ DigiWebAppBlackBerryDesign = {
 
 };
 
-DigiWebAppOrdinaryDesign = {
+var DigiWebAppOrdinaryDesign = {
 
       entryPage : 'splashView'
 
@@ -426,7 +426,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 };
 
-parseBool = function(val) {
+function parseBool(val) {
 	       if (val === "YES") {
 		return YES;
 	} else if (val === YES) {
