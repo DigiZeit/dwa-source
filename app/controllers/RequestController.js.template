@@ -209,7 +209,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             , onError: function(xhr, err) {
             	//writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
             	//writeToLog(xhr);
-            	trackError("Error in getDatabaseServer: " + err);
+            	trackError("Error in getDatabaseServer: " + err + "\nXHR: " + JSON.stringify(xhr));
             	//alert("Error in getDatabaseServer: " + err.message);
             	//console.error("Error in getDatabaseServer: " + err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
