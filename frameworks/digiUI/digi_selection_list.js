@@ -281,7 +281,7 @@ M.DigiSelectionListView = M.View.extend(
                 target: this,
                 action: 'itemSelected'
             }
-        }
+        };
         this.bindToCaller(this, M.View.registerEvents)();
     },
 
