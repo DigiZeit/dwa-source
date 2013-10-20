@@ -11,7 +11,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-	
+					alert("pagebeforeshow");
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
 		            var projektleiterArray = _.map(DigiWebApp.BautagebuchMainController.projektleiter, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
@@ -24,6 +24,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		            	}
 		            });
 		            projektleiterArray = _.compact(projektleiterArray);
+		            console.log(projektleiterArray);
 					DigiWebApp.BautagebuchBautageberichtDetailsController.set("projektleiterList", projektleiterArray)
 
 					// verfügbare Aufträge kopieren und ausgewählten selektieren

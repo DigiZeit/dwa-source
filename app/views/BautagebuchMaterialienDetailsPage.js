@@ -11,7 +11,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-					alert("beforeshow");
+					//alert("beforeshow");
 					// verfügbare Positionen kopieren und ausgewählte selektieren
 					var itemSelected = NO;
 					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
@@ -40,7 +40,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	DigiWebApp.BautagebuchMaterialienDetailsController.set("positionId", positionenArray[0].value)
 				    	DigiWebApp.BautagebuchMaterialienDetailsController.set("positionName", positionenArray[0].label)
 				    }
-				    console.log(positionenArray);
+				    //console.log(positionenArray);
 					DigiWebApp.BautagebuchMaterialienDetailsController.set("positionenList", positionenArray)
 					
 					DigiWebApp.BautagebuchMaterialienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMaterialienDetailsController.positionId);
