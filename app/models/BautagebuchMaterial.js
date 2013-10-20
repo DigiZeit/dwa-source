@@ -13,7 +13,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
     /* Define the name of your model. Do not delete this property! */
     __name__: 'BautagebuchMaterial'
 
-    , id: M.Model.attr('Number', {
+    , id: M.Model.attr('String', {
         isRequired: NO
     })
     

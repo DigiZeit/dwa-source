@@ -35,7 +35,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, load: function(myItem) {
 		var that = this;
 		that.set("item", myItem);
-		console.log(myItem);
+		//console.log(myItem);
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
@@ -126,7 +126,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			that.item.set("activityId", null);
 			that.item.set("activityName", null);
 		}
-		console.log(that.materialId);
+		//console.log(that.materialId);
 		that.item.set("materialId", that.materialId);
 		that.item.set("mengeneinheitId", that.mengeneinheitId);
 		that.item.set("artikel", that.artikel);
