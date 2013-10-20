@@ -58,15 +58,15 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 if (typeof(myLocalStorageString) === "string") {
                 	try {
                 		hIds = JSON.parse(myLocalStorageString);
-                	} catch(e) { console.error(e); }
+                	} catch(e2) { console.error(e2); }
                 } else {
                     // no handorderKeys in localstorage
                 }
                 
                 try {
                     hIds.push(op.m_id);
-                } catch(e) {
-                	console.error("ERROR in " + this.name + ".save: " + e);
+                } catch(e3) {
+                	console.error("ERROR in " + this.name + ".save: " + e3);
                 }
 
                 localStorage.setItem(k, JSON.stringify(hIds));

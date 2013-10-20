@@ -522,13 +522,13 @@ DigiWebApp.CameraController = M.Controller.extend({
                     myOrderName = order.get('name');
                 }
     		}
-    	} catch(e) { console.error(e); }
+    	} catch(e1) { console.error(e1); }
     	try {
     		if (myMediaFile.pId !== 0) myPositionName = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: myMediaFile.get("positionId")}})[0].get('name');
-    	} catch(e) { console.error(e); }
+    	} catch(e2) { console.error(e2); }
     	try {
     		if (myMediaFile.aId !== 0) myActivityName = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: myMediaFile.get("activityId")}})[0].get('name');
-    	} catch(e) { console.error(e); }
+    	} catch(e3) { console.error(e3); }
 	    myMediaFile.set('orderName', myOrderName);
 	    myMediaFile.set('positionName', myPositionName);
 	    myMediaFile.set('activityName', myActivityName);

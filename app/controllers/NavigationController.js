@@ -58,7 +58,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.POP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e2) { console.error(e2); }
     	}
     }
 
@@ -96,7 +96,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, NO);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e3) { console.error(e3); }
     	}
     }
 
@@ -115,7 +115,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.FLIP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e4) { console.error(e4); }
     	}
     }
 
@@ -134,7 +134,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.FLIP, NO);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e5) { console.error(e5); }
     	}
     }
 

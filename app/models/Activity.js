@@ -34,8 +34,8 @@ DigiWebApp.Activity = M.Model.create({
         var keys = [];
         try {
             keys = JSON.parse(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + this.name.toLowerCase() + 'Keys'));
-        } catch(e) {
-        	console.error("ERROR in " + this.name + ".findSorted: " + e);
+        } catch(e2) {
+        	console.error("ERROR in " + this.name + ".findSorted: " + e2);
         }
 
         var records = [];

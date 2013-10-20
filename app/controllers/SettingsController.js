@@ -170,7 +170,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var bautagebuchLimit_autoStartUhrzeit = record.get('bautagebuchLimit_autoStartUhrzeit');
             if (!bautagebuchLimit_autoStartUhrzeit) bautagebuchLimit_autoStartUhrzeit = DigiWebApp.SettingsController.defaultsettings.get("bautagebuchLimit_autoStartUhrzeit");
 
-            var settings = {
+            settings = {
             	  debug: [{
                       value: record.get('debug')
                     , label: 'debug'
@@ -282,7 +282,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         /* default values */
         } else {
         	//console.log("using default settings");
-            var settings = {
+            settings = {
                   debug: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("debug")
                     , label: 'debug'
@@ -406,7 +406,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			} else {
 				refreshWAIT();
 			}
-		}
+		};
 
 		var hideShowSettingsServiceApp = function () {
          	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
@@ -440,8 +440,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			            		         		}
 			            		         	});
 			            		         	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
-			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory)
-	            		         		} catch(e) {
+			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory);
+	            		         		} catch(e3) {
 	            		         			if (interactWithServiceApp) cleanDataDirectory();
 	            		         		}
 	            		         	} else {
@@ -464,7 +464,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 //	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
 	         	if (interactWithServiceApp) cleanDataDirectory();
 	        }
-	    }
+	    };
         
         if (interactWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417')) {
 	        // check for ServiceApp
@@ -561,8 +561,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
 
         var debugDatabaseServer              = DigiWebApp.SettingsController.getSetting('debugDatabaseServer');
-        var mitarbeiterVorname               = DigiWebApp.SettingsController.getSetting('mitarbeiterVorname')
-        var mitarbeiterNachname              = DigiWebApp.SettingsController.getSetting('mitarbeiterNachname')
+        var mitarbeiterVorname               = DigiWebApp.SettingsController.getSetting('mitarbeiterVorname');
+        var mitarbeiterNachname              = DigiWebApp.SettingsController.getSetting('mitarbeiterNachname');
         var auftragsDetailsKoppeln			 = $('#' + M.ViewManager.getView('settingsPage', 'auftragsDetailsKoppeln').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var numberRegex = /^[0-9]+$/;
@@ -982,7 +982,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		try {
         			propvalue = DigiWebApp.SettingsController.defaultsettings_object[prop];
         			setting.set(prop, propvalue);
-        		} catch(e) { console.error("ERROR: setting.get for prop=" + prop); }
+        		} catch(e4) { console.error("ERROR: setting.get for prop=" + prop); }
         	}
             return propvalue;
         }
@@ -993,7 +993,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-    		} catch(e) { console.error("ERROR: setting.set for prop=" + prop); }
+    		} catch(e5) { console.error("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES, YES);
@@ -1030,22 +1030,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	DigiWebApp.Anwesenheitsliste.find({urlParams:{},callbacks: {success: { action: function(records) {
         		try { 
         			_.each(records, function(record) {
-        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e) { console.error(e); }
+        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e6) { console.error(e6); }
         			}); 
         			if (callback) {
         				callback();
         			}
-        		} catch(e) { console.error(e); }
+        		} catch(e7) { console.error(e7); }
         	}}, error: { action: function(){}}}});
-        } catch(e) { console.error(e); }
+        } catch(e8) { console.error(e8); }
 	}
 
     , sendConfiguration: function() {
     	//alert("in sendConfiguration");
         var settings = DigiWebApp.Settings.find();    		
     	//alert("typeof(settings)=" + typeof(settings));
-    	var MitarbeiterWebAppID = "0"
-    	try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
+    	//var MitarbeiterWebAppID = "0";
+    	//try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
     	//alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
         DigiWebApp.RequestController.sendConfiguration({
               settings: settings
@@ -1067,7 +1067,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
 		        		}
 		        	}, function(error) {
-		        		console.error(error)
+		        		console.error(error);
 		        	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
         		}
             }

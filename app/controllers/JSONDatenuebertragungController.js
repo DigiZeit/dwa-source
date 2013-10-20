@@ -128,7 +128,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						} else {
 							zeitbuch.set(prop, el.get(prop));
 						}
-					} catch(e) {
+					} catch(e2) {
 						zeitbuch.set(prop, el.get(prop));
 					}
 				}

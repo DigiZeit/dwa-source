@@ -51,7 +51,7 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 		                        } else {
 		                        	DigiWebApp.ZeitbuchungenController.set('items', records);
 		                        }
-	            			} catch(e) {
+	            			} catch(e2) {
 	            		        DigiWebApp.ApplicationController.nativeAlertDialogView({
 	            		              title: M.I18N.l('error')
 	            		            , message: M.I18N.l('ZeitbuchungenKonntenNichtGeladenWerden')
@@ -91,10 +91,11 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 
 		if (DigiWebApp.ZeitbuchungenController.mitarbeiterNameVorname !== null) { 
 			//DigiWebApp.ZeitbuchungenPage.header.title.set("value", M.I18N.l('Zeitbuchungen') + ": " + DigiWebApp.ZeitbuchungenController.mitarbeiterNameVorname);
+			var wochentag = "";
 			try {
-				var wochentag = M.I18N.l(D8.create(DigiWebApp.ZeitbuchungenController.datum).format("dddd")).substring(0,2) + ', ';
-			} catch(e) {
-				var wochentag = "";
+				wochentag = M.I18N.l(D8.create(DigiWebApp.ZeitbuchungenController.datum).format("dddd")).substring(0,2) + ', ';
+			} catch(e2) {
+				wochentag = "";
 			}
 			DigiWebApp.ZeitbuchungenPage.header.title.set("value", DigiWebApp.ZeitbuchungenController.mitarbeiterNameVorname + '<br />' + wochentag + DigiWebApp.ZeitbuchungenController.datum);
 			DigiWebApp.ZeitbuchungenPage.header.title.renderUpdate();

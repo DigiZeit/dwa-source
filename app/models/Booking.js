@@ -187,14 +187,14 @@ DigiWebApp.Booking = M.Model.create({
     , closeBooking: function(location) {
 		try {
 			this.set('timeStampEnd', DigiWebApp.BookingController.currentBookingTimesStampBook.getTime());
-		} catch (e) {
+		} catch (e2) {
 			var timeEnd = new Date();
 	        this.set('timeStampEnd', timeEnd.getTime());
 		}
         if (location) {
         	this.set('latitude_bis',  location.latitude);
         	this.set('longitude_bis', location.longitude);
-        };
+        }
     }
 
     , setRemark: function(v) {
@@ -221,7 +221,7 @@ DigiWebApp.Booking = M.Model.create({
 			    			// was deleted successfully from device
 			    			el.del();	    		
 			    		});
-			    	} catch(e) {
+			    	} catch(e3) {
 		    			el.del();	    		
 			    	}
 		    	} else {
@@ -229,7 +229,7 @@ DigiWebApp.Booking = M.Model.create({
 		    		el.del();
 		    	}
 		    });
-    	} catch(e) { console.error(e); }
+    	} catch(e4) { console.error(e4); }
     }
 	
 	, hasFileName: function() {
@@ -242,7 +242,7 @@ DigiWebApp.Booking = M.Model.create({
     	
     }
     
-    , saveToFile: function(myWriteContent, successCallback, errorCallback) {		
+    , saveToFile: function(myWriteContent, successCallback, myErrorCallback) {		
 		var that = this;
 		var writeContent = new String(myWriteContent);
 		
@@ -260,13 +260,14 @@ DigiWebApp.Booking = M.Model.create({
 	    }
 	
 		// check for errorCallback is a function (optional)
-	    if (!errorCallback || (typeof errorCallback !== "function")) {
-			//console.error("saveToFileError: errorCallback is not a function");
-	    	var errorCallback = function(evt) {
-	            //console.log("deleteFileError: " + evt.target.error.code);
+		var errorCallback;
+	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
+	    	errorCallback = function(evt) {
 	    		console.error("saveToFileError", evt);
 	    	};
-	    };
+	    } else {
+	    	errorCallback = myErrorCallback;
+	    }
 		
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -349,29 +350,30 @@ DigiWebApp.Booking = M.Model.create({
 				   	}, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e) {
-			errorCallback(e);
+		} catch(e5) {
+			errorCallback(e5);
 		}
 
     }
 	
-	, readFromFile: function(successCallback, errorCallback) {
+	, readFromFile: function(successCallback, myErrorCallback) {
 		var that = this;
 			
 		// check for errorCallback is a function (optional)
-	    if (!errorCallback || (typeof errorCallback !== "function")) {
-			//console.error("readFromFileError: errorCallback is not a function");
-	    	var errorCallback = function(evt) {
-	            //console.log("deleteFileError: " + evt.target.error.code);
+		var errorCallback;
+	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
+	    	errorCallback = function(evt) {
 	    		console.error("readFromFileError", evt);
 	    	};
-	    };
+	    } else {
+	    	errorCallback = myErrorCallback;
+	    }
 	    
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("readFromFileError: successCallback is not a function");
 	        return false;
-	    };
+	    }
 		
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
@@ -379,7 +381,7 @@ DigiWebApp.Booking = M.Model.create({
 			console.error("readFromFileError: no fileName given");
 			errorCallback();
 	        return false;
-	    };
+	    }
 
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -453,12 +455,12 @@ DigiWebApp.Booking = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e) {
-			errorCallback(e);
+		} catch(e6) {
+			errorCallback(e6);
 		}
 	}
 	
-	, deleteFile: function(successCallback, errorCallback) {
+	, deleteFile: function(successCallback, myErrorCallback) {
 		var that = this;
 		
 		// check if fileName is set
@@ -466,22 +468,23 @@ DigiWebApp.Booking = M.Model.create({
 		if (!that.hasFileName()) {
 			console.error("deleteFileError: no fileName given");
 	        return false;
-	    };
+	    }
 	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("deleteFileError: successCallback is not a function");
 	        return false;
-	    };
+	    }
 		
 		// check for errorCallback is a function (optional)
-	    if (!errorCallback || (typeof errorCallback !== "function")) {
-			//console.error("deleteFileError: errorCallback is not a function");
-	    	var errorCallback = function(evt) {
-	            //console.log("deleteFileError: " + evt.target.error.code);
+		var errorCallback;
+	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
+	    	errorCallback = function(evt) {
 	    		console.error("deleteFileError", evt);
 	    	};
-	    };
+	    } else {
+	    	errorCallback = myErrorCallback;
+	    }
 	    
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -532,8 +535,8 @@ DigiWebApp.Booking = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e) {
-			errorCallback(e);
+		} catch(e7) {
+			errorCallback(e7);
 		}
 	}
 

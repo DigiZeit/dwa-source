@@ -2188,11 +2188,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
         return (pos.remote || pos.local) && (act.remote || act.local) && (ord.remote || ord.local); // && (wpl.remote || wpl.local);
     }
-    
-    , sonderzeichenCheck: function(str) {
-        return ( /[^\w\säöüÄÖÜß \x40"(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
-    }
-    
+        
     , profilingIntervalVar: null
     , profilingSingleRun: NO
     , profilingShowAlert: NO
@@ -2236,4 +2232,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) { console.error(e); }
     }
     
+    , sonderzeichenCheck: function(str) {
+        return ( /[^\w\säöüÄÖÜß \x40"(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
+    }
+
 });

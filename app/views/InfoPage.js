@@ -29,7 +29,7 @@ DigiWebApp.InfoPage = M.PageView.design({
     , pagebeforeshowFunction: function() {
             // reset click counter to reset settings
             DigiWebApp.ApplicationController.clickCounter = 0;
-            M.ViewManager.getView('infoPage', 'languageSelection').setSelection(M.I18N.getLanguage())
+            M.ViewManager.getView('infoPage', 'languageSelection').setSelection(M.I18N.getLanguage());
             DigiWebApp.InfoPage.lastTimePageWasLoaded = +new Date();
 			DigiWebApp.InfoPage.content.cordovaVersionLabel.renderUpdate();
 			DigiWebApp.InfoPage.content.deviceinfo.renderUpdate();
@@ -54,7 +54,7 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToDashboardPage();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
                 }
             }
         })
@@ -69,11 +69,11 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
+        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} 
 			        	DigiWebApp.SettingsController.mitarbeiterNameVorname = "";
 				        var settings = DigiWebApp.Settings.find();    		
-				    	var MitarbeiterWebAppID = "0"
-				    	try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
+				    	var MitarbeiterWebAppID = "0";
+				    	try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e4) { console.error(e4); }
 						DigiWebApp.SettingsController.refreshMitarbeiterNameVorname(MitarbeiterWebAppID, DigiWebApp.InfoPage.pagebeforeshowFunction);
 					}
                 }
@@ -126,7 +126,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                     }
 			        , tap: {
 						action: function() {
-			        		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+			        		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e5){}
 							}
 			        }
                 }
@@ -137,7 +137,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                   value: ''
                 , operation: function(v) {
                 	var myCompanyId = "";
-                	try { myCompanyId = DigiWebApp.Settings.find()[0].get("company"); } catch(e) { /*console.error(e);*/ }
+                	try { myCompanyId = DigiWebApp.Settings.find()[0].get("company"); } catch(e6) { /*console.error(e6);*/ }
                     return M.I18N.l('company') + ': ' + myCompanyId;
                 }
             }
@@ -149,7 +149,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                   value: ''
                 , operation: function(v) {
                 	var myWorkerId = "";
-                	try { myWorkerId = DigiWebApp.Settings.find()[0].get("workerId"); } catch(e) { /*console.error(e);*/ }
+                	try { myWorkerId = DigiWebApp.Settings.find()[0].get("workerId"); } catch(e7) { /*console.error(e7);*/ }
                     var outString = M.I18N.l('configuredUser') + ': ' + myWorkerId;
 //                    if (typeof(DigiWebApp.SettingsController.mitarbeiterNameVorname) !== "undefined" && DigiWebApp.SettingsController.mitarbeiterNameVorname !== null && DigiWebApp.SettingsController.mitarbeiterNameVorname !== "") {
 //                    	outString = outString + ' (' + DigiWebApp.SettingsController.mitarbeiterNameVorname + ')';
@@ -203,7 +203,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4351'
+              value: 'Build: 4352'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 

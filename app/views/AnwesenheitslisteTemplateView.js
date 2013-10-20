@@ -15,7 +15,6 @@ DigiWebApp.AnwesenheitslisteTemplateView = M.ListItemView.design({
     , events: {
         tap: {
 			action: function(id, m_id) {
-				var doShow = NO;
 			    var view = M.ViewManager.getViewById(id);
 			    var mitarbeiter_modelId = view.modelId;
 			    var doShow = NO;

@@ -292,7 +292,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , itemSelected: function(id, m_id) {
-    	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+    	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
     	var that = this;
         if (this.latestId) {
             $('#' + this.latestId).removeClass('selected');
@@ -323,7 +323,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             			thatFunction();
             		}
             	});
-        	} catch(e) {}
+        	} catch(e2) {}
         }
     }
     

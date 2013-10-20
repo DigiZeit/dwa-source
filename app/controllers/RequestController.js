@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4351
+    , softwareVersion: 4352
 
 
     /**
@@ -86,7 +86,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log(device.uuid);
                 return 'http://' + DigiWebApp.RequestController.DatabaseServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/' ;
             }
-        } catch(e) {
+        } catch(e1) {
             return '/Handy2WebServices/services/DatenTransfer/';
         }
 
