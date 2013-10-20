@@ -807,7 +807,9 @@ label.ui-input-text, .ui-controlgroup-label {
 {
     padding-bottom: 20px;
 }*/
-
+.bautagebuchZeitenDetailsPage .transparent {
+	border: transparent;
+}
   .bautagebuchWetterPage .centerText
 , .bautagebuchZeitenDetailsPage .ui-grid-a 
 {
