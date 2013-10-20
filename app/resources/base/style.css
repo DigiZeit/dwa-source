@@ -811,6 +811,8 @@ label.ui-input-text, .ui-controlgroup-label {
 	border: transparent;
 	color:  transparent;
 	background: transparent;
+	height:	0px;
+	width: 0px;
 }
   .bautagebuchWetterPage .centerText
 , .bautagebuchZeitenDetailsPage .ui-grid-a 
