@@ -56,7 +56,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	if ( typeof(o) === "undefined" ) {
 				    		console.log("UNDEFINED material");
 				    	} else {    
-							if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null) {
+							if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
 	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
 							} else {
