@@ -60,9 +60,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		that.set("auftragsName", myItem.get("orderName"));
 		that.set("mitarbeiterIds", myItem.get("selektierteMitarbeiter"));
 		that.set("startUhrzeit", myItem.get("startUhrzeit"));
-		console.log("---hier---");
 
 		that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
+		console.log("---hier---");
 		that.set("wetter.temperatur", myItem.get("temperatur"));
 		that.set("wetter.luftfeuchtigkeit", myItem.get("luftfeuchtigkeit"));
 		that.set("wetter.bewoelkung", myItem.get("bewoelkung"));
