@@ -62,13 +62,13 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		that.set("startUhrzeit", myItem.get("startUhrzeit"));
 
 		that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
-		console.log("---hier---");
 		that.set("wetter.temperatur", myItem.get("temperatur"));
 		that.set("wetter.luftfeuchtigkeit", myItem.get("luftfeuchtigkeit"));
 		that.set("wetter.bewoelkung", myItem.get("bewoelkung"));
 		that.set("wetter.niederschlag", myItem.get("niederschlag"));
 		that.set("wetter.wind", myItem.get("wind"));
 		that.set("wetter.wechselhaft", myItem.get("wechselhaft"));
+		console.log("---hier---");
 		that.set("wetter.wechselhaftItem", [{
 	        value: 'wechselhaft'
 	      , label: M.I18N.l('BautagebuchWechselhaft')
