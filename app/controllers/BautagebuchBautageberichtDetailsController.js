@@ -11,17 +11,17 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	  item: null // model itself
 	
 	, projektleiterId: null // in model
-	, projektleiterList: [] // runtime
+	, projektleiterList: [{label:"",value:0}] // runtime
 	  
 	, mitarbeiterIds: null // in model
-	, mitarbeiterList: [] // runtime
+	, mitarbeiterList: [{label:"",value:0}] // runtime
 	, mitarbeiterListSelected: null // runtime
 	
 	, datum: null // in model
 	
 	, auftragsId: null // in model
 	, auftragsName: null // in model
-	, auftraegeList: [] // runtime
+	, auftraegeList: [{label:"",value:0}] // runtime
 	
 	, positionenList: null // runtime (auftraegeComboBox-change)
 	
