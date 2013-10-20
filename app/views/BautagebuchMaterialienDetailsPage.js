@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+					alert("beforeshow");
 					// verfügbare Positionen kopieren und ausgewählte selektieren
 					var itemSelected = NO;
 					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
