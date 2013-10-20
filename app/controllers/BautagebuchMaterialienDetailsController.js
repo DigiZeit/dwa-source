@@ -35,6 +35,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, load: function(myItem) {
 		var that = this;
 		that.set("item", myItem);
+		console.log(myItem);
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
