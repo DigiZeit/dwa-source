@@ -35,7 +35,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToDashboardPage'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
         				if (!DigiWebApp.SettingsController.showCredentialsAlert) {
         					DigiWebApp.NavigationController.backToDashboardPage();
         				}
@@ -257,7 +257,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.SettingsController
-                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}; this.save();}
+                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.save();}
                     }
                 }
             })

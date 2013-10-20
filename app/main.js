@@ -24,7 +24,7 @@ function parseBool(val) {
 	} else if (val === false) {
 		return NO;
 	}
-};
+}
 
 if (!window.console) {
 	window.console = {
@@ -43,10 +43,20 @@ M.Application.useTransitions = NO;
 
 var DigiWebApp = DigiWebApp || {app: null};
 
-function writeToLog(myWriteContent, successCallback, errorCallback) {		
+function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {		
 	
-	if (typeof(successCallback) !== "function") successCallback = function(){};
-	if (typeof(errorCallback) !== "function") errorCallback = function(){};
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
 
 	var now = new Date();
 	var writeContent = "";
@@ -143,8 +153,8 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 			   	}, errorCallback);         // fileSystem.root.getDirectory
 		    }, errorCallback);             // window.requestFileSystem
 		}
-	} catch(e) {
-		errorCallback(e);
+	} catch(e2) {
+		errorCallback(e2);
 	}
 
 }
@@ -194,7 +204,7 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 			console.log(ex.stack);
 		}
 
-	} catch(ex) {}
+	} catch(ex2) {}
 	
 	return true;
 
@@ -203,12 +213,14 @@ function writeToLog(myWriteContent, successCallback, errorCallback) {
 window.onerror = function (msg, url, line) {
 	writeToLog('window.onerror: ' + msg + '\nURL: ' + url + '\nLine Number: ' + line);
 	return true;
-}
+};
 
 
 //override jQuery.fn.bind to wrap every provided function in try/catch
 var jQueryBind = jQuery.fn.bind;
-jQuery.fn.bind = function( type, data, fn ) {
+jQuery.fn.bind = function( type, myData, myFn ) {
+	var fn = myFn;
+	var data = myData;
 	if ( !fn && data && typeof data == 'function' ) {
 		fn = data;
 		data = null;
@@ -257,7 +269,7 @@ if (typeof(localStorage) !== "undefined") {
 $(window).bind('load', function(e) {
 	//console.log("window onload event");
 	if (window.applicationCache) {
-		$(window.applicationCache).bind('updateready', function(e) {
+		$(window.applicationCache).bind('updateready', function(e2) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				console.log("Browser downloaded a new app cache");
 				window.newAppVersionAvailable = YES;
@@ -388,10 +400,10 @@ if (searchForFeature(408)) { // Anwesenheitsliste
 
 if (searchForFeature(409)) { // ChefTool-Only
 	// hat keine eigenen Views, Buchungs-Views ausblenden
-	try{delete DigiWebAppOrdinaryDesign.bookingPage;}catch(e){};
-	try{delete DigiWebAppOrdinaryDesign.timeDataPage;}catch(e){};
-	try{delete DigiWebAppOrdinaryDesign.employeePage;}catch(e){};
-	try{delete DigiWebAppOrdinaryDesign.handOrderPage;}catch(e){};
+	try{delete DigiWebAppOrdinaryDesign.bookingPage;}catch(e2){}
+	try{delete DigiWebAppOrdinaryDesign.timeDataPage;}catch(e3){}
+	try{delete DigiWebAppOrdinaryDesign.employeePage;}catch(e4){}
+	try{delete DigiWebAppOrdinaryDesign.handOrderPage;}catch(e5){}
 }
 
 if ( !(searchForFeature(410)) && !(searchForFeature(409)) ) { // Menüeintrag "Handauftrag" ausblenden
@@ -442,5 +454,5 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
 } else {
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
-};
+}
 
