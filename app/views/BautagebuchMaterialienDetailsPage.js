@@ -46,7 +46,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					DigiWebApp.BautagebuchMaterialienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMaterialienDetailsController.positionId);
 
 					// verfügbare Materialien kopieren und ausgewähltes selektieren
-					var myMaterialienList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchMainController.materialien))
+					var myMaterialienList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchMainController.materialien));
 							
 					_.each(myMaterialienList, function(m) {
 						if (parseInt(m.value) !== 0) {
@@ -55,7 +55,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 							m.isSelected = YES;
 						}
 					});
-		    		console.log(DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
+		    		//console.log(DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
 				    var materialienArray = _.map(myMaterialienList, function(o) {
 				    	if ( typeof(o) === "undefined" ) {
 				    		console.log("UNDEFINED material");

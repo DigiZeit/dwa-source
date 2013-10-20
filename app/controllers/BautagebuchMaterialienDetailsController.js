@@ -126,6 +126,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			that.item.set("activityId", null);
 			that.item.set("activityName", null);
 		}
+		console.log(that.materialId);
 		that.item.set("materialId", that.materialId);
 		that.item.set("mengeneinheitId", that.mengeneinheitId);
 		that.item.set("artikel", that.artikel);

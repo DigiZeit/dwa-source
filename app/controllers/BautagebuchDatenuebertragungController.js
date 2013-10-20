@@ -136,6 +136,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// die empfangenen Materialien mit Model ablegen
 			_.each(data.materialliste, function(el) {
+				console.log(el);
 				if (typeof(el.materialbezeichnung) === "undefined") {
 					console.error("missing materialbezeichnung");
 					return errorCallback();
