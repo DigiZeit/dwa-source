@@ -73,6 +73,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	      , label: M.I18N.l('BautagebuchWechselhaft')
 	      , isSelected: myItem.get("wechselhaft")
 		}]);		
+		console.log("vor setPositionen");
 		that.setPositionen(myItem.get("orderId"));
 	}
 
