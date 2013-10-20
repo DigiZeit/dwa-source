@@ -803,10 +803,10 @@ label.ui-input-text, .ui-controlgroup-label {
 	width: 98% !important;
 }
 
-  .bautagebuchZeitenDetailsPage .dauerInput_container
+/*  .bautagebuchZeitenDetailsPage .dauerInput_container
 {
     padding-bottom: 20px;
-}
+}*/
 
   .bautagebuchWetterPage .centerText
 , .bautagebuchZeitenDetailsPage .ui-grid-a 
