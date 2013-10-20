@@ -142,7 +142,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					return errorCallback();
 				} else {
 					// el.materialbezeichnung zur Liste hinzufügen
-					DigiWebApp.BautagebuchMaterial.createRecord({bezeichnung: el.materialbezeichnung}).saveSorted();
+					DigiWebApp.BautagebuchMaterial.createRecord({bezeichnung: el.materialbezeichnung, id: el.materialbezeichnung}).saveSorted();
 				}
 			});
 			

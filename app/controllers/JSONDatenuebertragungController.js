@@ -73,7 +73,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		
 		var myURL = 'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
-		console.log(myURL);
+		//console.log(myURL);
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
