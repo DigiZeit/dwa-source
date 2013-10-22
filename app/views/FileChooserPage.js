@@ -29,10 +29,10 @@ DigiWebApp.FileChooserPage = M.PageView.design({
 					reader.onload = function() {
 						//console.log(this);
 						DigiWebApp.FileChooserPage.successCallback(this.result, file.name);
-					};
+					}
 					reader.onerror = function() {
 						DigiWebApp.FileChooserPage.successCallback(null);
-					};
+					}
 					reader.readAsDataURL(file);
 				});
 			}
@@ -53,7 +53,7 @@ DigiWebApp.FileChooserPage = M.PageView.design({
 	              	//  target: DigiWebApp.NavigationController
 	              	//, action: DigiWebApp.FileChooserPage.NavigationControllerMethodToReturnTo
 	    			action: function() {
-	    				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} 
+	    				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
 	    				history.back();
 	    			}
 	          	}

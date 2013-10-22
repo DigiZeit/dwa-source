@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMainController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchMainController = M.Controller.extend({
 
 	  projektleiter: null
@@ -148,12 +148,11 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
         auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
         that.set('auftraege', auftraegeArray);
         
-		var materialienArray = [];
         // Materialien
 		if (DigiWebApp.BautagebuchMaterial.findSorted().length !== 0) {
             itemSelected = NO;
     		var materialien = DigiWebApp.BautagebuchMaterial.findSorted();
-            materialienArray = _.map(materialien, function(o) {
+            var materialienArray = _.map(materialien, function(o) {
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED MATERIAL");
             	} else {        	
@@ -166,17 +165,18 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
             	}
             });
             materialienArray = _.compact(materialienArray);
+		} else {
+			var materialienArray = [];
 		}
         // push "Manuelle Eingabe"
         materialienArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
         that.set('materialien', materialienArray);
 
-		var mengeneinheitenArray = [];
         // Mengeneinheiten
 		if (DigiWebApp.BautagebuchMengeneinheit.findSorted().length !== 0) {
             itemSelected = NO;
     		var mengeneinheiten = DigiWebApp.BautagebuchMengeneinheit.findSorted();
-    		mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
+            var mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED MATERIAL");
             	} else {        	
@@ -188,10 +188,12 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
                     return obj;
             	}
             });
-    		mengeneinheitenArray = _.compact(mengeneinheitenArray);
+            mengeneinheitenArray = _.compact(mengeneinheitenArray);
+		} else {
+			var mengeneinheitenArray = [];
 		}
         // push "Manuelle Eingabe"
-		mengeneinheitenArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
+        mengeneinheitenArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
         that.set('mengeneinheiten', mengeneinheitenArray);
 
 	}

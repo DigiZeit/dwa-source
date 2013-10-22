@@ -5,23 +5,23 @@
 // Project: DigiWebApp
 // Controller: BautagebuchBautageberichtDetailsController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 
 	  item: null // model itself
 	
 	, projektleiterId: null // in model
-	, projektleiterList: [{label:"",value:0}] // runtime
+	, projektleiterList: null // runtime
 	  
 	, mitarbeiterIds: null // in model
-	, mitarbeiterList: [{label:"",value:0}] // runtime
+	, mitarbeiterList: null // runtime
 	, mitarbeiterListSelected: null // runtime
 	
 	, datum: null // in model
 	
 	, auftragsId: null // in model
 	, auftragsName: null // in model
-	, auftraegeList: [{label:"",value:0}] // runtime
+	, auftraegeList: null // runtime
 	
 	, positionenList: null // runtime (auftraegeComboBox-change)
 	

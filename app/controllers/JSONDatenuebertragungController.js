@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: JSONDatenuebertragungController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
@@ -21,14 +21,17 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 
 	, sendDataWithServer: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
-		//var that = this;
+		var that = this;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
-			myURL = myURL + '&' + additionalQueryParameter;
+			myURL = myURL + '&' + additionalQueryParameter
 		}
 		M.Request.init({
 			  url: myURL
+			, beforeSend: function(request) {
+                DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
+            }
 			, method: 'POST'
             , data: JSON.stringify(data)
             , timeout: 15000
@@ -41,7 +44,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
                     "text/plain"
                 );
             }
-            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
+            , onSuccess: function(data, msg, xhr) { // success callback of sendData
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 successCallback(data, msg, xhr);
             }
@@ -73,9 +76,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		
 		var myURL = 'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
-		//console.log(myURL);
 		if (additionalQueryParameter) {
-			myURL = myURL + '&' + additionalQueryParameter;
+			myURL = myURL + '&' + additionalQueryParameter
 		}
 		M.Request.init({
 			  url: myURL
@@ -98,7 +100,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 	
 	, sendeZeitdaten: function(buchungen, successCallback, errorCallback, isClosingDay, doSync) {
-		//var that = this;
+		var that = this;
 		
 		var items = [];
 		var relevanteZeitbuchungen = buchungen;
@@ -128,7 +130,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						} else {
 							zeitbuch.set(prop, el.get(prop));
 						}
-					} catch(e2) {
+					} catch(e) {
 						zeitbuch.set(prop, el.get(prop));
 					}
 				}
@@ -162,9 +164,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			});
 		});
 		if (items.length !== 0) {
-			var data = {"zeitdaten": items};
+			var data = {"zeitdaten": items}
 			
-			var internalSuccessCallback = function(data2, msg, request) {
+			var internalSuccessCallback = function(data, msg, request) {
 				// verarbeite empfangene Daten
 				//console.log("sendeZeitbuchungen Status: " + request.status);
 				// weiter in der Verarbeitungskette
@@ -172,7 +174,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				
 			};
 			var internalErrorCallback = function() {
-				if (isClosingDay) {
+				if(isClosingDay) {
                     if(DigiWebApp.EmployeeController.getEmployeeState() == 2) {
                         DigiWebApp.EmployeeController.setEmployeeState(1);
                     }
@@ -185,7 +187,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		            , message: M.I18N.l('connectionErrorMsg')
 		        });
 				errorCallback();
-			};
+			}
 			DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('sendDataMsg'), internalSuccessCallback, internalErrorCallback);
 		} else {
 			successCallback();

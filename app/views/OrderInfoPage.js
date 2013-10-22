@@ -33,7 +33,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
             , events: {
                 tap: {
                     target: DigiWebApp.NavigationController,
-                    action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
+                    action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToDashboardPage();}
                 }
             }
         })
@@ -70,7 +70,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.order = M.ViewManager.getView('orderInfoPage', 'order').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(M.ViewManager.getView('orderInfoPage', 'order').getSelection());
+		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(M.ViewManager.getView('orderInfoPage', 'order').getSelection())
 		                    			DigiWebApp.SelectionController.setPositions();
 		                    		}
 		                    	}
@@ -82,7 +82,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 	            }
 		        , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	  				}
 	            }
 	        }
@@ -112,7 +112,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.position = M.ViewManager.getView('orderInfoPage', 'position').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(M.ViewManager.getView('orderInfoPage', 'position').getSelection());
+		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(M.ViewManager.getView('orderInfoPage', 'position').getSelection())
 		                    			DigiWebApp.SelectionController.setActivities(YES);
 		                    		}
 		                    	}
@@ -123,7 +123,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 	            }
 		        , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	  				}
 	            }
 	        }

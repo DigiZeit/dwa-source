@@ -1,4 +1,3 @@
-"use strict";
 // ==========================================================================
 // The M-Project - Mobile HTML5 Application Framework
 // Generated with: Espresso 
@@ -6,6 +5,7 @@
 // Project: DigiWebApp
 // Model: BautagebuchMediaFile
 // ==========================================================================
+
 DigiWebApp.BautagebuchMediaFile = M.Model.create({
 
     /* Define the name of your model. Do not delete this property! */
@@ -96,7 +96,7 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
     	
     }
     
-	, saveToFile: function(myWriteContent, successCallback, myErrorCallback) {		
+	, saveToFile: function(myWriteContent, successCallback, errorCallback) {		
 		var that = this;
 		var writeContent = new String(myWriteContent);
 		
@@ -114,14 +114,13 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 	    }
 	
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("saveToFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("saveToFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 		
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -204,30 +203,29 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 				   	}, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e3) {
-			errorCallback(e3);
+		} catch(e) {
+			errorCallback(e);
 		}
 	
 	}
 	
-	, readFromFile: function(successCallback, myErrorCallback) {
+	, readFromFile: function(successCallback, errorCallback) {
 		var that = this;
 		
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("readFromFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("readFromFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 	    
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("readFromFileError: successCallback is not a function");
 	        return false;
-	    }
+	    };
 		
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
@@ -235,7 +233,7 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 			console.error("readFromFileError: no fileName given");
 			errorCallback();
 	        return false;
-	    }
+	    };
 	    
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -309,12 +307,12 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e4) {
-			errorCallback(e4);
+		} catch(e) {
+			errorCallback(e);
 		}
 	}
 	
-	, deleteFile: function(successCallback, myErrorCallback) {
+	, deleteFile: function(successCallback, errorCallback) {
 		var that = this;
 		
 		// check if fileName is set
@@ -322,23 +320,22 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 		if (!that.hasFileName()) {
 			console.error("deleteFileError: no fileName given");
 	        return false;
-	    }
+	    };
 	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("deleteFileError: successCallback is not a function");
 	        return false;
-	    }
+	    };
 		
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("deleteFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("deleteFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 	    
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -389,8 +386,8 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e5) {
-			errorCallback(e5);
+		} catch(e) {
+			errorCallback(e);
 		}
 	}
 
@@ -405,10 +402,10 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e6) {
-	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e6);
+	    } catch(e) {
+	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e);
 	    }
-	    if (keys) {
+	    if(keys){
 	        _.each(keys, function(k) {
 	        	if (k !== that.m_id) {
 	        		newKeys.push(k);
@@ -441,8 +438,8 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e7) {
-	    	console.error("ERROR in " + that.name + ".saveSorted: " + e7);
+	    } catch(e) {
+	    	console.error("ERROR in " + that.name + ".saveSorted: " + e);
 	    }
         var found = NO;
         _.each(keys, function(k) {
@@ -461,13 +458,13 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e8) {
-	    	console.error("ERROR in " + that.name + ".findSorted: " + e8);
+	    } catch(e) {
+	    	console.error("ERROR in " + that.name + ".findSorted: " + e);
 	    }
 	
 	    var records = [];
 	
-	    if (keys) {
+	    if(keys){
 	        _.each(keys, function(k) {
 	        	var loadedItem = that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k});
 	        	if ( (bautagesberichtId && loadedItem.get("bautagesberichtId") === bautagesberichtId) || (typeof(bautagesberichtId) === "undefined") ) {

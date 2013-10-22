@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMaterialienListeController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 
 	  items: null
@@ -18,7 +18,7 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 	}
 
 	, neu: function() {
-		//var that = this;
+		var that = this;
 		
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("item", DigiWebApp.BautagebuchMaterialBuchung.createRecord({
 			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id

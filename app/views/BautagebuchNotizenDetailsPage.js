@@ -27,7 +27,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 			    	} else {    
 						if (DigiWebApp.BautagebuchNotizenDetailsController.positionId) {
 							o.isSelected = (o.value === DigiWebApp.BautagebuchNotizenDetailsController.positionId);
-							if (o.isSelected) { itemSelected = YES; }
+							if (o.isSelected) { itemSelected = YES }
 						}
 			            return o;
 			    	}
@@ -36,10 +36,10 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 			    if (myPositionenList.length !== 1) {
 			    	positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
 			    } else {
-			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionId", positionenArray[0].value);
-			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionName", positionenArray[0].label);
+			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionId", positionenArray[0].value)
+			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionName", positionenArray[0].label)
 			    }
-				DigiWebApp.BautagebuchNotizenDetailsController.set("positionenList", positionenArray);
+				DigiWebApp.BautagebuchNotizenDetailsController.set("positionenList", positionenArray)
 				
 				DigiWebApp.BautagebuchNotizenDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchNotizenDetailsController.positionId);
 				
@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchNotizenListePageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} history.back();}
+        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} history.back();}
                 }
             }
         })
@@ -102,7 +102,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchNotizenDetailsController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.deleteNotiz();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.deleteNotiz();}
                 }
             }
         })

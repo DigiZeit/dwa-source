@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchZeitenDetailsController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 
 	  item: null
@@ -37,7 +37,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	, longitude_bis: "" // in model
 
 	, init: function(isFirstLoad) {
-		//var that = this;
+		var that = this;
 	}
 
 	, load: function(myItem) {
@@ -61,7 +61,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		
 		var positionSelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'positionComboBox').getSelection() !== "0" );
 		var activitySelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection() !== "0" );
-		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
+		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0))
 		
 		if (!positionSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -137,8 +137,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	        var itemSelected = NO;
 
 	        /* if a workplan exists, only use those activities that are in the workplan */
-	        var activities;
-	        if (workPlans.length > 0) {
+	        if(workPlans.length > 0) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
@@ -159,7 +158,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    });
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
-			that.set("activityList", taetigkeitenArray);
+			that.set("activityList", taetigkeitenArray)
 		}
 	}
 

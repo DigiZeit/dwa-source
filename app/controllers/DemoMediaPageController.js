@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: MediaPageController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.DemoMediaPageController = M.Controller.extend({
 
       events: {
@@ -20,7 +20,7 @@ DigiWebApp.DemoMediaPageController = M.Controller.extend({
     , latestId: null
 
     , init: function(isFirstLoad) {
-        if (DigiWebApp.DemoMediaPage.needsUpdate) {
+        if(DigiWebApp.DemoMediaPage.needsUpdate) {
             var items = [];
                         
 //            // Start::TakePicture (400)
@@ -50,7 +50,7 @@ DigiWebApp.DemoMediaPageController = M.Controller.extend({
         }
 
         var list = M.ViewManager.getView('mediaPage', 'list');
-        if (list) {
+        if(list) {
             $('#' + list.id).find('li').each(function() {
                 $(this).removeClass('selected');
             });
@@ -58,14 +58,14 @@ DigiWebApp.DemoMediaPageController = M.Controller.extend({
     }
 
     , itemSelected: function(id, m_id) {
-        if (this.latestId) {
+        if(this.latestId) {
             $('#' + this.latestId).removeClass('selected');
         }
         $('#' + id).addClass('selected');
 
         this.latestId = id;
 
-        if (m_id && typeof(this[m_id]) === 'function') {
+        if(m_id && typeof(this[m_id]) === 'function') {
             this[m_id]();
         }
     }

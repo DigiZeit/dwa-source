@@ -101,7 +101,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToBookTimePagePOP();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToBookTimePagePOP();}
                 }
             }
         })

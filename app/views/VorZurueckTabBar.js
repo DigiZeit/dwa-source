@@ -23,7 +23,7 @@ DigiWebApp.VorZurueckTabBar = M.TabBarView.design({
         , page: 'zeitbuchungenPage'
         , icon: 'arrow-l'
         , switchPage: function() {
-    		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
+    		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 			DigiWebApp.VorZurueckTabBar.backwardHandler();
     	}
     })
@@ -39,7 +39,7 @@ DigiWebApp.VorZurueckTabBar = M.TabBarView.design({
         , page: 'zeitbuchungenPage'
         , icon: 'arrow-r'
         , switchPage: function() {
-    		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+    		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
     		DigiWebApp.VorZurueckTabBar.forwardHandler();
     	}
     })
