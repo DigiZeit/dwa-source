@@ -563,9 +563,10 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	}
 
 	, refreshWAITBookings: function(successCallback, errorCallback, fileNamesToDelete) {
+		var that = this;
+
 		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in refreshWAITBookings");
-		var that = this;
 		var bookings = DigiWebApp.Booking.find();
 		var bookingIdsRefresh = [];
 		_.each(bookings, function(booking){
@@ -573,6 +574,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				bookingIdsRefresh.push(booking.m_id);
 			}
 		});
+		var iDsOnWAITgefunden = [];
 		if (bookingIdsRefresh.length > 0) {
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("bookingIdsRefresh: " + JSON.stringify(bookingIdsRefresh));
 			that.getBookings(bookingIdsRefresh, function(data){
@@ -610,6 +612,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 						switch(rBooking.status) {
 							case "WAIT":
 								updateModelBooking(modelBooking, datensatz);
+								iDsOnWAITgefunden.push(datensatz.m_id);
 								break;
 							case "OK":
 								updateModelBooking(modelBooking, datensatz);
@@ -629,7 +632,11 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 						}
 					});
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-					successCallback();
+					if (iDsOnWAITgefunden.length > 0 && typeof(successCallback) === "function") {
+						that.pollBookings(iDsOnWAITgefunden, successCallback, successCallback, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
+					} else {
+						if (typeof(successCallback) === "function") successCallback();	
+					}
 				} catch(e11) {
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					errorCallback("ERROR in getBookings: " + e11.message);
@@ -650,7 +657,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				}, function(){
 				});
 			}
-			successCallback();
+			if (typeof(successCallback) === "function") successCallback();
 		}
 	}
 	
