@@ -192,11 +192,14 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			}
 		}
 		if (DigiWebApp.SettingsController.featureAvailable('417') && (DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") || DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen"))) {
+			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
 			DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(buchungen, successCallback, errorCallback, isClosingDay, doSync);
 			},function(err){
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(buchungen, successCallback, errorCallback, isClosingDay, doSync);
 			}
 			, []);
