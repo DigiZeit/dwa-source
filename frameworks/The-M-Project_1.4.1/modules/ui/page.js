@@ -144,7 +144,18 @@ M.PageView = M.View.extend(
      * that. All other views just deliver their html representation to a page view.
      */
     writeToDOM: function() {
-        $('body').append(this.html);
+    	if (restartOnBlackBerry) {
+    		if (document.readyState === "loading") {
+    			document.write(this.html);
+    		} else if (typeof($(this.html)[0]) !== undefined) {
+    			// append only if the page-id isn't already in the body 
+    			if (document.body.innerHTML.indexOf($(this.html)[0].id) === -1) {
+    				$('body').append(this.html);
+    			}
+    		}
+		} else {
+			document.write(this.html);
+		}
     },
 
     /**

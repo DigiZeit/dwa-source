@@ -84,7 +84,8 @@ M.TabBarItemView = M.View.extend(
      * page switching job to M.Controller's switchToTab().
      */
     switchPage: function() {
-        if(this.page) {
+    	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+    	if(this.page) {
         	M.ViewManager.setCurrentPage(M.ViewManager.getPage(this.page));
             M.Controller.switchToTab(this);
         } else {

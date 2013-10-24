@@ -51,7 +51,8 @@ M.Controller = M.Object.extend(
      *
      * @param {M.TabBarItemView} tab The tab to be activated.
      */
-    switchToTab: function(tab) {
+    switchToTab: function(tab,back) {
+		if (!back) back = NO;
         if(!(tab.parentView && tab.parentView.type === 'M.TabBarView')) {
             M.Logger.log('Please provide a valid tab bar item to the switchToTab method.', M.WARN);
             return;
@@ -65,10 +66,10 @@ M.Controller = M.Object.extend(
         if(tab === currentTab) {
             var currentPage = M.ViewManager.getCurrentPage();
             if(currentPage !== newPage) {
-                this.switchToPage(newPage, null, YES, NO);
+                this.switchToPage(newPage, M.TRANSITION.FLIP, back, NO);
             }
         } else {
-            this.switchToPage(newPage, M.TRANSITION.NONE, NO, YES);
+            this.switchToPage(newPage, M.TRANSITION.FLIP, back, YES);
         }
     },
 
