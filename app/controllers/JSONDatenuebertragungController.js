@@ -97,9 +97,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}).send();
 	}
 	
-	, sendeZeitdaten: function(buchungen, successCallback, errorCallback, isClosingDay, doSync) {
+	, sendeZeitdaten: function(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync) {
 		//var that = this;
 		var absenden = function(buchungen, successCallback, errorCallback, isClosingDay, doSync) {
+			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("absenden");
 			var items = [];
 			var relevanteZeitbuchungen = buchungen;
 			var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
@@ -195,16 +196,17 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
 			DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
+				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done success");
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-				absenden(buchungen, successCallback, errorCallback, isClosingDay, doSync);
+				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			},function(err){
+				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done error", err);
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-				absenden(buchungen, successCallback, errorCallback, isClosingDay, doSync);
+				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			}
 			, []);
 		} else {
-			absenden(buchungen, successCallback, errorCallback, isClosingDay, doSync);
+			absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 		}
 	}
 });
