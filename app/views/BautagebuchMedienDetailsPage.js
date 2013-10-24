@@ -27,7 +27,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 			    	} else {    
 						if (DigiWebApp.BautagebuchMedienDetailsController.positionId) {
 							o.isSelected = (o.value === DigiWebApp.BautagebuchMedienDetailsController.positionId);
-							if (o.isSelected) { itemSelected = YES }
+							if (o.isSelected) { itemSelected = YES; }
 						}
 			            return o;
 			    	}
@@ -36,10 +36,10 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 			    if (positionenArray.length !== 1) {
 			    	positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
 			    } else {
-			    	DigiWebApp.BautagebuchMedienDetailsController.set("positionId", positionenArray[0].value)
-			    	DigiWebApp.BautagebuchMedienDetailsController.set("positionName", positionenArray[0].label)
+			    	DigiWebApp.BautagebuchMedienDetailsController.set("positionId", positionenArray[0].value);
+			    	DigiWebApp.BautagebuchMedienDetailsController.set("positionName", positionenArray[0].label);
 			    }
-				DigiWebApp.BautagebuchMedienDetailsController.set("positionenList", positionenArray)
+				DigiWebApp.BautagebuchMedienDetailsController.set("positionenList", positionenArray);
 				
 				DigiWebApp.BautagebuchMedienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMedienDetailsController.positionId);
 
@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMedienListePageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} history.back();}
+        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} history.back();}
                 }
             }
         })
@@ -102,7 +102,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchMedienDetailsController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}; this.deleteMedienBuchung();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.deleteMedienBuchung();}
                 }
             }
         })

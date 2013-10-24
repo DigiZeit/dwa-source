@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchZusammenfassungController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 
 	  item: null // model itself
@@ -48,7 +48,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	, ZeitbuchungenPerMitarbeiterList: []
 				
 	, init: function(isFirstLoad) {
-		var that = this;
+		//var that = this;
 		if (isFirstLoad) {
 		}
 		
@@ -156,7 +156,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	}
 
 	, setPositionen: function(auftragsId) {
-		var that = this;
+		//var that = this;
 		if (typeof(auftragsId) === "undefined") {
 			return false;
 		} else {
@@ -172,7 +172,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		    	}
 		    });
 		    positionenArray = _.compact(positionenArray);
-			DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionenList", positionenArray)
+			DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionenList", positionenArray);
 		}
 	}
 	
@@ -230,7 +230,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	        				}
 	        			});
 	        			if (found === NO) {
-	        				MAList.push(myMitarbeiter)
+	        				MAList.push(myMitarbeiter);
 	        			}
 		        	}
 			  });
@@ -250,12 +250,12 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 					   					, positionName: zeitbuch.get("positionName")
 					   					, activityName: zeitbuch.get("activityName")
 					   					, mitarbeiterId: maId
-					   				}
+					   				};
 					   				items.push(zeitbuchItem);
 				      	}
 				   });
 			});
-			var maItem = {"label": el.vollername() + ": " + mySumme.format("HH:MM") + "h", "items":items}
+			var maItem = {"label": el.vollername() + ": " + mySumme.format("HH:MM") + "h", "items":items};
 			result.push(maItem);
 		});
 		return result;

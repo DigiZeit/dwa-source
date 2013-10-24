@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: MediaListController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.MediaListController = M.Controller.extend({
 
     /* mediafiles */
@@ -24,7 +24,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     , init: function(isFirstLoad) {
 		var that = DigiWebApp.MediaListController;
 		var items = [];
-        if(isFirstLoad) {
+        if (isFirstLoad) {
             /* do something here, when page is loaded the first time. */
         }
         /* do something, for any other load. */
@@ -33,7 +33,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
         });
         that.set('items', items.reverse());
 
-        if(DigiWebApp.MediaListPage.needsUpdate) {
+        if (DigiWebApp.MediaListPage.needsUpdate) {
             var actions = [];
                         
 //            // Start::TakePicture (400)
@@ -72,35 +72,35 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
         try {
 	        list = M.ViewManager.getView('mediaListPage', 'mediafileslist');
-	        if(list) {
+	        if (list) {
 	            $('#' + list.id).find('li').each(function() {
 	                $(this).removeClass('selected');
 	            });
 	        }
-		} catch(e) { console.error(e); }
+		} catch(e2) { console.error(e2); }
 
         
         try {
 	        list = M.ViewManager.getView('mediaListPage', 'actionslist');
-	        if(list) {
+	        if (list) {
 	            $('#' + list.id).find('li').each(function() {
 	                $(this).removeClass('selected');
 	            });
 	        }
-        } catch(e) { console.error(e); }
+        } catch(e2) { console.error(e2); }
 
 	}
 
 	, itemSelected: function(id, m_id) {
-		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
-        if(this.latestId) {
+		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2s){} 
+        if (this.latestId) {
             $('#' + this.latestId).removeClass('selected');
         }
         $('#' + id).addClass('selected');
 
         this.latestId = id;
 
-        if(m_id && typeof(this[m_id]) === 'function') {
+        if (m_id && typeof(this[m_id]) === 'function') {
             this[m_id]();
         }
     }
@@ -167,7 +167,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	}
 
     , foto: function() {
-		var that = this;
+		//var that = this;
     	M.DialogView.actionSheet({
 	          title: M.I18N.l('takePicture')
 	        , cancelButtonValue: M.I18N.l('cancel')
@@ -333,14 +333,14 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadMediaFiles'));
 
-		successCallback = function() {
+		var successCallback = function() {
 			DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
-		}
+		};
 		
-		errorCallback = function(err) {
+		var errorCallback = function(err) {
 			console.error(err);
 			DigiWebApp.MediaListController.init();
-		}
+		};
 		
 		var proceed = function(mediaFiles) {
 			
@@ -355,9 +355,9 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					items.push(rec.record);
 				});
 				
-				var data = {"medien": items}
+				var data = {"medien": items};
 				
-				var internalSuccessCallback = function(data, msg, request) {
+				var internalSuccessCallback = function(data2, msg, request) {
 					// verarbeite empfangene Daten
 					console.log("sendeMedien Status: " + request.status);
 					// weiter in der Verarbeitungskette
@@ -371,7 +371,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 				// weiter in der Verarbeitungskette
 				successCallback();
 			}
-    	}
+    	};
 
 		var mediaFiles = DigiWebApp.MediaFile.find();
 		var mediaFilesLength = mediaFiles.length;

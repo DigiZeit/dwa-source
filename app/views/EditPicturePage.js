@@ -56,7 +56,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 	    	, events: {
 	          	tap: {
 	              	  target: DigiWebApp.NavigationController
-	              	, action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToMediaListPageTransition();}
+	              	, action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToMediaListPageTransition();}
 	          	}
 	      	  }
 	    })
@@ -69,7 +69,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 	              	//target: DigiWebApp.NavigationController,
 	              	//action: 'backToMediaListPageTransition'
 	    			action: function() {
-	    				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
+	    				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} 
 	    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('deleteMediaFile'));
 	    				DigiWebApp.EditPicturePageController.myMediaFile.deleteFile(
 	    						  DigiWebApp.EditPicturePageController.deleteMediaFileFromLocalStorage
@@ -210,7 +210,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 			  				//  target: DigiWebApp.CameraPage
 			  				//, action: 'savePicture'
 			  				action: function() {
-			  					try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
+			  					try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){} 
 			  					DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('saveMediaFile'));
 			  					DigiWebApp.EditPicturePage.savePicture();
 			  				}

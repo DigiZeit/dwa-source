@@ -40,10 +40,10 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e) {
-	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e);
+	    } catch(e2) {
+	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e2);
 	    }
-	    if(keys){
+	    if (keys){
 	        _.each(keys, function(k) {
 	        	if (k !== that.m_id) {
 	        		newKeys.push(k);
@@ -66,8 +66,8 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e) {
-	    	console.error("ERROR in " + that.name + ".saveSorted: " + e);
+	    } catch(e3) {
+	    	console.error("ERROR in " + that.name + ".saveSorted: " + e3);
 	    }
         var found = NO;
         _.each(keys, function(k) {
@@ -85,13 +85,13 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
 	    	if ( keyString !== null) {
 	    		keys = JSON.parse(keyString);
 	    	}
-	    } catch(e) {
-	    	console.error("ERROR in " + that.name + ".findSorted: " + e);
+	    } catch(e4) {
+	    	console.error("ERROR in " + that.name + ".findSorted: " + e4);
 	    }
 	
 	    var records = [];
 	
-	    if(keys){
+	    if (keys) {
 	        _.each(keys, function(k) {
 	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
 	        });

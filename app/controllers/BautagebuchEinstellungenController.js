@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchEinstellungenController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 
 	  settings: {

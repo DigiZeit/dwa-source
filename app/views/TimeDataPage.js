@@ -21,30 +21,30 @@ DigiWebApp.TimeDataPage = M.PageView.design({
 			action: function() {
 				if (DigiWebApp.BookingController.timeData) {
 					if (DigiWebApp.BookingController.timeData.length !== 0) {
-						$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).show()
+						$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).show();
 					} else {
-						$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).hide()
+						$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).hide();
 					}
 				} else {
-					$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).hide()
+					$('#' + DigiWebApp.TimeDataPage.contentNotSent.id).hide();
 				}
 				if (DigiWebApp.BookingController.timeDataSent) {
 					if (DigiWebApp.BookingController.timeDataSent.length !== 0) {
-						$('#' + DigiWebApp.TimeDataPage.contentSent.id).show()
+						$('#' + DigiWebApp.TimeDataPage.contentSent.id).show();
 					} else {
-						$('#' + DigiWebApp.TimeDataPage.contentSent.id).hide()
+						$('#' + DigiWebApp.TimeDataPage.contentSent.id).hide();
 					}
 				} else {
-					$('#' + DigiWebApp.TimeDataPage.contentSent.id).hide()
+					$('#' + DigiWebApp.TimeDataPage.contentSent.id).hide();
 				}
 				if (DigiWebApp.BookingController.timeDataSentDays) {
 					if (DigiWebApp.BookingController.timeDataSentDays.length !== 0) {
-						$('#' + DigiWebApp.TimeDataPage.contentDays.id).show()
+						$('#' + DigiWebApp.TimeDataPage.contentDays.id).show();
 					} else {
-						$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide()
+						$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide();
 					}
 				} else {
-					$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide()
+					$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide();
 				}
 			}
 		}
@@ -65,7 +65,7 @@ DigiWebApp.TimeDataPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToDashboardPage();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
                 }
             }
         })

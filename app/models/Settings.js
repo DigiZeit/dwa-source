@@ -84,6 +84,8 @@ DigiWebApp.Settings = M.Model.create({
     
     , mitarbeiterNachname: M.Model.attr('String')
     
+    , mitarbeiterNachname: M.Model.attr('String')
+    
     , auftragsDetailsKoppeln: M.Model.attr('Boolean')
     
 }, M.DataProviderLocalStorage);

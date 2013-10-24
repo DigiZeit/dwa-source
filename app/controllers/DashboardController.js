@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: DashboardController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.DashboardController = M.Controller.extend({
 
       items: null
@@ -23,7 +23,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				return true;
 			} else if (DigiWebApp.ApplicationController.timeouthappened && window.applicationCache.status !== window.applicationCache.UNCACHED) {
-				try { window.applicationCache.update(); } catch(e) { console.error(e); };
+				try { window.applicationCache.update(); } catch(e2) { console.error(e2); }
 				return (window.applicationCache.status == window.applicationCache.UPDATEREADY);
 			} else {
 				return (window.applicationCache.status == window.applicationCache.UPDATEREADY);
@@ -40,7 +40,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		// aus that.items that.itemsButtons bauen
 		var myButtonItem = {};
 		var myitemsButtons = [];
-		for (i=0; i < that.items.length; i++) {
+		for (var i=0; i < that.items.length; i++) {
 //			myButtonItem["button" + i % 2] = JSON.parse(JSON.stringify(that.items[i]));
 //			if (i % 2 === 0 && i === that.items.length - 1) {
 //				myButtonItem["button1"] = {};
@@ -93,15 +93,16 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			        	break;
 			    }
 			myitemsButtons.push(JSON.parse(JSON.stringify(myButtonItem)));
-		};
+		}
 		that.set('itemsButtons', myitemsButtons);		
 	}
 
     , init: function(isFirstLoad) {
     	if(DigiWebApp.DashboardPage.needsUpdate || isFirstLoad || this.appCacheUpdateReady()) {
         	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+        	var items;
         	if (ChefToolOnly) {
-	            var items = [
+	            items = [
 	                          {
 	     	                      label: M.I18N.l('dataTransfer')
 	     	                    , icon: 'icon_dataTransfer.png'
@@ -110,7 +111,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	            ];
         	} else {
 	        	// Standard-Einträge
-	            var items = [
+	            items = [
 	                  {
 	                      label: M.I18N.l('closingTime')
 	                    , icon: 'icon_closingTime.png'
@@ -283,7 +284,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     	}
 
         var list = M.ViewManager.getView('dashboard', 'list');
-        if(list) {
+        if (list) {
             $('#' + list.id).find('li').each(function() {
                 $(this).removeClass('selected');
             });
@@ -291,9 +292,9 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , itemSelected: function(id, m_id) {
-    	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+    	try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
     	var that = this;
-        if(this.latestId) {
+        if (this.latestId) {
             $('#' + this.latestId).removeClass('selected');
         }
         $('#' + id).addClass('selected');
@@ -308,12 +309,12 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
         this.latestId = id;
 
-        if(m_id && typeof(this[m_id]) === 'function') {
+        if (m_id && typeof(this[m_id]) === 'function') {
             this[m_id]();
         } else {
         	try {
             	var myContentBindingList = DigiWebApp.ButtonDashboardPage.content.list.contentBinding.target[DigiWebApp.ButtonDashboardPage.content.list.contentBinding.property];
-            	var myMethod = "";
+            	//var myMethod = "";
             	_.each(myContentBindingList, function(item) {
             		var button = $('#' + id);
             	    var buttonHtml = button.html();
@@ -321,8 +322,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
             		if (item.label === buttonHtml && typeof(thatFunction) === 'function') {
             			thatFunction();
             		}
-            	})
-        	} catch(e) {}
+            	});
+        	} catch(e2) {}
         }
     }
     
@@ -352,7 +353,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	        if(bookings.length > 0) {
 	    	    var finishBooking = function() {
 	    	    	DigiWebApp.BookingController.sendBookings(isClosingDay, true);
-	    	    }
+	    	    };
 	        	if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 					var pollBooking = function() {
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");

@@ -27,7 +27,7 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.6.1.4359 beta",
+        "version": "1.7.0.4356 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
@@ -62,7 +62,7 @@
         }
     },
     "libraries": [
-          {"name": "xml2json", "refs": ["jquery.xml2json_1.1.js"]}
+          {"name": "xml2json", "refs": ["jquery.xml2json_1.3.js"]}
         , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}

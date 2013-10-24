@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMaterialienDetailsController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 	  item: null
@@ -29,12 +29,13 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, menge: null // in model
 	  	
 	, init: function(isFirstLoad) {
-		var that = this;
+		//var that = this;
 	}
 
 	, load: function(myItem) {
 		var that = this;
 		that.set("item", myItem);
+		//console.log(myItem);
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
@@ -125,6 +126,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			that.item.set("activityId", null);
 			that.item.set("activityName", null);
 		}
+		//console.log(that.materialId);
 		that.item.set("materialId", that.materialId);
 		that.item.set("mengeneinheitId", that.mengeneinheitId);
 		that.item.set("artikel", that.artikel);
@@ -161,7 +163,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	        var itemSelected = NO;
 
 	        /* if a workplan exists, only use those activities that are in the workplan */
-	        if(workPlans.length > 0) {
+	        var activities;
+	        if (workPlans.length > 0) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
@@ -182,7 +185,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		    });
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomethingOptional'), value: '0', isSelected: !itemSelected});
-			that.set("activityList", taetigkeitenArray)
+			that.set("activityList", taetigkeitenArray);
 		}
 	}
 
