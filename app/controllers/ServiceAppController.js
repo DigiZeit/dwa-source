@@ -629,6 +629,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 						}
 					});
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
+					successCallback();
 				} catch(e11) {
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					errorCallback("ERROR in getBookings: " + e11.message);
