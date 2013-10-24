@@ -190,7 +190,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			} else {
 				successCallback();
 			}
-		}
+		};
 		if (DigiWebApp.SettingsController.featureAvailable('417') && (DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") || DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen"))) {
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");

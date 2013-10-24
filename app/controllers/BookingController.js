@@ -1161,6 +1161,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
     
     , closeDayWithRemark: function() {
+    	var that = this;
     	DigiWebApp.BookingController.getBookingLocation(that.closeDayWithRemarkWithPosition);
     }
             

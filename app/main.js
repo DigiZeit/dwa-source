@@ -99,7 +99,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    			
 				    			writer.onwriteend = function(evt) {
 					    			//writer.onwriteend = function(ev) {
-				    					successCallback(ev);
+				    					successCallback(evt);
 					    			//};
 				    				//writer.truncate(writeContent.length);
 				    	        };
@@ -140,7 +140,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    			
 			    			writer.onwriteend = function(evt) {
 				    			//writer.onwriteend = function(ev) {
-			    					successCallback(ev);
+			    					successCallback(evt);
 				    			//};
 			    				//writer.truncate(writeContent.length);
 			    	        };
