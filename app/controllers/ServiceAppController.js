@@ -650,6 +650,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				}, function(){
 				});
 			}
+			successCallback();
 		}
 	}
 	
