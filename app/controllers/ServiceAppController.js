@@ -91,6 +91,13 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	        	 this._readFile_Interval_Counter = null;
 	        	 this.available = false;
 	        	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("@@@ ServiceApp is UNavailable !!!");
+	        	 var e = new Error('@@@ ServiceApp is UNavailable !!!');
+//	        	 var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+//	        	      .replace(/^\s+at\s+/gm, '')
+//	        	      .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
+//	        	      .split('\n');
+	        	 console.log(e.stack);
+	        	  
 	        	 DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	        	 this.callback(null);
 	         }
