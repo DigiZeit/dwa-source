@@ -10,7 +10,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'date order position activity latitude longitude genauigkeit_von erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_von erfassungsverfahren_bis gpszeitstempel_bis remark'
+    , childViews: 'date order position activity latitude longitude genauigkeit_von erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_von erfassungsverfahren_bis gpszeitstempel_bis ServiceApp_Status remark'
 
     , events: {
         tap: {
@@ -455,6 +455,20 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
         }
     })
 
+    , ServiceApp_Status: M.LabelView.design({
+          cssClass: 'location unselectable'
+        , computedValue: {
+              valuePattern: '<%= ServiceApp_Status %>'
+            , operation: function(v) {
+                if (v !== null && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten") && DigiWebApp.SettingsController.getSetting("debug")) {
+               		return 'Status: ' + v;
+                } else {
+                    //return M.I18N.l('erfassungsverfahren_bis') + ': ' + M.I18N.l('GPSnotactive');
+                	return '';
+                }
+            }
+        }
+    })
 
     , remark: M.LabelView.design({
           cssClass: 'remark unselectable'
