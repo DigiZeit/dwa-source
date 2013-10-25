@@ -391,7 +391,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= ermittlungsverfahrenVon %>'
             , operation: function(v) {
                 if (v !== null && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
-               		return M.I18N.l('erfassungsverfahren_von') + ': ' + v;
+               		return M.I18N.l('erfassungsverfahren_von') + ': ' + v.substring(0,16) + "...";
                 } else {
                     //return M.I18N.l('erfassungsverfahren_von') + ': ' + M.I18N.l('GPSnotactive');
                 	return '';
@@ -406,7 +406,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= ermittlungsverfahrenBis %>'
             , operation: function(v) {
                 if (v !== null && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
-               		return M.I18N.l('erfassungsverfahren_bis') + ': ' + v;
+               		return M.I18N.l('erfassungsverfahren_bis') + ': ' + v.substring(0,16) + "...";
                 } else {
                     //return M.I18N.l('erfassungsverfahren_bis') + ': ' + M.I18N.l('GPSnotactive');
                 	return '';
@@ -422,9 +422,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	try {
-	                	console.log("'" + v + "'");
-	                	var a = M.Date.create(new Number(v));
-	                	console.log(a);
+	                	var a = M.Date.create(parseInt(v));
 	               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('mm.dd.yyyy HH:MM');
                 	} catch (eDate1) {
                 		return '';
@@ -444,9 +442,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	try {
-	                	console.log("'" + v + "'");
-	                	var a = M.Date.create(new Number(v));
-	                	console.log(a);
+	                	var a = M.Date.create(parseInt(v));
 	               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('mm.dd.yyyy HH:MM');
                 	} catch (eDate2) {
                 		return '';
