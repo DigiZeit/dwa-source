@@ -10,7 +10,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'date order position activity latitude longitude genauigkeit_von erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_von erfassungsverfahren_bis gpszeitstempel_bis ServiceApp_Status remark'
+      , childViews: 'date order position activity latitude longitude genauigkeit_von eolVon erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_bis eolBis erfassungsverfahren_bis gpszeitstempel_bis ServiceApp_Status remark'
 
     , events: {
         tap: {

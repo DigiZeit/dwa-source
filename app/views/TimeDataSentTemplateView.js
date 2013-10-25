@@ -10,7 +10,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
 
       isSelectable: NO
 
-    , childViews: 'date order position activity latitude longitude genauigkeit_von erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_von erfassungsverfahren_bis gpszeitstempel_bis ServiceApp_Status remark'
+    , childViews: 'date order position activity latitude longitude genauigkeit_von eolVon erfassungsverfahren_von gpszeitstempel_von latitude_bis longitude_bis genauigkeit_bis eolBis erfassungsverfahren_bis gpszeitstempel_bis ServiceApp_Status remark'
 
     , events: {
         tap: {
@@ -137,7 +137,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	var str = new Number(v);
-               		return M.I18N.l('vonKoordinate') + ': ' + str.toFixed(6);
+               		return M.I18N.l('vonKoordinate') + ': ' + str.toFixed(4);
                		//return M.I18N.l('latitude_von') + ': ' + str.toFixed(6);
                 } else {
                     //return M.I18N.l('latitude_von') + ': ' + M.I18N.l('GPSnotactive');
@@ -155,7 +155,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) { 
                 	var str = new Number(v);
-               		return ', ' + str.toFixed(6);
+               		return ', ' + str.toFixed(4);
                		//return M.I18N.l('longitude_von') + ': ' + str.toFixed(6);
                 } else {
                     //return M.I18N.l('longitude_von') + ': ' + M.I18N.l('GPSnotactive');
@@ -167,7 +167,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
 
     , genauigkeit_von: M.LabelView.design({
           cssClass: 'location unselectable'
-        , isInline: NO
+        , isInline: YES
         , computedValue: {
               valuePattern: '<%= genauigkeitVon %>'
             , operation: function(v) {
@@ -181,7 +181,12 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
             }
         }
     })
-    
+
+    , eolVon: M.LabelView.design({
+	        cssClass: 'location unselectable'
+	      , value: ''
+	  })
+        
     , latitude_bis: M.LabelView.design({
           cssClass: 'location unselectable'
         , isInline: YES
@@ -190,7 +195,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	var str = new Number(v);
-               		return M.I18N.l('bisKoordinate') + ': ' + str.toFixed(6);
+               		return M.I18N.l('bisKoordinate') + ': ' + str.toFixed(4);
                		//return M.I18N.l('latitude_bis') + ': ' + str.toFixed(6);
                 } else {
                     //return M.I18N.l('latitude_bis') + ': ' + M.I18N.l('GPSnotactive');
@@ -208,7 +213,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) { 
                 	var str = new Number(v);
-               		return ', ' + str.toFixed(6);
+               		return ', ' + str.toFixed(4);
                		//return M.I18N.l('longitude_bis') + ': ' + str.toFixed(6);
                 } else {
                     //return M.I18N.l('longitude_bis') + ': ' + M.I18N.l('GPSnotactive');
@@ -220,7 +225,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
 
     , genauigkeit_bis: M.LabelView.design({
           cssClass: 'location unselectable'
-        , isInline: NO
+        , isInline: YES
         , computedValue: {
               valuePattern: '<%= genauigkeitBis %>'
             , operation: function(v) {
@@ -235,6 +240,11 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
         }
     })
 
+    , eolBis: M.LabelView.design({
+	        cssClass: 'location unselectable'
+	      , value: ''
+	  })
+    
     , erfassungsverfahren_von: M.LabelView.design({
           cssClass: 'location unselectable'
         , computedValue: {
