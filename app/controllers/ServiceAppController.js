@@ -90,6 +90,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	        	 window.clearInterval(this._readFile_IntervalVar);
 	        	 this._readFile_Interval_Counter = null;
 	        	 this.available = false;
+	        	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("@@@ ServiceApp is UNavailable !!!");
 	        	 DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	        	 this.callback(null);
 	         }
@@ -110,7 +111,6 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	            	 that.internalCallback(that.returnData);
 	             }
 	         }, function(err) {
-	        	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("@@@ ServiceApp is UNavailable !!!");
 	        	 that.available = false;
 	         });          
 		};
@@ -593,9 +593,9 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("bookingIdsRefresh: " + JSON.stringify(bookingIdsRefresh));
 			that.getBookings(bookingIdsRefresh, function(data){
 				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
-					that.deleteFilesInServiceApp(fileNamesToDelete, function(data2){
-					}, function(){
-					});
+//					that.deleteFilesInServiceApp(fileNamesToDelete, function(data2){
+//					}, function(){
+//					});
 				}
 				try {
 					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("data: ", data);
@@ -688,18 +688,18 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			}, function(){
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
-					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-					}, function(){
-					});
+//					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+//					}, function(){
+//					});
 				}
 				errorCallback("refreshWAITBookings: ServiceApp hat nicht geantwortet!");
 			});
 		} else {
 			// es gibt keine Buchungen zu aktialisieren
 			if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
-				that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-				}, function(){
-				});
+//				that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+//				}, function(){
+//				});
 			}
 			if (typeof(successCallback) === "function") successCallback();
 		}
