@@ -13,7 +13,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		if (typeof(timeout) !== "undefined") {
 			this.timeout = timeout;
 		} else {
-			this.timeout = 3000;
+			this.timeout = 5000;
 		}
 		//this._requestInterval = this.timeout / 10; // immer zehnmal innerhalb des gewünschten Timeouts nach Antwort der ServiceApp suchen 
 		this._requestInterval = 300; // immer alle 300ms nach Antwort der ServiceApp suchen 

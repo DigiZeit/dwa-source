@@ -229,13 +229,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
     }
     
-    , getBookingLocation: function(successCallback) {
+    , getBookingLocation: function(mysuccessCallback) {
     	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in getBookingLocation");
 
     	var that = DigiWebApp.BookingController;
     	
 		// Get GPS-Position if set in Settings
-    	var getLocationNow = function() {
+    	var getLocationNow = function(successCallback) {
 	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'));
 	
 	            /*var getLocationOptions =  { 
@@ -283,19 +283,19 @@ DigiWebApp.BookingController = M.Controller.extend({
 				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
 		            DigiWebApp.ServiceAppController.knockknock(function(data) {
 		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
-						successCallback();
+		            	mysuccessCallback();
 		            }, function() {
 		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
-		            	getLocationNow();
+		            	getLocationNow(mysuccessCallback);
 		            });
+				} else {
+					mysuccessCallback();
+				}
+			} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
+				getLocationNow(mysuccessCallback);
 			} else {
-				successCallback();
+				mysuccessCallback();
 			}
-		} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
-			getLocationNow();
-		} else {
-			successCallback();
-		}
 
    	}
     
