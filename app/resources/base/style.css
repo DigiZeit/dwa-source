@@ -567,7 +567,7 @@ label.ui-input-text, .ui-controlgroup-label {
 .timeDataPage .ui-listview .tagLabel {
     font-size: 12px;
     font-weight: normal;
-    margin-left: 25px;
+    /*margin-left: 25px;*/
     color: #000000;
 }
 
