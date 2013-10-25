@@ -204,7 +204,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			}
-			, []);
+			, []
+			, true);
 		} else {
 			absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 		}

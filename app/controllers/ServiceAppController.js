@@ -562,7 +562,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	    myServiceApp.send();
 	}
 
-	, refreshWAITBookings: function(successCallback, errorCallback, fileNamesToDelete) {
+	, refreshWAITBookings: function(successCallback, errorCallback, fileNamesToDelete, doEngeKopplung) {
 		var that = this;
 
 		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
@@ -633,7 +633,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 						}
 					});
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-					if (iDsOnWAITgefunden.length > 0 && typeof(successCallback) === "function") {
+					if (iDsOnWAITgefunden.length > 0 && typeof(successCallback) === "function" && doEngeKopplung) {
 						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("pollBookings (enge Kopplung) mit", iDsOnWAITgefunden);
 						var checkForOK = function(datensaetze) {
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
