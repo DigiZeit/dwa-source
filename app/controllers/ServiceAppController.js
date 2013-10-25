@@ -656,6 +656,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 							});
 							successCallback();
+						};
 						that.pollBookings(iDsOnWAITgefunden, checkForOK, successCallback, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 					} else {
 						if (typeof(successCallback) === "function") successCallback();	
