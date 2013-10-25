@@ -744,7 +744,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                        // reset app by setting location new => like web page reload
 	                        //location.href = location.protocol + '//' + location.host + location.pathname;
 	                    	DigiWebApp.SettingsController.showIOSMessage = false;
-	                    	console.log(mycompany, mypassword, myconnectionCode, myworkerId);
+	                    	//console.log(mycompany, mypassword, myconnectionCode, myworkerId);
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
 	                    		DigiWebApp.SettingsController.init(YES);
 								DigiWebApp.SettingsController.setSetting("company", mycompany);
