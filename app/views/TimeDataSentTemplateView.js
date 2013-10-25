@@ -283,7 +283,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	try {
 	                	var a = M.Date.create(parseInt(v));
-	               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('mm.dd.yyyy HH:MM');
+	               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('dd.mm.yyyy HH:MM');
                 	} catch (eDate1) {
                 		return '';
                 	}
@@ -303,7 +303,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	try {
 	                	var a = M.Date.create(parseInt(v));
-	               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('mm.dd.yyyy HH:MM');
+	               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('dd.mm.yyyy HH:MM');
                 	} catch (eDate2) {
                 		return '';
                 	}
