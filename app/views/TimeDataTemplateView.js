@@ -421,10 +421,14 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= gps_zeitstempelVon %>'
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
-                	//console.log("'" + v + "'");
-                	var a = M.Date.create(new Number(v));
-                	console.log(a);
-               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('mm.dd.yyyy HH:MM');
+                	try {
+	                	console.log("'" + v + "'");
+	                	var a = M.Date.create(new Number(v));
+	                	console.log(a);
+	               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('mm.dd.yyyy HH:MM');
+                	} catch (eDate1) {
+                		return '';
+                	}
                 } else {
                     //return M.I18N.l('gpszeitstempel_von') + ': ' + M.I18N.l('GPSnotactive');
                 	return '';
@@ -439,10 +443,14 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= gps_zeitstempelBis %>'
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
-                	//console.log("'" + v + "'");
-                	var a = M.Date.create(new Number(v));
-                	console.log(a);
-               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('mm.dd.yyyy HH:MM');
+                	try {
+	                	console.log("'" + v + "'");
+	                	var a = M.Date.create(new Number(v));
+	                	console.log(a);
+	               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('mm.dd.yyyy HH:MM');
+                	} catch (eDate2) {
+                		return '';
+                	}
                 } else {
                     //return M.I18N.l('gpszeitstempel_bis') + ': ' + M.I18N.l('GPSnotactive');
                 	return '';
