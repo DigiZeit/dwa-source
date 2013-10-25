@@ -85,6 +85,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		this.readFileHandler = function() {
 			 var that = this;
 	    	 this._readFile_Interval_Counter++;
+	    	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this._readFile_Interval_Counter: " + this._readFile_Interval_Counter);
 	         if (this._readFile_Interval_Counter > (this.timeout / this._requestInterval)) { // if ServiceApp-File has not been found --> ServiceApp seems to be unavailable 
 	        	 window.clearInterval(this._readFile_IntervalVar);
 	        	 this._readFile_Interval_Counter = null;
@@ -96,6 +97,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	             window.clearInterval(that._readFile_IntervalVar);
 	             that.returnData = data3;
 	             that.available = true;
+	        	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("@@@ ServiceApp is available");
 	             if (false) { // nicht direkt löschen (kann zu Java-Exceptions führen)
 		             that.deleteFile(that._requestFileName, function(){
 		                 //console.log("erfolgreich gelöscht");
@@ -108,6 +110,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	            	 that.internalCallback(that.returnData);
 	             }
 	         }, function(err) {
+	        	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("@@@ ServiceApp is UNavailable !!!");
 	        	 that.available = false;
 	         });          
 		};
@@ -460,7 +463,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Success");
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Error");
 				   errorCallback();
 			   }
@@ -479,7 +482,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
 				   errorCallback();
 			   }
@@ -493,7 +496,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in pollBookings");
 		var internalErrorCallback = function() {				   
-			console.log("this.available", this.available);
+			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 			errorCallback();
 		}
 
@@ -527,7 +530,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 				   errorCallback();
 			   }
 	    };
@@ -546,7 +549,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 				   errorCallback();
 			   }
 	    };
@@ -563,7 +566,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Success");
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Error");
 				   errorCallback();
 			   }
