@@ -419,6 +419,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= gps_zeitstempelVon %>'
             , operation: function(v) {
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
+                	console.log(v);
                 	var a = new Date(v);
                 	a.getDay() + "." + a.getMonth() + "." + a.getFullYear() + " " + a.getHours() + ":" + a.getMinutes()
                		return M.I18N.l('gpszeitstempel_von') + ': ' + a;
