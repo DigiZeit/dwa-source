@@ -746,6 +746,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    	DigiWebApp.SettingsController.showIOSMessage = false;
 	                    	console.log(mycompany, mypassword, myconnectionCode, myworkerId);
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
+	                    		DigiWebApp.SettingsController.init(YES);
 								DigiWebApp.SettingsController.setSetting("company", mycompany);
 								DigiWebApp.SettingsController.setSetting("password", mypassword);
 								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode);
