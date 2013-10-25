@@ -602,6 +602,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 								if (typeof(datensatz.genauigkeit) !== "undefined") { modelBooking.set("genauigkeitVon", datensatz.genauigkeit); }
 								if (typeof(datensatz.gps_zeitstempel_bis) !== "undefined") { modelBooking.set("gps_zeitstempelBis", datensatz.gps_zeitstempel_bis); }
 								if (typeof(datensatz.gps_zeitstempel) !== "undefined") { modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel); }
+								if (typeof(datensatz.status) !== "undefined") { modelBooking.set("ServiceApp_Status", datensatz.status); }
 								modelBooking.save();
 								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAITBookings: datensatz " + datensatzObj.m_id + " gespeichert");
 							}
@@ -653,6 +654,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 									modelBooking.set("genauigkeitVon", datensatz.genauigkeit);
 									modelBooking.set("gps_zeitstempelBis", datensatz.gps_zeitstempel_bis);
 									modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
+									modelBooking.set("ServiceApp_Status", datensatz.status);
 									modelBooking.save();
 									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 								} catch(exNotFound) {

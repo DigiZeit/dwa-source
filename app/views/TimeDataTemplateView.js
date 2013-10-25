@@ -400,7 +400,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= ermittlungsverfahrenVon %>'
           , operation: function(v) {
-              if (v !== null && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
+              if (v !== null && typeof(v) !== "undefined"  && v !== "undefined"  && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
              		return M.I18N.l('erfassungsverfahren_von') + ': ' + v.substring(0,16) + "...";
               } else {
                   //return M.I18N.l('erfassungsverfahren_von') + ': ' + M.I18N.l('GPSnotactive');
@@ -415,7 +415,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= ermittlungsverfahrenBis %>'
           , operation: function(v) {
-              if (v !== null && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
+              if (v !== null && typeof(v) !== "undefined"  && v !== "undefined"  && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
              		return M.I18N.l('erfassungsverfahren_bis') + ': ' + v.substring(0,16) + "...";
               } else {
                   //return M.I18N.l('erfassungsverfahren_bis') + ': ' + M.I18N.l('GPSnotactive');

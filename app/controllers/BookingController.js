@@ -596,6 +596,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 							modelBooking.set("genauigkeitVon", datensatz.genauigkeit);
 							modelBooking.set("gps_zeitstempelBis", datensatz.gps_zeitstempel_bis);
 							modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
+							modelBooking.set("ServiceApp_Status", datensatz.status);
 							modelBooking.save();
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 						});
@@ -742,6 +743,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , genauigkeitBis: null
             , gps_zeitstempelBis: null
             , ermittlungsverfahrenBis: null
+            , ServiceApp_Status: "WAIT"
             , timezoneOffset: DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")
             , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
             , timeStampStart: timeStart.getTime()
@@ -1241,6 +1243,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 							modelBooking.set("genauigkeitVon", datensatz.genauigkeit);
 							modelBooking.set("gps_zeitstempelBis", datensatz.gps_zeitstempel_bis);
 							modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
+							modelBooking.set("ServiceApp_Status", datensatz.status);
 							modelBooking.save();
 							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 						});
