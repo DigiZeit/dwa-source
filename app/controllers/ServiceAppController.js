@@ -460,6 +460,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Success");
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Error");
 				   errorCallback();
 			   }
@@ -478,6 +479,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
 				   errorCallback();
 			   }
@@ -490,6 +492,11 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	, pollBookings: function(ids, successCallback, errorCallback, timeout) {
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in pollBookings");
+		var internalErrorCallback = function() {				   
+			console.log("this.available", this.available);
+			errorCallback();
+		}
+
 		var internalSuccessCallback = function(data) {
 			try {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("pollBookings Success");
@@ -506,7 +513,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				errorCallback(e10.message);
 			}
 		};
-		this.getBookings(ids, internalSuccessCallback, errorCallback, timeout, true);
+		this.getBookings(ids, internalSuccessCallback, internalErrorCallback, timeout, true);
 	}
 	
 	, putBookings: function(bookings, successCallback, errorCallback, timeout) {
@@ -520,6 +527,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   errorCallback();
 			   }
 	    };
@@ -538,6 +546,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   errorCallback();
 			   }
 	    };
@@ -554,6 +563,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Success");
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Error");
 				   errorCallback();
 			   }
@@ -630,7 +640,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 								modelBooking.del();
 								break;
 							default:
-								errorCallback("getBookings: Unbekannter Status");
+								errorCallback("refreshWAITBookings: Unbekannter Status");
 						}
 					});
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -670,7 +680,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					}
 				} catch(e11) {
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-					errorCallback("ERROR in getBookings: " + e11.message);
+					errorCallback("ERROR in refreshWAITBookings: " + e11.message);
 				}
 			}, function(){
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -679,7 +689,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					}, function(){
 					});
 				}
-				errorCallback("getBookings: ServiceApp hat nicht geantwortet!");
+				errorCallback("refreshWAITBookings: ServiceApp hat nicht geantwortet!");
 			});
 		} else {
 			// es gibt keine Buchungen zu aktialisieren

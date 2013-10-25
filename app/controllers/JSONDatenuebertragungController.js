@@ -200,7 +200,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			},function(err){
-				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done error", err);
+				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done error: " + err);
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			}
