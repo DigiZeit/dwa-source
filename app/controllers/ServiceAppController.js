@@ -633,6 +633,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					});
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					if (iDsOnWAITgefunden.length > 0 && typeof(successCallback) === "function") {
+						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("pollBookings (enge Kopplung) mit", iDsOnWAITgefunden);
 						that.pollBookings(iDsOnWAITgefunden, successCallback, successCallback, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 					} else {
 						if (typeof(successCallback) === "function") successCallback();	
