@@ -281,6 +281,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
     , latitude: M.LabelView.design({
           cssClass: 'location unselectable'
+        , isInline: YES
         , computedValue: {
               valuePattern: '<%= latitude %>'
             , operation: function(v) {
@@ -316,7 +317,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
     , genauigkeit_von: M.LabelView.design({
           cssClass: 'location unselectable'
-        , isInline: YES
+        , isInline: NO
         , computedValue: {
               valuePattern: '<%= genauigkeitVon %>'
             , operation: function(v) {
@@ -330,9 +331,10 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
             }
         }
     })
-
+    
     , latitude_bis: M.LabelView.design({
           cssClass: 'location unselectable'
+        , isInline: YES
         , computedValue: {
               valuePattern: '<%= latitude_bis %>'
             , operation: function(v) {
@@ -368,7 +370,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
     , genauigkeit_bis: M.LabelView.design({
           cssClass: 'location unselectable'
-        , isInline: YES
+        , isInline: NO
         , computedValue: {
               valuePattern: '<%= genauigkeitBis %>'
             , operation: function(v) {
@@ -421,6 +423,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	//console.log("'" + v + "'");
                 	var a = M.Date.create(new Number(v));
+                	console.log(a);
                		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('mm.dd.yyyy HH:MM');
                 } else {
                     //return M.I18N.l('gpszeitstempel_von') + ': ' + M.I18N.l('GPSnotactive');
@@ -438,6 +441,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
                 	//console.log("'" + v + "'");
                 	var a = M.Date.create(new Number(v));
+                	console.log(a);
                		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('mm.dd.yyyy HH:MM');
                 } else {
                     //return M.I18N.l('gpszeitstempel_bis') + ': ' + M.I18N.l('GPSnotactive');
