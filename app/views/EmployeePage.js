@@ -56,7 +56,7 @@ DigiWebApp.EmployeePage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.EmployeeController
-                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.saveEmployeeSelection();}
+                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.saveEmployeeSelection();}
                     }
                 }
             })

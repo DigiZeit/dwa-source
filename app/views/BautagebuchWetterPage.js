@@ -36,7 +36,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToBautagebuchBautageberichtDetailsPageTransition();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToBautagebuchBautageberichtDetailsPageTransition();}
                 }
             }
         })
@@ -234,18 +234,14 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				    		switch(v) {
 				    			case 0:
 				    				return M.I18N.l('BautagebuchBewoelkungKlar');
-				    				break;
 					    		case 1:
 				    				return M.I18N.l('BautagebuchBewoelkungMaessig');
-					    			break;
 					    		case 2:
 				    				return M.I18N.l('BautagebuchBewoelkungBedeckt');
-						    		break;
 					    		case 3:
 				    				return M.I18N.l('BautagebuchBewoelkungNeblig');
-					    			break;
 					    		default:
-					    		  return "";
+					    			return "";
 				    		}
 				        }
 				    }
@@ -300,22 +296,16 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				    		switch(v) {
 				    			case 0:
 				    				return M.I18N.l('BautagebuchNiederschlagKein');
-				    				break;
 					    		case 1:
 				    				return M.I18N.l('BautagebuchNiederschlagNiesel');
-					    			break;
 					    		case 2:
 				    				return M.I18N.l('BautagebuchNiederschlagRegen');
-						    		break;
 					    		case 3:
 				    				return M.I18N.l('BautagebuchNiederschlagGraupel');
-					    			break;
 					    		case 4:
 				    				return M.I18N.l('BautagebuchNiederschlagSchnee');
-					    			break;
 					    		case 5:
 				    				return M.I18N.l('BautagebuchNiederschlagHagel');
-					    			break;
 					    		default:
 					    		    return "";
 				    		}
@@ -372,16 +362,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				    		switch(v) {
 				    			case 0:
 				    				return M.I18N.l('BautagebuchWindStill');
-				    				break;
 					    		case 1:
 				    				return M.I18N.l('BautagebuchWindMaessig');
-					    			break;
 					    		case 2:
 				    				return M.I18N.l('BautagebuchWindBoeig');
-						    		break;
 					    		case 3:
 				    				return M.I18N.l('BautagebuchWindStuermisch');
-					    			break;
 					    		default:
 					    		    return "";
 				    		}

@@ -19,7 +19,7 @@ DigiWebApp.SplashViewPage = M.PageView.design({
 						DigiWebApp.ApplicationController.blackBerryRestart_var = setTimeout("DigiWebApp.ApplicationController.blackBerryRestart()", 3000);
 					} else {
 						DigiWebApp.ApplicationController.regSecEv(YES);	
-					};
+					}
 				}
 			}
         }

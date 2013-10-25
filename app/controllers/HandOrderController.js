@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: HandOrderController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.HandOrderController = M.Controller.extend({
 
       currentHandOrderName: ''
@@ -14,11 +14,10 @@ DigiWebApp.HandOrderController = M.Controller.extend({
         var orderName = M.ViewManager.getView('handOrderPage', 'orderName').value;
         orderName = $.trim(orderName);
 
-        if(orderName) {
+        if (orderName) {
             var sameHandOrders = _.select(DigiWebApp.HandOrder.findSorted(), function(ho) {
                 if (ho) return ho.get('name') === orderName;
             });
-
 
             //if(/[^a-zA-Z0-9_-]+/.test(orderName)) {
             //if (/[[^a-zA-Z0-9_-äöüÄÖÜ,. !?;:/\\@€=]]+/.test(orderName)) {
@@ -29,14 +28,14 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                     , message: M.I18N.l('specialCharProblemMsg')
                 });
                 return;
-            } else if(sameHandOrders.length > 0) {
+            } else if (sameHandOrders.length > 0) {
                 //M.DialogView.alert({
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('handOrderExists')
                     , message: M.I18N.l('handOrderExistsMsg')
                 });
                 return;
-            } else if(orderName.length > 16) {
+            } else if (orderName.length > 16) {
                 //M.DialogView.alert({
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('handOrderTooLong')
@@ -59,15 +58,15 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 if (typeof(myLocalStorageString) === "string") {
                 	try {
                 		hIds = JSON.parse(myLocalStorageString);
-                	} catch(e) { console.error(e); }
+                	} catch(e2) { console.error(e2); }
                 } else {
                     // no handorderKeys in localstorage
                 }
                 
                 try {
                     hIds.push(op.m_id);
-                } catch(e) {
-                	console.error("ERROR in " + this.name + ".save: " + e);
+                } catch(e3) {
+                	console.error("ERROR in " + this.name + ".save: " + e3);
                 }
 
                 localStorage.setItem(k, JSON.stringify(hIds));
@@ -75,7 +74,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 /* now save it */
                 op.save();
                 
-                if(op) {
+                if (op) {
                     M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
                     DigiWebApp.SelectionController.useSelections = NO;
                     DigiWebApp.SelectionController.showHandOrderFirst = YES;

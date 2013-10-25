@@ -36,7 +36,7 @@ DigiWebApp.SettingsPasswordPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToDashboardPagePOP'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
 						if (DigiWebApp.SettingsController.featureAvailable('404')) {
 			        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
 						} else {
@@ -87,7 +87,7 @@ DigiWebApp.SettingsPasswordPage = M.PageView.design({
 //            					console.log("\"" + $('#' + DigiWebApp.SettingsPasswordPage.content.passwordGrid.passwordInput.id).val() + "\"");
 //            					console.log("\"" + DigiWebApp.SettingsController.getSetting('settingsPassword') + "\"");
 //            				}
-            				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+            				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
             				if ($('#' + DigiWebApp.SettingsPasswordPage.content.passwordGrid.passwordInput.id).val() === DigiWebApp.SettingsController.getSetting('settingsPassword')) {
             					DigiWebApp.NavigationController.toSettingsPage();
             				} else {

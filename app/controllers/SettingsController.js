@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: SettingsController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.SettingsController = M.Controller.extend({
 
       showCredentialsAlert: NO
@@ -56,7 +56,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , debugDatabaseServer: null
         , mitarbeiterVorname: ""
         , mitarbeiterNachname: ""
+        , mitarbeiterId: "0"
         , auftragsDetailsKoppeln: false
+        , detailierteZeitdaten: true
     }
 
     , defaultsettings: null
@@ -69,7 +71,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	
-        if(that.showCredentialsAlert && !that.credentialsAlertShown) {
+        if (that.showCredentialsAlert && !that.credentialsAlertShown) {
             if (
             	  (    ( M.Environment.getPlatform().substr(0,4) === "iPad"   )
             	    || ( M.Environment.getPlatform().substr(0,6) === "iPhone" )
@@ -136,8 +138,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::Bautagebuch
 
-        
+        //console.log("vor enforceChefToolOnly");
         DigiWebApp.ApplicationController.enforceChefToolOnly();
+        //console.log("nach enforceChefToolOnly");
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();
         // Start::TransitionsAvailable
@@ -236,6 +239,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('remarkIsOptional')
 	                 , isSelected: record.get('remarkIsOptional')
 	            }]
+                , detailierteZeitdaten: [{
+ 	                   value: record.get('detailierteZeitdaten')
+ 	                 , label: M.I18N.l('detailierteZeitdaten')
+ 	                 , isSelected: record.get('detailierteZeitdaten')
+ 	            }]
                 , useTransitionsSetting: [{
                       value: record.get('useTransitionsSetting')
                     , label: M.I18N.l('useTransitionsSetting')
@@ -271,6 +279,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , debugDatabaseServer: record.get('debugDatabaseServer')
                , mitarbeiterVorname: record.get('mitarbeiterVorname')
                , mitarbeiterNachname: record.get('mitarbeiterNachname')
+               , mitarbeiterId: record.get('mitarbeiterId')
 	           , auftragsDetailsKoppeln: [{
 	                   value: record.get('auftragsDetailsKoppeln')
 	                 , label: M.I18N.l('auftragsDetailsKoppeln')
@@ -337,6 +346,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("remarkIsOptional")
 	                , label: M.I18N.l('remarkIsOptional')
 	            }]
+	            , detailierteZeitdaten: [{
+  	                  value: DigiWebApp.SettingsController.defaultsettings.get("detailierteZeitdaten")
+  	                , label: M.I18N.l('detailierteZeitdaten')
+  	            }]
                 , useTransitionsSetting: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("useTransitionsSetting")
                     , label: M.I18N.l('useTransitionsSetting')
@@ -367,6 +380,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            , debugDatabaseServer: DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer')
 	            , mitarbeiterVorname: DigiWebApp.SettingsController.defaultsettings.get('mitarbeiterVorname')
 	            , mitarbeiterNachname: DigiWebApp.SettingsController.defaultsettings.get('mitarbeiterNachname')
+	            , mitarbeiterId: DigiWebApp.SettingsController.defaultsettings.get('mitarbeiterId')
 	            , auftragsDetailsKoppeln: [{
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("auftragsDetailsKoppeln")
 	                , label: M.I18N.l('auftragsDetailsKoppeln')
@@ -388,14 +402,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 					DigiWebApp.BookingController.init(YES);
 				},function(err){console.error(err);}
 				, fileNamesToDelete);
-			}
-			if (true) {
+			};
+			if (false) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
 							fileNamesToDelete.push(fileName);
 							//DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
 						}
@@ -405,9 +419,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			} else {
 				refreshWAIT();
 			}
-		}
+		};
 
-		hideShowSettingsServiceApp = function () {
+		var hideShowSettingsServiceApp = function () {
          	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id).hide();
 //         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
@@ -439,8 +453,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			            		         		}
 			            		         	});
 			            		         	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
-			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory)
-	            		         		} catch(e) {
+			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory);
+	            		         		} catch(e3) {
 	            		         			if (interactWithServiceApp) cleanDataDirectory();
 	            		         		}
 	            		         	} else {
@@ -463,7 +477,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 //	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
 	         	if (interactWithServiceApp) cleanDataDirectory();
 	        }
-	    }
+	    };
         
         if (interactWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417')) {
 	        // check for ServiceApp
@@ -521,6 +535,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	}
         }
 
+        var detailierteZeitdaten         = $('#' + M.ViewManager.getView('settingsPage', 'detailierteZeitdaten').id            + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+
         var GPSDataIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'GPSDataIsMandatory') !== null) {
         	GPSDataIsMandatory = $('#' + M.ViewManager.getView('settingsPage', 'GPSDataIsMandatory').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
@@ -560,12 +576,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
 
         var debugDatabaseServer              = DigiWebApp.SettingsController.getSetting('debugDatabaseServer');
-        var mitarbeiterVorname               = DigiWebApp.SettingsController.getSetting('mitarbeiterVorname')
-        var mitarbeiterNachname              = DigiWebApp.SettingsController.getSetting('mitarbeiterNachname')
+        var mitarbeiterVorname               = DigiWebApp.SettingsController.getSetting('mitarbeiterVorname');
+        var mitarbeiterNachname              = DigiWebApp.SettingsController.getSetting('mitarbeiterNachname');
+        var mitarbeiterId                    = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
         var auftragsDetailsKoppeln			 = $('#' + M.ViewManager.getView('settingsPage', 'auftragsDetailsKoppeln').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var numberRegex = /^[0-9]+$/;
-        if(company) {
+        if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -575,7 +592,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 return;
             }
         }
-        if(workerId) {
+        if (workerId) {
             if(!numberRegex.test(workerId)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -585,7 +602,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 return;
             }
         }
-        if(daysToHoldBookingsOnDevice) {
+        if (daysToHoldBookingsOnDevice) {
             if(!numberRegex.test(daysToHoldBookingsOnDevice)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('inputError')
@@ -653,6 +670,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                                     record.set('remarkIsMandatory', remarkIsMandatory);
                                                     record.set('remarkIsOptional', remarkIsOptional);
+                                                    record.set('detailierteZeitdaten', detailierteZeitdaten);
                                                     record.set('useTransitionsSetting', useTransitionsSetting);
                                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                                     record.set('branding', branding);
@@ -668,6 +686,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('debugDatabaseServer', debugDatabaseServer);
                                                     record.set('mitarbeiterVorname', mitarbeiterVorname);
                                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
+                                                    record.set('mitarbeiterId', mitarbeiterId);
                                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
 
                                                     /* now save */
@@ -724,6 +743,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                     record.set('remarkIsMandatory', remarkIsMandatory);
                                     record.set('remarkIsOptional', remarkIsOptional);
+                                    record.set('detailierteZeitdaten', detailierteZeitdaten);
                                     record.set('useTransitionsSetting', useTransitionsSetting);
                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                     record.set('branding', branding);
@@ -739,6 +759,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('debugDatabaseServer', debugDatabaseServer);
                                     record.set('mitarbeiterVorname', mitarbeiterVorname);
                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
+                                    record.set('mitarbeiterId', mitarbeiterId);
                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
 
                                     /* now save */
@@ -746,7 +767,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     DigiWebApp.SettingsController.saveSettings(record, YES);
                             		DigiWebApp.SettingsController.saveDone = YES;
                                 }
-                            } else if(isNew) {
+                            } else if (isNew) {
                             	record.set('debug', debug);
                             	record.set('treatAllAsTablet', treatAllAsTablet);
                             	record.set('treatAllAsPhone', treatAllAsPhone);
@@ -769,6 +790,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                 record.set('remarkIsMandatory', remarkIsMandatory);
                                 record.set('remarkIsOptional', remarkIsOptional);
+                                record.set('detailierteZeitdaten', detailierteZeitdaten);
                                 record.set('useTransitionsSetting', useTransitionsSetting);
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
@@ -784,6 +806,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('debugDatabaseServer', debugDatabaseServer);
                                 record.set('mitarbeiterVorname', mitarbeiterVorname);
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
+                                record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
 
                                 /* now save */
@@ -814,6 +837,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                 record.set('remarkIsMandatory', remarkIsMandatory);
                                 record.set('remarkIsOptional', remarkIsOptional);
+                                record.set('detailierteZeitdaten', detailierteZeitdaten);
                                 record.set('useTransitionsSetting', useTransitionsSetting);
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
@@ -829,6 +853,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('debugDatabaseServer', debugDatabaseServer);
                                 record.set('mitarbeiterVorname', mitarbeiterVorname);
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
+                                record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
 
                                 /* now save */
@@ -861,6 +886,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , bautagebuchLimit_autoStartUhrzeit: bautagebuchLimit_autoStartUhrzeit
                                 , remarkIsMandatory: remarkIsMandatory
                                 , remarkIsOptional: remarkIsOptional
+                                , detailierteZeitdaten: detailierteZeitdaten
                                 , useTransitionsSetting: useTransitionsSetting
                                 , datatransfer_min_delay: datatransfer_min_delay
                                 , branding: branding
@@ -876,6 +902,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , debugDatabaseServer: debugDatabaseServer
                                 , mitarbeiterVorname: mitarbeiterVorname
                                 , mitarbeiterNachname: mitarbeiterNachname
+                                , mitarbeiterId: mitarbeiterId
                                 , auftragsDetailsKoppeln: auftragsDetailsKoppeln
 
                           });
@@ -900,7 +927,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     , saveSettings: function(record, reloadApplication, silent, superSilent) {
 
         /* clear the LS if its a reload */
-        if(reloadApplication) {
+        if (reloadApplication) {
 			DigiWebApp.ApplicationController.deleteAllData(); 
         	DigiWebApp.BookingController.currentBooking = null;
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
@@ -910,12 +937,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	}
         }
 
-        if(record.save()) {
+        if (record.save()) {
         	DigiWebApp.SettingsController.mitarbeiterNameVorname = "";
         	//console.log("record saved");
         	//console.log(record);
         	if (!superSilent) {
-	            if(!reloadApplication) {
+	            if (!reloadApplication) {
 	                // switch back to dashboard
 	            	if (silent) {
 	                    if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
@@ -981,7 +1008,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		try {
         			propvalue = DigiWebApp.SettingsController.defaultsettings_object[prop];
         			setting.set(prop, propvalue);
-        		} catch(e) { console.error("ERROR: setting.get for prop=" + prop); }
+        		} catch(e4) { console.error("ERROR: setting.get for prop=" + prop); }
         	}
             return propvalue;
         }
@@ -992,7 +1019,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-    		} catch(e) { console.error("ERROR: setting.set for prop=" + prop); }
+    		} catch(e5) { console.error("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES, YES);
@@ -1029,22 +1056,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	DigiWebApp.Anwesenheitsliste.find({urlParams:{},callbacks: {success: { action: function(records) {
         		try { 
         			_.each(records, function(record) {
-        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e) { console.error(e); }
+        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e6) { console.error(e6); }
         			}); 
         			if (callback) {
         				callback();
         			}
-        		} catch(e) { console.error(e); }
+        		} catch(e7) { console.error(e7); }
         	}}, error: { action: function(){}}}});
-        } catch(e) { console.error(e); }
+        } catch(e8) { console.error(e8); }
 	}
 
     , sendConfiguration: function() {
     	//alert("in sendConfiguration");
         var settings = DigiWebApp.Settings.find();    		
     	//alert("typeof(settings)=" + typeof(settings));
-    	var MitarbeiterWebAppID = "0"
-    	try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
+    	//var MitarbeiterWebAppID = "0";
+    	//try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
     	//alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
         DigiWebApp.RequestController.sendConfiguration({
               settings: settings
@@ -1061,12 +1088,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		        		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
 		        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
 		        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+		        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
 		        		} else {
 		        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
 		        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
+		        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
 		        		}
 		        	}, function(error) {
-		        		console.error(error)
+		        		console.error(error);
 		        	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
         		}
             }

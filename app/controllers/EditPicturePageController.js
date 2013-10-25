@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: EditPicturePageController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.EditPicturePageController = M.Controller.extend({
 
   // MediaFile das bearbeitet werden soll
@@ -24,11 +24,11 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
   , deleteMediaFileFromLocalStorage: function() {
 	  var that = this;
-	  var myMediaFile = DigiWebApp.EditPicturePageController.myMediaFile;
+	  var myMediaFile = that.myMediaFile;
 	  //console.log(myMediaFile);
 	  try {
 		  myMediaFile.del();
-	  } catch(e) { console.error(e); }
+	  } catch(e2) { console.error(e2); }
 	  DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	  DigiWebApp.NavigationController.backToMediaListPageTransition();
   }
@@ -36,7 +36,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   , init: function(isFirstLoad) {
 	  var that = this;
 		
-      if(isFirstLoad) {
+      if (isFirstLoad) {
           /* do something here, when page is loaded the first time. */
       }
 
@@ -77,7 +77,6 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       var orderId    = that.myMediaFile.get('orderId');
       var positionId = that.myMediaFile.get('positionId');
       var activityId = that.myMediaFile.get('activityId');
-
       
       /**
        * ORDERS
@@ -124,9 +123,9 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
        */
       var positionArray = _.map(positions, function(pos) {
     	if (pos) {
-          if(pos.get('orderId') === orderId) {
+          if (pos.get('orderId') === orderId) {
           	var obj = null;
-              if(pos.get('id') === positionId) {
+              if (pos.get('id') === positionId) {
                   obj = { label: pos.get('name'), value: pos.get('id'), isSelected: YES };
               } else {
                   obj = { label: pos.get('name'), value: pos.get('id') };
@@ -151,7 +150,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       var itemSelected = NO;
 
       /* if a workplan exists, only use those activities that are in the workplan */
-      if(workPlans.length > 0) {
+      if (workPlans.length > 0) {
           activities = this.getActivitiesFromWorkplan(workPlans[0]);
       } else {
           activities = DigiWebApp.EditPicturePageController.getActivities();
@@ -186,7 +185,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
   , setPositions: function() {
       var orderId = M.ViewManager.getView('editPicturePage', 'order').getSelection(YES).value;
-      if(!orderId) {
+      if (!orderId) {
           return;
       }
 //      M.ViewManager.getView('editPicturePage', 'position').removeSelection(); /* to avoid bug of not setting selected... */
@@ -195,7 +194,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       var i = 0;
       positions = _.map(positions, function(pos) {
     	  if (pos) {
-	          if(pos.get('orderId') === orderId) {
+	          if (pos.get('orderId') === orderId) {
 	              var obj = { label: pos.get('name'), value: pos.get('id') };
 	              if(i === 0) {
 	                  obj.isSelected = YES;
@@ -208,10 +207,9 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       });
       positions = _.compact(positions);/* remove falsy values from positions with _.compact() */
 
-      if(positions.length < 1) {
+      if (positions.length < 1) {
           positions.push({label: M.I18N.l('noData'), value: '0'});
       }
-
 
       M.ViewManager.getView('editPicturePage', 'position').resetSelection();
       this.set('positions', positions);
@@ -224,7 +222,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   , setActivities: function(checkForWorkPlan) {
       var posId = null;
 
-      if(checkForWorkPlan) {
+      if (checkForWorkPlan) {
           var posObj = M.ViewManager.getView('editPicturePage', 'position').getSelection(YES);
           if(posObj) {
               posId = posObj.value;
@@ -283,7 +281,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       activities = _.compact(activities);
 
       // new to show this when closing day is pressed (corresponds to a reset)
-      if(activities.length > 0) {
+      if (activities.length > 0) {
           activities.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:NO});
       } else {
           activities.push({label: M.I18N.l('noData'), value: '0'});
@@ -307,7 +305,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
      // create order selection
      var orderArray = [];
-     if(orders){
+     if (orders) {
          orderArray = _.map(orders, function(order) {
              if (order) return { label: order.get('name'), value: order.get('id') };
          });
@@ -321,7 +319,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
      // create position selection
      var positionArray = [];
-     if(positions){
+     if (positions) {
          positionArray = _.map(positions, function(pos) {
              if (pos) return { label: pos.get('name'), value: pos.get('id') };
          });
@@ -333,7 +331,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       * ACTIVITIES
       */
      var activityArray = [];
-     if(activities){
+     if (activities) {
           activityArray = _.map(activities, function(act) {
           	if ( typeof(act) === "undefined" ) {
           		console.log("UNDEFINED ACTIVITY");
@@ -366,7 +364,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   , isPositionSelected: function() {
       // implemented adjustment to M.SeletionListView to return null if no item is available
       var posObj = M.ViewManager.getView('editPicturePage', 'position').getSelection(YES);
-      if(posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
+      if (posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
           return YES;
       } else {
           return NO;
@@ -375,7 +373,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
   , isActivitySelected: function() {
       var actObj = M.ViewManager.getView('editPicturePage', 'activity').getSelection(YES);
-      if(actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
+      if (actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
           return YES;
       } else {
           return NO;
@@ -417,8 +415,8 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   , getActivitiesFromWorkplan: function(workplan) {
       var actIds = workplan.get('activityIds').split(',');
       var activities = [];
-      if(actIds && actIds.length > 0) {
-          for(var i = 0; i < actIds.length; i++) {
+      if (actIds && actIds.length > 0) {
+          for (var i = 0; i < actIds.length; i++) {
               activities.push(_.first(DigiWebApp.Activity.find({ query: {
                     identifier: 'id' 
                   , operator: '=' 
@@ -449,7 +447,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       			}
           	}
           });
-      };
+      }
       activities = _.compact(activities);
       return activities;
   }
@@ -469,7 +467,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 
 	    var handOrderId = null;
 	    var handOrderName = null;
-	    if(DigiWebApp.BookingController.isHandOrder(orderId)) {
+	    if (DigiWebApp.BookingController.isHandOrder(orderId)) {
 			handOrderId = orderId;
 			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 			    if (ord) return ord.get('id') === orderId || ord.get('name') === orderId;

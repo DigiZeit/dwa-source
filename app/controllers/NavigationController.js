@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: NavigationController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.NavigationController = M.Controller.extend({
 
 	  toSplashViewPage: function() {
@@ -27,7 +27,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -39,14 +39,14 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e2) { console.error(e2); }
     	}
     }
 
     , backToBookTimePagePOP: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -58,14 +58,14 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.POP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e2) { console.error(e2); }
     	}
     }
 
     , toBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -84,7 +84,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePageTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -96,14 +96,14 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, NO);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e3) { console.error(e3); }
     	}
     }
 
     , toBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -115,14 +115,14 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.FLIP, YES);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e4) { console.error(e4); }
     	}
     }
 
     , backToBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
     		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
     		DigiWebApp.NavigationController.toSplashViewPage();
     		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
@@ -134,7 +134,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			} else {
     				DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.FLIP, NO);
     			}
-    		} catch(e) { console.error(e); }
+    		} catch(e5) { console.error(e5); }
     	}
     }
 

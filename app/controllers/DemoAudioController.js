@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: AudioController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.DemoAudioController = M.Controller.extend({
 
 	/*
@@ -24,7 +24,7 @@ DigiWebApp.DemoAudioController = M.Controller.extend({
     , init: function(isFirstLoad) {
     	if (DigiWebApp.SettingsController.globalDebugMode) console.log('init');
     	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
-		if(isFirstLoad) {
+		if (isFirstLoad) {
             /* do something here, when page is loaded the first time. */
         }
         /* do something, for any other load. */
@@ -61,7 +61,7 @@ DigiWebApp.DemoAudioController = M.Controller.extend({
     , onSuccess: function() {
     	if (DigiWebApp.SettingsController.globalDebugMode) console.log('onSuccess');
     	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
-		switch(this.myState) {
+		switch (this.myState) {
 			case 'play':
 				
 				// rewire audioIcon for stopPlayback

@@ -426,4 +426,20 @@ M.I18N.de_de = {
 	, showInMapScholpp: "Sie werden weitergeleitet auf einen unabhängigen Kartendienst. Dies dient ausschließlich Ihrer Information und hat keinerlei Relevanz für Ihre Lohn- oder Reisekostenabrechnung."
 	, auftragsDetailsKoppeln: "Buchungsauswahl an Auftragsinfo koppeln" 
 	
+	, keepCredentials: "Zugangsdaten erhalten?"
+	, keepCredentialsMsg: "Sollen die Zugangsdaten erhalten bleiben?"
+		
+	, detailierteZeitdaten: "detailierte Zeitdaten"
+	, latitude_von: "Von-Breitengrad"
+	, longitude_von: "Von-Längengrad"
+	, latitude_bis: "Bis-Breitengrad"
+	, longitude_bis: "Bis-Längengrad"
+	, erfassungsverfahren_von: "Von-Ermittungsverfahren"
+	, erfassungsverfahren_bis: "Bis-Ermittungsverfahren"
+	, gpszeitstempel_von: "Von-GPS-Zeitstempel"
+	, gpszeitstempel_bis: "Bis-GPS-Zeitstempel"
+	, vonKoordinate: "Von-Koord."
+	, bisKoordinate: "Bis-Koord."
+	, genauigkeit: "Genauigkeit"
+
 };

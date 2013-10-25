@@ -47,6 +47,22 @@ DigiWebApp.SentBooking = M.Model.create({
 
     })
 
+    , startTimeString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , endeTimeString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , startDateString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , endeDateString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , latitude: M.Model.attr('String', {
         isRequired:NO
     })

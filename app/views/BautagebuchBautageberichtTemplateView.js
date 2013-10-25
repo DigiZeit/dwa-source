@@ -15,6 +15,7 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
     , events: {
         tap: {
 			action: function(id, m_id) {
+				//console.log("tap");
 			    var view = M.ViewManager.getViewById(id);
 			    var view_modelId = view.modelId;
 			    _.each(DigiWebApp.BautagebuchBautageberichteListeController.items, function(selectedItem) {

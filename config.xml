@@ -3,7 +3,7 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
 	versionCode = "4406"
-	version 	= "1.6.1.4406">
+	version 	= "1.7.0.4406">
 
 	<name>DIGI-WebApp Beta</name>
 

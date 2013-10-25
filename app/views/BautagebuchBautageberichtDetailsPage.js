@@ -11,7 +11,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-	
+					//alert("pagebeforeshow");
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
 		            var projektleiterArray = _.map(DigiWebApp.BautagebuchMainController.projektleiter, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
@@ -24,7 +24,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		            	}
 		            });
 		            projektleiterArray = _.compact(projektleiterArray);
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("projektleiterList", projektleiterArray)
+		            //console.log(projektleiterArray);
+					DigiWebApp.BautagebuchBautageberichtDetailsController.set("projektleiterList", projektleiterArray);
 
 					// verfügbare Aufträge kopieren und ausgewählten selektieren
 		            var auftraegeArray = _.map(DigiWebApp.BautagebuchMainController.auftraege, function(o) {
@@ -38,7 +39,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		            	}
 		            });
 					auftraegeArray = _.compact(auftraegeArray);
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftraegeList", auftraegeArray)
+					DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftraegeList", auftraegeArray);
 
 					// verfügbare Mitarbeiter kopieren und ausgewählte selektieren
                     var mitarbeiterIds = DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterIds; 
@@ -120,7 +121,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} this.backToBautagebuchBautageberichteListePageTransition();}
+                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToBautagebuchBautageberichteListePageTransition();}
                 }
             }
         })
@@ -134,7 +135,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
 	            tap: {
 	                action: function() {
-            			try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+            			try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
 				  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 								return;
 						}
@@ -187,7 +188,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                       //target: DigiWebApp.BautagebuchBautageberichtDetailsController
                     //, action: 'delete'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
         				DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
         			}
                 }
@@ -604,7 +605,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		                //target: DigiWebApp.BautagebuchBautageberichtDetailsController,
 		                //action: 'save'
 		    			action: function() {
-		    				var that = this;
+		    				//var that = this;
 					    	M.DialogView.actionSheet({
 						          title: M.I18N.l('BautagebuchSaveOrClose')
 						        , cancelButtonValue: M.I18N.l('cancel')

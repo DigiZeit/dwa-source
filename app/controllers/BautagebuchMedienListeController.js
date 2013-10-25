@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMedienListeController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 
 	  items: null
@@ -53,8 +53,8 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  	        , otherButtonValues: [M.I18N.l('library'),M.I18N.l('camera')]
 			    		  	        , otherButtonTags: ["library", "camera"]
 			    		  	        , callbacks: {
-			    		  				  other: {action: function(buttonTag) {
-			    		  	  			    switch(buttonTag) {
+			    		  				  other: {action: function(buttonTag2) {
+			    		  	  			    switch(buttonTag2) {
 			    		  		    		        case 'library':
 			    		  		    		        	
 			    		  		    		        	// unterscheiden: auf Gerät oder im Browser?
@@ -76,9 +76,8 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  	    		        					  DigiWebApp.NavigationController.toBautagebuchMedienDetailsPageTransition();
 			    		  	    		        				}
 			    		  	    		        				, function(err) {
-		    		  	    		        				    	var that = DigiWebApp.BautagebuchMedienDetailsController;
-			    		  				    		        		that.set("data", null);
-			    		  				    		        		that.set("fileType", null);
+			    		  				    		        		DigiWebApp.BautagebuchMedienDetailsController.set("data", null);
+			    		  				    		        		DigiWebApp.BautagebuchMedienDetailsController.set("fileType", null);
 			    		  				    		        		DigiWebApp.ApplicationController.nativeAlertDialogView({
 			    		  					    		                title: M.I18N.l('error')
 			    		  					    		              , message: M.I18N.l('noPicLoaded') + ": " + err
@@ -100,10 +99,9 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  		    		        	
 			    		  			    		        	// im Browser:
 			    		  			    		        	DigiWebApp.FileChooserPage.set("successCallback", function(imgData, fileName) {
-	    		  	    		        				    	var that = DigiWebApp.BautagebuchMedienDetailsController;
 			    		  				    		        	if (imgData !== null) {
 		    		  	    		        				          var image = document.getElementById(DigiWebApp.BautagebuchMedienDetailsPage.content.image.id);
-		    		  					    		        		  that.set("loadedFileName", fileName);
+		    		  					    		        		  DigiWebApp.BautagebuchMedienDetailsController.set("loadedFileName", fileName);
 		    		  					    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.CONSTImageFiletype;
 		    		  					    		        		  var tmp = fileName;
 		    		  					    		        		  var i = 0;

@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: RequestController
 // ==========================================================================
-
+// manuell var-checked
 DigiWebApp.RequestController = M.Controller.extend({
 
 	  GatewayServer: 'www.digi-gps.de'
@@ -86,7 +86,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log(device.uuid);
                 return 'http://' + DigiWebApp.RequestController.DatabaseServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/' ;
             }
-        } catch(e) {
+        } catch(e1) {
             return '/Handy2WebServices/services/DatenTransfer/';
         }
 
@@ -148,7 +148,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 		    		DigiWebApp.RequestController.DatabaseServer = data['return'];
 		    	} else {
 		    		console.log("FALLBACK: empty DatabaseServer --> falling back to GatewayServer"); 
-		    		DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayServer
+		    		DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayServer;
 		    	}
 		    	DigiWebApp.RequestController.DatabaseServerTimestamp = new Date().getTime();
 		    	if (typeof(device) === "undefined") {
@@ -207,8 +207,11 @@ DigiWebApp.RequestController = M.Controller.extend({
 				}
             }
             , onError: function(xhr, err) {
+            	//writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
+            	//writeToLog(xhr);
+            	trackError("Error in getDatabaseServer: " + err + "\nXHR: " + JSON.stringify(xhr));
             	//alert("Error in getDatabaseServer: " + err.message);
-            	console.error("Error in getDatabaseServer: " + err);
+            	//console.error("Error in getDatabaseServer: " + err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
 			}
@@ -437,7 +440,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      *
      * @param {Array|Object} settings: The settings to be sent
      */
-    , buildDataBodyConfiguration: function(settings) {
+    , buildDataBodyConfiguration: function(mysettings) {
         var dataStr = '';
         var soapData = '   <tran:konfigurationHandy>\n' +
             '       <xsd:keyId><keyId></xsd:keyId>\n' +
@@ -447,15 +450,18 @@ DigiWebApp.RequestController = M.Controller.extend({
             '       <xsd:timestamp><timestamp></xsd:timestamp>\n' +
             '   </tran:konfigurationHandy>\n';
     
-        if(typeof(settings) === 'object' && !_.isArray(settings)) {
-            settings = [settings];  // if an object was passed, push it into an array, to have one behaviour
+        var settings;
+        if (typeof(mysettings) === 'object' && !_.isArray(mysettings)) {
+            settings = [mysettings];  // if an object was passed, push it into an array, to have one behaviour
+        } else {
+        	settings = mysettings;
         }
 
         var now_as_timestamp = +new Date();
-        if(_.isArray(settings)) {
-            for(var i in settings) {
+        if (_.isArray(settings)) {
+            for (var i in settings) {
                 var setting = settings[i];
-                for(var prop in setting.record) {
+                for (var prop in setting.record) {
 	                var s = soapData;
                     if(prop === '_createdAt' || prop === '_updatedAt') { continue; }
                     s = s.replace(new RegExp('<keyId>'), prop);
@@ -512,7 +518,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                         , contentType: 'text/xml; charset=UTF-8'
                         , dataType: 'xml'
                         , beforeSend: function(xhr) {
-                            if(obj.loaderText) {
+                            if (obj.loaderText) {
                                 DigiWebApp.ApplicationController.DigiLoaderView.show(obj.loaderText);
                             } else {
                                 DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('sendConfigurationMsg'));
@@ -526,7 +532,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                                 "text/xml;charset=UTF-8"
                             );
                         }
-                        , onSuccess: function(data, msg, xhr) { // success callback of sendConfiguration
+                        , onSuccess: function(data2, msg, xhr) { // success callback of sendConfiguration
                         	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of sendConfiguration");
                             that.endSession({
                                   success: {// success callback of endSession
@@ -534,7 +540,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                                     , action: function() {
 			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        this.bindToCaller(this, this.handleSuccessCallback, [data, msg, xhr, null, null, 'sendConfiguration'])();
+                                        this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
                                     }
                                 }
@@ -543,7 +549,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                                     , action: function() {
 			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        this.bindToCaller(this, this.handleSuccessCallback, [data, msg, xhr, null, null, 'sendConfiguration'])();
+                                        this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
                                     }
                                 }
@@ -848,7 +854,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , handleSuccessCallback: function(data, msg, xhr, workPlanTransform, kolonneTransform, source) {
         var d = null;
-        if(!workPlanTransform && !kolonneTransform) {
+        if (!workPlanTransform && !kolonneTransform) {
             d = this.transformResultToJson(data);
         } else {
             if(workPlanTransform) {
@@ -888,10 +894,10 @@ DigiWebApp.RequestController = M.Controller.extend({
      * @param source
      */
     , saveCallbacks: function(success, error, source) {
-        if(success) {
+        if (success) {
             this.successCallback[source] = success;
         }
-        if(error) {
+        if (error) {
             this.errorCallback[source] = error;
         }
     }
@@ -938,7 +944,7 @@ DigiWebApp.RequestController = M.Controller.extend({
         		var arbeitsplanId = el.childNodes[0].childNodes[0].nodeValue;
         		var arbeitsplanTyp = el.childNodes[1].childNodes[0].nodeValue;
 
-        		for (j=2;j<anzahlPositionen + 2;j++) {
+        		for (var j=2; j<anzahlPositionen + 2; j++) {
         			//console.log(el.childNodes[j].childNodes[0].nodeValue + " = " + el.childNodes[j+anzahlPositionen].childNodes[0].nodeValue);	
         			var positionTaetigkeit = el.childNodes[j].childNodes[0].nodeValue;
         			var tateigkeitId = el.childNodes[j+anzahlPositionen].childNodes[0].nodeValue;
@@ -958,25 +964,25 @@ DigiWebApp.RequestController = M.Controller.extend({
 	            function(i, el) {
 	                var obj = {};
 	                $(el).find('[localName$="arbeitsplanId"]').each(
-	                    function(i, el) {
-	                        obj.arbeitsplanId = $(el).text();
+	                    function(r, el2) {
+	                        obj.arbeitsplanId = $(el2).text();
 	                    }
 	                );
 	                $(el).find('[localName$="arbeitsplanTyp"]').each(
-	                    function(i, el) {
-	                        obj.arbeitsplanTyp = $(el).text();
+	                    function(r, el2) {
+	                        obj.arbeitsplanTyp = $(el2).text();
 	                    }
 	                );
 	                obj.positionen = [];
 	                $(el).find('[localName$="positionTaetigkeit"]').each(
-	                    function(i, el) {
-	                        obj.positionen.push($(el).text());
+	                    function(r, el2) {
+	                        obj.positionen.push($(el2).text());
 	                    }
 	                );
 	                obj.taetigkeitsIds = [];
 	                $(el).find('[localName$="tateigkeitId"]').each(
-	                    function(i, el) {
-	                        obj.taetigkeitsIds.push($(el).text());
+	                    function(r, el2) {
+	                        obj.taetigkeitsIds.push($(el2).text());
 	                    }
 	                );
 	                response['return'].push(obj);
@@ -1014,7 +1020,7 @@ DigiWebApp.RequestController = M.Controller.extend({
         		var anzahlMitarbeiter = (el.childNodes.length -1) / 2;
         		var kolonnenId = el.childNodes[0].childNodes[0].nodeValue;
 
-        		for (j=1;j<=anzahlMitarbeiter;j++) {
+        		for (var j=1;j<=anzahlMitarbeiter;j++) {
         			//console.log(el.childNodes[j].childNodes[0].nodeValue + " = " + el.childNodes[j+anzahlMitarbeiter].childNodes[0].nodeValue);	
         			var mitarbeiterId = el.childNodes[j].childNodes[0].nodeValue;
         			var mitarbeiterName = el.childNodes[j+anzahlMitarbeiter].childNodes[0].nodeValue;
@@ -1033,20 +1039,20 @@ DigiWebApp.RequestController = M.Controller.extend({
 	            function(i, el) {
 	                var obj = {};
 	                $(el).find('[nodeName$="kolonnenId"]').each(
-	                    function(i, el) {
-	                        obj.kolonnenId = $(el).text();
+	                    function(r, el2) {
+	                        obj.kolonnenId = $(el2).text();
 	                    }
 	                );
 	                obj.mitarbeiterIds = [];
 	                $(el).find('[nodeName$="mitarbeiterId"]').each(
-	                    function(i, el) {
-	                        obj.mitarbeiterIds.push($(el).text());
+	                    function(r, el2) {
+	                        obj.mitarbeiterIds.push($(el2).text());
 	                    }
 	                );
 	                obj.mitarbeiterName = [];
 	                $(el).find('[nodeName$="mitarbeiterName"]').each(
-	                    function(i, el) {
-	                        obj.mitarbeiterName.push($(el).text());
+	                    function(r, el2) {
+	                        obj.mitarbeiterName.push($(el2).text());
 	                    }
 	                );
 	                response['return'] = obj;
@@ -1060,10 +1066,10 @@ DigiWebApp.RequestController = M.Controller.extend({
             for(var i in response['return'].mitarbeiterIds) {
                 var id = response['return'].mitarbeiterIds[i];
                 employees.push({
-                    kolonnenId: response['return'].kolonnenId,
-                    id: id,
-                    name: response['return'].mitarbeiterName[i]
-                })
+                      kolonnenId: response['return'].kolonnenId
+                    , id: id
+                    , name: response['return'].mitarbeiterName[i]
+                });
             }
 
             response['return'] = employees;

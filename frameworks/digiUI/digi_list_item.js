@@ -132,7 +132,7 @@ M.DigiListItemView = M.View.extend(
                 target: this.parentView,
                 action: 'setActiveListItem'
             }
-        }
+        };
         this.bindToCaller(this, M.View.registerEvents)();
     },
 

@@ -30,7 +30,7 @@ DigiWebApp.BookingPage = M.PageView.design({
         		if (DigiWebApp.SettingsController.featureAvailable('415')) {
         			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).show(); 			
         		} else {
-        			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide()
+        			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide();
         		}
         	}
         }
@@ -97,7 +97,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                     }
 	                , tap: {
 	    				action: function() {
-	                		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+	                		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
 		  				}
 	                }
                 }
@@ -122,7 +122,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 }
 	            , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
 	  				}
 	            }
             }
@@ -147,7 +147,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 }
 	            , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
 	  				}
 	            }
             }
