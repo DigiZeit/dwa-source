@@ -403,7 +403,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				},function(err){console.error(err);}
 				, fileNamesToDelete);
 			};
-			if (true) {
+			if (false) {
 				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
 					fileNamesToDelete = [];

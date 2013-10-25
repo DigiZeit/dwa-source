@@ -401,7 +401,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
                             		    	 var myArr = fileEntry.fullPath.split("/");
                         					 result.push(myArr[myArr.length - 1]);
                         				 });
-                            		     if (DigiWebApp.SettingsController.getSetting("debug")) console.log("listDirectory result", result);
+                            		     //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("listDirectory result", result);
                         				 successCallback(result);
 //                        			 } else {
 //                        				 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("results", results);
@@ -446,7 +446,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
-				   console.log("this.available", this.available);
+				   console.log("this.available = " + this.available);
 				   errorCallback();
 			   }
 	    };
@@ -463,7 +463,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Success");
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("getBookings Error");
 				   errorCallback();
 			   }
@@ -482,7 +482,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Success");
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 				   //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteFilesInServiceApp Error");
 				   errorCallback();
 			   }
@@ -496,7 +496,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in pollBookings");
 		var internalErrorCallback = function() {				   
-			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 			errorCallback();
 		}
 
@@ -530,7 +530,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 				   errorCallback();
 			   }
 	    };
@@ -549,7 +549,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 				   errorCallback();
 			   }
 	    };
@@ -566,7 +566,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Success");
 				   successCallback(data);
 			   } else {
-				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available", this.available);
+				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 				   if (DigiWebApp.SettingsController.getSetting("debug")) console.log("deleteBookings Error");
 				   errorCallback();
 			   }
