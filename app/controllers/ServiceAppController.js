@@ -443,6 +443,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			   if (this.available) {
 				   successCallback(data);
 			   } else {
+				   console.log("this.available", this.available);
 				   errorCallback();
 			   }
 	    };
