@@ -569,7 +569,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 	
 	, fixToobarsIntervalVar: null
+	
 	, devicereadyhandler: function() {
+		try {
+			DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+				DigiWebApp.ApplicationController.realDeviceReadyHandler();
+			}, function(){
+				DigiWebApp.ApplicationController.realDeviceReadyHandler();
+			});
+		} catch (exDeleteFiles) {
+			DigiWebApp.ApplicationController.realDeviceReadyHandler();
+		}
+	}
+	
+	, realDeviceReadyHandler: function() {
 		
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
