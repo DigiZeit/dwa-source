@@ -324,18 +324,31 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
         M.I18N.defaultLanguage = "de_de";
 
-		if(isFirstLoad) {
+		if (isFirstLoad) {
 			
 			var that = this;
 
             var img2 = M.ViewManager.getView('infoPage', 'logo');    // info page logo
 
+            that.clickCounter = 0;
             $('#'+ img2.id).bind('touchstart', function(ev) {
-                if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) that.showConfirmDialog();
+                if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) {
+                	that.clickCounter++;
+                	if (that.clickCounter > that.clickLimit) {
+                		that.clickCounter = 0;
+                		that.showConfirmDialog();
+                	}
+                }
             });
 
             $('#'+ img2.id).bind('mousedown', function(ev) {
-            	if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) that.showConfirmDialog();
+            	if (DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000)) {
+            		that.clickCounter++;
+                	if (that.clickCounter > that.clickLimit) {
+                		that.clickCounter = 0;
+                		that.showConfirmDialog();
+                	}
+            	}
             });
 
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
