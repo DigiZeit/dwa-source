@@ -409,7 +409,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
 							fileNamesToDelete.push(fileName);
 							//DigiWebApp.ServiceAppController.deleteFile(fileName, function(){}, function(){});
 						}

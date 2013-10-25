@@ -571,11 +571,28 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, devicereadyhandler: function() {
+        DigiWebApp.SettingsController.init(YES,YES);
+        
+        if (DigiWebApp.SettingsController.getSetting('debug')) { 
+        	DigiWebApp.SettingsController.globalDebugMode = YES; 
+        } else {
+        	DigiWebApp.SettingsController.globalDebugMode = NO; 
+        }
 		try {
-			DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-				DigiWebApp.ApplicationController.realDeviceReadyHandler();
-			}, function(){
-				DigiWebApp.ApplicationController.realDeviceReadyHandler();
+			var fileNamesToDelete = [];
+			DigiWebApp.ServiceAppController.listDirectory(function(results) {
+				fileNamesToDelete = [];
+				_.each(results, function(fileName) {
+					if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
+						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+						fileNamesToDelete.push(fileName);
+					}
+				});
+				DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+					DigiWebApp.ApplicationController.realDeviceReadyHandler();
+				}, function(){
+					DigiWebApp.ApplicationController.realDeviceReadyHandler();
+				});
 			});
 		} catch (exDeleteFiles) {
 			DigiWebApp.ApplicationController.realDeviceReadyHandler();
