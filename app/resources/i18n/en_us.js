@@ -438,8 +438,8 @@ M.I18N.en_us = {
 	, erfassungsverfahren_bis: "To-Discoverytype"
 	, gpszeitstempel_von: "From-GPS-Timestamp"
 	, gpszeitstempel_bis: "To-GPS-Timestamp"
-	, vonKoordinate: "From-Coordinate"
-	, bisKoordinate: "To-Coordinate"
+	, vonKoordinate: "From-Coord."
+	, bisKoordinate: "To-Coord."
 	, genauigkeit: "Precision"
 
 };

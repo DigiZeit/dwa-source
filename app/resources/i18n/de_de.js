@@ -438,8 +438,8 @@ M.I18N.de_de = {
 	, erfassungsverfahren_bis: "Bis-Ermittungsverfahren"
 	, gpszeitstempel_von: "Von-GPS-Zeitstempel"
 	, gpszeitstempel_bis: "Bis-GPS-Zeitstempel"
-	, vonKoordinate: "Von-Koordinate"
-	, bisKoordinate: "Bis-Koordinate"
+	, vonKoordinate: "Von-Koord."
+	, bisKoordinate: "Bis-Koord."
 	, genauigkeit: "Genauigkeit"
 
 };
