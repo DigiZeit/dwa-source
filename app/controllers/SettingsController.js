@@ -58,6 +58,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , mitarbeiterNachname: ""
         , mitarbeiterId: "0"
         , auftragsDetailsKoppeln: false
+        , detailierteZeitdaten: true
     }
 
     , defaultsettings: null
@@ -238,6 +239,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('remarkIsOptional')
 	                 , isSelected: record.get('remarkIsOptional')
 	            }]
+                , detailierteZeitdaten: [{
+ 	                   value: record.get('detailierteZeitdaten')
+ 	                 , label: M.I18N.l('detailierteZeitdaten')
+ 	                 , isSelected: record.get('detailierteZeitdaten')
+ 	            }]
                 , useTransitionsSetting: [{
                       value: record.get('useTransitionsSetting')
                     , label: M.I18N.l('useTransitionsSetting')
@@ -340,6 +346,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("remarkIsOptional")
 	                , label: M.I18N.l('remarkIsOptional')
 	            }]
+	            , detailierteZeitdaten: [{
+  	                  value: DigiWebApp.SettingsController.defaultsettings.get("detailierteZeitdaten")
+  	                , label: M.I18N.l('detailierteZeitdaten')
+  	            }]
                 , useTransitionsSetting: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("useTransitionsSetting")
                     , label: M.I18N.l('useTransitionsSetting')
@@ -525,6 +535,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	}
         }
 
+        var detailierteZeitdaten         = $('#' + M.ViewManager.getView('settingsPage', 'detailierteZeitdaten').id            + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+
         var GPSDataIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'GPSDataIsMandatory') !== null) {
         	GPSDataIsMandatory = $('#' + M.ViewManager.getView('settingsPage', 'GPSDataIsMandatory').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
@@ -658,6 +670,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                                     record.set('remarkIsMandatory', remarkIsMandatory);
                                                     record.set('remarkIsOptional', remarkIsOptional);
+                                                    record.set('detailierteZeitdaten', detailierteZeitdaten);
                                                     record.set('useTransitionsSetting', useTransitionsSetting);
                                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                                     record.set('branding', branding);
@@ -730,6 +743,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                     record.set('remarkIsMandatory', remarkIsMandatory);
                                     record.set('remarkIsOptional', remarkIsOptional);
+                                    record.set('detailierteZeitdaten', detailierteZeitdaten);
                                     record.set('useTransitionsSetting', useTransitionsSetting);
                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                     record.set('branding', branding);
@@ -776,6 +790,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                 record.set('remarkIsMandatory', remarkIsMandatory);
                                 record.set('remarkIsOptional', remarkIsOptional);
+                                record.set('detailierteZeitdaten', detailierteZeitdaten);
                                 record.set('useTransitionsSetting', useTransitionsSetting);
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
@@ -822,6 +837,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
                                 record.set('remarkIsMandatory', remarkIsMandatory);
                                 record.set('remarkIsOptional', remarkIsOptional);
+                                record.set('detailierteZeitdaten', detailierteZeitdaten);
                                 record.set('useTransitionsSetting', useTransitionsSetting);
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
@@ -870,6 +886,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , bautagebuchLimit_autoStartUhrzeit: bautagebuchLimit_autoStartUhrzeit
                                 , remarkIsMandatory: remarkIsMandatory
                                 , remarkIsOptional: remarkIsOptional
+                                , detailierteZeitdaten: detailierteZeitdaten
                                 , useTransitionsSetting: useTransitionsSetting
                                 , datatransfer_min_delay: datatransfer_min_delay
                                 , branding: branding

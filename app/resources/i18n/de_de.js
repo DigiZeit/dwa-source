@@ -429,4 +429,17 @@ M.I18N.de_de = {
 	, keepCredentials: "Zugangsdaten erhalten?"
 	, keepCredentialsMsg: "Sollen die Zugangsdaten erhalten bleiben?"
 		
+	, detailierteZeitdaten: "detailierte Zeitdaten"
+	, latitude_von: "Von-Breitengrad"
+	, longitude_von: "Von-Längengrad"
+	, latitude_bis: "Bis-Breitengrad"
+	, longitude_bis: "Bis-Längengrad"
+	, erfassungsverfahren_von: "Von-Ermittungsverfahren"
+	, erfassungsverfahren_bis: "Bis-Ermittungsverfahren"
+	, gpszeitstempel_von: "Von-GPS-Zeitstempel"
+	, gpszeitstempel_bis: "Bis-GPS-Zeitstempel"
+	, vonKoordinate: "Von-Koordinate"
+	, bisKoordinate: "Bis-Koordinate"
+	, genauigkeit: "Genauigkeit"
+
 };

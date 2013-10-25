@@ -428,5 +428,18 @@ M.I18N.en_us = {
 
 	, keepCredentials: "Preserve credentials?"
 	, keepCredentialsMsg: "Should the credentials sustain the reset?"
+		
+	, detailierteZeitdaten: "show more details for timedata"
+	, latitude_von: "From-Latitude"
+	, longitude_von: "From-Longitude"
+	, latitude_bis: "To-Breitengrad"
+	, longitude_bis: "To-Längengrad"
+	, erfassungsverfahren_von: "From-Discoverytype"
+	, erfassungsverfahren_bis: "To-Discoverytype"
+	, gpszeitstempel_von: "From-GPS-Timestamp"
+	, gpszeitstempel_bis: "To-GPS-Timestamp"
+	, vonKoordinate: "From-Coordinate"
+	, bisKoordinate: "To-Coordinate"
+	, genauigkeit: "Precision"
 
 };
