@@ -86,6 +86,8 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			 var that = this;
 	    	 this._readFile_Interval_Counter++;
 	    	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this._readFile_Interval_Counter: " + this._readFile_Interval_Counter);
+	    	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.timeout: " + this.timeout);
+	    	 if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this._requestInterval: " + this._requestInterval);
 	         if (this._readFile_Interval_Counter > (this.timeout / this._requestInterval)) { // if ServiceApp-File has not been found --> ServiceApp seems to be unavailable 
 	        	 window.clearInterval(this._readFile_IntervalVar);
 	        	 this._readFile_Interval_Counter = null;
