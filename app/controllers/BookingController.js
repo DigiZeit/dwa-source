@@ -1293,7 +1293,6 @@ DigiWebApp.BookingController = M.Controller.extend({
         		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
         		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
         		var inWinterzeit = !inSommerzeit;
-	        	while 
 	            _.each(bookings, function(booking) {
 	            	var startDate = booking.get('startDateString');
 	            	var startTime = booking.get('startTimeString');
