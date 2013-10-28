@@ -724,7 +724,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 		} catch (e6) {
 	    	timeStart = new Date();
 		}
-    	
+
+		var dateDate = new Date(timeStart.getTime()) + (1000 * 60 * (new Date().getTimezoneOffset() - Number(DigiWebApp.SettingsController.getSetting("currentTimezoneOffset"))));
+        var dateMDate = M.Date.create(dateDate.getTime());
+        var dateString = dateMDate.format('dd.mm.yyyy');
+        var timeString = dateMDate.format('HH:MM');
+
         return DigiWebApp.Booking.createRecord({
               orderId: obj.oId ? obj.oId : null
             , orderName: myOrderName
@@ -752,6 +757,10 @@ DigiWebApp.BookingController = M.Controller.extend({
             , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
             , timeStampStart: timeStart.getTime()
             , timeStampEnd: '0'
+            , startDateString: dateString
+            , endeDateString: ""
+            , startTimeString: timeString
+            , endeTimeString: ""
         });
     }
 
@@ -828,6 +837,10 @@ DigiWebApp.BookingController = M.Controller.extend({
             , timezoneOffset: obj.get('timezoneOffset')
             , timeStampStart: obj.get('timeStampStart')
             , timeStampEnd: obj.get('timeStampEnd')
+            , startDateString: obj.get('startDateString')
+            , endeDateString: obj.get('endeDateString')
+            , startTimeString: obj.get('startTimeString')
+            , endeTimeString: obj.get('endeTimeString')
             , employees: obj.get('employees')
             , isCurrent: false
         });
@@ -911,6 +924,10 @@ DigiWebApp.BookingController = M.Controller.extend({
             , timezoneOffset: obj.get('timezoneOffset')
             , timeStampStart: obj.get('timeStampStart')
             , timeStampEnd: obj.get('timeStampEnd')
+            , startDateString: obj.get('startDateString')
+            , endeDateString: obj.get('endeDateString')
+            , startTimeString: obj.get('startTimeString')
+            , endeTimeString: obj.get('endeTimeString')
             , employees: obj.get('employees')
             , tagLabel: myTagLabel
             , isCurrent: false
@@ -929,9 +946,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	} else {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset'));
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
@@ -969,9 +986,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	} else {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset'));
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
@@ -1023,9 +1040,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        if (bookings.length > 0) {
 		            _.each(bookings, function(booking) {
 		            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-		            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
+		            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 		            	} else {
-		            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset'));
+		            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 		            	}
 		
 		                // set the handOrderId as orderId for correct display in list item view
@@ -1057,9 +1074,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	} else {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset'));
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
@@ -1088,9 +1105,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        if (bookings.length > 0) {
 	            _.each(bookings, function(booking) {
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120');
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	} else {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset'));
+	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + booking.get('startDateString') + ',' + booking.get('startTimeString') + ',' + booking.get('endeDateString') + ',' + booking.get('endeTimeString'));
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view

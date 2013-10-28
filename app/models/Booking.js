@@ -38,13 +38,29 @@ DigiWebApp.Booking = M.Model.create({
     , timeStampStart: M.Model.attr('String', {
         isRequired: NO
     })
-
+    
     , timeStampEnd: M.Model.attr('String', {
         isRequired: NO
     })
 
     , date: M.Model.attr('String', { // is aggregated by the two timestamp values above
 
+    })
+
+    , startTimeString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , endeTimeString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , startDateString: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , endeDateString: M.Model.attr('String', {
+        isRequired: NO
     })
 
     , latitude: M.Model.attr('String', {
@@ -191,6 +207,14 @@ DigiWebApp.Booking = M.Model.create({
 			var timeEnd = new Date();
 	        this.set('timeStampEnd', timeEnd.getTime());
 		}
+
+		var dateDate = new Date(Number(this.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - this.get('timezoneOffset'))));
+        var dateMDate = M.Date.create(dateDate.getTime());
+        var dateString = dateMDate.format('dd.mm.yyyy');
+        var timeString = dateMDate.format('HH:MM');
+        this.set('endeDateString', dateString);
+        this.set('endeTimeString', timeString);
+        		
         if (location) {
         	this.set('latitude_bis',  location.latitude);
         	this.set('longitude_bis', location.longitude);

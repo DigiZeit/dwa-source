@@ -25,6 +25,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= date %>'
             //  value: '01.01.2011, 08:00 - 08:20 Uhr, 0:20 h'
+            // 0: timeStampStart, 1: timeStampEnd, 2: timeZoneOffset, 3: DateStart, 4: TimeStart, 5: DateEnd, 6: TimeEnd
             , operation: function(myV) {
                 var v = myV.split(',');
                 //var date1 = M.Date.create(Number(v[0]));
@@ -58,7 +59,8 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
                     //console.log(date1, date2);
 
                     if (date1.format('mm/dd/yyyy HH:MM') === date2.format('mm/dd/yyyy HH:MM')) { // if booking is closed in the same minute
-                        return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + date2.format('HH:MM') + ' ' + M.I18N.l('oclock') + ', 00:01 h';
+                        //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + date2.format('HH:MM') + ' ' + M.I18N.l('oclock') + ', 00:01 h';
+                    	return v[3] + ', ' + v[4] + ' - ' + v[6] + ' ' + M.I18N.l('oclock') + ', 00:01 h';
                     } else {
                         var timeBetween = date1.timeBetween(date2, M.MINUTES);
                         if (timeBetween < 1) {
@@ -75,12 +77,14 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
                         } else {
                             timeBetween = '00:' + (timeBetween < 10 ? '0' : '') + timeBetween;
                         }
-                        return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + date2.format('HH:MM') + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
+                        //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + date2.format('HH:MM') + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
+                        return v[3] + ', ' + v[4] + ' - ' + v[6] + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
                     }
 
 
                 } else {
-                    return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + M.I18N.l('open');
+                    //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + M.I18N.l('open');
+                	return v[3] + ', ' + v[4] + ' - ' + M.I18N.l('open');
                 }
 
             }
