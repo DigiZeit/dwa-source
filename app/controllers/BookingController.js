@@ -944,6 +944,12 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
 	        var bookings = DigiWebApp.Booking.find();
 	        if (bookings.length > 0) {
+	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+        		var d8Now = new D8();
+        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
+        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
+        		var inWinterzeit = !inSommerzeit;
 	            _.each(bookings, function(booking) {
 	            	var startDate = booking.get('startDateString');
 	            	var startTime = booking.get('startTimeString');
@@ -1030,6 +1036,12 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
 	        var bookings = DigiWebApp.SentBooking.find();
 	        if (bookings.length > 0) {
+	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+        		var d8Now = new D8();
+        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
+        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
+        		var inWinterzeit = !inSommerzeit;
 	            _.each(bookings, function(booking) {
 	            	var startDate = booking.get('startDateString');
 	            	var startTime = booking.get('startTimeString');
@@ -1130,6 +1142,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        	}
 		        });
 		        if (bookings.length > 0) {
+		        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+		        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+	        		var d8Now = new D8();
+	        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
+	        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
+	        		var inWinterzeit = !inSommerzeit;
 		            _.each(bookings, function(booking) {
 		            	var startDate = booking.get('startDateString');
 		            	var startTime = booking.get('startTimeString');
@@ -1210,6 +1228,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	if ( DigiWebApp.BookingController.currentBooking === null ) { return; }
 	        var bookings = [DigiWebApp.BookingController.currentBooking];
 	        if (bookings.length > 0) {
+	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+        		var d8Now = new D8();
+        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
+        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
+        		var inWinterzeit = !inSommerzeit;
 	            _.each(bookings, function(booking) {
 	            	var startDate = booking.get('startDateString');
 	            	var startTime = booking.get('startTimeString');
