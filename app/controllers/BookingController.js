@@ -960,13 +960,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8start = d8start.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8start = d8start.addHours(1);
 	                    	}
@@ -983,13 +983,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8ende = d8ende.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8ende = d8ende.addHours(1);
 	                    	}
@@ -1052,13 +1052,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8start = d8start.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8start = d8start.addHours(1);
 	                    	}
@@ -1075,13 +1075,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8ende = d8ende.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8ende = d8ende.addHours(1);
 	                    	}
@@ -1158,13 +1158,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 		                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
 		                    	// Buchung war in Sommerzeit
-		                    	if (inWinterzeit) {
+		                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 		                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 		                    		d8start = d8start.addHours(-1);
 		                    	}                   	
 		                    } else {
 		                    	// Buchung war in Winterzeit
-		                    	if (inSommerzeit) {
+		                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 		                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 		                    		d8start = d8start.addHours(1);
 		                    	}
@@ -1181,13 +1181,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 		                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 		                    	// Buchung war in Sommerzeit
-		                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+		                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 		                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 		                    		d8ende = d8ende.addHours(-1);
 		                    	}                   	
 		                    } else {
 		                    	// Buchung war in Winterzeit
-		                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+		                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 		                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 		                    		d8ende = d8ende.addHours(1);
 		                    	}
@@ -1267,13 +1267,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8ende = d8ende.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8ende = d8ende.addHours(1);
 	                    	}
@@ -1350,13 +1350,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - booking.get('timezoneOffset')))));
 	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 	                    	// Buchung war in Sommerzeit
-	                    	if (inWinterzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
 	                    		d8ende = d8ende.addHours(-1);
 	                    	}                   	
 	                    } else {
 	                    	// Buchung war in Winterzeit
-	                    	if (inSommerzeit && booking.get("timezone") === "Europe/Berlin") {
+	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
 	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
 	                    		d8ende = d8ende.addHours(1);
 	                    	}
