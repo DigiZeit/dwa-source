@@ -725,7 +725,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	timeStart = new Date();
 		}
 
-		var dateDate = new Date(timeStart.getTime()) + (1000 * 60 * (new Date().getTimezoneOffset() - Number(DigiWebApp.SettingsController.getSetting("currentTimezoneOffset"))));
+		var dateDate = new Date(timeStart.getTime() + (1000 * 60 * (new Date().getTimezoneOffset() - Number(DigiWebApp.SettingsController.getSetting("currentTimezoneOffset"))));
         var dateMDate = M.Date.create(dateDate.getTime());
         var dateString = dateMDate.format('dd.mm.yyyy');
         var timeString = dateMDate.format('HH:MM');
