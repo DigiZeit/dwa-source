@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: StudieChecklisteController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.StudieChecklisteController = M.Controller.extend({
 	
 	  listData: null
@@ -16,7 +16,7 @@ DigiWebApp.StudieChecklisteController = M.Controller.extend({
 	, comboBoxData: null
 			
 	, init: function(isFirstLoad) {
-        if (isFirstLoad) {
+        if(isFirstLoad) {
             /* do something here, when page is loaded the first time. */
         }
         

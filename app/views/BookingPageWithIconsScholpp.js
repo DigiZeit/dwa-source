@@ -23,10 +23,10 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
         		//if (DigiWebApp.SettingsController.featureAvailable('415')) {
         		//	$('#' + DigiWebApp.BookingPageWithIconsScholpp.header.feierabendButton.id).show(); 			
         		//} else {
-        			$('#' + DigiWebApp.BookingPageWithIconsScholpp.header.feierabendButton.id).hide();
+        			$('#' + DigiWebApp.BookingPageWithIconsScholpp.header.feierabendButton.id).hide()
         		//}
         		//$('#' + DigiWebApp.BookingPageWithIconsScholpp.header.feierabendButton.id).addClass("feierabendButton")
-        		$('#' + DigiWebApp.BookingPageWithIconsScholpp.content.activity.id + "_container").hide();
+        		$('#' + DigiWebApp.BookingPageWithIconsScholpp.content.activity.id + "_container").hide()
         		
         		$('#' + DigiWebApp.BookingPageWithIconsScholpp.content.spesenkennzeichen.id).attr('disabled', 'disabled');
         	}
@@ -99,7 +99,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , anchorLocation: M.RIGHT
                     , events: {
                         tap: {
-		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
+		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
                 				DigiWebApp.ScholppBookingController.bucheArbeitsende();
 		        			}
                         }
@@ -109,7 +109,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                       value: 'theme/images/48x48_plain_home.png'
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitsende();
 		          				}
 		                  }
@@ -132,7 +132,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , anchorLocation: M.RIGHT
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					DigiWebApp.ScholppBookingController.bucheUnterbrechung();
 		          				}
 		                  }
@@ -142,7 +142,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                       value: 'theme/images/48x48_plain_clock_pause.png'
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e5){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					DigiWebApp.ScholppBookingController.bucheUnterbrechung();
 		          				}
 		                  }
@@ -165,7 +165,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , anchorLocation: M.RIGHT
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e6){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					//DigiWebApp.ScholppBookingController.buchePause();
 		          				}
 		                  }
@@ -175,7 +175,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                       value: ''
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e7){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					//DigiWebApp.ScholppBookingController.buchePause();
 		          				}
 		                  }
@@ -203,7 +203,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , anchorLocation: M.RIGHT
                   , events: {
                       tap: {
-		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e8){}
+		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
             	  				DigiWebApp.ScholppBookingController.bucheFahrzeit();
               				}
                       }
@@ -213,7 +213,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     value: 'theme/images/48x48_plain_car_compact_grey.png'
                   , events: {
 	                  tap: {
-		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e9){}
+		    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
             	  				DigiWebApp.ScholppBookingController.bucheFahrzeit();
 	          				}
 	                  }
@@ -235,7 +235,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , anchorLocation: M.RIGHT
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e10){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -245,7 +245,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                       value: 'theme/images/48x48_plain_wrench.png'
                     , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e11){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -267,7 +267,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , anchorLocation: M.RIGHT
                   , events: {
 		                  tap: {
-			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e12){}
+			    				action: function() { try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					//DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -277,7 +277,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     value: ''
                   , events: {
 		                  tap: {
-			    				action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e13){}
+			    				action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	          	  					//DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -306,7 +306,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     }
 	                , tap: {
 	    				action: function() {
-	                		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e14){}
+	                		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 		  				}
 	                }
                 }
@@ -331,7 +331,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                 }
 	            , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e15){}
+	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
 	  				}
 	            }
             }

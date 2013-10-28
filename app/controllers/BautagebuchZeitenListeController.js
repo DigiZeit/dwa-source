@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchZeitenListeController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchZeitenListeController = M.Controller.extend({
 
 	  items: null
@@ -18,7 +18,7 @@ DigiWebApp.BautagebuchZeitenListeController = M.Controller.extend({
 	}
 
 	, neu: function(vorselektierterMitarbeiter) {
-		//var that = this;
+		var that = this;
 		
 		DigiWebApp.BautagebuchZeitenDetailsController.set("item", DigiWebApp.BautagebuchZeitbuchung.createRecord({
 			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id

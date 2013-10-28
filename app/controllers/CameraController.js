@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: CameraController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.CameraController = M.Controller.extend({
 
     // arrays for selection lists
@@ -25,7 +25,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
     , init: function(isFirstLoad) {
 		
-        if (isFirstLoad) {
+        if(isFirstLoad) {
             /* do something here, when page is loaded the first time. */
         }
         /* do something, for any other load. */
@@ -48,7 +48,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         	DigiWebApp.CameraController.useLoadedPicture();
         }
 
-        if (DigiWebApp.BookingController.currentBooking) {
+        if(DigiWebApp.BookingController.currentBooking) {
             DigiWebApp.CameraController.setSelectionByCurrentBooking();
         } else {
             DigiWebApp.CameraController.initSelection();
@@ -75,7 +75,7 @@ DigiWebApp.CameraController = M.Controller.extend({
          * ORDERS
          */
         var orderArray = _.map(orders, function(order) {
-            if (order.get('id') == orderId) {
+            if(order.get('id') == orderId) {
                 return { label: order.get('name'), value: order.get('id'), isSelected: YES };
             } else {
                 return { label: order.get('name'), value: order.get('id') };
@@ -90,9 +90,9 @@ DigiWebApp.CameraController = M.Controller.extend({
          * POSITIONS
          */
         var positionArray = _.map(positions, function(pos) {
-            if (pos.get('orderId') === orderId) {
+            if(pos.get('orderId') === orderId) {
             	var obj = null;
-                if (pos.get('id') === positionId) {
+                if(pos.get('id') === positionId) {
                     obj = { label: pos.get('name'), value: pos.get('id'), isSelected: YES };
                 } else {
                     obj = { label: pos.get('name'), value: pos.get('id') };
@@ -116,7 +116,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         var itemSelected = NO;
 
         /* if a workplan exists, only use those activities that are in the workplan */
-        if (workPlans.length > 0) {
+        if(workPlans.length > 0) {
             activities = this.getActivitiesFromWorkplan(workPlans[0]);
         } else {
             activities = DigiWebApp.CameraController.getActivities();
@@ -128,7 +128,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         		return null;
         	} else {
         		var obj = null;
-        		if (act.get('id') == activityId) {
+        		if(act.get('id') == activityId) {
         			obj = { label: act.get('name'), value: act.get('id'), isSelected: YES };
         			//console.log("ACTIVITY " + i + " = " + act.get('name') + " in setSelectionByCurrentBooking isSelected");
         			itemSelected = YES;
@@ -151,7 +151,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
     , setPositions: function() {
         var orderId = M.ViewManager.getView('cameraPage', 'order').getSelection(YES).value;
-        if (!orderId) {
+        if(!orderId) {
             return;
         }
 //        M.ViewManager.getView('cameraPage', 'position').removeSelection(); /* to avoid bug of not setting selected... */
@@ -159,9 +159,9 @@ DigiWebApp.CameraController = M.Controller.extend({
 
         var i = 0;
         positions = _.map(positions, function(pos) {
-            if (pos.get('orderId') === orderId) {
+            if(pos.get('orderId') === orderId) {
                 var obj = { label: pos.get('name'), value: pos.get('id') };
-                if (i === 0) {
+                if(i === 0) {
                     obj.isSelected = YES;
                 }
                 i += 1;
@@ -171,7 +171,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         });
         positions = _.compact(positions);/* remove falsy values from positions with _.compact() */
 
-        if (positions.length < 1) {
+        if(positions.length < 1) {
             positions.push({label: M.I18N.l('noData'), value: '0'});
         }
 
@@ -187,9 +187,9 @@ DigiWebApp.CameraController = M.Controller.extend({
     , setActivities: function(checkForWorkPlan) {
         var posId = null;
 
-        if (checkForWorkPlan) {
+        if(checkForWorkPlan) {
             var posObj = M.ViewManager.getView('cameraPage', 'position').getSelection(YES);
-            if (posObj) {
+            if(posObj) {
                 posId = posObj.value;
             }
         }
@@ -216,7 +216,6 @@ DigiWebApp.CameraController = M.Controller.extend({
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null ) { 
         	currentBookingActivityId = DigiWebApp.BookingController.currentBooking.get('activityId');
         }
-        
 		var currentBookingActivitySelectable = false;
 		_.each(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
@@ -247,7 +246,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         activities = _.compact(activities);
 
         // new to show this when closing day is pressed (corresponds to a reset)
-        if (activities.length > 0) {
+        if(activities.length > 0) {
             activities.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:NO});
         } else {
             activities.push({label: M.I18N.l('noData'), value: '0'});
@@ -271,7 +270,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
        // create order selection
        var orderArray = [];
-       if (orders) {
+       if(orders){
            orderArray = _.map(orders, function(order) {
                if (order) return { label: order.get('name'), value: order.get('id') };
            });
@@ -285,7 +284,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
        // create position selection
        var positionArray = [];
-       if (positions) {
+       if(positions){
            positionArray = _.map(positions, function(pos) {
         	   if (pos) return { label: pos.get('name'), value: pos.get('id') };
            });
@@ -297,7 +296,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         * ACTIVITIES
         */
        var activityArray = [];
-       if (activities) {
+       if(activities){
             activityArray = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
             		console.log("UNDEFINED ACTIVITY");
@@ -309,6 +308,7 @@ DigiWebApp.CameraController = M.Controller.extend({
        }
        // push "Bitte wählen Option"
        activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: YES});
+
 
         this.resetSelection();
         // set selection arrays to start content binding process
@@ -329,7 +329,7 @@ DigiWebApp.CameraController = M.Controller.extend({
     , isPositionSelected: function() {
         // implemented adjustment to M.SeletionListView to return null if no item is available
         var posObj = M.ViewManager.getView('cameraPage', 'position').getSelection(YES);
-        if (posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
+        if(posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
         } else {
             return NO;
@@ -338,7 +338,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
     , isActivitySelected: function() {
         var actObj = M.ViewManager.getView('cameraPage', 'activity').getSelection(YES);
-        if (actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
+        if(actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
         } else {
             return NO;
@@ -380,8 +380,8 @@ DigiWebApp.CameraController = M.Controller.extend({
     , getActivitiesFromWorkplan: function(workplan) {
         var actIds = workplan.get('activityIds').split(',');
         var activities = [];
-        if (actIds && actIds.length > 0) {
-            for (var i = 0; i < actIds.length; i++) {
+        if(actIds && actIds.length > 0) {
+            for(var i = 0; i < actIds.length; i++) {
                 activities.push(_.first(DigiWebApp.Activity.find({ query: {
                       identifier: 'id' 
                     , operator: '=' 
@@ -412,7 +412,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         			}
             	}
             });
-        }
+        };
         activities = _.compact(activities);
         return activities;
     }
@@ -464,7 +464,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
 	    var handOrderId = null;
 	    var handOrderName = null;
-	    if (DigiWebApp.BookingController.isHandOrder(orderId)) {
+	    if(DigiWebApp.BookingController.isHandOrder(orderId)) {
 			handOrderId = orderId;
 			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 			    if (ord) return ord.get('id') === orderId || ord.get('name') === orderId;
@@ -477,7 +477,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
 	    var lat = '0';
 	    var lon = '0';
-	    if (location) {
+	    if(location) {
 			if (location.latitude) {
 			    lat = location.latitude;
 			}
@@ -517,18 +517,18 @@ DigiWebApp.CameraController = M.Controller.extend({
         				return myO_id == myGetO_id || myHO_id == myGetO_id; // || get('name') is for checking handOrders also
         			}
                 });
-                if (order && order.length > 0) {
+                if(order && order.length > 0) {
                     order = order[0];
                     myOrderName = order.get('name');
                 }
     		}
-    	} catch(e1) { console.error(e1); }
+    	} catch(e) { console.error(e); }
     	try {
     		if (myMediaFile.pId !== 0) myPositionName = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: myMediaFile.get("positionId")}})[0].get('name');
-    	} catch(e2) { console.error(e2); }
+    	} catch(e) { console.error(e); }
     	try {
     		if (myMediaFile.aId !== 0) myActivityName = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: myMediaFile.get("activityId")}})[0].get('name');
-    	} catch(e3) { console.error(e3); }
+    	} catch(e) { console.error(e); }
 	    myMediaFile.set('orderName', myOrderName);
 	    myMediaFile.set('positionName', myPositionName);
 	    myMediaFile.set('activityName', myActivityName);

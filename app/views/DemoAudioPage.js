@@ -67,6 +67,16 @@ DigiWebApp.DemoAudioPage = M.PageView.design({
     		}
         })
 
+        , recordIcon: M.ImageView.design({
+    		  value: 'theme/images/icon_record.png'
+    		, cssClass: 'mediaIcon'
+        	, events: {
+        		tap: {
+        			action: DigiWebApp.DemoAudioController.recordAudio
+        		}
+    		}
+        })
+
         , stopRecordIcon: M.ImageView.design({
     		  value: 'theme/images/icon_stop.png'
     		, cssClass: 'mediaIcon'

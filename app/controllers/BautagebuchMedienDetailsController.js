@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchMedienDetailsController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 
 	  item: null
@@ -24,7 +24,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 	, loadedFileName: null // runtime
 
 	, init: function(isFirstLoad) {
-		//var that = this;
+		var that = this;
 	}
 
 	, load: function(myItem) {
@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 		} else {
 			that.item.set("remark", null);
 		}
-	    //var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
+	    var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
 
 	    //that.item.set('fileType', DigiWebApp.ApplicationController.CONSTImageFiletype);
 
@@ -126,8 +126,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 	        var itemSelected = NO;
 
 	        /* if a workplan exists, only use those activities that are in the workplan */
-	        var activities = null;
-	        if (workPlans.length > 0) {
+	        if(workPlans.length > 0) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
@@ -148,7 +147,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 		    });
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomethingOptional'), value: '0', isSelected: !itemSelected});
-			that.set("activityList", taetigkeitenArray);
+			that.set("activityList", taetigkeitenArray)
 		}
 	}
 	

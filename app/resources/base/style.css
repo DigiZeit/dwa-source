@@ -69,15 +69,6 @@ body {
 
 }
 
-.splashViewPage.w320 { background: #003366 !important }
-.splashViewPage.w480 { background: #003366 !important }
-.splashViewPage.w640 { background: #003366 !important }
-.splashViewPage.w800 { background: #003366 !important }
-.splashViewPage.w1024 { background: #003366 !important }
-.splashViewPage.w1080 { background: #003366 !important }
-.splashViewPage.w1536 { background: #003366 !important }
-.splashViewPage.w5000 { background: #003366 !important }
-
 .w320 { background: url('images/320x480_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .w480 { background: url('images/480x800_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .w640 { background: url('images/640x960_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
@@ -370,24 +361,62 @@ label.ui-input-text, .ui-controlgroup-label {
 /* Feierabend-Icon oben rechts */
 .bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
 .bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
-.bookTimePage .ui-btn-right { width: 80px; }
 
 /* Feierabend-Icon oben rechts */
 .bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
 .bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
 
 /* mediaListPage */
+.actionsList .ui-content {
+    background: url('images/arrow_white.png') 100% 50% no-repeat !important;
+    background-image: url('images/arrow_white.png') 100% 50% no-repeat !important;
+}
+
+.actionsList .ui-body-c {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.actionsList .ui-body-c li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
 
 .actionsList .ui-li-thumb {
     width: 32px;
     margin-left: 15px;
     margin-top: 10px;
 }
-.actionsList .ui-li.ui-li-static.ui-btn-up-c.ui-li-has-thumb.ui-first-child.ui-last-child {
-	background: transparent;	
-	border: transparent;
-	text-shadow: 0 0;
-	padding-top: 15px;
+
+.actionsList .ui-body-c li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.actionsList .ui-body-c .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.actionsList .ui-body-c .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
 }
 
 .mediaListPage .mediafilesList .ui-listview li {
@@ -567,7 +596,7 @@ label.ui-input-text, .ui-controlgroup-label {
 .timeDataPage .ui-listview .tagLabel {
     font-size: 12px;
     font-weight: normal;
-    /*margin-left: 25px;*/
+    margin-left: 25px;
     color: #000000;
 }
 
@@ -677,7 +706,7 @@ label.ui-input-text, .ui-controlgroup-label {
 	color: #000000;
 }
 
-.zeitbuchungDetailsPage .posInfoButton 
+.zeitbuchungDetailsPage [data-theme="posInfoButton"] 
 {
     moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -709,7 +738,7 @@ label.ui-input-text, .ui-controlgroup-label {
 	background-image:linear-gradient(#ededed,#dadada);
 }
 
-.zeitbuchungDetailsPage .posInfoButton span.ui-btn-inner 
+.zeitbuchungDetailsPage [data-theme="posInfoButton"] span.ui-btn-inner 
 {
     padding: .6em 10px;
 }
@@ -785,16 +814,14 @@ label.ui-input-text, .ui-controlgroup-label {
 	padding-right: 1%;
 }
 
-/*  .tmp-dialog-footer .ui-btn.ui-btn-up-c.ui-btn-corner-all.ui-shadow
-, .tmp-dialog-footer .ui-btn.ui-btn-hover-c.ui-btn-corner-all.ui-shadow
-{
+.tmp-dialog-footer .ui-btn.ui-btn-up-c.ui-btn-corner-all.ui-shadow {
 	height: 60px;
 }
 
 .tmp-dialog-footer .ui-btn-up-c .ui-btn-inner.ui-btn-corner-all
 {
 	margin-top: 10px;
-}*/
+}
 
   .bautagebuchZeitenDetailsPage input.ui-input-text
 , .bautagebuchBautageberichtDetailsPage input.ui-input-text
@@ -803,17 +830,11 @@ label.ui-input-text, .ui-controlgroup-label {
 	width: 98% !important;
 }
 
-/*  .bautagebuchZeitenDetailsPage .dauerInput_container
+  .bautagebuchZeitenDetailsPage .dauerInput_container
 {
     padding-bottom: 20px;
-}*/
-.transparent {
-	border: transparent;
-	color:  transparent;
-	background: transparent;
-	height:	0px;
-	width: 0px;
 }
+
   .bautagebuchWetterPage .centerText
 , .bautagebuchZeitenDetailsPage .ui-grid-a 
 {

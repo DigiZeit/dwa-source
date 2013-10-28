@@ -38,29 +38,13 @@ DigiWebApp.Booking = M.Model.create({
     , timeStampStart: M.Model.attr('String', {
         isRequired: NO
     })
-    
+
     , timeStampEnd: M.Model.attr('String', {
         isRequired: NO
     })
 
     , date: M.Model.attr('String', { // is aggregated by the two timestamp values above
 
-    })
-
-    , startTimeString: M.Model.attr('String', {
-        isRequired: NO
-    })
-
-    , endeTimeString: M.Model.attr('String', {
-        isRequired: NO
-    })
-
-    , startDateString: M.Model.attr('String', {
-        isRequired: NO
-    })
-
-    , endeDateString: M.Model.attr('String', {
-        isRequired: NO
     })
 
     , latitude: M.Model.attr('String', {
@@ -203,22 +187,14 @@ DigiWebApp.Booking = M.Model.create({
     , closeBooking: function(location) {
 		try {
 			this.set('timeStampEnd', DigiWebApp.BookingController.currentBookingTimesStampBook.getTime());
-		} catch (e2) {
+		} catch (e) {
 			var timeEnd = new Date();
 	        this.set('timeStampEnd', timeEnd.getTime());
 		}
-
-		var dateDate = new Date(Number(this.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - this.get('timezoneOffset'))));
-        var dateMDate = M.Date.create(dateDate.getTime());
-        var dateString = dateMDate.format('dd.mm.yyyy');
-        var timeString = dateMDate.format('HH:MM');
-        this.set('endeDateString', dateString);
-        this.set('endeTimeString', timeString);
-        		
         if (location) {
         	this.set('latitude_bis',  location.latitude);
         	this.set('longitude_bis', location.longitude);
-        }
+        };
     }
 
     , setRemark: function(v) {
@@ -245,7 +221,7 @@ DigiWebApp.Booking = M.Model.create({
 			    			// was deleted successfully from device
 			    			el.del();	    		
 			    		});
-			    	} catch(e3) {
+			    	} catch(e) {
 		    			el.del();	    		
 			    	}
 		    	} else {
@@ -253,7 +229,7 @@ DigiWebApp.Booking = M.Model.create({
 		    		el.del();
 		    	}
 		    });
-    	} catch(e4) { console.error(e4); }
+    	} catch(e) { console.error(e); }
     }
 	
 	, hasFileName: function() {
@@ -266,7 +242,7 @@ DigiWebApp.Booking = M.Model.create({
     	
     }
     
-    , saveToFile: function(myWriteContent, successCallback, myErrorCallback) {		
+    , saveToFile: function(myWriteContent, successCallback, errorCallback) {		
 		var that = this;
 		var writeContent = new String(myWriteContent);
 		
@@ -284,14 +260,13 @@ DigiWebApp.Booking = M.Model.create({
 	    }
 	
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("saveToFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("saveToFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 		
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -374,30 +349,29 @@ DigiWebApp.Booking = M.Model.create({
 				   	}, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e5) {
-			errorCallback(e5);
+		} catch(e) {
+			errorCallback(e);
 		}
 
     }
 	
-	, readFromFile: function(successCallback, myErrorCallback) {
+	, readFromFile: function(successCallback, errorCallback) {
 		var that = this;
 			
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("readFromFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("readFromFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 	    
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("readFromFileError: successCallback is not a function");
 	        return false;
-	    }
+	    };
 		
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
@@ -405,7 +379,7 @@ DigiWebApp.Booking = M.Model.create({
 			console.error("readFromFileError: no fileName given");
 			errorCallback();
 	        return false;
-	    }
+	    };
 
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -479,12 +453,12 @@ DigiWebApp.Booking = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e6) {
-			errorCallback(e6);
+		} catch(e) {
+			errorCallback(e);
 		}
 	}
 	
-	, deleteFile: function(successCallback, myErrorCallback) {
+	, deleteFile: function(successCallback, errorCallback) {
 		var that = this;
 		
 		// check if fileName is set
@@ -492,23 +466,22 @@ DigiWebApp.Booking = M.Model.create({
 		if (!that.hasFileName()) {
 			console.error("deleteFileError: no fileName given");
 	        return false;
-	    }
+	    };
 	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			console.error("deleteFileError: successCallback is not a function");
 	        return false;
-	    }
+	    };
 		
 		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
+	    if (!errorCallback || (typeof errorCallback !== "function")) {
+			//console.error("deleteFileError: errorCallback is not a function");
+	    	var errorCallback = function(evt) {
+	            //console.log("deleteFileError: " + evt.target.error.code);
 	    		console.error("deleteFileError", evt);
 	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
+	    };
 	    
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
@@ -559,8 +532,8 @@ DigiWebApp.Booking = M.Model.create({
 				    }, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}
-		} catch(e7) {
-			errorCallback(e7);
+		} catch(e) {
+			errorCallback(e);
 		}
 	}
 

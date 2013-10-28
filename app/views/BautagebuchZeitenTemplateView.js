@@ -37,7 +37,7 @@ DigiWebApp.BautagebuchZeitenTemplateView = M.ListItemView.design({
 		      valuePattern: '<%= mitarbeiterIds %>'
 		    , operation: function(v) {
 						if (v !== "" && v !== null) {
-							var outString = "";
+							var outString = ""
 							// v ist eine (json-striginfied) Liste mit (DTC-)mitarbeiterIds
 							var vAsArray = JSON.parse(v);
 							var mitarbeiterList = DigiWebApp.BautagebuchMitarbeiter.findSorted();
@@ -48,7 +48,7 @@ DigiWebApp.BautagebuchZeitenTemplateView = M.ListItemView.design({
 									}
 									outString += "<nobr>" + el.vollername() + "</nobr>";
 								}
-							});
+							})
 							return outString;
 						} else {
 							return "";

@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchBautageberichteListeController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 
 	  items: null

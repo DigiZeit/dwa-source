@@ -38,13 +38,13 @@ DigiWebApp.Employee = M.Model.create({
         var keys = [];
         try {
             keys = JSON.parse(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + this.name.toLowerCase() + 'Keys'));
-        } catch(e2) {
-        	console.error("ERROR in " + this.name + ".findSorted: " + e2);
+        } catch(e) {
+        	console.error("ERROR in " + this.name + ".findSorted: " + e);
         }
 
         var records = [];
 
-        if (keys) {
+        if(keys){
             _.each(keys, function(k) {
                 records.push(that.find({key:M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + that.name + '_' + k}));
             });

@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: OrderDetailsController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.OrderDetailsController = M.Controller.extend({
 
 	  positionForDetails: null
@@ -14,7 +14,7 @@ DigiWebApp.OrderDetailsController = M.Controller.extend({
 	
 	, init: function(isFirstLoad) {
 		var that = DigiWebApp.OrderDetailsController;
-		if (that.items === null) {
+		if(that.items === null) {
 			DigiWebApp.RequestController.getDatabaseServer(that.initWithServer, isFirstLoad);
 		} else {
 			that.initWithServer(isFirstLoad);
@@ -23,7 +23,7 @@ DigiWebApp.OrderDetailsController = M.Controller.extend({
 
     , initWithServer: function(isFirstLoad) {
     	var that = DigiWebApp.OrderDetailsController;
-		if (that.positionForDetails === null) {
+		if(that.positionForDetails === null) {
 			//console.log("Anwesenheitsliste: showing Loader");		
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('positionLaden'));
 

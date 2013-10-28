@@ -5,7 +5,7 @@
 // Project: DigiWebApp
 // Controller: BautagebuchDatenuebertragungController
 // ==========================================================================
-// manuell var-checked
+
 DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	  successReturnCallback: function() {}
@@ -24,9 +24,13 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		
 		// Verarbeitungskette definieren und starten
 		DigiWebApp.RequestController.getDatabaseServer(function() {
+			var that = DigiWebApp.BautagebuchDatenuebertragungController;
 			that.empfangeProjektleiter(function() {
+				var that = DigiWebApp.BautagebuchDatenuebertragungController;
 				that.empfangeMitarbeiter(function() {
+					var that = DigiWebApp.BautagebuchDatenuebertragungController;
 					that.empfangeMengeneinheiten(function() {
+						var that = DigiWebApp.BautagebuchDatenuebertragungController;
 						that.empfangeMaterialien(
 							that.successReturnCallback
 						  , that.successReturnCallback);
@@ -101,13 +105,13 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 	
 	, empfangeMaterialien: function(successCallback, errorCallback) {
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
 			
-			if (that.consoleLogOutput) console.log("empfangeMaterialien Status: " + request.status);
+			if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("empfangeMaterialien Status: " + request.status);
 
-			//var myMaterialliste = [];
+			var myMaterialliste = [];
 			
 			// wurde eine materialliste erhalten?
 			if (typeof(data.materialliste) === "undefined") {
@@ -124,8 +128,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				var myLength = null;
 				try {
 					myLength = data.materialliste.length;
-				} catch(e2) {
-					console.error(myLength);
+				} catch(e) {
 					//return errorCallback();
 				}
 			}
@@ -136,13 +139,12 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// die empfangenen Materialien mit Model ablegen
 			_.each(data.materialliste, function(el) {
-				//console.log(el);
 				if (typeof(el.materialbezeichnung) === "undefined") {
 					console.error("missing materialbezeichnung");
 					return errorCallback();
 				} else {
 					// el.materialbezeichnung zur Liste hinzufügen
-					DigiWebApp.BautagebuchMaterial.createRecord({bezeichnung: el.materialbezeichnung, id: el.materialbezeichnung}).saveSorted();
+					DigiWebApp.BautagebuchMaterial.createRecord({bezeichnung: el.materialbezeichnung}).saveSorted();
 				}
 			});
 			
@@ -155,11 +157,11 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 
 	, empfangeProjektleiter: function(successCallback, errorCallback) {
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
 						
-			if (that.consoleLogOutput) console.log("empfangeProjektleiter Status: " + request.status);
+			if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("empfangeProjektleiter Status: " + request.status);
 
 			// wurde eine Projektleiterliste erhalten?
 			if (typeof(data.mitarbeiter) === "undefined") {
@@ -176,9 +178,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				var myLength = null;
 				try {
 					myLength = data.mitarbeiter.length;
-				} catch(e1) {
+				} catch(e) {
 					// ohne Projektleiter geht im Bautagebuch nichts
-					console.error(myLength);
 					return errorCallback();
 				}
 			}
@@ -223,11 +224,11 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 
 	, empfangeMitarbeiter: function(successCallback, errorCallback) {
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
 						
-			if (that.consoleLogOutput) console.log("empfangeMitarbeiter Status: " + request.status);
+			if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("empfangeMitarbeiter Status: " + request.status);
 			
 			// wurde eine Mitarbeiterliste erhalten?
 			if (typeof(data.mitarbeiter) === "undefined") {
@@ -244,9 +245,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				var myLength = null;
 				try {
 					myLength = data.mitarbeiter.length;
-				} catch(e2) {
+				} catch(e) {
 					// ohne Mitarbeiter geht im Bautagebuch nichts
-					console.error(myLength);
 					return errorCallback();
 				}
 			}
@@ -301,11 +301,17 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		
 		// Verarbeitungskette definieren und starten
 		DigiWebApp.RequestController.getDatabaseServer(function() {
+			var that = DigiWebApp.BautagebuchDatenuebertragungController;
 			that.sendeBautagesbericht(item,function() {
+				var that = DigiWebApp.BautagebuchDatenuebertragungController;
 				that.sendeZeitbuchungen(item,function() {
+					var that = DigiWebApp.BautagebuchDatenuebertragungController;
 					that.sendeMaterialbuchungen(item,function() {
+						var that = DigiWebApp.BautagebuchDatenuebertragungController;
 						that.sendeNotizen(item,function() {
+							var that = DigiWebApp.BautagebuchDatenuebertragungController;
 							that.sendeMedien(item,function() {
+								var that = DigiWebApp.BautagebuchDatenuebertragungController;
 								that.sendeBautagesberichtFertig(
 										item
 									  , that.successReturnCallback
@@ -320,12 +326,12 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	
 	, sendeBautagesbericht: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		item.set("bautagesberichtId", item.m_id);
 		item.set("transferCompleted", NO);
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
-			if (that.consoleLogOutput) console.log("sendeBautagesbericht Status: " + request.status);
+			if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeBautagesbericht Status: " + request.status);
 			// weiter in der Verarbeitungskette
 			successCallback();
 			
@@ -348,7 +354,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeZeitbuchungen: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		
-		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		
 		var items = [];
 		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}); 
@@ -367,7 +373,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						} else {
 							zeitbuch.set(prop, el.get(prop));
 						}
-					} catch(e2) {
+					} catch(e) {
 						zeitbuch.set(prop, el.get(prop));
 					}
 				}
@@ -376,9 +382,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			});
 		});
 		if (items.length !== 0) {
-			var data = {"zeitdaten": items};
+			var data = {"zeitdaten": items}
 			
-			var internalSuccessCallback = function(data2, msg, request) {
+			var internalSuccessCallback = function(data, msg, request) {
 				// verarbeite empfangene Daten
 				console.log("sendeZeitbuchungen Status: " + request.status);
 				// weiter in der Verarbeitungskette
@@ -394,7 +400,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeMaterialbuchungen: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		
-		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		var items = [];
 		_.each(DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}), function(el) {
 			var tmp = el.record;
@@ -403,9 +409,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		});
 		
 		if (items.length !== 0) {
-			var data = {"materialbuchungen": items};
+			var data = {"materialbuchungen": items}
 			
-			var internalSuccessCallback = function(data2, msg, request) {
+			var internalSuccessCallback = function(data, msg, request) {
 				// verarbeite empfangene Daten
 				if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeMaterialbuchungen Status: " + request.status);
 				// weiter in der Verarbeitungskette
@@ -421,16 +427,16 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeNotizen: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		
-		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 		var items = [];
 		_.each(DigiWebApp.BautagebuchNotiz.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}), function(el) {
 			items.push(el.record);
 		});
 		
 		if (items.length !== 0) {
-			var data = {"notizen": items};
+			var data = {"notizen": items}
 			
-			var internalSuccessCallback = function(data2, msg, request) {
+			var internalSuccessCallback = function(data, msg, request) {
 				// verarbeite empfangene Daten
 				if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeNotizen Status: " + request.status);										
 				// weiter in der Verarbeitungskette
@@ -445,7 +451,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	, sendeMedien: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
-		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var that = this;
 
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadMediaFiles'));
 
@@ -458,9 +464,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					items.push(mf.record);
 				});
 				
-				var data = {"medien": items};
+				var data = {"medien": items}
 				
-				var internalSuccessCallback = function(data2, msg, request) {
+				var internalSuccessCallback = function(data, msg, request) {
 					// verarbeite empfangene Daten
 					if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeMedien Status: " + request.status);
 					// weiter in der Verarbeitungskette
@@ -474,7 +480,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				// weiter in der Verarbeitungskette
 				successCallback();
 			}
-    	};
+    	}
 
 		var mediaFiles = DigiWebApp.BautagebuchMediaFile.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}});
 		var mediaFilesLength = mediaFiles.length;
@@ -536,7 +542,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	, sendeBautagesberichtFertig: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
-		//var that = this;
+		var that = this;
 		item.set("bautagesberichtId", item.m_id);
 		item.set("transferCompleted", YES);
 		var internalSuccessCallback = function(data, msg, request) {

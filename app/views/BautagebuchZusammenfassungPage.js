@@ -33,7 +33,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 					$("#" + DigiWebApp.BautagebuchZusammenfassungPage.content.grid.id).show();
 					$('#' + DigiWebApp.BautagebuchZusammenfassungPage.header.delButton.id).show();
 					$("#" + DigiWebApp.BautagebuchZusammenfassungPage.content.transferGrid.id).hide();
-					$('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.container.leistungsnachweisList.zeitenAendernButton.id).show();
+					$('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.container.leistungsnachweisList.zeitenAendernButton.id).show()
 				}
 				$('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.container.leistungsnachweisList.zeitenAendernButton.id).addClass("zeitenAendernButton");
         		// Feature 405 (Unterschrift)
@@ -90,7 +90,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} history.back();}
+        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} history.back();}
                 }
             }
         })
@@ -107,7 +107,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
                       //target: DigiWebApp.BautagebuchBautageberichtDetailsController
                     //, action: 'delete'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} 
+        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){} 
         				DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
         			}
                 }
@@ -264,12 +264,16 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		    				    		switch(v) {
 		    				    			case 0:
 		    				    				return M.I18N.l('BautagebuchBewoelkungKlar');
+		    				    				break;
 		    					    		case 1:
 		    				    				return M.I18N.l('BautagebuchBewoelkungMaessig');
+		    					    			break;
 		    					    		case 2:
 		    				    				return M.I18N.l('BautagebuchBewoelkungBedeckt');
+		    						    		break;
 		    					    		case 3:
 		    				    				return M.I18N.l('BautagebuchBewoelkungNeblig');
+		    					    			break;
 		    					    		default:
 		    					    		  return "";
 		    				    		}
@@ -297,16 +301,22 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		    				    		switch(v) {
 		    				    			case 0:
 		    				    				return M.I18N.l('BautagebuchNiederschlagKein');
+		    				    				break;
 		    					    		case 1:
 		    				    				return M.I18N.l('BautagebuchNiederschlagNiesel');
+		    					    			break;
 		    					    		case 2:
 		    				    				return M.I18N.l('BautagebuchNiederschlagRegen');
+		    						    		break;
 		    					    		case 3:
 		    				    				return M.I18N.l('BautagebuchNiederschlagGraupel');
+		    					    			break;
 		    					    		case 4:
 		    				    				return M.I18N.l('BautagebuchNiederschlagSchnee');
+		    					    			break;
 		    					    		case 5:
 		    				    				return M.I18N.l('BautagebuchNiederschlagHagel');
+		    					    			break;
 		    					    		default:
 		    					    		    return "";
 		    				    		}
@@ -334,12 +344,16 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		    				    		switch(v) {
 		    				    			case 0:
 		    				    				return M.I18N.l('BautagebuchWindStill');
+		    				    				break;
 		    					    		case 1:
 		    				    				return M.I18N.l('BautagebuchWindMaessig');
+		    					    			break;
 		    					    		case 2:
 		    				    				return M.I18N.l('BautagebuchWindBoeig');
+		    						    		break;
 		    					    		case 3:
 		    				    				return M.I18N.l('BautagebuchWindStuermisch');
+		    					    			break;
 		    					    		default:
 		    					    		    return "";
 		    				    		}
@@ -367,8 +381,10 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		    				    		switch(v) {
 		    				    			case false:
 		    				    				return M.I18N.l('no');
+		    				    				break;
 		    					    		case true:
 		    				    				return M.I18N.l('yes');
+		    					    			break;
 		    					    		default:
 		    					    		    return "";
 		    				    		}
@@ -530,7 +546,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 			                //  target: DigiWebApp.BautagebuchZusammenfassungController
 			                //, action: 'finish'
 			    			action: function() {
-			    				//var that = this;
+			    				var that = this;
 			    				DigiWebApp.BautagebuchZusammenfassungController.finish(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
 			    				DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
 								DigiWebApp.NavigationController.toBautagebuchZusammenfassungPageTransition();
