@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4448
+    , softwareVersion: 4449
 
 
     /**
@@ -243,15 +243,20 @@ DigiWebApp.RequestController = M.Controller.extend({
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
 	    		}
-	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    		DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
+	    		//DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    		//DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
 	    	}, function(error) {
-	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    		DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
+	    		//DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    		//DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
+    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
+    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
+    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
 	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
     	};
 
-    	DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
+    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
+    	myFunc(obj);
+    	DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
 
     }
 
