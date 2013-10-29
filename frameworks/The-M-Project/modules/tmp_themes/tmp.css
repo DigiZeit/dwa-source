@@ -20,10 +20,10 @@
 
     text-align: center;
     padding: 5px;
-    color: #fff; /*text-shadow: 1px 1px black;*/
-/*text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;*/
+    color: #fff;
     font-size: 0.9em;
     font-weight: bold;
+    text-shadow: none;
 }
 
 .tmp-dialog-content {
@@ -33,6 +33,7 @@
     text-align: center;
     color: #fff;
     font-size: 0.9em;
+    text-shadow: none;
 }
 
 .tmp-dialog-footer {
@@ -148,151 +149,259 @@
 }
 
 
-
-/* datepicker */
-.dwo {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.5);
+/* SPLITVIEW */
+.tmp-splitview-menu {
+    position:absolute;
 }
 
-.dw {
-    border-radius: 8px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(47, 74, 117, 0.9)), color-stop(0.5, rgba(47, 76, 117, 0.9)), color-stop(0.5, rgba(47, 76, 117, 0.9)), color-stop(1, rgba(134, 140, 158, 0.9)));
-    -webkit-box-shadow: 0 0 8px 4px #555;
-    box-shadow: 0 0 8px 4px #555;
-    border: 2px solid #fff;
-    color: #fff;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+.tmp-splitview-content {
+    position:absolute;
 }
 
-.dw .dwc .dwwc {
-    border-radius: 8px;
-    border: 1px solid #555555;
+.landscape .tmp-splitview-menu {
+    top:41px;
+    bottom:0px;
+    border-right:1px solid #ccc;
+    
+    
 }
 
-.dw .ui-grid-a {
-    width: 100%;
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 10px;
+.landscape .tmp-splitview-content-toolbar {
+    top:0px;
+    left: auto;
+
 }
 
-.dw > div.ui-btn {
-    margin-bottom: 10px;
-    margin-top: 10px;
+.landscape .tmp-splitview-content-toolbar-show-menu-button .ui-btn-left ,
+.landscape .tmp-splitview-content-toolbar-show-menu-button .ui-btn-right {
+    display:none;
 }
 
-.dw > div.ui-btn:last-child {
-    margin-top: 0px;
+.landscape .tmp-splitview-menu-toolbar {
+    left:0px;
+    float:left;
+    border-right:1px solid #000;
+    
 }
 
-.tmp-datepicker-no-label .dw .dwl {
-    display: none;
+.landscape .tmp-splitview-menu-toolbar h1 {
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
-.tmp-datepicker-no-label .dw .dww {
+.landscape .tmp-splitview-content {
+    top:41px;
+    bottom:0px;
+}
+
+.portrait .tmp-splitview-menu {
+    display:none
+}
+
+.portrait .tmp-splitview-content {
+    top:41px;
+    bottom:0px;
+    left:0px;
+}
+
+.portrait .tmp-splitview-content-toolbar-show-menu-button .ui-btn-left,
+.portrait .tmp-splitview-content-toolbar-show-menu-button .ui-btn-right {
+    display:block;
+}
+
+.portrait .tmp-splitview-content-toolbar {
+    top:0px;
+}
+
+.portrait .tmp-splitview-menu-toolbar {
+    display:none
+}
+
+.tmp-footer {
+    position:absolute !important;
+    bottom:-41px;
+}
+
+.tmp-splitview-no-header .tmp-splitview-content, .tmp-splitview-no-header .tmp-splitview-menu {
     top: 0px;
 }
 
-.tmp-datepicker-no-label .dw .dwc {
-    padding-top: 10px;
+.labeltest{
+
+    border: 1px solid #000;
+
+}
+
+
+/* POPOVER */
+.tmp-popover {
+    position: absolute !important;
+    left: 15px !important;
+    top: 56px !important;
+    min-height: 50px !important;
+    -webkit-border-radius: 5px 5px 5px 5px !important;
+    -moz-border-radius: 5px 5px 5px 5px !important;
+    border-radius: 5px 5px 5px 5px !important;
+    z-index: 100001 !important;
+}
+
+.tmp-popover-header {
+    -webkit-border-radius: 5px 5px 0px 0px !important;
+    -moz-border-radius: 5px 5px 0px 0px !important;
+    border-radius: 5px 5px 0px 0px !important;
+    border-top: 0px !important;
+    position: absolute;
+}
+
+.tmp-popover-content {
+    border: 5px solid #111 !important;
+    border-top: 0px !important;
+    -webkit-border-radius: 0px 0px 5px 5px !important;
+    -moz-border-radius: 0px 0px 5px 5px !important;
+    border-radius: 0px 0px 5px 5px !important;
+}
+
+.tmp-popover-arrow {
+    border-color: transparent transparent #3C3C3C transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -40px;
+    left: 10px;
 }
 
 
 
 
-/* slider */
-.tmp-slider-container.tmp-slider-is-slider-only {
-    padding-left: 14px;
-    padding-right: 14px;
-    min-height: 30px;
+/* DATEPICKER */
+.dw > .ui-grid-a, .dw > [data-role="button"]:last-child {
+    margin-bottom: 15px;
 }
 
-.tmp-slider-container.tmp-slider-is-slider-only div.ui-slider {
-    width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
+.dwo {
+    position: fixed;
+    background: none;
+}
+
+.dww li {
+    font-size: 22px;
 }
 
 
-/* adjustments for touch overflow */
-.ui-mobile-touch-overflow .ui-content {
-    left: 0px;
+
+
+/* CONTENT AREA */
+.ui-content {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: visible;
+}
+
+/* label */
+.tmp-movable-outer {
+    position: relative;
+}
+
+.tmp-movable-inner {
+    position: absolute;
+}
+
+/* carousel */
+.tmp-carousel-wrapper {
+	width: 100%;
+	float: left;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+    opacity: 0;
+}
+
+.tmp-carousel-scroller {
+	height: 100%;
+	float: left;
+}
+
+.tmp-carousel-list {
+	list-style: none;
+	display: block;
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+
+.tmp-carousel-list li {
+    float: left;
+}
+
+.tmp-carousel-paginator {
+    position: absolute;
+    z-index: 1000;
+    text-align: center;
+}
+
+.tmp-carousel-paginator-vertical {
+    width: 20px;
     right: 0px;
-    margin-top: 15px;
-    margin-bottom: 15px;
 }
 
-.ui-mobile-touch-overflow .ui-listview {
-    margin-top:  -15px;
-    margin-bottom:  -15px;
-}
-
-
-
-
-/* table */
-.tmp-table-container {
+.tmp-carousel-paginator-horizontal {
     width: 100%;
+    height: 20px;
+    left: 0px;
 }
 
-.tmp-table {
-    width: 100%;
-    table-layout:fixed;
-    border: 1px solid #121212;
-    border-spacing: 0px;
+.tmp-carousel-paginator-item {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #333333;
+    opacity: 0.8;
+    margin-left: 5px;
+    margin-right: 5px;
+    -webkit-border-radius: 3px 3px 3px 3px !important;
+    -moz-border-radius: 3px 3px 3px 3px !important;
+    border-radius: 3px 3px 3px 3px !important;
 }
 
-.tmp-table-th {
-    background-color: #121212;
-    color: #FFFFFF;
-    text-shadow: none;
-    padding: 5px;
-    text-align: left;
+.tmp-carousel-paginator-item-active {
+    background: #FFFFFF;
 }
 
-.tmp-table-td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 5px;
-}
-
-.tmp-table-tr-a td {
-    background-color: rgb(220, 220, 220);
-}
-
-.tmp-table-tr-b td {
-    background-color: rgb(235, 235, 235);
+.tmp-carousel-clear {
+    height: 0px;
+    width: 0px;
+    clear: both;
 }
 
 
-
-
-/* fixing the 100% problem of jqm */
-.ui-page {
-    min-height: 100% !important;
+/* IMAGE PRELOADING */
+.tmp-image-preloading {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    visibility: hidden;
 }
 
-
-
-
-/* fixing overlapping list at top/bottom of a page */
-ul[data-role="listview"].listview-do-not-overlap-at-top {
-    margin-top: 15px;
+.tmp-image-hidden{
+    display: none;
 }
 
-ul[data-role="listview"].listview-do-not-overlap-at-bottom {
-    margin-bottom: 15px;
-}
+/* Version 1.2 to Version 1.3 hacks*/
+    /* iOS portrait to landscape hack*/
+    .ui-mobile body .ui-page-active {
+        overflow-x:hidden;
+    }
 
+    /*Buttons in the Header are shown in the content area*/
+    .ui-header .ui-btn{
+        margin-top: 0;
+    }
 
-
-
-/* fixing a too long center value of header bar */
-.ui-header h1 div {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    /* Default button group hasn't the browser width*/
+    .ui-page .ui-controlgroup-horizontal .ui-controlgroup-controls{
+        display: block;
+    }

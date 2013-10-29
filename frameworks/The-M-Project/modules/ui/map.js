@@ -246,7 +246,7 @@ M.MapView = M.View.extend(
      * @returns {String} The map view's html representation.
      */
     render: function() {
-        this.html += '<div data-fullscreen="true" id="' + this.id + '"';
+        this.html = '<div data-fullscreen="true" id="' + this.id + '"';
         this.html += !this.isInset ? ' class="ui-listview"' : '';
         this.html += '><div id="' + this.id + '_map"' + this.style() + '></div></div>';
 
@@ -540,14 +540,20 @@ M.MapView = M.View.extend(
      * @param {M.MapMarkerView} marker The marker to be added.
      */
     addMarker: function(marker) {
-        if(marker && typeof(marker) === 'object' && marker.type === 'M.MapMarkerView') {
+        if(marker && typeof(marker) === 'object' && marker.type === 'M.MapMarkerView' && typeof(google) !== 'undefined') {
             var that = this;
             marker.marker = new google.maps.Marker({
                 map: that.map,
                 draggable: NO,
                 animation: google.maps.Animation[marker.markerAnimationType ? marker.markerAnimationType : that.markerAnimationType],
                 position: new google.maps.LatLng(marker.location.latitude, marker.location.longitude),
-                icon: marker.icon
+                icon: marker.icon ? new google.maps.MarkerImage(
+                    marker.icon,
+                    null,
+                    null,
+                    marker.iconSize && marker.isIconCentered ? new google.maps.Point(marker.iconSize.width / 2, marker.iconSize.height / 2) : null,
+                    marker.iconSize ? new google.maps.Size(marker.iconSize.width, marker.iconSize.height) : null
+                ) : marker.icon
             });
             marker.registerEvents();
             this.markers.push(

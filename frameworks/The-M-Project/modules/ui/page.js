@@ -54,7 +54,7 @@ M.PageView = M.View.extend(
      *
      * @type Array
      */
-    recommendedEvents: ['pagebeforeshow', 'pageshow', 'pagebeforehide', 'pagehide', 'orientationchange'],
+    recommendedEvents: ['pagebeforeshow', 'pageshow', 'pagebeforehide', 'pagehide', 'orientationdidchange'],
 
     /**
      * This property is used to specify a view's internal events and their corresponding actions. If
@@ -94,7 +94,7 @@ M.PageView = M.View.extend(
         /* store the currently rendered page as a reference for use in child views */
         M.ViewManager.currentlyRenderedPage = this;
         
-        this.html += '<div id="' + this.id + '" data-role="page"' + this.style() + '>';
+        this.html = '<div id="' + this.id + '" data-role="page"' + this.style() + '>';
 
         this.renderChildViews();
 
@@ -131,7 +131,7 @@ M.PageView = M.View.extend(
                 target: this,
                 action: 'pageDidHide'
             },
-            orientationchange: {
+            orientationdidchange: {
                 target: this,
                 action: 'orientationDidChange'
             }
@@ -147,10 +147,10 @@ M.PageView = M.View.extend(
     	if (restartOnBlackBerry) {
     		if (document.readyState === "loading") {
     			document.write(this.html);
-    		} else if (typeof(jQuery(this.html)[0]) !== undefined) {
+    		} else if (typeof($(this.html)[0]) !== undefined) {
     			// append only if the page-id isn't already in the body 
-    			if (document.body.innerHTML.indexOf(jQuery(this.html)[0].id) === -1) {
-    				jQuery("body").append(this.html);
+    			if (document.body.innerHTML.indexOf($(this.html)[0].id) === -1) {
+    				$('body').append(this.html);
     			}
     		}
 		} else {
@@ -190,6 +190,14 @@ M.PageView = M.View.extend(
             M.LoaderView.initialize();
         }
 
+        /* call controlgroup plugin on any such element on the page */
+        $('#' + id).find('[data-role="controlgroup"]').each(function() {
+            var that = this;
+            window.setTimeout(function() {
+                $(that).controlgroup();
+            }, 1);
+        });
+
         /* reset the page's title */
         document.title = M.Application.name;
 
@@ -213,8 +221,10 @@ M.PageView = M.View.extend(
             M.EventDispatcher.callHandler(nextEvent, event, NO, [this.isFirstLoad]);
         }
 
-        /* call jqm to fix header/footer */
-        $.mobile.fixedToolbars.show();
+        /* call controlgroup plugin on any such element on the page */
+//        $('#' + id).find('[data-role="controlgroup"]').each(function() {
+//            $(this).controlgroup();
+//        });
 
         this.isFirstLoad = NO;
     },
@@ -258,7 +268,7 @@ M.PageView = M.View.extend(
 
     /**
      * This method is called right after the device's orientation did change. If a action for
-     * orientationchange is defined for the page, it is now called.
+     * orientationdidchange is defined for the page, it is now called.
      *
      * @param {String} id The DOM id of the event target.
      * @param {Object} event The DOM event.
@@ -282,6 +292,12 @@ M.PageView = M.View.extend(
                 dialog.positionDialog(dialogDOM);
                 dialog.positionBackground($('.tmp-dialog-background'));
             }, 500);
+        });
+
+        /* auto-reposition carousels */
+        $('#' + this.id + ' .tmp-carousel-wrapper').each(function() {
+            var carousel = M.ViewManager.getViewById($(this).attr('id'));
+            carousel.orientationDidChange();
         });
 
         /* set the current orientation */

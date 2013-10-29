@@ -17,19 +17,52 @@ $(document).bind("mobileinit", function(){
 
     /* disable auto initialize */
     $.mobile.autoInitializePage = false;
-
-    /* disable touch overflow */
-    $.mobile.touchOverflowEnabled = false;
 });
 $(document).ready(function(){
-    /* configure jqm */
-    $.mobile.touchOverflowEnabled = M.Application.getConfig('enableTouchOverflow') !== undefined ? M.Application.getConfig('enableTouchOverflow') : $.mobile.touchOverflowEnabled;
+    /* bind the orientationchange event globally */
+    M.EventDispatcher.registerEvent(
+        'orientationchange',
+        $(window),
+        {
+            target: M.EventDispatcher,
+            action: 'dispatchOrientationChangeEvent'
+        },
+        ['orientationchange'],
+        null,
+        NO,
+        YES
+    );
 
     /* init pages */
     $.mobile.initializePage();
 
-    /* bind orientation change event */
-    $(window).bind('orientationchange', function() {
-        $('#' + M.ViewManager.getCurrentPage().id).trigger('orientationchange');
-    });
+    $(document).trigger('applicationdidload');
+
+    /* preload images */
+    if(M.Application.getConfig('preloadImages') && M.Application.getConfig('imagesToPreload').length) {
+        M.ImagePreloader.init({
+            images: M.Application.getConfig('imagesToPreload'),
+            refId: 'bootstrap',
+            events: {
+                load: {
+                    action: function(imagePath, refId) {
+                        M.Logger.info('Image preloading: loaded single file \'' + imagePath + '\' for refId \'' + refId + '\'.');
+                    }
+                },
+                error: {
+                    action: function(imagePath, refId) {
+                        M.Logger.info('Image preloading: error loading single file \'' + imagePath + '\' for refId \'' + refId + '\'.');
+                    }
+                },
+                finish: {
+                    action: function(refId) {
+                        M.Logger.info('Image preloading: loaded all file associated with refId \'' + refId + '\'.');
+                    }
+                }
+            }
+        }).preload();
+    }
+
+    /* dont hide the toolbar, ever */
+    $("[data-role=header][data-position=fixed]").fixedtoolbar({ hideDuringFocus: "" });
 });

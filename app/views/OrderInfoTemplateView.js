@@ -283,10 +283,10 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 			    						plugins.childBrowser.showWebPage(encodeURI(url_byAddress), { showNavigationBar: true });
 			    					} catch(e6) { alert("Error: " + e6.message); }
 			    				} else {
-			    					window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
+			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
+		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
 		    				}
 						} else {
 							// TODO: Error-Message for disabled Map-Services
@@ -349,10 +349,10 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 				    					plugins.childBrowser.showWebPage(encodeURI(url_byCoordinates), { showNavigationBar: true });
 			    					} catch(e9) { alert("Error: " + e9.message); }
 			    				} else {
-			    					window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
+			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
+		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=no,copyhistory=no,directories=no');
 		    				}
 						} else {
 							// TODO: Error-Message for disabled Map-Services

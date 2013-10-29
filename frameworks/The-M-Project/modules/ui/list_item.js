@@ -72,10 +72,51 @@ M.ListItemView = M.View.extend(
     recommendedEvents: ['tap'],
 
     /**
-     * This property can be used to specify whether a selection list item can be selected or not. Note, that this
+     * This property can be used to specify whether a list item can be selected or not. Note, that this
      * only affects styling stuff. If set to NO, you still can apply e.g. tap events.
+     *
+     * @type Boolean
      */
     isSelectable: YES,
+
+    /**
+     * This property can be used to specify a button that appears on a swipe left or swipe right
+     * gesture (as known from the iphone). Simply specify a tap event for that button and provide a
+     * custom method to handle the event. This can e.g. be used as a delete button.
+     *
+     * By default the button will look like a delete button (in red) and display 'delete'. To change this,
+     * simply pass a value to set the label and make use of the cssClass property. To get a standard button
+     * as you now it from the other parts of the framework, set the cssClass property's value to:
+     *
+     *   - 'a'  ->  black
+     *   - 'b'  ->  blue
+     *   - 'c'  ->  light grey
+     *   - 'd'  ->  white
+     *   - 'e'  ->  yellow
+     *
+     * Check the jQM docs for further information and visual samples of these themes:
+     * http://jquerymobile.com/test/docs/buttons/buttons-themes.html
+     *
+     * A valid and usefull configuration of such a swipe button could e.g. look like the following:
+     *
+     *   swipeButton: M.ButtonView.design({
+     *     events: {
+     *       tap: {
+     *         target: MyApp.MyController,
+     *         action: 'removeItem'
+     *       }
+     *     },
+     *     cssClass: 'e'
+     *   })
+     *
+     * The event handler (removeItem() in the sample above) will be called with two parameters:
+     *
+     *   - domID  ->  The DOM id of the list item view, e.g. 'm_123'
+     *   - id  ->  The id/recordId of the list item based on the bound data
+     *
+     * @type M.ButtonView
+     */
+    swipeButton: null,
 
     /**
      * Renders a list item as an li-tag. The rendering is initiated by the parent list view.
@@ -113,8 +154,38 @@ M.ListItemView = M.View.extend(
         }
 
         this.html += '</li>';
-        
+
         return this.html;
+    },
+
+    /**
+     * Triggers render() on all children. This method defines a special rendering behaviour for a list item
+     * view's child views.
+     *
+     * @override
+     * @private
+     */
+    renderChildViews: function() {
+        if(this.childViews) {
+            var childViews = this.getChildViewsAsArray();
+            for(var i in childViews) {
+                var childView = this[childViews[i]];
+                if(childView) {
+                    childView._name = childViews[i];
+                    childView.parentView = this;
+
+                    if(childView.type === 'M.ButtonView') {
+                        this.html += '<div>' + childView.render() + '</div>';
+                    } else {
+                        this.html += childView.render();
+                    }
+                } else {
+                    this.childViews = this.childViews.replace(childViews[i], ' ');
+                    M.Logger.log('There is no child view \'' + childViews[i] + '\' available for ' + this.type + ' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')! It will be excluded from the child views and won\'t be rendered.', M.WARN);
+                }
+            }
+            return this.html;
+        }
     },
 
     /**
@@ -131,6 +202,18 @@ M.ListItemView = M.View.extend(
                 target: this.parentView,
                 action: 'setActiveListItem'
             }
+        };
+        if(this.swipeButton) {
+            $.extend(this.internalEvents, {
+                swipeleft: {
+                    target: this.parentView,
+                    action: 'showSwipeButton'
+                },
+                swiperight: {
+                    target: this.parentView,
+                    action: 'showSwipeButton'
+                }
+            })
         }
         this.bindToCaller(this, M.View.registerEvents)();
     },
@@ -147,6 +230,23 @@ M.ListItemView = M.View.extend(
             html += ' class="' + this.cssClass + '"';
         }
         return html;
+    },
+
+    /**
+     * This method is used as the event handler of the tap event of a swipe button. All it does
+     * is to collect the required information for the external handler (domID, modelID) and call
+     * this external handler (if there is one specified).
+     *
+     * @private
+     */
+    swipeButtonClicked: function(id, event, nextEvent) {
+        id = this.id;
+        var modelId = M.ViewManager.getViewById(id).modelId;
+
+        /* delegate event to external handler, if specified */
+        if(nextEvent) {
+            M.EventDispatcher.callHandler(nextEvent, event, NO, [id, modelId]);
+        }
     }
 
 });

@@ -57,6 +57,8 @@ M.LoaderView = M.View.extend(
     initialize: function() {
         if(!this.isInitialized) {
             this.refCount = 0;
+            $.mobile.showPageLoadingMsg();
+            $.mobile.hidePageLoadingMsg();
             this.isInitialized = YES;
         }
     },
@@ -66,16 +68,18 @@ M.LoaderView = M.View.extend(
      * title parameter.
      *
      * @param {String} title The title for this loader.
+     * @param {Boolean} hideSpinner A boolean to specify whether to display a spinning wheel or not.
      */
-    show: function(title) {
+    show: function(title, hideSpinner) {
         this.refCount++;
         var title = title && typeof(title) === 'string' ? title : this.defaultTitle;
         if(this.refCount == 1){
-            $.mobile.showPageLoadingMsg();
-            this.changeTitle(title);
+            $.mobile.showPageLoadingMsg('a', title, hideSpinner);
+            var loader = $('.ui-loader');
+            loader.removeClass('ui-loader-default');
+            loader.addClass('ui-loader-verbose');
 
             /* position alert in the center of the possibly scrolled viewport */
-            var loader = $('.ui-loader');
             var screenSize = M.Environment.getSize();
             var scrollYOffset = window.pageYOffset;
             var loaderHeight = loader.outerHeight();

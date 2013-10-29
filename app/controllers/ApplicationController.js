@@ -662,12 +662,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //		}
 	}
 	
+	, inAppBrowser_var: null
+	
 	, closeChildbrowser: function() {
 		//alert("pause");
 		try {
 			plugins.childBrowser.close();
 		} catch(e) {
-			console.log(e);
+		}
+		try {
+			DigiWebApp.ApplicationController.inAppBrowser_var.close();
+		} catch(e) {
 		}
 	}
        

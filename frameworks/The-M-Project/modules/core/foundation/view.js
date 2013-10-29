@@ -72,6 +72,13 @@ M.View = M.Object.extend(
     contentBindingReverse: null,
 
     /**
+     * some kind of ContentBinding for thinks like SelectionListViews if you want to apply some businessdata like a model to it.
+     *
+     * @property {String}
+     */
+    valueBinding: null,
+
+    /**
      * An array specifying the view's children.
      *
      * @type Array
@@ -208,6 +215,14 @@ M.View = M.Object.extend(
      * @type Array
      */
     recommendedEvents: null,
+    
+    /**
+     * Cache for getParentPage function.
+     *
+     * @type M.PageView
+     */
+
+    parentPage : null,
 
     /**
      * This method encapsulates the 'extend' method of M.Object for better reading of code syntax.
@@ -260,6 +275,7 @@ M.View = M.Object.extend(
             for(var i in childViews) {
                 if(this[childViews[i]]) {
                     this[childViews[i]]._name = childViews[i];
+                    this[childViews[i]].parentView = this;
                     this.html += this[childViews[i]].render();
                 } else {
                     this.childViews = this.childViews.replace(childViews[i], ' ');
@@ -299,7 +315,11 @@ M.View = M.Object.extend(
      * @returns {Array} The child views as an array.
      */
     getChildViewsAsArray: function() {
-        return $.trim(this.childViews.replace(/\s+/g, ' ')).split(' ');
+    	try{
+    	    return this.childViews ? $.trim(this.childViews.replace(/\s+/g, ' ')).split(' ') : [];
+    	} catch(e){
+    	    return [];
+    	}
     },
 
     /**
@@ -413,9 +433,25 @@ M.View = M.Object.extend(
     registerEvents: function() {
         var externalEvents = {};
         for(var event in this.events) {
+            /* map orientationchange event to orientationdidchange event */
+            if(event === 'orientationchange') {
+                event = 'orientationdidchange';
+            }
             externalEvents[event] = this.events[event];
         }
-        
+
+        if(this.internalEvents) {
+            for(var event in this.internalEvents) {
+                /* map orientationchange event to orientationdidchange event */
+                if(this.internalEvents[event]) {
+                    if(event === 'orientationchange') {
+                        this.internalEvents['orientationdidchange'] = this.internalEvents[event];
+                        delete this.internalEvents[event];
+                    }
+                }
+            }
+        }
+
         if(this.internalEvents && externalEvents) {
             for(var event in externalEvents) {
                 if(this.internalEvents[event]) {
@@ -468,7 +504,6 @@ M.View = M.Object.extend(
         var propertyChain = contentBinding.property.split('.');
         _.each(propertyChain, function(level) {
             if(value) {
-            	//console.log(value + "[" + level + "]: " + value[level]);
                 value = value[level];
             }
         });
@@ -492,34 +527,50 @@ M.View = M.Object.extend(
      * This method attaches the view to an observable to be later notified once the observable's
      * state did change.
      */
-    attachToObservable: function() {
-        var contentBinding = this.contentBinding ? this.contentBinding : (this.computedValue) ? this.computedValue.contentBinding : null;
 
-        if(!contentBinding) {
+    attachToObservable: function() {
+        this.registerContentBinding();
+        this.registervalueBinding();
+    },
+
+    registervalueBinding:function () {
+        var valueBinding = this.valueBinding ? this.valueBinding : (this.computedValue) ? this.computedValue.valueBinding : null;
+        if(!valueBinding) { return; }
+        this.attachBinding(valueBinding, 'valueBinding');
+    },
+
+    registerContentBinding: function(){
+        var contentBinding = this.contentBinding ? this.contentBinding : (this.computedValue) ? this.computedValue.contentBinding : null;
+        if(!contentBinding) { return; }
+        this.attachBinding(contentBinding, 'contentBinding');
+    },
+
+    attachBinding: function(binding, name) {
+        if(!binding) {
             return;
         }
 
-        if(typeof(contentBinding) === 'object') {
-            if(contentBinding.target && typeof(contentBinding.target) === 'object') {
-                if(contentBinding.property && typeof(contentBinding.property) === 'string') {
-                    var propertyChain = contentBinding.property.split('.');
-                    if(contentBinding.target[propertyChain[0]] !== undefined) {
-                        if(!contentBinding.target.observable) {
-                            contentBinding.target.observable = M.Observable.extend({});
+        if(typeof(binding) === 'object') {
+            if(binding.target && typeof(binding.target) === 'object') {
+                if(binding.property && typeof(binding.property) === 'string') {
+                    var propertyChain = binding.property.split('.');
+                    if(binding.target[propertyChain[0]] !== undefined) {
+                        if(!binding.target.observable) {
+                            binding.target.observable = M.Observable.extend({});
                         }
-                        contentBinding.target.observable.attach(this, contentBinding.property);
+                        binding.target.observable.attach(this, binding.property);
                         this.isObserver = YES;
                     } else {
-                        M.Logger.log('The specified target for contentBinding for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')\' has no property \'' + contentBinding.property + '!', M.WARN);
+                        M.Logger.log('The specified target for ' + name + ' for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')\' has no property \'' + binding.property + '!', M.WARN);
                     }
                 } else {
-                    M.Logger.log('The type of the value of \'action\' in contentBinding for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')\' is \'' + typeof(contentBinding.property) + ' but it must be of type \'string\'!', M.WARN);
+                    M.Logger.log('The type of the value of \'action\' in ' + name + ' for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')\' is \'' + typeof(binding.property) + ' but it must be of type \'string\'!', M.WARN);
                 }
             } else {
-                M.Logger.log('No valid target specified in content binding \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')!', M.WARN);
+                M.Logger.log('No valid target specified in ' + name + ' \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')!', M.WARN);
             }
         } else {
-            M.Logger.log('No valid content binding specified for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')!', M.WARN);
+            M.Logger.log('No valid ' + name + ' specified for \'' + this.type + '\' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ')!', M.WARN);
         }
     },
 
@@ -696,20 +747,55 @@ M.View = M.Object.extend(
     removeCssProperty: function(key) {
         this.setCssProperty(key, '');
     },
-    
-    /**
+	/**
      *
      * returns the page on which the current view is defined
      *
-     * @return {*} M.PageView
+      * @return {*} M.PageView
      */
     getParentPage: function(){
-        if(this.type === 'M.PageView') {
-            return this;
-        } else if(this.parentView) {
-            return this.parentView.getParentPage();
-	
+        if(this.parentPage){
+            return this.parentPage;
+        }else{
+            if(this.type === 'M.PageView'){
+                return this;
+            }else if(this.parentView){
+                this.parentPage = this.parentView.getParentPage();
+            }else{
+                var parentId = $('#' + this.id).parent().closest('[id^=m_]').attr('id');
+                if(parentId){
+                    this.parentPage = M.ViewManager.getViewById(parentId).getParentPage();
+                }
+            }
+            return this.parentPage;
         }
-    }
+    },
+    
+    /*
+    * find all childviews to the given string
+    *
+    * @param {String} childName the name of the child view looking for.
+    * @param {Boolean} deepSearch look also in all childViews for the one.
+    * @return {Array} all found childViews
+    * 
+    */
+    findChildViews: function( childName, deepSearch ) {
+    	var that = this;
+        var childViews = this.getChildViewsAsArray();
+        var foundChildren = [];
+        _.each(childViews, function( child ) {
+            if( child === childName ) {
+                foundChildren.push(that[child]);
+            }
+        });
 
+        if( deepSearch ) {
+            _.each(childViews, function( child ) {
+                foundChildren.push.apply(foundChildren, that[child].findChildViews(childName, deepSearch));
+            });
+        }
+
+        return foundChildren;
+    }
+	
 });

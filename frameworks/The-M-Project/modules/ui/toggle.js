@@ -60,7 +60,7 @@ M.ToggleView = M.View.extend(
      * @returns {String} The toggle view's html representation.
      */
     render: function() {
-        this.html += '<div id="' + this.id + '">';
+        this.html = '<div id="' + this.id + '">';
 
         this.renderChildViews();
 
@@ -84,7 +84,7 @@ M.ToggleView = M.View.extend(
                     if(this[childViews[i]]) {
                         if(this.toggleOnClick) {
                             this[childViews[i]].internalEvents = {
-                                tap: {
+                                vclick: {
                                     target: this,
                                     action: 'toggleView'
                                 }
@@ -110,17 +110,14 @@ M.ToggleView = M.View.extend(
     toggleView: function(id, event, nextEvent) {
         this.isInFirstState = !this.isInFirstState;
         var currentViewIndex = this.isInFirstState ? 0 : 1;
-        $('#' + this.id + '_' + currentViewIndex).show();
         $('#' + this.id + '_' + (currentViewIndex > 0 ? 0 : 1)).hide();
+        $('#' + this.id + '_' + currentViewIndex).show();
 
         /* set current view */
         var childViews = this.getChildViewsAsArray();
         if(this[childViews[currentViewIndex]]) {
             this.currentView = this[childViews[currentViewIndex]];
         }
-
-        /* call jqm to fix header/footer */
-        $.mobile.fixedToolbars.show();
 
         if(nextEvent) {
             M.EventDispatcher.callHandler(nextEvent, event, YES);

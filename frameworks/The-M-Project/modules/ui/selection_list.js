@@ -179,6 +179,20 @@ M.SelectionListView = M.View.extend(
     recommendedEvents: ['change'],
 
     /**
+     * Define whether putting an asterisk to the right of the label for this selection list.
+     *
+     * @type Boolean
+     */
+    hasAsteriskOnLabel: NO,
+
+    /**
+     * This property can be used to assign a css class to the asterisk on the right of the label.
+     *
+     * @type String
+     */
+    cssClassForAsterisk: null,
+
+    /**
      * Renders a selection list.
      *
      * @private
@@ -189,7 +203,7 @@ M.SelectionListView = M.View.extend(
         /* initialize the initialState property as new array */
         this.initialState = [];
 
-        this.html += '<div id="' + this.id + '_container"';
+        this.html = '<div id="' + this.id + '_container"';
 
         if(this.isGrouped) {
             this.html += ' data-role="fieldcontain"';
@@ -209,7 +223,16 @@ M.SelectionListView = M.View.extend(
         if(this.selectionMode === M.SINGLE_SELECTION_DIALOG || this.selectionMode === M.MULTIPLE_SELECTION_DIALOG) {
             
             if(this.label) {
-                this.html += '<label for="' + this.id + '">' + this.label + '</label>';
+                this.html += '<label for="' + this.id + '">' + this.label;
+                if (this.hasAsteriskOnLabel) {
+                    if (this.cssClassForAsterisk) {
+                        this.html += '<span class="' + this.cssClassForAsterisk + '">*</span></label>';
+                    } else {
+                        this.html += '<span>*</span></label>';
+                    }
+                } else {
+                    this.html += '</label>';
+                }
             }
 
             this.html += '<select name="' + (this.name ? this.name : this.id) + '" id="' + this.id + '"' + this.style() + (this.selectionMode === M.MULTIPLE_SELECTION_DIALOG ? ' multiple="multiple"' : '') + '>';
@@ -223,7 +246,16 @@ M.SelectionListView = M.View.extend(
             this.html += '<fieldset data-role="controlgroup" data-native-menu="false" id="' + this.id + '">';
 
             if(this.label) {
-                this.html += '<legend>' + this.label + '</legend>';
+                this.html += '<legend>' + this.label;
+                if (this.hasAsteriskOnLabel) {
+                    if (this.cssClassForAsterisk) {
+                        this.html += '<span class="' + this.cssClassForAsterisk + '">*</span></legend>';
+                    } else {
+                        this.html += '<span>*</span></legend>';
+                    }
+                } else {
+                    this.html += '</legend>';
+                }
             }
 
             this.renderChildViews();
@@ -356,8 +388,9 @@ M.SelectionListView = M.View.extend(
     theme: function() {
         if(this.selectionMode === M.SINGLE_SELECTION_DIALOG || this.selectionMode === M.MULTIPLE_SELECTION_DIALOG) {
             $('#' + this.id).selectmenu();
-            if(this.selectionMode === M.MULTIPLE_SELECTION_DIALOG && this.initialText && this.selection && this.selection.length === 0) {
+            if((this.selectionMode === M.MULTIPLE_SELECTION_DIALOG && this.initialText && this.selection && this.selection.length === 0) || (this.selectionMode === M.SINGLE_SELECTION_DIALOG && !this.selection && this.initialText)) {
                 $('#' + this.id + '_container').find('.ui-btn-text').html(this.initialText);
+                document.getElementById(this.id).selectedIndex = -1;
             }
         } else if(this.selectionMode !== M.SINGLE_SELECTION_DIALOG && this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
             $('#' + this.id).controlgroup();
@@ -372,8 +405,9 @@ M.SelectionListView = M.View.extend(
     themeUpdate: function() {
         if(this.selectionMode === M.SINGLE_SELECTION_DIALOG || this.selectionMode === M.MULTIPLE_SELECTION_DIALOG) {
             $('#' + this.id).selectmenu('refresh');
-            if(this.selectionMode === M.MULTIPLE_SELECTION_DIALOG && this.initialText && this.selection && this.selection.length === 0) {
+            if((this.selectionMode === M.MULTIPLE_SELECTION_DIALOG && this.initialText && this.selection && this.selection.length === 0) || (this.selectionMode === M.SINGLE_SELECTION_DIALOG && !this.selection && this.initialText)) {
                 $('#' + this.id + '_container').find('.ui-btn-text').html(this.initialText);
+                document.getElementById(this.id).selectedIndex = -1;
             } else if(this.selectionMode === M.SINGLE_SELECTION_DIALOG && !this.selection) {
                 var that = this;
                 var item = M.ViewManager.getViewById($('#' + this.id).find('option:first-child').attr('id'));
@@ -458,6 +492,7 @@ M.SelectionListView = M.View.extend(
                 selectionValues.push(this.selection[i].value);
                 $('#' + this.id + '_container').find('.ui-btn-text').html(this.formatSelectionLabel(this.selection.length));
             }
+            $('#' + this.id + '_container').find('.ui-li-count').html(this.selection ? this.selection.length : 0);
 
             /* if there is no more item selected, reset the initial text */
             if(this.selection.length === 0) {
@@ -467,6 +502,27 @@ M.SelectionListView = M.View.extend(
             if(nextEvent) {
                 M.EventDispatcher.callHandler(nextEvent, event, NO, [selectionValues, this.selection]);
             }
+        }
+
+        /* fix the toolbar(s) again */
+        if(this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
+            $('#' + this.id).blur();
+        }
+        
+        this.delegateValueUpdate();
+    },
+    
+    /**
+     * This method delegates any value changes to a controller, if the 'contentBindingReverse'
+     * property is specified.
+     */
+    delegateValueUpdate: function() {
+        /**
+         * delegate value updates to a bound controller, but only if the view currently is
+         * the master
+         */
+        if(this.contentBindingReverse) {
+            this.contentBindingReverse.target.set(this.contentBindingReverse.property, this.selection.value);
         }
     },
 
@@ -580,10 +636,10 @@ M.SelectionListView = M.View.extend(
 
                     /* set the label */
                     $('#' + that.id + '_container').find('.ui-btn-text').html(that.formatSelectionLabel(that.selection.length));
+                    $('#' + that.id + '_container').find('.ui-li-count').html(that.selection ? that.selection.length : 0);
                 });
             }
         }
-        that.theme();
     },
 
     /**
@@ -679,7 +735,7 @@ M.SelectionListView = M.View.extend(
                 $(this).checkboxradio('disable');
             });
         } else {
-            $('#' + this.id).select('disable');
+            $('#' + this.id).selectmenu('disable');
             $('#' + this.id).each(function() {
                 $(this).attr('disabled', 'disabled');
             });
@@ -697,11 +753,34 @@ M.SelectionListView = M.View.extend(
                 $(this).checkboxradio('enable');
             });
         } else {
-            $('#' + this.id).select('enable');
+            $('#' + this.id).selectmenu('enable');
             $('#' + this.id).each(function() {
                 $(this).removeAttr('disabled');
             });
         }
+    },
+
+    valueDidChange: function(){
+        var valueBinding = this.valueBinding ? this.valueBinding : (this.computedValue) ? this.computedValue.valueBinding : null;
+
+        if(!valueBinding) {
+            return;
+        }
+
+        var value = valueBinding.target;
+        var propertyChain = valueBinding.property.split('.');
+        _.each(propertyChain, function(level) {
+            if(value) {
+                value = value[level];
+            }
+        });
+
+        if(!value || value === undefined || value === null) {
+            M.Logger.log('The value assigned by valueBinding (property: \'' + valueBinding.property + '\') for ' + this.type + ' (' + (this._name ? this._name + ', ' : '') + '#' + this.id + ') is invalid!', M.WARN);
+            return;
+        }
+
+        this.setSelection(value);
     }
 
 });

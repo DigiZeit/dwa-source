@@ -70,11 +70,19 @@ M.ButtonView = M.View.extend(
     tag: null,
 
     /**
+     * This property can be used to specifically set the data-theme property of a button view
+     * as it is used by jquery mobile.
+     *
+     * @type String
+     */
+    dataTheme: '',
+
+    /**
      * This property specifies the recommended events for this type of view.
      *
      * @type Array
      */
-    recommendedEvents: ['click', 'tap'],
+    recommendedEvents: ['click', 'tap', 'vclick'],
 
     /**
      * Renders a button as an input tag. Input is automatically converted by jQuery mobile.
@@ -84,7 +92,7 @@ M.ButtonView = M.View.extend(
      */
     render: function() {
         this.computeValue();
-        this.html += '<a data-role="button" id="' + this.id + '"' + this.style() + ' ';
+        this.html = '<a data-role="button" id="' + this.id + '"' + this.style() + ' ';
 
         if(this.hyperlinkTarget && this.hyperlinkType) {
             switch (this.hyperlinkType) {
@@ -134,11 +142,7 @@ M.ButtonView = M.View.extend(
      */
     renderUpdate: function() {
         this.computeValue();
-        if(this.parentView && this.parentView.type === 'M.ButtonGroupView') {
-            $('#' + this.id).find('.ui-btn-text').text(this.value);
-        } else {
-            $('#' + this.id).parent().find('.ui-btn-text').text(this.value);
-        }
+        $('#' + this.id + ' .ui-btn-text').text(this.value);
     },
 
     /**
@@ -159,7 +163,7 @@ M.ButtonView = M.View.extend(
     theme: function() {
         /* theme only if not already done */
         if(!$('#' + this.id).hasClass('ui-btn')) {
-            $('#' + this.id).button();
+            $('#' + this.id).buttonMarkup();
         }
     },
 
@@ -178,7 +182,10 @@ M.ButtonView = M.View.extend(
             html += ' data-icon="' + this.icon + '"';
         }
         if(this.cssClass) {
-            html += ' data-theme="' + this.cssClass + '"';
+            html += ' class="' + this.cssClass + '"';
+        }
+        if(this.dataTheme) {
+            html += ' data-theme="' + this.dataTheme + '"';
         }
         if(this.isIconOnly) {
             html += ' data-iconpos="notext"';

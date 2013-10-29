@@ -162,6 +162,29 @@ M.MapMarkerView = M.View.extend(
     icon: null,
 
     /**
+     * This property can be used to specify the display size of the icon used for the
+     * marker. This is important if you want to support e.g. the iphone's retina display.
+     *
+     * Pass along an object containing the desired width and height, e.g.:
+     *
+     *     {
+     *         width: 20,
+     *         height: 20
+     *     }
+     *
+     * @type Object
+     */
+    iconSize: null,
+
+    /**
+     * This property can be used to display a map marker icon centered about its location.
+     * By default a map marker is positioned with its bottom center at the location.
+     *
+     * @type Boolean
+     */
+    isIconCentered: NO,
+
+    /**
      * This property specifies the recommended events for this type of view.
      *
      * @type Array
@@ -235,7 +258,7 @@ M.MapMarkerView = M.View.extend(
         if(this.events || this.map.events) {
             var events = this.events ? this.events : this.map.events;
             for(var e in events) {
-                if(e === (event.type === 'click' ? 'tap' : event.type)) {
+                if(e === ((event.type === 'click' || event.type === 'touchend') ? 'tap' : event.type)) {
                     M.EventDispatcher.callHandler(events[e], event, NO, [this]);
                 }
             }
