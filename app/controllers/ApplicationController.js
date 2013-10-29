@@ -579,21 +579,25 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	DigiWebApp.SettingsController.globalDebugMode = NO; 
         }
 		try {
-			var fileNamesToDelete = [];
-			DigiWebApp.ServiceAppController.listDirectory(function(results) {
-				fileNamesToDelete = [];
-				_.each(results, function(fileName) {
-					if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
-						fileNamesToDelete.push(fileName);
-					}
+			if (DigiWebApp.SettingsController.featureAvailable('417')) {
+				var fileNamesToDelete = [];
+				DigiWebApp.ServiceAppController.listDirectory(function(results) {
+					fileNamesToDelete = [];
+					_.each(results, function(fileName) {
+						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
+							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							fileNamesToDelete.push(fileName);
+						}
+					});
+					DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+						DigiWebApp.ApplicationController.realDeviceReadyHandler();
+					}, function(){
+						DigiWebApp.ApplicationController.realDeviceReadyHandler();
+					});
 				});
-				DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-					DigiWebApp.ApplicationController.realDeviceReadyHandler();
-				}, function(){
-					DigiWebApp.ApplicationController.realDeviceReadyHandler();
-				});
-			});
+			} else {
+				DigiWebApp.ApplicationController.realDeviceReadyHandler();
+			}
 		} catch (exDeleteFiles) {
 			DigiWebApp.ApplicationController.realDeviceReadyHandler();
 		}
@@ -768,6 +772,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                         // only clears entries of the app
                         // (with prefix: M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX)            
         				var zuruecksetzen = function(mycompany, mypassword, myconnectionCode, myworkerId) {
+        					writeToLog("DIGI-WebApp wird zurückgesetzt");
         					DigiWebApp.SettingsController.credentialsAlertShown = false;
 	    					DigiWebApp.ApplicationController.deleteAllData(); 
 	                    	DigiWebApp.BookingController.currentBooking = null;
@@ -781,6 +786,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    	DigiWebApp.SettingsController.showIOSMessage = false;
 	                    	//console.log(mycompany, mypassword, myconnectionCode, myworkerId);
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
+	        					writeToLog("Zugangsdaten blieben erhalten");
 	                    		DigiWebApp.SettingsController.init(YES);
 								DigiWebApp.SettingsController.setSetting("company", mycompany);
 								DigiWebApp.SettingsController.setSetting("password", mypassword);
