@@ -228,8 +228,8 @@ M.LocationManager = M.Object.extend(
         options.maximumAge = options.maximumAge ? options.maximumAge : 0;
         options.timeout = options.timeout ? options.timeout : 3000;
 
-        //if(navigator && navigator.geolocation) {
-        if (geolocation) { // as of phonegap 3.0 ff
+        if(navigator && navigator.geolocation) {
+        //if (geolocation) { // as of phonegap 3.0 ff
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     that.isGettingLocation = NO;
