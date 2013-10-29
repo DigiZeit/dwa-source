@@ -746,6 +746,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , remark: obj.remark ? obj.remark : ''
             , istFeierabend: false
             , istKolonnenbuchung: false
+            , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
             , genauigkeitVon: null
             , gps_zeitstempelVon: null
             , ermittlungsverfahrenVon: null
