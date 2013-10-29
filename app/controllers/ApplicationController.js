@@ -1759,12 +1759,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
             // create a record for each order returned from the server and save it
             _.each(data['return'], function(el) {
-                rec = DigiWebApp.HandOrder.createRecord({
-                      id: el.handauftragsId
-                    , name: el.handauftragsBezeichnung
-                    , isLocalOnly: NO
-                });
-
+            	if (DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0) {
+	                rec = DigiWebApp.HandOrder.createRecord({
+	                      id: el.handauftragsId
+	                    , name: el.handauftragsBezeichnung
+	                    , isLocalOnly: NO
+	                });
+            	}
                 try {
                     rec.save();
                     mIdArray.push(rec.m_id);
