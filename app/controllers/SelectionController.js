@@ -145,6 +145,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
 	        this.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
+			this.saveSelection();
 		}
         
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
@@ -263,6 +264,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
 	        that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
+			that.saveSelection();
 		}
 
         // set selection arrays to start content binding process
@@ -456,6 +458,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
 	        this.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
+			this.saveSelection();
 		}
         
     	//if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
