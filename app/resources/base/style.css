@@ -97,14 +97,14 @@ body {
 .SCHOLPP_w1536 { background: url('images/1536x2048_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .SCHOLPP_w5000 { background: url('images/5000x5000_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
-.splashViewPage.SCHOLPP_w320 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w480 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w640 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w800 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w1024 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w1080 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w1536 { background: #e0232a !important }
-.splashViewPage.SCHOLPP_w5000 { background: #e0232a !important }
+.splashViewPage.SCHOLPP_w320 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w480 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w640 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w800 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1024 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1080 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1536 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w5000 { background: #003366 !important }
 
 .infoLabel a, 
 .infoLabel a:hover, 
