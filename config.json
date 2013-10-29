@@ -27,7 +27,7 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.7.1.4433",
+        "version": "1.7.1.4434",
         "debugMode": "false",
         "keyPrefix": "#m#",
         "keySuffix": "_",
