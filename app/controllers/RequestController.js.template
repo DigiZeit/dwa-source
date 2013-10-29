@@ -232,7 +232,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     , authenticate: function(obj) {
     	
         // empfange den konfigurierten Mitarbeiternamen
-    	var myFunc = function() {
+    	var myFunc = function(obj) {
     		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
 	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
@@ -243,9 +243,11 @@ DigiWebApp.RequestController = M.Controller.extend({
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
 	    		}
-	    		DigiWebApp.RequestController.authenticateWithDatabaseServer();
+	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    		DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
 	    	}, function(error) {
-	    		DigiWebApp.RequestController.authenticateWithDatabaseServer();
+	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    		DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
 	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
     	};
 
