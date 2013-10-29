@@ -113,7 +113,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				// Kolonne aktiv
 				employeeIdsArray = employeeIds.split(",");
 			} else {
-				employeeIdsArray = [DigiWebApp.SettingsController.getSetting("workerId")];
+				employeeIdsArray = [DigiWebApp.SettingsController.getSetting("mitarbeiterId")];
 			}
 					
 			_.each(relevanteZeitbuchungenSorted, function(el) {
