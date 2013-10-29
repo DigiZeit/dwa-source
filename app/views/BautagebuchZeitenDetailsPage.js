@@ -50,7 +50,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				mitarbeiterArray = _.map(JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterListSelected)), function(o) {
 					var mitarbeiterSelected = NO;
 					_.each(mitarbeiterIds, function(m) {
-						if (m === o.value) {
+						if (parseInt(m) === parseInt(o.value)) {
 							mitarbeiterSelected = YES;
 						}
 					});
