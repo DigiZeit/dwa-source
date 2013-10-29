@@ -507,7 +507,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		var internalErrorCallback = function() {				   
 			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("this.available = " + this.available);
 			errorCallback();
-		}
+		};
 
 		var internalSuccessCallback = function(data) {
 			try {
