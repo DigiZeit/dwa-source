@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4424"
-	version 	= "1.7.0.4424">
+	versionCode = "4425"
+	version 	= "1.7.0.4425">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -21,7 +21,7 @@
 	<gap:platform name="winphone" />
 	<!-- <gap:platform name="webos" /> -->
 	<!-- <gap:platform name="symbian" /> -->
-	<gap:platform name="blackberry" project="widgets" />
+	<!-- <gap:platform name="blackberry" project="widgets" /> -->
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	

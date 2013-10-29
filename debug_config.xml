@@ -21,7 +21,7 @@
 	<gap:platform name="winphone" />
 	<!-- <gap:platform name="webos" /> -->
 	<!-- <gap:platform name="symbian" /> -->
-	<gap:platform name="blackberry" project="widgets" />
+	<!-- <gap:platform name="blackberry" project="widgets" /> -->
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
