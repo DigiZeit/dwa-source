@@ -1765,6 +1765,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    , name: el.handauftragsBezeichnung
 	                    , isLocalOnly: NO
 	                });
+            	} else {
+            		rec = DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}})[0];
             	}
                 try {
                     rec.save();
