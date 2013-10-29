@@ -63,10 +63,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
     , defaultsettings: null
     
-    , init: function(isFirstLoad, interactWithServiceApp) {
+    , init: function(isFirstLoad, myinteractWithServiceApp) {
     	
     	var that = DigiWebApp.SettingsController;
     	
+    	var interactWithServiceApp = (myinteractWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417'));
+
     	M.I18N.defaultLanguage = "de_de";
     	
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
