@@ -52,6 +52,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 	, doBucheFahrzeit: function() {
 		if (DigiWebApp.ScholppBookingController.bucheFahrzeitTimeoutvar !== null) clearTimeout(DigiWebApp.ScholppBookingController.bucheFahrzeitTimeoutvar);
 		DigiWebApp.BookingController.book();
+		DigiWebApp.SelectionController.saveSelection();
 	}
 	
 	, bucheArbeitszeitTimeoutvar: null
@@ -81,6 +82,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 	, doBucheArbeitszeit: function() {
 		if (DigiWebApp.ScholppBookingController.bucheArbeitszeitTimeoutvar !== null) clearTimeout(DigiWebApp.ScholppBookingController.bucheArbeitszeitTimeoutvar);
 		DigiWebApp.BookingController.book();
+		DigiWebApp.SelectionController.saveSelection();
 	}
 
 	, bucheUnterbrechungTimeoutvar: null
@@ -110,6 +112,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 	, doBucheUnterbrechung: function() {
 		if (DigiWebApp.ScholppBookingController.bucheUnterbrechungTimeoutvar !== null) clearTimeout(DigiWebApp.ScholppBookingController.bucheUnterbrechungTimeoutvar);
 		DigiWebApp.BookingController.book();
+		DigiWebApp.SelectionController.saveSelection();
 	}
 	
 	, buchePauseTimeoutvar: null
@@ -139,6 +142,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 	, doBuchePause: function() {
 		if (DigiWebApp.ScholppBookingController.buchePauseTimeoutvar !== null) clearTimeout(DigiWebApp.ScholppBookingController.buchePauseTimeoutvar);
 		DigiWebApp.BookingController.book();
+		DigiWebApp.SelectionController.saveSelection();
 	}
 
 	, bucheArbeitsendeTimeoutvar: null
@@ -149,6 +153,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 	, doBucheArbeitsende: function() {
 		if (DigiWebApp.ScholppBookingController.bucheArbeitsendeTimeoutvar !== null) clearTimeout(DigiWebApp.ScholppBookingController.bucheArbeitsendeTimeoutvar);
 		DigiWebApp.BookingController.closeDay();
+		DigiWebApp.SelectionController.resetSelection();
 	}
 	
 	, selectFahrzeit: function() {

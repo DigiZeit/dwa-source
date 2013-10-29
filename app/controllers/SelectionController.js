@@ -128,7 +128,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
 	        /**
-	         * Scholpp-Spesen: Übrnachtungskennzeichen 
+	         * Scholpp-Spesen: Übernachtungskennzeichen 
 	         */
 	        itemSelected = NO;
 	        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
