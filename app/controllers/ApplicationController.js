@@ -2359,7 +2359,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
     		var inWinterzeit = !inSommerzeit;
 
-        	if (typeof(DigiWebApp.SettingsController.getSetting("currentTimezone")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezone") === "") {
+        	if (
+        			(typeof(DigiWebApp.SettingsController.getSetting("currentTimezone")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezone") === "") 
+        		||	(typeof(DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezoneOffset") === "") 
+        	){
                 if (inSommerzeit) {
                 	// wir sind aktuell in der Sommerzeit
         	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -120);
