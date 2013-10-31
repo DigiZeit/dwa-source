@@ -981,7 +981,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                }
 	            }
 	            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
-	            if(isCurrentBookingAvailable === YES) {
+	            if (isCurrentBookingAvailable === YES) {
 	            	//alert("go to BookTimePage");
 	            	DigiWebApp.NavigationController.toBookTimePage();
 	                return;
