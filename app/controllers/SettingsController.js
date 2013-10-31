@@ -169,6 +169,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var daysToHoldBookingsOnDevice = record.get('daysToHoldBookingsOnDevice');
             if (!daysToHoldBookingsOnDevice) daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get("daysToHoldBookingsOnDevice");
 
+            var vibrationsDauer = record.get('vibrationsDauer');
+            if (!vibrationsDauer) vibrationsDauer = DigiWebApp.SettingsController.defaultsettings.get("vibrationsDauer");
+
             var GPSDataIsMandatory = record.get('GPSDataIsMandatory');
             if (!GPSDataIsMandatory) GPSDataIsMandatory = DigiWebApp.SettingsController.defaultsettings.get("GPSDataIsMandatory");
             
@@ -191,7 +194,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                     , label: 'treatAllAsPhone'
                     , isSelected: record.get('treatAllAsPhone')
                 }]
-                , daysToHoldBookingsOnDevice: record.get('daysToHoldBookingsOnDevice')
+                , daysToHoldBookingsOnDevice: daysToHoldBookingsOnDevice
                 , company: record.get('company')
                 , password: record.get('password')
                 , connectionCode: record.get('connectionCode')
@@ -288,7 +291,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('auftragsDetailsKoppeln')
 	                 , isSelected: record.get('auftragsDetailsKoppeln')
 	           }]
-               , vibrationsDauer: record.get('vibrationsDauer')
+               , vibrationsDauer: vibrationsDauer
 
             };
         /* default values */

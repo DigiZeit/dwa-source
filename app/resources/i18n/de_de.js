@@ -442,6 +442,6 @@ M.I18N.de_de = {
 	, bisKoordinate: "Bis-Koord."
 	, genauigkeit: "Genauigkeit"
 		
-	, vibrationsDauer: "Vibrationsdauer"
+	, vibrationsDauerLabel: "Vibrationsdauer"
 
 };
