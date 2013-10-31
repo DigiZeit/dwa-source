@@ -2360,9 +2360,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		var inWinterzeit = !inSommerzeit;
 
         	if (typeof(DigiWebApp.SettingsController.getSetting("currentTimezone")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezone") === "") {
-        		var d8startApprox = D8.create(new Date(Number(booking.get('timeStampStart'))));
-                if (tagDerSommerzeit.timeBetween(d8startApprox) >= 0 && tagDerWinterzeit.timeBetween(d8startApprox) <= 0) {
-                	// Buchung war in Sommerzeit (nicht stundengenau)
+                if (inSommerzeit) {
+                	// wir sind aktuell in der Sommerzeit
         	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -120);
         		} else {
         	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -60);
