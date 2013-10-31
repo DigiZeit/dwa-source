@@ -2349,29 +2349,26 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , updateModels: function(callback) {
     	
     	var doUpdate = function() {
-    		
-	    	// Booking
-    		
+    		    		
 	    	var allBookings = DigiWebApp.Booking.find();
         	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
         	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
     		var d8Now = new D8();
-    		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
-    		var inWinterzeit = !inSommerzeit;
+    		
+    		// Zeitverschiebunsgregeln für Deutschland:
+    		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0); // -2h
+    		var inWinterzeit = !inSommerzeit;                                                                          // -1h
 
+    		// aktuelle Zeitzone und Verschiebung merken
         	if (
         			(typeof(DigiWebApp.SettingsController.getSetting("currentTimezone")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezone") === "") 
         		||	(typeof(DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezoneOffset") === "") 
         	){
-                if (inSommerzeit) {
-                	// wir sind aktuell in der Sommerzeit
-        	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -120);
-        		} else {
-        	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -60);
-        		}
-    	    	DigiWebApp.SettingsController.setSetting("currentTimezone", "Europe/Berlin");
+    	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", new Date().getTimezoneOffset());
+    	    	DigiWebApp.SettingsController.setSetting("currentTimezone", jstz.determine().name());
         	}
 
+	    	// Booking aktualisieren
         	_.each(allBookings, function(booking) {
 	    		
 	    		if (typeof(booking.get("modelVersion")) === "undefined" || booking.get("modelVersion") === "") {
@@ -2383,18 +2380,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	    			// Strings für die Zeitdarstellung nachberechnen
 	        		
-	            	// im Zweifel deutsche Zeitzone verwenden
-	            	if (typeof(booking.get("timezoneOffset")) === "undefined" || booking.get("timezoneOffset") === "") {
-	            		var d8startApprox = D8.create(new Date(Number(booking.get('timeStampStart'))));
-	                    if (tagDerSommerzeit.timeBetween(d8startApprox) >= 0 && tagDerWinterzeit.timeBetween(d8startApprox) <= 0) {
-	                    	// Buchung war in Sommerzeit (nicht stundengenau)
-	            			booking.set("timezoneOffset", -120);
-	            		} else {
-	            			booking.set("timezoneOffset", -60);
-	            		}
-	            		booking.set("timezone", "Europe/Berlin");
-		    	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", new Date().getTimezoneOffset());
-		    	    	DigiWebApp.SettingsController.setSetting("currentTimezone", "Europe/Berlin");
+	            	// Zeitzone setzen (wir wissen nicht welche es war, also wird die aktuelle verwendet)
+	            	if (
+	            			(typeof(booking.get("timezoneOffset")) === "undefined" || booking.get("timezoneOffset") === "") 
+	            		||	(typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "") 
+	            	){
+//	            		var d8startApprox = D8.create(new Date(Number(booking.get('timeStampStart'))));
+//	                    if (tagDerSommerzeit.timeBetween(d8startApprox) >= 0 && tagDerWinterzeit.timeBetween(d8startApprox) <= 0) {
+//	                    	// Buchung war in Sommerzeit (nicht stundengenau)
+//	            			booking.set("timezoneOffset", -120);
+//	            		} else {
+//	            			booking.set("timezoneOffset", -60);
+//	            		}
+            			booking.set("timezoneOffset", new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset());
+	            		booking.set("timezone", jstz.determine().name());
 	            	}
 
 	            	var startDate = booking.get('startDateString');
