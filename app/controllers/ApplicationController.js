@@ -2450,6 +2450,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	
     	};
 
+    	alert(DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
     	// zunächst muss die mitarbeiterId des Benutzers bekannt sein (ab modelVersion 1)
     	if (
     	   (typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) === "undefined") 
