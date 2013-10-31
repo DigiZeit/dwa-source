@@ -991,7 +991,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            }
 	        } else {
 	        	DigiWebApp.NavigationController.toBookTimePage();
-	        	this.startsync();
+	        	DigiWebApp.ApplicationController.startsync();
 	        }
         };
         
