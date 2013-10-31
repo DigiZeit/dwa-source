@@ -2346,8 +2346,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     , updateModels: function(callback) {
     	
-		writeToLog("in updateModels");
-
     	var doUpdate = function() {
 	    	// Booking
 	    	var allBookings = DigiWebApp.Booking.find();
@@ -2459,12 +2457,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	|| (parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0))
     	) {
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
-//    		writeToLog("DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\") = " + DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
-//    		writeToLog("typeof(DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\")) = " + typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")));
-//    		writeToLog("parseInt(DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\")) = " + parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId")));
-//    		writeToLog(" = " + );
-//    		writeToLog(" = " + );
-//    		writeToLog(" = " + );
     		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
 	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
