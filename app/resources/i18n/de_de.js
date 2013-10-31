@@ -426,9 +426,9 @@ M.I18N.de_de = {
 	, showInMapScholpp: "Sie werden weitergeleitet auf einen unabhängigen Kartendienst. Dies dient ausschließlich Ihrer Information und hat keinerlei Relevanz für Ihre Lohn- oder Reisekostenabrechnung."
 	, auftragsDetailsKoppeln: "Buchungsauswahl an Auftragsinfo koppeln" 
 	
+	, vibrationsDauerLabel: "Vibrationsdauer"
 	, keepCredentials: "Zugangsdaten erhalten?"
 	, keepCredentialsMsg: "Sollen die Zugangsdaten erhalten bleiben?"
-		
 	, detailierteZeitdaten: "detailierte Zeitdaten"
 	, latitude_von: "Von-Breitengrad"
 	, longitude_von: "Von-Längengrad"
@@ -440,8 +440,6 @@ M.I18N.de_de = {
 	, gpszeitstempel_bis: "Bis-GPS-Zeitstempel"
 	, vonKoordinate: "Von-Koord."
 	, bisKoordinate: "Bis-Koord."
-	, genauigkeit: "Genauigkeit"
-		
-	, vibrationsDauerLabel: "Vibrationsdauer"
+	, genauigkeit: "Genauigkeit"		
 
 };

@@ -429,6 +429,7 @@ M.I18N.en_us = {
 	, keepCredentials: "Preserve credentials?"
 	, keepCredentialsMsg: "Should the credentials sustain the reset?"
 		
+	, vibrationsDauerLabel: "Vibrationduration"
 	, detailierteZeitdaten: "show more details for timedata"
 	, latitude_von: "From-Latitude"
 	, longitude_von: "From-Longitude"
@@ -441,7 +442,5 @@ M.I18N.en_us = {
 	, vonKoordinate: "From-Coord."
 	, bisKoordinate: "To-Coord."
 	, genauigkeit: "Precision"
-
-	, vibrationsDauerLabel: "Vibrationduration"
 
 };
