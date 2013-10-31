@@ -2349,23 +2349,37 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , updateModels: function(callback) {
     	
     	var doUpdate = function() {
+    		
 	    	// Booking
+    		
 	    	var allBookings = DigiWebApp.Booking.find();
-	    	_.each(allBookings, function(booking) {
+        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
+    		var d8Now = new D8();
+    		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
+    		var inWinterzeit = !inSommerzeit;
+
+        	if (typeof(DigiWebApp.SettingsController.getSetting("currentTimezone")) === "undefined" || DigiWebApp.SettingsController.getSetting("currentTimezone") === "") {
+        		var d8startApprox = D8.create(new Date(Number(booking.get('timeStampStart'))));
+                if (tagDerSommerzeit.timeBetween(d8startApprox) >= 0 && tagDerWinterzeit.timeBetween(d8startApprox) <= 0) {
+                	// Buchung war in Sommerzeit (nicht stundengenau)
+        	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -120);
+        		} else {
+        	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", -60);
+        		}
+    	    	DigiWebApp.SettingsController.setSetting("currentTimezone", "Europe/Berlin");
+        	}
+
+        	_.each(allBookings, function(booking) {
 	    		
 	    		if (typeof(booking.get("modelVersion")) === "undefined" || booking.get("modelVersion") === "") {
 	    			
 	    			// vor modelVersion 1
 	    			
-	    			// booking.mitarbeiterId setzen (DigiWebApp.SettingsController.getSetting("mitarbeiterId"))
+	    	    	// booking.mitarbeiterId setzen (DigiWebApp.SettingsController.getSetting("mitarbeiterId"))
 	    			booking.set("mitarbeiterId", DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
 
 	    			// Strings für die Zeitdarstellung nachberechnen
-		        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-		        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-	        		var d8Now = new D8();
-	        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
-	        		var inWinterzeit = !inSommerzeit;
 	        		
 	            	// im Zweifel deutsche Zeitzone verwenden
 	            	if (typeof(booking.get("timezoneOffset")) === "undefined" || booking.get("timezoneOffset") === "") {
@@ -2377,6 +2391,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            			booking.set("timezoneOffset", -60);
 	            		}
 	            		booking.set("timezone", "Europe/Berlin");
+		    	    	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", new Date().getTimezoneOffset());
+		    	    	DigiWebApp.SettingsController.setSetting("currentTimezone", "Europe/Berlin");
 	            	}
 
 	            	var startDate = booking.get('startDateString');
