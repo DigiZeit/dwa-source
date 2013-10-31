@@ -420,7 +420,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , checkSizeModeChange: function() {
     	if (this.sizeMode === null || this.timeouthappened) {
 			switch(true) {
-				case(                          $(window).width()<=320):
+				case(                          $(window).width()<320):
 					if (this.sizeMode !== "w320") {
 						this.sizeMode = "w320";
 						return true;
@@ -428,7 +428,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>320  && $(window).width()<=480):
+				case($(window).width()>=320  && $(window).width()<480):
 					if (this.sizeMode !== "w480") {
 						this.sizeMode = "w480";
 						return true;
@@ -436,7 +436,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>480  && $(window).width()<=640):
+				case($(window).width()>=480  && $(window).width()<640):
 					if (this.sizeMode !== "w640") {
 						this.sizeMode = "w640";
 						return true;
@@ -444,7 +444,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>640  && $(window).width()<=800):
+				case($(window).width()>=640  && $(window).width()<800):
 					if (this.sizeMode !== "w800") {
 						this.sizeMode = "w800";
 						return true;
@@ -452,7 +452,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>800  && $(window).width()<=1024):
+				case($(window).width()>=800  && $(window).width()<1024):
 					if (this.sizeMode !== "w1024") {
 						this.sizeMode = "w1024";
 						return true;
@@ -460,7 +460,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>1024  && $(window).width()<=1080):
+				case($(window).width()>=1024  && $(window).width()<1080):
 					if (this.sizeMode !== "w1080") {
 						this.sizeMode = "w1080";
 						return true;
@@ -468,7 +468,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						return false;
 					}
 					break;
-				case($(window).width()>1080 && $(window).width()<=1536):
+				case($(window).width()>=1080 && $(window).width()<1536):
 					if (this.sizeMode !== "w1536") {
 						this.sizeMode = "w1536";
 						return true;
