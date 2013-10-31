@@ -2458,6 +2458,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	|| parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0)
     	)) {
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
+    		writeToLog("DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\") = " + DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
+    		writeToLog("typeof(DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\")) = " + typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")));
+    		writeToLog("parseInt(DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\")) = " + parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId")));
     		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
 	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
@@ -2481,6 +2484,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
               });
 	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
 
+    	} else {
+    		doUpdate();
     	}
     	
     }
