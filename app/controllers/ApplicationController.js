@@ -2457,10 +2457,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	|| (DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "")
     	|| (parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0))
     	) {
+    		alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
 	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+	    			alert(data.mitarbeiter.length);
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
 	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
