@@ -2453,10 +2453,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	};
 
     	// zunächst muss die mitarbeiterId des Benutzers bekannt sein (ab modelVersion 1)
-    	if (typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "undefined" 
-    	|| DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "" 
-    	|| parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0)
-    	)) {
+    	if (
+    	   (typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "undefined")) 
+    	|| (DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "")
+    	|| (parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0))
+    	) {
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\") = " + DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
     		writeToLog("typeof(DigiWebApp.SettingsController.getSetting(\"mitarbeiterId\")) = " + typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")));
