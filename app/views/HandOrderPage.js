@@ -34,7 +34,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToDashboardPage();}
                 }
             }
         })
@@ -66,7 +66,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.HandOrderController
-                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.save();}
+                        , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
                     }
                 }
             })

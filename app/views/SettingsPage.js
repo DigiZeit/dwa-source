@@ -35,7 +35,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToDashboardPage'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){}
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
         				if (!DigiWebApp.SettingsController.showCredentialsAlert) {
         					DigiWebApp.NavigationController.backToDashboardPage();
         				}
@@ -52,7 +52,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
         //  childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory autoSaveGPSData GPSDataIsMandatory useTransitionsSetting grid'
-          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory remarkIsOptional autoSaveGPSData detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln grid'
+          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory remarkIsOptional autoSaveGPSData detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -64,6 +64,20 @@ DigiWebApp.SettingsPage = M.PageView.design({
 		            , contentBinding: {
 		                  target: DigiWebApp.SettingsController
 		                , property: 'settings.daysToHoldBookingsOnDevice'
+		            }
+		        })
+        })
+        , vibrationsDauerSliderContainer: M.ContainerView.design({
+      	  		  childViews: 'vibrationsDauerSlider'
+		        , vibrationsDauerSlider: M.SliderView.design({
+		        	  label: M.I18N.l('vibrationsDauerLabel')
+		        	, min: 1
+		        	, max: 40
+		        	, highlightLeftPart: YES
+		        	, cssClass: 'vibrationsDauerSlider'
+		            , contentBinding: {
+		                  target: DigiWebApp.SettingsController
+		                , property: 'settings.vibrationsDauer'
 		            }
 		        })
         })
@@ -265,7 +279,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.SettingsController
-                        , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.save();}
+                        , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
                     }
                 }
             })

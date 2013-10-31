@@ -1034,6 +1034,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.daysToHoldBookingsOnDeviceSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.auftragsDetailsKoppeln.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.detailierteZeitdaten.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.vibrationsDauerSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		} else {
 			//if (debug) console.log("enforcing ChefToolOnly, SHOW");
 	    	// show tabbar
@@ -1053,6 +1054,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.featureAvailable('406')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.auftragsDetailsKoppeln.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.vibrationsDauerSliderContainer.id  + ']').each(function() { $(this).show(); });}catch(e){}
 		}
 		
 
@@ -2491,6 +2493,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , sonderzeichenCheck: function(str) {
         return ( /[^\w\säöüÄÖÜß \x40"(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
+    }
+    
+    , vibrate: function() {
+    	try {
+	    	var vibrationsDauer = DigiWebApp.ApplicationController.CONSTVibrateDuration;
+	    	if (typeof(DigiWebApp.SettingsController.getSetting("vibrationsDauer")) !== "undefined") {
+	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
+	    	}
+	    	if (vibrationsDauer > 0) {
+	    		navigator.notification.vibrate(vibrationsDauer)
+	    	}
+    	} catch (vibrateError) {}
     }
 
 });

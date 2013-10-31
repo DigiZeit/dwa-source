@@ -54,7 +54,7 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToDashboardPage();}
                 }
             }
         })
@@ -69,7 +69,7 @@ DigiWebApp.InfoPage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} 
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
 			        	DigiWebApp.SettingsController.mitarbeiterNameVorname = "";
 				        var settings = DigiWebApp.Settings.find();    		
 				    	var MitarbeiterWebAppID = "0";
@@ -126,7 +126,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                     }
 			        , tap: {
 						action: function() {
-			        		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e5){}
+			        		try{DigiWebApp.ApplicationController.vibrate();}catch(e5){}
 							}
 			        }
                 }
@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4480'
+              value: 'Build: 4482'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 

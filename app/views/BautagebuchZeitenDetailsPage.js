@@ -110,7 +110,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchZeitenListePageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e8){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} history.back();}
                 }
             }
         })
@@ -125,7 +125,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchZeitenDetailsController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e9){} this.deleteZeitbuchung();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e9){} this.deleteZeitbuchung();}
                 }
             }
         })

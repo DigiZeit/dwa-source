@@ -89,5 +89,7 @@ DigiWebApp.Settings = M.Model.create({
     , auftragsDetailsKoppeln: M.Model.attr('Boolean')
 
     , detailierteZeitdaten: M.Model.attr('Boolean')
+    
+    , vibrationsDauer: M.Model.attr('String')
 
 }, M.DataProviderLocalStorage);

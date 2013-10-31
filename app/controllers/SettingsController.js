@@ -59,6 +59,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , mitarbeiterId: "0"
         , auftragsDetailsKoppeln: false
         , detailierteZeitdaten: true
+        , vibrationsDauer: 100
     }
 
     , defaultsettings: null
@@ -190,7 +191,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                     , label: 'treatAllAsPhone'
                     , isSelected: record.get('treatAllAsPhone')
                 }]
-                , daysToHoldBookingsOnDevice: daysToHoldBookingsOnDevice
+                , daysToHoldBookingsOnDevice: record.get('daysToHoldBookingsOnDevice')
                 , company: record.get('company')
                 , password: record.get('password')
                 , connectionCode: record.get('connectionCode')
@@ -287,6 +288,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('auftragsDetailsKoppeln')
 	                 , isSelected: record.get('auftragsDetailsKoppeln')
 	           }]
+               , vibrationsDauer: record.get('vibrationsDauer')
 
             };
         /* default values */
@@ -387,6 +389,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("auftragsDetailsKoppeln")
 	                , label: M.I18N.l('auftragsDetailsKoppeln')
 	            }]
+                , vibrationsDauer: DigiWebApp.SettingsController.defaultsettings.get("vibrationsDauer")
 
             };
             
@@ -582,6 +585,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var mitarbeiterNachname              = DigiWebApp.SettingsController.getSetting('mitarbeiterNachname');
         var mitarbeiterId                    = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
         var auftragsDetailsKoppeln			 = $('#' + M.ViewManager.getView('settingsPage', 'auftragsDetailsKoppeln').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+    	var vibrationsDauer                  = $('#' + M.ViewManager.getView('settingsPage', 'vibrationsDauerSlider').id).val();
 
         var numberRegex = /^[0-9]+$/;
         if (company) {
@@ -690,6 +694,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
                                                     record.set('mitarbeiterId', mitarbeiterId);
                                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
+                                                    record.set('vibrationsDauer', vibrationsDauer);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -763,6 +768,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('mitarbeiterNachname', mitarbeiterNachname);
                                     record.set('mitarbeiterId', mitarbeiterId);
                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
+                                    record.set('vibrationsDauer', vibrationsDauer);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -810,6 +816,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
                                 record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
+                                record.set('vibrationsDauer', vibrationsDauer);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -857,6 +864,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mitarbeiterNachname', mitarbeiterNachname);
                                 record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
+                                record.set('vibrationsDauer', vibrationsDauer);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -906,6 +914,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , mitarbeiterNachname: mitarbeiterNachname
                                 , mitarbeiterId: mitarbeiterId
                                 , auftragsDetailsKoppeln: auftragsDetailsKoppeln
+                                , vibrationsDauer: vibrationsDauer
 
                           });
 

@@ -90,7 +90,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
                 }
             }
         })
@@ -107,7 +107,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
                       //target: DigiWebApp.BautagebuchBautageberichtDetailsController
                     //, action: 'delete'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} 
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
         				DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
         			}
                 }

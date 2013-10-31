@@ -32,7 +32,7 @@ DigiWebApp.AnwesenheitslistePage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.backToDashboardPage();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.backToDashboardPage();}
                 }
             }
         })
@@ -47,7 +47,7 @@ DigiWebApp.AnwesenheitslistePage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
 			    		DigiWebApp.AnwesenheitslisteController.set('items', {});
 			    		DigiWebApp.AnwesenheitslisteController.items = null;
 						DigiWebApp.AnwesenheitslisteController.init();

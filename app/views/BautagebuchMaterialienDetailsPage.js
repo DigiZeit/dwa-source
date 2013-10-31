@@ -137,7 +137,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMaterialienListePageTransition'
-        			action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
                 }
             }
         })
@@ -152,7 +152,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){} this.deleteMaterialbuchung();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.deleteMaterialbuchung();}
                 }
             }
         })

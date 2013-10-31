@@ -33,7 +33,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
             , events: {
                 tap: {
                     target: DigiWebApp.NavigationController,
-                    action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToDashboardPage();}
+                    action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToDashboardPage();}
                 }
             }
         })
@@ -82,7 +82,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 	            }
 		        , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 	  				}
 	            }
 	        }
@@ -123,7 +123,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 	            }
 		        , tap: {
 					action: function() {
-	            		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
+	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
 	  				}
 	            }
 	        }

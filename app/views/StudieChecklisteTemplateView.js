@@ -84,7 +84,7 @@ DigiWebApp.StudieChecklisteTemplateView = M.DigiListItemView.design({
 //			      }
 //			      , tap: {
 //						action: function() {
-//			      		try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e){}
+//			      		try{DigiWebApp.ApplicationController.vibrate();}catch(e){}
 //						}
 //			      }
 //			  }

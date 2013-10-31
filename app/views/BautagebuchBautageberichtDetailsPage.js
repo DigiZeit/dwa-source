@@ -121,7 +121,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e2){} this.backToBautagebuchBautageberichteListePageTransition();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToBautagebuchBautageberichteListePageTransition();}
                 }
             }
         })
@@ -135,7 +135,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
 	            tap: {
 	                action: function() {
-            			try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e3){}
+            			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 				  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 								return;
 						}
@@ -188,7 +188,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                       //target: DigiWebApp.BautagebuchBautageberichtDetailsController
                     //, action: 'delete'
         			action: function() {
-        				try{navigator.notification.vibrate(DigiWebApp.ApplicationController.CONSTVibrateDuration);}catch(e4){}
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
         				DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
         			}
                 }
