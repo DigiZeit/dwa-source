@@ -155,7 +155,10 @@ DigiWebApp.InfoPage = M.PageView.design({
 //                    	outString = outString + ' (' + DigiWebApp.SettingsController.mitarbeiterNameVorname + ')';
 //                    }
                     if (DigiWebApp.SettingsController.getSetting("mitarbeiterVorname") !== "" || DigiWebApp.SettingsController.getSetting("mitarbeiterNachname") !== "") { 
-                    	outString = outString + " (" + DigiWebApp.SettingsController.getSetting("mitarbeiterVorname") + " " + DigiWebApp.SettingsController.getSetting("mitarbeiterNachname") + ", MitarbeiterID " + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")";
+                    	outString = outString + " (" + DigiWebApp.SettingsController.getSetting("mitarbeiterVorname") + " " + DigiWebApp.SettingsController.getSetting("mitarbeiterNachname") + ")";
+                    	if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    		outString = outString + "<br/>MitarbeiterID " + DigiWebApp.SettingsController.getSetting("mitarbeiterId");	
+                    	}
                     }
                     return outString;
                 }
@@ -203,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4461'
+              value: 'Build: 4462'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
