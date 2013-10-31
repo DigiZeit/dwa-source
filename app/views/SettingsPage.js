@@ -71,8 +71,8 @@ DigiWebApp.SettingsPage = M.PageView.design({
       	  		  childViews: 'vibrationsDauerSlider'
 		        , vibrationsDauerSlider: M.SliderView.design({
 		        	  label: M.I18N.l('vibrationsDauerLabel')
-		        	, min: 1
-		        	, max: 40
+		        	, min: 0
+		        	, max: 200
 		        	, highlightLeftPart: YES
 		        	, cssClass: 'vibrationsDauerSlider'
 		            , contentBinding: {

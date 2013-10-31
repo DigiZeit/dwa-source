@@ -442,4 +442,6 @@ M.I18N.en_us = {
 	, bisKoordinate: "To-Coord."
 	, genauigkeit: "Precision"
 
+	, vibrationsDauer: "Vibrationduration"
+
 };
