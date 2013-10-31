@@ -1787,7 +1787,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     rec.save();
                     mIdArray.push(rec.m_id);
                     _.each(DigiWebApp.Booking.find({query:{identifier: 'handOrderId', operator: '=', value: el.handauftragsBezeichnung}}), function(booking) {
-                    	booking.set("handOrderId", el.handauftragsId).save();
+                    	booking.set("handOrderId", el.handauftragsId);
+                    	booking.save();
                     });
                 } catch(e) {
                 	console.error("ERROR in " + this.name + ".getHandOrdersFromRemoteSuccess: " + e);
