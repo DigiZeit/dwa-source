@@ -79,7 +79,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 
 	try {
 		
-		console.log(writeContent);
+		console.log(writeContent.toString());
 		
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
 	    // open filesystem
