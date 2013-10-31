@@ -1765,7 +1765,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             _.each(data['return'], function(el) {
             	if (
             			(DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0)
-            			(DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length === 0)
+            		&&	(DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length === 0)
             	) {
 	                rec = DigiWebApp.HandOrder.createRecord({
 	                      id: el.handauftragsId
