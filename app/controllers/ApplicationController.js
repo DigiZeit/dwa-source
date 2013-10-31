@@ -2457,7 +2457,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	|| DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "" 
     	|| parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId") === 0)
     	)) {
-    		writeToLog("aktualisiere Mitarbeiter des Benutzers in upodateModels");
+    		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
 	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
