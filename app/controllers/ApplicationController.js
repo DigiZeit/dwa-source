@@ -1763,14 +1763,25 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
             // create a record for each order returned from the server and save it
             _.each(data['return'], function(el) {
-            	if (DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0) {
+            	if (
+            			(DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0)
+            			(DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length === 0)
+            	) {
 	                rec = DigiWebApp.HandOrder.createRecord({
 	                      id: el.handauftragsId
 	                    , name: el.handauftragsBezeichnung
 	                    , isLocalOnly: NO
 	                });
-            	} else {
+            	} else if (DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length !== 0) {
             		rec = DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}})[0];
+            		rec.set("id", el.handauftragsId);
+            		rec.set("name", el.handauftragsBezeichnung);
+            		rec.set("isLocalOnly", NO);
+            	} else if (DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length !== 0) {
+            		rec = DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}})[0];
+            		rec.set("id", el.handauftragsId);
+            		rec.set("name", el.handauftragsBezeichnung);
+            		rec.set("isLocalOnly", NO);
             	}
                 try {
                     rec.save();
