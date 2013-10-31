@@ -762,6 +762,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , endeDateString: ""
             , startTimeString: timeString
             , endeTimeString: ""
+            , modelVersion: "1"
         });
     }
 

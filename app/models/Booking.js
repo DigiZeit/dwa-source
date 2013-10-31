@@ -11,6 +11,10 @@ DigiWebApp.Booking = M.Model.create({
     /* Define the name of your model. Do not delete this property! */
     __name__: 'Booking'
 
+    , modelVersion: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , fileName: M.Model.attr('String', {
         isRequired: NO
     })
