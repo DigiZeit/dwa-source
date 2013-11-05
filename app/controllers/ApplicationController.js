@@ -2402,7 +2402,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	|| (typeof(startTime) === "undefined" || !startTime || startTime === "")
 	            	) {
 	            		// Buchung aus alter WebAppVersion
-	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart')).getTimezoneOffset() - booking.get('timezoneOffset')))));
+	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
 //	                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
 //	                    	// Buchung war in Sommerzeit
 //	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
@@ -2428,7 +2428,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	|| (typeof(endeTime) === "undefined" || !endeTime || endeTime === "")
 	            	) {
 	            		// Buchung aus alter WebAppVersion
-	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd')).getTimezoneOffset() - booking.get('timezoneOffset')))));
+	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
 //	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
 //	                    	// Buchung war in Sommerzeit
 //	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
