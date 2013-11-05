@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4492
+    , softwareVersion: 4493
 
 
     /**
@@ -262,7 +262,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     }
 
     , authenticateWithDatabaseServer: function(obj) {
-		writeToLog("in authenticateWithDatabaseServer");
+		//writeToLog("in authenticateWithDatabaseServer");
 
         DigiWebApp.RequestController.saveCallbacks(obj.success, obj.error, 'authenticate');
 
