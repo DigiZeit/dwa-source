@@ -1907,6 +1907,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.SettingsController.setSetting('treatAllAsTablet', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
             DigiWebApp.SettingsController.setSetting('treatAllAsPhone', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
             DigiWebApp.SettingsController.setSetting('settingsPassword', DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
+            var oldBranding = DigiWebApp.SettingsController.getSetting('branding');
             DigiWebApp.SettingsController.setSetting('branding', DigiWebApp.SettingsController.defaultsettings.get('branding'));
             DigiWebApp.SettingsController.setSetting('silentLoader', DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
             DigiWebApp.SettingsController.setSetting('mapType', DigiWebApp.SettingsController.defaultsettings.get('mapType'));
@@ -1972,6 +1973,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                	if (el[prefix + 'keyId'] === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
 	                	if (el[prefix + 'keyId'] === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
 	                }
+	                
+	                // auch bei geändertem branding neu starten
+	                if ((el[prefix + 'keyId'] === "branding") && (el[prefix + 'value'] !== oldBranding)) DigiWebApp.ApplicationController.restartApp = YES;
 	                
 	            }
                 DigiWebApp.ApplicationController.triggerUpdate = YES;
