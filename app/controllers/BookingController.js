@@ -733,7 +733,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         return DigiWebApp.Booking.createRecord({
               orderId: obj.oId ? obj.oId : null
             , orderName: myOrderName
-            , handOrderId: obj.hoId ? obj.hoId : null
+            , handOrderId: obj.hoId ? obj.hoId : ""
             , handOrderName: obj.hoName ? obj.hoName : null
             , latitude: obj.lat ? obj.lat : null
             , longitude: obj.lon ? obj.lon : null
