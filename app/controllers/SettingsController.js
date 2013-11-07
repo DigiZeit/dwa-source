@@ -483,7 +483,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 //	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_engeKopplung.id).hide();
 //	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id).hide();
 //	         	$('#' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id).hide();
-	         	if (interactWithServiceApp) cleanDataDirectory();
+	         	//if (interactWithServiceApp) cleanDataDirectory();
 	        }
 	    };
         

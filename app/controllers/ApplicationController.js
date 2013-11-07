@@ -1358,7 +1358,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     mIdArray.push(rec.m_id);
                 } catch(e) {
                     // maybe do something here
-                	console.error("ERROR in " + this.name + ".getOrdersFromRemoteSuccess: " + e);
+                	console.error("ERROR in getOrdersFromRemoteSuccess: " + e);
                 }
             });
 
@@ -1516,7 +1516,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     rec.save();
                     mIdArray.push(rec.m_id);
                 } catch(e) {
-                	console.error("ERROR in " + this.name + ".getPositionsFromRemoteSuccess: " + e);
+                	console.error("ERROR in getPositionsFromRemoteSuccess: " + e);
                 }
                 
             });
@@ -1608,7 +1608,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    rec.save();
 	                    mIdArray.push(rec.m_id);
 	                } catch(e) {
-	                	console.error("ERROR in " + this.name + ".getActivitiesFromRemoteSuccess: " + e);
+	                	console.error("ERROR in getActivitiesFromRemoteSuccess: " + e);
 	                }
             	}
             });
@@ -1793,7 +1793,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     	booking.save();
                     });
                 } catch(e) {
-                	console.error("ERROR in " + this.name + ".getHandOrdersFromRemoteSuccess: " + e);
+                	console.error("ERROR in getHandOrdersFromRemoteSuccess: " + e);
                 }
             });
 
@@ -2134,7 +2134,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 	k.save();
                     mIdArray.push(k.m_id);
                 } catch(e) {
-                	console.error("ERROR in " + this.name + ".getKolonneFromRemoteSuccess: " + e);
+                	console.error("ERROR in getKolonneFromRemoteSuccess: " + e);
                 }
 
             });

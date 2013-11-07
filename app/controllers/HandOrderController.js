@@ -66,7 +66,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 try {
                     hIds.push(op.m_id);
                 } catch(e3) {
-                	console.error("ERROR in " + this.name + ".save: " + e3);
+                	console.error("ERROR in save: " + e3);
                 }
 
                 localStorage.setItem(k, JSON.stringify(hIds));
