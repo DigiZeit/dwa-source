@@ -1904,9 +1904,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
             // reset settings without gui-elements
             //DigiWebApp.SettingsController.setSetting('debug', false);
-            DigiWebApp.SettingsController.setSetting('treatAllAsTablet', false);
-            DigiWebApp.SettingsController.setSetting('treatAllAsPhone', false);
-            DigiWebApp.SettingsController.setSetting('settingsPassword', 'digi$');
+            DigiWebApp.SettingsController.setSetting('treatAllAsTablet', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
+            DigiWebApp.SettingsController.setSetting('treatAllAsPhone', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
+            DigiWebApp.SettingsController.setSetting('settingsPassword', DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
+            DigiWebApp.SettingsController.setSetting('branding', DigiWebApp.SettingsController.defaultsettings.get('branding'));
+            DigiWebApp.SettingsController.setSetting('silentLoader', DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
+            DigiWebApp.SettingsController.setSetting('mapType', DigiWebApp.SettingsController.defaultsettings.get('mapType'));
+            //DigiWebApp.SettingsController.setSetting('useTransitionsSetting', DigiWebApp.SettingsController.defaultsettings.get('useTransitionsSetting'));
+            DigiWebApp.SettingsController.setSetting('datatransfer_min_delay', DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
+            DigiWebApp.SettingsController.setSetting('GPSTimeOut', DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
+            DigiWebApp.SettingsController.setSetting('debugDatabaseServer', DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
 
             DigiWebApp.ApplicationController.triggerUpdate = NO;
             
