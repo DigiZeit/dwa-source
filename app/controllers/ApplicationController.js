@@ -2511,7 +2511,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			DigiWebApp.ApplicationController.nativeAlertDialogView({
                     title: M.I18N.l('offlineWorkNotPossible')
                   , message: M.I18N.l('offlineWorkNotPossibleMsg')
-              });
+    			});
 	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
 
     	} else {
