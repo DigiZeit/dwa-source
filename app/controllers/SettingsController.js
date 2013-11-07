@@ -170,7 +170,18 @@ DigiWebApp.SettingsController = M.Controller.extend({
             if (!daysToHoldBookingsOnDevice) daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get("daysToHoldBookingsOnDevice");
 
             var vibrationsDauer = record.get('vibrationsDauer');
-            if (!vibrationsDauer) vibrationsDauer = DigiWebApp.SettingsController.defaultsettings.get("vibrationsDauer");
+            if (!vibrationsDauer) {
+            	var plat = "";
+            	try {
+            		plat = device.platform.substr(0,3);
+            	} catch(e) {}
+            	if (plat === "iOS") {
+            		// disable vibration on iOS by default
+            		vibrationsDauer = 0;
+            	} else {
+            		vibrationsDauer = DigiWebApp.SettingsController.defaultsettings.get("vibrationsDauer");
+            	}
+            }
 
             var GPSDataIsMandatory = record.get('GPSDataIsMandatory');
             if (!GPSDataIsMandatory) GPSDataIsMandatory = DigiWebApp.SettingsController.defaultsettings.get("GPSDataIsMandatory");
