@@ -49,7 +49,7 @@ body {
 */
 
 .ui-header .ui-btn-left {
-	margin-top: 0px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
+	margin-top: 3px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
 }
 
 .ui-li-has-arrow .ui-btn-inner a.ui-link-inherit, 
@@ -237,6 +237,10 @@ img.audioIcon {
 	margin: 3px
 }
 
+.scholppButton [data-role="button"] {
+	margin: 0px;
+}
+
 .scholppButton span.ui-btn-inner
 {
     font-weight: bold;
@@ -252,7 +256,7 @@ img.audioIcon {
 
 .ui-content .scholppButton {
     position: relative;
-    height: 60px;
+    height: 40px;
     padding-bottom: 15px;
 }
 
@@ -275,11 +279,11 @@ img.audioIcon {
 
 .ui-content .scholppButton .icon img 
 {
-    width: 48px;
+    width: 30px;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    top: -58px;
+    top: -35px;
     position: relative;
 }
 
