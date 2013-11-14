@@ -423,7 +423,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
         })
 
         , currentBookingLabel: M.LabelView.design({
-              cssClass: 'marginTop25 whiteLabel unselectable'
+              cssClass: 'marginTop15 whiteLabel unselectable'
             , computedValue: {
                   contentBinding: {
                       target: DigiWebApp.BookingController
