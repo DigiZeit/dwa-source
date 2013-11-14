@@ -426,12 +426,16 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
 		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
+		    			uebernachtungAuswahl = "6";
 		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
+		    			uebernachtungAuswahl = "6";
 		    		} else if (activityName.indexOf("Pause") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectPause();
+		    			uebernachtungAuswahl = "6";
 		    		} else {
 		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+		    			uebernachtungAuswahl = "6";
 		    		}
 	    		}
     		} else {
