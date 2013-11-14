@@ -12,7 +12,8 @@ body {
 	text-weight: bold;
 }
 
-input[type="text"], input[type="password"]  {
+  .ui-body-c input[type="text"]
+, .ui-body-c input[type="password"]  {
 	color: #000 !important;
 }
 
@@ -96,6 +97,10 @@ input[type="text"], input[type="password"]  {
 .w5000 { background: url('images/5000x5000_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
 /* SCHOLPP-Branding */
+.SCHOLPPbranding .ui-body-c {
+	color: #fff !important;
+	text-weight: bold;
+}
 .splashViewPage.SCHOLPP_w320 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w480 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w640 { background: #003366 !important }
@@ -113,7 +118,11 @@ input[type="text"], input[type="password"]  {
 .SCHOLPP_w1536 { background: url('images/1536x2048_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .SCHOLPP_w5000 { background: url('images/5000x5000_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
-/* SCHOLPP-Branding */
+/* DIGI-WEBAPP-WHITE-Branding */
+.DIGI-WEBAPP-WHITEbranding .ui-body-c {
+	color: #000 !important;
+	text-weight: bold;
+}
 .splashViewPage.DIGI-WEBAPP-WHITE_w320 { background: #ffffff !important }
 .splashViewPage.DIGI-WEBAPP-WHITE_w480 { background: #ffffff !important }
 .splashViewPage.DIGI-WEBAPP-WHITE_w640 { background: #ffffff !important }
