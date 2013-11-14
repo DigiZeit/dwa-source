@@ -12,6 +12,10 @@ body {
 	text-weight: bold;
 }
 
+input[type="text"], input[type="password"]  {
+	color: #000 !important;
+}
+
 /*
 
 .ui-mobile-viewport-transitioning,
