@@ -419,26 +419,28 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		if (typeof(activitySelection) !== "undefined") {
 	    		var activitySelected = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
 	    		if (typeof(activitySelected) === "undefined") {
+	    			uebernachtungAuswahl = "6";
 	    			DigiWebApp.ScholppBookingController.selectArbeitsende();
 	    		} else {
 		    		var activityName = activitySelected.get("name");
 		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
 		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
+		    			uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
-		    			uebernachtungAuswahl = "6";
 		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
+		    			uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
-		    			uebernachtungAuswahl = "6";
 		    		} else if (activityName.indexOf("Pause") >= 0) {
+		    			uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectPause();
-		    			uebernachtungAuswahl = "6";
 		    		} else {
-		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    			uebernachtungAuswahl = "6";
+		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    		}
 	    		}
     		} else {
+    			uebernachtungAuswahl = "6";
     			DigiWebApp.ScholppBookingController.selectArbeitsende();
     		}
     	}
