@@ -88,7 +88,8 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 value: M.I18N.l('company')
             })
             , companyInput: M.TextFieldView.design({
-                contentBinding: {
+            	  inputType: M.INPUT_NUMBER
+                , contentBinding: {
                       target: DigiWebApp.SettingsController
                     , property: 'settings.company'
                 }
