@@ -13,7 +13,10 @@ body {
 }
 
   .ui-body-c input[type="text"]
-, .ui-body-c input[type="password"]  {
+, .ui-body-c input[type="password"]
+, .ui-body-c input[type="number"]
+, .ui-body-c input[type="tel"]
+{
 	color: #000 !important;
 }
 
