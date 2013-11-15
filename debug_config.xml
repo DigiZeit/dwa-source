@@ -31,7 +31,7 @@
 	<preference name="autorotate" value="false" readonly="false" />
 	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="portrait" />
-	<preference name="load-url-timeout" value="60000" />
+	<preference name="loadUrlTimeoutValue" value="60000" />
 	<preference name="splash-screen-duration" value="60000" />
 	
 <!-- smartphone and tablet -->

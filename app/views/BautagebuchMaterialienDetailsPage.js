@@ -310,7 +310,6 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
         , mengenInput: M.TextFieldView.design({
 	          label: M.I18N.l('BautagebuchMenge')
-	        , inputType: M.INPUT_NUMBER
 	        , events: {
         		keyup: {
                     /* executed in scope of DOMWindow because no target defined */
