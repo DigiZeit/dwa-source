@@ -245,26 +245,7 @@ jQuery.fn.bind = function( type, myData, myFn ) {
 	return jQueryBind.call( this, type, data, fn );
 };
 
-;!(function ($) {
-    $.fn.classes = function (callback) {
-        var classes = [];
-        $.each(this, function (i, v) {
-            var splitClassName = v.className.split(/\s+/);
-            for (var j in splitClassName) {
-                var className = splitClassName[j];
-                if (-1 === classes.indexOf(className)) {
-                    classes.push(className);
-                }
-            }
-        });
-        if ('function' === typeof callback) {
-            for (var i in classes) {
-                callback(classes[i]);
-            }
-        }
-        return classes;
-    };
-})(jQuery);
+
 
 // reloading app one more time
 if (typeof(localStorage) !== "undefined") {

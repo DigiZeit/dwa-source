@@ -100,8 +100,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
                         tap: {
 		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		    					M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
-		    					DigiWebApp.ScholppBookingController.bucheArbeitsende();
+                				DigiWebApp.ScholppBookingController.bucheArbeitsende();
 		        			}
                         }
                     }
@@ -111,7 +110,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-			    					M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitsende();
 		          				}
 		                  }
@@ -135,8 +133,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
-			    					M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
-			    					DigiWebApp.ScholppBookingController.bucheUnterbrechung();
+	          	  					DigiWebApp.ScholppBookingController.bucheUnterbrechung();
 		          				}
 		                  }
 		            }
@@ -146,7 +143,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e5){}
-			    					M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					DigiWebApp.ScholppBookingController.bucheUnterbrechung();
 		          				}
 		                  }
@@ -170,7 +166,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e6){}
-		    						//M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					//DigiWebApp.ScholppBookingController.buchePause();
 		          				}
 		                  }
@@ -181,7 +176,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e7){}
-		    						//M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					//DigiWebApp.ScholppBookingController.buchePause();
 		          				}
 		                  }
@@ -242,7 +236,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e10){}
-		    						M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -253,7 +246,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e11){}
-		    						M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -276,7 +268,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
 		                  tap: {
 			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e12){}
-			    					//M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
 	          	  					//DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
@@ -287,8 +278,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
 		                  tap: {
 			    				action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e13){}
-		    						//M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection("6");
-		    						//DigiWebApp.ScholppBookingController.bucheArbeitszeit();
+	          	  					//DigiWebApp.ScholppBookingController.bucheArbeitszeit();
 		          				}
 		                  }
 		            }
@@ -433,7 +423,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
         })
 
         , currentBookingLabel: M.LabelView.design({
-              cssClass: 'marginTop15 whiteLabel unselectable'
+              cssClass: 'marginTop25 whiteLabel unselectable'
             , computedValue: {
                   contentBinding: {
                       target: DigiWebApp.BookingController
