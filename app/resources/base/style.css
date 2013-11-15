@@ -13,10 +13,7 @@ body {
 }
 
   .ui-body-c input[type="text"]
-, .ui-body-c input[type="password"]
-, .ui-body-c input[type="number"]
-, .ui-body-c input[type="tel"]
-{
+, .ui-body-c input[type="password"]  {
 	color: #000 !important;
 }
 
@@ -104,14 +101,6 @@ body {
 	color: #fff !important;
 	text-weight: bold;
 }
-  .SCHOLPPbranding .ui-body-c input[type="text"]
-, .SCHOLPPbranding .ui-body-c input[type="password"]
-, .SCHOLPPbranding .ui-body-c input[type="number"]
-, .SCHOLPPbranding .ui-body-c input[type="tel"]
-{
-	color: #000 !important;
-}
-
 .splashViewPage.SCHOLPP_w320 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w480 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w640 { background: #003366 !important }
@@ -257,7 +246,7 @@ img.audioIcon {
     border-radius: 8px;
     background: #FFFFFF;
     border: 0px solid #000000;
-    opacity: 0.8;
+    opacity: 0.9;
 	margin: 3px
 }
 
@@ -268,9 +257,8 @@ img.audioIcon {
 .scholppButton span.ui-btn-inner
 {
     font-weight: bold;
-    font-size: 11px !important;
-    color: #000;
-    text-shadow: none !important;
+    font-size: 10px !important;
+    color: #333;
     text-decoration: none;
     moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -281,7 +269,7 @@ img.audioIcon {
 
 .ui-content .scholppButton {
     position: relative;
-    height: 70px;
+    height: 40px;
     padding-bottom: 15px;
 }
 
@@ -304,11 +292,11 @@ img.audioIcon {
 
 .ui-content .scholppButton .icon img 
 {
-    width: 60px;
+    width: 30px;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    top: -65px;
+    top: -35px;
     position: relative;
 }
 

@@ -38,7 +38,7 @@
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
 
-<!-- if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
+<!-- if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen --!
 	<preference name="prerendered-icon" value="true" />
 
 <!-- controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
