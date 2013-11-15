@@ -243,7 +243,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            		maximumAge: 0, 
 	            		timeout: 240000 
 	            	};*/
-	            var getLocationOptions =  { enableHighAccuracy: true, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
+	            var getLocationOptions =  { enableHighAccuracy: NO, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
 	
 	            M.LocationManager.getLocation(that, successCallback, function(error) {
 	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);

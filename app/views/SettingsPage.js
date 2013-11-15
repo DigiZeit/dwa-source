@@ -129,7 +129,8 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 value: M.I18N.l('workerId')
             })
             , workerIdInput: M.TextFieldView.design({
-                  contentBinding: {
+            	    inputType: M.INPUT_NUMBER
+                  , contentBinding: {
                       target: DigiWebApp.SettingsController
                     , property: 'settings.workerId'
                 }
