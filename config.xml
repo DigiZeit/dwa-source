@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4536"
-	version 	= "1.7.1.4536">
+	versionCode = "4537"
+	version 	= "1.7.1.4537">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -29,7 +29,7 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="true" />
 	<preference name="autorotate" value="false" readonly="false" />
-	<preference name="phonegap-version" value="3.1.0" />
+	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="120000" />
 	<preference name="loadUrlTimeoutValue" value="120000" />
