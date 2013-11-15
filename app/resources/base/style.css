@@ -13,7 +13,10 @@ body {
 }
 
   .ui-body-c input[type="text"]
-, .ui-body-c input[type="password"]  {
+, .ui-body-c input[type="password"]
+, .ui-body-c input[type="number"]
+, .ui-body-c input[type="tel"]
+{
 	color: #000 !important;
 }
 
@@ -101,6 +104,14 @@ body {
 	color: #fff !important;
 	text-weight: bold;
 }
+  .SCHOLPPbranding .ui-body-c input[type="text"]
+, .SCHOLPPbranding .ui-body-c input[type="password"]
+, .SCHOLPPbranding .ui-body-c input[type="number"]
+, .SCHOLPPbranding .ui-body-c input[type="tel"]
+{
+	color: #000 !important;
+}
+
 .splashViewPage.SCHOLPP_w320 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w480 { background: #003366 !important }
 .splashViewPage.SCHOLPP_w640 { background: #003366 !important }
