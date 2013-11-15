@@ -29,10 +29,10 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="true" />
 	<preference name="autorotate" value="false" readonly="false" />
-	<preference name="phonegap-version" value="3.0.0" />
+	<preference name="phonegap-version" value="3.1.0" />
 	<preference name="orientation" value="portrait" />
-	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" />
+	<preference name="load-url-timeout" value="120000" />
+	<preference name="splash-screen-duration" value="120000" />
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
