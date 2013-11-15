@@ -257,8 +257,9 @@ img.audioIcon {
 .scholppButton span.ui-btn-inner
 {
     font-weight: bold;
-    font-size: 10px !important;
-    color: #333;
+    font-size: 11px !important;
+    color: #000;
+    text-shadow: none !important;
     text-decoration: none;
     moz-border-radius: 8px;
     -webkit-border-radius: 8px;
