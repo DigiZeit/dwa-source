@@ -11,7 +11,7 @@ DigiWebApp.Activity = M.Model.create({
     /* Define the name of your model. Do not delete this property! */
     __name__: 'Activity'
 
-    , id: M.Model.attr('Number', {
+    , id: M.Model.attr('String', {
         isRequired: NO
     })
 
@@ -43,6 +43,14 @@ DigiWebApp.Activity = M.Model.create({
         localStorage.removeItem(DigiWebApp.ApplicationController.storagePrefix + '_' + that.name.toLowerCase() + 'Keys');
     }
 
+	, findById: function(queryId) {
+		_.each(this.find(),function(el){
+			if (parseInt(queryId) === parseInt(el.get("id"))) {
+				return el;
+			}
+		});
+	}
+	
     , findSorted: function() {
         var that = this;
         var keys = [];

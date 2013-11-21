@@ -713,7 +713,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} catch(e4) { console.error(e4); }
     	try {
     		if (obj.aId != null) {
-    			var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
+    			//var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
+    			var myActivityLoad = DigiWebApp.Activity.findById(obj.aId);
     			if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
     		}
     	} catch(e5) { console.error(e5); }
