@@ -11,7 +11,7 @@ DigiWebApp.Activity = M.Model.create({
     /* Define the name of your model. Do not delete this property! */
     __name__: 'Activity'
 
-    , id: M.Model.attr('String', {
+    , id: M.Model.attr('Number', {
         isRequired: NO
     })
 
