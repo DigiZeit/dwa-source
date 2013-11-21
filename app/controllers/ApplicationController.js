@@ -1559,10 +1559,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , getActivitiesFromRemote: function() {
     	var that = this;
 
+    	that.setCallbackStatus('activity', 'local', NO);
     	DigiWebApp.JSONDatenuebertragungController.empfangeTaetigkeiten(
-    			  that.getWorkPlansFromRemote
+    			  function() {
+    				that.setCallbackStatus('activity', 'remote', YES);
+    		    	that.setCallbackStatus('activity', 'local', (DigiWebApp.Activity.find().length > 0));
+    				that.getWorkPlansFromRemote
+    			  }
     			, function() {
-    				  that.proceedWithLocalData("getActivitiesFromRemote");
+  				  	that.setCallbackStatus('activity', 'remote', NO);
+    				that.proceedWithLocalData("getActivitiesFromRemote");
     			}
     	);
     	
