@@ -1659,15 +1659,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	var that = this;
         DigiWebApp.RequestController.getWorkPlans({
               success: {
-                  target: that
-                , action: function(data, msg, xhr, getWorkplan) {
+                //  target: that
+                  action: function(data, msg, xhr, getWorkplan) {
         			that.getWorkPlansFromRemoteSuccess(data, msg, xhr);
         			that.getHandOrdersFromRemote();
                 }
             }
             , error: {
-                  target: that
-                , action: function() {
+                //  target: that
+                  action: function() {
             		console.error("getWorkPlansFromRemote-error");
             		that.proceedWithLocalData("getWorkPlansFromRemote");
                 }
