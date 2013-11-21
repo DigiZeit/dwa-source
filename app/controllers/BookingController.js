@@ -170,7 +170,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				if (
 						   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
 						|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-				)}
+				){
 						// if remark-feature active and not optional: go to remarkpage
 						// or if gefahreneKilometer-Freischaltung is enabled: go to RemarkPage
 						this.refreshCurrentBooking(false);
