@@ -353,7 +353,7 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= gefahreneKilometer %>'
           , operation: function(v) {
-              if (v) { 
+              if (v && v > 0) { 
              		return M.I18N.l('gefahreneKilometer') + ': ' + v;
               } else {
                   return '';
