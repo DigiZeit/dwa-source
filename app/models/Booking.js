@@ -147,6 +147,10 @@ DigiWebApp.Booking = M.Model.create({
         isRequired: NO
     })
 
+    , gefahreneKilometer: M.Model.attr('Number', {
+        isRequired: NO
+    })
+
     , employees: M.Model.attr('String', {
         isRequired: NO
     })

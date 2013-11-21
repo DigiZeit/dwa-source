@@ -22,12 +22,21 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				//DigiWebApp.BookingController.setNotBookedBookings();
 								
 				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
-				//$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).hide();
+				if (DigiWebApp.SettingsController.featureAvailable('422')) {
+					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).show();
+					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').show();
+				} else {
+					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).hide();
+					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').hide();
+				}
 				
 				// Bemerkung ausblenden, wenn Freischaltung dafür fehlt
 				if (DigiWebApp.SettingsController.featureAvailable('403')) {
+					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).show();
+					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').show();
+				} else {
 					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).hide();
-					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').hide()
+					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').hide();
 				}
 				
 				// load remark
@@ -48,6 +57,23 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				}
 				$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].focus();
 				$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].blur();
+
+				// load gefahreneKilometer
+				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
+					if (typeof(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer')) !== "undefined" && DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer') !== null) {
+						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
+						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
+						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer');
+					} else {
+						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
+						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
+						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
+					}
+				} else {
+					//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
+					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
+					M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
+				}
 			}
         }
     }
@@ -87,6 +113,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	            	
 	    			// save booking
 	    			DigiWebApp.BookingController.currentBooking.set('remark', M.ViewManager.getView('remarkPage', 'remarkInput').value);
+	    			DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', parseInt(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value));
 	    			DigiWebApp.BookingController.currentBooking.save();
 	    			
 	    			DigiWebApp.RemarkPage.myCallback();
@@ -154,7 +181,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         	
               childViews: 'button icon'
             , layout: {
-                  cssClass: 'digiButton'
+                  cssClass: 'digiButton marginTop25'
                 , columns: {
                       0: 'button'
                     , 1: 'icon'

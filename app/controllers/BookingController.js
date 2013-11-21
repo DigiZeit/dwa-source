@@ -167,8 +167,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
 			if (this.currentBooking) {
 				// Start::Bemerkungsfeld (403)
-				if (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
+				if (
+						   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+						|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+				)}
 						// if remark-feature active and not optional: go to remarkpage
+						// or if gefahreneKilometer-Freischaltung is enabled: go to RemarkPage
 						this.refreshCurrentBooking(false);
 						DigiWebApp.NavigationController.toRemarkPage(function() {
 		    		        DigiWebApp.BookingController.set('isBackFromRemarkPage', YES);
@@ -764,6 +768,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , startTimeString: timeString
             , endeTimeString: ""
             , modelVersion: "1"
+            , gefahreneKilometer: 0
         });
     }
 
@@ -846,6 +851,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , endeTimeString: obj.get('endeTimeString')
             , employees: obj.get('employees')
             , isCurrent: false
+            , gefahreneKilometer: obj.get('gefahreneKilometer')
         });
     }
 
@@ -934,6 +940,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , employees: obj.get('employees')
             , tagLabel: myTagLabel
             , isCurrent: false
+            , gefahreneKilometer: obj.get('gefahreneKilometer')
         });
     }
 
@@ -1412,7 +1419,10 @@ DigiWebApp.BookingController = M.Controller.extend({
         	
         	var spesencallback = function() {
 		        // Start::Bemerkungsfeld (403)
-				if (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
+				if (
+				   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+				|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+				){
 					// if remark-feature active: go to remarkpage
 					that.refreshCurrentBooking(false);
 		        	DigiWebApp.NavigationController.toRemarkPage(function() {

@@ -52,6 +52,20 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).val("");
 					M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = "";
 				}
+        		
+				// load gefahreneKilometer
+        		if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit !== null) {
+					if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer')) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer') !== null) {
+						$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer'));
+						M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer');
+					} else {
+						$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
+						M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
+					}
+				} else {
+					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
+					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
+				}
 
         		// enable feature 403
         		if (DigiWebApp.SettingsController.featureAvailable('403')) {
@@ -74,6 +88,15 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	    			});
 				}
         		
+				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
+				if (DigiWebApp.SettingsController.featureAvailable('422')) {
+					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).show();
+					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').show();
+				} else {
+					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).hide();
+					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').hide();
+				}
+
         		// Feature 405 (Unterschrift)
         		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
         			// load signature
@@ -136,8 +159,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    , message: M.I18N.l('specialCharProblemMsg')
 	                });
 	            } else {
-    				// save remark in bookingToEdit
+    				// save remark und gefahreneKilometer in bookingToEdit
     				DigiWebApp.EditTimeDataPage.bookingToEdit.set('remark', M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
+    				DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
     				DigiWebApp.EditTimeDataPage.bookingToEdit.save();
 
     				if (unterschriftString !== "") {
@@ -242,7 +266,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         , saveGrid: M.GridView.design({
               childViews: 'saveButton icon'
             , layout: {
-                  cssClass: 'digiButton'
+                  cssClass: 'digiButton marginTop25'
                 , columns: {
                       0: 'saveRemarkButton'
                     , 1: 'icon'
