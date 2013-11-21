@@ -23,18 +23,22 @@ DigiWebApp.RemarkPage = M.PageView.design({
 								
 				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
 				if (DigiWebApp.SettingsController.featureAvailable('422')) {
+					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).parent().show()
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).show();
 					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').show();
 				} else {
+					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).parent().hide()
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).hide();
 					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').hide();
 				}
 				
 				// Bemerkung ausblenden, wenn Freischaltung dafür fehlt
 				if (DigiWebApp.SettingsController.featureAvailable('403')) {
+					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).parent().show()
 					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).show();
 					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').show();
 				} else {
+					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).parent().hide()
 					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).hide();
 					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').hide();
 				}

@@ -68,31 +68,42 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				}
 
         		// enable feature 403
-        		if (DigiWebApp.SettingsController.featureAvailable('403')) {
-	        		// show label
-					$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    					$(this).show();
-	    			});
-					// show textarea
-	        		$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    					$(this).show();
-	    			});
+//        		if (DigiWebApp.SettingsController.featureAvailable('403')) {
+//	        		// show label
+//					$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+//	    					$(this).show();
+//	    			});
+//					// show textarea
+//	        		$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+//	    					$(this).show();
+//	    			});
+//				} else {
+//					// hide label
+//	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+//	    					$(this).hide();
+//	    			});
+//					// hide textarea
+//					$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+//	    					$(this).hide();
+//	    			});
+//				}
+				if (DigiWebApp.SettingsController.featureAvailable('403')) {
+					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).parent().show()
+					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).show();
+					$('label[for="' + DigiWebApp.EditTimeDataPage.content.remarkInput.id + '"]').show();
 				} else {
-					// hide label
-	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    					$(this).hide();
-	    			});
-					// hide textarea
-					$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    					$(this).hide();
-	    			});
+					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).parent().hide()
+					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).hide();
+					$('label[for="' + DigiWebApp.EditTimeDataPage.content.remarkInput.id + '"]').hide();
 				}
         		
 				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
 				if (DigiWebApp.SettingsController.featureAvailable('422')) {
+					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).parent().show()
 					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).show();
 					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').show();
 				} else {
+					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).parent().hide()
 					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).hide();
 					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').hide();
 				}
