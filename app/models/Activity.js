@@ -53,6 +53,7 @@ DigiWebApp.Activity = M.Model.create({
 			}
 			return true;
 		});
+		return foundElement;
 	}
 	
     , findSorted: function() {
