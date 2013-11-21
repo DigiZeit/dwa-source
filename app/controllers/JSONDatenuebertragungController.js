@@ -267,7 +267,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					}
 					// el zur Liste hinzufügen
 					DigiWebApp.Activity.createRecord({
-						, id: el.leistungsId
+						  id: el.leistungsId
 						, name: el.leistungsBezeichnung
 						, positionId: istMitarbeiterZugeordnet // 0: nicht MA-zugeordnet, 1: MA-zugeordnet
 						, istStandardPause: el.istStandardPause
