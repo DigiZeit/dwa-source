@@ -45,12 +45,13 @@ DigiWebApp.Activity = M.Model.create({
 
 	, findById: function(queryId) {
 		var foundElement = null;
-		_.each(this.find(),function(el){
+		$.each(this.find(),function(el){
 			if (parseInt(queryId) === parseInt(el.get("id"))) {
 				foundElement = el;
+				return false; // break
 			}
+			return true;
 		});
-		return foundElement;
 	}
 	
     , findSorted: function() {
