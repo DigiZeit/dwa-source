@@ -206,7 +206,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'orderbox remarkInput signature saveGrid'
+          childViews: 'orderbox remarkInput gefahreneKilometerInput signature saveGrid'
         
         , orderbox: M.ListView.design({
         	
