@@ -462,6 +462,11 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 	DigiWebAppOrdinaryDesign.spesenPage = DigiWebApp.SpesenPage;
 }
 
+if (searchForFeature(422)) { // gefahrene Kilometer
+	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
+	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
+}
+
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {

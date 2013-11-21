@@ -221,8 +221,17 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         
         , remarkInput: M.TextFieldView.design({
                   label: M.I18N.l('remark')
+                , cssClass: 'remarkInput'
                 , hasMultipleLines: YES
+                , initialText: "max. 255 " + M.I18N.l('characters')
                 , numberOfChars: 255
+        })
+            
+        , gefahreneKilometerInput: M.TextFieldView.design({
+                  label: M.I18N.l('gefahreneKilometer')
+                , cssClass: 'remarkInput'
+                , hasMultipleLines: NO
+        	    , inputType: M.INPUT_NUMBER
         })
             
         , signature: M.ContainerView.design({
