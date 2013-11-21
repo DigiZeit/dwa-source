@@ -1557,90 +1557,98 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
     , getActivitiesFromRemote: function() {
+    	var that = this;
 
-        DigiWebApp.RequestController.getActivities({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr, getActivities) {
-                    this.getActivitiesFromRemoteSuccess(data, msg, xhr);
-                    this.getWorkPlansFromRemote();
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-        			console.error("getActivitiesFromRemote-error");
-                    this.proceedWithLocalData("getActivitiesFromRemote");
-                }
-            }
-        });
-    }
-
-    /**
-     * The success callback for getActivitiesFromRemote.
-     * If correct data is in response the following is done:
-     * 1) the callback status for 'activity' and 'remote' is set (means activities are correctly returned by server)
-     * 2) the local available activities are deleted, the corresponding callback status is set
-     * 3) activities, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
-    , getActivitiesFromRemoteSuccess: function(data, msg, xhr) {
+    	DigiWebApp.JSONDatenuebertragungController.empfangeTaetigkeiten(
+    			  that.getWorkPlansFromRemote
+    			, function() {
+    				  that.proceedWithLocalData("getActivitiesFromRemote");
+    			}
+    	);
     	
-   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-    		data['return'] = data['ns:return'];
-    		try {
-    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-    			var myns = this.myns;
-    			 _.each(data['return'], function(el) {
-    				 el.taetigkeitsId = el[myns + ':taetigkeitsId'];
-    				 el.taetigkeitsBezeichnung = el[myns + ':taetigkeitsBezeichnung'];
-    				 el.positionsId = el[myns + ':positionsId'];
-    			 });
-    		} catch(e) {
-    		}
-    	}
-   		
-    	if(data['return']) {
-    		
-            this.setCallbackStatus('activity', 'remote', YES);
-
-            // Clear activities from storage
-            DigiWebApp.Activity.deleteAll();
-            this.setCallbackStatus('activity', 'local', NO);
-
-            var mIdArray = [];
-            var rec = null;
-
-            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-                data['return'] = [data['return']];
-            }
-
-            // create a record for each order returned from the server and save it
-            _.each(data['return'], function(el) {
-            	if (DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: "" + el.taetigkeitsId}}).length === 0) {
-	                rec = DigiWebApp.Activity.createRecord({
-	                    id: el.taetigkeitsId,
-	                    name: el.taetigkeitsBezeichnung,
-	                    positionId: el.positionsId
-	                });
-	
-	                try {
-	                    rec.save();
-	                    mIdArray.push(rec.m_id);
-	                } catch(e) {
-	                	console.error("ERROR in getActivitiesFromRemoteSuccess: " + e);
-	                }
-            	}
-            });
-
-            localStorage.setItem(this.storagePrefix + '_activityKeys', JSON.stringify(mIdArray));
-
-            this.setCallbackStatus('activity', 'local', YES);
-        }
+//        DigiWebApp.RequestController.getActivities({
+//              success: {
+//                  target: this
+//                , action: function(data, msg, xhr, getActivities) {
+//                    this.getActivitiesFromRemoteSuccess(data, msg, xhr);
+//                    this.getWorkPlansFromRemote();
+//                }
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//        			console.error("getActivitiesFromRemote-error");
+//                    this.proceedWithLocalData("getActivitiesFromRemote");
+//                }
+//            }
+//        });
     }
+
+//    /**
+//     * The success callback for getActivitiesFromRemote.
+//     * If correct data is in response the following is done:
+//     * 1) the callback status for 'activity' and 'remote' is set (means activities are correctly returned by server)
+//     * 2) the local available activities are deleted, the corresponding callback status is set
+//     * 3) activities, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+//     *
+//     * @param data The returned data of the server in JSON, means JS object.
+//     * @param msg
+//     * @param xhr The XMLHTTPRequest object.
+//     */
+//    , getActivitiesFromRemoteSuccess: function(data, msg, xhr) {
+//    	
+//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
+//    		data['return'] = data['ns:return'];
+//    		try {
+//    			//myns = data['return'][0]['xsi:type'].split(":")[0];
+//    			var myns = this.myns;
+//    			 _.each(data['return'], function(el) {
+//    				 el.taetigkeitsId = el[myns + ':taetigkeitsId'];
+//    				 el.taetigkeitsBezeichnung = el[myns + ':taetigkeitsBezeichnung'];
+//    				 el.positionsId = el[myns + ':positionsId'];
+//    			 });
+//    		} catch(e) {
+//    		}
+//    	}
+//   		
+//    	if(data['return']) {
+//    		
+//            this.setCallbackStatus('activity', 'remote', YES);
+//
+//            // Clear activities from storage
+//            DigiWebApp.Activity.deleteAll();
+//            this.setCallbackStatus('activity', 'local', NO);
+//
+//            var mIdArray = [];
+//            var rec = null;
+//
+//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
+//                data['return'] = [data['return']];
+//            }
+//
+//            // create a record for each order returned from the server and save it
+//            _.each(data['return'], function(el) {
+//            	if (DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: "" + el.taetigkeitsId}}).length === 0) {
+//	                rec = DigiWebApp.Activity.createRecord({
+//	                    id: el.taetigkeitsId,
+//	                    name: el.taetigkeitsBezeichnung,
+//	                    positionId: el.positionsId
+//	                });
+//	
+//	                try {
+//	                    rec.save();
+//	                    mIdArray.push(rec.m_id);
+//	                } catch(e) {
+//	                	console.error("ERROR in getActivitiesFromRemoteSuccess: " + e);
+//	                }
+//            	}
+//            });
+//
+//            localStorage.setItem(this.storagePrefix + '_activityKeys', JSON.stringify(mIdArray));
+//
+//            this.setCallbackStatus('activity', 'local', YES);
+//        }
+//    }
 
     /**
      * Calls getWorkPlans on DigiWebApp.RequestController.

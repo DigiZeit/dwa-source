@@ -210,4 +210,79 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 		}
 	}
+	
+	, empfangeTaetigkeiten: function(successCallback, errorCallback) {
+
+		var internalSuccessCallback = function(data, msg, request) {
+			// verarbeite empfangene Daten
+			
+			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("empfangeMaterialien Status: " + request.status);
+			
+			// wurden tätigkeiten empfangen?
+			if (typeof(data.leistungen) === "undefined" && data.leistungen !== null && data.leistungen.length > 0) {
+				console.error("missing leistungen");
+				return errorCallback();
+			}
+			
+			var myLength = null;
+			try {
+				myLength = data.leistungen.length;
+			} catch(e2) {
+				console.error(myLength);
+				//return errorCallback();
+			}
+
+			if (data.leistungen === null) {
+				// hier könnte man - wenn gewünscht - verhindern, dass es gar keine Tätigkeiten gibt
+				return errorCallback();
+			} else {
+				// ist data.leistungen auch wirklich ein Array?
+				var myLength = null;
+				try {
+					myLength = data.leistungen.length;
+				} catch(e2) {
+					console.error(myLength);
+					return errorCallback();
+				}
+			}
+			
+			// data.leistungen enthält also myLength Elemente
+
+			// alle "alten" Tätigkeiten löschen
+			DigiWebApp.Activity.deleteAll();
+			
+			// die empfangenen Materialien mit Model ablegen
+			_.each(data.leistungen, function(el) {
+				//console.log(el);
+				if (typeof(el.leistungsId) === "undefined") {
+					console.error("missing leistungsId");
+					return errorCallback();
+				} else if (typeof(el.leistungsBezeichnung) === "undefined") {
+					console.error("missing leistungsBezeichnung");
+					return errorCallback();
+				} else {
+					var istMitarbeiterZugeordnet = 0; // 0: nicht MA-zugeordnet, 1: MA-zugeordnet
+					if (el.istMitarbeiterZugeordnet) {
+						istMitarbeiterZugeordnet = 1;
+					}
+					// el zur Liste hinzufügen
+					DigiWebApp.Activity.createRecord({
+						, id: el.leistungsId
+						, name: el.leistungsBezeichnung
+						, positionId: istMitarbeiterZugeordnet // 0: nicht MA-zugeordnet, 1: MA-zugeordnet
+						, istStandardPause: el.istStandardPause
+						, istUnterschriftsAbnahme: el.istUnterschriftsAbnahme
+						, istFahrzeitRelevant: el.istFahrzeitRelevant
+					}).saveSorted();
+				}
+			});
+			
+			// weiter in der Verarbeitungskette
+			successCallback();
+		};
+		
+		DigiWebApp.JSONDatenuebertragungController.recieveData("leistungen", M.I18N.l('getActivitiesLoader'), internalSuccessCallback, errorCallback);
+		
+	}
+
 });
