@@ -1656,19 +1656,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
     , getWorkPlansFromRemote: function() {
+    	var that = this;
         DigiWebApp.RequestController.getWorkPlans({
               success: {
-                  target: this
+                  target: that
                 , action: function(data, msg, xhr, getWorkplan) {
-                    this.getWorkPlansFromRemoteSuccess(data, msg, xhr);
-                    this.getHandOrdersFromRemote();
+        			that.getWorkPlansFromRemoteSuccess(data, msg, xhr);
+        			that.getHandOrdersFromRemote();
                 }
             }
             , error: {
-                  target: this
+                  target: that
                 , action: function() {
             		console.error("getWorkPlansFromRemote-error");
-                    this.proceedWithLocalData("getWorkPlansFromRemote");
+            		that.proceedWithLocalData("getWorkPlansFromRemote");
                 }
             }
         });

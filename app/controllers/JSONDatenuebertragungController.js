@@ -216,7 +216,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
 			
-			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("empfangeMaterialien Status: " + request.status);
+			if (DigiWebApp.SettingsController.getSetting("debug")) console.log("empfangeTaetigkeiten Status: " + request.status);
 			
 			// wurden tätigkeiten empfangen?
 			if (typeof(data.leistungen) === "undefined" && data.leistungen !== null && data.leistungen.length > 0) {
