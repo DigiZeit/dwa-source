@@ -400,7 +400,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   		activities = DigiWebApp.Activity.findSorted();
   	}
   	activities = _.map(activities, function(acti) {
-	    	if(acti.get("positionId") === "1") {
+	    	if(parseInt(acti.get("positionId")) === 1) {
 	            // normale Tätigkeit
 	            return acti;
 	         } else {

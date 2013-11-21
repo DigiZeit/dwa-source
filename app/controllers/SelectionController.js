@@ -796,7 +796,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
     	activities = _.map(activities, function(acti) {
     		if (acti) { 
-		    	if(acti.get("positionId") === "1") {
+		    	if(parseInt(acti.get("positionId")) === 1) {
 		            // normale Tätigkeit
 		            return acti;
 		         } else {
