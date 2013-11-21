@@ -707,13 +707,13 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} catch(e3) { console.error(e3); }
     	try {
     		if (obj.pId != null) {
-    			var myPositionLoad = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId}})[0];
+    			var myPositionLoad = DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId.toString()}})[0];
     			if (myPositionLoad && obj.pId !== 0) myPositionName = myPositionLoad.get('name');
     		}
     	} catch(e4) { console.error(e4); }
     	try {
     		if (obj.aId != null) {
-    			var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId}})[0];
+    			var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
     			if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
     		}
     	} catch(e5) { console.error(e5); }
