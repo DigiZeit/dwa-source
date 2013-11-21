@@ -21,6 +21,15 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				DigiWebApp.BookingController.setTimeDataForRemark();
 				//DigiWebApp.BookingController.setNotBookedBookings();
 								
+				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
+				//$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).hide();
+				
+				// Bemerkung ausblenden, wenn Freischaltung dafür fehlt
+				if (DigiWebApp.SettingsController.featureAvailable('403')) {
+					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).hide();
+					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').hide()
+				}
+				
 				// load remark
 				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 					if (typeof(DigiWebApp.BookingController.currentBooking.get('remark')) !== "undefined" && DigiWebApp.BookingController.currentBooking.get('remark') !== null) {
@@ -113,7 +122,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'orderbox remarkInput grid'
+          childViews: 'orderbox remarkInput gefahreneKilometerInput grid'
         
         , orderbox: M.ListView.design({
         	
@@ -132,6 +141,13 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 , hasMultipleLines: YES
                 , initialText: "max. 255 " + M.I18N.l('characters')
                 , numberOfChars: 255
+        })
+            
+        , gefahreneKilometerInput: M.TextFieldView.design({
+                  label: M.I18N.l('gefahreneKilometer')
+                , cssClass: 'remarkInput'
+                , hasMultipleLines: NO
+        	    , inputType: M.INPUT_NUMBER
         })
             
         , grid: M.GridView.design({

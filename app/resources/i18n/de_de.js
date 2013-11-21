@@ -442,4 +442,5 @@ M.I18N.de_de = {
 	, bisKoordinate: "Bis-Koord."
 	, genauigkeit: "Genauigkeit"		
 
+	, gefahreneKilometer: "gefahrene Kilometer"
 };
