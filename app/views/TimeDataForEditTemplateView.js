@@ -195,7 +195,6 @@ DigiWebApp.TimeDataForEditTemplateView = M.ListItemView.design({
         }
     })
 
-
 });
 
 
