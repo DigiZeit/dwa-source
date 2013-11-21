@@ -36,9 +36,11 @@ DigiWebApp.Activity = M.Model.create({
     })
 
     , deleteAll: function() {
+    	var that = this;
         _.each(this.find(), function(el) {
             el.del();
         });
+        localStorage.removeItem(DigiWebApp.ApplicationController.storagePrefix + '_' + that.name.toLowerCase() + 'Keys');
     }
 
     , findSorted: function() {
