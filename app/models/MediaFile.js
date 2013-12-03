@@ -59,6 +59,10 @@ DigiWebApp.MediaFile = M.Model.create({
         isRequired: NO
     })
 
+    , mitarbeiterId: M.Model.attr('String', {
+        isRequired: NO
+    })
+    
     , handOrderName: M.Model.attr('String', {
         isRequired: NO
     })

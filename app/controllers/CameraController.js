@@ -494,6 +494,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 			, lon: lon
 			, pId: posId
 			, aId: actId
+			, mId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
     	});
 	    
 	    myMediaFile.setRemark(M.ViewManager.getView('cameraPage', 'remarkInput').value);
@@ -547,6 +548,7 @@ DigiWebApp.CameraController = M.Controller.extend({
             , longitude: obj.lon ? obj.lon : '0'
             , positionId: obj.pId ? obj.pId : '0'
             , activityId: obj.aId ? obj.aId : '0'
+            , mitarbeiterId: obj.mId ? obj.mId : '0'
             , icon: 'icon_takePicture.png'
             , timeStamp: +new Date()
         });

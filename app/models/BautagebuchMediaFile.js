@@ -62,6 +62,10 @@ DigiWebApp.BautagebuchMediaFile = M.Model.create({
     , longitude: M.Model.attr('String', {
         isRequired: NO
     })
+    
+    , mitarbeiterId: M.Model.attr('String', {
+        isRequired: NO
+    })    
 
     , remark: M.Model.attr('String', {
         isRequired: NO
