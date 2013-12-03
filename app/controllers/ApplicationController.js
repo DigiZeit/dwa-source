@@ -1564,7 +1564,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			  function() {
     				that.setCallbackStatus('activity', 'remote', YES);
     		    	that.setCallbackStatus('activity', 'local', (DigiWebApp.Activity.find().length > 0));
-    				that.getWorkPlansFromRemote
+    				that.getWorkPlansFromRemote();
     			  }
     			, function() {
   				  	that.setCallbackStatus('activity', 'remote', NO);
