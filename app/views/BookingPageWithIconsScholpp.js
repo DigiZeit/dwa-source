@@ -314,11 +314,11 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                             this.setPositions();
                         }
                     }
-	                , tap: {
-	    				action: function() {
-	                		try{DigiWebApp.ApplicationController.vibrate();}catch(e14){}
-		  				}
-	                }
+//	                , tap: {
+//	    				action: function() {
+//	                		try{DigiWebApp.ApplicationController.vibrate();}catch(e14){}
+//		  				}
+//	                }
                 }
         })
             
@@ -339,11 +339,11 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                         this.setActivities(YES);
                     }
                 }
-	            , tap: {
-					action: function() {
-	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e15){}
-	  				}
-	            }
+//	            , tap: {
+//					action: function() {
+//	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e15){}
+//	  				}
+//	            }
             }
         })
 

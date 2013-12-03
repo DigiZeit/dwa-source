@@ -80,11 +80,11 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                DigiWebApp.OrderInfoController.setItem();
 	                }
 	            }
-		        , tap: {
-					action: function() {
-	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-	  				}
-	            }
+//		        , tap: {
+//					action: function() {
+//	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+//	  				}
+//	            }
 	        }
 	    })
 	    
@@ -121,11 +121,11 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
                 		DigiWebApp.OrderInfoController.setItem();
 	                }
 	            }
-		        , tap: {
-					action: function() {
-	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
-	  				}
-	            }
+//		        , tap: {
+//					action: function() {
+//	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
+//	  				}
+//	            }
 	        }
 	    })
     })

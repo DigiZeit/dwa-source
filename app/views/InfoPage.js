@@ -124,11 +124,11 @@ DigiWebApp.InfoPage = M.PageView.design({
                             M.I18N.setLanguage(selectedLanguage);
                         }
                     }
-			        , tap: {
-						action: function() {
-			        		try{DigiWebApp.ApplicationController.vibrate();}catch(e5){}
-							}
-			        }
+//			        , tap: {
+//						action: function() {
+//			        		try{DigiWebApp.ApplicationController.vibrate();}catch(e5){}
+//							}
+//			        }
                 }
         })
 
@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4568'
+              value: 'Build: 4569'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
