@@ -14,6 +14,7 @@ body {
 
   .ui-body-c input[type="text"]
 , .ui-body-c input[type="password"]
+, .ui-body-c input[type="textarea"]
 , .ui-body-c input[type="number"]
 , .ui-body-c input[type="tel"]
 {
@@ -769,7 +770,9 @@ label.ui-input-text, .ui-controlgroup-label {
 .settingsPage input[type="text"], 
 .settingsPage input[type="password"], 
 .settingsPasswordPage input[type="text"], 
-.settingsPasswordPage input[type="password"] {
+.settingsPasswordPage input[type="password"],
+.settingsPasswordPage input[type="textarea"]
+{
     width: 90%;
 }
 
