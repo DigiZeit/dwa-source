@@ -21,6 +21,10 @@ body {
 	color: #000 !important;
 }
 
+textarea.ui-input-text {
+	color: #000 !important;
+}
+
 /*
 
 .ui-mobile-viewport-transitioning,
@@ -769,7 +773,7 @@ label.ui-input-text, .ui-controlgroup-label {
 /* settingsPage */
 .settingsPage input[type="text"], 
 .settingsPage input[type="password"], 
-.settingsPasswordPage input[type="text"], 
+.settingstePage input[type="text"], 
 .settingsPasswordPage input[type="password"],
 .settingsPasswordPage input[type="textarea"]
 {
