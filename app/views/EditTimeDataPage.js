@@ -69,38 +69,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
         		// enable feature 403
         		if (DigiWebApp.SettingsController.featureAvailable('403')) {
-        			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
-	        			var currentActivity = null;
-	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseInt(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
-	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
-			        		// show label
-							$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-			    					$(this).show();
-			    			});
-							// show textarea
-			        		$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-			    					$(this).show();
-			    			});
-	        			} else {
-	    					// hide label
-	    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    	    					$(this).hide();
-	    	    			});
-	    					// hide textarea
-	    					$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-	    	    					$(this).hide();
-	    	    			});
-	        			}
-        			} else {
-    					// hide label
-    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-    	    					$(this).hide();
-    	    			});
-    					// hide textarea
-    					$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
-    	    					$(this).hide();
-    	    			});
-        			}
+	        		// show label
+					$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+	    					$(this).show();
+	    			});
+					// show textarea
+	        		$('[id=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
+	    					$(this).show();
+	    			});
 				} else {
 					// hide label
 	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
@@ -123,14 +99,38 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		
 				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
         		if (DigiWebApp.SettingsController.featureAvailable('422')) {
-	        		// show label
-					$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    					$(this).show();
-	    			});
-					// show textarea
-	        		$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    					$(this).show();
-	    			});
+        			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
+	        			var currentActivity = null;
+	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseInt(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
+	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
+			        		// show label
+							$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+			    					$(this).show();
+			    			});
+							// show textarea
+			        		$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+			    					$(this).show();
+			    			});
+	        			} else {
+	    					// hide label
+	    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    	    					$(this).hide();
+	    	    			});
+	    					// hide textarea
+	    					$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    	    					$(this).hide();
+	    	    			});
+	        			}
+        			} else {
+    					// hide label
+    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+    	    					$(this).hide();
+    	    			});
+    					// hide textarea
+    					$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+    	    					$(this).hide();
+    	    			});
+        			}
 				} else {
 					// hide label
 	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
