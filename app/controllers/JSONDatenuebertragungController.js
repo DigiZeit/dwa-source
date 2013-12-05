@@ -181,10 +181,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
 	                    localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
 	                }
-			        DigiWebApp.ApplicationController.nativeAlertDialogView({
-			              title: M.I18N.l('connectionError')
-			            , message: M.I18N.l('connectionErrorMsg')
-			        });
+//			        DigiWebApp.ApplicationController.nativeAlertDialogView({
+//			              title: M.I18N.l('connectionError')
+//			            , message: M.I18N.l('connectionErrorMsg')
+//			        });
 					errorCallback();
 				};
 				DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('sendDataMsg'), internalSuccessCallback, internalErrorCallback);

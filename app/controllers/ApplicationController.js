@@ -504,36 +504,37 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	} else {
     		if (this.checkSizeModeChange()) {
 		        _.each(DigiWebApp.app.pages, function(myPage) {
-		        	if ($('#' + myPage.id).get("0").classList) {
-	    				if (!$('#' + myPage.id).get("0").classList.contains(DigiWebApp.ApplicationController.sizeMode)) {
-	    					if ( typeof(DigiWebApp) != "undefined" ) {
-	    						if ( typeof(DigiWebApp.SettingsController) != "undefined" ) {
-		    						if ( typeof(DigiWebApp.SettingsController.getSetting("branding")) != "undefined" && DigiWebApp.SettingsController.getSetting("branding") != "" ) {
-		    							var myBranding = DigiWebApp.SettingsController.getSetting("branding").toUpperCase();
-		    							// remove old gloobal branding from body
-		    							$('body').classes(function(n) {
-		    								if (n.substring(n.length - "branding".length) === "branding") {
-		    									$('body').removeClass(n);
-		    								}
-		    							});
-		    							// apply branding
-		    							$('body').addClass(myBranding + "branding");
-		    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-		    	    					$('#' + myPage.id).removeClass(myBranding + "_w320").removeClass(myBranding + "_w480").removeClass(myBranding + "_w640").removeClass(myBranding + "_w800").removeClass(myBranding + "_w1024").removeClass(myBranding + "_w1080").removeClass(myBranding + "_w1536").removeClass(myBranding + "_w5000");
-		    	        				$('#' + myPage.id).addClass(myBranding + "_" + DigiWebApp.ApplicationController.sizeMode);	        					
-		    						} else {
-		    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-		    	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
-		    						}
+		        	if (
+		        			($('#' + myPage.id).get("0").classList && (!$('#' + myPage.id).get("0").classList.contains(DigiWebApp.ApplicationController.sizeMode)))
+		        	     || ($('#' + myPage.id).get("0").className.split(" ").indexOf(DigiWebApp.ApplicationController.sizeMode) === -1)
+		        	) {
+    					if ( typeof(DigiWebApp) != "undefined" ) {
+    						if ( typeof(DigiWebApp.SettingsController) != "undefined" ) {
+	    						if ( typeof(DigiWebApp.SettingsController.getSetting("branding")) != "undefined" && DigiWebApp.SettingsController.getSetting("branding") != "" ) {
+	    							var myBranding = DigiWebApp.SettingsController.getSetting("branding").toUpperCase();
+	    							// remove old gloobal branding from body
+	    							$('body').classes(function(n) {
+	    								if (n.substring(n.length - "branding".length) === "branding") {
+	    									$('body').removeClass(n);
+	    								}
+	    							});
+	    							// apply branding
+	    							$('body').addClass(myBranding + "branding");
+	    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
+	    	    					$('#' + myPage.id).removeClass(myBranding + "_w320").removeClass(myBranding + "_w480").removeClass(myBranding + "_w640").removeClass(myBranding + "_w800").removeClass(myBranding + "_w1024").removeClass(myBranding + "_w1080").removeClass(myBranding + "_w1536").removeClass(myBranding + "_w5000");
+	    	        				$('#' + myPage.id).addClass(myBranding + "_" + DigiWebApp.ApplicationController.sizeMode);	        					
 	    						} else {
 	    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
 	    	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
 	    						}
-	    					} else {
-		    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-		        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
-	    					}
-	    				}
+    						} else {
+    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
+    	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
+    						}
+    					} else {
+	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
+	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
+    					}
 		        	}
 		        });
     		}
