@@ -817,12 +817,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var actIds = workplan.get('activityIds').split(',');
         var activities = [];
         if (actIds && actIds.length > 0) {
+        	var alleTaetigkeiten = DigiWebApp.Activity.find(); 
             for (var i = 0; i < actIds.length; i++) {
-                activities.push(_.first(DigiWebApp.Activity.find({ query: {
-                    identifier: 'id', 
-                    operator: '=', 
-                    value: actIds[i] 
-                }})));
+            	var taet = _.find(alleTaetigkeiten,function(t){ return t.get("id") === actIds[i]});
+//                activities.push(_.first(DigiWebApp.Activity.find({ query: {
+//                    identifier: 'id', 
+//                    operator: '=', 
+//                    value: actIds[i] 
+//                }})));
+            	if (taet) activities.push(taet);
             }
 
         }
