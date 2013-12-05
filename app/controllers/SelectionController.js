@@ -558,11 +558,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	
 	        //var workPlans = DigiWebApp.WorkPlan.find({query: 'id=' + posId}); // pre TMP-1.0
 			//console.log("posId " + posId);
-	        var workPlans = DigiWebApp.WorkPlan.find({ query: { 
-	              identifier: 'id' 
-	            , operator: '=' 
-	            , value: posId 
-	        }});
+//	        var workPlans = DigiWebApp.WorkPlan.find({ query: { 
+//	              identifier: 'id' 
+//	            , operator: '=' 
+//	            , value: posId 
+//	        }});
+	        var workPlans = []; 
+	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
+	        	if (parseInt(wp.get("id")) === parseInt(posId)) workPlans.push(wp);
+	        });
 	        i = 0;
 	
 	        /* if a workplan exists, only use those activities that are in the workplan */
