@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4587"
-	version 	= "1.7.2.4587">
+	versionCode = "4588"
+	version 	= "1.7.2.4588">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -71,7 +71,6 @@ which PhoneGap requires. -->
 	<gap:plugin name="org.apache.cordova.vibration" />
 	<!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
-	<gap:plugin name="com.phonegap.plugins.emailcomposer" />
 	
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="theme/images/Icon.png" />
