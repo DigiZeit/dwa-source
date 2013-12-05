@@ -819,12 +819,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
         if (actIds && actIds.length > 0) {
         	var alleTaetigkeiten = DigiWebApp.Activity.find(); 
             for (var i = 0; i < actIds.length; i++) {
-            	var taet = _.find(alleTaetigkeiten,function(t){ return parseInt(t.get("id")) === parseInt(actIds[i])});
 //                activities.push(_.first(DigiWebApp.Activity.find({ query: {
 //                    identifier: 'id', 
 //                    operator: '=', 
 //                    value: actIds[i] 
 //                }})));
+            	var taet = _.find(alleTaetigkeiten, function(t){ return parseInt(t.get("id")) === parseInt(actIds[i])});
             	if (taet) activities.push(taet);
             }
 
