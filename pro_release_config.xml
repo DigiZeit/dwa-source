@@ -74,7 +74,7 @@ which PhoneGap requires. -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 
 <!-- if a single icon is specified then Build will use it for all platforms -->
-    <icon src="theme/images/Icon.png" />
+    <icon src="icon.png" />
 
 <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon --> 
@@ -101,9 +101,9 @@ which PhoneGap requires. -->
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" />
+    <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
 
-	<gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
 	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
 	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
