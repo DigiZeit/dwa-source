@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webapp"
-	versionCode = "4601"
-	version 	= "1.7.2.4601">
+	versionCode = "4602"
+	version 	= "1.7.2.4602">
 
 	<name>DIGI-WebApp</name>
 
@@ -74,7 +74,7 @@ which PhoneGap requires. -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 
 <!-- if a single icon is specified then Build will use it for all platforms -->
-    <icon src="theme/images/Icon.png" />
+    <icon src="icon.png" />
 
 <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon --> 
