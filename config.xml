@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4593"
-	version 	= "1.7.2.4593">
+	versionCode = "4594"
+	version 	= "1.7.2.4594">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -27,18 +27,19 @@
 	
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
-	<preference name="fullscreen" value="true" />
+	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="false" readonly="false" />
 	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="portrait" />
-	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" />
+	<preference name="load-url-timeout" value="600000" />
+	<preference name="splash-screen-duration" value="600000" />
+	<preference name="show-splash-screen-spinner" value="true" />
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
 
 <!-- if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
-	<preference name="prerendered-icon" value="true" />
+	<preference name="prerendered-icon" value="false" />
 
 <!-- controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
 	<preference name="webviewbounce" value="false" />
