@@ -98,14 +98,12 @@ which PhoneGap requires. -->
 	<icon src="theme/images/icon-winphone.png" gap:platform="winphone" />
 	<icon src="theme/images/tile-icon-winphone.png" gap:platform="winphone" gap:role="background" />
 
-	<gap:splash src="splash.png" />
-
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
 
-	<gap:splash src="theme/images/splash.png" gap:platform="blackberry" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
 	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
 	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
