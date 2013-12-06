@@ -103,7 +103,7 @@ all builds. Currently, all platforms except ios use a single splash
 screen -->
     <gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" />
 
-	<gap:splash src="theme/images/splash.png" gap:platform="blackberry" />
+	<gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
 	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
 	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
