@@ -161,7 +161,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , book: function() {
-    	this.currentBookingTimesStampBook = new Date();
+    	var that = DigiWebApp.BookingController;
+    	that.currentBookingTimesStampBook = new Date();
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
     	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
@@ -1412,9 +1413,9 @@ DigiWebApp.BookingController = M.Controller.extend({
      *  6) If not, the employee selection is cleared
      */
     , closeDay: function() {
-    	this.currentBookingTimesStampBook = new Date();
-    	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
     	var that = DigiWebApp.BookingController;
+    	that.currentBookingTimesStampBook = new Date();
+    	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
         	
         	var spesencallback = function() {
