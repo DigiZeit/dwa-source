@@ -174,7 +174,8 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 						        , value: ''
 						        , operation: function(v) {
 						        	// projekleiterName nachladen
-					        		var myProjektleiter = DigiWebApp.BautagebuchProjektleiter.find({query:{identifier: 'id', operator: '=', value: v}})[0];
+					        		var myProjektleiter = _.find(DigiWebApp.BautagebuchProjektleiter.find(), function(a) { return (parseInt(a.get("id")) === v);});
+					        		//DigiWebApp.BautagebuchProjektleiter.find({query:{identifier: 'id', operator: '=', value: v}})[0];
 					        		if (typeof myProjektleiter !== "undefined") {
 					        			return M.I18N.l('BautagebuchProjektleiter') + ": " + myProjektleiter.vollername();
 						        	} else {
