@@ -34,7 +34,7 @@ DigiWebApp.OrderDetailsController = M.Controller.extend({
 	                  success: {
 	                    action: function(records) {
 	            			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	                        if ((records && records.length === 0) || (DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsId") === "0")) {
+	                        if ((records && records.length === 0) || (parseInt(DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsId")) === 0)) {
 	                    		//console.log("Anwesenheitsliste: error length==0");		
 	            		        DigiWebApp.ApplicationController.nativeAlertDialogView({
 	            		              title: M.I18N.l('error')

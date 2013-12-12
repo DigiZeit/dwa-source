@@ -429,7 +429,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
           }
 
       }
-      if (workplan.get("workplanType") === "1") {
+      if (parseInt(workplan.get("workplanType")) === 1) {
       	// only those activities which are bound to employee
           activities = _.map(activities, function(act) {
           	if ( typeof(act) === "undefined" ) {
@@ -440,7 +440,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
           		var allActivities = DigiWebApp.Activity.findSorted();
           		_.each(allActivities, function(acti) {
           			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
-          			if (acti.get("positionId") === "1") {
+          			if (parseInt(acti.get("positionId")) === 1) {
           				zugeordnet = YES;
           			}
           		});

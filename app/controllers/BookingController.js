@@ -316,7 +316,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} else {
             orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
     	}
-        if (!orderId || (orderId && orderId === "0")) {
+        if (!orderId || (orderId && parseInt(orderId) === 0)) {
             //M.DialogView.alert({
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                   title: M.I18N.l('noOrderSelected')
@@ -410,7 +410,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 	    return true;
 		
-        } // end of else of: if(!orderId || (orderId && orderId === "0"))
+        } // end of else of: if(!orderId || (orderId && parseInt(orderId) === 0))
     }
 
     
@@ -1015,7 +1015,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1107,7 +1107,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1213,7 +1213,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	}
 		
 		                // set the handOrderId as orderId for correct display in list item view
-		                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+		                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
 		                    booking.set('orderId', booking.get('handOrderId'));
 		                }
 		
@@ -1299,7 +1299,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1382,7 +1382,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (booking.get('orderId') === "0" && booking.get('handOrderId') !== "0") {
+	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	

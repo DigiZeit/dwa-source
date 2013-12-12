@@ -829,7 +829,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
             }
 
         }
-        if (workplan.get("workplanType") === "1") {
+        if (parseInt(workplan.get("workplanType")) === 1) {
         	// only those activities which are bound to employee
             activities = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {

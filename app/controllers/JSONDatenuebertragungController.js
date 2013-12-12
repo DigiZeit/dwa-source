@@ -139,7 +139,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						}
 					}
 					
-					if (zeitbuch.get("timeStampEnd") === "0") {
+					if (parseInt(zeitbuch.get("timeStampEnd")) === 0) {
 						zeitbuch.set("timeStampEnd", null);
 						
 						// compability
