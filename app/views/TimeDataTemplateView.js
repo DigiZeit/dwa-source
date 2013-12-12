@@ -266,9 +266,12 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
               valuePattern: '<%= activityId %>'
             , operation: function(v) {
                 if (v) {
-                    var activity = _.select(DigiWebApp.Activity.findSorted(), function(a) {
-                        if (a) return v == a.get('id');
-                    });
+                	var activity = null;
+                	if (parseInt(v) !== 0) {
+                        activity = _.select(DigiWebApp.Activity.findSorted(), function(a) {
+                        	if (a) return v == a.get('id');
+                        });
+                	}
                     if (activity && activity.length > 0) {
                         activity = activity[0];
                         return M.I18N.l('activity') + ': ' + activity.get('name');
