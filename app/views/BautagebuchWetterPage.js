@@ -60,7 +60,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'temperaturView luftfeuchteView bewoelkungView niederschlagView windView wechselhaftCheckbox'
+    	  childViews: 'temperaturView luftfeuchteView bewoelkungView niederschlagView windView wechselhaftCheckbox speichernButton'
         	  
         , cssClass: 'content'
         	
@@ -391,6 +391,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		            }
 	          }
 	    })
+	    
 
     })
 

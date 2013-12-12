@@ -833,6 +833,13 @@ label.ui-input-text, .ui-controlgroup-label {
 	white-space: normal !important;
 }
 
+.startUhrzeit {
+	font-size: 3em !important;
+}
+
+.bautagebuchListePage {
+	color: #000 !important;
+}
   .bautagebuchZeitenDetailsPage .ui-content .ui-block-a 
 , .bautagebuchZeitenDetailsPage .ui-content .ui-block-b 
 {
