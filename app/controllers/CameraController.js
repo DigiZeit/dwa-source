@@ -529,12 +529,12 @@ DigiWebApp.CameraController = M.Controller.extend({
     		}
     	} catch(e1) { console.error(e1); }
     	try {
-    		if (myMediaFile.pId !== 0) {
+    		if (parseInt(myMediaFile.get("positionId")) !== 0) {
     			myPositionName = _.find(DigiWebApp.Position.find(), function(p){ return parseInt(p.get("id")) === parseInt(myMediaFile.get("positionId"))}).get('name');
     		}
     	} catch(e2) { console.error(e2); }
     	try {
-    		if (myMediaFile.aId !== 0) {
+    		if (parseInt(myMediaFile.get("activityId")) !== 0) {
     			myActivityName = _.find(DigiWebApp.Activity.find(), function(p){ return parseInt(p.get("id")) === parseInt(myMediaFile.get("activityId"))}).get('name');
     		}
     	} catch(e3) { console.error(e3); }
