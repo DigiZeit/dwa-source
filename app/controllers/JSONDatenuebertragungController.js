@@ -65,7 +65,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, recieveDataWithServer: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
 		
 		var myModus = '0';
-		if (typeof(modus) === "undefined") {
+		if (typeof(modus) !== "undefined") {
 			myModus = modus;
 		}
 
