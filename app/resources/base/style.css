@@ -246,7 +246,6 @@ img.audioIcon {
 }
 
 /* custom scholppButton */
-/* custom scholppButton */
 .scholppButton
 {
     moz-border-radius: 8px;
@@ -337,6 +336,110 @@ img.audioIcon {
         100% {
             border-width: 0px;
             background-color:green;
+        }
+ }
+ 
+/* end custom scholppButton */
+
+
+/* custom bautagebuchButton */
+.bautagebuchButton
+{
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 0px solid #000000;
+    opacity: 0.9;
+	margin: 3px
+}
+
+.bautagebuchButton [data-role="button"] {
+	margin: 0px;
+}
+
+.bautagebuchButton span.ui-btn-inner
+{
+    font-weight: bold;
+    font-size: 10px !important;
+    color: #333;
+    text-decoration: none;
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.ui-content .bautagebuchButton {
+    position: relative;
+    height: 40px;
+    padding-bottom: 15px;
+}
+
+.ui-content .bautagebuchButton .buttonSelected {
+    background: green;
+    color: #ffffff;
+		/* frei gewaehlter Name*/
+        -webkit-animation-name: white_to_green_to_white;   
+        /* Abspieldauer  in Sekunden*/
+        -webkit-animation-duration: .5s;
+        /* Wiederholungen in Zahlen*/   
+        -webkit-iteration-count: 1; 
+        /* Verhalten am Ende bei Wiederholungen mit: normal / reverse / alternate / alternate-reverse */
+        -webkit-animation-direction: normal; 
+        /* Animatioskurve mit: ease / ease-in / ease-out / ease-in-out / liner / bezier */
+        -webkit-animation-timing-function: linear;
+        /* Fill-Mode für den Effekt bei einem Delay sichtbar mit: none / forwards / backwards / both */
+        animation-fill-mode: forwards;
+}
+
+.ui-content .bautagebuchButton .icon img 
+{
+    width: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: -35px;
+    position: relative;
+}
+
+.bautagebuchButtonMenuIcon.ui-li-thumb
+{ 
+    width: 48px;
+    top: 15px;
+    left: 15px;
+}
+
+.buttonDashboardPage [data-theme="bautagebuchButton"] span.ui-btn-inner {
+	font-size: 25px;
+	top: 5px;
+	text-align: right;
+	margin-right: 15px;
+}
+
+.ui-content .bautagebuchButton.hack .icon {
+    top: -25px;
+}
+
+@-webkit-keyframes white_to_green_to_white {
+        0% {
+            background-color:white;
+        }
+        25% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        50% {
+            border-width: 0px;
+            background-color:green;
+        }
+        75% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        1000% {
+            background-color:white;
         }
  }
  
