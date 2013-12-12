@@ -543,20 +543,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		            }
               })
           })
-    	    , notizenButton: M.ButtonView.design({
-	  	          value: M.I18N.l('BautagebuchNotizen')
-	  	        //, cssClass: 'digiButton'
-	  	        //, anchorLocation: M.CENTER
-	  	        , events: {
-	  	            tap: {
-	  	                //target: DigiWebApp.NavigationController,
-	  	                //action: 'toBautagebuchNotizenListePageTransition'
-	  	    			action: function() {
-	  	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
-	  					}
-	  	            }
-	  	          }
-	  	    })
 	  	
 	  	    , medienButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchMedien')
