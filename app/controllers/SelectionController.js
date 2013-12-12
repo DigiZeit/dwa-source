@@ -840,7 +840,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
             		var allActivities = DigiWebApp.Activity.findSorted();
             		_.each(allActivities, function(acti) {
             			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
-            			if (act.get("id") === acti.get("id") && acti.get("positionId") === "1") {
+            			if (act.get("id") === acti.get("id") && parseInt(acti.get("positionId")) === 1) {
             				zugeordnet = YES;
             			}
             		});
