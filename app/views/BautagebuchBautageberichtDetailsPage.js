@@ -446,146 +446,132 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , zeiten_material_ButtonGrid: M.GridView.design({
         	  childViews: 'materialienButton zeitenButton'
             , layout: M.TWO_COLUMNS
-            , materialienButton: M.GridView.design({
-                childViews: 'button icon'
-              , layout: {
-                    cssClass: 'bautagebuchButton'
-                  , columns: {
-                        0: 'button'
-                      , 1: 'icon'
-                  }
-              }
-              , button: M.ButtonView.design({
-                    value: M.I18N.l('BautagebuchMaterialien')
-                  , cssClass: 'bautagebuchButton'
-                  , anchorLocation: M.RIGHT
-                  , events: {
-                      tap: {
-		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
-		        			}
-                      }
-                  }
-              })
-              , icon: M.ImageView.design({
-                    value: 'theme/images/48x48_plain_pda_write.png'
-                  , events: {
-		                  tap: {
-			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-			    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
-		          				}
-		                  }
-		            }
-              })
-          })
-  	
-            , zeitenButton: M.GridView.design({
-                childViews: 'button icon'
-              , layout: {
-                    cssClass: 'bautagebuchButton'
-                  , columns: {
-                        0: 'button'
-                      , 1: 'icon'
-                  }
-              }
-              , button: M.ButtonView.design({
-                    value: M.I18N.l('BautagebuchZeiten')
-                  , cssClass: 'bautagebuchButton'
-                  , anchorLocation: M.RIGHT
-                  , events: {
-                      tap: {
-		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
-		        			}
-                      }
-                  }
-              })
-              , icon: M.ImageView.design({
-                    value: 'theme/images/48x48_plain_pda_write.png'
-                  , events: {
-		                  tap: {
-			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-			    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
-		          				}
-		                  }
-		            }
-              })
-          })
+      	    , materialienButton: M.ButtonView.design({
+    	          value: M.I18N.l('BautagebuchMaterialien')
+    	        //, cssClass: 'digiButton'
+    	        //, anchorLocation: M.CENTER
+    	        , events: {
+    	            tap: {
+    	                //target: DigiWebApp.NavigationController,
+    	                //action: 'toBautagebuchMaterialienListePageTransition'
+    		    			action: function() {
+  							DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
+  						}
+    	            }
+    	          }
+    	    })
+    	
+	  	    , zeitenButton: M.ButtonView.design({
+	  	          value: M.I18N.l('BautagebuchZeiten')
+	  	        //, cssClass: 'marginTop12'
+	  	        //, anchorLocation: M.CENTER
+	  	        , events: {
+	  	            tap: {
+	  	                //target: DigiWebApp.NavigationController,
+	  	                //action: 'toBautagebuchZeitenListePageTransition'
+	  	    			action: function() {
+	  	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
+	  	    			}
+	  	            }
+	  	          }
+	  	    })
 
         })
         
+	    , materialienButton: M.ButtonView.design({
+  	          value: M.I18N.l('BautagebuchMaterialien')
+  	        //, cssClass: 'digiButton'
+  	        //, anchorLocation: M.CENTER
+  	        , events: {
+  	            tap: {
+  	                //target: DigiWebApp.NavigationController,
+  	                //action: 'toBautagebuchMaterialienListePageTransition'
+  		    			action: function() {
+							DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
+						}
+  	            }
+  	          }
+  	    })
+  	
+	    , zeitenButton: M.ButtonView.design({
+	          value: M.I18N.l('BautagebuchZeiten')
+	        //, cssClass: 'marginTop12'
+	        //, anchorLocation: M.CENTER
+	        , events: {
+	            tap: {
+	                //target: DigiWebApp.NavigationController,
+	                //action: 'toBautagebuchZeitenListePageTransition'
+	    			action: function() {
+	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
+	    			}
+	            }
+	          }
+	    })
 	
         , notizen_medien_ButtonGrid: M.GridView.design({
         	  childViews: 'notizenButton medienButton'
             , layout: M.TWO_COLUMNS
-            
-            , notizenButton: M.GridView.design({
-                childViews: 'button icon'
-              , layout: {
-                    cssClass: 'bautagebuchButton'
-                  , columns: {
-                        0: 'button'
-                      , 1: 'icon'
-                  }
-              }
-              , button: M.ButtonView.design({
-                    value: M.I18N.l('BautagebuchNotizen')
-                  , cssClass: 'bautagebuchButton'
-                  , anchorLocation: M.RIGHT
-                  , events: {
-                      tap: {
-		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
-		        			}
-                      }
-                  }
-              })
-              , icon: M.ImageView.design({
-                    value: 'theme/images/48x48_plain_pda_write.png'
-                  , events: {
-		                  tap: {
-			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-			    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
-		          				}
-		                  }
-		            }
-              })
-          })
+    	    , notizenButton: M.ButtonView.design({
+	  	          value: M.I18N.l('BautagebuchNotizen')
+	  	        //, cssClass: 'digiButton'
+	  	        //, anchorLocation: M.CENTER
+	  	        , events: {
+	  	            tap: {
+	  	                //target: DigiWebApp.NavigationController,
+	  	                //action: 'toBautagebuchNotizenListePageTransition'
+	  	    			action: function() {
+	  	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+	  					}
+	  	            }
+	  	          }
+	  	    })
 	  	
-            , medienButton: M.GridView.design({
-                childViews: 'button icon'
-              , layout: {
-                    cssClass: 'bautagebuchButton'
-                  , columns: {
-                        0: 'button'
-                      , 1: 'icon'
-                  }
-              }
-              , button: M.ButtonView.design({
-                    value: M.I18N.l('BautagebuchMedien')
-                  , cssClass: 'bautagebuchButton'
-                  , anchorLocation: M.RIGHT
-                  , events: {
-                      tap: {
-		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
-		        			}
-                      }
-                  }
-              })
-              , icon: M.ImageView.design({
-                    value: 'theme/images/48x48_plain_pda_write.png'
-                  , events: {
-		                  tap: {
-			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-			    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
-		          				}
-		                  }
-		            }
-              })
-          })
+	  	    , medienButton: M.ButtonView.design({
+	  	          value: M.I18N.l('BautagebuchMedien')
+	  	        //, cssClass: 'digiButton'
+	  	        //, anchorLocation: M.CENTER
+	  	        , events: {
+	  	            tap: {
+	  	                //target: DigiWebApp.NavigationController,
+	  	                //action: 'toBautagebuchMedienListePageTransition'
+	  		    			action: function() {
+	  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
+	  						}
+	  	            }
+	  	          }
+	  	    })
         })
-        	    
+        
+	    , notizenButton: M.ButtonView.design({
+	          value: M.I18N.l('BautagebuchNotizen')
+	        //, cssClass: 'digiButton'
+	        //, anchorLocation: M.CENTER
+	        , events: {
+	            tap: {
+	                //target: DigiWebApp.NavigationController,
+	                //action: 'toBautagebuchNotizenListePageTransition'
+	    			action: function() {
+	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+					}
+	            }
+	          }
+	    })
+	
+	    , medienButton: M.ButtonView.design({
+	          value: M.I18N.l('BautagebuchMedien')
+	        //, cssClass: 'digiButton'
+	        //, anchorLocation: M.CENTER
+	        , events: {
+	            tap: {
+	                //target: DigiWebApp.NavigationController,
+	                //action: 'toBautagebuchMedienListePageTransition'
+		    			action: function() {
+		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
+						}
+	            }
+	          }
+	    })
+	    
 	    , wetterButton: M.ButtonView.design({
 	          value: M.I18N.l('BautagebuchWetter')
 	        //, cssClass: 'digiButton'
