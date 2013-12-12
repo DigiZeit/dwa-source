@@ -379,7 +379,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 
 		, speichernButton: M.ButtonView.design({
 	          value: M.I18N.l('save')
-	        //, cssClass: 'speichernButton'
+	        , cssClass: 'marginTop25'
 	        //, anchorLocation: M.CENTER
 	        , events: {
 		            tap: {

@@ -833,8 +833,14 @@ label.ui-input-text, .ui-controlgroup-label {
 	white-space: normal !important;
 }
 
-.startUhrzeit {
+  .startUhrzeit
+{
 	font-size: 3em !important;
+}
+
+.startUhrzeit_container
+{
+	font-size: 1.5em !important;
 }
 
 .bautagebuchListePage {

@@ -524,6 +524,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	  					}
 	  	            }
 	  	          }
+	            , icon: M.ImageView.design({
+	                value: 'theme/images/48x48_plain_note_view.png'
+	            })
+
 	  	    })
 	  	
 	  	    , medienButton: M.ButtonView.design({
