@@ -511,6 +511,38 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , notizen_medien_ButtonGrid: M.GridView.design({
         	  childViews: 'notizenButton medienButton'
             , layout: M.TWO_COLUMNS
+            , notizenButton: M.GridView.design({
+                childViews: 'button icon'
+              , layout: {
+                    cssClass: 'scholppButton'
+                  , columns: {
+                        0: 'button'
+                      , 1: 'icon'
+                  }
+              }
+              , button: M.ButtonView.design({
+                    value: M.I18N.l('BautagebuchNotizen')
+                  , cssClass: 'scholppButton'
+                  , anchorLocation: M.RIGHT
+                  , events: {
+                      tap: {
+		    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+		    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+		        			}
+                      }
+                  }
+              })
+              , icon: M.ImageView.design({
+                    value: 'theme/images/48x48_plain_pda_write.png'
+                  , events: {
+		                  tap: {
+			    				action: function() { try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+			    					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+		          				}
+		                  }
+		            }
+              })
+          })
     	    , notizenButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchNotizen')
 	  	        //, cssClass: 'digiButton'
