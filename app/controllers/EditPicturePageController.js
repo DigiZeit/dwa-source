@@ -341,7 +341,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
           		console.log("UNDEFINED ACTIVITY");
           		return null;
           	} else {
-          		return obj = { label: act.get('name'), value: act.get('id') };
+          		return { label: act.get('name'), value: act.get('id') };
           	}
          });
      }
