@@ -23,7 +23,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   }
 
   , deleteMediaFileFromLocalStorage: function() {
-	  var that = this;
+	  var that = DigiWebApp.EditPicturePageController;
 	  var myMediaFile = that.myMediaFile;
 	  //console.log(myMediaFile);
 	  try {
