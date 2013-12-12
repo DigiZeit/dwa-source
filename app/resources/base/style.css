@@ -447,6 +447,7 @@ img.audioIcon {
 
 label.ui-input-text, .ui-controlgroup-label {
 	color: #ffffff;
+	background: transparent;
 }
 
 .header {

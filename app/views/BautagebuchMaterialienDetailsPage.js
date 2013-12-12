@@ -62,11 +62,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	} else {
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).hide();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().addClass("transparent");
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
 							} else {
-								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).show();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().removeClass("transparent");
+								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
 	                			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.artikel);
 							}
 				            return o;
@@ -90,11 +90,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	} else {    
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== null) {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId);				    			
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).hide();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().addClass("transparent");
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).hide();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().addClass("transparent");
 							} else {
-								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).show();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().removeClass("transparent");
+								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).show();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().removeClass("transparent");
 	                			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.einheit);
 							}
 				            return o;
@@ -161,8 +161,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox materialGridView spacer2 mengenInput spacer3 speichernButton'
-        //childViews: 'positionComboBox activityComboBox materialComboBox materialInput spacer1 mengeneinheitComboBox mengeneinheitInput spacer2 mengenInput spacer3 speichernButton'
+    	  childViews: 'positionComboBox activityComboBox materialComboBox materialInput spacer1 mengeneinheitComboBox mengeneinheitInput spacer2 mengenInput spacer3 speichernButton'
         	  
         , cssClass: 'content'
     	
@@ -224,113 +223,102 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 	}
                 }
         })
-         
-        , materialGridView: M.GridView.design({
-		  	  childviews: 'materialContainer mengeneinheitenContainer'
-            , layout: M.TWO_COLUMNS
-        	, materialContainer: M.ContainerView.design({
-      		  	  childviews: 'materialComboBox materialInput'
-		        , materialComboBox: M.SelectionListView.design({
-		
-		                /* renders a selection view like check boxes */
-		                  selectionMode: M.SINGLE_SELECTION_DIALOG
-		                , initialText: M.I18N.l('noData')
-		                , label: M.I18N.l('BautagebuchMaterial')
-		                , applyTheme: NO
-		                /* this seleciton view has no static entries, instead it is filled via content binding. */
-		                , contentBinding: {
-		                      target: DigiWebApp.BautagebuchMaterialienDetailsController
-		                    , property: 'materialienList'
-		                }
-		                , events: {
-		                    change: {
-		                    	/* executed in scope of DOMWindow because no target defined */
-		                    	action: function(selectedValue, selectedItem) {
-		                			DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).value);
-		                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
-		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).show();
-			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().removeClass("transparent");
-		                			} else {
-		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).hide();
-			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().addClass("transparent");
-		    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).label);
-		                			}
-		                    	}
-		                	}
-		                }
-		        })
-		            	
-		        , materialInput: M.TextFieldView.design({
-			         events: {
-		        		keyup: {
-			                /* executed in scope of DOMWindow because no target defined */
-			            	action: function(selectedValue, selectedItem) {
-			        				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').getValue());
-			            	}
-			            }
-			    	}
-		        })
-        	})
-        	
-        	, mengeneinheitenContainer: M.ContainerView.design({
-        		  childviews: 'mengeneinheitComboBox mengeneinheitInput'
+            	
+        , materialComboBox: M.SelectionListView.design({
 
-			    , mengeneinheitComboBox: M.SelectionListView.design({
-			
-			        /* renders a selection view like check boxes */
-			          selectionMode: M.SINGLE_SELECTION_DIALOG
-			        , initialText: M.I18N.l('noData')
-			        , label: M.I18N.l('BautagebuchMengeneinheit')
-			        , applyTheme: NO
-			        /* this seleciton view has no static entries, instead it is filled via content binding. */
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchMaterialienDetailsController
-			            , property: 'mengeneinheitenList'
-			        }
-			        , events: {
-			                    change: {
-			                        /* executed in scope of DOMWindow because no target defined */
-					            	action: function(selectedValue, selectedItem) {
-			        					DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value);
-			                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
-			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).show();
-				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().removeClass("transparent");
-			                			} else {
-			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).hide();
-				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().addClass("transparent");
-			                				var mengeneinheitId = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value;
-			                				var mengeneinheitKuerzel = DigiWebApp.BautagebuchMengeneinheit.findSorted(mengeneinheitId)[0].get("kuerzel");
-			                				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", mengeneinheitKuerzel);
-						    			}
-					            	}
-			                    }
-			        }
-			    })
-			
-		        , mengeneinheitInput: M.TextFieldView.design({
-			         events: {
-		        		keyup: {
-		                    /* executed in scope of DOMWindow because no target defined */
+                /* renders a selection view like check boxes */
+                  selectionMode: M.SINGLE_SELECTION_DIALOG
+                , initialText: M.I18N.l('noData')
+                , label: M.I18N.l('BautagebuchMaterial')
+                , applyTheme: NO
+                /* this seleciton view has no static entries, instead it is filled via content binding. */
+                , contentBinding: {
+                      target: DigiWebApp.BautagebuchMaterialienDetailsController
+                    , property: 'materialienList'
+                }
+                , events: {
+                    change: {
+                    	/* executed in scope of DOMWindow because no target defined */
+                    	action: function(selectedValue, selectedItem) {
+                			DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).value);
+                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
+                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
+                			} else {
+                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
+    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).label);
+                			}
+                    	}
+                	}
+                }
+        })
+            	
+        , materialInput: M.TextFieldView.design({
+	         events: {
+        		keyup: {
+	                /* executed in scope of DOMWindow because no target defined */
+	            	action: function(selectedValue, selectedItem) {
+	        				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').getValue());
+	            	}
+	            }
+	    	}
+        })
+
+	    , mengeneinheitComboBox: M.SelectionListView.design({
+	
+	        /* renders a selection view like check boxes */
+	          selectionMode: M.SINGLE_SELECTION_DIALOG
+	        , initialText: M.I18N.l('noData')
+	        , label: M.I18N.l('BautagebuchMengeneinheit')
+	        , applyTheme: NO
+	        /* this seleciton view has no static entries, instead it is filled via content binding. */
+	        , contentBinding: {
+	              target: DigiWebApp.BautagebuchMaterialienDetailsController
+	            , property: 'mengeneinheitenList'
+	        }
+	        , events: {
+	                    change: {
+	                        /* executed in scope of DOMWindow because no target defined */
 			            	action: function(selectedValue, selectedItem) {
-		            				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').getValue());
+	        					DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value);
+	                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
+	                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).show();
+		                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().removeClass("transparent");
+	                			} else {
+	                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).hide();
+		                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().addClass("transparent");
+	                				var mengeneinheitId = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value;
+	                				var mengeneinheitKuerzel = DigiWebApp.BautagebuchMengeneinheit.findSorted(mengeneinheitId)[0].get("kuerzel");
+	                				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", mengeneinheitKuerzel);
+				    			}
 			            	}
-		                }
-		        	}
-		        })
-        	})
-		
-	        , mengenInput: M.TextFieldView.design({
-	        	  inputType: M.INPUT_NUMBER
-	            , label: M.I18N.l('BautagebuchMenge')
-		        , events: {
-	        		keyup: {
-	                    /* executed in scope of DOMWindow because no target defined */
-		            	action: function(selectedValue, selectedItem) {
-	            				DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').getValue());
-		            	}
-	                }
-	        	}
-	        })
+	                    }
+	        }
+	    })
+	
+        , mengeneinheitInput: M.TextFieldView.design({
+	         events: {
+        		keyup: {
+                    /* executed in scope of DOMWindow because no target defined */
+	            	action: function(selectedValue, selectedItem) {
+            				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').getValue());
+	            	}
+                }
+        	}
+        })
+
+        , mengenInput: M.TextFieldView.design({
+        	  inputType: M.INPUT_NUMBER
+            , label: M.I18N.l('BautagebuchMenge')
+	        , events: {
+        		keyup: {
+                    /* executed in scope of DOMWindow because no target defined */
+	            	action: function(selectedValue, selectedItem) {
+            				DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').getValue());
+	            	}
+                }
+        	}
         })
 
         , speichernButton: M.ButtonView.design({
