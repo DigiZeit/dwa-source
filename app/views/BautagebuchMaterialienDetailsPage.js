@@ -62,11 +62,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	} else {
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).hide();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().addClass("transparent");
 							} else {
-								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
+								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).show();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().removeClass("transparent");
 	                			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.artikel);
 							}
 				            return o;
@@ -90,11 +90,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	} else {    
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== null) {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId);				    			
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).hide();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().addClass("transparent");
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).hide();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().addClass("transparent");
 							} else {
-								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).show();
-	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().removeClass("transparent");
+								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).show();
+	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().removeClass("transparent");
 	                			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.einheit);
 							}
 				            return o;
@@ -248,11 +248,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 		                    	action: function(selectedValue, selectedItem) {
 		                			DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).value);
 		                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
-		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
-			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
+		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).show();
+			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().removeClass("transparent");
 		                			} else {
-		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
-			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
+		                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).hide();
+			                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.materialContainer.materialInput.id).parent().addClass("transparent");
 		    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).label);
 		                			}
 		                    	}
@@ -293,11 +293,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					            	action: function(selectedValue, selectedItem) {
 			        					DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value);
 			                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
-			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).show();
-				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().removeClass("transparent");
+			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).show();
+				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().removeClass("transparent");
 			                			} else {
-			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).hide();
-				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().addClass("transparent");
+			                				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).hide();
+				                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialGridView.mengeneinheitenContainer.mengeneinheitInput.id).parent().addClass("transparent");
 			                				var mengeneinheitId = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitComboBox').getSelection(YES).value;
 			                				var mengeneinheitKuerzel = DigiWebApp.BautagebuchMengeneinheit.findSorted(mengeneinheitId)[0].get("kuerzel");
 			                				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", mengeneinheitKuerzel);
