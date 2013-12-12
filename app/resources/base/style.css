@@ -939,12 +939,12 @@ label.ui-input-text, .ui-controlgroup-label {
 
   .startUhrzeit
 {
-	font-size: 3em !important;
+	font-size: 2.5em !important;
 }
 
 .startUhrzeit_container
 {
-	font-size: 1.5em !important;
+	/*font-size: 1.5em !important;*/
 }
 
 .bautagebuchListePage {
