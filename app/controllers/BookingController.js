@@ -251,36 +251,41 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            var getLocationOptions =  { enableHighAccuracy: NO, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
 	
 	            M.LocationManager.getLocation(that, successCallback, function(error) {
-	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-	
-	            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-	                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-	                	/*
-	                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
-	                    */
-	                	if ( error === "POSITION_UNAVAILABLE" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunavailable')
-	                		});
-	                	} else if ( error === "TIMEOUT" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPStimeout')
-	                		});
-	                	} else if ( error === "PERMISSION_DENIED" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSmissingPermission')
-	                		});
-	                	} else {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunknownError') + error
-	                		});
-	                	}
-	                    //M.LocationManager.getLocation(that, successCallback, successCallback);
-	                	successCallback();
+	            	
+		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
+		        	
+		            M.LocationManager.getLocation(that, successCallback, function(error) {
+		            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		
+		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
+		                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		                	/*
+		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
+		                    */
+		                	if ( error === "POSITION_UNAVAILABLE" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunavailable')
+		                		});
+		                	} else if ( error === "TIMEOUT" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPStimeout')
+		                		});
+		                	} else if ( error === "PERMISSION_DENIED" ) {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSmissingPermission')
+		                		});
+		                	} else {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunknownError') + error
+		                		});
+		                	}
+		                    //M.LocationManager.getLocation(that, successCallback, successCallback);
+		                	successCallback();
+		            }, getLocationOptions);
 	            }, getLocationOptions);
         	};
     	
