@@ -272,6 +272,7 @@ img.audioIcon {
     border-radius: 8px;
     padding-left: 0px;
     padding-right: 0px;
+    text-shadow: 0 0px 0 #000 !important;
 }
 
 .ui-content .scholppButton {
