@@ -320,8 +320,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , regSecEv: function(isFirstLoad) {
     	var that = this;
     	setTimeout(function() {
+            if(localStorage) {
+                var language = null;
+                language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
+                if (language === null) {
+                	localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
+                	M.I18N.setLanguage('de_de');
+                }
+            }
     		that.realregSecEv(isFirstLoad);
-    	}, 100);
+    	}, 1);
     }
     
 	, realregSecEv: function(isFirstLoad) {
@@ -330,14 +338,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         DigiWebApp.ApplicationController.setImageClass();
         
         M.I18N.defaultLanguage = "de_de";
-
-        if(localStorage) {
-            var language = null;
-            language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
-            if (language === null) {
-            	M.I18N.setLanguage('de_de');
-            }
-        }
         
 		if (isFirstLoad) {
 			
