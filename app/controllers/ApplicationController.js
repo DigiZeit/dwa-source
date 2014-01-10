@@ -637,7 +637,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    	
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 						
-			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
+	        try {
+				//alert("hiding splash");
+				navigator.splashscreen.hide();
+			} catch(e) {
+				console.log("unable to hide splashscreen");
+			}
+
+	        if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
 	    		// unfix header
 				_.each(DigiWebApp.app.pages, function(myPage) {
 					if ( typeof(myPage.header) !== "undefined" ) {
@@ -676,13 +683,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        } else {
 	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
 	        }
-
-	        try {
-				//alert("hiding splash");
-				navigator.splashscreen.hide();
-			} catch(e) {
-				console.log("unable to hide splashscreen");
-			}
 	        
 			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
 
