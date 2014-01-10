@@ -342,6 +342,15 @@ function searchForFeature(featureId) {
     return false;    
 }
 
+if(localStorage) {
+	var language = null;
+	language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
+	if (language === null) {
+		localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
+		//M.I18N.setLanguage('de_de');
+	}
+}
+
 // reduce pre-rendering on BlackBerry to reduce time spent on native-splash
 var DigiWebAppBlackBerryDesign = {
 

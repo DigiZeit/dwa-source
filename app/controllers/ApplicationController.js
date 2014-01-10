@@ -319,17 +319,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , regSecEv: function(isFirstLoad) {
     	var that = this;
-    	setTimeout(function() {
-            if(localStorage) {
-                var language = null;
-                language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
-                if (language === null) {
-                	localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
-                	//M.I18N.setLanguage('de_de');
-                }
-            }
-    		that.realregSecEv(isFirstLoad);
-    	}, 1);
+//    	setTimeout(function() {
+//            if(localStorage) {
+//                var language = null;
+//                language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
+//                if (language === null) {
+//                	localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
+//                	//M.I18N.setLanguage('de_de');
+//                }
+//            }
+//    		that.realregSecEv(isFirstLoad);
+//    	}, 1);
+    	that.realregSecEv(isFirstLoad);
     }
     
 	, realregSecEv: function(isFirstLoad) {
@@ -635,14 +636,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //		try {
 		    	
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			
-			try {
-				//alert("hiding splash");
-				navigator.splashscreen.hide();
-			} catch(e) {
-				console.log("unable to hide splashscreen");
-			}
-			
+						
 			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
 	    		// unfix header
 				_.each(DigiWebApp.app.pages, function(myPage) {
@@ -682,6 +676,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        } else {
 	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
 	        }
+
+	        try {
+				//alert("hiding splash");
+				navigator.splashscreen.hide();
+			} catch(e) {
+				console.log("unable to hide splashscreen");
+			}
 	        
 			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
 
