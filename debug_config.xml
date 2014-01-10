@@ -33,7 +33,6 @@
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="SplashScreenDelay" value="60000"/>
-	<preference name="splash-screen-duration" value="10000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	
 <!-- smartphone and tablet -->
