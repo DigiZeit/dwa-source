@@ -27,7 +27,6 @@
 	
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
-	<preference name="android-windowSoftInputMode" value="stateVisible" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="false" readonly="false" />
 	<preference name="phonegap-version" value="3.1.0" />
