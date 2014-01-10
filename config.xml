@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4644"
-	version 	= "1.7.2.4644">
+	versionCode = "4645"
+	version 	= "1.7.2.4645">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -32,7 +32,7 @@
 	<preference name="phonegap-version" value="3.1.0" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" />
+	<preference name="splash-screen-duration" value="6000000" />
 	<preference name="show-splash-screen-spinner" value="true" />
 	
 <!-- smartphone and tablet -->
