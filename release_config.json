@@ -1,9 +1,9 @@
 {
     "name" : "DigiWebApp",
-    "mode": "debug",
-    "debugLevel": 1,
-    "eliminate": false,
-    "minify": false,
+    "mode": "release",
+    "debugLevel": 0,
+    "eliminate": true,
+    "minify": true,
     "proxies": [
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
