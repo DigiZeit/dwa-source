@@ -29,9 +29,10 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="false" readonly="false" />
-	<preference name="phonegap-version" value="3.1.0" />
+	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
+	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	
@@ -59,9 +60,9 @@ which PhoneGap requires. -->
 
 <!-- include ChildBrowserPlugIn -->
 	<!-- <gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
-	<!-- <gap:plugin name="org.apache.cordova.camera" /> -->
-	<!-- <gap:plugin name="org.apache.cordova.media-capture" /> -->
-	<!-- <gap:plugin name="org.apache.cordova.console" /> -->
+	<gap:plugin name="org.apache.cordova.camera" />
+	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.console" />
 	<gap:plugin name="org.apache.cordova.contacts" />
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.file" />

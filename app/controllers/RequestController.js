@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4661
+    , softwareVersion: 4662
 
 
     /**
@@ -231,35 +231,29 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , authenticate: function(obj) {
     	
-        // empfange den konfigurierten Mitarbeiternamen
-    	var myFunc = function(obj) {
-    		writeToLog("aktualisiere Mitarbeiter des Benutzers in authenticate");
-    		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
-	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-	    		} else {
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
-	    		}
-	    		//DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    		//DigiWebApp.RequestController.authenticateWithDatabaseServer(obj);
-	    		DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
-	    	}, function(error) {
-	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    			// Fehlermeldung
-    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                    title: M.I18N.l('offlineWorkNotPossible')
-                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-    			});
-	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
-    	};
-
-    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
-    	myFunc(obj);
-    	//DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
+//        // empfange den konfigurierten Mitarbeiternamen
+//    	var myFunc = function(obj) {
+//    		writeToLog("aktualisiere Mitarbeiter des Benutzers in authenticate");
+//    		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
+//	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+//	    		}
+//	    		DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
+//	    	}, function(error) {
+//	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+//    			// Fehlermeldung
+//    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+//                    title: M.I18N.l('offlineWorkNotPossible')
+//                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+//    			});
+//	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
+//    	};
+//
+//    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
+//    	//myFunc(obj);
+    	DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
 
     }
 

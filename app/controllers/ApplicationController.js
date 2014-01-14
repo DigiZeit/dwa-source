@@ -394,7 +394,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	if (typeof(device) === "undefined") { 
 	        	// register deviceready-event and wait for it to fire
         		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
-        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 12000);
+        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
         		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
         	} else {
@@ -597,6 +597,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, devicereadyhandler: function() {
+		
+        try {
+			//alert("hiding splash");
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
+
         DigiWebApp.SettingsController.init(YES,YES);
         
         if (DigiWebApp.SettingsController.getSetting('debug')) { 
@@ -1241,6 +1249,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     }
     
+    , timestampMitarbeiterZuletztGeladen: null
+    
     /**
      *
      * The success callback for authenticate.
@@ -1276,7 +1286,31 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.ApplicationController.triggerUpdate = YES;
                 DigiWebApp.DashboardController.init(YES);
                 DigiWebApp.MediaListController.init(YES);
-        		this.getFeaturesFromRemote();        		
+                	
+        		var timestampNow = D8.now().getTimestamp();
+        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
+        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
+            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate");
+            		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
+        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+        	    		}
+        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
+        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+        	    	}, function(error) {
+        	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+            			// Fehlermeldung
+            			DigiWebApp.ApplicationController.nativeAlertDialogView({
+                            title: M.I18N.l('offlineWorkNotPossible')
+                          , message: M.I18N.l('offlineWorkNotPossibleMsg')
+            			});
+        	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
+        		} else {
+    	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+        		}
+
                 DigiWebApp.ApplicationController.enforceChefToolOnly();
         		break;
             
