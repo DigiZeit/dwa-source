@@ -2,7 +2,7 @@
     "name" : "DigiWebApp",
     "mode": "release",
     "debugLevel": 0,
-    "eliminate": true,
+    "eliminate": false,
     "minify": true,
     "proxies": [
         {
@@ -27,7 +27,7 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.7.2.4663 beta",
+        "version": "1.7.2.4664 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",

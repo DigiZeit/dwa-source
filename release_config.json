@@ -2,7 +2,7 @@
     "name" : "DigiWebApp",
     "mode": "release",
     "debugLevel": 0,
-    "eliminate": true,
+    "eliminate": false,
     "minify": true,
     "proxies": [
         {
