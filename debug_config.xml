@@ -60,17 +60,17 @@ which PhoneGap requires. -->
 
 <!-- include PhonegapPlugIns -->
 	<!-- <gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
-	<gap:plugin name="org.apache.cordova.camera" />
-	<gap:plugin name="org.apache.cordova.media-capture" />
-	<!-- <gap:plugin name="org.apache.cordova.console" /> -->
-	<gap:plugin name="org.apache.cordova.contacts" />
-	<gap:plugin name="org.apache.cordova.device" />
-	<gap:plugin name="org.apache.cordova.file" />
-	<gap:plugin name="org.apache.cordova.geolocation" />
-	<gap:plugin name="org.apache.cordova.inappbrowser" />
-	<gap:plugin name="org.apache.cordova.dialogs" />
-	<gap:plugin name="org.apache.cordova.splashscreen" />
-	<gap:plugin name="org.apache.cordova.vibration" />
+<!-- 	<gap:plugin name="org.apache.cordova.camera" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.media-capture" /> -->
+<!-- 	<!-- <gap:plugin name="org.apache.cordova.console" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.contacts" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.device" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.file" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.geolocation" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.inappbrowser" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.dialogs" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.splashscreen" /> -->
+<!-- 	<gap:plugin name="org.apache.cordova.vibration" /> -->
 	<!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 	
