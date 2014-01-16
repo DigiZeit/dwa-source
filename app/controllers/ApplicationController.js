@@ -108,7 +108,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);
 		/* now lets render all other pages 
         _.each(M.ViewManager.pageList, function(page) {
-        	console.log(page);
+//        	console.log(page);
         	if (page.html === '') {
         		//page.render();
         	}
@@ -1006,15 +1006,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            var isCurrentBookingAvailable = NO;
 	            for (var i = 0; i < bookings.length; i++) {
 	            	//alert("in for i=" + i);
-	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
+	            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
 	                if (bookings[i].get('isCurrent') === YES) {
 	                	//alert("currentBooking found");
-	                	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
+	                	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
 	                	isCurrentBookingAvailable = YES;
 	                    break;
 	                }
 	            }
-	            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
+	            ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
 	            if (isCurrentBookingAvailable === YES) {
 	            	//alert("go to BookTimePage");
 	            	DigiWebApp.NavigationController.toBookTimePage();
@@ -1188,7 +1188,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            that.setCallbackStatus('features', 'local', YES);
 	        }
 	
-	        if (DigiWebApp.SettingsController.globalDebugMode) {
+	        //if (DigiWebApp.SettingsController.globalDebugMode) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                  title: M.I18N.l('offlineWork')
 	                , message: fromwhere
@@ -1966,7 +1966,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	if (data && data['return']) {
         	
-        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
+        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
         	
             this.setCallbackStatus('features', 'remote', YES);
 
@@ -2005,12 +2005,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	}
             	//console.log("el['" + prefix + "valueType'] = " + el[prefix + 'valueType']);
             	if (el[prefix + 'valueType'] === "Setting_WebApp") {
-            		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Setting: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
+            		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Setting: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
             		var prop_setting = el[prefix + 'value'];
             		if (prop_setting === "false" || prop_setting === "true" ) { prop_setting = ( prop_setting === "true" ); }
             		DigiWebApp.SettingsController.setSetting(el[prefix + 'keyId'], prop_setting);
             	} else if (el[prefix + 'valueType'] === "Feature") {
-            		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Feature: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
+            		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Feature: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
 	                k = DigiWebApp.Features.createRecord({
 	                      id: el[prefix + 'keyId']
 	                    , name: el[prefix + 'keyId']
@@ -2071,7 +2071,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
         } else {
 
-        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
+        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
 
         	// keine Features empfangen
             this.setCallbackStatus('features', 'remote', YES);

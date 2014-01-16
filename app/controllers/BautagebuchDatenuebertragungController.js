@@ -380,7 +380,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			var internalSuccessCallback = function(data2, msg, request) {
 				// verarbeite empfangene Daten
-				console.log("sendeZeitbuchungen Status: " + request.status);
+//				console.log("sendeZeitbuchungen Status: " + request.status);
 				// weiter in der Verarbeitungskette
 				successCallback();
 				
