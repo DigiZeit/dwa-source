@@ -3,7 +3,7 @@
     "mode": "production",
     "debugLevel": 0,
     "eliminate": false,
-    "minify": false,
+    "minify": true,
     "proxies": [
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
