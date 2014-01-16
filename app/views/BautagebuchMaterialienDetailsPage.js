@@ -24,7 +24,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					});
 				    var positionenArray = _.map(myPositionenList, function(o) {
 				    	if ( typeof(o) === "undefined" ) {
-				    		//console.log("UNDEFINED position");
+				    		console.log("UNDEFINED position");
 				    	} else {    
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.positionId) {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.positionId);
@@ -58,7 +58,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 		    		//console.log(DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
 				    var materialienArray = _.map(myMaterialienList, function(o) {
 				    	if ( typeof(o) === "undefined" ) {
-				    		//console.log("UNDEFINED material");
+				    		console.log("UNDEFINED material");
 				    	} else {
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.materialId);
@@ -86,7 +86,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					});
 				    var mengeneinheitenArray = _.map(myMengeneinheitenList, function(o) {
 				    	if ( typeof(o) === "undefined" ) {
-				    		//console.log("UNDEFINED mengeneinheit");
+				    		console.log("UNDEFINED mengeneinheit");
 				    	} else {    
 							if (DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== null) {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId);				    			

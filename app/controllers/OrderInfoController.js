@@ -217,7 +217,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     		return;
     	}
     	var item = DigiWebApp.OrderInfoController.items[0];
-    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("searching contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
+    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("searching contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
     	// try to load the contact to prevent duplicates
     	var options = new ContactFindOptions();
     	options.filter = item.orderName + ", " + item.positionName; 
@@ -233,7 +233,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     	if (typeof(contacts) === "undefined") {
     		
         	// create new contact
-        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
+        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
         	var myContact = navigator.contacts.create({
         		//displayName: The name of this Contact, suitable for display to end-users. (DOMString)
         		"displayName": M.I18N.l('orderInfo') + " " + item.orderName
@@ -244,7 +244,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 
     		if (contacts.length === 0) {
             	// create new contact
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
             	var myContact = navigator.contacts.create({
             		//displayName: The name of this Contact, suitable for display to end-users. (DOMString)
             		"displayName": M.I18N.l('orderInfo') + " " + item.orderName + ", " + item.positionName
@@ -268,7 +268,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
                     		  target: this
                     		, action: function() {
 					    	    		//console.log(contacts[0]);
-					    	    		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("using contact[0] for orderName=" + item.orderName + ", positionName=" + item.positionName);
+					    	    		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("using contact[0] for orderName=" + item.orderName + ", positionName=" + item.positionName);
 					    	    		//return DigiWebApp.OrderInfoController.saveAsContactSave(contacts[0]);
 	    								var myContactFound = contacts[0];
 	    								myContactFound.remove(DigiWebApp.OrderInfoController.contactRemoveSuccess, DigiWebApp.OrderInfoController.contactRemoveError);
@@ -289,7 +289,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     , contactRemoveSuccess: function() {
     	var item = DigiWebApp.OrderInfoController.items[0];
 		// create new contact
-    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
+    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("creating new contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
     	var myContact = navigator.contacts.create({
     		//displayName: The name of this Contact, suitable for display to end-users. (DOMString)
     		"displayName": M.I18N.l('orderInfo') + " " + item.orderName
@@ -386,7 +386,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		//urls: An array of web pages associated to the contact. (ContactField[])
 
         // save contact
-   		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("saving contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
+   		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("saving contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('saveAsContact'));
         myContact.save(DigiWebApp.OrderInfoController.saveAsContactSuccess, DigiWebApp.OrderInfoController.saveAsContactError);
     }

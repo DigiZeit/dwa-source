@@ -22,8 +22,8 @@ DigiWebApp.AudioController = M.Controller.extend({
     * To handle the first load of a page.
     */
     , init: function(isFirstLoad) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('init');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('init');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
 		if (isFirstLoad) {
             /* do something here, when page is loaded the first time. */
         }
@@ -45,22 +45,22 @@ DigiWebApp.AudioController = M.Controller.extend({
         this.myState = null;
     	
         DigiWebApp.AudioController.myAudioObject = new Media(this.myFilename, this.onSuccess, this.onError, this.mediaStatus, this.mediaPosition);
-        //if (DigiWebApp.SettingsController.globalDebugMode) console.log(this.myFilename);
-        //if (DigiWebApp.SettingsController.globalDebugMode) console.log(DigiWebApp.AudioController.myAudioObject);
+        if (DigiWebApp.SettingsController.globalDebugMode) console.log(this.myFilename);
+        if (DigiWebApp.SettingsController.globalDebugMode) console.log(DigiWebApp.AudioController.myAudioObject);
     	
     }
 
     , mediaStatus: function(status) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('mediaStatus: ' + status);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('mediaStatus: ' + status);
     }
     
     , mediaPosition: function(position) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('mediaPosition: ' + position);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('mediaPosition: ' + position);
     }
     
     , onSuccess: function() {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('onSuccess');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('onSuccess');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
 		switch(this.myState) {
 			case 'play':
 				
@@ -105,7 +105,7 @@ DigiWebApp.AudioController = M.Controller.extend({
     }
     
     , onError: function(error) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('onError');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('onError');
     	console.log('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
     	console.log('Filename: ' + this.myFilename);
     	
@@ -132,8 +132,8 @@ DigiWebApp.AudioController = M.Controller.extend({
     	DigiWebApp.AudioPage.content.grid.button.events = { tap: { action: DigiWebApp.AudioController.init } };
     	DigiWebApp.AudioPage.content.grid.button.registerEvents();
 
-		//if (DigiWebApp.SettingsController.globalDebugMode) console.log('recordAudio');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+		if (DigiWebApp.SettingsController.globalDebugMode) console.log('recordAudio');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
     }
    
     , stopRecord: function() {
@@ -145,8 +145,8 @@ DigiWebApp.AudioController = M.Controller.extend({
     	DigiWebApp.AudioPage.content.audioIcon.registerEvents();
     	document.getElementById(DigiWebApp.AudioPage.content.audioIcon.id).src = 'theme/images/icon_playbackAudio.png';
 
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('stopRecord');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('stopRecord');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
     }
         
     , playbackAudio: function() {
@@ -158,8 +158,8 @@ DigiWebApp.AudioController = M.Controller.extend({
 		DigiWebApp.AudioPage.content.audioIcon.registerEvents();
 		document.getElementById(DigiWebApp.AudioPage.content.audioIcon.id).src = 'theme/images/icon_stop.png';
 
-		//if (DigiWebApp.SettingsController.globalDebugMode) console.log('playbackAudio');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+		if (DigiWebApp.SettingsController.globalDebugMode) console.log('playbackAudio');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
     }
     
     , stopPlayback: function() {
@@ -171,8 +171,8 @@ DigiWebApp.AudioController = M.Controller.extend({
     	DigiWebApp.AudioPage.content.audioIcon.registerEvents();
     	document.getElementById(DigiWebApp.AudioPage.content.audioIcon.id).src = 'theme/images/icon_playbackAudio.png';
 
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('stopPlayback');
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('stopPlayback');
+    	if (DigiWebApp.SettingsController.globalDebugMode) console.log('this.myState = ' + this.myState);
     }
     
 });

@@ -38,7 +38,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
                         
 //            // Start::TakePicture (400)
 //            if (DigiWebApp.SettingsController.featureAvailable('400')) {
-//            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 400 (TakePicture)");
+//            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 400 (TakePicture)");
 //            	actions.push({
 //                      label: M.I18N.l('takePicture')
 //                    , icon: 'icon_takePicture.png'
@@ -49,7 +49,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 //
 //            // Start::RecordAudio (401)
 //            if (DigiWebApp.SettingsController.featureAvailable('401')) {
-//            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 401 (RecordAudio)");
+//            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 401 (RecordAudio)");
 //            	actions.push({
 //                      label: M.I18N.l('recordAudio')
 //                    , icon: 'icon_recordAudio.png'

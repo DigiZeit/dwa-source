@@ -124,7 +124,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
         var activityArray = _.map(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
         		var obj = null;
@@ -224,7 +224,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 		var currentBookingActivitySelectable = false;
 		_.each(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
 				if ( act.get('id') === currentBookingActivityId ) { currentBookingActivitySelectable = true; }
@@ -233,7 +233,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 		
         activities = _.map(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
         		var obj = null;
@@ -304,7 +304,7 @@ DigiWebApp.CameraController = M.Controller.extend({
        if (activities) {
             activityArray = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
-            		//console.log("UNDEFINED ACTIVITY");
+            		console.log("UNDEFINED ACTIVITY");
             		return null;
             	} else {
             		return { label: act.get('name'), value: act.get('id') };
@@ -398,7 +398,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         	// only those activities which are bound to employee
             activities = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
-            		//console.log("UNDEFINED ACTIVITY");
+            		console.log("UNDEFINED ACTIVITY");
             		return null;
             	} else {
         			var zugeordnet = NO;

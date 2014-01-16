@@ -73,7 +73,7 @@ DigiWebApp.MediaListTemplateView = M.ListItemView.design({
                 });
                 if(order && order.length > 0) {
                     order = order[0];
-                    //if (DigiWebApp.SettingsController.globalDebugMode) {
+                    if (DigiWebApp.SettingsController.globalDebugMode) {
                     	return M.I18N.l('order') + ': ' + order.get('name') + ' (' + order.get('id') + ')';
                     } else {
                     	return M.I18N.l('order') + ': ' + order.get('name');

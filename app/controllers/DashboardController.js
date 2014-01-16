@@ -157,7 +157,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
         	var AuftragsInfoAvailable = (DigiWebApp.SettingsController.featureAvailable('406'));
 
         	if ( ( AuftragsInfoAvailable ) && !ChefToolOnly ) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 406 (AuftragsInfo)");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 406 (AuftragsInfo)");
                 items.push({
                       label: M.I18N.l('orderInfo')
                     , icon: 'icon_info.png'
@@ -171,7 +171,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             var RecordAudioAvailable = (DigiWebApp.SettingsController.featureAvailable('401'));
 
             if ( ( RecordAudioAvailable ) && !ChefToolOnly ) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media') + " (DEMO)"
                     , icon: 'icon_media.png'
@@ -179,7 +179,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
                 });
             }
             if ( TakePictureAvailable ) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media')
                     , icon: 'icon_media.png'
@@ -197,7 +197,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	            }
             
             if ( (MaterialerfassungAvailable) && !ChefToolOnly ) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 402 (Materialerfassung)");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 402 (Materialerfassung)");
                 items.push({
                       label: M.I18N.l('materialPickUp')
                     , icon: 'icon_info.png'
@@ -210,7 +210,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			var TageschecklisteAvailable = DigiWebApp.SettingsController.featureAvailable('407');
             
             if ( (TageschecklisteAvailable) && !ChefToolOnly ) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 407 (Tagescheckliste)");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 407 (Tagescheckliste)");
                 items.push({
                       label: M.I18N.l('dailyChecklist')
                     , icon: 'icon_info.png'
@@ -223,7 +223,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             var AnwesenheitslisteAvailable = DigiWebApp.SettingsController.featureAvailable('408');
             
             if (AnwesenheitslisteAvailable) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 408 (Anwesenheitsliste)");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 408 (Anwesenheitsliste)");
                 items.push({
                       label: M.I18N.l('Anwesenheitsliste')
                     , icon: 'icon_info.png'
@@ -236,7 +236,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             var BautagebuchAvailable = DigiWebApp.SettingsController.featureAvailable('412');
             
             if (BautagebuchAvailable) {
-            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 412 (Bautagebuch)");
+            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 412 (Bautagebuch)");
                 items.push({
                       label: M.I18N.l('Bautagebuch')
                     , icon: 'icon_info.png'
@@ -356,17 +356,17 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	    	    };
 	        	if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 					var pollBooking = function() {
-						//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
+						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
 						// getBookings mit timeout
 						var checkForOK = function(datensaetze) {
-							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
+							if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 							_.each(datensaetze, function(datensatzObj) {
 								try {
-									//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
+									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
 									var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id; } );
 									var datensatz = datensatzObj.record;
-									//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
-									//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
+									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
+									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
 									modelBooking.set("latitude", datensatz.latitude);
 									modelBooking.set("latitude_bis", datensatz.latitude_bis);
 									modelBooking.set("longitude", datensatz.longitude);
@@ -379,9 +379,9 @@ DigiWebApp.DashboardController = M.Controller.extend({
 									modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
 									modelBooking.set("ServiceApp_Status", datensatz.status);
 									modelBooking.save();
-									//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
+									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 								} catch(exNotFound) {
-									//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
+									if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
 								}
 							});
 							finishBooking();

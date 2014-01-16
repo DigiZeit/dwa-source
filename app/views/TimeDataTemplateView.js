@@ -28,7 +28,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 					DigiWebApp.NavigationController.toEditTimeDataPage();
 			    } else {
 					// else: nothing
-			    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log(id);
+			    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log(id);
 			    }
 			    // End::Bemerkungsfeld oder Unterschrift
 			}
@@ -157,7 +157,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 //                });
 //                if(order && order.length > 0) {
 //                    order = order[0];
-//                    //if (DigiWebApp.SettingsController.globalDebugMode) {
+//                    if (DigiWebApp.SettingsController.globalDebugMode) {
 //                    	return M.I18N.l('order') + ': ' + order.get('name') + ' (' + order.get('id') + ')';
 //                    } else {
 //                    	return M.I18N.l('order') + ': ' + order.get('name');
@@ -225,7 +225,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 });
                 if (order && order.length > 0) {
                     order = order[0];
-                    //if (DigiWebApp.SettingsController.globalDebugMode) {
+                    if (DigiWebApp.SettingsController.globalDebugMode) {
                     	return M.I18N.l('order') + ': ' + order.get('name') + ' (' + order.get('id') + ')';
                     } else {
                     	return M.I18N.l('order') + ': ' + order.get('name');

@@ -83,7 +83,7 @@ DigiWebApp.SettingsPasswordPage = M.PageView.design({
                         //target: DigiWebApp.NavigationController,
                         //action: 'toSettingsPage'
             			action: function() {
-//            				//if (DigiWebApp.SettingsController.globalDebugMode) {
+//            				if (DigiWebApp.SettingsController.globalDebugMode) {
 //            					console.log("\"" + $('#' + DigiWebApp.SettingsPasswordPage.content.passwordGrid.passwordInput.id).val() + "\"");
 //            					console.log("\"" + DigiWebApp.SettingsController.getSetting('settingsPassword') + "\"");
 //            				}

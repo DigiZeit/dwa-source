@@ -23,7 +23,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 				});
 			    var positionenArray = _.map(myPositionenList, function(o) {
 			    	if ( typeof(o) === "undefined" ) {
-			    		//console.log("UNDEFINED position");
+			    		console.log("UNDEFINED position");
 			    	} else {    
 						if (DigiWebApp.BautagebuchNotizenDetailsController.positionId) {
 							o.isSelected = (o.value === DigiWebApp.BautagebuchNotizenDetailsController.positionId);

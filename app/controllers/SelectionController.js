@@ -105,7 +105,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         itemSelected = NO;
         var activityArray = _.map(this.get('activities'), function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         	} else {        	
         		var obj = { label: act.label, value: act.value };
         		if (obj.value === mySelection.activity) {
@@ -133,7 +133,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        itemSelected = NO;
 	        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
 	        	if ( typeof(ueK) === "undefined" ) {
-	        		//console.log("UNDEFINED uebernachtungskennzeichenScholpp");
+	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
 	        	} else {        	
 	        		var obj = { label: ueK.label, value: ueK.value };
 	        		if (obj.value === mySelection.uebernachtungskennzeichenScholpp) {
@@ -223,7 +223,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var i = 0;
         var activityArray = _.map(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
         		var obj = null;
@@ -253,7 +253,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        itemSelected = NO;
 	        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
 	        	if ( typeof(ueK) === "undefined" ) {
-	        		//console.log("UNDEFINED uebernachtungskennzeichenScholpp");
+	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
 	        	} else {        	
 	        		var obj = { label: ueK.label, value: ueK.value };
 	        		if(parseInt(obj.value) === 6) { // select "- -"
@@ -391,7 +391,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var itemSelected = NO;
         var activityArray = _.map(this.get('activities'), function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
         		var obj = null;
@@ -455,7 +455,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        itemSelected = NO;
 	        var uebernachtungskennzeichenScholppArray = _.map(this.uebernachtungskennzeichenScholpp, function(ueK) {
 	        	if ( typeof(ueK) === "undefined" ) {
-	        		//console.log("UNDEFINED uebernachtungskennzeichenScholpp");
+	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
 	        	} else {        	
 	        		var obj = { label: ueK.label, value: ueK.value };
 	        		if (obj.value === uebernachtungAuswahl) {
@@ -590,7 +590,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		var currentBookingActivitySelectable = false;
 		_.each(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
 				if ( act.get('id') === currentBookingActivityId ) { currentBookingActivitySelectable = true; }
@@ -599,7 +599,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		
         activities = _.map(activities, function(act) {
         	if ( typeof(act) === "undefined" ) {
-        		//console.log("UNDEFINED ACTIVITY");
+        		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
         		var obj = null;
@@ -688,7 +688,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
        if (activities) {
             activityArray = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
-            		//console.log("UNDEFINED ACTIVITY");
+            		console.log("UNDEFINED ACTIVITY");
             		return null;
             	} else {
             		return { label: act.get('name'), value: act.get('id') };
@@ -836,7 +836,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	// only those activities which are bound to employee
             activities = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
-            		//console.log("UNDEFINED ACTIVITY");
+            		console.log("UNDEFINED ACTIVITY");
             		return null;
             	} else {
         			var zugeordnet = NO;

@@ -136,7 +136,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 			// verfügbare Tätigkeiten kopieren und ausgewähltes selektieren
 		    var taetigkeitenArray = _.map(activities, function(act) {
 		    	if ( typeof(act) === "undefined" ) {
-		    		//console.log("UNDEFINED activity");
+		    		console.log("UNDEFINED activity");
 		    	} else {
 	    			var obj = { label: act.get('name'), value: act.get('id'), isSelected: NO };
 	    			if (that.activityId === obj.value) {

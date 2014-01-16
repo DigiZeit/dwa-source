@@ -30,7 +30,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		var activities = DigiWebApp.SelectionController.getActivities();
 		var activityArray = _.map(activities, function(act) {
 		        	if ( typeof(act) === "undefined" ) {
-		        		//console.log("UNDEFINED ACTIVITY");
+		        		console.log("UNDEFINED ACTIVITY");
 		        		return null;
 		        	} else {
 		        		var obj = null;
@@ -60,7 +60,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		var activities = DigiWebApp.SelectionController.getActivities();
 		var activityArray = _.map(activities, function(act) {
 		        	if ( typeof(act) === "undefined" ) {
-		        		//console.log("UNDEFINED ACTIVITY");
+		        		console.log("UNDEFINED ACTIVITY");
 		        		return null;
 		        	} else {
 		        		var obj = null;
@@ -90,7 +90,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		var activities = DigiWebApp.SelectionController.getActivities();
 		var activityArray = _.map(activities, function(act) {
 		        	if ( typeof(act) === "undefined" ) {
-		        		//console.log("UNDEFINED ACTIVITY");
+		        		console.log("UNDEFINED ACTIVITY");
 		        		return null;
 		        	} else {
 		        		var obj = null;
@@ -120,7 +120,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		var activities = DigiWebApp.SelectionController.getActivities();
 		var activityArray = _.map(activities, function(act) {
 		        	if ( typeof(act) === "undefined" ) {
-		        		//console.log("UNDEFINED ACTIVITY");
+		        		console.log("UNDEFINED ACTIVITY");
 		        		return null;
 		        	} else {
 		        		var obj = null;

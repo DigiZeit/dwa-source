@@ -341,7 +341,7 @@
 //    			console.log("unknown eventtype: " + ev.type);
 //    		}
 //        } else {
-//        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("skipping touchmove");
+//        	if (DigiWebApp.SettingsController.globalDebugMode) console.log("skipping touchmove");
 //        }
 //	}
 //	

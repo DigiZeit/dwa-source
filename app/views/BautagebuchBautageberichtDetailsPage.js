@@ -15,7 +15,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
 		            var projektleiterArray = _.map(DigiWebApp.BautagebuchMainController.projektleiter, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
-		            		//console.log("UNDEFINED PROJEKTLEADER");
+		            		console.log("UNDEFINED PROJEKTLEADER");
 		            	} else {    
 		    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.projektleiterId) {
 		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.projektleiterId);
@@ -30,7 +30,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					// verfügbare Aufträge kopieren und ausgewählten selektieren
 		            var auftraegeArray = _.map(DigiWebApp.BautagebuchMainController.auftraege, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
-		            		//console.log("UNDEFINED ORDER");
+		            		console.log("UNDEFINED ORDER");
 		            	} else {    
 		    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
 		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
