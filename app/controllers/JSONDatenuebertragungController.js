@@ -105,7 +105,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, sendeZeitdaten: function(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync) {
 		//var that = this;
 		var absenden = function(buchungen, successCallback, errorCallback, isClosingDay, doSync) {
-			////if (DigiWebApp.SettingsController.getSetting("debug")) console.log("absenden");
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("absenden");
 			var items = [];
 			var relevanteZeitbuchungen = buchungen;
 			var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
@@ -199,13 +199,13 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		};
 		if (DigiWebApp.SettingsController.featureAvailable('417') && (DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") || DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen"))) {
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
-			////if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
 			DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-				////if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done success");
+				//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done success");
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			},function(err){
-				////if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done error: " + err);
+				//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done error: " + err);
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				absenden(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay, mydoSync);
 			}
@@ -221,7 +221,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
 			
-			////if (DigiWebApp.SettingsController.getSetting("debug")) console.log("empfangeTaetigkeiten Status: " + request.status);
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("empfangeTaetigkeiten Status: " + request.status);
 			
 			// wurden tätigkeiten empfangen?
 			if (typeof(data.leistungen) === "undefined" && data.leistungen !== null && data.leistungen.length > 0) {
