@@ -598,12 +598,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
-//        try {
-//			//alert("hiding splash");
-//			navigator.splashscreen.hide();
-//		} catch(e) {
-//			console.log("unable to hide splashscreen");
-//		}
+        try {
+			//alert("hiding splash");
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
 
         DigiWebApp.SettingsController.init(YES,YES);
         
