@@ -1,6 +1,6 @@
 {
     "name" : "DigiWebApp",
-    "mode": "release",
+    "mode": "debug",
     "debugLevel": 0,
     "eliminate": false,
     "minify": true,

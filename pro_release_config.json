@@ -1,7 +1,7 @@
 {
     "name" : "DigiWebApp",
     "mode": "production",
-    "debugLevel": 1,
+    "debugLevel": 0,
     "eliminate": false,
     "minify": false,
     "proxies": [
