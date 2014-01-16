@@ -156,7 +156,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 //                    }
                     if (DigiWebApp.SettingsController.getSetting("mitarbeiterVorname") !== "" || DigiWebApp.SettingsController.getSetting("mitarbeiterNachname") !== "") { 
                     	outString = outString + " (" + DigiWebApp.SettingsController.getSetting("mitarbeiterVorname") + " " + DigiWebApp.SettingsController.getSetting("mitarbeiterNachname") + ")";
-                    	if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    	//if (DigiWebApp.SettingsController.getSetting("debug")) {
                     		outString = outString + "<br/>MitarbeiterID: " + DigiWebApp.SettingsController.getSetting("mitarbeiterId");	
                     	}
                     }
@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4679'
+              value: 'Build: 4680'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
