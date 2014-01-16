@@ -108,7 +108,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);
 		/* now lets render all other pages 
         _.each(M.ViewManager.pageList, function(page) {
-//        	console.log(page);
+        	console.log(page);
         	if (page.html === '') {
         		//page.render();
         	}
@@ -318,28 +318,19 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
     , regSecEv: function(isFirstLoad) {
-    	console.log("in regSecEv");
     	var that = this;
-//    	setTimeout(function() {
-//            if(localStorage) {
-//                var language = null;
-//                language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
-//                if (language === null) {
-//                	localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
-//                	//M.I18N.setLanguage('de_de');
-//                }
-//            }
-//    		that.realregSecEv(isFirstLoad);
-//    	}, 1);
-    	that.realregSecEv(isFirstLoad);
+    	setTimeout(function() {
+    		that.realregSecEv(isFirstLoad);
+    	}, 100);
     }
     
 	, realregSecEv: function(isFirstLoad) {
+    	console.log("in regSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
         M.I18N.defaultLanguage = "de_de";
-        
+
 		if (isFirstLoad) {
 			
 			var that = this;
@@ -394,7 +385,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	if (typeof(device) === "undefined") { 
 	        	// register deviceready-event and wait for it to fire
         		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
-        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 12000);
+        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
         		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
         	} else {
@@ -563,7 +554,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
-        //this.skipEvents = true;
+        this.skipEvents = true;
 		this.devicereadyhandler();
 	}
 	
@@ -597,14 +588,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, devicereadyhandler: function() {
-		
-        try {
-			//alert("hiding splash");
-			navigator.splashscreen.hide();
-		} catch(e) {
-			console.log("unable to hide splashscreen");
-		}
-
         DigiWebApp.SettingsController.init(YES,YES);
         
         if (DigiWebApp.SettingsController.getSetting('debug')) { 
@@ -619,7 +602,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
 							fileNamesToDelete.push(fileName);
 						}
 					});
@@ -644,15 +627,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //		try {
 		    	
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-						
-	        try {
+			
+			try {
 				//alert("hiding splash");
 				navigator.splashscreen.hide();
 			} catch(e) {
 				console.log("unable to hide splashscreen");
 			}
-
-	        if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
+			
+			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
 	    		// unfix header
 				_.each(DigiWebApp.app.pages, function(myPage) {
 					if ( typeof(myPage.header) !== "undefined" ) {
@@ -1006,15 +989,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            var isCurrentBookingAvailable = NO;
 	            for (var i = 0; i < bookings.length; i++) {
 	            	//alert("in for i=" + i);
-	            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
+	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
 	                if (bookings[i].get('isCurrent') === YES) {
 	                	//alert("currentBooking found");
-	                	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
+	                	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
 	                	isCurrentBookingAvailable = YES;
 	                    break;
 	                }
 	            }
-	            ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
+	            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
 	            if (isCurrentBookingAvailable === YES) {
 	            	//alert("go to BookTimePage");
 	            	DigiWebApp.NavigationController.toBookTimePage();
@@ -1188,7 +1171,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            that.setCallbackStatus('features', 'local', YES);
 	        }
 	
-	        //if (DigiWebApp.SettingsController.globalDebugMode) {
+	        if (DigiWebApp.SettingsController.globalDebugMode) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                  title: M.I18N.l('offlineWork')
 	                , message: fromwhere
@@ -1249,8 +1232,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     }
     
-    , timestampMitarbeiterZuletztGeladen: null
-    
     /**
      *
      * The success callback for authenticate.
@@ -1286,31 +1267,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.ApplicationController.triggerUpdate = YES;
                 DigiWebApp.DashboardController.init(YES);
                 DigiWebApp.MediaListController.init(YES);
-                	
-        		var timestampNow = D8.now().getTimestamp();
-        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
-        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
-            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate");
-            		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
-        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-        	    		}
-        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-        	    	}, function(error) {
-        	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-            			// Fehlermeldung
-            			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                            title: M.I18N.l('offlineWorkNotPossible')
-                          , message: M.I18N.l('offlineWorkNotPossibleMsg')
-            			});
-        	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
-        		} else {
-    	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-        		}
-
+        		this.getFeaturesFromRemote();        		
                 DigiWebApp.ApplicationController.enforceChefToolOnly();
         		break;
             
@@ -1966,7 +1923,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	if (data && data['return']) {
         	
-        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
+        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
         	
             this.setCallbackStatus('features', 'remote', YES);
 
@@ -2005,12 +1962,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	}
             	//console.log("el['" + prefix + "valueType'] = " + el[prefix + 'valueType']);
             	if (el[prefix + 'valueType'] === "Setting_WebApp") {
-            		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Setting: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
+            		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Setting: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
             		var prop_setting = el[prefix + 'value'];
             		if (prop_setting === "false" || prop_setting === "true" ) { prop_setting = ( prop_setting === "true" ); }
             		DigiWebApp.SettingsController.setSetting(el[prefix + 'keyId'], prop_setting);
             	} else if (el[prefix + 'valueType'] === "Feature") {
-            		////if (DigiWebApp.SettingsController.globalDebugMode) console.log("Feature: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
+            		//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Feature: " + el[prefix + 'keyId'] + "=" + el[prefix + 'value']);
 	                k = DigiWebApp.Features.createRecord({
 	                      id: el[prefix + 'keyId']
 	                    , name: el[prefix + 'keyId']
@@ -2071,7 +2028,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
         } else {
 
-        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
+        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
 
         	// keine Features empfangen
             this.setCallbackStatus('features', 'remote', YES);
