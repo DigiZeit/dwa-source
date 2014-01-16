@@ -415,15 +415,15 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
-				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
+//				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
 				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
+//					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 					DigiWebApp.BookingController.init(YES);
 				},function(err){console.error(err);}
 				, fileNamesToDelete);
 			};
 			if (false) {
-				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("clean DataDirectory");
+//				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("clean DataDirectory");
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
@@ -471,7 +471,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			            		         			deleteBookingsInServiceappIDs.push(datensatzObj.m_id);
 			            		         		}
 			            		         	});
-			            		         	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
+//			            		         	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("deleteBookingsInServiceappIDs:",deleteBookingsInServiceappIDs);
 			      		  				    DigiWebApp.ServiceAppController.deleteBookings(deleteBookingsInServiceappIDs, cleanDataDirectory, cleanDataDirectory);
 	            		         		} catch(e3) {
 	            		         			if (interactWithServiceApp) cleanDataDirectory();
