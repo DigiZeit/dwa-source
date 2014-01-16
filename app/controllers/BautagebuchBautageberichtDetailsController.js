@@ -162,7 +162,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 			// verfügbare Positionen kopieren und ausgewähltes selektieren
 		    var positionenArray = _.map(DigiWebApp.Position.find(), function(pos) {
 		    	if ( typeof(pos) === "undefined" ) {
-		    		console.log("UNDEFINED Position");
+		    		//console.log("UNDEFINED Position");
 		    	} else {
 		    		if (pos.get('orderId') === auftragsId) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };

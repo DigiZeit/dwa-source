@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4672
+    , softwareVersion: 4673
 
 
     /**
@@ -83,7 +83,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     , getUrl: function() {
         try {
             if(device && device.uuid) {
-            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log(device.uuid);
+            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log(device.uuid);
                 return 'http://' + DigiWebApp.RequestController.DatabaseServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/' ;
             }
         } catch(e1) {
@@ -503,7 +503,7 @@ DigiWebApp.RequestController = M.Controller.extend({
         }
         
         //dataStr += '\n';
-        //if (DigiWebApp.SettingsController.globalDebugMode) console.log('soapDataBooking: ' + dataStr);
+        ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('soapDataBooking: ' + dataStr);
         return dataStr;
     }
 
@@ -556,12 +556,12 @@ DigiWebApp.RequestController = M.Controller.extend({
                             );
                         }
                         , onSuccess: function(data2, msg, xhr) { // success callback of sendConfiguration
-                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of sendConfiguration");
+                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of sendConfiguration");
                             that.endSession({
                                   success: {// success callback of endSession
                                       target: that
                                     , action: function() {
-			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
+			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
                                         this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
@@ -570,7 +570,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                                 , error: { // error callback of endSession
                                       target: that
                                     , action: function() {
-			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
+			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
                                         this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
@@ -579,12 +579,12 @@ DigiWebApp.RequestController = M.Controller.extend({
                             });
                         }
                         , onError: function(xhr, err) {// error callback of sendConfiguration
-                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of sendConfiguration " + err);
+                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of sendConfiguration " + err);
                             that.endSession({
                                   success: {// success callback of endSession
                                       target: that
                                     , action: function() { // call errorcallback of sendConfiguration
-			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
+			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
                                         that.bindToCaller(that, that.handleErrorCallback, [xhr, err, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
@@ -593,7 +593,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                                 , error: { // error callback of endSession
                                       target: that
                                     , action: function() {
-			                        	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
+			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
                                         DigiWebApp.ApplicationController.DigiLoaderView.hide();
                                         that.bindToCaller(that, that.handleErrorCallback, [xhr, err, 'sendConfiguration'])();
                                         DigiWebApp.ApplicationController.authenticate();
@@ -832,7 +832,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 //        }
 //        
 //        //dataStr += '\n';
-//        //if (DigiWebApp.SettingsController.globalDebugMode) console.log('soapDataBooking: ' + dataStr);
+//        ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('soapDataBooking: ' + dataStr);
 //        return dataStr;
 //    }
 //
@@ -933,7 +933,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      * @return {Object} The data in JSON format (=> JavaScript object).
      */
     , transformResultToJson: function(data) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformResultToJson: " + data);
+    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformResultToJson: " + data);
         return $.xml2json(data);
     }
 
@@ -948,12 +948,12 @@ DigiWebApp.RequestController = M.Controller.extend({
      * @return {Object} The data as a JavaScript object underneath a "return" property as an array.
      */
     , transformWorkPlanXmlToJson: function(data) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformWorkPlanXmlToJson: " + data);
+    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformWorkPlanXmlToJson: " + data);
 
         var response = {}; 
         response['return'] = [];        
         var xmlDoc = $.parseXML(data);
-        //if (DigiWebApp.SettingsController.globalDebugMode) console.log(xmlDoc);
+        ////if (DigiWebApp.SettingsController.globalDebugMode) console.log(xmlDoc);
         
         if ((YES) || ( $(xmlDoc).find('return').length !== xmlDoc.documentElement.childNodes.length )) {
 
@@ -1025,12 +1025,12 @@ DigiWebApp.RequestController = M.Controller.extend({
      * @return {Object|Null} The data (employees) as a JavaScript object underneath a "return" property as an array or null if no employees where sent.
      */
     , transformKolonneXmlToJson: function(data) {
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformKolonneXmlToJson: " + data);
+    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("transformKolonneXmlToJson: " + data);
         
         var response = {};
         response['return'] = [];        
         var xmlDoc = $.parseXML(data);
-        //if (DigiWebApp.SettingsController.globalDebugMode) console.log(xmlDoc);
+        ////if (DigiWebApp.SettingsController.globalDebugMode) console.log(xmlDoc);
         
         if ((YES) || ( $(xmlDoc).find('return').length !== xmlDoc.documentElement.childNodes.length )) {
 

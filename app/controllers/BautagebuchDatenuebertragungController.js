@@ -486,9 +486,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	    		
 	    		mediaFilesIndex = mediaFilesIndex + 1;
 	    		
-    			console.log('loading mediaFile for mediaFilesIndex ' + mediaFilesIndex);
+//    			console.log('loading mediaFile for mediaFilesIndex ' + mediaFilesIndex);
     			if (el.hasFileName()) {
-	    			console.log("fileName: " + el.get('fileName'));
+//	    			console.log("fileName: " + el.get('fileName'));
 					// load signature into el
 					el.readFromFile(function(fileContent){
 						//console.log("fileContent: " + fileContent);
@@ -501,7 +501,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						}
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
-				    		console.log('last mediaFile done (with file)');
+//				    		console.log('last mediaFile done (with file)');
 		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
 		    				proceed(mediaFiles);
@@ -509,7 +509,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					}, function() {
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
-				    		console.log('last mediaFile done (last file load failed)');
+//				    		console.log('last mediaFile done (last file load failed)');
 		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
 		    				proceed(mediaFiles);
@@ -519,7 +519,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	    			// this mediaFile has no file
 					if ( mediaFilesIndex === mediaFilesLength && done === false) {
 						// last mediaFile loaded
-			    		console.log('last mediaFile done (no file)');
+//			    		console.log('last mediaFile done (no file)');
 	    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    				done = true;
 	    				proceed(mediaFiles);

@@ -318,6 +318,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
     , regSecEv: function(isFirstLoad) {
+    	console.log("in regSecEv");
     	var that = this;
 //    	setTimeout(function() {
 //            if(localStorage) {
@@ -334,7 +335,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
 	, realregSecEv: function(isFirstLoad) {
-    	console.log("in regSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
@@ -619,7 +619,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
+							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("delete " + fileName);
 							fileNamesToDelete.push(fileName);
 						}
 					});

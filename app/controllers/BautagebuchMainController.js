@@ -92,7 +92,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		var projektleiter = DigiWebApp.BautagebuchProjektleiter.findSorted();
             var projektleiterArray = _.map(projektleiter, function(o) {
             	if ( typeof(o) === "undefined" ) {
-            		console.log("UNDEFINED PROJEKTLEADER");
+            		//console.log("UNDEFINED PROJEKTLEADER");
             	} else {        	
             		var obj = { label: o.vollername(), value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {
@@ -114,7 +114,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		var mitarbeiter = DigiWebApp.BautagebuchMitarbeiter.findSorted();
             var mitarbeiterArray = _.map(mitarbeiter, function(o) {
             	if ( typeof(o) === "undefined" ) {
-            		console.log("UNDEFINED WORKER");
+            		//console.log("UNDEFINED WORKER");
             	} else {        	
             		var obj = { label: o.vollername(), value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {
@@ -133,7 +133,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		var auftraege = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
         var auftraegeArray = _.map(auftraege, function(o) {
         	if ( typeof(o) === "undefined" ) {
-        		console.log("UNDEFINED ORDER");
+        		//console.log("UNDEFINED ORDER");
         	} else {        	
         		var obj = { label: o.get('name'), value: o.get('id') };
 //        		if(obj.value === that.selections.activity) {
@@ -155,7 +155,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		var materialien = DigiWebApp.BautagebuchMaterial.findSorted();
             materialienArray = _.map(materialien, function(o) {
             	if ( typeof(o) === "undefined" ) {
-            		console.log("UNDEFINED MATERIAL");
+            		//console.log("UNDEFINED MATERIAL");
             	} else {        	
             		var obj = { label: o.get("bezeichnung"), value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {
@@ -178,7 +178,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		var mengeneinheiten = DigiWebApp.BautagebuchMengeneinheit.findSorted();
     		mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
             	if ( typeof(o) === "undefined" ) {
-            		console.log("UNDEFINED MATERIAL");
+            		//console.log("UNDEFINED MATERIAL");
             	} else {        	
             		var obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {

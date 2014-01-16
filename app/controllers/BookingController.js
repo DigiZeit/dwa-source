@@ -111,15 +111,15 @@ DigiWebApp.BookingController = M.Controller.extend({
         } else {
 			//this.refreshCurrentBooking(true);
             if (DigiWebApp.SelectionController.useSelections) {
-            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
+            	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
                 DigiWebApp.SelectionController.setSelectionByPreviousSelection();
             } else if (DigiWebApp.SelectionController.showHandOrderFirst) {
-                //if (DigiWebApp.SettingsController.globalDebugMode) console.log('showHandOrderFirst');
+                ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('showHandOrderFirst');
                 DigiWebApp.SelectionController.showHandOrderFirst = NO;
                 DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
             } else {
                 if (this.currentBooking) {
-                    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('useCurrentBooking');
+                    ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('useCurrentBooking');
                     DigiWebApp.SelectionController.setSelectionByCurrentBooking();
                 } else {
                     DigiWebApp.SelectionController.initSelection();
@@ -147,12 +147,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 
         if (openBookings && openBookings.length > 0) {
 
-            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr was ' + this.get('currentBookingStr'));
+            ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr was ' + this.get('currentBookingStr'));
 
             this.set('currentBooking', openBookings[0]);
             this.set('currentBookingStr', this.buildBookingStr(this.currentBooking));
 
-            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
+            ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
             if (setSelection) {
             	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
@@ -164,7 +164,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var that = DigiWebApp.BookingController;
     	that.currentBookingTimesStampBook = new Date();
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
+//    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
 			if (this.currentBooking) {
 				// Start::Bemerkungsfeld (403)
@@ -206,13 +206,13 @@ DigiWebApp.BookingController = M.Controller.extend({
      * 2) If autoSaveGPSData is active, fetch position first and then proceed booking, otherwise proceed booking immediately
      */
     , bookWithRemark: function() {
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in bookWithRemark");
+//    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in bookWithRemark");
 
         // refresh bookings from localStorage
     	this.setNotBookedBookings(); // this also calls this.setBookedBookings() and this.setArchivedDays()
     	
     	// refresh currentBooking from localStorage
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('refresh currentBooking');
+    	////if (DigiWebApp.SettingsController.globalDebugMode) console.log('refresh currentBooking');
 		this.refreshCurrentBooking(false);
     	
     	// EmployeeSelection (Kolonne)
@@ -235,7 +235,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
     
     , getBookingLocation: function(mysuccessCallback) {
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in getBookingLocation");
+    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in getBookingLocation");
 
     	var that = DigiWebApp.BookingController;
     	
@@ -255,10 +255,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
 		        	
 		            M.LocationManager.getLocation(that, successCallback, function(error) {
-		            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		            	////if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
 		
 		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-		                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		                	////if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
 		                	/*
 		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
 		                    */
@@ -292,10 +292,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") && DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
 				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
 		            DigiWebApp.ServiceAppController.knockknock(function(data) {
-		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
+		            	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is available");
 		            	mysuccessCallback();
 		            }, function() {
-		            	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
+		            	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("ServiceApp is NOT available");
 		            	getLocationNow(mysuccessCallback);
 		            });
 				} else {
@@ -310,7 +310,7 @@ DigiWebApp.BookingController = M.Controller.extend({
    	}
     
     , checkBooking: function(skipSelection) {
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in checkBooking");
+    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in checkBooking");
 		
         //var booking = null;
 
@@ -431,7 +431,7 @@ DigiWebApp.BookingController = M.Controller.extend({
      * @param {Object} location The location object with the coordinates (latitude, longitude) if a location could be retrieved
      */
     , proceedBooking: function(location) {
-    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in proceedBooking");
+    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in proceedBooking");
 
     	var that = DigiWebApp.BookingController;
     	
@@ -467,14 +467,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 			//var curBookingHandOrderId = this.currentBooking.get('handOrderId');
 			//var curBookingPosId = this.currentBooking.get('positionId');
 			//var curBookingActId = this.currentBooking.get('activityId');
-			//if (DigiWebApp.SettingsController.globalDebugMode) console.log('close currentBooking with orderId=' + curBookingOrderId);
+			////if (DigiWebApp.SettingsController.globalDebugMode) console.log('close currentBooking with orderId=' + curBookingOrderId);
 	
 			// now setting states on record
-			//if (DigiWebApp.SettingsController.globalDebugMode) console.log("currentBooking.remark before closeBooking: " + that.currentBooking.get('remark'));
+			////if (DigiWebApp.SettingsController.globalDebugMode) console.log("currentBooking.remark before closeBooking: " + that.currentBooking.get('remark'));
 			that.currentBooking.closeBooking(location);
 			that.currentBooking.removeAsCurrent();
 			that.currentBooking.save();
-			//if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving open ' + that.currentBooking.get('orderId'));
+			////if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving open ' + that.currentBooking.get('orderId'));
 			that.currentBookingClosed = that.currentBooking;
 	    } else {
 	    	// no currentBooking: remember TimezoneOffset
@@ -551,7 +551,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    that.set('currentBooking', newOpenBooking);
 
 	    that.currentBooking.setAsCurrent();
-	    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving new ' + that.currentBooking.get('orderId'));
+	    ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving new ' + that.currentBooking.get('orderId'));
 	    that.currentBooking.save();
 	    
 	    that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
@@ -561,7 +561,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 	    var finishBooking = function() {
 	    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Kommunikation mit ServiceApp beendet");
+	    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Kommunikation mit ServiceApp beendet");
 		    if (that.autoSend()) {
 		    	that.sendCurrentBookings();
 		    } else {
@@ -586,17 +586,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
 				var pollBooking = function() {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
 					// getBookings mit timeout
 					var checkForOK = function(datensaetze) {
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
+						//if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
 							try {
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
 								var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id; } );
 								var datensatz = datensatzObj.record;
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
 								modelBooking.set("latitude", datensatz.latitude);
 								modelBooking.set("latitude_bis", datensatz.latitude_bis);
 								modelBooking.set("longitude", datensatz.longitude);
@@ -609,9 +609,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 								modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
 								modelBooking.set("ServiceApp_Status", datensatz.status);
 								modelBooking.save();
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 							} catch(exNotFound) {
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
 							}
 						});
 						finishBooking();
@@ -622,36 +622,36 @@ DigiWebApp.BookingController = M.Controller.extend({
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				};
 				var continueFunc = function() {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pollBooking, finishBooking);
 				};
 				if (that.currentBookingClosed !== null) {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], pollBooking, continueFunc);	
 				}
 			} else {
 				if (that.currentBookingClosed !== null) {
 					var continueFunc = function() {
 						var getWAITFunc = function() {
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
+							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
 							DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
 								finishBooking();
 							},function(err){
 								DigiWebApp.ApplicationController.DigiLoaderView.hide();
 								console.error(err);
 							});
 						};
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
+						//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 						DigiWebApp.ServiceAppController.putBookings([that.currentBooking], getWAITFunc, getWAITFunc);
 					};
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], continueFunc, continueFunc);
 				} else {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("put currentBooking");
 					DigiWebApp.ServiceAppController.putBookings([that.currentBooking], finishBooking, finishBooking);	
 				}
 			}
@@ -1529,17 +1529,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
 				var pollBooking = function() {
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("polling for bookinglocations");
 					// getBookings mit timeout
 					var checkForOK = function(datensaetze) {
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
+						//if (DigiWebApp.SettingsController.getSetting("debug")) console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
 							try {
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
 								var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return (b.m_id === datensatzObj.m_id);});
 								var datensatz = datensatzObj.record;
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("modelBooking: ", modelBooking);
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz: ", datensatz);
 								modelBooking.set("latitude", datensatz.latitude);
 								modelBooking.set("latitude_bis", datensatz.latitude_bis);
 								modelBooking.set("longitude", datensatz.longitude);
@@ -1552,9 +1552,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 								modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
 								modelBooking.set("ServiceApp_Status", datensatz.status);
 								modelBooking.save();
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 							} catch(exNotFound) {
-								if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
+								//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
 							}
 						});
 						that.currentBookingClosed = null;
@@ -1565,18 +1565,18 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (that.currentBookingClosed !== null) { idsToPoll.push(that.currentBookingClosed.m_id); }
 					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				};
-				if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
+				//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 				DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], pollBooking, finishBooking);
 			} else {
 				if (that.currentBookingClosed !== null) {
 					var getWAITFunc = function() {
-						if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
+						//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT");
 						DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
-							if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
+							//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("refreshWAIT done");
 							finishBooking();
 						},function(err){console.error(err);finishBooking();});
 					};
-					if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
+					//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("post currentBookingClosed");
 					DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], getWAITFunc, getWAITFunc);
 				} else {
 					finishBooking();	
@@ -1722,7 +1722,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         					  CurrentAvailable = true;
         				  }
     				  });
-        			  if (DigiWebApp.SettingsController.getSetting("debug")) console.log("CurrentAvailable: ", CurrentAvailable);
+        			  //if (DigiWebApp.SettingsController.getSetting("debug")) console.log("CurrentAvailable: ", CurrentAvailable);
         			  // no current booking: after closing-time
         			  if (!CurrentAvailable) {
         				  DigiWebApp.SentBooking.deleteAll();
@@ -1792,10 +1792,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 							DigiWebApp.ServiceAppController.deleteBookings(
 								    deleteBuchungsIds
 								  , function() {
-								    	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.");
+								    	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen wurden in der ServiceApp gelöscht.");
 								  }
 								  , function() {
-									  	if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.");
+									  	//if (DigiWebApp.SettingsController.getSetting("debug")) console.log("Buchungen konnten nicht in der ServiceApp gelöscht werden.");
 									  }
 							);
 		  				}
