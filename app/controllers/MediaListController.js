@@ -380,8 +380,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     	
     	if (mediaFilesLength !== 0) { 
 	    	_.each(mediaFiles, function(el) {
-	    		
-	    		
+	    			    		
     			console.log('loading mediaFile for mediaFilesIndex ' + mediaFilesIndex);
     			if (el.hasFileName()) {
 	    			console.log("fileName: " + el.get('fileName'));
