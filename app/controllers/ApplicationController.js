@@ -725,6 +725,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , backbuttonhandler: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if ((!DigiWebApp.SettingsController.showCredentialsAlert)) {
+			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 	    	if (
 	    	   (DigiWebApp.TabBar.tabItem1.isActive) 
 	    	|| (ChefToolOnly && (M.ViewManager.getCurrentPage().get("id") === DigiWebApp.DashboardPage.get("id")))
