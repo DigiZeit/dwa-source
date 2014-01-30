@@ -683,14 +683,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
-	        	if (backButtonHandlerRegistered === null) {
+	        	if (DigiWebApp.ApplicationController.backButtonHandlerRegistered === null) {
 	        		$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-	        		backButtonHandlerRegistered = YES;
+	        		DigiWebApp.ApplicationController.backButtonHandlerRegistered = YES;
 	        	}
 	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
-	        	if (menuButtonHandlerRegistered === null) {
+	        	if (DigiWebApp.ApplicationController.menuButtonHandlerRegistered === null) {
 	        		$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-	        		menuButtonHandlerRegistered = YES;
+	        		DigiWebApp.ApplicationController.menuButtonHandlerRegistered = YES;
 	        	}
 	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
 	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
