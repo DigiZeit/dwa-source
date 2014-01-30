@@ -591,7 +591,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, devicereadyhandler: function() {
 
 		DigiWebApp.NavigationController.toBookTimePage();
-		DigiWebApp.TabBar.tabItem1.switchPage();
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 		
 		try {
 			//alert("hiding splash");
@@ -643,7 +643,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			
 			DigiWebApp.NavigationController.toBookTimePage();
-			DigiWebApp.TabBar.tabItem1.switchPage();
+			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 
 			try {
 				//alert("hiding splash");

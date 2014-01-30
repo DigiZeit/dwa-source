@@ -12,6 +12,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (!ChefToolOnly) {
 			DigiWebApp.NavigationController.toBookTimePage();
+			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 		} else {
 			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.NONE, NO);
 		}
@@ -22,6 +23,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (!ChefToolOnly) {
 			DigiWebApp.NavigationController.toBookTimePageTransition();
+			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 		} else {
 			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
 		}
@@ -36,6 +38,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePage: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -55,6 +58,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePagePOP: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -74,6 +78,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePage: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -93,6 +98,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -112,6 +118,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageFlipTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -131,6 +138,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePageFlipTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
