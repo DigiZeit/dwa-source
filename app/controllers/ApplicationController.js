@@ -382,15 +382,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	// i guess we are not on a mobile device --> no deviceready-event
         	this.devicereadyhandler();
         } else {
-        	if (typeof(device) === "undefined") { 
-	        	// register deviceready-event and wait for it to fire
-        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
-        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
-        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
-        		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
-        	} else {
-        		DigiWebApp.ApplicationController.devicereadyhandler();
-        	}
+    		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+    		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 1000);
+//        	if (typeof(device) === "undefined") { 
+//	        	// register deviceready-event and wait for it to fire
+//        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
+//        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
+//        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
+//        	} else {
+//        		DigiWebApp.ApplicationController.devicereadyhandler();
+//        	}
         }
 
     }
