@@ -272,17 +272,17 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('editPicturePage', M.TRANSITION.SLIDEUP, YES);
     }
 
-    , toDemoMediaPage: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.NONE, NO);
-    }
-
-    , toDemoMediaPageTransition: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, NO);
-    }
-
-    , backToDemoMediaPage: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, YES);
-    }
+//    , toDemoMediaPage: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.NONE, NO);
+//    }
+//
+//    , toDemoMediaPageTransition: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, NO);
+//    }
+//
+//    , backToDemoMediaPage: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, YES);
+//    }
 
     , toMediaListPage: function() {
     	DigiWebApp.NavigationController.switchToPage('mediaListPage', M.TRANSITION.NONE, NO);
@@ -300,21 +300,21 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('mediaListPage', M.TRANSITION.SLIDEUP, YES);
     }
 
-    , toAudioPage: function() {
-    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.NONE, NO);
-    }
+//    , toAudioPage: function() {
+//    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.NONE, NO);
+//    }
+//
+//    , toAudioPageTransition: function() {
+//    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.SLIDEUP, NO);
+//    }
 
-    , toAudioPageTransition: function() {
-    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.SLIDEUP, NO);
-    }
-
-    , toDemoAudioPage: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.NONE, NO);
-    }
-
-    , toDemoAudioPageTransition: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.SLIDEUP, NO);
-    }
+//    , toDemoAudioPage: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.NONE, NO);
+//    }
+//
+//    , toDemoAudioPageTransition: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.SLIDEUP, NO);
+//    }
 
     , toCameraPage: function() {
     	DigiWebApp.NavigationController.switchToPage('cameraPage', M.TRANSITION.NONE, NO);
@@ -324,13 +324,13 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('cameraPage', M.TRANSITION.SLIDEUP, NO);
     }
     
-    , toDemoCameraPage: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.NONE, NO);
-    }
-    
-    , toDemoCameraPageTransition: function() { /* DEMO */
-    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.SLIDEUP, NO);
-    }
+//    , toDemoCameraPage: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.NONE, NO);
+//    }
+//    
+//    , toDemoCameraPageTransition: function() { /* DEMO */
+//    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.SLIDEUP, NO);
+//    }
     
     , toSpesenPage: function(mycallback) {
     	if (typeof(mycallback) === "function") {
@@ -573,8 +573,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
     // Ende::ButtonsDashboardPage   
 
-    , toStudieChecklistePage: function() {
-    	DigiWebApp.NavigationController.switchToPage('studieChecklistePage', M.TRANSITION.NONE, NO);
-    }
+//    , toStudieChecklistePage: function() {
+//    	DigiWebApp.NavigationController.switchToPage('studieChecklistePage', M.TRANSITION.NONE, NO);
+//    }
 
 });
