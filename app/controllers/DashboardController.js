@@ -356,17 +356,17 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	    	    };
 	        	if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 					var pollBooking = function() {
-						if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("polling for bookinglocations");
+						//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("polling for bookinglocations");
 						// getBookings mit timeout
 						var checkForOK = function(datensaetze) {
-							if (DigiWebApp.SettingsController.getSetting("debug"))  console.log(datensaetze.length + " Datensätze empfangen");
+							//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log(datensaetze.length + " Datensätze empfangen");
 							_.each(datensaetze, function(datensatzObj) {
 								try {
-									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
+									//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
 									var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return b.m_id === datensatzObj.m_id; } );
 									var datensatz = datensatzObj.record;
-									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("modelBooking: ", modelBooking);
-									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz: ", datensatz);
+									//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("modelBooking: ", modelBooking);
+									//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz: ", datensatz);
 									modelBooking.set("latitude", datensatz.latitude);
 									modelBooking.set("latitude_bis", datensatz.latitude_bis);
 									modelBooking.set("longitude", datensatz.longitude);
@@ -379,9 +379,9 @@ DigiWebApp.DashboardController = M.Controller.extend({
 									modelBooking.set("gps_zeitstempelVon", datensatz.gps_zeitstempel);
 									modelBooking.set("ServiceApp_Status", datensatz.status);
 									modelBooking.save();
-									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz " + datensatzObj.m_id + " gespeichert");
+									//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz " + datensatzObj.m_id + " gespeichert");
 								} catch(exNotFound) {
-									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
+									//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("datensatz " + datensatzObj.m_id + " nicht gefunden");
 								}
 							});
 							finishBooking();
@@ -462,7 +462,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, tagescheckliste: function() {
-	    DigiWebApp.NavigationController.toStudieChecklistePage();
+	    //DigiWebApp.NavigationController.toStudieChecklistePage();
 	}
         
 	, anwesenheitsliste: function() {

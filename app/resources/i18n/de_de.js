@@ -429,7 +429,7 @@ M.I18N.de_de = {
 	, vibrationsDauerLabel: "Vibrationsdauer"
 	, keepCredentials: "Zugangsdaten erhalten?"
 	, keepCredentialsMsg: "Sollen die Zugangsdaten erhalten bleiben?"
-	, detailierteZeitdaten: "detailierte Zeitdaten"
+	, detailierteZeitdaten: "detaillierte Zeitdaten"
 	, latitude_von: "Von-Breitengrad"
 	, longitude_von: "Von-Längengrad"
 	, latitude_bis: "Bis-Breitengrad"
