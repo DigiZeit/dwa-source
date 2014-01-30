@@ -756,7 +756,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		
 	    	} else {
 	    		// catch double-fire of backbutton-event via timeout
-	    		DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
+	    		//DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
+	    		DigiWebApp.ApplicationController.backButtonToBookTimePage();
 	    		//DigiWebApp.NavigationController.toBookTimePage();
 			}
 		}
