@@ -108,7 +108,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);
 		/* now lets render all other pages 
         _.each(M.ViewManager.pageList, function(page) {
-        	//console.log(page);
+        	console.log(page);
         	if (page.html === '') {
         		//page.render();
         	}
@@ -325,7 +325,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
 	, realregSecEv: function(isFirstLoad) {
-    	//console.log("in regSecEv");
+    	console.log("in regSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
@@ -359,7 +359,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             });
 
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
-        		//console.log("registering emergencyhandler");
+        		console.log("registering emergencyhandler");
         		$(document).bind('keydown', DigiWebApp.ApplicationController.keydownHandler);
         	}
 
@@ -500,7 +500,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , setImageClass: function () {
     	var disableOnBlackBerry = true;
     	if ((M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (disableOnBlackBerry)) {
-    		//console.log("We are on BlackBerry, so we skip dynamic Background!");
+    		console.log("We are on BlackBerry, so we skip dynamic Background!");
     	} else {
     		if (this.checkSizeModeChange()) {
 		        _.each(DigiWebApp.app.pages, function(myPage) {
@@ -548,7 +548,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 		DigiWebApp.ApplicationController.timeouthappened = true;
 		var myStartInfo = "DIGI-WebApp hat Plattform \"" + M.Environment.getPlatform() + "\" (" + navigator.userAgent + ") erkannt. Es werden keine Eventhandler registriert! (Version " + M.Application.getConfig('version') + ")";
-        //console.log(myStartInfo);
+        console.log(myStartInfo);
         //writeToLog(myStartInfo);
         // if in Chrome: enable FileSystem
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
@@ -564,7 +564,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, keydownHandler: function(event) {
 		if (event.timeStamp - DigiWebApp.ApplicationController.emergencyStartedTimestamp > 20000) {
-			//console.log("timeout: reset emergency-mechanism");
+			console.log("timeout: reset emergency-mechanism");
 			DigiWebApp.ApplicationController.emergencyStartedTimestamp = event.timeStamp;
 			DigiWebApp.ApplicationController.emergencyStringEntered = "";
 		}
@@ -593,7 +593,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			//alert("hiding splash");
 			navigator.splashscreen.hide();
 		} catch(e) {
-			//console.log("unable to hide splashscreen");
+			console.log("unable to hide splashscreen");
 		}
 
 		DigiWebApp.SettingsController.init(YES,YES);
@@ -610,7 +610,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					fileNamesToDelete = [];
 					_.each(results, function(fileName) {
 						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-							//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("delete " + fileName);
+							if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("delete " + fileName);
 							fileNamesToDelete.push(fileName);
 						}
 					});
@@ -640,7 +640,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				//alert("hiding splash");
 				navigator.splashscreen.hide();
 			} catch(e) {
-				console.error("unable to hide splashscreen");
+				console.log("unable to hide splashscreen");
 			}
 			
 			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
@@ -751,7 +751,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , registerButtonHandlerByTimeout: function() {
     	if (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true)) {
-    		//console.log("registering buttonhandler again on blackberry");
+    		console.log("registering buttonhandler again on blackberry");
         	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
         	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
     	}
@@ -1179,12 +1179,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            that.setCallbackStatus('features', 'local', YES);
 	        }
 	
-//	        if (DigiWebApp.SettingsController.globalDebugMode) {
-//	            DigiWebApp.ApplicationController.nativeAlertDialogView({
-//	                  title: M.I18N.l('offlineWork')
-//	                , message: fromwhere
-//	            });
-//	        }
+	        if (DigiWebApp.SettingsController.globalDebugMode) {
+	            DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                  title: M.I18N.l('offlineWork')
+	                , message: fromwhere
+	            });
+	        }
 	        
 	        if(that.isReadyToProceed()) {
 	            DigiWebApp.NavigationController.toBookTimePage(YES);

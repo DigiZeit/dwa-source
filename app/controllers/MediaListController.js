@@ -307,7 +307,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     }
 
     , audio: function() {
-        //DigiWebApp.NavigationController.toAudioPageTransition();
+        DigiWebApp.NavigationController.toAudioPageTransition();
     }
     
     , uploadMediaFiles: function() {
