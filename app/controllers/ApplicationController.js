@@ -590,6 +590,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 
+		DigiWebApp.NavigationController.toBookTimePage();
 		try {
 			//alert("hiding splash");
 			navigator.splashscreen.hide();
