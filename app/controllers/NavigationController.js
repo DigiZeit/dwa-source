@@ -9,11 +9,22 @@
 DigiWebApp.NavigationController = M.Controller.extend({
 
 	  toSplashViewPage: function() {
-		DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.NONE, NO);
+		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+		if (!ChefToolOnly) {
+			DigiWebApp.NavigationController.toBookTimePage();
+		} else {
+			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.NONE, NO);
+		}
   	}
 
 	, toSplashViewPageTransition: function() {
-		DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
+		DigiWebApp.NavigationController.toBookTimePageTransition();
+		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+		if (!ChefToolOnly) {
+			DigiWebApp.NavigationController.toBookTimePageTransition();
+		} else {
+			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
+		}
 	}
 
     , toInfoPage: function() {
