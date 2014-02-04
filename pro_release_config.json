@@ -65,5 +65,6 @@
         , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}
+        , {"name": "digiUI", "refs": ["*"]}
     ]
 }

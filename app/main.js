@@ -389,13 +389,13 @@ if (searchForFeature(400)) { // Camera
 	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
-//if (searchForFeature(401)) { // Audio
-//	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
-//	DigiWebAppOrdinaryDesign.audioPage = DigiWebApp.AudioPage;
-//	DigiWebAppOrdinaryDesign.demoaudioPage = DigiWebApp.DemoAudioPage;
-//	DigiWebAppOrdinaryDesign.demomediaPage = DigiWebApp.DemoMediaPage;
-//	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
-//}
+if (searchForFeature(401)) { // Audio
+	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
+	DigiWebAppOrdinaryDesign.audioPage = DigiWebApp.AudioPage;
+	DigiWebAppOrdinaryDesign.demoaudioPage = DigiWebApp.DemoAudioPage;
+	DigiWebAppOrdinaryDesign.demomediaPage = DigiWebApp.DemoMediaPage;
+	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
+}
 
 if (searchForFeature(402)) { // Materialerfassung
 	// hat (noch) keine eigenen Views
@@ -418,9 +418,9 @@ if (searchForFeature(406) && !(searchForFeature(409))) { // Auftragsinfo
 	DigiWebAppOrdinaryDesign.orderInfoPage = DigiWebApp.OrderInfoPage;
 }
 
-//if (searchForFeature(407)) { // Tagescheckliste
-//	DigiWebAppOrdinaryDesign.studieChecklistePage = DigiWebApp.StudieChecklistePage;
-//}
+if (searchForFeature(407)) { // Tagescheckliste
+	DigiWebAppOrdinaryDesign.studieChecklistePage = DigiWebApp.StudieChecklistePage;
+}
 
 if (searchForFeature(408)) { // Anwesenheitsliste
 	DigiWebAppOrdinaryDesign.anwesenheitslistePage = DigiWebApp.AnwesenheitslistePage;

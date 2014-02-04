@@ -423,7 +423,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
         
     , demomedia: function() {
-        //DigiWebApp.NavigationController.toDemoMediaPageTransition();
+        DigiWebApp.NavigationController.toDemoMediaPageTransition();
     }
     
     , media: function() {

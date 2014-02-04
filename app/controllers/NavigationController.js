@@ -9,24 +9,11 @@
 DigiWebApp.NavigationController = M.Controller.extend({
 
 	  toSplashViewPage: function() {
-		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-		if (!ChefToolOnly) {
-			DigiWebApp.NavigationController.toBookTimePage();
-			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
-		} else {
-			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.NONE, NO);
-		}
+		DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.NONE, NO);
   	}
 
 	, toSplashViewPageTransition: function() {
-		DigiWebApp.NavigationController.toBookTimePageTransition();
-		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-		if (!ChefToolOnly) {
-			DigiWebApp.NavigationController.toBookTimePageTransition();
-			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
-		} else {
-			DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
-		}
+		DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
 	}
 
     , toInfoPage: function() {
@@ -38,7 +25,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePage: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -58,7 +44,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePagePOP: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -78,7 +63,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePage: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -98,7 +82,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageTransition: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -118,7 +101,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageFlipTransition: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -138,7 +120,6 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePageFlipTransition: function() {
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -291,17 +272,17 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('editPicturePage', M.TRANSITION.SLIDEUP, YES);
     }
 
-//    , toDemoMediaPage: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.NONE, NO);
-//    }
-//
-//    , toDemoMediaPageTransition: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, NO);
-//    }
-//
-//    , backToDemoMediaPage: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, YES);
-//    }
+    , toDemoMediaPage: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.NONE, NO);
+    }
+
+    , toDemoMediaPageTransition: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, NO);
+    }
+
+    , backToDemoMediaPage: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('demomediaPage', M.TRANSITION.SLIDEUP, YES);
+    }
 
     , toMediaListPage: function() {
     	DigiWebApp.NavigationController.switchToPage('mediaListPage', M.TRANSITION.NONE, NO);
@@ -319,21 +300,21 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('mediaListPage', M.TRANSITION.SLIDEUP, YES);
     }
 
-//    , toAudioPage: function() {
-//    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.NONE, NO);
-//    }
-//
-//    , toAudioPageTransition: function() {
-//    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.SLIDEUP, NO);
-//    }
+    , toAudioPage: function() {
+    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.NONE, NO);
+    }
 
-//    , toDemoAudioPage: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.NONE, NO);
-//    }
-//
-//    , toDemoAudioPageTransition: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.SLIDEUP, NO);
-//    }
+    , toAudioPageTransition: function() {
+    	DigiWebApp.NavigationController.switchToPage('audioPage', M.TRANSITION.SLIDEUP, NO);
+    }
+
+    , toDemoAudioPage: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.NONE, NO);
+    }
+
+    , toDemoAudioPageTransition: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('demoaudioPage', M.TRANSITION.SLIDEUP, NO);
+    }
 
     , toCameraPage: function() {
     	DigiWebApp.NavigationController.switchToPage('cameraPage', M.TRANSITION.NONE, NO);
@@ -343,13 +324,13 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('cameraPage', M.TRANSITION.SLIDEUP, NO);
     }
     
-//    , toDemoCameraPage: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.NONE, NO);
-//    }
-//    
-//    , toDemoCameraPageTransition: function() { /* DEMO */
-//    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.SLIDEUP, NO);
-//    }
+    , toDemoCameraPage: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.NONE, NO);
+    }
+    
+    , toDemoCameraPageTransition: function() { /* DEMO */
+    	DigiWebApp.NavigationController.switchToPage('democameraPage', M.TRANSITION.SLIDEUP, NO);
+    }
     
     , toSpesenPage: function(mycallback) {
     	if (typeof(mycallback) === "function") {
@@ -592,8 +573,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
     // Ende::ButtonsDashboardPage   
 
-//    , toStudieChecklistePage: function() {
-//    	DigiWebApp.NavigationController.switchToPage('studieChecklistePage', M.TRANSITION.NONE, NO);
-//    }
+    , toStudieChecklistePage: function() {
+    	DigiWebApp.NavigationController.switchToPage('studieChecklistePage', M.TRANSITION.NONE, NO);
+    }
 
 });

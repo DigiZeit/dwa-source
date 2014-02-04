@@ -382,16 +382,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	// i guess we are not on a mobile device --> no deviceready-event
         	this.devicereadyhandler();
         } else {
-    		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
-    		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 1000);
-//        	if (typeof(device) === "undefined") { 
-//	        	// register deviceready-event and wait for it to fire
-//        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
-//        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
-//        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
-//        	} else {
-//        		DigiWebApp.ApplicationController.devicereadyhandler();
-//        	}
+        	if (typeof(device) === "undefined") { 
+	        	// register deviceready-event and wait for it to fire
+        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
+        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
+        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
+        		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+        	} else {
+        		DigiWebApp.ApplicationController.devicereadyhandler();
+        	}
         }
 
     }
@@ -555,7 +554,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
-        //this.skipEvents = true;
+        this.skipEvents = true;
 		this.devicereadyhandler();
 	}
 	
@@ -590,9 +589,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 
-		DigiWebApp.NavigationController.toBookTimePage();
-		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
-		
 		try {
 			//alert("hiding splash");
 			navigator.splashscreen.hide();
@@ -632,8 +628,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 	}
 	
-    , backButtonHandlerRegistered: null
-    , menuButtonHandlerRegistered: null
 	, realDeviceReadyHandler: function() {
 		
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
@@ -642,9 +636,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    	
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			
-			DigiWebApp.NavigationController.toBookTimePage();
-			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
-
 			try {
 				//alert("hiding splash");
 				navigator.splashscreen.hide();
@@ -683,15 +674,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
-	        	if (DigiWebApp.ApplicationController.backButtonHandlerRegistered === null) {
-	        		$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-	        		DigiWebApp.ApplicationController.backButtonHandlerRegistered = YES;
-	        	}
+	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
 	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
-	        	if (DigiWebApp.ApplicationController.menuButtonHandlerRegistered === null) {
-	        		$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-	        		DigiWebApp.ApplicationController.menuButtonHandlerRegistered = YES;
-	        	}
+	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
 	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
 	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
 	        } else {
@@ -725,7 +710,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , backbuttonhandler: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if ((!DigiWebApp.SettingsController.showCredentialsAlert)) {
-			DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
 	    	if (
 	    	   (DigiWebApp.TabBar.tabItem1.isActive) 
 	    	|| (ChefToolOnly && (M.ViewManager.getCurrentPage().get("id") === DigiWebApp.DashboardPage.get("id")))
@@ -757,8 +741,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		
 	    	} else {
 	    		// catch double-fire of backbutton-event via timeout
-	    		//DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
-	    		DigiWebApp.ApplicationController.backButtonToBookTimePage();
+	    		DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
 	    		//DigiWebApp.NavigationController.toBookTimePage();
 			}
 		}
