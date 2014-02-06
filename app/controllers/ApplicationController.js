@@ -319,6 +319,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
 	, timeoutdeviceready_var: null
 	, timeouthappened: false
+	, buttonHandlerRegistered: NO
 
 	, regSecEv: function(isFirstLoad) {
     	// register deviceready-event and wait for it to fire
@@ -590,12 +591,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 
-		try {
-			//alert("hiding splash");
-			navigator.splashscreen.hide();
-		} catch(e) {
-			console.log("unable to hide splashscreen");
-		}
+    	if (!DigiWebApp.ApplicationController.buttonHandlerRegistered) {
+    		$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+    		$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+    		DigiWebApp.ApplicationController.buttonHandlerRegistered = YES;
+    	}
+//		try {
+//			//alert("hiding splash");
+//			navigator.splashscreen.hide();
+//		} catch(e) {
+//			console.log("unable to hide splashscreen");
+//		}
 
 		DigiWebApp.SettingsController.init(YES,YES);
         
@@ -671,16 +677,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
 	    	//alert("nach ApplicationController.init");
-	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
-	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
-	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
-	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
-	        } else {
-	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
-	        }
+
+//	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+//	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
+//	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+//	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
+//	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+//	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
+//	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
+//	        } else {
+//	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
+//	        }
 	        
 			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
 
@@ -688,6 +695,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //			//trackError(e);
 //			console.error(e);
 //		}
+
+	    try {
+			//alert("hiding splash");
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
 	}
 	
 	, inAppBrowser_var: null
