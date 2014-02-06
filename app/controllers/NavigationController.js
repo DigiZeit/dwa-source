@@ -13,6 +13,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
   	}
 
 	, toSplashViewPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toSplashViewPage();
 		DigiWebApp.NavigationController.switchToPage('splashView', M.TRANSITION.FADE, NO);
 	}
 
@@ -21,10 +22,12 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toInfoPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toInfoPage();
     	DigiWebApp.NavigationController.switchToPage('infoPage', M.TRANSITION.SLIDEUP, NO);
     }
 
     , backToBookTimePage: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -44,6 +47,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePagePOP: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -63,6 +67,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePage: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -82,6 +87,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toBookTimePage();
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -101,6 +108,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageFlipTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toBookTimePage();
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -120,6 +129,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePageFlipTransition: function() {
+		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
     		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
@@ -152,6 +162,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toHandOrderPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toHandOrderPage();
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
 			if (DigiWebApp.SettingsController.featureAvailable('404')) {
@@ -181,6 +192,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toSettingsPasswordPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toSettingsPasswordPage();
     	DigiWebApp.NavigationController.switchToPage('settingsPasswordPage', M.TRANSITION.POP, NO);
     }
 
@@ -189,6 +201,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toTimeDataPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toTimeDataPage();
     	DigiWebApp.NavigationController.switchToPage('timeDataPage', M.TRANSITION.SLIDEUP, NO);
     }
 
@@ -206,6 +219,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toDashboardPageTransition: function() { // 404 checked
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toDashboardPageTransition();
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.SLIDEUP, NO);
     }
 
@@ -232,6 +246,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toButtonDashboardPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toButtonDashboardPage();
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, NO);
     }
 
@@ -248,6 +263,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toButtonDashboardPageFlipTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toButtonDashboardPage();
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, NO);
     }
 // ENDE:ButtonMenü
@@ -257,6 +273,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toOrderInfoPageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toOrderInfoPage();
     	DigiWebApp.NavigationController.switchToPage('orderInfoPage', M.TRANSITION.SLIDEUP, NO);
     }
 
@@ -265,6 +282,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toEditPicturePageTransition: function() {
+		if (!M.Application.useTransitions) DigiWebApp.NavigationController.toEditPicturePage();
     	DigiWebApp.NavigationController.switchToPage('editPicturePage', M.TRANSITION.SLIDEUP, NO);
     }
 
