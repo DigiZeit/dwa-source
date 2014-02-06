@@ -502,7 +502,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	}
 	
 	, pollBookings: function(ids, successCallback, errorCallback, timeout) {
-		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 		//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in pollBookings");
 		var internalErrorCallback = function() {				   
 			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("this.available = " + this.available);

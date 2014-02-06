@@ -318,6 +318,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
     , regSecEv: function(isFirstLoad) {
+		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -384,12 +385,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         } else {
         	if (typeof(device) === "undefined") { 
 	        	// register deviceready-event and wait for it to fire
-        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
-        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
-        		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
-        	} else {
-        		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
 
@@ -419,7 +415,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }
 
         // using timeout-detection
-        this.skipEvents = false;
+        //this.skipEvents = false;
     }
 	
     , sizeMode: null
@@ -554,7 +550,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
-        this.skipEvents = true;
+        //this.skipEvents = true;
 		this.devicereadyhandler(YES);
 	}
 	
