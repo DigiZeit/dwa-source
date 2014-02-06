@@ -1109,6 +1109,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , startsync: function(isFirstLoad) {
     	//alert("in startsync");
+    	if (
+    		(DigiWebApp.ApplicationController.syncStartTimestamp !== null)
+    	&&  (D8.now().getTimestamp() - DigiWebApp.ApplicationController.syncStartTimestamp < 25000)
+    	) {
+    		return;
+    	}
+    	
     	DigiWebApp.ApplicationController.syncStartTimestamp = D8.now().getTimestamp();
 
         // authentication data
@@ -1121,7 +1128,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.NavigationController.toSettingsPage(YES);
             return;
         }
-
+		
         M.Application.config.useTransitions = NO;
 
     	DigiWebApp.ApplicationController.syncRunning = YES;
