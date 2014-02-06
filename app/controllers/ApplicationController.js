@@ -592,6 +592,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		try {
 			//alert("hiding splash");
 			navigator.splashscreen.hide();
+			alert('splashscreen hidden');
 		} catch(e) {
 			console.log("unable to hide splashscreen");
 		}
