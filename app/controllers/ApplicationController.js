@@ -1113,7 +1113,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		(DigiWebApp.ApplicationController.syncStartTimestamp !== null)
     	&&  (D8.now().getTimestamp() - DigiWebApp.ApplicationController.syncStartTimestamp < 25000)
     	) {
-    		alert("zu früh");
+    		DigiWebApp.ApplicationController.DigiLoaderView.hide()
+    		alert(D8.now().getTimestamp() - DigiWebApp.ApplicationController.syncStartTimestamp);
     		return;
     	}
     	
@@ -1123,7 +1124,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         var company = DigiWebApp.SettingsController.getSetting('company');
         var password = DigiWebApp.SettingsController.getSetting('password');
 
-		if(!company || !password) {
+		if (!company || !password) {
             DigiWebApp.NavigationController.toBookTimePage(YES);
             DigiWebApp.SettingsController.showCredentialsAlert = YES;
             DigiWebApp.NavigationController.toSettingsPage(YES);
