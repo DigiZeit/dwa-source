@@ -317,7 +317,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
-    , regSecEv: function(isFirstLoad) {
+	, timeoutdeviceready_var: null
+	, timeouthappened: false
+	, buttonHandlerRegistered: NO
+
+	, regSecEv: function(isFirstLoad) {
+    	// register deviceready-event and wait for it to fire
+		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+		
     	// register deviceready-event and wait for it to fire
 		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
     	var that = this;
@@ -382,13 +389,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		if (this.skipEvents) {
         	// i guess we are not on a mobile device --> no deviceready-event
-        	this.devicereadyhandler();
+			DigiWebApp.ApplicationController.devicereadyhandler();
         } else {
-        	if (typeof(device) === "undefined") { 
-        		// or start deviceready-handler after a timeout of 10 seconds (then we are not on a mobile device)
+        	if (typeof(device) === "undefined") {
+        		// we are not on a mobile device
+        		DigiWebApp.ApplicationController.devicereadyhandler();
+        	} else {
+        		// start deviceready-handler after a timeout of 10 seconds (then we are not on a mobile device)
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
-//        	} else {
-//        		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
 
@@ -539,9 +547,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		}
     	}
 	}
-
-	, timeoutdeviceready_var: null
-	, timeouthappened: false
 	
 	, timeoutdevicereadyhandler: function() {
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
@@ -662,7 +667,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); };}, 1000);
 			}
 	    	
-	    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+	    	//if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 			
 	    	DigiWebApp.ApplicationController.setImageClass();
 	
