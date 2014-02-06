@@ -327,18 +327,37 @@ $(window).bind('load', function(e) {
 	}
 });
 
+var gefundeneFreischaltungen = [];
 function searchForFeature(featureId) {
-	//console.log(featureId);
-    for (var i = 0; i < localStorage.length; i++) {
-        var k = localStorage.key(i);
-        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Features_').exec(k);
-        if (regexResult) {
-            var record = JSON.parse(localStorage.getItem(k));
-        	if (featureId.toString() === record.id.toString()) {
-        		return (record.isAvailable.toString() === "true");
-        	}
-        }
-    }
+	if (gefundeneFreischaltungen.length === 0) {
+		// alle Freischaltungen in Array laden
+	    for (var i = 0; i < localStorage.length; i++) {
+	        var k = localStorage.key(i);
+	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Features_').exec(k);
+	        if (regexResult) {
+	            var record = JSON.parse(localStorage.getItem(k));
+	            gefundeneFreischaltungen.push(record);
+	        }
+	    }
+	}
+	
+	var featureInArray = _.filter(gefundeneFreischaltungen,function(record){return record.id == featureId;});
+	if (featureInArray.length != 0) {
+		return (featureInArray[0].isAvailable == "true");
+	}
+	
+// alte, direkte Variante
+//    for (var i = 0; i < localStorage.length; i++) {
+//        var k = localStorage.key(i);
+//        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Features_').exec(k);
+//        if (regexResult) {
+//            var record = JSON.parse(localStorage.getItem(k));
+//        	if (featureId.toString() === record.id.toString()) {
+//        		return (record.isAvailable.toString() === "true");
+//        	}
+//        }
+//    }
+	
     return false;    
 }
 
