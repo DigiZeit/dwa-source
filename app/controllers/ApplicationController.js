@@ -555,7 +555,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
         this.skipEvents = true;
-		this.devicereadyhandler();
+		this.devicereadyhandler(YES);
 	}
 	
 	, emergencyCode: "007RESET007"
@@ -588,7 +588,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, devicereadyDone: null
-	, devicereadyhandler: function() {
+	, devicereadyhandler: function(timeoutHappened) {
 
 		if (DigiWebApp.ApplicationController.devicereadyDone === null) {
 			try {
@@ -618,24 +618,31 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 							}
 						});
 						DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-							DigiWebApp.ApplicationController.realDeviceReadyHandler();
+							DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
 						}, function(){
-							DigiWebApp.ApplicationController.realDeviceReadyHandler();
+							DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
 						});
 					});
 				} else {
-					DigiWebApp.ApplicationController.realDeviceReadyHandler();
+					DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
 				}
 			} catch (exDeleteFiles) {
-				DigiWebApp.ApplicationController.realDeviceReadyHandler();
+				DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
 			}
 		} else {
-			DigiWebApp.ApplicationController.realDeviceReadyHandler();
+			DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
 		}
 	}
 	
-	, realDeviceReadyHandler: function() {
-		
+	, realDeviceReadyHandler: function(timeoutHappened) {
+
+		if (!timeoutHappened) {
+			$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+			$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+		}
+
+		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+
 		if (DigiWebApp.ApplicationController.devicereadyDone === null) {
 	    	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 			    	
@@ -660,9 +667,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //						$(this).removeClass("ui-footer-fixed");
 //					});
 //				}
-		    	
-		    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
-				
+		    					
 		    	DigiWebApp.ApplicationController.setImageClass();
 		
 		    	$(window).resize(function() {
@@ -670,14 +675,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    	});
 		
 		    	DigiWebApp.ApplicationController.init(true);
-		        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-		        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-		        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-		        }
+//		        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+//		        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+//		        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+//		        }
 		        
 		} else {
-        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+//        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+//        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
 		}
 		DigiWebApp.ApplicationController.devicereadyDone === YES;
 	}
