@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		    = "com.digi.webapp"
-	versionCode = "4691"
-	version 	= "1.7.2.4691">
+	id		    = "com.digi.webappbeta"
+	versionCode = "4692"
+	version 	= "1.7.2.4692">
 
-	<name>DIGI-WebApp</name>
+	<name>DIGI-WebApp Beta</name>
 
 	<description>
 		Die mobile Zeiterfassung für das Handwerk!
@@ -53,16 +53,16 @@ which PhoneGap requires. -->
 <!-- to enable single features use the following examples -->
 	<feature name="http://api.phonegap.com/1.0/geolocation" />
 	<feature name="http://api.phonegap.com/1.0/network" />
-	<!-- <feature name="http://api.phonegap.com/1.0/camera" /> Kamera nur in Pro-Version -->
+	<feature name="http://api.phonegap.com/1.0/camera" />
 	<feature name="http://api.phonegap.com/1.0/file" />
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
-<!-- include ChildBrowserPlugIn -->
+<!-- include PhonegapPlugIns -->
 	<!-- <gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
-	<!--  <gap:plugin name="org.apache.cordova.console" /> -->
+	<gap:plugin name="org.apache.cordova.console" />
 	<gap:plugin name="org.apache.cordova.contacts" />
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.file" />
@@ -70,10 +70,10 @@ which PhoneGap requires. -->
 	<gap:plugin name="org.apache.cordova.inappbrowser" />
 	<gap:plugin name="org.apache.cordova.dialogs" />
 	<gap:plugin name="org.apache.cordova.splashscreen" />
-	<gap:plugin name="org.apache.cordova.vibration" />
-	<!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> nur in Pro-Version, da Kamera nötig -->
+ 	<gap:plugin name="org.apache.cordova.vibration" />
+	<!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
-
+	
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="icon.png" />
 
@@ -104,7 +104,7 @@ which PhoneGap requires. -->
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
 
 	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
@@ -117,10 +117,10 @@ screen -->
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
-	<gap:splash src="theme/images/1024x768_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="1024" height="768" />
-	<gap:splash src="theme/images/768x1024_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="768" height="1024" />
 	<gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="theme/images/640x960_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="theme/images/768x1024_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="768" height="1024" />
+	<gap:splash src="theme/images/1024x768_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="1024" height="768" />
 	<gap:splash src="theme/images/640x1136_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="640" height="1136" />
 
 <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
