@@ -503,7 +503,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	cleanDataDirectory();
         }
         hideShowSettingsServiceApp();
-		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	}
 	
 	, saveDone: YES 

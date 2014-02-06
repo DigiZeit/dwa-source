@@ -381,11 +381,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		if (this.skipEvents) {
         	// i guess we are not on a mobile device --> no deviceready-event
-        	this.devicereadyhandler();
+			DigiWebApp.ApplicationController.devicereadyhandler();
         } else {
         	if (typeof(device) === "undefined") { 
 	        	// register deviceready-event and wait for it to fire
+        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
+        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
+        	} else {
+        		//DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
 
@@ -550,8 +554,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
-        //this.skipEvents = true;
-		this.devicereadyhandler(YES);
+        this.skipEvents = true;
+		this.devicereadyhandler();
 	}
 	
 	, emergencyCode: "007RESET007"
@@ -583,104 +587,108 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, fixToobarsIntervalVar: null
 	
-	, devicereadyDone: null
-	, devicereadyhandler: function(timeoutHappened) {
+	, devicereadyhandler: function() {
 
-		if (DigiWebApp.ApplicationController.devicereadyDone === null) {
-			try {
-				//alert("hiding splash");
-				navigator.splashscreen.hide();
-				DigiWebApp.NavigationController.toBookTimePage();
-			} catch(e) {
-				console.log("unable to hide splashscreen");
-			}
-	
-			DigiWebApp.SettingsController.init(YES,YES);
-	        
-	        if (DigiWebApp.SettingsController.getSetting('debug')) { 
-	        	DigiWebApp.SettingsController.globalDebugMode = YES; 
-	        } else {
-	        	DigiWebApp.SettingsController.globalDebugMode = NO; 
-	        }
-			try {
-				if (DigiWebApp.SettingsController.featureAvailable('417')) {
-					var fileNamesToDelete = [];
-					DigiWebApp.ServiceAppController.listDirectory(function(results) {
-						fileNamesToDelete = [];
-						_.each(results, function(fileName) {
-							if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
-								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("delete " + fileName);
-								fileNamesToDelete.push(fileName);
-							}
-						});
-						DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-							DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
-						}, function(){
-							DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
-						});
+		try {
+			//alert("hiding splash");
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
+
+		DigiWebApp.SettingsController.init(YES,YES);
+        
+        if (DigiWebApp.SettingsController.getSetting('debug')) { 
+        	DigiWebApp.SettingsController.globalDebugMode = YES; 
+        } else {
+        	DigiWebApp.SettingsController.globalDebugMode = NO; 
+        }
+		try {
+			if (DigiWebApp.SettingsController.featureAvailable('417')) {
+				var fileNamesToDelete = [];
+				DigiWebApp.ServiceAppController.listDirectory(function(results) {
+					fileNamesToDelete = [];
+					_.each(results, function(fileName) {
+						if (fileName.search("DigiWebAppServiceApp.*.response.json") === 0) {
+							if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("delete " + fileName);
+							fileNamesToDelete.push(fileName);
+						}
 					});
-				} else {
-					DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
-				}
-			} catch (exDeleteFiles) {
-				DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
+					DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
+						DigiWebApp.ApplicationController.realDeviceReadyHandler();
+					}, function(){
+						DigiWebApp.ApplicationController.realDeviceReadyHandler();
+					});
+				});
+			} else {
+				DigiWebApp.ApplicationController.realDeviceReadyHandler();
 			}
-		} else {
-			DigiWebApp.ApplicationController.realDeviceReadyHandler(timeoutHappened);
+		} catch (exDeleteFiles) {
+			DigiWebApp.ApplicationController.realDeviceReadyHandler();
 		}
 	}
 	
-	, realDeviceReadyHandler: function(timeoutHappened) {
-
-		if (!timeoutHappened) {
-			$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-			$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-		}
-
-		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
-
-		if (DigiWebApp.ApplicationController.devicereadyDone === null) {
-	    	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
-			    	
-				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-				
-				try {
-					//alert("hiding splash");
-					navigator.splashscreen.hide();
-				} catch(e) {
-					console.log("unable to hide splashscreen");
-				}
-				
-//				if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
-//		    		// unfix header
-//					_.each(DigiWebApp.app.pages, function(myPage) {
-//						if ( typeof(myPage.header) !== "undefined" ) {
-//							$('#' + myPage.header.id ).removeClass("ui-header-fixed");
-//						}
-//					});
-//		    		// unfix footer
-//		    		$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() {
-//						$(this).removeClass("ui-footer-fixed");
-//					});
-//				}
-		    					
-		    	DigiWebApp.ApplicationController.setImageClass();
+	, realDeviceReadyHandler: function() {
 		
-		    	$(window).resize(function() {
-		    		DigiWebApp.ApplicationController.setImageClass();
-		    	});
-		
-		    	DigiWebApp.ApplicationController.init(true);
-//		        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-//		        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-//		        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-//		        }
-		        
-		} else {
-//        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-//        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-		}
-		DigiWebApp.ApplicationController.devicereadyDone === YES;
+    	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
+
+//		try {
+		    	
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			
+			try {
+				//alert("hiding splash");
+				navigator.splashscreen.hide();
+			} catch(e) {
+				console.log("unable to hide splashscreen");
+			}
+			
+			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
+	    		// unfix header
+				_.each(DigiWebApp.app.pages, function(myPage) {
+					if ( typeof(myPage.header) !== "undefined" ) {
+						$('#' + myPage.header.id ).removeClass("ui-header-fixed");
+					}
+				});
+	    		// unfix footer
+	    		$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() {
+					$(this).removeClass("ui-footer-fixed");
+				});
+	    		//$(document).keydown(DigiWebApp.ApplicationController.keypressedHandler);
+			} else {
+				// refresh fixed toolbars every second
+				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); };}, 1000);
+			}
+	    	
+	    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+			
+	    	DigiWebApp.ApplicationController.setImageClass();
+	
+	    	$(window).resize(function() {
+	    		DigiWebApp.ApplicationController.setImageClass();
+	    	});
+	
+	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
+	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
+	    	DigiWebApp.ApplicationController.init(true);
+	    	//alert("nach ApplicationController.init");
+	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
+	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
+	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
+	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
+	        } else {
+	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
+	        }
+	        
+			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
+
+//		} catch(e) {
+//			//trackError(e);
+//			console.error(e);
+//		}
 	}
 	
 	, inAppBrowser_var: null
