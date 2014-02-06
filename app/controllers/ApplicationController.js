@@ -317,16 +317,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
-	, timeoutdeviceready_var: null
-	, timeouthappened: false
-	, buttonHandlerRegistered: NO
-
-	, regSecEv: function(isFirstLoad) {
-    	// register deviceready-event and wait for it to fire
-		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
-		
-    	// register deviceready-event and wait for it to fire
-		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+    , regSecEv: function(isFirstLoad) {
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -389,14 +380,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		if (this.skipEvents) {
         	// i guess we are not on a mobile device --> no deviceready-event
-			DigiWebApp.ApplicationController.devicereadyhandler();
+        	this.devicereadyhandler();
         } else {
-        	if (typeof(device) === "undefined") {
-        		// we are not on a mobile device
-        		DigiWebApp.ApplicationController.devicereadyhandler();
-        	} else {
-        		// start deviceready-handler after a timeout of 10 seconds (then we are not on a mobile device)
+        	if (typeof(device) === "undefined") { 
+	        	// register deviceready-event and wait for it to fire
+        		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", 10000);
+        		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
+        		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+        	} else {
+        		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
 
@@ -426,7 +419,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }
 
         // using timeout-detection
-        //this.skipEvents = false;
+        this.skipEvents = false;
     }
 	
     , sizeMode: null
@@ -547,6 +540,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		}
     	}
 	}
+
+	, timeoutdeviceready_var: null
+	, timeouthappened: false
 	
 	, timeoutdevicereadyhandler: function() {
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
@@ -593,15 +589,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 
-    	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-    	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-
-//		try {
-//			//alert("hiding splash");
-//			navigator.splashscreen.hide();
-//		} catch(e) {
-//			console.log("unable to hide splashscreen");
-//		}
+		try {
+			//alert("hiding splash");
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
 
 		DigiWebApp.SettingsController.init(YES,YES);
         
@@ -643,12 +636,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    	
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			
-//			try {
-//				//alert("hiding splash");
-//				navigator.splashscreen.hide();
-//			} catch(e) {
-//				console.log("unable to hide splashscreen");
-//			}
+			try {
+				//alert("hiding splash");
+				navigator.splashscreen.hide();
+			} catch(e) {
+				console.log("unable to hide splashscreen");
+			}
 			
 			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
 	    		// unfix header
@@ -667,7 +660,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); };}, 1000);
 			}
 	    	
-	    	//if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+	    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 			
 	    	DigiWebApp.ApplicationController.setImageClass();
 	
@@ -675,12 +668,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		DigiWebApp.ApplicationController.setImageClass();
 	    	});
 	
+	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
+	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-
-//	    	if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-//	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-//	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-//	        }
+	    	//alert("nach ApplicationController.init");
+	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
+	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
+	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
+	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
+	        } else {
+	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
+	        }
 	        
 			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
 
@@ -688,13 +689,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //			//trackError(e);
 //			console.error(e);
 //		}
-			try {
-				//alert("hiding splash");
-				navigator.splashscreen.hide();
-			} catch(e) {
-				console.log("unable to hide splashscreen");
-			}
-
 	}
 	
 	, inAppBrowser_var: null
