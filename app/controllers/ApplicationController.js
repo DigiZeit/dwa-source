@@ -1113,6 +1113,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		(DigiWebApp.ApplicationController.syncStartTimestamp !== null)
     	&&  (D8.now().getTimestamp() - DigiWebApp.ApplicationController.syncStartTimestamp < 25000)
     	) {
+    		alert("zu früh");
     		return;
     	}
     	
