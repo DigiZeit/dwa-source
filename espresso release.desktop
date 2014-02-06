@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[de]=
+Comment=
+Exec=~/bin/espresso_build_release.sh
+GenericName[de]=
+GenericName=
+Icon=exec
+MimeType=
+Name[de]=espresso release
+Name=espresso release
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=none
+X-KDE-SubstituteUID=false
+X-KDE-Username=

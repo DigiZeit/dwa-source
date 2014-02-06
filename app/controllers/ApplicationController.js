@@ -594,6 +594,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (!DigiWebApp.ApplicationController.buttonHandlerRegistered) {
     		$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
     		$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+    		$(document).bind('pause', DigiWebApp.ApplicationController.closeChildbrowser);
     		DigiWebApp.ApplicationController.buttonHandlerRegistered = YES;
     	}
 //		try {

@@ -1,0 +1,1 @@
+/home/fedora/workspace/DIGI-WebApp-Source/build_scripts/prepare_debugbuild.sh
