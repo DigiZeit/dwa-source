@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 4719'
+              value: 'Build: 4720'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -328,7 +328,8 @@ DigiWebApp.InfoPage = M.PageView.design({
                 	var output = "";
                 	if (typeof(device) !== "undefined") {
                     	output = 'Device Name: '     + device.name     + '<br />' + 
-                                 'Device Platform: ' + device.platform + '<br />' + 
+			                     'Device Model: ' + device.model + '<br />' + 
+			                     'Device Platform: ' + device.platform + '<br />' + 
                                  'Device UUID: '     + device.uuid     + '<br />' + 
                                  'Device Version: '  + device.version  + '<br />';
                     }
