@@ -816,7 +816,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		myPositionName = obj.get('positionName');
     	} else {
         	try {
-	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === obj.get('positionId'));}).get('name');
+	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
     		} catch(e8) { console.error(e8); }
     	}
@@ -824,7 +824,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		myActivityName = obj.get('activityName');
     	} else {
         	try {
-	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === obj.get('activityId'));}).get('name');
+	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
     		} catch(e9) { console.error(e9); }
     	}
@@ -905,7 +905,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myPositionName = obj.get('positionName');
     	} else {
         	try {
-	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === obj.get('positionId'));}).get('name');
+	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
     		} catch(e11) { console.error(e11); }
     	}
@@ -914,7 +914,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myActivityName = obj.get('activityName');
     	} else {
         	try {
-	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === obj.get('activityId'));}).get('name');
+	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
     		} catch(e12) { console.error(e12); }
     	}
