@@ -740,7 +740,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} catch(e4) { 
     		//console.error(e4);
     	}
-    	}
     }
 
     , isPositionSelected: function() {
