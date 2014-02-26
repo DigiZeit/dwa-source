@@ -26,9 +26,11 @@
   margin: 0;
   padding: 0;
   width: 300px;
+  zoom: 1 !important;
 }
 
 .sigPad label {
+  zoom: 1 !important;
   display: block;
   margin: 0 0 0.515em;
   padding: 0;
@@ -38,10 +40,12 @@
 }
 
 .sigPad label.error {
+  zoom: 1 !important;
   color: #f33;
 }
 
 .sigPad input {
+  zoom: 1 !important;
   margin: 0;
   padding: 0.2em 0;
   width: 298px;
@@ -52,10 +56,12 @@
 }
 
 .sigPad input.error {
+  zoom: 1 !important;
   border-color: #f33;
 }
 
 .sigPad button {
+  zoom: 1 !important;
   margin: 1em 0 0 0;
   padding: 0.6em 0.6em 0.7em;
 
@@ -73,6 +79,7 @@
 }
 
 .sigPad button:hover {
+  zoom: 1 !important;
   background-color: #333;
 
   color: #fff;
@@ -81,12 +88,14 @@
 
 /* Bautagebuch::Start */
 .sigPad2 {
+  zoom: 1 !important;
   margin: 0;
   padding: 0;
   width: 554px;
 }
 
 .sigPad2 label {
+  zoom: 1 !important;
   display: block;
   margin: 0 0 0.515em;
   padding: 0;
@@ -96,10 +105,12 @@
 }
 
 .sigPad2 label.error {
+  zoom: 1 !important;
   color: #f33;
 }
 
 .sigPad2 input {
+  zoom: 1 !important;
   margin: 0;
   padding: 0.2em 0;
   width: 198px;
@@ -110,10 +121,12 @@
 }
 
 .sigPad2 input.error {
+  zoom: 1 !important;
   border-color: #f33;
 }
 
 .sigPad2 button {
+  zoom: 1 !important;
   margin: 1em 0 0 0;
   padding: 0.6em 0.6em 0.7em;
 
@@ -131,6 +144,7 @@
 }
 
 .sigPad2 button:hover {
+  zoom: 1 !important;
   background-color: #333;
 
   color: #fff;
@@ -138,10 +152,12 @@
 /* Bautagebuch::End */
 
 .sig {
+  zoom: 1 !important;
   display: none;
 }
 
 .sigNav {
+  zoom: 1 !important;
   display: none;
   height: 2.25em;
   margin: 0;
@@ -152,6 +168,7 @@
 }
 
 .sigNav li {
+  zoom: 1 !important;
   display: inline;
   float: left;
   margin: 0;
@@ -161,6 +178,7 @@
 .sigNav a,
 .sigNav a:link,
 .sigNav a:visited {
+  zoom: 1 !important;
   display: block;
   margin: 0;
   padding: 0 0.6em;
@@ -176,6 +194,7 @@
 .sigNav a.current,
 .sigNav a.current:link,
 .sigNav a.current:visited {
+  zoom: 1 !important;
   background-color: #666;
   -moz-border-radius-topleft: 8px;
   -moz-border-radius-topright: 8px;
@@ -190,12 +209,14 @@
 .sigNav .typeIt a.current,
 .sigNav .typeIt a.current:link,
 .sigNav .typeIt a.current:visited {
+  zoom: 1 !important;
   background-color: #ccc;
 
   color: #555;
 }
 
 .sigNav .clearButton {
+  zoom: 1 !important;
   bottom: 0.2em;
   display: none;
   position: absolute;
@@ -207,6 +228,7 @@
 
 /* Zeitbuchungen::Start */
 .sigWrapper {
+  zoom: 1 !important;
   clear: both;
   height: 150px;
 
@@ -214,16 +236,19 @@
 }
 
 .sigWrapper.current {
+  zoom: 1 !important;
   border-color: #666;
 }
 
 .signed .sigWrapper {
+  zoom: 1 !important;
   border: 0;
 }
 /* Zeitbuchungen::Ende */
 
 /* Bautagebuch::Start */
 .sigWrapper2 {
+  zoom: 1 !important;
   clear: both;
   height: 322px;
 
@@ -231,19 +256,23 @@
 }
 
 .sigWrapper2.current {
+  zoom: 1 !important;
   border-color: #666;
 }
 
 .signed .sigWrapper2 {
+  zoom: 1 !important;
   border: 0;
 }
 /* Bautagebuch::Ende */
 
 .pad {
+  zoom: 1 !important;
   position: relative;
 }
 
 .current .pad {
+  zoom: 1 !important;
   /**
    * For cross browser compatibility, this should be an absolute URL
    * In IE the cursor is relative to the HTML document
@@ -260,6 +289,7 @@
 }
 
 .typed {
+  zoom: 1 !important;
   height: 55px;
   margin: 0;
   padding: 0 5px;
@@ -274,6 +304,7 @@
 
 .typeItDesc,
 .drawItDesc {
+  zoom: 1 !important;
   display: none;
   margin: 0.75em 0 0.515em;
   padding: 0.515em 0 0;
@@ -285,6 +316,7 @@
 }
 
 p.error {
+  zoom: 1 !important;
   display: block;
   margin: 0.5em 0;
   padding: 0.4em;

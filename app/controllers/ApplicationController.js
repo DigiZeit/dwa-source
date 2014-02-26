@@ -317,7 +317,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
-    , regSecEv: function(isFirstLoad) {
+    , regSecEv: function(isFirstLoad) {    	
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -428,6 +428,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (this.sizeMode === null || this.timeouthappened) {
 			switch(true) {
 				case(                          $(window).width()<320):
+			    	$("*").css("zoom", 1);
 					if (this.sizeMode !== "w320") {
 						this.sizeMode = "w320";
 						return true;
@@ -436,6 +437,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=320  && $(window).width()<480):
+			    	$("*").css("zoom", 1);
 					if (this.sizeMode !== "w480") {
 						this.sizeMode = "w480";
 						return true;
@@ -444,6 +446,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=480  && $(window).width()<640):
+			    	$("*").css("zoom", 1);
 					if (this.sizeMode !== "w640") {
 						this.sizeMode = "w640";
 						return true;
@@ -452,6 +455,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=640  && $(window).width()<800):
+			    	$("*").css("zoom", 1);
 					if (this.sizeMode !== "w800") {
 						this.sizeMode = "w800";
 						return true;
@@ -460,6 +464,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=800  && $(window).width()<1024):
+			    	$("*").css("zoom", 1.03);
 					if (this.sizeMode !== "w1024") {
 						this.sizeMode = "w1024";
 						return true;
@@ -468,6 +473,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1024  && $(window).width()<1080):
+			    	$("*").css("zoom", 1.03);
 					if (this.sizeMode !== "w1080") {
 						this.sizeMode = "w1080";
 						return true;
@@ -476,6 +482,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1080 && $(window).width()<1536):
+			    	$("*").css("zoom", 1.04);
 					if (this.sizeMode !== "w1536") {
 						this.sizeMode = "w1536";
 						return true;
@@ -484,6 +491,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				default:
+			    	$("*").css("zoom", 1.05);
 					if (this.sizeMode !== "w5000") {
 						this.sizeMode = "w5000";
 						return true;
