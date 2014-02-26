@@ -450,7 +450,7 @@ if (searchForFeature(408)) { // Anwesenheitsliste
 
 if (searchForFeature(409)) { // ChefTool-Only
 	// hat keine eigenen Views, Buchungs-Views ausblenden
-	try{delete DigiWebAppOrdinaryDesign.bookingPage;}catch(e2){}
+	//try{delete DigiWebAppOrdinaryDesign.bookingPage;}catch(e2){}
 	try{delete DigiWebAppOrdinaryDesign.timeDataPage;}catch(e3){}
 	try{delete DigiWebAppOrdinaryDesign.employeePage;}catch(e4){}
 	try{delete DigiWebAppOrdinaryDesign.handOrderPage;}catch(e5){}
