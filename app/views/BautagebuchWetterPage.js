@@ -384,7 +384,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 	        , events: {
 		            tap: {
 		                target: DigiWebApp.NavigationController
-		                , action: 'backToBautagebuchMaterialienDetailsPageTransition'
+		                , action: 'backToBautagebuchBautageberichtDetailsPageTransition'
 //						action: function() {
 //							
 //						}
