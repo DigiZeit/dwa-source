@@ -27,11 +27,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.backToDashboardPage();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+        		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+        		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+        		DigiWebApp.NavigationController.toSplashViewPage();
+        		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+        		DigiWebApp.NavigationController.backToDashboardPage();
+    		}
     	} else {
     		try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
@@ -46,11 +51,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePagePOP: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.backToDashboardPagePOP();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+	    		DigiWebApp.NavigationController.toSplashViewPage();
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		//DigiWebApp.NavigationController.backToDashboardPagePOP();
+    		}	
     	} else {
     		try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
@@ -65,11 +75,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.toDashboardPage();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+	    		DigiWebApp.NavigationController.toSplashViewPage();
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		//DigiWebApp.NavigationController.toDashboardPage();
+    		}
     	} else {
     		//try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
@@ -84,11 +99,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePageTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.toDashboardPageTransition();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+	    		DigiWebApp.NavigationController.toSplashViewPage();
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		//DigiWebApp.NavigationController.toDashboardPageTransition();
+    		}
     	} else {
     		try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
@@ -103,11 +123,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.toDashboardPageFlipTransition();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+	    		DigiWebApp.NavigationController.toSplashViewPage();
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		//DigiWebApp.NavigationController.toDashboardPageFlipTransition();
+    		}
     	} else {
     		try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
@@ -122,11 +147,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBookTimePageFlipTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
-    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
-    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
-    		DigiWebApp.NavigationController.toSplashViewPage();
-    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
-    		//DigiWebApp.NavigationController.backToDashboardPageFlipTransition();
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    		if (Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
+	    		DigiWebApp.NavigationController.toSplashViewPage();
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		//DigiWebApp.NavigationController.backToDashboardPageFlipTransition();
+    		}
     	} else {
     		try {
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
