@@ -25,6 +25,10 @@ textarea.ui-input-text {
 	color: #000 !important;
 }
 
+.tmp-actionsheet {
+	zoom: 1.4 !important;
+}
+
 /*
 
 .ui-mobile-viewport-transitioning,
@@ -46,10 +50,6 @@ textarea.ui-input-text {
 		    -ms-backface-visibility: visible !important;
 		     -o-backface-visibility: visible !important;
 		        backface-visibility: visible !important;
-}
-
-.tmp-actionsheet {
-	zoom: 1.4 !important;
 }
 
 */
