@@ -465,7 +465,7 @@ if ( (searchForFeature(411)) && !(searchForFeature(409)) ) { // Buchungen X Tage
 	DigiWebAppOrdinaryDesign.timeDataArchivePage = DigiWebApp.TimeDataArchivePage;
 }
 	
-if ( (searchForFeature(412)) && !(searchForFeature(409)) ) { // Bautagebuch
+if (searchForFeature(412)) { // Bautagebuch
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage;
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage;
 	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage;

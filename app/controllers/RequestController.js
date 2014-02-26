@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4721
+    , softwareVersion: 4722
 
 
     /**
