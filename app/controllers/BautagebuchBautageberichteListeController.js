@@ -16,6 +16,10 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 		if (isFirstLoad) {
 		}
 		that.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+		var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+		if (ChefToolOnly) {
+			DigiWebApp.BautagebuchBautageberichteListePage.header.backButton.setValue(M.I18N.l("mainMenu"));
+		}
 	}
 
 	, neu: function() {
