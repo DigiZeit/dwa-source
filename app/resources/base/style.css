@@ -17,6 +17,8 @@ body {
 , .ui-body-c input[type="textarea"]
 , .ui-body-c input[type="number"]
 , .ui-body-c input[type="tel"]
+, .ui-body-c input[type="time"]
+, .ui-body-c input[type="date"]
 {
 	color: #000 !important;
 }
