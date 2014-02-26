@@ -1911,7 +1911,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 , action: function(data, msg, xhr) {
                     this.getFeaturesFromRemoteSuccess(data, msg, xhr);
                 	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-                	if (ChefToolOnly) {
+                	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+                	if (ChefToolOnly && !Bautagebuch) {
                 		//TODO: Stammdaten für Bautagebuch laden
                 		this.endSession();
                 	} else {
