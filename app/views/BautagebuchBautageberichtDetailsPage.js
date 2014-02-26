@@ -227,9 +227,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      		  	tap: {
 	          		  	action: function(id, event) {
 				          		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+					  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
 				  					return;
 					  			}
-				  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
+/*				          		$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
 				          		M.DatePickerView.show({
 				          		      source: M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'startUhrzeit')
 				          		    , initialDate: D8.create("01.01.1993 " + DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit)
@@ -266,7 +267,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 						      					}
 						      				}
 			      		  			}
-			          		});
+			          		});*/
 	      	  			}
 	      	  		}
 	      	 }
