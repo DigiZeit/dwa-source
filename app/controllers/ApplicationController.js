@@ -1195,12 +1195,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                , message: M.I18N.l('offlineWorkMsg')
 	            });
 	        } else {
-				if (DigiWebApp.SettingsController.featureAvailable('404')) {
-		            DigiWebApp.NavigationController.toButtonDashboardPage();
-				} else {
-		            DigiWebApp.NavigationController.toDashboardPage();
-				}
-	            
+	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+	        	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+	    		if (ChefToolOnly && Bautagebuch) {
+	        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+	    		} else {
+					if (DigiWebApp.SettingsController.featureAvailable('404')) {
+			            DigiWebApp.NavigationController.toButtonDashboardPage();
+					} else {
+			            DigiWebApp.NavigationController.toDashboardPage();
+					}
+	    		}
 	            //M.DialogView.alert({
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                  title: M.I18N.l('offlineWorkNotPossible')
@@ -1208,11 +1213,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            });
 	        }
     	} else {
-			if (DigiWebApp.SettingsController.featureAvailable('404')) {
-	            DigiWebApp.NavigationController.toButtonDashboardPage();
-			} else {
-	            DigiWebApp.NavigationController.toDashboardPage();
-			}
+        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+        	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+    		if (ChefToolOnly && Bautagebuch) {
+        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    		} else {
+				if (DigiWebApp.SettingsController.featureAvailable('404')) {
+		            DigiWebApp.NavigationController.toButtonDashboardPage();
+				} else {
+		            DigiWebApp.NavigationController.toDashboardPage();
+				}
+    		}
     	}
     }
 
@@ -2302,11 +2313,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if(this.isReadyToProceed()) {
             if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
             	if (DigiWebApp.SettingsController.featureAvailable('409')) {
-    				if (DigiWebApp.SettingsController.featureAvailable('404')) {
-    		            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
-    				} else {
-    		            DigiWebApp.NavigationController.toDashboardPage(YES);
-    				}
+    	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    	    		if (Bautagebuch) {
+    	        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    	    		} else {
+	    				if (DigiWebApp.SettingsController.featureAvailable('404')) {
+	    		            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
+	    				} else {
+	    		            DigiWebApp.NavigationController.toDashboardPage(YES);
+	    				}
+    	    		}
             	} else {
             		DigiWebApp.NavigationController.toBookTimePage(YES);
                 	DigiWebApp.BookingController.init();
