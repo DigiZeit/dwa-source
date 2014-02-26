@@ -146,7 +146,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             	  blur: {
             		action: function() {
 		            	var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
-						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
+						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
             		}
             	}
 	            , tap: {
