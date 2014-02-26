@@ -719,7 +719,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
             	M.ViewManager.getView('bookingPage', 'position').setSelection('0');
             	M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
         	}
-    	} catch(e3) { console.error(e3); }
+    	} catch(e3) { 
+    		//console.error(e3);
+    	}
     }
 
     , resetSelection: function() {
@@ -735,7 +737,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		M.ViewManager.getView('bookingPage', 'position').resetSelection();
         		M.ViewManager.getView('bookingPage', 'activity').resetSelection();
         	}
-    	} catch(e4) { console.error(e4); }
+    	} catch(e4) { 
+    		//console.error(e4);
+    	}
+    	}
     }
 
     , isPositionSelected: function() {
