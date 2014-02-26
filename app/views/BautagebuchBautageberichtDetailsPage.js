@@ -11,6 +11,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+					
+					var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datum.split(".");
+					DigiWebApp.BautagebuchBautageberichtDetailsController.set("datumAsDate", datumArray[2] . "-" . datumArray[1] . "-" . datumArray[0]);
+					
 					//alert("pagebeforeshow");
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
 		            var projektleiterArray = _.map(DigiWebApp.BautagebuchMainController.projektleiter, function(o) {
@@ -132,17 +136,27 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.BautagebuchBautageberichtDetailsController
-        		, property: 'datum'
+        		, property: 'datumAsDate'
         	}
+	        , contentBindingReverse: {
+	    		  target: DigiWebApp.BautagebuchBautageberichtDetailsController
+	    		, property: 'datumAsDate'
+	    	}
             , events: {
-	            tap: {
+            	  blur: {
+            		action: function() {
+		            	var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
+						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] . "-" . datumArray[1] . "-" . datumArray[0]);
+            		}
+            	}
+	            , tap: {
 	                action: function() {
             			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 				  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 				  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.header.title).blur();
 								return;
 						}
-			      		M.DatePickerView.show({
+/*			      		M.DatePickerView.show({
 			    		      source: M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'title')
 			    		    , initialDate: D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.datum)
 			    		    , showTimePicker: NO
@@ -177,7 +191,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			      					}
 			      				}
 			      			}
-			    		});
+			    		});*/
         			}
 	            }
 	        }
