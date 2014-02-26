@@ -125,7 +125,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                 }
             }
         })
-        , title: M.TextField.design({
+        , title: M.TextFieldView.design({
               value: ''
             , anchorLocation: M.CENTER
             , cssClass: 'dateTitle'
