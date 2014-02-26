@@ -125,9 +125,11 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                 }
             }
         })
-        , title: M.LabelView.design({
+        , title: M.TextField.design({
               value: ''
             , anchorLocation: M.CENTER
+            , cssClass: 'dateTitle'
+            , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.BautagebuchBautageberichtDetailsController
         		, property: 'datum'
@@ -137,6 +139,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	                action: function() {
             			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 				  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+				  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.header.title).blur();
 								return;
 						}
 			      		M.DatePickerView.show({
