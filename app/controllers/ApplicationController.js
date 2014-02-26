@@ -2086,10 +2086,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }
 
     	if ((DigiWebApp.SettingsController.featureAvailable('409')) && (DigiWebApp.ApplicationController.profilingIntervalVar === null)) {
-			if (DigiWebApp.SettingsController.featureAvailable('404')) {
-	            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
+			if (DigiWebApp.SettingsController.featureAvailable('412')) {
+	            DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition(YES);
 			} else {
-	            DigiWebApp.NavigationController.toDashboardPage(YES);
+				if (DigiWebApp.SettingsController.featureAvailable('404')) {
+		            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
+				} else {
+		            DigiWebApp.NavigationController.toDashboardPage(YES);
+				}
 			}
         	// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
         	if (DigiWebApp.ApplicationController.restartApp === YES) {
