@@ -215,6 +215,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , startUhrzeit: M.TextFieldView.design({
 	    	    label: M.I18N.l('BautagebuchStartUhrzeit')
 	    	  , cssClass: 'startUhrzeit'
+	    	  , inputType: M.INPUT_TIME
 	    	  , contentBindingReverse: {
 	                target: DigiWebApp.BautagebuchBautageberichtDetailsController
 	              , property: 'startUhrzeit'
