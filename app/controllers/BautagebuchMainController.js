@@ -37,18 +37,18 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	, init: function(isFirstLoad) {
 		var that = this;
 		
+		$('#' + DigiWebApp.BautagebuchBautageberichteListePage.id).css("zoom", that.zoomFactor);
 		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchMedienListePage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchEinstellungenPage.id).css("zoom", that.zoomFactor);
 		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.id).css("zoom", that.zoomFactor);
 		$('#' + DigiWebApp.BautagebuchMaterialienListePage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchMedienDetailsPage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchMedienListePage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchNotizenListePage.id).css("zoom", that.zoomFactor);
-		$('#' + DigiWebApp.BautagebuchWetterPage.id).css("zoom", that.zoomFactor);
 		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.id).css("zoom", that.zoomFactor);
 		$('#' + DigiWebApp.BautagebuchZeitenListePage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchNotizenListePage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchMedienDetailsPage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchMedienListePage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchEinstellungenPage.id).css("zoom", that.zoomFactor);
+		$('#' + DigiWebApp.BautagebuchWetterPage.id).css("zoom", that.zoomFactor);
 
 		DigiWebApp.BautagebuchEinstellungenController.load();
 		
