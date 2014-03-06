@@ -392,7 +392,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 				    				successCallback();
 								}
 							}
-							, errorCallback: function() {
+							, errorCallback: function(xhr, err) {
 								if ( mediaFilesIndex === mediaFilesLength && done === false) {
 									// last mediaFile sent (failed)
 						    		console.log('last mediaFile done (sending last file failed)');
