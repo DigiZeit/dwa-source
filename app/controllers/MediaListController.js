@@ -89,6 +89,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        }
         } catch(e2) { console.error(e2); }
 
+		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+
 	}
 
 	, itemSelected: function(id, m_id) {
@@ -335,7 +337,6 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
 		var successCallback = function() {
 			DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
-			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		};
 		
 		var errorCallback = function(err) {
