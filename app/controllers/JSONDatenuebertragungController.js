@@ -56,6 +56,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             }
             , onError: function(xhr, err) {// error callback of sendData
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                writeToLog(err);
                 errorCallback(xhr, err);
             }
         }).send();
