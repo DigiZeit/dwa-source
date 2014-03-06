@@ -336,6 +336,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadMediaFiles'));
 
 		var successCallback = function() {
+			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('cleanMediaFiles'));
 			DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
 		};
 		
