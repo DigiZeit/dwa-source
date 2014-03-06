@@ -359,11 +359,11 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					}
 					items.push(rec.record);
 					
-					var data = {"medien": items};
+					var myMediaListToSend = {"medien": items};
 					
 	    			console.log('sending mediaFile for mediaFilesIndex ' + mediaFilesIndex);
 						var sendObj = {
-							  data: el.record
+							  data: myMediaListToSend
 							, webservice: "medien"
 							, loaderText: M.I18N.l('sendeMedien')
 							, successCallback: function(data2, msg, request) {
