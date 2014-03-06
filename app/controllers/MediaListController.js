@@ -337,7 +337,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
 		var successCallback = function() {
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('cleanMediaFiles'));
-			DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
+			DigiWebApp.MediaListController.init();
+			//DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
 		};
 		
 		var errorCallback = function(err) {
@@ -373,6 +374,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 							, successCallback: function(data2, msg, request) {
 						    	_.each(mediaFiles, function(mf) {
 						            if (mf.m_id === el.m_id) {
+						            	mf.deleteFile(function(){mf.del();}, function(){mf.del();});
 							    		mediaFilesIndex = mediaFilesIndex + 1;
 						            }
 						        });
@@ -463,7 +465,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
 				    		console.log('last mediaFile done (with file)');
-		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
 		    				proceed(mediaFiles);
 						}
@@ -471,7 +473,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
 				    		console.log('last mediaFile done (last file load failed)');
-		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
 		    				proceed(mediaFiles);
 						}
@@ -481,7 +483,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					if ( mediaFilesIndex === mediaFilesLength && done === false) {
 						// last mediaFile loaded
 			    		console.log('last mediaFile done (no file)');
-	    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    				done = true;
 	    				proceed(mediaFiles);
 					}
@@ -489,7 +491,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        });
     	} else {
     		//console.log('no mediafiles');
-			DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			proceed(mediaFiles);
     	}
     }
