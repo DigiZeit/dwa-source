@@ -1697,7 +1697,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 				// weiter in der Verarbeitungskette
 				that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
 			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(data, "medien/unterschrift", M.I18N.l('sendSignatures'), internalSuccessCallback, internalSuccessCallback);
+
+			var sendObj = {
+					  data: data
+					, webservice: "medien/unterschrift"
+					, loaderText: M.I18N.l('sendSignatures')
+					, successCallback: internalSuccessCallback
+					, errorCallback: internalSuccessCallback
+					//, additionalQueryParameter:
+					//, timeout: 
+			};
+			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 			
 		} else {
 			that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);

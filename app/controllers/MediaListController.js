@@ -345,26 +345,79 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		var proceed = function(mediaFiles) {
 			
 			if (mediaFiles.length !== 0) {
-				var items = [];
 				
-				_.each(mediaFiles, function(mf){
-					var rec = JSON.parse(JSON.stringify(mf)); // clone to new Object
-					if (rec.record.handOrderId !== null && rec.record.handOrderId !== "0") {
-						rec.record.orderId = null;
-					}
-					items.push(rec.record);
-				});
-				
-				var data = {"medien": items};
-				
-				var internalSuccessCallback = function(data2, msg, request) {
-					// verarbeite empfangene Daten
-					console.log("sendeMedien Status: " + request.status);
-					// weiter in der Verarbeitungskette
-					successCallback();
-								
-				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(data, "medien", M.I18N.l('sendeMedien'), internalSuccessCallback, errorCallback);
+				var mediaFilesLength = mediaFiles.length;
+		    	var mediaFilesIndex = 0;
+		    	var done = false;
+
+		    	_.each(mediaFiles, function(el) {
+		    		
+	    			console.log('sending mediaFile for mediaFilesIndex ' + mediaFilesIndex);
+						var sendObj = {
+							  data: el.record
+							, webservice: "medien"
+							, loaderText: M.I18N.l('sendeMedien')
+							, successCallback: function(data2, msg, request) {
+						    	_.each(mediaFiles, function(mf) {
+						            if (mf.m_id === el.m_id) {
+							    		mediaFilesIndex = mediaFilesIndex + 1;
+						            }
+						        });
+								if ( mediaFilesIndex === mediaFilesLength && done === false) {
+									// last mediaFile sent
+						    		console.log('sending last mediaFile done (with file)');
+				    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				    				done = true;
+				    				successCallback();
+								}
+							}
+							, errorCallback: function() {
+								if ( mediaFilesIndex === mediaFilesLength && done === false) {
+									// last mediaFile sent (failed)
+						    		console.log('last mediaFile done (sending last file failed)');
+				    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				    				done = true;
+				    				successCallback();
+								}
+							}
+							//, additionalQueryParameter:
+							, timeout: 60000
+						};
+						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+							
+		        });
+
+// Alte Variante: alles auf einmal senden
+//				var items = [];
+//				
+//				_.each(mediaFiles, function(mf){
+//					var rec = JSON.parse(JSON.stringify(mf)); // clone to new Object
+//					if (rec.record.handOrderId !== null && rec.record.handOrderId !== "0") {
+//						rec.record.orderId = null;
+//					}
+//					items.push(rec.record);
+//				});
+//				
+//				var data = {"medien": items};
+//				
+//				var internalSuccessCallback = function(data2, msg, request) {
+//					// verarbeite empfangene Daten
+//					console.log("sendeMedien Status: " + request.status);
+//					// weiter in der Verarbeitungskette
+//					successCallback();
+//								
+//				};
+//				var sendObj = {
+//						  data: data
+//						, webservice: "medien"
+//						, loaderText: M.I18N.l('sendeMedien')
+//						, successCallback: internalSuccessCallback
+//						, errorCallback: errorCallback
+//						//, additionalQueryParameter:
+//						, timeout: 60000
+//				};
+//				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+		    	
 			} else {
 				// no files to send
 
@@ -385,7 +438,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     			if (el.hasFileName()) {
 	    			console.log("fileName: " + el.get('fileName'));
 					// load signature into el
-					el.readFromFile(function(fileContent){
+					el.readFromFile(function(fileContent) {
 						//console.log("fileContent: " + fileContent);
 						if (fileContent && (fileContent !== "")) {
 					    	_.each(mediaFiles, function(mf) {

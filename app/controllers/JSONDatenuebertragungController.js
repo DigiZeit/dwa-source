@@ -10,18 +10,26 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
 
-	, sendData: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
+	, sendData: function(sendObj) {
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
-		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
+		  	DigiWebApp.RequestController.getDatabaseServer(function(sendObj) {
+		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
+			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
 		}
 	}
 
-	, sendDataWithServer: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
+	, sendDataWithServer: function(sendObj) {
 		//var that = this;
+
+		var data = sendObj['data']
+		var webservice = sendObj['webservice']
+		var loaderText = sendObj['loaderText']
+		var successCallback = sendObj['successCallback']
+		var errorCallback = sendObj['errorCallback']
+		var additionalQueryParameter = sendObj['additionalQueryParameter']
+		var timeout = sendObj['timeout'] ? sendObj['timeout'] : 20000;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
@@ -31,7 +39,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			  url: myURL
 			, method: 'POST'
             , data: JSON.stringify(data)
-            , timeout: 15000
+            , timeout: timeout
             , contentType: 'text/plain'
             , dataType: 'text' // oder 'json'
             , beforeSend: function(xhr) {
@@ -52,22 +60,26 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         }).send();
 	}
 
-	, recieveData: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
+	, recieveData: function(recieveObj) {
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
+		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
+			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
 		}
 	}
 
-	, recieveDataWithServer: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
+	, recieveDataWithServer: function(recieveObj) {
 		
-		var myModus = '0';
-		if (typeof(modus) !== "undefined") {
-			myModus = modus;
-		}
+		var webservice = recieveObj['webservice']
+		var loaderText = recieveObj['loaderText']
+		var successCallback = recieveObj['successCallback']
+		var errorCallback = recieveObj['errorCallback']
+		var additionalQueryParameter = recieveObj['additionalQueryParameter']
+		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : 20000;
+		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
+		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
 
 		// hack um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
@@ -90,6 +102,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			, method: 'GET'
 			, sendNoCacheHeader: YES
 			, sendTimestamp: YES
+			, timeout: timeout
 			, isJSON: YES
 			, onSuccess: function(data, msg, request) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -192,7 +205,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 //			        });
 					errorCallback();
 				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('sendDataMsg'), internalSuccessCallback, internalErrorCallback);
+				var sendObj = {
+					  data: data
+					, webservice: "zeitdaten"
+					, loaderText: M.I18N.l('sendDataMsg')
+					, successCallback: internalSuccessCallback
+					, errorCallback: internalErrorCallback
+					//, additionalQueryParameter:
+					//, timeout: 60000
+				};
+				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 			} else {
 				successCallback();
 			}
@@ -286,7 +308,17 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			successCallback();
 		};
 		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
-		DigiWebApp.JSONDatenuebertragungController.recieveData("leistungen", M.I18N.l('getActivitiesLoader'), internalSuccessCallback, errorCallback, '', false, '1');
+		var recieveObj = {
+			  webservice: "leistungen"
+			, loaderText: M.I18N.l('getActivitiesLoader')
+			, successCallback: internalSuccessCallback
+			, errorCallback: errorCallback
+			, additionalQueryParameter: ''
+			//, timeout: 
+			, geraeteIdOverride: false
+			, modus: '1'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
 

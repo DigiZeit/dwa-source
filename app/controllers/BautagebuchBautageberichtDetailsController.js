@@ -18,7 +18,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	, mitarbeiterListSelected: null // runtime
 	
 	, datum: null // in model
-	, datumAsDate: null // runtime to feed date-textinput
 	
 	, auftragsId: null // in model
 	, auftragsName: null // in model

@@ -23,8 +23,8 @@ DigiWebApp.CameraPage = M.PageView.design({
     , savePicture: function() {
     	
     	var myRemark = '';
-    	if ((M.ViewManager.getView('cameraPage', 'remarkInput').value !== null) && (typeof(M.ViewManager.getView('cameraPage', 'remarkInput').value) !== "undefined")) {
-    		myRemark = M.ViewManager.getView('cameraPage', 'remarkInput').value;
+    	if (($('#' + DigiWebApp.CameraPage.content.remarkInput.id).val() !== null) && (typeof($('#' + DigiWebApp.CameraPage.content.remarkInput.id).val()) !== "undefined")) {
+    		myRemark = $('#' + DigiWebApp.CameraPage.content.remarkInput.id).val();
     	}
     			
 		if (myRemark.length > 255) {

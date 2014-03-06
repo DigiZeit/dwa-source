@@ -11,10 +11,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-					
-					var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datum.split(".");
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
-					
 					//alert("pagebeforeshow");
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
 		            var projektleiterArray = _.map(DigiWebApp.BautagebuchMainController.projektleiter, function(o) {
@@ -129,34 +125,21 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                 }
             }
         })
-        , title: M.TextFieldView.design({
+        , title: M.LabelView.design({
               value: ''
             , anchorLocation: M.CENTER
-            , cssClass: 'dateTitle'
-            , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.BautagebuchBautageberichtDetailsController
-        		, property: 'datumAsDate'
+        		, property: 'datum'
         	}
-	        , contentBindingReverse: {
-	    		  target: DigiWebApp.BautagebuchBautageberichtDetailsController
-	    		, property: 'datumAsDate'
-	    	}
             , events: {
-            	  blur: {
-            		action: function() {
-		            	var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
-						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
-            		}
-            	}
-	            , tap: {
+	            tap: {
 	                action: function() {
             			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 				  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-				  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.header.title).blur();
 								return;
 						}
-/*			      		M.DatePickerView.show({
+			      		M.DatePickerView.show({
 			    		      source: M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'title')
 			    		    , initialDate: D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.datum)
 			    		    , showTimePicker: NO
@@ -191,7 +174,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			      					}
 			      				}
 			      			}
-			    		});*/
+			    		});
         			}
 	            }
 	        }
@@ -232,7 +215,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , startUhrzeit: M.TextFieldView.design({
 	    	    label: M.I18N.l('BautagebuchStartUhrzeit')
 	    	  , cssClass: 'startUhrzeit'
-	    	  , inputType: M.INPUT_TIME
 	    	  , contentBindingReverse: {
 	                target: DigiWebApp.BautagebuchBautageberichtDetailsController
 	              , property: 'startUhrzeit'
@@ -245,10 +227,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      		  	tap: {
 	          		  	action: function(id, event) {
 				          		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-					  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
 				  					return;
 					  			}
-/*				          		$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
+				  				$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit).blur();
 				          		M.DatePickerView.show({
 				          		      source: M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'startUhrzeit')
 				          		    , initialDate: D8.create("01.01.1993 " + DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit)
@@ -285,7 +266,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 						      					}
 						      				}
 			      		  			}
-			          		});*/
+			          		});
 	      	  			}
 	      	  		}
 	      	 }

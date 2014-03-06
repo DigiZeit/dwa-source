@@ -17,8 +17,6 @@ body {
 , .ui-body-c input[type="textarea"]
 , .ui-body-c input[type="number"]
 , .ui-body-c input[type="tel"]
-, .ui-body-c input[type="time"]
-, .ui-body-c input[type="date"]
 {
 	color: #000 !important;
 }
@@ -27,21 +25,6 @@ textarea.ui-input-text {
 	color: #000 !important;
 }
 
-.tmp-actionsheet {
-	zoom: 1.4 !important;
-}
-
-.bautagebuchBautageberichtDetailsPage .ui-title {
-	margin: -12px 20px 20px 20px;
-	padding: 3px 90px 0px 90px;
-	border: 0px;
-	height: 64px !important;
-}
-
-.dateTitle.ui-input-text.ui-body-a {
-	font-weight: bold !important;
-	color: #fff !important;
-}
 /*
 
 .ui-mobile-viewport-transitioning,
@@ -78,9 +61,7 @@ textarea.ui-input-text {
 }
 */
 
-  .ui-header .ui-btn-left
-, .ui-header .ui-btn-right
-{
+.ui-header .ui-btn-left {
 	margin-top: 3px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
 }
 
