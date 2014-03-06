@@ -352,6 +352,15 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
 		    	_.each(mediaFiles, function(el) {
 		    		
+		    		var items = [];
+					var rec = JSON.parse(JSON.stringify(el)); // clone to new Object
+					if (rec.record.handOrderId !== null && rec.record.handOrderId !== "0") {
+						rec.record.orderId = null;
+					}
+					items.push(rec.record);
+					
+					var data = {"medien": items};
+					
 	    			console.log('sending mediaFile for mediaFilesIndex ' + mediaFilesIndex);
 						var sendObj = {
 							  data: el.record
