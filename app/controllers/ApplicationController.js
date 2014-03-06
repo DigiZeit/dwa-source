@@ -13,7 +13,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, CONSTVideoFiletype: "video/mp4;base64"
 	, CONSTTextFiletype: "text/plain"
 		
-	, CONSTApplicationQuota: 10*1024*1024
+	, CONSTApplicationQuota: 20*1024*1024
 	
 	, CONSTVibrateDuration: 100
 	
