@@ -335,11 +335,13 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
 		var successCallback = function() {
 			DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		};
 		
 		var errorCallback = function(err) {
 			console.error(err);
 			DigiWebApp.MediaListController.init();
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		};
 		
 		var proceed = function(mediaFiles) {
@@ -375,7 +377,6 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								if ( mediaFilesIndex === mediaFilesLength && done === false) {
 									// last mediaFile sent
 						    		console.log('sending last mediaFile done (with file)');
-				    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				    				done = true;
 				    				successCallback();
 								}
@@ -384,7 +385,6 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								if ( mediaFilesIndex === mediaFilesLength && done === false) {
 									// last mediaFile sent (failed)
 						    		console.log('last mediaFile done (sending last file failed)');
-				    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				    				done = true;
 				    				successCallback();
 								}
