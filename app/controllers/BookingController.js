@@ -977,7 +977,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	var startTime = booking.get('startTimeString');
 	            	if ((typeof(startDate) === "undefined" || !startDate || startDate === "")
 	            	|| (typeof(startTime) === "undefined" || !startTime || startTime === "")
-	            	) {
+	            	) && (booking.get('timeStampStart') !== "0") {
 	            		// Buchung aus alter WebAppVersion
 	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
 //	                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
@@ -1000,7 +1000,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	var endeTime = booking.get('endeTimeString');
 	            	if ((typeof(endeDate) === "undefined" || !endeDate || endeDate === "")
 	            	|| (typeof(endeTime) === "undefined" || !endeTime || endeTime === "")
-	            	) {
+	            	) && (booking.get('timeStampEnd') !== "0") {
 	            		// Buchung aus alter WebAppVersion
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
 //	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
