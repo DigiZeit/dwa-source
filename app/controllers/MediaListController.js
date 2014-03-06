@@ -458,6 +458,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					            if (mf.m_id === el.m_id) {
 					            	mf.set("data", fileContent);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
+				        			console.log('mediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
 					            }
 					        });
 						}
