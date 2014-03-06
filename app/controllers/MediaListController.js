@@ -448,11 +448,10 @@ DigiWebApp.MediaListController = M.Controller.extend({
     	if (mediaFilesLength !== 0) { 
 	    	_.each(mediaFiles, function(el) {
 	    			    		
-    			console.log('loading mediaFile ' + rec.get('fileName'));
     			if (el.hasFileName()) {
-	    			//console.log("fileName: " + el.get('fileName'));
-					// load signature into el
-					el.readFromFile(function(fileContent) {
+        			console.log('loading mediaFile ' + el.get('fileName'));
+
+        			el.readFromFile(function(fileContent) {
 						//console.log("fileContent: " + fileContent);
 						if (fileContent && (fileContent !== "")) {
 					    	_.each(mediaFiles, function(mf) {
