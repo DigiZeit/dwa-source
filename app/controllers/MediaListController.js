@@ -366,7 +366,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					
 					var myMediaListToSend = {"medien": items};
 					
-	    			console.log('sending mediaFile ' + rec.get('fileName'));
+	    			console.log('sending mediaFile ' + rec.record.fileName);
 						var sendObj = {
 							  data: myMediaListToSend
 							, webservice: "medien"
