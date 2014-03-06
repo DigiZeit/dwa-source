@@ -31,6 +31,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         /* do something, for any other load. */
 
         $('#' + DigiWebApp.CameraPage.content.remarkInput.id).val("");
+        M.ViewManager.getView('cameraPage', 'remarkInput').value = "";
         
         if (DigiWebApp.CameraController.loadedPicture === null) {
         	var image = document.getElementById(DigiWebApp.CameraPage.content.image.id);
