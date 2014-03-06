@@ -365,7 +365,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					
 					var myMediaListToSend = {"medien": items};
 					
-	    			console.log('sending mediaFile for mediaFilesIndex ' + mediaFilesIndex);
+	    			console.log('sending mediaFile ' + rec.get('fileName'));
 						var sendObj = {
 							  data: myMediaListToSend
 							, webservice: "medien"
@@ -393,6 +393,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 							}
 							//, additionalQueryParameter:
 							, timeout: 60000
+							, omitLoaderHide: true
 						};
 						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 							
@@ -445,9 +446,9 @@ DigiWebApp.MediaListController = M.Controller.extend({
     	if (mediaFilesLength !== 0) { 
 	    	_.each(mediaFiles, function(el) {
 	    			    		
-    			console.log('loading mediaFile for mediaFilesIndex ' + mediaFilesIndex);
+    			console.log('loading mediaFile ' + rec.get('fileName'));
     			if (el.hasFileName()) {
-	    			console.log("fileName: " + el.get('fileName'));
+	    			//console.log("fileName: " + el.get('fileName'));
 					// load signature into el
 					el.readFromFile(function(fileContent) {
 						//console.log("fileContent: " + fileContent);

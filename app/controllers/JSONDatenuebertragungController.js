@@ -30,6 +30,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var errorCallback = sendObj['errorCallback']
 		var additionalQueryParameter = sendObj['additionalQueryParameter']
 		var timeout = sendObj['timeout'] ? sendObj['timeout'] : 20000;
+		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
@@ -50,7 +51,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
                 );
             }
             , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-                DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
                 successCallback(data, msg, xhr);
             }
             , onError: function(xhr, err) {// error callback of sendData
