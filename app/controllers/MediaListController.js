@@ -374,11 +374,14 @@ DigiWebApp.MediaListController = M.Controller.extend({
 							, successCallback: function(data2, msg, request) {
 						    	_.each(mediaFiles, function(mf) {
 						            if (mf.m_id === el.m_id) {
-						            	mf.deleteFile(function(){mf.del();}, function(){mf.del();});
-						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
-						                    return parseInt(mediafile.get('timeStamp'));
-						                });
-						                that.set('items', items.reverse());
+						            	var delFunc = function() {
+						            		mf.del();
+							                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
+							                    return parseInt(mediafile.get('timeStamp'));
+							                });
+							                that.set('items', items.reverse());
+						            	}
+						            	mf.deleteFile(delFunc, delFunc);
 							    		mediaFilesIndex = mediaFilesIndex + 1;
 						            }
 						        });
