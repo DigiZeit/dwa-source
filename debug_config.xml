@@ -67,7 +67,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.file" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
-	<gap:plugin name="org.apache.cordova.inappbrowser" />
+	<gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.2" />
 	<gap:plugin name="org.apache.cordova.dialogs" />
 	<gap:plugin name="org.apache.cordova.splashscreen" />
  	<gap:plugin name="org.apache.cordova.vibration" />
