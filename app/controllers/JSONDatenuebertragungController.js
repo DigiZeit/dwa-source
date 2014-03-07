@@ -11,6 +11,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	  consoleLogOutput: YES
 
 	, sendData: function(sendObj) {
+		if (!sendObj) {
+			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
+		}
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(sendObj) {
 		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
@@ -63,6 +66,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 
 	, recieveData: function(recieveObj) {
+		if (!recieveObj) {
+			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
+		}
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
 		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
