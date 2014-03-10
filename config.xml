@@ -77,7 +77,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="org.apache.cordova.media-capture" version="0.2.3" />
 	<gap:plugin name="org.apache.cordova.console" version="0.2.6" />
 	<gap:plugin name="org.apache.cordova.contacts" version="0.2.9" />
-	<gap:plugin name="org.apache.cordova.device" version="0.2.7" />
+	<gap:plugin name="org.apache.cordova.device" version="0.2.8" />
 	<gap:plugin name="org.apache.cordova.file" version="1.0.1" />
 	<gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" />
 	<gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.3" />
