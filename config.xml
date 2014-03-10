@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4762"
-	version 	= "1.7.2.4762">
+	versionCode = "4763"
+	version 	= "1.7.2.4763">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -75,7 +75,7 @@ which PhoneGap requires. -->
 
 	<gap:plugin name="org.apache.cordova.camera" version="0.2.3" />
 	<gap:plugin name="org.apache.cordova.media-capture" version="0.2.3" />
-	<gap:plugin name="org.apache.cordova.console" version="0.2.6" />
+	<gap:plugin name="org.apache.cordova.console" version="0.2.7" />
 	<gap:plugin name="org.apache.cordova.contacts" version="0.2.9" />
 	<gap:plugin name="org.apache.cordova.device" version="0.2.8" />
 	<gap:plugin name="org.apache.cordova.file" version="1.0.1" />
