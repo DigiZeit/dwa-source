@@ -29,6 +29,12 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
         		$('#' + DigiWebApp.BookingPageWithIconsScholpp.content.activity.id + "_container").hide();
         		
         		$('#' + DigiWebApp.BookingPageWithIconsScholpp.content.spesenkennzeichen.id).attr('disabled', 'disabled');
+        		
+        		if (DigiWebApp.SettingsController.featureAvailable('424')) {
+        			
+        		} else {
+        			
+        		}
         	}
         }
     }
