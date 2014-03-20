@@ -482,7 +482,7 @@ if (searchForFeature(412)) { // Bautagebuch
 	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
-if ( (searchForFeature(416) || searchForFeature(424)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
+if ( (searchForFeature(416)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
 	DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp = DigiWebApp.BookingPageWithIconsScholpp;
 }
 

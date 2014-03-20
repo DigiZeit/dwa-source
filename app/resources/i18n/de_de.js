@@ -224,7 +224,6 @@ M.I18N.de_de = {
 	, notDefined: "nicht definiert"
 	, unknown: "nicht angegeben"
 	, uploadMediaFiles: "Medien übertragen"
-	, cleanMediaFiles: "Medien aufräumen"
 	, editPicture: "Bild bearbeiten"
 	, deleteLabel: "Löschen"
 	, errorWhileDeletingMediaFile: "Die Mediendatei konnte nicht gelöscht werden!"

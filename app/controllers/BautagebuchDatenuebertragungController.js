@@ -96,17 +96,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 //			successCallback();
 //		};
 //		
-//		var recieveObj = {
-//				  webservice: "mengeneinheiten"
-//				, loaderText: M.I18N.l('BautagebuchLadeMengeneinheiten')
-//				, successCallback: internalSuccessCallback
-//				, errorCallback: errorCallback
-//				//, additionalQueryParameter: 
-//				//, timeout: 
-//				//, geraeteIdOverride: 
-//				//, modus: 
-//		};
-//		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+//		DigiWebApp.JSONDatenuebertragungController.recieveData("mengeneinheiten", M.I18N.l('BautagebuchLadeMengeneinheiten'), internalSuccessCallback, errorCallback);
 		
 	}
 	
@@ -160,17 +150,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			successCallback();
 		};
 		
-		var recieveObj = {
-			  webservice: "materialliste"
-			, loaderText: M.I18N.l('BautagebuchLadeMaterialien')
-			, successCallback: internalSuccessCallback
-			, errorCallback: errorCallback
-			//, additionalQueryParameter: 
-			//, timeout: 
-			//, geraeteIdOverride: 
-			//, modus: 
-		};
-		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		DigiWebApp.JSONDatenuebertragungController.recieveData("materialliste", M.I18N.l('BautagebuchLadeMaterialien'), internalSuccessCallback, errorCallback);
 		
 	}
 
@@ -238,17 +218,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			successCallback();
 		};
 		
-		var recieveObj = {
-			  webservice: "mitarbeiter"
-			, loaderText: M.I18N.l('BautagebuchLadeProjektleiter')
-			, successCallback: internalSuccessCallback
-			, errorCallback: errorCallback
-			, additionalQueryParameter: 'getAll=true&nurKolonne=false'
-			//, timeout: 
-			//, geraeteIdOverride: 
-			//, modus: 
-		};
-		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter", M.I18N.l('BautagebuchLadeProjektleiter'), internalSuccessCallback, errorCallback, 'getAll=true&nurKolonne=false');
 		
 	}
 
@@ -314,17 +284,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		};
 		// getAll=true  Alle
 		// getAll=false KolonnenMAs
-		var recieveObj = {
-			  webservice: "mitarbeiter"
-			, loaderText: M.I18N.l('BautagebuchLadeProjektleiter')
-			, successCallback: internalSuccessCallback
-			, errorCallback: errorCallback
-			, additionalQueryParameter: 'getAll=true&nurKolonne=true'
-			//, timeout: 
-			//, geraeteIdOverride: 
-			//, modus: 
-		};
-		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter", M.I18N.l('BautagebuchLadeMitarbeiter'), internalSuccessCallback, errorCallback, 'getAll=true&nurKolonne=true');
 		
 	}
 	
@@ -370,29 +330,17 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			successCallback();
 			
 		};
-		var sendObj = {
-				  data: item.record
-				, webservice: "bautagesbericht"
-				, loaderText: M.I18N.l('BautagebuchSendeBautagesbericht')
-				, successCallback: internalSuccessCallback
-				, errorCallback: errorCallback
-				//, additionalQueryParameter:
-				//, timeout: 
-		};
 		if (item.hasFileName()) {
 			item.readFromFile(function(result){
 				item.set("unterschrift", JSON.parse(result));
-				sendObj.data = item.record;
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				DigiWebApp.JSONDatenuebertragungController.sendData(item.record, "bautagesbericht", M.I18N.l('BautagebuchSendeBautagesbericht'), internalSuccessCallback, errorCallback);
 			},function(err){
 				item.set("unterschrift", [{"lx":1,"ly":1,"mx":1,"my":1}]);
-				sendObj.data = item.record;
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				DigiWebApp.JSONDatenuebertragungController.sendData(item.record, "bautagesbericht", M.I18N.l('BautagebuchSendeBautagesbericht'), internalSuccessCallback, errorCallback);
 			});
 		} else {
 			item.set("unterschrift", [{"lx":1,"ly":1,"mx":1,"my":1}]);
-			sendObj.data = item.record;
-			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+			DigiWebApp.JSONDatenuebertragungController.sendData(item.record, "bautagesbericht", M.I18N.l('BautagebuchSendeBautagesbericht'), internalSuccessCallback, errorCallback);
 		}
 		
 	}
@@ -437,16 +385,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				successCallback();
 				
 			};
-			var sendObj = {
-					  data: data
-					, webservice: "zeitdaten"
-					, loaderText: M.I18N.l('BautagebuchSendeZeitbuchungen')
-					, successCallback: internalSuccessCallback
-					, errorCallback: errorCallback
-					//, additionalQueryParameter:
-					//, timeout: 
-			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+			DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('BautagebuchSendeZeitbuchungen'), internalSuccessCallback, errorCallback);
 		} else {
 			successCallback();
 		}
@@ -473,16 +412,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				successCallback();
 				
 			};
-			var sendObj = {
-					  data: data
-					, webservice: "bautagesbericht/materialbuchung"
-					, loaderText: M.I18N.l('BautagebuchSendeMaterialbuchungen')
-					, successCallback: internalSuccessCallback
-					, errorCallback: errorCallback
-					//, additionalQueryParameter:
-					//, timeout: 
-			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+			DigiWebApp.JSONDatenuebertragungController.sendData(data, "bautagesbericht/materialbuchung", M.I18N.l('BautagebuchSendeMaterialbuchungen'), internalSuccessCallback, errorCallback);
 		} else {
 			successCallback();
 		}
@@ -507,16 +437,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				successCallback();
 				
 			};
-			var sendObj = {
-					  data: data
-					, webservice: "bautagesbericht/notiz"
-					, loaderText: M.I18N.l('BautagebuchSendeNotizen')
-					, successCallback: internalSuccessCallback
-					, errorCallback: errorCallback
-					//, additionalQueryParameter:
-					//, timeout: 
-			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+			DigiWebApp.JSONDatenuebertragungController.sendData(data, "bautagesbericht/notiz", M.I18N.l('BautagebuchSendeNotizen'), internalSuccessCallback, errorCallback);
 		} else {
 			successCallback();
 		}
@@ -546,16 +467,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					successCallback();
 								
 				};
-				var sendObj = {
-						  data: data
-						, webservice: "medien"
-						, loaderText: M.I18N.l('BautagebuchSendeMedien')
-						, successCallback: internalSuccessCallback
-						, errorCallback: errorCallback
-						//, additionalQueryParameter:
-						//, timeout: 
-				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				DigiWebApp.JSONDatenuebertragungController.sendData(data, "medien", M.I18N.l('BautagebuchSendeMedien'), internalSuccessCallback, errorCallback);
 			} else {
 				// no files to send
 
@@ -641,16 +553,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 						
 		};
-		var sendObj = {
-				  data: item.record
-				, webservice: "bautagesbericht"
-				, loaderText: M.I18N.l('BautagebuchSendeBautagesbericht')
-				, successCallback: internalSuccessCallback
-				, errorCallback: errorCallback
-				//, additionalQueryParameter:
-				//, timeout: 
-		};
-		DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+		DigiWebApp.JSONDatenuebertragungController.sendData(item.record, "bautagesbericht", M.I18N.l('BautagebuchSendeBautagesbericht'), internalSuccessCallback, errorCallback);
 		
 	}
 

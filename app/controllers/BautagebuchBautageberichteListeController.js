@@ -10,7 +10,7 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 
 	  items: null
 	
-	, init: function(isFirstLoad) {
+	, init: function(isFirstLoad) {		
 		var that = this;
 		DigiWebApp.BautagebuchMainController.init(isFirstLoad);
 		if (isFirstLoad) {

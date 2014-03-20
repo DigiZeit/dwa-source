@@ -1108,30 +1108,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		            	DigiWebApp.NavigationController.toBookTimePageTransition();
 		            	//DigiWebApp.NavigationController.toDashboardPageFlipTransition(YES);
 		        	}
-//	                // empfange den konfigurierten Mitarbeiternamen
-//		    		var recieveObj = {
-//		    				  webservice: "mitarbeiter"
-//		    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-//		    				, successCallback: function(data){
-//					        		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-//				        		} else {
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
-//				        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
-//				        		}
-//				        	}
-//		    				, errorCallback: function(error) {
-//		    					console.error(error);
-//	    		        	}
-//		    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-//		    				//, timeout: 
-//		    				, geraeteIdOverride: true
-//		    				, modus: '1'
-//		    			};
-//		        	DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+	                // empfange den konfigurierten Mitarbeiternamen
+//		        	DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
+//		        		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+//		        		} else {
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
+//		        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
+//		        		}
+//		        	}, function(error) {
+//		        		console.error(error);
+//		        	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
         		}
             }
             , error: {

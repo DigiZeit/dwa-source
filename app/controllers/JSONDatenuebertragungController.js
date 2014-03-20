@@ -10,31 +10,18 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
 
-	, sendData: function(sendObj) {
-		if (!sendObj) {
-			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
-			return;
-		}
+	, sendData: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
+		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
+			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
 		}
 	}
 
-	, sendDataWithServer: function(sendObj) {
+	, sendDataWithServer: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
 		//var that = this;
-
-		var data = sendObj['data']
-		var webservice = sendObj['webservice']
-		var loaderText = sendObj['loaderText']
-		var successCallback = sendObj['successCallback']
-		var errorCallback = sendObj['errorCallback']
-		var additionalQueryParameter = sendObj['additionalQueryParameter']
-		var timeout = sendObj['timeout'] ? sendObj['timeout'] : 30000;
-		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
@@ -44,7 +31,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			  url: myURL
 			, method: 'POST'
             , data: JSON.stringify(data)
-            , timeout: timeout
+            , timeout: 60000
             , contentType: 'text/plain'
             , dataType: 'text' // oder 'json'
             , beforeSend: function(xhr) {
@@ -55,41 +42,32 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
                 );
             }
             , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
+                DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 successCallback(data, msg, xhr);
             }
             , onError: function(xhr, err) {// error callback of sendData
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                writeToLog(err);
                 errorCallback(xhr, err);
             }
         }).send();
 	}
 
-	, recieveData: function(recieveObj) {
-		if (!recieveObj) {
-			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
-			return;
-		}
+	, recieveData: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
+		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
+			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
 		}
 	}
 
-	, recieveDataWithServer: function(recieveObj) {
+	, recieveDataWithServer: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
 		
-		var webservice = recieveObj['webservice']
-		var loaderText = recieveObj['loaderText']
-		var successCallback = recieveObj['successCallback']
-		var errorCallback = recieveObj['errorCallback']
-		var additionalQueryParameter = recieveObj['additionalQueryParameter']
-		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : 30000;
-		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
-		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
+		var myModus = '0';
+		if (typeof(modus) !== "undefined") {
+			myModus = modus;
+		}
 
 		// hack um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
@@ -112,7 +90,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			, method: 'GET'
 			, sendNoCacheHeader: YES
 			, sendTimestamp: YES
-			, timeout: timeout
 			, isJSON: YES
 			, onSuccess: function(data, msg, request) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -215,16 +192,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 //			        });
 					errorCallback();
 				};
-				var sendObj = {
-					  data: data
-					, webservice: "zeitdaten"
-					, loaderText: M.I18N.l('sendDataMsg')
-					, successCallback: internalSuccessCallback
-					, errorCallback: internalErrorCallback
-					//, additionalQueryParameter:
-					//, timeout: 60000
-				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('sendDataMsg'), internalSuccessCallback, internalErrorCallback);
 			} else {
 				successCallback();
 			}
@@ -318,17 +286,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			successCallback();
 		};
 		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
-		var recieveObj = {
-			  webservice: "leistungen"
-			, loaderText: M.I18N.l('getActivitiesLoader')
-			, successCallback: internalSuccessCallback
-			, errorCallback: errorCallback
-			, additionalQueryParameter: ''
-			//, timeout: 
-			, geraeteIdOverride: false
-			, modus: '1'
-		};
-		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		DigiWebApp.JSONDatenuebertragungController.recieveData("leistungen", M.I18N.l('getActivitiesLoader'), internalSuccessCallback, errorCallback, '', false, '1');
 		
 	}
 

@@ -13,7 +13,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, CONSTVideoFiletype: "video/mp4;base64"
 	, CONSTTextFiletype: "text/plain"
 		
-	, CONSTApplicationQuota: 20*1024*1024
+	, CONSTApplicationQuota: 10*1024*1024
 	
 	, CONSTVibrateDuration: 100
 	
@@ -317,7 +317,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
-    , regSecEv: function(isFirstLoad) {
+    , regSecEv: function(isFirstLoad) {    	
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -428,6 +428,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (this.sizeMode === null || this.timeouthappened) {
 			switch(true) {
 				case(                          $(window).width()<320):
+			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w320") {
 						this.sizeMode = "w320";
 						return true;
@@ -436,6 +437,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=320  && $(window).width()<480):
+			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w480") {
 						this.sizeMode = "w480";
 						return true;
@@ -444,6 +446,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=480  && $(window).width()<640):
+			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w640") {
 						this.sizeMode = "w640";
 						return true;
@@ -452,6 +455,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=640  && $(window).width()<800):
+			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w800") {
 						this.sizeMode = "w800";
 						return true;
@@ -460,6 +464,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=800  && $(window).width()<1024):
+			    	//$("*").css("zoom", 1.04);
 					if (this.sizeMode !== "w1024") {
 						this.sizeMode = "w1024";
 						return true;
@@ -468,6 +473,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1024  && $(window).width()<1080):
+			    	//$("*").css("zoom", 1.04);
 					if (this.sizeMode !== "w1080") {
 						this.sizeMode = "w1080";
 						return true;
@@ -476,6 +482,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1080 && $(window).width()<1536):
+			    	//$("*").css("zoom", 1.05);
 					if (this.sizeMode !== "w1536") {
 						this.sizeMode = "w1536";
 						return true;
@@ -484,6 +491,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				default:
+			    	//$("*").css("zoom", 1.06);
 					if (this.sizeMode !== "w5000") {
 						this.sizeMode = "w5000";
 						return true;
@@ -1293,32 +1301,22 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
         		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
             		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate");
-            		var recieveObj = {
-          				  webservice: "mitarbeiter"
-          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-          				, successCallback: function(data){
-	        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-	        	    		}
-	        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-	        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-	        	    	}
-          				, errorCallback: function(error) {
-            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                			// Fehlermeldung
-                			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                                title: M.I18N.l('offlineWorkNotPossible')
-                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
-                			});
-            	    	}
-          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-          				//, timeout: 
-          				, geraeteIdOverride: true
-          				//, modus: 
-            		};
-            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+            		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
+        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+        	    		}
+        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
+        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+        	    	}, function(error) {
+        	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+            			// Fehlermeldung
+            			DigiWebApp.ApplicationController.nativeAlertDialogView({
+                            title: M.I18N.l('offlineWorkNotPossible')
+                          , message: M.I18N.l('offlineWorkNotPossibleMsg')
+            			});
+        	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
         		} else {
     	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
         		}
@@ -2560,39 +2558,29 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	) {
     		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
-    		var recieveObj = {
-    				  webservice: "mitarbeiter"
-    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-    				, successCallback: function(data){
-			    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-			    			//alert(data.mitarbeiter.length);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-				    		doUpdate();
-			    		} else {
-			    			// Fehlermeldung
-			    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-			                    title: M.I18N.l('offlineWorkNotPossible')
-			                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-			              });
-			    		}
-			    	}
-    				, errorCallback: function(error) {
-    		    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    	    			// Fehlermeldung
-    	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-    	                    title: M.I18N.l('offlineWorkNotPossible')
-    	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-    	    			});
-    		    	}
-    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-    				//, timeout: 
-    				, geraeteIdOverride: true
-    				//, modus: 
-      		};
-    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+    		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
+	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+	    			//alert(data.mitarbeiter.length);
+	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+		    		doUpdate();
+	    		} else {
+	    			// Fehlermeldung
+	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                    title: M.I18N.l('offlineWorkNotPossible')
+	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+	              });
+	    		}
+	    	}, function(error) {
+	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+    			// Fehlermeldung
+    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+                    title: M.I18N.l('offlineWorkNotPossible')
+                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+    			});
+	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
 
     	} else {
     		doUpdate();

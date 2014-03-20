@@ -63,7 +63,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         orderArray = _.compact(orderArray);
         // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+        if (DigiWebApp.SettingsController.featureAvailable('419')) {
         	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:!itemSelected});
         } else {
         	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
@@ -363,7 +363,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         positionArray = _.compact(positionArray);
         // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+        if (DigiWebApp.SettingsController.featureAvailable('419')) {
         	positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:!itemSelected});
         } else {
         	positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
@@ -657,7 +657,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
            });
        }
        // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('416')) {
+       if (DigiWebApp.SettingsController.featureAvailable('419')) {
     	   orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:YES});
        } else {
     	   orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
@@ -675,7 +675,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
            });
        }
        // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('416')) {
+       if (DigiWebApp.SettingsController.featureAvailable('419')) {
     	   positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:YES});
        } else {
     	   positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
