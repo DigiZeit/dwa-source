@@ -103,7 +103,7 @@ DigiWebApp.MediaFile = M.Model.create({
 		var internalSuccessCallback = function(el) {
 			el.del();
 			i = i + 1;
-			if (i === iMax) successCallback(); 
+			if (i === iMax && typeof(successCallback) === "function") successCallback(); 
 		};
 	    _.each(that.find(), function(el) {
 			if (el.hasFileName()) {

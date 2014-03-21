@@ -78,6 +78,18 @@ DigiWebApp.Position = M.Model.create({
     , orderId: M.Model.attr('String', {
         isRequired: NO
     })
+    
+     , positionBegin: M.Model.attr('String', {
+        isRequired: NO
+    })
+    
+     , positionEnd: M.Model.attr('String', {
+        isRequired: NO
+    })
+    
+     , appointments: M.Model.attr('String', {
+        isRequired: NO
+    })
 
     , deleteAll: function() {
         _.each(this.find(), function(el) {

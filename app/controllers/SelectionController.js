@@ -63,7 +63,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         orderArray = _.compact(orderArray);
         // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+        if (DigiWebApp.SettingsController.featureAvailable('416')) {
         	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:!itemSelected});
         } else {
         	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
@@ -363,7 +363,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         positionArray = _.compact(positionArray);
         // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+        if (DigiWebApp.SettingsController.featureAvailable('416')) {
         	positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:!itemSelected});
         } else {
         	positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
@@ -657,11 +657,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
            });
        }
        // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('419')) {
+       if (DigiWebApp.SettingsController.featureAvailable('416')) {
     	   orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:YES});
        } else {
     	   orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
        }
+       orderArray = _.compact(orderArray);
 
        /**
         * POSITIONS
@@ -675,11 +676,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
            });
        }
        // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('419')) {
+       if (DigiWebApp.SettingsController.featureAvailable('416')) {
     	   positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:YES});
        } else {
     	   positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
        }
+       positionArray = _.compact(positionArray);
 
        /**
         * ACTIVITIES
@@ -701,6 +703,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
        } else {
     	   activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
        }
+       activityArray = _.compact(activityArray);
 
         this.resetSelection();
         // set selection arrays to start content binding process

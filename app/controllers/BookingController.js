@@ -966,59 +966,30 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
 	        var bookings = DigiWebApp.Booking.find();
 	        if (bookings.length > 0) {
-	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-        		var d8Now = new D8();
-        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
-        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
-        		var inWinterzeit = !inSommerzeit;
 	            _.each(bookings, function(booking) {
+	            	
 	            	var startDate = booking.get('startDateString');
 	            	var startTime = booking.get('startTimeString');
-	            	if ((typeof(startDate) === "undefined" || !startDate || startDate === "")
+	            	if (((typeof(startDate) === "undefined" || !startDate || startDate === "")
 	            	|| (typeof(startTime) === "undefined" || !startTime || startTime === "")
-	            	) {
+	            	) && (booking.get('timeStampStart') !== "0")) {
 	            		// Buchung aus alter WebAppVersion
 	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
-//	                    if (tagDerSommerzeit.timeBetween(d8start) >= 0 && tagDerWinterzeit.timeBetween(d8start) <= 0) {
-//	                    	// Buchung war in Sommerzeit
-//	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
-//	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
-//	                    		d8start = d8start.addHours(-1);
-//	                    	}                   	
-//	                    } else {
-//	                    	// Buchung war in Winterzeit
-//	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
-//	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
-//	                    		d8start = d8start.addHours(1);
-//	                    	}
-//	                    }
 	                    startDate = d8start.format('dd.mm.yyyy');
 	                    startTime = d8start.format('HH:MM');
 	            	}
+	            	
 	            	var endeDate = booking.get('endeDateString');
 	            	var endeTime = booking.get('endeTimeString');
-	            	if ((typeof(endeDate) === "undefined" || !endeDate || endeDate === "")
+	            	if (((typeof(endeDate) === "undefined" || !endeDate || endeDate === "")
 	            	|| (typeof(endeTime) === "undefined" || !endeTime || endeTime === "")
-	            	) {
+	            	) && (booking.get('timeStampEnd') !== "0")) {
 	            		// Buchung aus alter WebAppVersion
 	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
-//	                    if (tagDerSommerzeit.timeBetween(d8ende) >= 0 && tagDerWinterzeit.timeBetween(d8ende) <= 0) {
-//	                    	// Buchung war in Sommerzeit
-//	                    	if (inWinterzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
-//	                    		// inzwischen haben wir jedoch Winterzeit: Buchung eine Stunde zurück schieben
-//	                    		d8ende = d8ende.addHours(-1);
-//	                    	}                   	
-//	                    } else {
-//	                    	// Buchung war in Winterzeit
-//	                    	if (inSommerzeit && (typeof(booking.get("timezone")) === "undefined" || booking.get("timezone") === "Europe/Berlin")) {
-//	                    		// inzwischen haben wir jedoch Sommerzeit: Buchung eine Stunde vor schieben
-//	                    		d8ende = d8ende.addHours(1);
-//	                    	}
-//	                    }
 	                    endeDate = d8ende.format('dd.mm.yyyy');
 	                    endeTime = d8ende.format('HH:MM');
 	            	}
+	            	
 	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
 	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + startDate + ',' + startTime + ',' + endeDate + ',' + endeTime);
 	            	} else {
@@ -1031,11 +1002,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                }
 	
 	            });
+	            
 	            // newest booking at the top => first sort than reverse order
 	            bookings = _.sortBy(bookings, function(booking) {
 	                return parseInt(booking.get('timeStampStart'));
 	            });
 	            this.set('timeData', bookings.reverse());
+	            
 	        } else {
 	            this.set('timeData', []);
 	        }
@@ -1697,7 +1670,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 				// weiter in der Verarbeitungskette
 				that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);
 			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(data, "medien/unterschrift", M.I18N.l('sendSignatures'), internalSuccessCallback, internalSuccessCallback);
+
+			var sendObj = {
+					  data: data
+					, webservice: "medien/unterschrift"
+					, loaderText: M.I18N.l('sendSignatures')
+					, successCallback: internalSuccessCallback
+					, errorCallback: internalSuccessCallback
+					//, additionalQueryParameter:
+					//, timeout: 
+			};
+			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 			
 		} else {
 			that.sendBookingsWithoutSignatures(DigiWebApp.Booking.find(), isClosingDay, doSync);

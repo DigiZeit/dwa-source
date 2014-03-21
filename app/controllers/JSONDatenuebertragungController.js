@@ -10,18 +10,31 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
 
-	, sendData: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
+	, sendData: function(sendObj) {
+		if (!sendObj) {
+			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
+			return;
+		}
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
+		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter);
+			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
 		}
 	}
 
-	, sendDataWithServer: function(data, webservice, loaderText, successCallback, errorCallback, additionalQueryParameter) {
+	, sendDataWithServer: function(sendObj) {
 		//var that = this;
+
+		var data = sendObj['data']
+		var webservice = sendObj['webservice']
+		var loaderText = sendObj['loaderText']
+		var successCallback = sendObj['successCallback']
+		var errorCallback = sendObj['errorCallback']
+		var additionalQueryParameter = sendObj['additionalQueryParameter']
+		var timeout = sendObj['timeout'] ? sendObj['timeout'] : 30000;
+		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
@@ -31,7 +44,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			  url: myURL
 			, method: 'POST'
             , data: JSON.stringify(data)
-            , timeout: 60000
+            , timeout: timeout
             , contentType: 'text/plain'
             , dataType: 'text' // oder 'json'
             , beforeSend: function(xhr) {
@@ -42,32 +55,41 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
                 );
             }
             , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-                DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
                 successCallback(data, msg, xhr);
             }
             , onError: function(xhr, err) {// error callback of sendData
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                writeToLog(err);
                 errorCallback(xhr, err);
             }
         }).send();
 	}
 
-	, recieveData: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
+	, recieveData: function(recieveObj) {
+		if (!recieveObj) {
+			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
+			return;
+		}
 		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
 		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
+		  		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
 		  	}, null);
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus);
+			DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(recieveObj);
 		}
 	}
 
-	, recieveDataWithServer: function(webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus) {
+	, recieveDataWithServer: function(recieveObj) {
 		
-		var myModus = '0';
-		if (typeof(modus) !== "undefined") {
-			myModus = modus;
-		}
+		var webservice = recieveObj['webservice']
+		var loaderText = recieveObj['loaderText']
+		var successCallback = recieveObj['successCallback']
+		var errorCallback = recieveObj['errorCallback']
+		var additionalQueryParameter = recieveObj['additionalQueryParameter']
+		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : 30000;
+		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
+		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
 
 		// hack um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
@@ -90,6 +112,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			, method: 'GET'
 			, sendNoCacheHeader: YES
 			, sendTimestamp: YES
+			, timeout: timeout
 			, isJSON: YES
 			, onSuccess: function(data, msg, request) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -192,7 +215,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 //			        });
 					errorCallback();
 				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(data, "zeitdaten", M.I18N.l('sendDataMsg'), internalSuccessCallback, internalErrorCallback);
+				var sendObj = {
+					  data: data
+					, webservice: "zeitdaten"
+					, loaderText: M.I18N.l('sendDataMsg')
+					, successCallback: internalSuccessCallback
+					, errorCallback: internalErrorCallback
+					//, additionalQueryParameter:
+					//, timeout: 60000
+				};
+				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 			} else {
 				successCallback();
 			}
@@ -286,7 +318,195 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			successCallback();
 		};
 		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
-		DigiWebApp.JSONDatenuebertragungController.recieveData("leistungen", M.I18N.l('getActivitiesLoader'), internalSuccessCallback, errorCallback, '', false, '1');
+		var recieveObj = {
+			  webservice: "leistungen"
+			, loaderText: M.I18N.l('getActivitiesLoader')
+			, successCallback: internalSuccessCallback
+			, errorCallback: errorCallback
+			, additionalQueryParameter: ''
+			//, timeout: 
+			, geraeteIdOverride: false
+			, modus: '1'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		
+	}
+
+	, empfangePositionen: function(successCallback, errorCallback) {
+
+		var internalSuccessCallback = function(data, msg, request) {
+			// verarbeite empfangene Daten
+			
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("empfangePositionen Status: " + request.status);
+			
+			// wurden Positionen empfangen?
+			if (typeof(data.positionen) === "undefined" && data.positionen !== null && data.positionen.length > 0) {
+				console.error("missing positionen");
+				return errorCallback();
+			}
+
+			var myLength = null;
+			try {
+				myLength = data.positionen.length;
+			} catch(e2) {
+				console.error(myLength);
+				//return errorCallback();
+			}
+
+			if (data.positionen === null) {
+				// hier könnte man - wenn gewünscht - verhindern, dass es gar keine Positionen gibt
+				return errorCallback();
+			} else {
+				// ist data.positionen auch wirklich ein Array?
+				var myLength = null;
+				try {
+					myLength = data.positionen.length;
+				} catch(e2) {
+					console.error(myLength);
+					return errorCallback();
+				}
+			}
+			
+			// data.positionen enthält also myLength Elemente
+
+			// alle "alten" Positionen löschen
+			DigiWebApp.Position.deleteAll();
+			
+			// die empfangenen Positionen mit Model ablegen
+			var errorHappened = false;
+			_.each(data.positionen, function(el) {
+				//console.log(el);
+				if (typeof(el.positionsId) === "undefined") {
+					console.error("missing positionsId");
+					errorHappened = true;
+					return;
+				} else if (typeof(el.positionsBezeichnung) === "undefined") {
+					console.error("missing positionsBezeichnung");
+					errorHappened = true;
+					return;
+				} else {
+					// el zur Liste hinzufügen
+	            	var posid = el.positionsId;
+	                var posname = el.positionsBezeichnung;
+	                var posstrasse = el.positionStrasse;
+	                var poshausnummer = el.positionHausnummer;
+	                var posplz = el.positionPlz;
+	                var posort = el.positionOrt;
+	                var posland = el.positionZusatz;
+	                var poscountrycode = el.positionLand;
+	                var posphone = el.positionTelefon;
+	                var posfax = el.positionFax;
+	                var posemail = el.positionEmail;
+	                var posansprechpartner = el.positionAnsprechpartner;
+	                var poskundenname = el.positionKundenname;
+	                var poslongitude = el.positionLongitude;
+	                var poslatitude = el.positionLatitude;
+	                var posdescription = el.positionBeschreibung;
+	                var posorderId = el.auftragsId;
+	                
+					var positionBegin = "";
+					if (el.auftragsBeginn) { positionBegin = el.auftragsBeginn; }
+					var positionEnd = "";
+					if (el.auftragsEnde && el.auftragsEnde !== "01.01.1900") { positionEnd = el.auftragsEnde; }
+
+	            	if (typeof(posid) === "object") { posid = ""; } 
+	            	if (typeof(posname) === "object") { posname = ""; } 
+	            	if (typeof(posstrasse) === "object") { posstrasse = ""; } 
+	            	if (typeof(poshausnummer) === "object") { poshausnummer = ""; } 
+	            	if (typeof(posplz) === "object") { posplz = ""; } 
+	            	if (typeof(posort) === "object") { posort = ""; } 
+	            	if (typeof(posland) === "object") { posland = ""; } 
+	            	if (typeof(poscountrycode) === "object") { poscountrycode = ""; } 
+	            	if (typeof(posphone) === "object") { posphone = ""; } 
+	            	if (typeof(posfax) === "object") { posfax = ""; } 
+	            	if (typeof(posemail) === "object") { posemail = ""; } 
+	            	if (typeof(posansprechpartner) === "object") { posansprechpartner = ""; } 
+	            	if (typeof(poskundenname) === "object") { poskundenname = ""; } 
+	            	if (typeof(poslongitude) === "object") { poslongitude = ""; } 
+	            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
+	            	if (typeof(posdescription) === "object") { posdescription = ""; } 
+	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
+	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
+
+	            	var positionItem = DigiWebApp.Position.createRecord({
+	                      id: posid
+	                    , name: posname
+	                    , strasse: posstrasse
+	                    , hausnummer: poshausnummer
+	                    , plz: posplz
+	                    , ort: posort
+	                    , land: posland
+	                    , countrycode: poscountrycode
+	                    , telefon: posphone
+	                    , fax: posfax
+	                    , email: posemail
+	                    , ansprechpartner: posansprechpartner
+	                    , kundenname: poskundenname
+	                    , longitude: poslongitude
+	                    , latitude: poslatitude
+	                    , description: posdescription
+	                    , orderId: posorderId
+						, positionBegin: positionBegin
+						, positionEnd: positionEnd
+	                });
+	            	
+					// sind Termine in der Position hinterlegt?
+					var terminList = [];
+					if (typeof(el.mitarbeiterTermine) !== "undefined" && el.mitarbeiterTermine !== null && el.mitarbeiterTermine.length > 0) {
+						
+						// Termine hinzufügen
+						_.each(el.mitarbeiterTermine, function(termin) {
+							var myDateVon = D8.create(termin.get("von"));
+							var myDateBis = D8.create(termin.get("bis"));
+							var myDateVonStr = myDateVon.format("dd.mm.yyyy");
+							var myDateBisStr = myDateBis.format("dd.mm.yyyy");
+							if (myDateVonStr === myDateBisStr) {
+								if (!_.contains(terminList, myDateVonStr)) {
+									terminList.push(myDateVonStr);
+								}
+							} else {
+								var myDateStr = myDateVon.format("dd.mm.yyyy");
+								var myDate = myDateVon;
+								// TODO: Schleife fixen
+								while (myDateBisStr !== myDateStr) {
+									myDateStr = myDate.format("dd.mm.yyyy");
+									if (!_.contains(terminList,myDateStr)) {
+										terminList.push(myDateStr);
+									}
+									myDate = myDate.addDays(1);
+								}
+							}
+						});
+						
+					}
+					positionItem.set("appointments",JSON.stringify(terminList));
+					
+					//Position speichern
+					positionItem.saveSorted();
+				}
+			});
+			
+			if (errorHappened) {
+				return errorCallback();
+			} else {
+				// weiter in der Verarbeitungskette
+				return successCallback();
+			}
+			
+		};
+
+		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
+		var recieveObj = {
+			  webservice: "positionen"
+			, loaderText: M.I18N.l('getPositionsLoader')
+			, successCallback: internalSuccessCallback
+			, errorCallback: errorCallback
+			, additionalQueryParameter: ''
+			//, timeout: 
+			, geraeteIdOverride: false
+			, modus: '1'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
 

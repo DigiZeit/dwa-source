@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 994755
+    , softwareVersion: 4782
 
 
     /**
@@ -234,21 +234,31 @@ DigiWebApp.RequestController = M.Controller.extend({
 //        // empfange den konfigurierten Mitarbeiternamen
 //    	var myFunc = function(obj) {
 //    		writeToLog("aktualisiere Mitarbeiter des Benutzers in authenticate");
-//    		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
-//	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-//	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-//	    		}
-//	    		DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
-//	    	}, function(error) {
-//	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-//    			// Fehlermeldung
-//    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                    title: M.I18N.l('offlineWorkNotPossible')
-//                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-//    			});
-//	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
+//    		var recieveObj = {
+//				  webservice: "mitarbeiter"
+//				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+//				, successCallback: function(data){
+//					if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+//						DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+//						DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+//						DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+//					}
+//					DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
+//				}
+//				, errorCallback: function(error) {
+//					DigiWebApp.ApplicationController.DigiLoaderView.hide();
+//					// Fehlermeldung
+//					DigiWebApp.ApplicationController.nativeAlertDialogView({
+//				        title: M.I18N.l('offlineWorkNotPossible')
+//				      , message: M.I18N.l('offlineWorkNotPossibleMsg')
+//					});
+//				}
+//				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+//				//, timeout: 
+//				, geraeteIdOverride: true
+//				//, modus: 
+//			};
+//    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 //    	};
 //
 //    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);

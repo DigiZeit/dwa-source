@@ -13,7 +13,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, CONSTVideoFiletype: "video/mp4;base64"
 	, CONSTTextFiletype: "text/plain"
 		
-	, CONSTApplicationQuota: 10*1024*1024
+	, CONSTApplicationQuota: 20*1024*1024
 	
 	, CONSTVibrateDuration: 100
 	
@@ -317,7 +317,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
-    , regSecEv: function(isFirstLoad) {    	
+    , regSecEv: function(isFirstLoad) {
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -428,7 +428,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (this.sizeMode === null || this.timeouthappened) {
 			switch(true) {
 				case(                          $(window).width()<320):
-			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w320") {
 						this.sizeMode = "w320";
 						return true;
@@ -437,7 +436,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=320  && $(window).width()<480):
-			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w480") {
 						this.sizeMode = "w480";
 						return true;
@@ -446,7 +444,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=480  && $(window).width()<640):
-			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w640") {
 						this.sizeMode = "w640";
 						return true;
@@ -455,7 +452,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=640  && $(window).width()<800):
-			    	//$("*").css("zoom", 1);
 					if (this.sizeMode !== "w800") {
 						this.sizeMode = "w800";
 						return true;
@@ -464,7 +460,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=800  && $(window).width()<1024):
-			    	//$("*").css("zoom", 1.04);
 					if (this.sizeMode !== "w1024") {
 						this.sizeMode = "w1024";
 						return true;
@@ -473,7 +468,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1024  && $(window).width()<1080):
-			    	//$("*").css("zoom", 1.04);
 					if (this.sizeMode !== "w1080") {
 						this.sizeMode = "w1080";
 						return true;
@@ -482,7 +476,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				case($(window).width()>=1080 && $(window).width()<1536):
-			    	//$("*").css("zoom", 1.05);
 					if (this.sizeMode !== "w1536") {
 						this.sizeMode = "w1536";
 						return true;
@@ -491,7 +484,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					}
 					break;
 				default:
-			    	//$("*").css("zoom", 1.06);
 					if (this.sizeMode !== "w5000") {
 						this.sizeMode = "w5000";
 						return true;
@@ -1301,22 +1293,32 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
         		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
             		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate");
-            		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
-        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-        	    		}
-        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-        	    	}, function(error) {
-        	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-            			// Fehlermeldung
-            			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                            title: M.I18N.l('offlineWorkNotPossible')
-                          , message: M.I18N.l('offlineWorkNotPossibleMsg')
-            			});
-        	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
+            		var recieveObj = {
+          				  webservice: "mitarbeiter"
+          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+          				, successCallback: function(data){
+	        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+	        	    		}
+	        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
+	        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+	        	    	}
+          				, errorCallback: function(error) {
+            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                			// Fehlermeldung
+                			DigiWebApp.ApplicationController.nativeAlertDialogView({
+                                title: M.I18N.l('offlineWorkNotPossible')
+                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
+                			});
+            	    	}
+          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+          				//, timeout: 
+          				, geraeteIdOverride: true
+          				//, modus: 
+            		};
+            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
         		} else {
     	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
         		}
@@ -1461,150 +1463,165 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
     , getPositionsFromRemote: function() {
-        DigiWebApp.RequestController.getPositions({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-                    this.getPositionsFromRemoteSuccess(data, msg, xhr);
-                    this.getActivitiesFromRemote();
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-            		console.error("getPositionsFromRemote-error");
-            		this.proceedWithLocalData("getPositionsFromRemote");
-                }
-            }
-        });
+    	var that = this;
+
+    	that.setCallbackStatus('position', 'local', NO);
+    	DigiWebApp.JSONDatenuebertragungController.empfangePositionen(
+    			  function() {
+    				that.setCallbackStatus('position', 'remote', YES);
+    		    	that.setCallbackStatus('position', 'local', (DigiWebApp.Position.find().length > 0));
+    				that.getActivitiesFromRemote();
+    			  }
+    			, function() {
+  				  	that.setCallbackStatus('position', 'remote', NO);
+    				that.proceedWithLocalData("getPositionsFromRemote");
+    			}
+    	);
+
+//    	DigiWebApp.RequestController.getPositions({
+//              success: {
+//                  target: this
+//                , action: function(data, msg, xhr) {
+//                    this.getPositionsFromRemoteSuccess(data, msg, xhr);
+//                    this.getActivitiesFromRemote();
+//                }
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//            		console.error("getPositionsFromRemote-error");
+//            		this.proceedWithLocalData("getPositionsFromRemote");
+//                }
+//            }
+//        });
     }
 
-    /**
-     * The success callback for getPositionsFromRemote.
-     * If correct data is in response the following is done:
-     * 1) the callback status for 'position' and 'remote' is set (means positions are correctly returned by server)
-     * 2) the local available positions are deleted, the corresponding callback status is set
-     * 3) positions, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
-    , getPositionsFromRemoteSuccess: function(data, msg, xhr) {
-
-   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-    		data['return'] = data['ns:return'];
-    		try {
-    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-    			var myns = this.myns;
-    			 _.each(data['return'], function(el) {
-
-    				 el.positionsId = el[myns + ':positionsId'];
-    				 el.positionsBezeichnung = el[myns + ':positionsBezeichnung'];
-    				 el.auftragsId = el[myns + ':auftragsId'];
-
-    				 el.positionHausnummer = el[myns + ':positionHausnummer'];
-    				 el.positionPlz = el[myns + ':positionPlz'];
-    				 el.positionOrt = el[myns + ':positionOrt'];
-    				 el.positionLand = el[myns + ':positionZusatz'];
-    				 el.positionLongitude = el[myns + ':positionLongitude'];
-    				 el.positionLatitude = el[myns + ':positionLatitude'];
-    				 el.positionBeschreibung = el[myns + ':positionBeschreibung'];
-    				 el.positionTelefon = el[myns + ':positionTelefon'];
-
-    			 });
-    		} catch(e) {
-    		}
-    	}
-   		 
-    	if(data['return']) {
-            this.setCallbackStatus('position', 'remote', YES);
-
-            // Clear positions from storage
-            DigiWebApp.Position.deleteAll();
-            this.setCallbackStatus('position', 'local', NO);
-
-            var mIdArray = [];
-            var rec = null;
-
-
-            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-                data['return'] = [data['return']];
-            }
-
-            // create a record for each position returned from the server and save it
-            _.each(data['return'], function(el) {
-            	            	
-            	var posid = el.positionsId;
-                var posname = el.positionsBezeichnung;
-                var posstrasse = el.positionStrasse;
-                var poshausnummer = el.positionHausnummer;
-                var posplz = el.positionPlz;
-                var posort = el.positionOrt;
-                var posland = el.positionZusatz;
-                var poscountrycode = el.positionLand;
-                var posphone = el.positionTelefon;
-                var posfax = el.positionFax;
-                var posemail = el.positionEmail;
-                var posansprechpartner = el.positionAnsprechpartner;
-                var poskundenname = el.positionKundenname;
-                var poslongitude = el.positionLongitude;
-                var poslatitude = el.positionLatitude;
-                var posdescription = el.positionBeschreibung;
-                var posorderId = el.auftragsId;
-                
-            	if (typeof(posid) === "object") { posid = ""; } 
-            	if (typeof(posname) === "object") { posname = ""; } 
-            	if (typeof(posstrasse) === "object") { posstrasse = ""; } 
-            	if (typeof(poshausnummer) === "object") { poshausnummer = ""; } 
-            	if (typeof(posplz) === "object") { posplz = ""; } 
-            	if (typeof(posort) === "object") { posort = ""; } 
-            	if (typeof(posland) === "object") { posland = ""; } 
-            	if (typeof(poscountrycode) === "object") { poscountrycode = ""; } 
-            	if (typeof(posphone) === "object") { posphone = ""; } 
-            	if (typeof(posfax) === "object") { posfax = ""; } 
-            	if (typeof(posemail) === "object") { posemail = ""; } 
-            	if (typeof(posansprechpartner) === "object") { posansprechpartner = ""; } 
-            	if (typeof(poskundenname) === "object") { poskundenname = ""; } 
-            	if (typeof(poslongitude) === "object") { poslongitude = ""; } 
-            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
-            	if (typeof(posdescription) === "object") { posdescription = ""; } 
-            	if (typeof(posorderId) === "object") { posorderId = ""; } 
-
-        		rec = DigiWebApp.Position.createRecord({
-                      id: posid
-                    , name: posname
-                    , strasse: posstrasse
-                    , hausnummer: poshausnummer
-                    , plz: posplz
-                    , ort: posort
-                    , land: posland
-                    , countrycode: poscountrycode
-                    , telefon: posphone
-                    , fax: posfax
-                    , email: posemail
-                    , ansprechpartner: posansprechpartner
-                    , kundenname: poskundenname
-                    , longitude: poslongitude
-                    , latitude: poslatitude
-                    , description: posdescription
-                    , orderId: posorderId
-                });
-        		
-                try {
-                    rec.save();
-                    mIdArray.push(rec.m_id);
-                } catch(e) {
-                	console.error("ERROR in getPositionsFromRemoteSuccess: " + e);
-                }
-                
-            });
-
-            localStorage.setItem(this.storagePrefix + '_positionKeys', JSON.stringify(mIdArray));
-
-            this.setCallbackStatus('position', 'local', YES);
-        }
-    }
+//    /**
+//     * The success callback for getPositionsFromRemote.
+//     * If correct data is in response the following is done:
+//     * 1) the callback status for 'position' and 'remote' is set (means positions are correctly returned by server)
+//     * 2) the local available positions are deleted, the corresponding callback status is set
+//     * 3) positions, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+//     *
+//     * @param data The returned data of the server in JSON, means JS object.
+//     * @param msg
+//     * @param xhr The XMLHTTPRequest object.
+//     */
+//    , getPositionsFromRemoteSuccess: function(data, msg, xhr) {
+//
+//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
+//    		data['return'] = data['ns:return'];
+//    		try {
+//    			//myns = data['return'][0]['xsi:type'].split(":")[0];
+//    			var myns = this.myns;
+//    			 _.each(data['return'], function(el) {
+//
+//    				 el.positionsId = el[myns + ':positionsId'];
+//    				 el.positionsBezeichnung = el[myns + ':positionsBezeichnung'];
+//    				 el.auftragsId = el[myns + ':auftragsId'];
+//
+//    				 el.positionHausnummer = el[myns + ':positionHausnummer'];
+//    				 el.positionPlz = el[myns + ':positionPlz'];
+//    				 el.positionOrt = el[myns + ':positionOrt'];
+//    				 el.positionLand = el[myns + ':positionZusatz'];
+//    				 el.positionLongitude = el[myns + ':positionLongitude'];
+//    				 el.positionLatitude = el[myns + ':positionLatitude'];
+//    				 el.positionBeschreibung = el[myns + ':positionBeschreibung'];
+//    				 el.positionTelefon = el[myns + ':positionTelefon'];
+//
+//    			 });
+//    		} catch(e) {
+//    		}
+//    	}
+//   		 
+//    	if(data['return']) {
+//            this.setCallbackStatus('position', 'remote', YES);
+//
+//            // Clear positions from storage
+//            DigiWebApp.Position.deleteAll();
+//            this.setCallbackStatus('position', 'local', NO);
+//
+//            var mIdArray = [];
+//            var rec = null;
+//
+//
+//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
+//                data['return'] = [data['return']];
+//            }
+//
+//            // create a record for each position returned from the server and save it
+//            _.each(data['return'], function(el) {
+//            	            	
+//            	var posid = el.positionsId;
+//                var posname = el.positionsBezeichnung;
+//                var posstrasse = el.positionStrasse;
+//                var poshausnummer = el.positionHausnummer;
+//                var posplz = el.positionPlz;
+//                var posort = el.positionOrt;
+//                var posland = el.positionZusatz;
+//                var poscountrycode = el.positionLand;
+//                var posphone = el.positionTelefon;
+//                var posfax = el.positionFax;
+//                var posemail = el.positionEmail;
+//                var posansprechpartner = el.positionAnsprechpartner;
+//                var poskundenname = el.positionKundenname;
+//                var poslongitude = el.positionLongitude;
+//                var poslatitude = el.positionLatitude;
+//                var posdescription = el.positionBeschreibung;
+//                var posorderId = el.auftragsId;
+//                
+//            	if (typeof(posid) === "object") { posid = ""; } 
+//            	if (typeof(posname) === "object") { posname = ""; } 
+//            	if (typeof(posstrasse) === "object") { posstrasse = ""; } 
+//            	if (typeof(poshausnummer) === "object") { poshausnummer = ""; } 
+//            	if (typeof(posplz) === "object") { posplz = ""; } 
+//            	if (typeof(posort) === "object") { posort = ""; } 
+//            	if (typeof(posland) === "object") { posland = ""; } 
+//            	if (typeof(poscountrycode) === "object") { poscountrycode = ""; } 
+//            	if (typeof(posphone) === "object") { posphone = ""; } 
+//            	if (typeof(posfax) === "object") { posfax = ""; } 
+//            	if (typeof(posemail) === "object") { posemail = ""; } 
+//            	if (typeof(posansprechpartner) === "object") { posansprechpartner = ""; } 
+//            	if (typeof(poskundenname) === "object") { poskundenname = ""; } 
+//            	if (typeof(poslongitude) === "object") { poslongitude = ""; } 
+//            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
+//            	if (typeof(posdescription) === "object") { posdescription = ""; } 
+//            	if (typeof(posorderId) === "object") { posorderId = ""; } 
+//
+//        		rec = DigiWebApp.Position.createRecord({
+//                      id: posid
+//                    , name: posname
+//                    , strasse: posstrasse
+//                    , hausnummer: poshausnummer
+//                    , plz: posplz
+//                    , ort: posort
+//                    , land: posland
+//                    , countrycode: poscountrycode
+//                    , telefon: posphone
+//                    , fax: posfax
+//                    , email: posemail
+//                    , ansprechpartner: posansprechpartner
+//                    , kundenname: poskundenname
+//                    , longitude: poslongitude
+//                    , latitude: poslatitude
+//                    , description: posdescription
+//                    , orderId: posorderId
+//                });
+//        		
+//                try {
+//                    rec.save();
+//                    mIdArray.push(rec.m_id);
+//                } catch(e) {
+//                	console.error("ERROR in getPositionsFromRemoteSuccess: " + e);
+//                }
+//                
+//            });
+//
+//            localStorage.setItem(this.storagePrefix + '_positionKeys', JSON.stringify(mIdArray));
+//
+//            this.setCallbackStatus('position', 'local', YES);
+//        }
+//    }
 
 
     /**
@@ -2544,7 +2561,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //				});
 //        	}
 	    	
-	    	// mit dem übergebenen callback weitermachen
+        	// von modelVersion 2 auf 3
+//        	var allBookings_version1 = _.filter(DigiWebApp.Booking.find(), function(obj){return obj.get("modelVersion") === "1";});
+//        	if (allBookings_version1.length > 0) {
+//		    	_.each(allBookings_version1, function(booking) {
+//		    		
+//		    		// TODO: modelVersion 1 auf 2
+//					
+//		        	//booking.set("modelVersion", "2");
+//					//booking.save();
+//		        	//writeToLog("Buchung auf modelVersion 2 aktualisiert: " + JSON.stringify(booking));
+//				});
+//        	}
+
+        	// mit dem übergebenen callback weitermachen
 	    	callback();
 	    	
     	}
@@ -2558,29 +2588,39 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	) {
     		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
-    		DigiWebApp.JSONDatenuebertragungController.recieveData("mitarbeiter",M.I18N.l('BautagebuchLadeMitarbeiter'),function(data){
-	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-	    			//alert(data.mitarbeiter.length);
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-		    		doUpdate();
-	    		} else {
-	    			// Fehlermeldung
-	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                    title: M.I18N.l('offlineWorkNotPossible')
-	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-	              });
-	    		}
-	    	}, function(error) {
-	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    			// Fehlermeldung
-    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                    title: M.I18N.l('offlineWorkNotPossible')
-                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-    			});
-	    	}, "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId"), true);
+    		var recieveObj = {
+    				  webservice: "mitarbeiter"
+    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+    				, successCallback: function(data){
+			    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+			    			//alert(data.mitarbeiter.length);
+			    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+			    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+			    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+				    		doUpdate();
+			    		} else {
+			    			// Fehlermeldung
+			    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+			                    title: M.I18N.l('offlineWorkNotPossible')
+			                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+			              });
+			    		}
+			    	}
+    				, errorCallback: function(error) {
+    		    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+    	    			// Fehlermeldung
+    	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+    	                    title: M.I18N.l('offlineWorkNotPossible')
+    	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+    	    			});
+    		    	}
+    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+    				//, timeout: 
+    				, geraeteIdOverride: true
+    				//, modus: 
+      		};
+    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 
     	} else {
     		doUpdate();

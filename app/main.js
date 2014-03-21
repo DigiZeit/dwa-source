@@ -482,7 +482,7 @@ if (searchForFeature(412)) { // Bautagebuch
 	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
-if ( (searchForFeature(416)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
+if ( (searchForFeature(416) || searchForFeature(424)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
 	DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp = DigiWebApp.BookingPageWithIconsScholpp;
 }
 
@@ -493,6 +493,10 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 if (searchForFeature(422)) { // gefahrene Kilometer
 	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
 	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
+}
+
+if (searchForFeature(423)) { // chronologische Auftragsliste
+	DigiWebAppOrdinaryDesign.chronologischeAuftragslistePage = DigiWebApp.ChronologischeAuftragslistePage;
 }
 
 var restartOnBlackBerry = true;

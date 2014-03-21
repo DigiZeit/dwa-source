@@ -1,1 +1,0 @@
-/home/fedora/workspace/DIGI-WebApp-Source kersten branch/build_scripts/espresso_build_kersten_debug.sh

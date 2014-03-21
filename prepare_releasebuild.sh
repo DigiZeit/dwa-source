@@ -1,1 +1,0 @@
-/home/fedora/workspace/DIGI-WebApp-Source/build_scripts/prepare_releasebuild.sh
