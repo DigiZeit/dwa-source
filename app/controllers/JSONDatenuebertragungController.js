@@ -456,8 +456,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						
 						// Termine hinzufügen
 						_.each(el.mitarbeiterTermine, function(termin) {
-							var myDateVon = D8.create(termin.get("von"));
-							var myDateBis = D8.create(termin.get("bis"));
+							var myDateVon = D8.create(termin.von);
+							var myDateBis = D8.create(termin.bis);
 							var myDateVonStr = myDateVon.format("dd.mm.yyyy");
 							var myDateBisStr = myDateBis.format("dd.mm.yyyy");
 							if (myDateVonStr === myDateBisStr) {
