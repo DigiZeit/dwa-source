@@ -330,7 +330,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
          */
         var orderArray = _.map(orders, function(order) {
         	if (order) {
-	            if(order.get('id') == orderId) {
+	            if(parseInt(order.get('id')) == parseInt(orderId)) {
 	                return { label: order.get('name'), value: order.get('id'), isSelected: YES };
 	            } else {
 	                return { label: order.get('name'), value: order.get('id') };
@@ -354,7 +354,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
          */
         var positionArray = _.map(this.get('positions'), function(pos) {
         	if (pos) {
-                if (pos.value === positionId) {
+                if (parseInt(pos.value) === parseInt(positionId)) {
                     return { label: pos.label, value: pos.value, isSelected: YES };
                 } else {
                 	return { label: pos.label, value: pos.value };
@@ -395,7 +395,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		return null;
         	} else {
         		var obj = null;
-        		if (act.value == activityId) {
+        		if (parseInt(act.value) == parseInt(activityId)) {
         			obj = { label: act.label, value: act.value, isSelected: YES };
         			//console.log("ACTIVITY " + i + " = " + act.get('name') + " in setSelectionByCurrentBooking isSelected");
         			itemSelected = YES;
@@ -504,7 +504,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var i = 0;
         positions = _.map(positions, function(pos) {
         	if (pos) {
-	            if(pos.get('orderId') === orderId) {
+	            if(parseInt(pos.get('orderId')) === parseInt(orderId)) {
 	                var obj = { label: pos.get('name'), value: pos.get('id') };
 	                if(i === 0) {
 	                    obj.isSelected = YES;
@@ -593,7 +593,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
-				if ( act.get('id') === currentBookingActivityId ) { currentBookingActivitySelectable = true; }
+				if ( parseInt(act.get('id')) === parseInt(currentBookingActivityId) ) { currentBookingActivitySelectable = true; }
 			}
 		});
 		

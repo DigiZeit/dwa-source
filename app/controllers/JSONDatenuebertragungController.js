@@ -426,7 +426,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
 	            	if (typeof(posdescription) === "object") { posdescription = ""; } 
 	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
-	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
 
 	            	var positionItem = DigiWebApp.Position.createRecord({
 	                      id: posid
