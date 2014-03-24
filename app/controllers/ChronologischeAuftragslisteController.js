@@ -66,6 +66,10 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 
 			}
 		});
+		
+		itemsToShow = _.sortBy(itemsToShow, function(el){
+			return D8.create(el.get("positionBegin")).getTimestamp();
+		});
 		that.set("items", itemsToShow);
 	}
 

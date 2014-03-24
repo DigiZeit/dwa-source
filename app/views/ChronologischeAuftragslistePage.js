@@ -46,7 +46,7 @@ DigiWebApp.ChronologischeAuftragslistePage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('password')
+              value: M.I18N.l('chronologischeAuftragsliste')
             , anchorLocation: M.CENTER
         })
         , anchorLocation: M.TOP

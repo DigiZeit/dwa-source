@@ -607,4 +607,12 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('studieChecklistePage', M.TRANSITION.NONE, NO);
     }
 
+    , toChronologischeAuftragslistePage: function() {
+    	DigiWebApp.NavigationController.switchToPage('chronologischeAuftragslistePage', M.TRANSITION.SLIDEUP, NO);
+    }
+
+    , backToChronologischeAuftragslistePage: function() {
+    	DigiWebApp.NavigationController.switchToPage('chronologischeAuftragslistePage', M.TRANSITION.SLIDEUP, YES);
+    }
+
 });
