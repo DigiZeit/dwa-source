@@ -172,6 +172,9 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		    	}
 		    });
 		    positionenArray = _.compact(positionenArray);
+		    if (positionenArray.length == 1) {
+		    	positionenArray[0].isSelected = YES;
+		    }
 			DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionenList", positionenArray);
 		}
 	}
