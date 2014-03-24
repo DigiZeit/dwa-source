@@ -449,6 +449,7 @@ M.I18N.de_de = {
 	, chronologischeAuftragsliste: "Chronol. Liste"
 	, positionBegin: "Beginn"
 	, positionEnd: "Ende"
-	, terminHeute: "Als Termin eingeplant!"
+	, terminEingeplant: "Mit Terminen geplant!"
+	, terminHeute: "Für Heute eingeplant!"
 
 };
