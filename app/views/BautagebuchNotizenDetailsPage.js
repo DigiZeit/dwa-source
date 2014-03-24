@@ -39,6 +39,9 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionId", positionenArray[0].value);
 			    	DigiWebApp.BautagebuchNotizenDetailsController.set("positionName", positionenArray[0].label);
 			    }
+			    if (positionenArray.length == 1) {
+			    	positionenArray[0].isSelected = YES;
+			    }
 				DigiWebApp.BautagebuchNotizenDetailsController.set("positionenList", positionenArray);
 				
 				DigiWebApp.BautagebuchNotizenDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchNotizenDetailsController.positionId);

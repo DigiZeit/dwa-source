@@ -40,7 +40,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	DigiWebApp.BautagebuchMaterialienDetailsController.set("positionId", positionenArray[0].value);
 				    	DigiWebApp.BautagebuchMaterialienDetailsController.set("positionName", positionenArray[0].label);
 				    }
-				    //console.log(positionenArray);
+				    if (positionenArray.length == 1) {
+				    	positionenArray[0].isSelected = YES;
+				    }
 					DigiWebApp.BautagebuchMaterialienDetailsController.set("positionenList", positionenArray);
 					
 					DigiWebApp.BautagebuchMaterialienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMaterialienDetailsController.positionId);

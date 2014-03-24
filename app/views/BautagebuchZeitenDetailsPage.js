@@ -39,6 +39,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", positionenArray[0].value);
 			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", positionenArray[0].label);
 			    }
+			    if (positionenArray.length == 1) {
+			    	positionenArray[0].isSelected = YES;
+			    }
 				DigiWebApp.BautagebuchZeitenDetailsController.set("positionenList", positionenArray);
 				
 				DigiWebApp.BautagebuchZeitenDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchZeitenDetailsController.positionId);
