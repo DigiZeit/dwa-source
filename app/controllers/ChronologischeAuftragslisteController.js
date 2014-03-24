@@ -24,7 +24,7 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 			for (var x=0; x <= tageZuvor + tageDanach; x++) {
 				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
 				var todayEnd = todayStart.addDays(1).addMilliseconds(-1);
-				var todayStr = today.format("dd.mm.yyyy");
+				var todayStr = todayStart.format("dd.mm.yyyy");
 				
 				// läuft der Auftrag bereits?
 				var posBeginnStr = pos.get("positionBegin");
