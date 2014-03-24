@@ -79,15 +79,15 @@ DigiWebApp.Position = M.Model.create({
         isRequired: NO
     })
     
-     , positionBegin: M.Model.attr('String', {
+    , positionBegin: M.Model.attr('String', {
         isRequired: NO
     })
     
-     , positionEnd: M.Model.attr('String', {
+    , positionEnd: M.Model.attr('String', {
         isRequired: NO
     })
     
-     , appointments: M.Model.attr('String', {
+    , appointments: M.Model.attr('String', {
         isRequired: NO
     })
 

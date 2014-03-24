@@ -37,14 +37,26 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 	, auftragsBezeichnung: M.LabelView.design({
         cssClass: 'normal unselectable'
       , computedValue: {
-            valuePattern: '<%= auftragsBezeichnung %>'
+            valuePattern: '<%= id %>'
           , operation: function(v) {
-				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
-					return M.I18N.l('order') + ': ' + v;
+				var auftragsBezeichnung = "";
+				var position = _.find(DigiWebApp.Position.find(), function(el) {
+					return parseInt(el.get("id")) === parseInt(v)
+				});
+				if (position) {
+					var auftrag = _.find(DigiWebApp.Order.find(), function(el) {
+						return parseInt(el.get("id")) === parseInt(position.get("orderId"))
+					});
+					if (auftrag) {
+						auftragsBezeichnung = auftrag.get("name");
+					}
+				}
+				if (auftragsBezeichnung !== "" && typeof(auftragsBezeichnung) !== "undefined" && auftragsBezeichnung !== "undefined" && auftragsBezeichnung !== "null" && auftragsBezeichnung !== null) {
+					return M.I18N.l('position') + ': ' + auftragsBezeichnung;
 				} else {
 					return '';
 				}
-              }
+          }
       }
 	})
 
@@ -52,14 +64,14 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 	, positionsBezeichnung: M.LabelView.design({
         cssClass: 'normal unselectable'
       , computedValue: {
-            valuePattern: '<%= positionsBezeichnung %>'
+            valuePattern: '<%= name %>'
           , operation: function(v) {
 				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
 					return M.I18N.l('position') + ': ' + v;
 				} else {
 					return '';
 				}
-              }
+          }
       }
 	})
       
