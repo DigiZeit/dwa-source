@@ -35,7 +35,7 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 
 	//	  auftragsBezeichnung: "6657Heim"
 	, auftragsBezeichnung: M.LabelView.design({
-        cssClass: 'normal unselectable'
+        cssClass: 'bold unselectable'
       , computedValue: {
             valuePattern: '<%= id %>'
           , operation: function(v) {
@@ -62,7 +62,7 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 
 	//	  positionsBezeichnung: "6657Heim"
 	, positionsBezeichnung: M.LabelView.design({
-        cssClass: 'normal unselectable'
+        cssClass: 'bold unselectable'
       , computedValue: {
             valuePattern: '<%= name %>'
           , operation: function(v) {
