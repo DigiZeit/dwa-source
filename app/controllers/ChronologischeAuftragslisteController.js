@@ -17,7 +17,54 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 		}
 		var itemsToShow = [];
 		_.each(DigiWebApp.Position.find(), function(pos) {
-			// TODO: Termin am heitigen Tag?
+			
+			var tageZuvor = 2;
+			var tageDanach = 2;
+			var myDate = D8.create().addDays(0 - tageZuvor);
+			for (x=0; x <= tageZuvor + tageDanach; x++) {
+				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
+				var todayEnd = todayStart.addDays(1).addMilliseconds(-1);
+				var todayStr = today.format("dd.mm.yyyy");
+				
+				// läuft der Auftrag bereits?
+				var posBeginnStr = pos.get("positionBegin");
+				var posBeginn = null;
+				if (posBeginnStr !== "") {
+					posBeginn = D8.create(posBeginnStr);
+				}
+				// Wurde der Auftrag bereits abgeschlossen?
+				var posEndeStr = pos.get("positionEnd");
+				var posEnde = null;
+				if (posEndeStr !== "") {
+					posEnde = D8.create(posEndeStr);
+				}
+	
+				// liegt heute im Zeitraum des Auftrags?
+				var positionHeuteRelevant = NO; 
+				if (
+					   ((posBeginn.getTimestamp() < todayStart.getTimestamp()) && !posEnde)
+					|| ((posBeginn.getTimestamp() < todayStart.getTimestamp()) && (todayEnd.getTimestamp() < posEnde.getTimestamp()))
+				) {
+					positionHeuteRelevant = YES;
+				}
+				
+				// Gibt es Termine?
+				var termineList = JSON.parse(pos.get("appointments"));
+				if (termineList.length !== 0) {
+					var terminHeute = (typeof(_.find(termineList, function(t){ return t == todayStr; })) !== "undefined");
+					if (!terminHeute) {
+						// Der Auftrag läuft heute, aber der Mitarbeiter hat heute keinen Termin für diesen Auftrag
+						positionHeuteRelevant = NO;
+					}
+				}
+				
+				if (positionHeuteRelevant) {
+					itemsToShow.push(pos);
+				}
+				
+				var myDate = D8.create().addDays(1);
+
+			}
 		});
 		that.set("items", itemsToShow);
 	}
