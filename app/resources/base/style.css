@@ -61,7 +61,9 @@ textarea.ui-input-text {
 }
 */
 
-.ui-header .ui-btn-left {
+  .ui-header .ui-btn-left
+, .ui-header .ui-btn-right
+{
 	margin-top: 3px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
 }
 
