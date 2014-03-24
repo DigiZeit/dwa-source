@@ -150,7 +150,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    		console.log("UNDEFINED activity");
 		    	} else {
 	    			var obj = { label: act.get('name'), value: act.get('id'), isSelected: NO };
-	    			if (that.activityId === obj.value) {
+	    			if (parseInt(that.activityId) === parseInt(obj.value)) {
 	    				obj.isSelected = YES;
 	    				itemSelected = YES;
 	    			}
