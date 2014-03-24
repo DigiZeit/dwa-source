@@ -1451,3 +1451,8 @@ li.ui-li {
     margin-left: 25px;
     color: #000000;	
 }
+.chronologischeAuftragslistePage .red {
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF0000;	
+}
