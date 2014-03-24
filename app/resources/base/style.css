@@ -1438,3 +1438,10 @@ li.ui-li {
     margin-left: auto;
     margin-right: auto;
 }
+
+.chronologischeAuftragslistePage .normal {
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 25px;
+    color: #000000;	
+}

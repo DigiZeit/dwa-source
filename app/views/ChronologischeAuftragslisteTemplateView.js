@@ -52,7 +52,7 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 					}
 				}
 				if (auftragsBezeichnung !== "" && typeof(auftragsBezeichnung) !== "undefined" && auftragsBezeichnung !== "undefined" && auftragsBezeichnung !== "null" && auftragsBezeichnung !== null) {
-					return M.I18N.l('position') + ': ' + auftragsBezeichnung;
+					return M.I18N.l('order') + ': ' + auftragsBezeichnung;
 				} else {
 					return '';
 				}
