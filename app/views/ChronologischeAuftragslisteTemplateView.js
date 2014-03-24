@@ -10,7 +10,7 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'auftragsBezeichnung positionsBezeichnung'
+    , childViews: 'auftragsBezeichnung positionsBezeichnung positionBegin positionEnd'
 
     , events: {
         tap: {
@@ -75,6 +75,34 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
       }
 	})
       
+	, positionBegin: M.LabelView.design({
+        cssClass: 'normal unselectable'
+      , computedValue: {
+            valuePattern: '<%= positionBegin %>'
+          , operation: function(v) {
+				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
+					return M.I18N.l('positionBegin') + ': ' + v;
+				} else {
+					return '';
+				}
+          }
+      }
+	})
+
+	, positionEnd: M.LabelView.design({
+        cssClass: 'normal unselectable'
+      , computedValue: {
+            valuePattern: '<%= positionEnd %>'
+          , operation: function(v) {
+				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
+					return M.I18N.l('positionEnd') + ': ' + v;
+				} else {
+					return '';
+				}
+          }
+      }
+	})
+
 });
 
 

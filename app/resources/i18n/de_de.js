@@ -447,5 +447,7 @@ M.I18N.de_de = {
 		
 	, chronologischeAuftragslisteLong: "Chronologische Liste"
 	, chronologischeAuftragsliste: "Chronol. Liste"
+	, positionBegin: "Positionsbeginn"
+	, positionEnd: "Positionsende"
 
 };
