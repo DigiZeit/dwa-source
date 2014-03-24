@@ -182,20 +182,20 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			if (that.consoleLogOutput) console.log("empfangeProjektleiter Status: " + request.status);
 
 			// wurde eine Projektleiterliste erhalten?
-			if (typeof(data.mitarbeiter) === "undefined") {
+			if (typeof(data.projektleiter) === "undefined") {
 				console.error("missing mitarbeiterliste");
 				return errorCallback();
 			}
 			
 			// enthält die Projektleiterliste Projektleiter?
-			if (data.mitarbeiter === null) {
+			if (data.projektleiter === null) {
 				// ohne Projektleiter geht im Bautagebuch nichts
 				return errorCallback();
 			} else {
 				// ist data.materialliste auch wirklich ein Array?
 				var myLength = null;
 				try {
-					myLength = data.mitarbeiter.length;
+					myLength = data.projektleiter.length;
 				} catch(e1) {
 					// ohne Projektleiter geht im Bautagebuch nichts
 					console.error(myLength);
@@ -208,7 +208,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			DigiWebApp.BautagebuchProjektleiter.deleteAll();
 			
 			// die empfangenen Projektleiter mit Model ablegen
-			_.each(data.mitarbeiter, function(el) {
+			_.each(data.projektleiter, function(el) {
 				if (typeof(el.id) === "undefined") {
 					console.error("missing id");
 					return errorCallback();
