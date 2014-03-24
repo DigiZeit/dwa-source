@@ -59,7 +59,7 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 				}
 				
 				if (positionHeuteRelevant) {
-					var found = _.find(a, function(el) {
+					var found = _.find(itemsToShow, function(el) {
 						return parseInt(el.get("id")) === parseInt(pos.get("id"))
 					});
 					if (!found) {
