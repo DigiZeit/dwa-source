@@ -111,12 +111,12 @@ DigiWebApp.ChronologischeAuftragslisteTemplateView = M.ListItemView.design({
 				var terminList = JSON.parse(v);
 				if (terminList.length > 0) {
 					var found = _.find(terminList, function(el){
-						el == D8.create().format("dd.mm.yyyy");
+						return el == D8.create().format("dd.mm.yyyy");
 					});
 					if (found) {
 						return M.I18N.l('terminHeute');
 					} else {
-						return "<font color=\"yellow\">" + M.I18N.l('terminEingeplant') + "</font>";
+						return "<font color=\"#FF9933\">" + M.I18N.l('terminEingeplant') + "</font>";
 					}
 				} else {
 					return '';
