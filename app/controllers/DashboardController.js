@@ -245,12 +245,12 @@ DigiWebApp.DashboardController = M.Controller.extend({
             }
             // End::Bautagebuch
 
-            // Start::ChronologischeAuftragsliste (408)
+            // Start::ChronologischeAuftragsliste (423)
             var ChronologischeAuftragslisteAvailable = DigiWebApp.SettingsController.featureAvailable('423');
             
             if (ChronologischeAuftragslisteAvailable) {
                 items.push({
-                      label: M.I18N.l('chronologischeAuftragsliste')
+                      label: M.I18N.l('chronologischeAuftragslisteLong')
                     , icon: 'icon_info.png'
                     , id: 'chronologischeAuftragsliste'
                 });	
