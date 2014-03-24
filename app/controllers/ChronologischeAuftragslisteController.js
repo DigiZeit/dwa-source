@@ -12,7 +12,7 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 		
 	, init: function(isFirstLoad) {
 		var that = DigiWebApp.ChronologischeAuftragslisteController;
-		if (isFirst) {
+		if (isFirstLoad) {
 			// do something only for the first load
 		}
 		var itemsToShow = [];
