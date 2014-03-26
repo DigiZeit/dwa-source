@@ -1441,19 +1441,19 @@ li.ui-li {
     margin-right: auto;
 }
 
-.chronologischeAuftragslistePage .normal {
+.TerminlistePage .normal {
     font-size: 10px;
     font-weight: normal;
     margin-left: 25px;
     color: #000000;	
 }
-.chronologischeAuftragslistePage .bold {
+.TerminlistePage .bold {
     font-size: 12px;
     font-weight: bold;
     margin-left: 25px;
     color: #000000;	
 }
-.chronologischeAuftragslistePage .red {
+.TerminlistePage .red {
     font-size: 10px;
     font-weight: bold;
     color: #FF0000;	

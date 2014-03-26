@@ -245,16 +245,16 @@ DigiWebApp.DashboardController = M.Controller.extend({
             }
             // End::Bautagebuch
 
-            // Start::ChronologischeAuftragsliste (423)
-            var ChronologischeAuftragslisteAvailable = DigiWebApp.SettingsController.featureAvailable('423');
-            if (ChronologischeAuftragslisteAvailable) {
+            // Start::Terminliste (423)
+            var TerminlisteAvailable = DigiWebApp.SettingsController.featureAvailable('423');
+            if (TerminlisteAvailable) {
                 items.push({
-                      label: M.I18N.l('chronologischeAuftragslisteLong')
+                      label: M.I18N.l('TerminlisteLong')
                     , icon: 'icon_info.png'
-                    , id: 'chronologischeAuftragsliste'
+                    , id: 'Terminliste'
                 });	
             }
-            // End::ChronologischeAuftragsliste
+            // End::Terminliste
 
             // finish the Dashboard with the Settings-, Update- and the Info-Page
             items.push({
@@ -488,8 +488,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		DigiWebApp.NavigationController.toButtonsDashboardPageFlipTransition();
 	}
 	
-	, chronologischeAuftragsliste: function() {
-		DigiWebApp.NavigationController.toChronologischeAuftragslistePage();
+	, Terminliste: function() {
+		DigiWebApp.NavigationController.toTerminlistePage();
 	}
 	
 });

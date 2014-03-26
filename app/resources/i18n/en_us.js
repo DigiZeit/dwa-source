@@ -446,8 +446,8 @@ M.I18N.en_us = {
 
 	, gefahreneKilometer: "Milage"
 
-	, chronologischeAuftragslisteLong: "Chronol. list of orders"
-	, chronologischeAuftragsliste: "Chronol. list"
+	, TerminlisteLong: "Appointmentlist"
+	, Terminliste: "Appointmentlist"
 	, positionBegin: "Begin"
 	, positionEnd: "End"
 	, ganztaegig: "ganztägig"

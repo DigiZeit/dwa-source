@@ -26,6 +26,20 @@ function parseBool(val) {
 	}
 }
 
+function addToListIfNotFoundById(list, element, id) {
+	var found = _.find(list, function(el) {
+		if (typeof(el.get) === "function") {
+			return parseInt(el.get("id")) === parseInt(id);
+		} else {
+			return parseInt(el.id) === parseInt(id)
+		}
+	});
+	if (!found) {
+		list.push(element);
+	}
+	return list;
+}
+
 if (!window.console) {
 	window.console = {
 		log: function(a) {}
@@ -495,8 +509,8 @@ if (searchForFeature(422)) { // gefahrene Kilometer
 	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
-if (searchForFeature(423)) { // chronologische Auftragsliste
-	DigiWebAppOrdinaryDesign.chronologischeAuftragslistePage = DigiWebApp.ChronologischeAuftragslistePage;
+if (searchForFeature(423)) { // Terminliste
+	DigiWebAppOrdinaryDesign.terminlistePage = DigiWebApp.TerminlistePage;
 }
 
 var restartOnBlackBerry = true;

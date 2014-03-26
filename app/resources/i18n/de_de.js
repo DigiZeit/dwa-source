@@ -445,8 +445,8 @@ M.I18N.de_de = {
 
 	, gefahreneKilometer: "gefahrene Kilometer"
 		
-	, chronologischeAuftragslisteLong: "Chronol. Auftragsliste"
-	, chronologischeAuftragsliste: "Chronol. Liste"
+	, TerminlisteLong: "Terminliste"
+	, Terminliste: "Terminliste"
 	, positionBegin: "Beginn"
 	, positionEnd: "Ende"
 	, ganztaegig: "ganztägig"
