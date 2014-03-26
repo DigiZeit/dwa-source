@@ -247,7 +247,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
             // Start::ChronologischeAuftragsliste (423)
             var ChronologischeAuftragslisteAvailable = DigiWebApp.SettingsController.featureAvailable('423');
-            
             if (ChronologischeAuftragslisteAvailable) {
                 items.push({
                       label: M.I18N.l('chronologischeAuftragslisteLong')

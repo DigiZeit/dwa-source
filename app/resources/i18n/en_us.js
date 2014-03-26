@@ -446,4 +446,11 @@ M.I18N.en_us = {
 
 	, gefahreneKilometer: "Milage"
 
+	, chronologischeAuftragslisteLong: "Chronol. list of orders"
+	, chronologischeAuftragsliste: "Chronol. list"
+	, positionBegin: "Begin"
+	, positionEnd: "End"
+	, ganztaegig: "ganztägig"
+	, nachUhrzeit: "nach Uhrzeit"
+
 };

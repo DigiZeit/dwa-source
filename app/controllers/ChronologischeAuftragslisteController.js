@@ -16,10 +16,12 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 			// do something only for the first load
 		}
 		var itemsToShow = [];
+		var ganztaegigeItems = [];
+		var nachUhrzeitItems = [];
 		_.each(DigiWebApp.Position.find(), function(pos) {
 			
-			var tageZuvor = 2;
-			var tageDanach = 2;
+			var tageZuvor = 0;
+			var tageDanach = 0;
 			var myDate = D8.create().addDays(0 - tageZuvor);
 			for (var x=0; x <= tageZuvor + tageDanach; x++) {
 				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
@@ -59,11 +61,20 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 				}
 				
 				if (positionHeuteRelevant) {
-					var found = _.find(itemsToShow, function(el) {
-						return parseInt(el.get("id")) === parseInt(pos.get("id"))
-					});
-					if (!found) {
-						itemsToShow.push(pos);
+					if () {
+						var found = _.find(ganztaegigeItems, function(el) {
+							return parseInt(el.get("id")) === parseInt(pos.get("id"))
+						});
+						if (!found) {
+							ganztaegigeItems.push(pos);
+						}
+					} else {
+						var found = _.find(nachUhrzeitItems, function(el) {
+							return parseInt(el.get("id")) === parseInt(pos.get("id"))
+						});
+						if (!found) {
+							nachUhrzeitItems.push(pos);
+						}
 					}
 				}
 				
@@ -72,9 +83,11 @@ DigiWebApp.ChronologischeAuftragslisteController = M.Controller.extend({
 			}
 		});
 		
-		itemsToShow = _.sortBy(itemsToShow, function(el){
+		nachUhrzeitItems = _.sortBy(nachUhrzeitItems, function(el){
 			return D8.create(el.get("positionBegin")).getTimestamp();
 		});
+		itemsToShow.push(ganztaegigeItems);
+		itemsToShow.push(nachUhrzeitItems);
 		that.set("items", itemsToShow);
 	}
 

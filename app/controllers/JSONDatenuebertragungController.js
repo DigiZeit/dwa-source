@@ -455,26 +455,26 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						
 						// Termine hinzufügen
 						_.each(el.mitarbeiterTermine, function(termin) {
-							var myDateVon = D8.create(termin.von);
-							var myDateBis = D8.create(termin.bis);
-							var myDateVonStr = myDateVon.format("dd.mm.yyyy");
-							var myDateBisStr = myDateBis.format("dd.mm.yyyy");
-							if (myDateVonStr === myDateBisStr) {
-								if (!_.contains(terminList, myDateVonStr)) {
-									terminList.push(myDateVonStr);
-								}
-							} else {
-								var myDateStr = myDateVon.format("dd.mm.yyyy");
-								var myDate = myDateVon;
-								// TODO: Schleife fixen
-								while (myDateBisStr !== myDateStr) {
-									myDateStr = myDate.format("dd.mm.yyyy");
-									if (!_.contains(terminList,myDateStr)) {
-										terminList.push(myDateStr);
-									}
-									myDate = myDate.addDays(1);
-								}
-							}
+//							var myDateVon = D8.create(termin.von);
+//							var myDateBis = D8.create(termin.bis);
+//							var myDateVonStr = myDateVon.format("dd.mm.yyyy");
+//							var myDateBisStr = myDateBis.format("dd.mm.yyyy");
+//							if (myDateVonStr === myDateBisStr) {
+//								if (!_.contains(terminList, myDateVonStr)) {
+//									terminList.push(myDateVonStr);
+//								}
+//							} else {
+//								var myDateStr = myDateVon.format("dd.mm.yyyy");
+//								var myDate = myDateVon;
+//								while (myDateBisStr !== myDateStr) {
+//									myDateStr = myDate.format("dd.mm.yyyy");
+//									if (!_.contains(terminList,myDateStr)) {
+//										terminList.push(myDateStr);
+//									}
+//									myDate = myDate.addDays(1);
+//								}
+//							}
+							terminList.push(JSON.stringify(termin));
 						});
 						
 					}
