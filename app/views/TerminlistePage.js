@@ -55,7 +55,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
     , content: M.ScrollView.design({
             childViews: 'auftragsliste'
           , auftragsliste: M.ListView.design({
-        	      isDivided: YES
+        	  	  isDividedList: YES
                 , contentBinding: {
 	                  target: DigiWebApp.TerminlisteController
 	                , property: 'items'
