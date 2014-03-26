@@ -450,5 +450,6 @@ M.I18N.de_de = {
 	, positionZeitraum: "Auftragszeitraum"
 	, ganztaegig: "ganztägig"
 	, nachUhrzeit: "nach Uhrzeit"
+	, betreff: "Betreff"
 
 };

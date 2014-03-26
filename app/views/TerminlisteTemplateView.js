@@ -10,7 +10,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
+    , childViews: 'betreff auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
 
     , events: {
         tap: {
@@ -33,9 +33,25 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 		}
 	}
 
+
+	, betreff: M.LabelView.design({
+	    cssClass: 'bold unselectable'
+	  , computedValue: {
+	        valuePattern: '<%= betreff %>'
+	      , operation: function(v) {
+				var text = v;
+				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
+					return M.I18N.l('betreff') + ': ' + text;
+				} else {
+					return '';
+				}
+	      }
+	  }
+	})
+	
 	//	  auftragsBezeichnung: "6657Heim"
 	, auftragsBezeichnung: M.LabelView.design({
-        cssClass: 'bold unselectable'
+        cssClass: 'normal unselectable'
       , computedValue: {
             valuePattern: '<%= positionId %>'
           , operation: function(v) {
@@ -62,7 +78,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
 	//	  positionsBezeichnung: "6657Heim"
 	, positionsBezeichnung: M.LabelView.design({
-        cssClass: 'bold unselectable'
+        cssClass: 'normal unselectable'
       , computedValue: {
             valuePattern: '<%= positionId %>'
           , operation: function(v) {
@@ -140,7 +156,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					var uhrzeit = v.split(" ")[1];
 					return uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
-					return;
+					return '';
 				}
           }
       }
@@ -156,7 +172,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					var uhrzeit = v.split(" ")[1];
 					return " - " + uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
-					return;
+					return '';
 				}
           }
       }
