@@ -117,7 +117,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		});
 		
 		nachUhrzeitItems = _.sortBy(nachUhrzeitItems, function(el){
-			return D8.create(el.get("timeStampVon")).getTimestamp();
+			return D8.create(el.timeStampVon).getTimestamp();
 		});
 		var ganztaegigeItemsObject = {
 				  label: "ganztägig"
