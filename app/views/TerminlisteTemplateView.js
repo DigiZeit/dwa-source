@@ -85,10 +85,10 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	, positionBegin: M.LabelView.design({
         cssClass: 'normal unselectable'
       , computedValue: {
-            valuePattern: '<%= id %>'
+            valuePattern: '<%= positionId %>'
           , operation: function(v) {
 				var text = "";
-				var obj = _.find(DigiWebApp.Order.find(), function(el) {
+				var obj = _.find(DigiWebApp.Position.find(), function(el) {
 					return parseInt(el.get("id")) === parseInt(v);
 				});
 				if (obj) {
@@ -106,10 +106,10 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	, positionEnd: M.LabelView.design({
         cssClass: 'normal unselectable'
       , computedValue: {
-            valuePattern: '<%= id %>'
+            valuePattern: '<%= positionId %>'
           , operation: function(v) {
 				var text = "";
-				var obj = _.find(DigiWebApp.Order.find(), function(el) {
+				var obj = _.find(DigiWebApp.Position.find(), function(el) {
 					return parseInt(el.get("id")) === parseInt(v);
 				});
 				if (obj) {
@@ -129,7 +129,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= von %>'
           , operation: function(v) {
-				if (v) {
+				if (v && v.indexOf("00:00:00") === -1) {
 					return "von: " + v.split(" ")[1]
 				} else {
 					return '';
@@ -143,7 +143,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= bis %>'
           , operation: function(v) {
-				if (v) {
+				if (v && v.indexOf("23:59:59") === -1) {
 					return "bis: " + v.split(" ")[1]
 				} else {
 					return '';

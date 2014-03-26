@@ -474,6 +474,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 //									myDate = myDate.addDays(1);
 //								}
 //							}
+							if (termin.ganzerTag) {
+								// künstliches von und bis setzen, um die Uhrzeit in der Terminliste ausblenden zu können
+								var datum = termin.von.split(" ")[0];
+								termin.von = datum + " 00:00:00"
+								termin.bis = datum + " 23:59:59"
+							}
 							terminList.push(JSON.stringify(termin));
 						});
 						
