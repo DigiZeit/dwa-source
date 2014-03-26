@@ -37,17 +37,22 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	, auftragsBezeichnung: M.LabelView.design({
         cssClass: 'bold unselectable'
       , computedValue: {
-            valuePattern: '<%= orderId %>'
+            valuePattern: '<%= positionId %>'
           , operation: function(v) {
-				var bezeichnung = "";
-				var obj = _.find(DigiWebApp.Order.find(), function(el) {
+				var text = "";
+				var pos = _.find(DigiWebApp.Position.find(), function(el) {
 					return parseInt(el.get("id")) === parseInt(v);
 				});
-				if (obj) {
-					bezeichnung = obj.get("name");
+				if (pos) {
+					var obj = _.find(DigiWebApp.Order.find(), function(el) {
+						return parseInt(el.get("id")) === parseInt(pos.get("orderId"));
+					});
+					if (obj) {
+						text = obj.get("name");
+					}
 				}
-				if (bezeichnung !== "" && typeof(bezeichnung) !== "undefined" && bezeichnung !== "undefined" && bezeichnung !== "null" && bezeichnung !== null) {
-					return M.I18N.l('order') + ': ' + bezeichnung;
+				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
+					return M.I18N.l('order') + ': ' + text;
 				} else {
 					return '';
 				}
@@ -59,17 +64,17 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	, positionsBezeichnung: M.LabelView.design({
         cssClass: 'bold unselectable'
       , computedValue: {
-            valuePattern: '<%= id %>'
+            valuePattern: '<%= positionId %>'
           , operation: function(v) {
 				var text = "";
-				var obj = _.find(DigiWebApp.Order.find(), function(el) {
+				var obj = _.find(DigiWebApp.Position.find(), function(el) {
 					return parseInt(el.get("id")) === parseInt(v);
 				});
 				if (obj) {
 					text = obj.get("name");
 				}
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('position') + ': ' + bezeichnung;
+					return M.I18N.l('position') + ': ' + text;
 				} else {
 					return '';
 				}
@@ -90,7 +95,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					text = obj.get("positionBegin");
 				}
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('positionBegin') + ': ' + bezeichnung;
+					return M.I18N.l('positionBegin') + ': ' + text;
 				} else {
 					return '';
 				}
@@ -111,7 +116,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					text = obj.get("positionEnd");
 				}
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('positionEnd') + ': ' + bezeichnung;
+					return M.I18N.l('positionEnd') + ': ' + text;
 				} else {
 					return '';
 				}
@@ -120,12 +125,12 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	})
 
 	, von: M.LabelView.design({
-        cssClass: 'normal red unselectable'
+        cssClass: 'normal unselectable'
       , computedValue: {
             valuePattern: '<%= von %>'
           , operation: function(v) {
 				if (v) {
-					return "von: " + v
+					return "von: " + v.split(" ")[1]
 				} else {
 					return '';
 				}
@@ -134,12 +139,12 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	})
 
 	, bis: M.LabelView.design({
-        cssClass: 'normal red unselectable'
+        cssClass: 'normal unselectable'
       , computedValue: {
             valuePattern: '<%= bis %>'
           , operation: function(v) {
 				if (v) {
-					return "bis: " + v
+					return "bis: " + v.split(" ")[1]
 				} else {
 					return '';
 				}

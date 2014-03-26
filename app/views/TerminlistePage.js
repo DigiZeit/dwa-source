@@ -20,7 +20,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 
     , childViews: 'header content'
 
-    , cssClass: 'TerminlistePage'
+    , cssClass: 'terminlistePage'
 
     , header: M.ToolbarView.design({
           childViews: 'backButton title'
@@ -53,8 +53,8 @@ DigiWebApp.TerminlistePage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-            childViews: 'auftragsliste'
-          , auftragsliste: M.ListView.design({
+            childViews: 'terminliste'
+          , terminliste: M.ListView.design({
         	  	  isDividedList: YES
                 , contentBinding: {
 	                  target: DigiWebApp.TerminlisteController

@@ -1441,19 +1441,19 @@ li.ui-li {
     margin-right: auto;
 }
 
-.TerminlistePage .normal {
+.terminlistePage .normal {
     font-size: 10px;
     font-weight: normal;
     margin-left: 25px;
     color: #000000;	
 }
-.TerminlistePage .bold {
+.terminlistePage .bold {
     font-size: 12px;
     font-weight: bold;
     margin-left: 25px;
     color: #000000;	
 }
-.TerminlistePage .red {
+.terminlistePage .red {
     font-size: 10px;
     font-weight: bold;
     color: #FF0000;	
