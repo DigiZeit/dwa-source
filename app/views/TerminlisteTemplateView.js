@@ -130,7 +130,8 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
             valuePattern: '<%= von %>'
           , operation: function(v) {
 				if (v && v.indexOf("00:00:00") === -1) {
-					return "von: " + v.split(" ")[1]
+					var uhrzeit = v.split(" ")[1];
+					return "von: " + uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
 					return '';
 				}
@@ -144,7 +145,8 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
             valuePattern: '<%= bis %>'
           , operation: function(v) {
 				if (v && v.indexOf("23:59:59") === -1) {
-					return "bis: " + v.split(" ")[1]
+					var uhrzeit = v.split(" ")[1];
+					return "bis: " + uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
 					return '';
 				}
