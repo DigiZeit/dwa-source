@@ -608,11 +608,11 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toTerminlistePage: function() {
-    	DigiWebApp.NavigationController.switchToPage('TerminlistePage', M.TRANSITION.SLIDEUP, NO);
+    	DigiWebApp.NavigationController.switchToPage('terminlistePage', M.TRANSITION.SLIDEUP, NO);
     }
 
     , backToTerminlistePage: function() {
-    	DigiWebApp.NavigationController.switchToPage('TerminlistePage', M.TRANSITION.SLIDEUP, YES);
+    	DigiWebApp.NavigationController.switchToPage('terminlistePage', M.TRANSITION.SLIDEUP, YES);
     }
 
 });
