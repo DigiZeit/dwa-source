@@ -1460,6 +1460,13 @@ li.ui-li {
     margin-left: 25px;
     color: #000000;	
 }
+
+.terminlistePage .boldInline {
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;	
+}
+
 .terminlistePage .red {
     font-size: 10px;
     font-weight: bold;

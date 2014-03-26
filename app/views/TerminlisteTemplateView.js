@@ -131,7 +131,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	})
 
 	, von: M.LabelView.design({
-        cssClass: 'normal unselectable'
+        cssClass: 'bold unselectable'
       , isInline: YES
       , computedValue: {
             valuePattern: '<%= von %>'
@@ -140,14 +140,14 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					var uhrzeit = v.split(" ")[1];
 					return uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
-					return '';
+					return;
 				}
           }
       }
 	})
 
 	, bis: M.LabelView.design({
-        cssClass: 'normalInline unselectable'
+        cssClass: 'boldInline unselectable'
       , isInline: YES
       , computedValue: {
             valuePattern: '<%= bis %>'
@@ -156,7 +156,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					var uhrzeit = v.split(" ")[1];
 					return " - " + uhrzeit.split(":")[0] + ":" + uhrzeit.split(":")[1]
 				} else {
-					return '';
+					return;
 				}
           }
       }
