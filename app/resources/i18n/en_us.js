@@ -434,8 +434,8 @@ M.I18N.en_us = {
 	, detailierteZeitdaten: "show more details for timedata"
 	, latitude_von: "From-Latitude"
 	, longitude_von: "From-Longitude"
-	, latitude_bis: "To-Breitengrad"
-	, longitude_bis: "To-Längengrad"
+	, latitude_bis: "To-Latitude"
+	, longitude_bis: "To-Longitude"
 	, erfassungsverfahren_von: "From-Discoverytype"
 	, erfassungsverfahren_bis: "To-Discoverytype"
 	, gpszeitstempel_von: "From-GPS-Timestamp"
@@ -448,9 +448,8 @@ M.I18N.en_us = {
 
 	, TerminlisteLong: "Appointmentlist"
 	, Terminliste: "Appointmentlist"
-	, positionBegin: "Begin"
-	, positionEnd: "End"
-	, ganztaegig: "ganztägig"
-	, nachUhrzeit: "nach Uhrzeit"
+	, positionZeitraum: "Order period"
+	, ganztaegig: "full-time"
+	, nachUhrzeit: "per appointment"
 
 };

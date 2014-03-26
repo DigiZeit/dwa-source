@@ -120,11 +120,11 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			return D8.create(el.timeStampVon).getTimestamp();
 		});
 		var ganztaegigeItemsObject = {
-				  label: "ganztägig"
+				  label: M.I18N.l("ganztaegig")
 				, items: ganztaegigeItems
 		};
 		var nachUhrzeitItemsObject = {
-				  label: "nach Uhrzeit"
+				  label: M.I18N.l("nachUhrzeit")
 				, items: nachUhrzeitItems
 		};
 		itemsToShow.push(ganztaegigeItemsObject);

@@ -10,7 +10,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'auftragsBezeichnung positionsBezeichnung positionBegin positionEnd von bis'
+    , childViews: 'auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
 
     , events: {
         tap: {
@@ -84,6 +84,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
       
 	, positionBegin: M.LabelView.design({
         cssClass: 'normal unselectable'
+      , isInline: YES
       , computedValue: {
             valuePattern: '<%= positionId %>'
           , operation: function(v) {
@@ -95,7 +96,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					text = obj.get("positionBegin");
 				}
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('positionBegin') + ': ' + text;
+					return M.I18N.l('positionZeitraum') + ": " + text;
 				} else {
 					return '';
 				}
@@ -104,7 +105,8 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	})
 
 	, positionEnd: M.LabelView.design({
-        cssClass: 'normal unselectable'
+        cssClass: 'normalInline unselectable'
+      , isInline: YES
       , computedValue: {
             valuePattern: '<%= positionId %>'
           , operation: function(v) {
@@ -116,12 +118,16 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					text = obj.get("positionEnd");
 				}
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('positionEnd') + ': ' + text;
+					return ' - ' + text;
 				} else {
 					return '';
 				}
           }
       }
+	})
+
+	, spacer1: M.LabelView.design({
+	    value: ' '
 	})
 
 	, von: M.LabelView.design({
@@ -141,7 +147,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	})
 
 	, bis: M.LabelView.design({
-        cssClass: 'normal unselectable'
+        cssClass: 'normalInline unselectable'
       , isInline: YES
       , computedValue: {
             valuePattern: '<%= bis %>'

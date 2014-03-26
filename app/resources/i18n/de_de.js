@@ -447,8 +447,7 @@ M.I18N.de_de = {
 		
 	, TerminlisteLong: "Terminliste"
 	, Terminliste: "Terminliste"
-	, positionBegin: "Beginn"
-	, positionEnd: "Ende"
+	, positionZeitraum: "Auftragszeitraum"
 	, ganztaegig: "ganztägig"
 	, nachUhrzeit: "nach Uhrzeit"
 
