@@ -743,41 +743,52 @@ DigiWebApp.BookingController = M.Controller.extend({
         var dateString = dateMDate.format('dd.mm.yyyy');
         var timeString = dateMDate.format('HH:MM');
 
-        return DigiWebApp.Booking.createRecord({
-              orderId: obj.oId ? obj.oId : null
-            , orderName: myOrderName
-            , handOrderId: obj.hoId ? obj.hoId : null
-            , handOrderName: obj.hoName ? obj.hoName : null
-            , latitude: obj.lat ? obj.lat : null
-            , longitude: obj.lon ? obj.lon : null
-            , latitude_bis: null
-    		, longitude_bis: null
-            , positionId: obj.pId ? obj.pId : null
-            , positionName: myPositionName
-            , activityId: obj.aId ? obj.aId : null
-            , activityName: myActivityName
-            , remark: obj.remark ? obj.remark : ''
-            , istFeierabend: false
-            , istKolonnenbuchung: false
-            , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
-            , genauigkeitVon: null
-            , gps_zeitstempelVon: null
-            , ermittlungsverfahrenVon: null
-            , genauigkeitBis: null
-            , gps_zeitstempelBis: null
-            , ermittlungsverfahrenBis: null
-            , ServiceApp_Status: "WAIT"
-            , timezoneOffset: DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")
-            , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
-            , timeStampStart: timeStart.getTime()
-            , timeStampEnd: '0'
-            , startDateString: dateString
-            , endeDateString: ""
-            , startTimeString: timeString
-            , endeTimeString: ""
-            , modelVersion: "1"
-            , gefahreneKilometer: 0
+        var found = _.find(DigiWebApp.Booking.find(), function(booking) {
+        	return (booking.get("startDateString") == dateString && booking.get("startTimeString") == timeString && booking.get("endeDateString") == "" && booking.get("endeTimeString") == "");
         });
+        
+        if (found) {
+        	
+        	return found;
+        	
+        } else {
+        
+	        return DigiWebApp.Booking.createRecord({
+	              orderId: obj.oId ? obj.oId : null
+	            , orderName: myOrderName
+	            , handOrderId: obj.hoId ? obj.hoId : null
+	            , handOrderName: obj.hoName ? obj.hoName : null
+	            , latitude: obj.lat ? obj.lat : null
+	            , longitude: obj.lon ? obj.lon : null
+	            , latitude_bis: null
+	    		, longitude_bis: null
+	            , positionId: obj.pId ? obj.pId : null
+	            , positionName: myPositionName
+	            , activityId: obj.aId ? obj.aId : null
+	            , activityName: myActivityName
+	            , remark: obj.remark ? obj.remark : ''
+	            , istFeierabend: false
+	            , istKolonnenbuchung: false
+	            , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
+	            , genauigkeitVon: null
+	            , gps_zeitstempelVon: null
+	            , ermittlungsverfahrenVon: null
+	            , genauigkeitBis: null
+	            , gps_zeitstempelBis: null
+	            , ermittlungsverfahrenBis: null
+	            , ServiceApp_Status: "WAIT"
+	            , timezoneOffset: DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")
+	            , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
+	            , timeStampStart: timeStart.getTime()
+	            , timeStampEnd: '0'
+	            , startDateString: dateString
+	            , endeDateString: ""
+	            , startTimeString: timeString
+	            , endeTimeString: ""
+	            , modelVersion: "1"
+	            , gefahreneKilometer: 0
+	        });
+        }
     }
 
     /**
@@ -785,6 +796,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      * @param obj The parameter object with the data for the booking
      */
     , sentBooking: function(obj) {
+
+    	if (obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString")) {
+    		return null;
+    	};
+
     	// speichere die Namen von Auftrag, Position und Tätigkeit,
     	// falls beim nächsten Stammdatenabgleich eines davon vom Gerät entfernt werden
     	var myOrderName = M.I18N.l('notDefined');
@@ -829,40 +845,51 @@ DigiWebApp.BookingController = M.Controller.extend({
     		} catch(e9) { console.error(e9); }
     	}
     	
-        return DigiWebApp.SentBooking.createRecord({
-              orderId: obj.get('orderId')
-            , orderName: myOrderName
-            , handOrderId: obj.get('handOrderId')
-            , handOrderName: obj.get('handOrderName')
-            , latitude: obj.get('latitude')
-            , longitude: obj.get('longitude')
-            , latitude_bis: obj.get('latitude_bis')
-            , longitude_bis: obj.get('longitude_bis')
-            , positionId: obj.get('positionId')
-            , positionName: myPositionName
-            , activityId: obj.get('activityId')
-            , activityName: myActivityName
-            , remark: obj.get('remark')
-            , istFeierabend: obj.get('istFeierabend')
-            , istKolonnenbuchung: obj.get('istKolonnenbuchung')
-            , genauigkeitVon: obj.get('genauigkeitVon')
-            , gps_zeitstempelVon: obj.get('gps_zeitstempelVon')
-            , ermittlungsverfahrenVon: obj.get('ermittlungsverfahrenVon')
-            , genauigkeitBis: obj.get('genauigkeitBis')
-            , gps_zeitstempelBis: obj.get('gps_zeitstempelBis')
-            , ermittlungsverfahrenBis: obj.get('ermittlungsverfahrenBis')
-            , ServiceApp_Status: obj.get('ServiceApp_Status')
-            , timezoneOffset: obj.get('timezoneOffset')
-            , timeStampStart: obj.get('timeStampStart')
-            , timeStampEnd: obj.get('timeStampEnd')
-            , startDateString: obj.get('startDateString')
-            , endeDateString: obj.get('endeDateString')
-            , startTimeString: obj.get('startTimeString')
-            , endeTimeString: obj.get('endeTimeString')
-            , employees: obj.get('employees')
-            , isCurrent: false
-            , gefahreneKilometer: obj.get('gefahreneKilometer')
+        var found = _.find(DigiWebApp.SentBooking.find(), function(booking) {
+        	return (booking.get("startDateString") == obj.get("startDateString") && booking.get("startTimeString") == obj.get("startTimeString") && booking.get("endeDateString") == obj.get("endeDateString") && booking.get("endeTimeString") == obj.get("endeTimeString"));
         });
+        
+        if (found) {
+        	
+        	return found;
+        	
+        } else {
+        
+	        return DigiWebApp.SentBooking.createRecord({
+	              orderId: obj.get('orderId')
+	            , orderName: myOrderName
+	            , handOrderId: obj.get('handOrderId')
+	            , handOrderName: obj.get('handOrderName')
+	            , latitude: obj.get('latitude')
+	            , longitude: obj.get('longitude')
+	            , latitude_bis: obj.get('latitude_bis')
+	            , longitude_bis: obj.get('longitude_bis')
+	            , positionId: obj.get('positionId')
+	            , positionName: myPositionName
+	            , activityId: obj.get('activityId')
+	            , activityName: myActivityName
+	            , remark: obj.get('remark')
+	            , istFeierabend: obj.get('istFeierabend')
+	            , istKolonnenbuchung: obj.get('istKolonnenbuchung')
+	            , genauigkeitVon: obj.get('genauigkeitVon')
+	            , gps_zeitstempelVon: obj.get('gps_zeitstempelVon')
+	            , ermittlungsverfahrenVon: obj.get('ermittlungsverfahrenVon')
+	            , genauigkeitBis: obj.get('genauigkeitBis')
+	            , gps_zeitstempelBis: obj.get('gps_zeitstempelBis')
+	            , ermittlungsverfahrenBis: obj.get('ermittlungsverfahrenBis')
+	            , ServiceApp_Status: obj.get('ServiceApp_Status')
+	            , timezoneOffset: obj.get('timezoneOffset')
+	            , timeStampStart: obj.get('timeStampStart')
+	            , timeStampEnd: obj.get('timeStampEnd')
+	            , startDateString: obj.get('startDateString')
+	            , endeDateString: obj.get('endeDateString')
+	            , startTimeString: obj.get('startTimeString')
+	            , endeTimeString: obj.get('endeTimeString')
+	            , employees: obj.get('employees')
+	            , isCurrent: false
+	            , gefahreneKilometer: obj.get('gefahreneKilometer')
+	        });
+        }
     }
 
     /**
@@ -870,6 +897,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      * @param obj The parameter object with the data for the booking
      */
     , sentBookingArchived: function(obj) {
+    	
+    	if (obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString")) {
+    		return null;
+    	};
+
     	// speichere das Datum der Buchung für einfacheren Archivzugriff
     	var myTagLabel = D8.create(obj.get('timeStampStart')).format("dd.mm.yyyy");
     	
@@ -919,41 +951,52 @@ DigiWebApp.BookingController = M.Controller.extend({
     		} catch(e12) { console.error(e12); }
     	}
     	
-    	return DigiWebApp.SentBookingArchived.createRecord({
-              orderId: obj.get('orderId')
-            , orderName: myOrderName
-            , handOrderId: obj.get('handOrderId')
-            , handOrderName: obj.get('handOrderName')
-            , latitude: obj.get('latitude')
-            , longitude: obj.get('longitude')
-            , latitude_bis: obj.get('latitude_bis')
-            , longitude_bis: obj.get('longitude_bis')
-            , positionId: obj.get('positionId')
-            , positionName: myPositionName
-            , activityId: obj.get('activityId')
-            , activityName: myActivityName
-            , remark: obj.get('remark')
-            , istFeierabend: obj.get('istFeierabend')
-            , istKolonnenbuchung: obj.get('istKolonnenbuchung')
-            , genauigkeitVon: obj.get('genauigkeitVon')
-            , gps_zeitstempelVon: obj.get('gps_zeitstempelVon')
-            , ermittlungsverfahrenVon: obj.get('ermittlungsverfahrenVon')
-            , genauigkeitBis: obj.get('genauigkeitBis')
-            , gps_zeitstempelBis: obj.get('gps_zeitstempelBis')
-            , ermittlungsverfahrenBis: obj.get('ermittlungsverfahrenBis')
-            , ServiceApp_Status: obj.get('ServiceApp_Status')
-            , timezoneOffset: obj.get('timezoneOffset')
-            , timeStampStart: obj.get('timeStampStart')
-            , timeStampEnd: obj.get('timeStampEnd')
-            , startDateString: obj.get('startDateString')
-            , endeDateString: obj.get('endeDateString')
-            , startTimeString: obj.get('startTimeString')
-            , endeTimeString: obj.get('endeTimeString')
-            , employees: obj.get('employees')
-            , tagLabel: myTagLabel
-            , isCurrent: false
-            , gefahreneKilometer: obj.get('gefahreneKilometer')
+        var found = _.find(DigiWebApp.SentBookingArchived.find(), function(booking) {
+        	return (booking.get("startDateString") == obj.get("startDateString") && booking.get("startTimeString") == obj.get("startTimeString") && booking.get("endeDateString") == obj.get("endeDateString") && booking.get("endeTimeString") == obj.get("endeTimeString"));
         });
+        
+        if (found) {
+        	
+        	return found;
+        	
+        } else {
+        
+	    	return DigiWebApp.SentBookingArchived.createRecord({
+	              orderId: obj.get('orderId')
+	            , orderName: myOrderName
+	            , handOrderId: obj.get('handOrderId')
+	            , handOrderName: obj.get('handOrderName')
+	            , latitude: obj.get('latitude')
+	            , longitude: obj.get('longitude')
+	            , latitude_bis: obj.get('latitude_bis')
+	            , longitude_bis: obj.get('longitude_bis')
+	            , positionId: obj.get('positionId')
+	            , positionName: myPositionName
+	            , activityId: obj.get('activityId')
+	            , activityName: myActivityName
+	            , remark: obj.get('remark')
+	            , istFeierabend: obj.get('istFeierabend')
+	            , istKolonnenbuchung: obj.get('istKolonnenbuchung')
+	            , genauigkeitVon: obj.get('genauigkeitVon')
+	            , gps_zeitstempelVon: obj.get('gps_zeitstempelVon')
+	            , ermittlungsverfahrenVon: obj.get('ermittlungsverfahrenVon')
+	            , genauigkeitBis: obj.get('genauigkeitBis')
+	            , gps_zeitstempelBis: obj.get('gps_zeitstempelBis')
+	            , ermittlungsverfahrenBis: obj.get('ermittlungsverfahrenBis')
+	            , ServiceApp_Status: obj.get('ServiceApp_Status')
+	            , timezoneOffset: obj.get('timezoneOffset')
+	            , timeStampStart: obj.get('timeStampStart')
+	            , timeStampEnd: obj.get('timeStampEnd')
+	            , startDateString: obj.get('startDateString')
+	            , endeDateString: obj.get('endeDateString')
+	            , startTimeString: obj.get('startTimeString')
+	            , endeTimeString: obj.get('endeTimeString')
+	            , employees: obj.get('employees')
+	            , tagLabel: myTagLabel
+	            , isCurrent: false
+	            , gefahreneKilometer: obj.get('gefahreneKilometer')
+	        });
+        }
     }
 
     /*
@@ -1718,20 +1761,22 @@ DigiWebApp.BookingController = M.Controller.extend({
 							      _.each(DigiWebApp.Booking.find(), function(el) {
 							          if (!el.get('isCurrent')) {
 							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
-							      		  sentBookingArchivedEl.save();
-							      		  // check if that day is already in archive
-							      		  var dayFound = NO;
-							      		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
-							      		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
-							      			  if (day.get('tagLabel') === dayToFind) {
-							      				  dayFound = YES;
-							      			  }
-							      		  });
-							      		  if (dayFound === NO) {
-							      			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
-							      				  tagLabel: dayToFind
-							      			  });
-							      			  dayRecord.save();
+							      		  if (sentBookingArchivedEl != null) {
+								      		  sentBookingArchivedEl.save();
+								      		  // check if that day is already in archive
+								      		  var dayFound = NO;
+								      		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
+								      		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
+								      			  if (day.get('tagLabel') === dayToFind) {
+								      				  dayFound = YES;
+								      			  }
+								      		  });
+								      		  if (dayFound === NO) {
+								      			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
+								      				  tagLabel: dayToFind
+								      			  });
+								      			  dayRecord.save();
+								      		  }
 							      		  }
 							          }
 							      });
@@ -1758,7 +1803,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			                  		  try {
 			                      		  // save booking as sentBooking for later view in sentBookingsListView
 			                      		  var sentBookingEl = that.sentBooking(el);
-			                          	  sentBookingEl.save();
+			                      		  if (sentBookingEl != null) { sentBookingEl.save(); }
 			                  		  } catch(e21) {
 			        			            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			        			                  title: M.I18N.l('error')

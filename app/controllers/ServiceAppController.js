@@ -644,7 +644,10 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 							case "SENT":
 								// move to SentBookings
 								if (DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen")) {
-									DigiWebApp.BookingController.sentBooking(modelBooking).save();
+									var mySentBooking = DigiWebApp.BookingController.sentBooking(modelBooking);
+									if (mySentBooking != null) {
+										mySentBooking.save();
+									}
 									modelBooking.del();
 								}
 								break;
