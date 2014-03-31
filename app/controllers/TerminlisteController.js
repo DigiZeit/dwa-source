@@ -22,6 +22,9 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		var datumArray = DigiWebApp.TerminlisteController.datum.split(".");
 		DigiWebApp.TerminlisteController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
 
+		var tabBar = DigiWebApp.TerminlisteVorZurueckTabBar;
+		tabBar.setActiveTab(tabBar.tabItemDayToShow);
+		
 		var itemsToShow = [];
 		var ganztaegigeItems = [];
 		var nachUhrzeitItems = [];
