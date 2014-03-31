@@ -46,7 +46,34 @@ DigiWebApp.TerminlistePage = M.PageView.design({
                 }
             }
         })
-        , title: M.LabelView.design({
+        , title: M.TextFieldView.design({
+              value: ''
+            , anchorLocation: M.CENTER
+            , cssClass: 'dateTitle'
+            , inputType: M.INPUT_DATE
+            , contentBinding: {
+        		  target: DigiWebApp.TerminlisteController
+        		, property: 'datumAsDate'
+        	}
+	        , contentBindingReverse: {
+	    		  target: DigiWebApp.TerminlisteController
+	    		, property: 'datumAsDate'
+	    	}
+            , events: {
+            	  blur: {
+            		action: function() {
+		            	var datumArray = DigiWebApp.TerminlisteController.datumAsDate.split("-");
+						DigiWebApp.TerminlisteController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+            		}
+            	}
+	            , tap: {
+	                action: function() {
+            			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+        			}
+	            }
+	        }
+        })
+        , titleLabel: M.LabelView.design({
               value: M.I18N.l('Terminliste')
             , anchorLocation: M.CENTER
         })

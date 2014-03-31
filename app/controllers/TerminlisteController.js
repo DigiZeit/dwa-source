@@ -11,6 +11,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 	  items: null
 	  
 	, datum: null
+	, datumAsDate: null
 		
 	, init: function(isFirstLoad) {
 		var that = DigiWebApp.TerminlisteController;
@@ -18,6 +19,9 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			// do something only for the first load
 		}
 		
+		var datumArray = DigiWebApp.TerminlisteController.datum.split(".");
+		DigiWebApp.TerminlisteController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
+
 		var itemsToShow = [];
 		var ganztaegigeItems = [];
 		var nachUhrzeitItems = [];
