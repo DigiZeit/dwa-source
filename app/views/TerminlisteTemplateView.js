@@ -20,11 +20,11 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 					    var view = M.ViewManager.getViewById(id);
 					    var mitarbeiter_modelId = view.modelId;
 						_.each(DigiWebApp.TerminlisteController.items, function(TerminlisteControllerItem) {
-							if (ZeitbuchungenItem.m_id === mitarbeiter_modelId) {
-									doShow = YES;
-									//DigiWebApp.TerminlisteController.set('itemForDetails', TerminlisteControllerItem);
-									//DigiWebApp.ZeitbuchungDetailsPage.updateContent();
-							}
+//							if (ZeitbuchungenItem.m_id === mitarbeiter_modelId) {
+//									doShow = YES;
+//									DigiWebApp.TerminlisteController.set('itemForDetails', TerminlisteControllerItem);
+//									DigiWebApp.ZeitbuchungDetailsPage.updateContent();
+//							}
 						});
 						
 						if (doShow === YES) {

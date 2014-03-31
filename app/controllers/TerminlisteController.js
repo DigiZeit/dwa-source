@@ -86,6 +86,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 					// konkrete Termine
 					_.each(termineHeute, function(terminStr) {
 						var termin = JSON.parse(terminStr);
+						termin.m_id = pos.m_id;
 						if (termin.ganzerTag) {
 							addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
 						} else {
@@ -118,6 +119,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 							, timeStampErinnerung: null
 							, timeStampVon: D8.create(todayStr + " 00:00:00").getTimestamp()
 							, zeitstempel: D8.create().getTimestamp()
+							, m_id: pos.m_id
 					}
 					addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
 				}
