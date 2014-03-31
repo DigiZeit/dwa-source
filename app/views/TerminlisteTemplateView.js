@@ -50,6 +50,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 								M.ViewManager.getView('bookingPage', 'order').setSelection(position.get("orderId"));
 								DigiWebApp.SelectionController.setPositions();
 								M.ViewManager.getView('bookingPage', 'position').setSelection(position.get("id"));
+								DigiWebApp.SelectionController.setActivities(YES);
 							}
 						}
 			}
