@@ -18,17 +18,26 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 						var doShow = NO;
 					    var view = M.ViewManager.getViewById(id);
 					    var positionId = view.positionId;
-					    console.log(positionId);
-						_.each(DigiWebApp.TerminlisteController.items, function(TerminlisteControllerItem) {
-//							if (ZeitbuchungenItem.m_id === mitarbeiter_modelId) {
-//									doShow = YES;
-//									DigiWebApp.TerminlisteController.set('itemForDetails', TerminlisteControllerItem);
-//									DigiWebApp.ZeitbuchungDetailsPage.updateContent();
-//							}
+					    var position = null;
+						_.each(DigiWebApp.Position.find(), function(item) {
+							if (item.get("id") === positionId) {
+								position = item;
+							}
 						});
 						
-						if (doShow === YES) {
-							//DigiWebApp.NavigationController.toZeitbuchungDetailsPageTransition();
+						if (position !== null) {
+							if (DigiWebApp.SettingsController.featureAvailable("406")) {
+								// Auftragsinfo
+								if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
+									DigiWebApp.OrderInfoController.init();
+								}
+								M.ViewManager.getView('orderInfoPage', 'order').setSelection(position.get("orderId"));
+								M.ViewManager.getView('orderInfoPage', 'position').setSelection(position.get("id"));
+								DigiWebApp.OrderInfoController.setItem();
+								DigiWebApp.NavigationController.toOrderInfoPageTransition();
+							} else {
+								// vorausgewählte Buchungsliste
+							}
 						}
 			}
 		}
