@@ -53,8 +53,8 @@ textarea.ui-input-text {
 */
 
 .terminlistePage .ui-title {
-	margin: -12px 0px 20px 20px;
-	padding: 3px 90px 0px 90px;
+	margin: -12px 0px 0px 20px;
+	padding: 3px 9px 0px 90px;
 	border: 0px;
 	height: 64px !important;
 }
