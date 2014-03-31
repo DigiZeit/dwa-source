@@ -15,10 +15,10 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
     , events: {
         tap: {
 			action: function(id, m_id, a, b) {
-						console.log(id, m_id, a, b);
 						var doShow = NO;
 					    var view = M.ViewManager.getViewById(id);
-					    var mitarbeiter_modelId = view.modelId;
+					    var positionId = view.positionId;
+					    console.log(positionId);
 						_.each(DigiWebApp.TerminlisteController.items, function(TerminlisteControllerItem) {
 //							if (ZeitbuchungenItem.m_id === mitarbeiter_modelId) {
 //									doShow = YES;
