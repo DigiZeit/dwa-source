@@ -16,7 +16,6 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		var that = DigiWebApp.TerminlisteController;
 		if (isFirstLoad) {
 			// do something only for the first load
-			if 
 		}
 		
 		var itemsToShow = [];
