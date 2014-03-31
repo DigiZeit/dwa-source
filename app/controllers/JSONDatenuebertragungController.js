@@ -388,26 +388,26 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					// el zur Liste hinzufügen
 	            	var posid = el.positionsId;
 	                var posname = el.positionsBezeichnung;
-	                var posstrasse = el.positionStrasse;
-	                var poshausnummer = el.positionHausnummer;
-	                var posplz = el.positionPlz;
-	                var posort = el.positionOrt;
-	                var posland = el.positionZusatz;
-	                var poscountrycode = el.positionLand;
-	                var posphone = el.positionTelefon;
-	                var posfax = el.positionFax;
-	                var posemail = el.positionEmail;
-	                var posansprechpartner = el.positionAnsprechpartner;
-	                var poskundenname = el.positionKundenname;
-	                var poslongitude = el.positionLongitude;
-	                var poslatitude = el.positionLatitude;
-	                var posdescription = el.positionBeschreibung;
+	                var posstrasse = el.strasse;
+	                var poshausnummer = el.hausnummer;
+	                var posplz = el.plz;
+	                var posort = el.ort;
+	                var posland = el.land;
+	                var poscountrycode = el.countrycode;
+	                var posphone = el.telefon;
+	                var posfax = el.fax;
+	                var posemail = el.email;
+	                var posansprechpartner = el.ansprechpartner;
+	                var poskundenname = el.kundenname;
+	                var poslongitude = el.longitude;
+	                var poslatitude = el.latitude;
+	                var posdescription = el.auftragsBeschreibung;
 	                var posorderId = el.auftragsId;
 	                
 					var positionBegin = "";
-					if (el.auftragsBeginn) { positionBegin = el.auftragsBeginn; }
+					if (el.positionBegin) { positionBegin = el.positionBegin; }
 					var positionEnd = "";
-					if (el.auftragsEnde && el.auftragsEnde !== "01.01.1900") { positionEnd = el.auftragsEnde; }
+					if (el.positionEnd && el.positionEnd !== "01.01.1900") { positionEnd = el.positionEnd; }
 
 	            	if (typeof(posid) === "object") { posid = ""; } 
 	            	if (typeof(posname) === "object") { posname = ""; } 
