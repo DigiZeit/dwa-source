@@ -19,7 +19,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
         }
     }
 
-    , childViews: 'header content'
+    , childViews: 'header content tabBar'
 
     , cssClass: 'terminlistePage'
 
