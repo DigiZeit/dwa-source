@@ -26,17 +26,20 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 						});
 						
 						if (position !== null) {
+							var auftrag = _.find(DigiWebApp.Order.find(), function(el) { 
+								return parseInt(position.get("orderId")) === parseInt(el.get("id"));
+							});
 							if (DigiWebApp.SettingsController.featureAvailable("406")) {
 								// Auftragsinfo
 								if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
 									DigiWebApp.OrderInfoController.init();
 								}
 								DigiWebApp.NavigationController.toOrderInfoPageTransition();
-								var orderId = position.get("orderId");
-								var positionId = position.get("id");
-								M.ViewManager.getView('orderInfoPage', 'order').setSelection(orderId);
+								M.ViewManager.getView('orderInfoPage', 'order').setSelection(position.get("orderId"));
+								DigiWebApp.OrderInfoController.activeOrder = [auftrag];
 								DigiWebApp.OrderInfoController.setPositions();
-								M.ViewManager.getView('orderInfoPage', 'position').setSelection(positionId);
+								M.ViewManager.getView('orderInfoPage', 'position').setSelection(position.get("id"));
+								DigiWebApp.OrderInfoController.activePosition = [position];
 								DigiWebApp.OrderInfoController.setItem();
 							} else {
 								// vorausgewählte Buchungsliste
