@@ -47,14 +47,18 @@ DigiWebApp.TerminlisteVorZurueckTabBar = M.TabBarView.design({
     , backwardHandler: function() {
 		//DigiWebApp.TerminlisteController.set('items', null);
 		DigiWebApp.TerminlisteController.items = null;
-		DigiWebApp.TerminlisteController.set('datum', D8.create(DigiWebApp.TerminlisteController.datum).addDays(-1).format("dd.mm.yyyy"));
+		var today = D8.create(DigiWebApp.TerminlisteController.datum);
+		var yesterday = today.yesterday();
+		DigiWebApp.TerminlisteController.set('datum', today.addMinutes(-today.date.getTimezoneOffset() + yesterday.date.getTimezoneOffset()).addDays(-1).format("dd.mm.yyyy"));
 		DigiWebApp.TerminlisteController.init(YES);
 	}
 
 	, forwardHandler: function() {
 		//DigiWebApp.TerminlisteController.set('items', null);
 		DigiWebApp.TerminlisteController.items = null;
-		DigiWebApp.TerminlisteController.set('datum', D8.create(DigiWebApp.TerminlisteController.datum).addDays(1).format("dd.mm.yyyy"));
+		var today = D8.create(DigiWebApp.TerminlisteController.datum);
+		var yesterday = today.yesterday();
+		DigiWebApp.TerminlisteController.set('datum', today.addMinutes(-today.date.getTimezoneOffset() + yesterday.date.getTimezoneOffset()).addDays(1).format("dd.mm.yyyy"));
 		DigiWebApp.TerminlisteController.init(YES);
 	}
 
