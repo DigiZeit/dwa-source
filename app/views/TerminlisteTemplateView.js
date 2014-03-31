@@ -31,9 +31,11 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 								if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
 									DigiWebApp.OrderInfoController.init();
 								}
-								M.ViewManager.getView('orderInfoPage', 'order').setSelection(position.get("orderId"));
+								var orderId = position.get("orderId")
+								var positionId = position.get("Id")
+								M.ViewManager.getView('orderInfoPage', 'order').setSelection(orderId);
 								DigiWebApp.OrderInfoController.setPositions();
-								M.ViewManager.getView('orderInfoPage', 'position').setSelection(position.get("id"));
+								M.ViewManager.getView('orderInfoPage', 'position').setSelection(positionId);
 								DigiWebApp.OrderInfoController.setItem();
 								DigiWebApp.NavigationController.toOrderInfoPageTransition();
 							} else {
