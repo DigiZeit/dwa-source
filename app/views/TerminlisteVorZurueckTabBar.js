@@ -3,59 +3,59 @@
 // Generated with: Espresso 
 //
 // Project: DigiWebApp
-// View: VorZurueckTabBar
+// View: TerminlisteVorZurueckTabBar
 // ==========================================================================
 
-DigiWebApp.VorZurueckTabBar = M.TabBarView.design({
+DigiWebApp.TerminlisteVorZurueckTabBar = M.TabBarView.design({
 
       childViews: 'tabItemZurueck tabItemDayToShow tabItemVor'
 
     , anchorLocation: M.BOTTOM
 
-    , isFixed: YES // useless as TMP set position fixed hard in code... :-(
+    , isFixed: YES 
 
     , transition: M.TRANSITION.FADE
 
-    , name: 'vorzuruecktabbar'
+    , name: 'terminlistevorzuruecktabbar'
 
     , tabItemZurueck: M.TabBarItemView.design({
           value: M.I18N.l('backward')
-        , page: 'zeitbuchungenPage'
+        , page: 'terminlistePage'
         , icon: 'arrow-l'
         , switchPage: function() {
     		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-			DigiWebApp.VorZurueckTabBar.backwardHandler();
+			DigiWebApp.TerminlisteVorZurueckTabBar.backwardHandler();
     	}
     })
 
     , tabItemDayToShow: M.TabBarItemView.design({
           value: ''
-        , page: 'zeitbuchungenPage'
+        , page: 'terminlistePage'
         , icon: ''
     })
 
     , tabItemVor: M.TabBarItemView.design({
           value: M.I18N.l('forward')
-        , page: 'zeitbuchungenPage'
+        , page: 'terminlistePage'
         , icon: 'arrow-r'
         , switchPage: function() {
     		try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-    		DigiWebApp.VorZurueckTabBar.forwardHandler();
+    		DigiWebApp.TerminlisteVorZurueckTabBar.forwardHandler();
     	}
     })
         
     , backwardHandler: function() {
-		DigiWebApp.ZeitbuchungenController.set('items', null);
-		DigiWebApp.ZeitbuchungenController.items = null;
-		DigiWebApp.ZeitbuchungenController.set('datum', D8.create(DigiWebApp.ZeitbuchungenController.datum).addDays(-1).format("dd.mm.yyyy"));
-		DigiWebApp.ZeitbuchungenController.init(YES);
+		DigiWebApp.TerminlisteController.set('items', null);
+		DigiWebApp.TerminlisteController.items = null;
+		DigiWebApp.TerminlisteController.set('datum', D8.create(DigiWebApp.ZeitbuchungenController.datum).addDays(-1).format("dd.mm.yyyy"));
+		DigiWebApp.TerminlisteController.init(YES);
 	}
 
 	, forwardHandler: function() {
-		DigiWebApp.ZeitbuchungenController.set('items', null);
-		DigiWebApp.ZeitbuchungenController.items = null;
-		DigiWebApp.ZeitbuchungenController.set('datum', D8.create(DigiWebApp.ZeitbuchungenController.datum).addDays(1).format("dd.mm.yyyy"));
-		DigiWebApp.ZeitbuchungenController.init(YES);
+		DigiWebApp.TerminlisteController.set('items', null);
+		DigiWebApp.TerminlisteController.items = null;
+		DigiWebApp.TerminlisteController.set('datum', D8.create(DigiWebApp.ZeitbuchungenController.datum).addDays(1).format("dd.mm.yyyy"));
+		DigiWebApp.TerminlisteController.init(YES);
 	}
 
 });

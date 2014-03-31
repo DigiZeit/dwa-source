@@ -489,6 +489,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, Terminliste: function() {
+		DigiWebApp.TerminlisteController.datum = D8.create().format("dd.mm.yyyy");
 		DigiWebApp.NavigationController.toTerminlistePage();
 	}
 	

@@ -7,6 +7,7 @@
 // ==========================================================================
 
 m_require('app/views/TerminlisteTemplateView');
+m_require('app/views/TerminlisteVorZurueckTabBar.js');
 
 DigiWebApp.TerminlistePage = M.PageView.design({
 
@@ -63,5 +64,8 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 	            , listItemTemplateView: DigiWebApp.TerminlisteTemplateView
 	      })
     })
+
+    , tabBar: DigiWebApp.TerminlisteVorZurueckTabBar
+
 });
 

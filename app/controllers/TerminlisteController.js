@@ -9,11 +9,14 @@
 DigiWebApp.TerminlisteController = M.Controller.extend({
 
 	  items: null
+	  
+	, datum: null
 		
 	, init: function(isFirstLoad) {
 		var that = DigiWebApp.TerminlisteController;
 		if (isFirstLoad) {
 			// do something only for the first load
+			if 
 		}
 		
 		var itemsToShow = [];
@@ -26,7 +29,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			var tageDanach = 0;
 			var hideOhneTermin = false;
 			var beachteAlleTermine = false;
-			var myDate = D8.create().addDays(0 - tageZuvor);
+			var myDate = D8.create(DigiWebApp.TerminlisteController.datum).addDays(0 - tageZuvor);
 			for (var x=0; x <= tageZuvor + tageDanach; x++) {
 				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
 				var todayEnd = todayStart.addDays(1).addMilliseconds(-1);
