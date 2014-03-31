@@ -58,7 +58,8 @@ DigiWebApp.TerminlisteVorZurueckTabBar = M.TabBarView.design({
 		DigiWebApp.TerminlisteController.items = null;
 		var today = D8.create(DigiWebApp.TerminlisteController.datum);
 		var tomorrow = today.tomorrow();
-		DigiWebApp.TerminlisteController.set('datum', today.addMinutes(today.date.getTimezoneOffset() - tomorrow.date.getTimezoneOffset()).addDays(1).format("dd.mm.yyyy"));
+		//if (tomorrow.format(""))
+		DigiWebApp.TerminlisteController.set('datum', today.addMinutes(-today.date.getTimezoneOffset() + tomorrow.date.getTimezoneOffset()).addDays(1).format("dd.mm.yyyy"));
 		DigiWebApp.TerminlisteController.init(YES);
 	}
 
