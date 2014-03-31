@@ -14,8 +14,8 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
     , events: {
         tap: {
-			action: function(id, m_id) {
-						console.log(id, m_id);
+			action: function(id, m_id, a, b) {
+						console.log(id, m_id, a, b);
 						var doShow = NO;
 					    var view = M.ViewManager.getViewById(id);
 					    var mitarbeiter_modelId = view.modelId;
