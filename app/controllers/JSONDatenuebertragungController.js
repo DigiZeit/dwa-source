@@ -405,9 +405,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                var posorderId = el.auftragsId;
 	                
 					var positionBegin = "";
-					if (el.positionBegin) { positionBegin = el.positionBegin; }
+					if (el.beginn) { positionBegin = el.beginn; }
 					var positionEnd = "";
-					if (el.positionEnd && el.positionEnd !== "01.01.1900") { positionEnd = el.positionEnd; }
+					if (el.ende && el.ende !== "01.01.1900") { positionEnd = el.ende; }
 
 	            	if (typeof(posid) === "object") { posid = ""; } 
 	            	if (typeof(posname) === "object") { posname = ""; } 
