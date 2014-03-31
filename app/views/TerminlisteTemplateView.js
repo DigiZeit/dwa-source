@@ -43,6 +43,13 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 								DigiWebApp.OrderInfoController.setItem();
 							} else {
 								// vorausgewählte Buchungsliste
+								if (typeof(M.ViewManager.getView('bookingPage', 'order').getSelection()) === "undefined") {
+									DigiWebApp.BookingController.init();
+								}
+								DigiWebApp.NavigationController.toBookTimePageTransition();
+								M.ViewManager.getView('bookingPage', 'order').setSelection(position.get("orderId"));
+								DigiWebApp.SelectionController.setPositions();
+								M.ViewManager.getView('bookingPage', 'position').setSelection(position.get("id"));
 							}
 						}
 			}
