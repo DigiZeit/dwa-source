@@ -184,7 +184,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
         var i = 0;
         positions = _.map(positions, function(pos) {
         	if (!(pos)) return;
-            if (pos.get('orderId') === orderId) {
+            if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
                 var obj = { label: pos.get('name'), value: pos.get('id') };
                 if(i === 0) {
                     obj.isSelected = YES;
