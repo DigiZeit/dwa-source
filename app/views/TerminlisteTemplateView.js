@@ -32,6 +32,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 									DigiWebApp.OrderInfoController.init();
 								}
 								M.ViewManager.getView('orderInfoPage', 'order').setSelection(position.get("orderId"));
+								DigiWebApp.OrderInfoController.setPositions();
 								M.ViewManager.getView('orderInfoPage', 'position').setSelection(position.get("id"));
 								DigiWebApp.OrderInfoController.setItem();
 								DigiWebApp.NavigationController.toOrderInfoPageTransition();
