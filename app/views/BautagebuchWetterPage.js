@@ -16,7 +16,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
         }
         , pagehide: {
             action: function() {
-
+        		clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
         	}
         }
     }
@@ -36,7 +36,10 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToBautagebuchBautageberichtDetailsPageTransition();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+                    	clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
+                    	this.backToBautagebuchBautageberichtDetailsPageTransition();
+                    }
                 }
             }
         })
@@ -603,11 +606,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 	        //, anchorLocation: M.CENTER
 	        , events: {
 		            tap: {
-		                target: DigiWebApp.NavigationController
-		                , action: 'backToBautagebuchBautageberichtDetailsPageTransition'
-//						action: function() {
-//							
-//						}
+		                //  target: DigiWebApp.NavigationController
+		                //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
+						action: function() {
+								clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
+								DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition();
+						}
 		            }
 	          }
 	    })
