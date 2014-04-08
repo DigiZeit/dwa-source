@@ -26,6 +26,14 @@ function parseBool(val) {
 	}
 }
 
+// Extend Number with padLeft-Member
+Number.prototype.padLeft = function (n,str) {
+    return (this < 0 ? '-' : '') + 
+            Array(n-String(Math.abs(this)).length+1)
+             .join(str||'0') + 
+           (Math.abs(this));
+}
+
 function addToListIfNotFoundById(list, element, id) {
 	var found = _.find(list, function(el) {
 		if (typeof(el.get) === "function") {

@@ -260,10 +260,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 		      		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
 		      		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
 		      		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
-		      		  				var hoursInBetween = Math.floor(minutesInBetween);
+		      		  				var hoursInBetween = Math.floor(minutesInBetween / 60);
 		      		  				var remainingMinutes = minutesInBetween % 60;
-		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween + ":" + remainingMinutes);
-		      		  				console.log(hoursInBetween + ":" + remainingMinutes);
+		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
 		      		  			} catch(e) {}
 	          		  		}
 	          	  	  }
@@ -285,12 +284,12 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	          		  blur: {
 		          		  	action: function(id, event) {
 	          		  			try {
-	          		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
-	          		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
-	          		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
-	          		  				var hoursInBetween = Math.floor(minutesInBetween);
-	          		  				var remainingMinutes = minutesInBetween % 60;
-	          		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween + ":" + remainingMinutes);
+		      		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
+		      		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
+		      		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
+		      		  				var hoursInBetween = Math.floor(minutesInBetween / 60);
+		      		  				var remainingMinutes = minutesInBetween % 60;
+		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
 	          		  			} catch(e) {}
 	          		  		}
 	          	  	  }
