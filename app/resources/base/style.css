@@ -1488,6 +1488,10 @@ li.ui-li {
 }
 
 .terminlisteEinstellungen {
+	margin-bottom: 60px;
 	margin-top: 30px;
 	height: 100px;
+}
+.terminlisteEinstellungen li{
+	margin-bottom: 20px;
 }

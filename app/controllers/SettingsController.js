@@ -198,6 +198,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var bautagebuchLimit_autoStartUhrzeit = record.get('bautagebuchLimit_autoStartUhrzeit');
             if (!bautagebuchLimit_autoStartUhrzeit) bautagebuchLimit_autoStartUhrzeit = DigiWebApp.SettingsController.defaultsettings.get("bautagebuchLimit_autoStartUhrzeit");
 
+            var terminliste_keineKuenstlichenTermine = record.get('terminliste_keineKuenstlichenTermine');
+            if (!terminliste_keineKuenstlichenTermine) terminliste_keineKuenstlichenTermine = DigiWebApp.SettingsController.defaultsettings.get("terminliste_keineKuenstlichenTermine");
+
+            var terminliste_ignoriereAuftragszeitraum = record.get('bautagebuchLimit_autoStartUhrzeit');
+            if (!terminliste_ignoriereAuftragszeitraum) terminliste_ignoriereAuftragszeitraum = DigiWebApp.SettingsController.defaultsettings.get("terminliste_ignoriereAuftragszeitraum");
+
             settings = {
             	  debug: [{
                       value: record.get('debug')
