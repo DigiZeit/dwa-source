@@ -62,7 +62,8 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	              value: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
 	          })
 	          , startUhrzeitInput: M.TextFieldView.design({
-	        	    contentBindingReverse: {
+	        	    inputType: M.INPUT_TIME
+	        	  , contentBindingReverse: {
 	                    target: DigiWebApp.BautagebuchEinstellungenController
 	                  , property: 'settings.startUhrzeit'
 	              }
@@ -73,44 +74,6 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	          	  , events: {
 	          		  tap: {
 		          		  	action: function(id, event) {
-	          		  				$(DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeit.startUhrzeitInput).blur();
-					          		M.DatePickerView.show({
-					          		      source: M.ViewManager.getView('bautagebuchEinstellungenPage', 'startUhrzeitInput')
-					          		    , initialDate: D8.create("01.01.1993 " + DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit)
-					          		    , showTimePicker: YES
-					          		    , showDatePicker: NO
-					          		    , showAmPm: NO
-						    		    , dateOrder: 'ddmmyy'
-					          		    , dateFormat: "dd.mm.yy"
-					          		    , timeFormat: "HH:ii"
-					          		    , minutesLabel: M.I18N.l('minute')
-					          		    , hoursLabel: M.I18N.l('hour')
-					          		    , dayLabel: M.I18N.l('day')
-					          		    , monthLabel: M.I18N.l('month')
-					          		    , yearLabel: M.I18N.l('year')
-					          		    , dayNamesShort: DigiWebApp.ApplicationController.dayNamesShort
-					          		    , dayNames: DigiWebApp.ApplicationController.dayNames
-					          		    , monthNamesShort: DigiWebApp.ApplicationController.monthNamesShort
-					          		    , monthNames: DigiWebApp.ApplicationController.monthNames
-					          		    , callbacks: {
-					      				confirm: {
-					      					  target: this
-					      					, action: function(value, date) {
-					      						DigiWebApp.BautagebuchEinstellungenController.set("settings.startUhrzeit", value);
-					      					}
-					      				}
-					      				, before: {
-					      					action: function(value, date) {
-					      					
-					      					}
-					      				}
-					      				, cancel: {
-					      					action: function() {
-					      					
-					      					}
-					      				}
-					      			}
-					          		});
 	          		  		}
 	          	  	  }
 	          	  }
