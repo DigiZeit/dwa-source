@@ -29,6 +29,18 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		var ganztaegigeItems = [];
 		var nachUhrzeitItems = [];
 		
+		var ganztaegigeItemsObject = {
+				  label: M.I18N.l("ganztaegig")
+				, items: ganztaegigeItems
+		};
+		itemsToShow.push(ganztaegigeItemsObject);
+		var nachUhrzeitItemsObject = {
+				  label: M.I18N.l("nachUhrzeit")
+				, items: nachUhrzeitItems
+		};
+		itemsToShow.push(nachUhrzeitItemsObject);
+		that.set("items", itemsToShow);
+
 		_.each(DigiWebApp.Position.find(), function(pos) {
 			
 			var tageZuvor = 0;
@@ -133,6 +145,9 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		});
 		
 		//if (ganztaegigeItems.length > 0) {
+			ganztaegigeItems = _.sortBy(ganztaegigeItems, function(el){
+				return D8.create(el.timeStampVon).getTimestamp();
+			});
 			var ganztaegigeItemsObject = {
 					  label: M.I18N.l("ganztaegig")
 					, items: ganztaegigeItems
