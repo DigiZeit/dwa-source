@@ -86,13 +86,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
       	})
           
 		, temperaturView: M.ContainerView.design({
-			  childViews: 'myLabel mySliderGrid'
+			  childViews: 'myLabel myGrid'
 	    	, cssClass: 'temperaturView'
 		    , myLabel: M.LabelView.design({
 		    	  cssClass: 'whiteText marginBottom5px'
 	        	, value: M.I18N.l('BautagebuchTemperatur')
 	        })
-			, mySliderGrid: M.GridView.design({
+			, myGrid: M.GridView.design({
 				  childViews: 'minusButton plusButton TextValue'
 			    , layout: M.THREE_COLUMNS
 			    , minusButton: M.ButtonView.design({
@@ -101,6 +101,9 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.temperatur = -50) {
+				    					return;
+				    				}
 				    				myWetter.temperatur = myWetter.temperatur - 1;
 				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 				    			}
@@ -113,40 +116,14 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.temperatur = 50) {
+				    					return;
+				    				}
 				    				myWetter.temperatur = myWetter.temperatur + 1;
 				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 		              }
-			    })
-			    , mySlider: M.SliderView.design({
-			    	  min: -50
-			    	, max: 50
-			    	, isSliderOnly: YES
-			    	, highlightLeftPart: NO
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.temperatur'
-				    }
-			        , contentBindingReverse: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.temperatur'
-				    }
-				    , events: {
-			    		change: {
-			    			action: function(myValue, m_id) {
-				    			var mySliderContainer = DigiWebApp.BautagebuchWetterPage.content.temperaturView.mySliderGrid;
-				    			if (mySliderContainer.mySlider.id !== m_id) {
-				    				return true;
-				    			} else { 
-				    				mySliderContainer.TextValue.computedValue.value = parseInt(myValue);
-				    				mySliderContainer.TextValue.computeValue();
-				    				mySliderContainer.TextValue.renderUpdate();
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.wetter.temperatur = parseInt(myValue);
-			    				}
-			    			}
-			    		}
-					}
 			    })
 			    , TextValue: M.LabelView.design({
 			    	  cssClass: 'whiteText centerText'
@@ -169,39 +146,44 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		})
 
 		, luftfeuchteView: M.ContainerView.design({
-			  childViews: 'myLabel mySliderGrid'
+			  childViews: 'myLabel myGrid'
 	    	, cssClass: 'luftfeuchteView'
 		    , myLabel: M.LabelView.design({
 		    	  cssClass: 'whiteText marginBottom5px'
 	        	, value: M.I18N.l('BautagebuchLuftfeuchtigkeit')
 	        })
-			, mySliderGrid: M.GridView.design({
-				  childViews: 'mySlider TextValue'
-			    , layout: M.TWO_COLUMNS
-			    , mySlider: M.SliderView.design({
-			    	  min: 0
-			    	, max: 100
-			    	, isSliderOnly: YES
-			    	, highlightLeftPart: NO
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.luftfeuchtigkeit'
-				    }
-				    , events: {
-			    		change: {
-			    			action: function(myValue, m_id) {
-				    			var mySliderContainer = DigiWebApp.BautagebuchWetterPage.content.luftfeuchteView.mySliderGrid;
-				    			if (mySliderContainer.mySlider.id !== m_id) {
-				    				return true;
-				    			} else { 
-				    				mySliderContainer.TextValue.computedValue.value = parseInt(myValue);
-				    				mySliderContainer.TextValue.computeValue();
-				    				mySliderContainer.TextValue.renderUpdate();
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.wetter.luftfeuchtigkeit = parseInt(myValue);
-			    				}
-			    			}
-			    		}
-					}
+			, myGrid: M.GridView.design({
+				  childViews: 'minusButton plusButton TextValue'
+			    , layout: M.THREE_COLUMNS
+			    , minusButton: M.ButtonView.design({
+  		                value: "-"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.bewoelkung = 0) {
+				    					return;
+				    				}
+				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 10;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
+			    })
+			    , plusButton: M.ButtonView.design({
+		                value: "+"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.bewoelkung = 100) {
+				    					return;
+				    				}
+				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 10;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
 			    })
 			    , TextValue: M.LabelView.design({
 			    	  cssClass: 'whiteText centerText'
@@ -220,39 +202,44 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		})
 
 		, bewoelkungView: M.ContainerView.design({
-			  childViews: 'myLabel mySliderGrid'
+			  childViews: 'myLabel myGrid'
 	    	, cssClass: 'bewoelkungView'
 		    , myLabel: M.LabelView.design({
 		    	  cssClass: 'whiteText marginBottom5px'
 	        	, value: M.I18N.l('BautagebuchBewoelkung')
 	        })
-			, mySliderGrid: M.GridView.design({
-				  childViews: 'mySlider TextValue'
-			    , layout: M.TWO_COLUMNS
-			    , mySlider: M.SliderView.design({
-			    	  min: 0
-			    	, max: 3
-			    	, isSliderOnly: YES
-			    	, highlightLeftPart: NO
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.bewoelkung'
-				    }
-				    , events: {
-			    		change: {
-			    			action: function(myValue, m_id) {
-				    			var mySliderContainer = DigiWebApp.BautagebuchWetterPage.content.bewoelkungView.mySliderGrid;
-				    			if (mySliderContainer.mySlider.id !== m_id) {
-				    				return true;
-				    			} else { 
-				    				mySliderContainer.TextValue.computedValue.value = parseInt(myValue);
-				    				mySliderContainer.TextValue.computeValue();
-				    				mySliderContainer.TextValue.renderUpdate();
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.wetter.bewoelkung = parseInt(myValue);
-			    				}
-			    			}
-			    		}
-					}
+			, myGrid: M.GridView.design({
+				  childViews: 'minusButton plusButton TextValue'
+			    , layout: M.THREE_COLUMNS
+			    , minusButton: M.ButtonView.design({
+  		                value: "-"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.bewoelkung = 0) {
+				    					return;
+				    				}
+				    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
+			    })
+			    , plusButton: M.ButtonView.design({
+		                value: "+"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.bewoelkung = 3) {
+				    					return;
+				    				}
+				    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
 			    })
 			    , TextValue: M.LabelView.design({
 			    	  cssClass: 'whiteText centerText'
@@ -282,39 +269,44 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		})
 
 		, niederschlagView: M.ContainerView.design({
-			  childViews: 'myLabel mySliderGrid'
+			  childViews: 'myLabel myGrid'
 	    	, cssClass: 'niederschlagView'
 		    , myLabel: M.LabelView.design({
 		    	  cssClass: 'whiteText marginBottom5px'
 	        	, value: M.I18N.l('BautagebuchNiederschlag')
 	        })
-			, mySliderGrid: M.GridView.design({
-				  childViews: 'mySlider TextValue'
-			    , layout: M.TWO_COLUMNS
-			    , mySlider: M.SliderView.design({
-			    	  min: 0
-			    	, max: 5
-			    	, isSliderOnly: YES
-			    	, highlightLeftPart: NO
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.niederschlag'
-				    }
-				    , events: {
-			    		change: {
-			    			action: function(myValue, m_id) {
-				    			var mySliderContainer = DigiWebApp.BautagebuchWetterPage.content.niederschlagView.mySliderGrid;
-				    			if (mySliderContainer.mySlider.id !== m_id) {
-				    				return true;
-				    			} else { 
-				    				mySliderContainer.TextValue.computedValue.value = parseInt(myValue);
-				    				mySliderContainer.TextValue.computeValue();
-				    				mySliderContainer.TextValue.renderUpdate();
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.wetter.niederschlag = parseInt(myValue);
-			    				}
-			    			}
-			    		}
-					}
+			, myGrid: M.GridView.design({
+				  childViews: 'minusButton plusButton TextValue'
+			    , layout: M.THREE_COLUMNS
+			    , minusButton: M.ButtonView.design({
+  		                value: "-"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.niederschlag = 0) {
+				    					return;
+				    				}
+				    				myWetter.niederschlag = myWetter.niederschlag - 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
+			    })
+			    , plusButton: M.ButtonView.design({
+		                value: "+"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.niederschlag = 5) {
+				    					return;
+				    				}
+				    				myWetter.niederschlag = myWetter.niederschlag + 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
 			    })
 			    , TextValue: M.LabelView.design({
 			    	  cssClass: 'whiteText centerText'
@@ -348,39 +340,44 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		})
 
 		, windView: M.ContainerView.design({
-			  childViews: 'myLabel mySliderGrid'
+			  childViews: 'myLabel myGrid'
 	    	, cssClass: 'windView'
 		    , myLabel: M.LabelView.design({
 		    	  cssClass: 'whiteText marginBottom5px'
 	        	, value: M.I18N.l('BautagebuchWind')
 	        })
-			, mySliderGrid: M.GridView.design({
-				  childViews: 'mySlider TextValue'
-			    , layout: M.TWO_COLUMNS
-			    , mySlider: M.SliderView.design({
-			    	  min: 0
-			    	, max: 3
-			    	, isSliderOnly: YES
-			    	, highlightLeftPart: NO
-			        , contentBinding: {
-			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
-			            , property: 'wetter.wind'
-				    }
-				    , events: {
-			    		change: {
-			    			action: function(myValue, m_id) {
-				    			var mySliderContainer = DigiWebApp.BautagebuchWetterPage.content.windView.mySliderGrid;
-				    			if (mySliderContainer.mySlider.id !== m_id) {
-				    				return true;
-				    			} else { 
-				    				mySliderContainer.TextValue.computedValue.value = parseInt(myValue);
-				    				mySliderContainer.TextValue.computeValue();
-				    				mySliderContainer.TextValue.renderUpdate();
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.wetter.wind = parseInt(myValue);
-			    				}
-			    			}
-			    		}
-					}
+			, myGrid: M.GridView.design({
+				  childViews: 'minusButton plusButton TextValue'
+			    , layout: M.THREE_COLUMNS
+			    , minusButton: M.ButtonView.design({
+  		                value: "-"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.wind = 0) {
+				    					return;
+				    				}
+				    				myWetter.wind = myWetter.wind - 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
+			    })
+			    , plusButton: M.ButtonView.design({
+		                value: "+"
+		              , events: {
+		                  tap: {
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				if (myWetter.wind = 3) {
+				    					return;
+				    				}
+				    				myWetter.wind = myWetter.wind + 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
+		                  }
+		              }
 			    })
 			    , TextValue: M.LabelView.design({
 			    	  cssClass: 'whiteText centerText'
