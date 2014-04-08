@@ -101,7 +101,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.temperatur = -50) {
+				    				if (myWetter.temperatur === -50) {
 				    					return;
 				    				}
 				    				myWetter.temperatur = myWetter.temperatur - 1;
@@ -116,7 +116,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.temperatur = 50) {
+				    				if (myWetter.temperatur === 50) {
 				    					return;
 				    				}
 				    				myWetter.temperatur = myWetter.temperatur + 1;
@@ -161,7 +161,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung = 0) {
+				    				if (myWetter.bewoelkung === 0) {
 				    					return;
 				    				}
 				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 10;
@@ -176,7 +176,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung = 100) {
+				    				if (myWetter.bewoelkung === 100) {
 				    					return;
 				    				}
 				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 10;
@@ -217,7 +217,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung = 0) {
+				    				if (myWetter.bewoelkung === 0) {
 				    					return;
 				    				}
 				    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
@@ -232,7 +232,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung = 3) {
+				    				if (myWetter.bewoelkung === 3) {
 				    					return;
 				    				}
 				    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
@@ -284,7 +284,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.niederschlag = 0) {
+				    				if (myWetter.niederschlag === 0) {
 				    					return;
 				    				}
 				    				myWetter.niederschlag = myWetter.niederschlag - 1;
@@ -299,7 +299,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.niederschlag = 5) {
+				    				if (myWetter.niederschlag === 5) {
 				    					return;
 				    				}
 				    				myWetter.niederschlag = myWetter.niederschlag + 1;
@@ -355,7 +355,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.wind = 0) {
+				    				if (myWetter.wind === 0) {
 				    					return;
 				    				}
 				    				myWetter.wind = myWetter.wind - 1;
@@ -370,7 +370,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.wind = 3) {
+				    				if (myWetter.wind === 3) {
 				    					return;
 				    				}
 				    				myWetter.wind = myWetter.wind + 1;
