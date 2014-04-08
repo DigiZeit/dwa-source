@@ -91,5 +91,9 @@ DigiWebApp.Settings = M.Model.create({
     , detailierteZeitdaten: M.Model.attr('Boolean')
     
     , vibrationsDauer: M.Model.attr('String')
+    
+    , terminliste_keineKuenstlichenTermine: M.Model.attr('Boolean') 
+    
+    , terminliste_ignoriereAuftragszeitraum: M.Model.attr('Boolean')
 
 }, M.DataProviderLocalStorage);
