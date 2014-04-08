@@ -254,9 +254,16 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	                  , property: 'von'
 	              }
 	          	  , events: {
-	          		  tap: {
+	          		  change: {
 		          		  	action: function(id, event) {
-	          		  				//$(DigiWebApp.BautagebuchZeitenDetailsPage.content.vonInput).blur();
+		    		  			try {
+		      		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
+		      		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
+		      		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
+		      		  				var hoursInBetween = Math.floor(minutesInBetween);
+		      		  				var remainingMinutes = minutesInBetween % 60;
+		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween + ":" + remainingMinutes);
+		      		  			} catch(e) {}
 	          		  		}
 	          	  	  }
 	          	  }
@@ -274,9 +281,16 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	                  , property: 'bis'
 	              }
 	          	  , events: {
-	          		  tap: {
+	          		  change: {
 		          		  	action: function(id, event) {
-	          		  				//$(DigiWebApp.BautagebuchZeitenDetailsPage.content.bisInput).blur();
+	          		  			try {
+	          		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
+	          		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
+	          		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
+	          		  				var hoursInBetween = Math.floor(minutesInBetween);
+	          		  				var remainingMinutes = minutesInBetween % 60;
+	          		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween + ":" + remainingMinutes);
+	          		  			} catch(e) {}
 	          		  		}
 	          	  	  }
 	          	  }
