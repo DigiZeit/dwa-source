@@ -33,8 +33,6 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			
 			var tageZuvor = 0;
 			var tageDanach = 0;
-			var hideOhneTermin = false;
-			var beachteAlleTermine = false;
 			var myDate = D8.create(DigiWebApp.TerminlisteController.datum).addDays(0 - tageZuvor);
 			for (var x=0; x <= tageZuvor + tageDanach; x++) {
 				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
@@ -87,41 +85,48 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 					_.each(termineHeute, function(terminStr) {
 						var termin = JSON.parse(terminStr);
 						termin.m_id = pos.m_id;
-						if (termin.ganzerTag) {
-							addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
-						} else {
-							addToListIfNotFoundById(nachUhrzeitItems, termin, termin.terminId)
+						if (
+								   (DigiWebApp.SettingsController.getSetting("terminliste_ignoriereAuftragszeitraum"))
+								|| (heuteLiegtImAuftragsZeitraum)
+						) {
+							if (termin.ganzerTag) {
+								addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
+							} else {
+								addToListIfNotFoundById(nachUhrzeitItems, termin, termin.terminId)
+							}
 						}
 					});
 				} else {
-					// künstlicher Termin für diesen Auftrag
-					var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("id"))});
-					var kuenstlicherTermin = {
-							  _createdAt: D8.create().getTimestamp()
-							, _updatedAt: D8.create().getTimestamp()
-							, beschreibung: null
-							, betreff: pos.get("name") + ", " + order.get("name")
-							, von: todayStr + " 00:00:00"
-							, bis: todayStr + " 23:59:59"
-							, erinnert: false
-							, erinnerung: null
-							, erstellerBenutzerId: null
-							, ganzerTag: false
-							, neueTerminId: null
-							, ortId: null
-							, positionId: pos.get("id")
-							, ressourcen: null
-							, serienterminId: null
-							, status: null
-							, terminId: null
-							, terminartId: null
-							, timeStampBis: D8.create(todayStr + " 23:59:59").getTimestamp()
-							, timeStampErinnerung: null
-							, timeStampVon: D8.create(todayStr + " 00:00:00").getTimestamp()
-							, zeitstempel: D8.create().getTimestamp()
-							, m_id: pos.m_id
+					if (!DigiWebApp.SettingsController.getSetting("terminliste_keineKuenstlichenTermine")) {
+						// künstlicher Termin für diesen Auftrag
+						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("id"))});
+						var kuenstlicherTermin = {
+								  _createdAt: D8.create().getTimestamp()
+								, _updatedAt: D8.create().getTimestamp()
+								, beschreibung: null
+								, betreff: pos.get("name") + ", " + order.get("name")
+								, von: todayStr + " 00:00:00"
+								, bis: todayStr + " 23:59:59"
+								, erinnert: false
+								, erinnerung: null
+								, erstellerBenutzerId: null
+								, ganzerTag: false
+								, neueTerminId: null
+								, ortId: null
+								, positionId: pos.get("id")
+								, ressourcen: null
+								, serienterminId: null
+								, status: null
+								, terminId: null
+								, terminartId: null
+								, timeStampBis: D8.create(todayStr + " 23:59:59").getTimestamp()
+								, timeStampErinnerung: null
+								, timeStampVon: D8.create(todayStr + " 00:00:00").getTimestamp()
+								, zeitstempel: D8.create().getTimestamp()
+								, m_id: pos.m_id
+						}
+						addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
 					}
-					addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
 				}
 				
 			}
