@@ -269,10 +269,10 @@ DigiWebApp.SettingsPage = M.PageView.design({
       	  		  childViews: 'terminlisteEinstellungen_titel' // terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
 		        , terminlisteEinstellungen_titel: M.ListView.design({
 	        	  	  isDividedList: YES
-	                , value: [{
-	    				  label: M.I18N.l("ganztaegig")
-	    				, items: [{}]
-	    			}]
+	                , contentBinding: {
+		            	  target: DigiWebApp.SettingsPage
+		            	, property: 'terminlisteEinstellungen_dividedList'
+		        	}
 	  	      })
         })
 
@@ -302,6 +302,11 @@ DigiWebApp.SettingsPage = M.PageView.design({
         })
     })
 
+    , terminlisteEinstellungen_dividedList: [{
+		  label: M.I18N.l("ganztaegig")
+		, items: [{}]
+	}]
+    	
     , tabBar: DigiWebApp.TabBar
 
 });
