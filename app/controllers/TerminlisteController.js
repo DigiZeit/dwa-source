@@ -25,10 +25,11 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		var tabBar = DigiWebApp.TerminlisteVorZurueckTabBar;
 		tabBar.setActiveTab(tabBar.tabItemDayToShow);
 		
+		/* TerminlistePage zurücksetzen */
 		var itemsToShow = [];
 		var ganztaegigeItems = [];
 		var nachUhrzeitItems = [];
-		
+	
 		var ganztaegigeItemsObject = {
 				  label: M.I18N.l("ganztaegig")
 				, items: ganztaegigeItems
@@ -40,6 +41,11 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		};
 		itemsToShow.push(nachUhrzeitItemsObject);
 		that.set("items", itemsToShow);
+
+		/* erstelle Terminliste */
+		var itemsToShow = [];
+		var ganztaegigeItems = [];
+		var nachUhrzeitItems = [];
 
 		_.each(DigiWebApp.Position.find(), function(pos) {
 			
