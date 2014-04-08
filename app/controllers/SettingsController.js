@@ -60,6 +60,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , auftragsDetailsKoppeln: false
         , detailierteZeitdaten: true
         , vibrationsDauer: 100
+        , terminliste_keineKuenstlichenTermine: false
+        , terminliste_ignoriereAuftragszeitraum: true
     }
 
     , defaultsettings: null
@@ -150,9 +152,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::Terminliste
 
-        //console.log("vor enforceChefToolOnly");
         DigiWebApp.ApplicationController.enforceChefToolOnly();
-        //console.log("nach enforceChefToolOnly");
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();
         // Start::TransitionsAvailable
@@ -312,6 +312,16 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , isSelected: record.get('auftragsDetailsKoppeln')
 	           }]
                , vibrationsDauer: vibrationsDauer
+	           , terminliste_keineKuenstlichenTermine: [{
+	                   value: record.get('terminliste_keineKuenstlichenTermine')
+	                 , label: M.I18N.l('terminliste_keineKuenstlichenTermine')
+	                 , isSelected: record.get('terminliste_keineKuenstlichenTermine')
+	           }]
+    	       , terminliste_ignoriereAuftragszeitraum: [{
+	                   value: record.get('terminliste_ignoriereAuftragszeitraum')
+	                 , label: M.I18N.l('terminliste_ignoriereAuftragszeitraum')
+	                 , isSelected: record.get('terminliste_ignoriereAuftragszeitraum')
+	           }]
 
             };
         /* default values */
@@ -413,6 +423,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                , label: M.I18N.l('auftragsDetailsKoppeln')
 	            }]
                 , vibrationsDauer: DigiWebApp.SettingsController.defaultsettings.get("vibrationsDauer")
+ 	           , terminliste_keineKuenstlichenTermine: [{
+	                   value: DigiWebApp.SettingsController.defaultsettings.get('terminliste_keineKuenstlichenTermine')
+	                 , label: M.I18N.l('terminliste_keineKuenstlichenTermine')
+	           }]
+		       , terminliste_ignoriereAuftragszeitraum: [{
+	                   value: DigiWebApp.SettingsController.defaultsettings.get('terminliste_ignoriereAuftragszeitraum')
+	                 , label: M.I18N.l('terminliste_ignoriereAuftragszeitraum')
+	           }]
 
             };
             
@@ -609,6 +627,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var mitarbeiterId                    = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
         var auftragsDetailsKoppeln			 = $('#' + M.ViewManager.getView('settingsPage', 'auftragsDetailsKoppeln').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
     	var vibrationsDauer                  = $('#' + M.ViewManager.getView('settingsPage', 'vibrationsDauerSlider').id).val();
+        var terminliste_keineKuenstlichenTermine  = $('#' + M.ViewManager.getView('settingsPage', 'terminliste_keineKuenstlichenTermine').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var terminliste_ignoriereAuftragszeitraum = $('#' + M.ViewManager.getView('settingsPage', 'terminliste_ignoriereAuftragszeitraum').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var numberRegex = /^[0-9]+$/;
         if (company) {
@@ -718,6 +738,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('mitarbeiterId', mitarbeiterId);
                                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
                                                     record.set('vibrationsDauer', vibrationsDauer);
+                                                    record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
+                                                    record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -792,6 +814,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('mitarbeiterId', mitarbeiterId);
                                     record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
                                     record.set('vibrationsDauer', vibrationsDauer);
+                                    record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
+                                    record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -840,6 +864,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
                                 record.set('vibrationsDauer', vibrationsDauer);
+                                record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
+                                record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -888,6 +914,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mitarbeiterId', mitarbeiterId);
                                 record.set('auftragsDetailsKoppeln', auftragsDetailsKoppeln);
                                 record.set('vibrationsDauer', vibrationsDauer);
+                                record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
+                                record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -938,6 +966,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , mitarbeiterId: mitarbeiterId
                                 , auftragsDetailsKoppeln: auftragsDetailsKoppeln
                                 , vibrationsDauer: vibrationsDauer
+                                , terminliste_keineKuenstlichenTermine: terminliste_keineKuenstlichenTermine
+                                , terminliste_ignoriereAuftragszeitraum: terminliste_ignoriereAuftragszeitraum
 
                           });
 

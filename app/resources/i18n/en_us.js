@@ -452,5 +452,7 @@ M.I18N.en_us = {
 	, ganztaegig: "full-time"
 	, nachUhrzeit: "per appointment"
 	, betreff: "Subject"
+	, terminliste_keineKuenstlichenTermine: "Show only concrete appointments"
+	, terminliste_ignoriereAuftragszeitraum: "Ignore order period"
 
 };

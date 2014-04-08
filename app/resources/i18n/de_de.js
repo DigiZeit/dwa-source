@@ -451,5 +451,6 @@ M.I18N.de_de = {
 	, ganztaegig: "ganztägig"
 	, nachUhrzeit: "nach Uhrzeit"
 	, betreff: "Betreff"
-
+	, terminliste_keineKuenstlichenTermine: "Nur konkrete Termine zeigen"
+	, terminliste_ignoriereAuftragszeitraum: "Ignoriere Auftragszeitraum"
 };
