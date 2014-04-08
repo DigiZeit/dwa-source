@@ -267,17 +267,17 @@ DigiWebApp.SettingsPage = M.PageView.design({
         })
 
         , terminlisteEinstellungen: M.ContainerView.design({
-      	  		  childViews: 'terminlisteEinstellungen_titel' // terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
+      	  		  childViews: 'terminlisteEinstellungen_titel terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum' // terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
       	  		, cssClass: 'terminlisteEinstellungen'
 		        , terminlisteEinstellungen_titel: M.ListView.design({
 	        	  	  isDividedList: YES
 	                , contentBinding: {
 		            	  target: DigiWebApp.SettingsController
-		            	, property: 'terminlisteEinstellungen_titel terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
+		            	, property: 'terminlisteEinstellungen_titel'
 		        	}
 		        	, listItemTemplateView: DigiWebApp.DummyTemplateView
-	  	      })
-	          , terminliste_keineKuenstlichenTermine: M.SelectionListView.design({
+	  	      	})
+	  	      	, terminliste_keineKuenstlichenTermine: M.SelectionListView.design({
 	        	  	  selectionMode: M.MULTIPLE_SELECTION
 		            , contentBinding: {
 		                  target: DigiWebApp.SettingsController
