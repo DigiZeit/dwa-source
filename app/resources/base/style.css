@@ -932,6 +932,17 @@ label.ui-input-text, .ui-controlgroup-label {
     margin-bottom: 10px;
 }
 
+.terminlisteEinstellungen {
+	margin-top: 30px;
+}
+.terminlisteEinstellungen li {
+	margin-bottom: 20px;
+}
+
+.settingsPage .digiButton {
+	margin-top: 20px;
+}
+
 .fileChooserPage .inputfile {
 	text-align: center;
 	background: #fff;
@@ -1485,13 +1496,4 @@ li.ui-li {
     font-size: 10px;
     font-weight: bold;
     color: #FF0000;	
-}
-
-.terminlisteEinstellungen {
-	margin-bottom: 60px;
-	margin-top: 30px;
-	height: 100px;
-}
-.terminlisteEinstellungen li{
-	margin-bottom: 20px;
 }
