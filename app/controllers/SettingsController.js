@@ -1148,9 +1148,41 @@ DigiWebApp.SettingsController = M.Controller.extend({
         });
     }
 
-    , terminlisteEinstellungen_dividedList: [{
-		  label: M.I18N.l("ganztaegig")
-		, items: [{}]
-	}]
+    , terminlisteEinstellungen_dividedList: [
+                                             {
+                                                 "label": "First Divider",
+                                                 "items": [
+                                                     {
+                                                         name: "List Item 1",
+                                                         prop: "another property"
+                                                     },
+                                                     {
+                                                         name: "List Item 2",
+                                                         prop: "another property"
+                                                     },
+                                                     {
+                                                         name: "List Item 3",
+                                                         prop: "another property"
+                                                     }
+                                                 ]
+                                             },
+                                             {
+                                                 "label": "Second Divider",
+                                                 "items": [
+                                                     {
+                                                         name: "List Item 1",
+                                                         prop: "another property"
+                                                     },
+                                                     {
+                                                         name: "List Item 2",
+                                                         prop: "another property"
+                                                     },
+                                                     {
+                                                         name: "List Item 3",
+                                                         prop: "another property"
+                                                     }
+                                                 ]
+                                             }
+                                         ]
 
 });
