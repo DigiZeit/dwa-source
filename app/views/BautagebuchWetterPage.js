@@ -161,7 +161,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung === 0) {
+				    				if (myWetter.luftfeuchtigkeit === 0) {
 				    					return;
 				    				}
 				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 10;
@@ -176,7 +176,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
 				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.bewoelkung === 100) {
+				    				if (myWetter.luftfeuchtigkeit === 100) {
 				    					return;
 				    				}
 				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 10;
