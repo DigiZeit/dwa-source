@@ -1148,4 +1148,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         });
     }
 
+    , terminlisteEinstellungen_dividedList: [{
+		  label: M.I18N.l("ganztaegig")
+		, items: [{}]
+	}]
+
 });

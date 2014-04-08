@@ -270,7 +270,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 		        , terminlisteEinstellungen_titel: M.ListView.design({
 	        	  	  isDividedList: YES
 	                , contentBinding: {
-		            	  target: DigiWebApp.SettingsPage
+		            	  target: DigiWebApp.SettingsController
 		            	, property: 'terminlisteEinstellungen_dividedList'
 		        	}
 	  	      })
@@ -301,11 +301,6 @@ DigiWebApp.SettingsPage = M.PageView.design({
             })
         })
     })
-
-    , terminlisteEinstellungen_dividedList: [{
-		  label: M.I18N.l("ganztaegig")
-		, items: [{}]
-	}]
     	
     , tabBar: DigiWebApp.TabBar
 
