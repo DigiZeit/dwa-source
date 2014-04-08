@@ -1040,16 +1040,16 @@ label.ui-input-text, .ui-controlgroup-label {
     margin-top: 20px;
 }
 
-.bautagebuchWetterPage .wechselhaftCheckbox
+.bautagebuchWetterPage fieldset
 {
-    margin-bottom: 40px;
+	margin: 40px 4px 40px 4px;
 }
 
-  .bautagebuchWetterPage .temperaturView .u-grid-a
-, .bautagebuchWetterPage .luftfeuchteView .u-grid-a
-, .bautagebuchWetterPage .bewoelkungView .u-grid-a
-, .bautagebuchWetterPage .niederschlagView .u-grid-a
-, .bautagebuchWetterPage .windView .u-grid-a
+  .bautagebuchWetterPage .temperaturView div
+, .bautagebuchWetterPage .luftfeuchteView div
+, .bautagebuchWetterPage .bewoelkungView div
+, .bautagebuchWetterPage .niederschlagView div
+, .bautagebuchWetterPage .windView div
 {
     margin-top: 5px;
 }
