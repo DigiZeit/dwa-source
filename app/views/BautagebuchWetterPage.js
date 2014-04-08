@@ -99,7 +99,11 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
   		                value: "-"
 		              , events: {
 		                  tap: {
-			    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				myWetter.temperatur = myWetter.temperatur - 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
 		                  }
 		              }
 			    })
@@ -107,7 +111,11 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                value: "+"
 		              , events: {
 		                  tap: {
-			    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+				    				myWetter.temperatur = myWetter.temperatur + 1;
+				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+				    			}
 		                  }
 		              }
 			    })
@@ -117,6 +125,10 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	, isSliderOnly: YES
 			    	, highlightLeftPart: NO
 			        , contentBinding: {
+			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+			            , property: 'wetter.temperatur'
+				    }
+			        , contentBindingReverse: {
 			              target: DigiWebApp.BautagebuchBautageberichtDetailsController
 			            , property: 'wetter.temperatur'
 				    }
@@ -143,7 +155,11 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
 				            , property: 'wetter.temperatur'
 				        }
-			    		, value: 0
+				        , contentBindingReverse: {
+				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				            , property: 'wetter.temperatur'
+					    }
+			    		, value: 10
 				        , operation: function(v) {
 			    			return v + "°C";
 				        }
