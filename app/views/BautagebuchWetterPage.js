@@ -369,14 +369,32 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-				    				if (myWetter.wind === 3) {
-				    					return;
-				    				}
-				    				myWetter.wind = myWetter.wind + 1;
-				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				if (myWetter.wind === 3) {
+//				    					return;
+//				    				}
+//				    				myWetter.wind = myWetter.wind + 1;
+//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
+			              , touchstart: {
+					    			action: function() {
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(function(){
+						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				if (myWetter.wind === 3) {
+						    					return;
+						    				}
+						    				myWetter.wind = myWetter.wind + 1;
+						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+			            	  			});
+					    			}
+			                }
+			              , touchstart: {
+					    			action: function() {
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			              			}  
+			              }
+			              }
 		              }
 			    })
 			    , TextValue: M.LabelView.design({

@@ -18,6 +18,8 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	
 	, mengeneinheiten: null
 
+	, buttonPressInterval: null
+	
 	, wetterDefaults: {
 	      temperatur: 10   // -50 bis +50
 		, luftfeuchtigkeit: 0  // 0% - 100%
