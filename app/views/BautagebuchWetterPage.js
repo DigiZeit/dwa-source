@@ -394,7 +394,6 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			              			}  
 			              }
-			              }
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
