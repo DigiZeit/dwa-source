@@ -6,7 +6,7 @@
 // View: SettingsPage
 // ==========================================================================
 
-m_require('app/views/TerminlisteTemplateView');
+m_require('app/views/DummyTemplateView');
 m_require('app/views/TabBar.js');
 
 DigiWebApp.SettingsPage = M.PageView.design({
@@ -277,7 +277,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 		            	  target: DigiWebApp.SettingsController
 		            	, property: 'terminlisteEinstellungen_dividedList'
 		        	}
-		        	, listItemTemplateView: DigiWebApp.TerminlisteTemplateView
+		        	, listItemTemplateView: DigiWebApp.DummyTemplateView
 	  	      })
         })
 
