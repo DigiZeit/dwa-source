@@ -27,25 +27,27 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		
 		/* TerminlistePage zurücksetzen */
 		var itemsToShow = [];
+		
 		var ganztaegigeItems = [];
-		var nachUhrzeitItems = [];
-	
 		var ganztaegigeItemsObject = {
 				  label: M.I18N.l("ganztaegig")
 				, items: ganztaegigeItems
 		};
 		itemsToShow.push(ganztaegigeItemsObject);
+
+		var nachUhrzeitItems = [];
 		var nachUhrzeitItemsObject = {
 				  label: M.I18N.l("nachUhrzeit")
 				, items: nachUhrzeitItems
 		};
 		itemsToShow.push(nachUhrzeitItemsObject);
+		
 		that.set("items", itemsToShow);
 
 		/* erstelle Terminliste */
-		var itemsToShow = [];
-		var ganztaegigeItems = [];
-		var nachUhrzeitItems = [];
+		itemsToShow = [];
+		ganztaegigeItems = [];
+		nachUhrzeitItems = [];
 
 		_.each(DigiWebApp.Position.find(), function(pos) {
 			
@@ -154,7 +156,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			ganztaegigeItems = _.sortBy(ganztaegigeItems, function(el){
 				return D8.create(el.timeStampVon).getTimestamp();
 			});
-			var ganztaegigeItemsObject = {
+			ganztaegigeItemsObject = {
 					  label: M.I18N.l("ganztaegig")
 					, items: ganztaegigeItems
 			};
@@ -165,7 +167,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			nachUhrzeitItems = _.sortBy(nachUhrzeitItems, function(el){
 				return D8.create(el.timeStampVon).getTimestamp();
 			});
-			var nachUhrzeitItemsObject = {
+			nachUhrzeitItemsObject = {
 					  label: M.I18N.l("nachUhrzeit")
 					, items: nachUhrzeitItems
 			};
