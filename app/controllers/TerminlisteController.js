@@ -125,26 +125,32 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 								, zeitstempel: D8.create().getTimestamp()
 								, m_id: pos.m_id
 						}
-						addToListIfNotFoundById(ganztaegigeItems, termin, termin.terminId)
+						addToListIfNotFoundById(ganztaegigeItems, kuenstlicherTermin, kuenstlicherTermin.terminId)
 					}
 				}
 				
 			}
 		});
 		
-		nachUhrzeitItems = _.sortBy(nachUhrzeitItems, function(el){
-			return D8.create(el.timeStampVon).getTimestamp();
-		});
-		var ganztaegigeItemsObject = {
-				  label: M.I18N.l("ganztaegig")
-				, items: ganztaegigeItems
-		};
-		var nachUhrzeitItemsObject = {
-				  label: M.I18N.l("nachUhrzeit")
-				, items: nachUhrzeitItems
-		};
-		itemsToShow.push(ganztaegigeItemsObject);
-		itemsToShow.push(nachUhrzeitItemsObject);
+		//if (ganztaegigeItems.length > 0) {
+			var ganztaegigeItemsObject = {
+					  label: M.I18N.l("ganztaegig")
+					, items: ganztaegigeItems
+			};
+			itemsToShow.push(ganztaegigeItemsObject);
+		//}
+		
+		//if (nachUhrzeitItems.length > 0) {
+			nachUhrzeitItems = _.sortBy(nachUhrzeitItems, function(el){
+				return D8.create(el.timeStampVon).getTimestamp();
+			});
+			var nachUhrzeitItemsObject = {
+					  label: M.I18N.l("nachUhrzeit")
+					, items: nachUhrzeitItems
+			};
+			itemsToShow.push(nachUhrzeitItemsObject);
+		//}
+		
 		that.set("items", itemsToShow);
 	}
 
