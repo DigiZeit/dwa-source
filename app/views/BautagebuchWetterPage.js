@@ -126,7 +126,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
-			    	  cssClass: 'whiteText centerText'
+			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
@@ -186,7 +186,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
-			    	  cssClass: 'whiteText centerText'
+			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
@@ -242,7 +242,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
-			    	  cssClass: 'whiteText centerText'
+			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
@@ -309,7 +309,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
-			    	  cssClass: 'whiteText centerText'
+			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
@@ -380,7 +380,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , TextValue: M.LabelView.design({
-			    	  cssClass: 'whiteText centerText'
+			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
 				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
