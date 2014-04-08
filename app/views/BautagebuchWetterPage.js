@@ -94,7 +94,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 	        })
 			, mySliderGrid: M.GridView.design({
 				  childViews: 'minusButton plusButton TextValue'
-			    , layout: M.TWO_COLUMNS
+			    , layout: M.THREE_COLUMNS
 			    , minusButton: M.ButtonView.design({
   		                value: "-"
 		              , events: {
@@ -104,7 +104,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              }
 			    })
 			    , plusButton: M.ButtonView.design({
-		                value: "-"
+		                value: "+"
 		              , events: {
 		                  tap: {
 			    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
