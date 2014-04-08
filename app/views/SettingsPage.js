@@ -271,7 +271,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 	        	  	  isDividedList: YES
 	                , value: {
 	    				  label: M.I18N.l("ganztaegig")
-	    				, items: ganztaegigeItems
+	    				, items: []
 	    			}
 	  	      })
         })
