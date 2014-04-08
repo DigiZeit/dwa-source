@@ -319,14 +319,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           }]
                , vibrationsDauer: vibrationsDauer
 	           , terminliste_keineKuenstlichenTermine: [{
-	                   value: record.get('terminliste_keineKuenstlichenTermine')
+	                   value: terminliste_keineKuenstlichenTermine
 	                 , label: M.I18N.l('terminliste_keineKuenstlichenTermine')
-	                 , isSelected: record.get('terminliste_keineKuenstlichenTermine')
+	                 , isSelected: terminliste_keineKuenstlichenTermine
 	           }]
     	       , terminliste_ignoriereAuftragszeitraum: [{
-	                   value: record.get('terminliste_ignoriereAuftragszeitraum')
+	                   value: terminliste_ignoriereAuftragszeitraum
 	                 , label: M.I18N.l('terminliste_ignoriereAuftragszeitraum')
-	                 , isSelected: record.get('terminliste_ignoriereAuftragszeitraum')
+	                 , isSelected: terminliste_ignoriereAuftragszeitraum
 	           }]
 
             };
