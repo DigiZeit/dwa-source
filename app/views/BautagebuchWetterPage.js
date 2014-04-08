@@ -386,7 +386,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				}
 						    				myWetter.wind = myWetter.wind + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
-			            	  			});
+			            	  			}, 1000);
 					    			}
 			                }
 			              , touchend: {
