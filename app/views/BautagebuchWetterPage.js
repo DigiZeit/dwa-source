@@ -115,7 +115,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.temperatur === -50) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.temperatur - 1;
+						    				myWetter.temperatur = myWetter.temperatur - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -149,7 +149,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.temperatur === 50) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.temperatur + 1;
+						    				myWetter.temperatur = myWetter.temperatur + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -213,7 +213,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.luftfeuchtigkeit === 0) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.luftfeuchtigkeit - 1;
+						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -248,7 +248,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.luftfeuchtigkeit === 100) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.luftfeuchtigkeit + 1;
+						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -308,7 +308,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.bewoelkung === 0) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.bewoelkung - 1;
+						    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -342,7 +342,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.bewoelkung === 3) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.bewoelkung + 1;
+						    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -413,7 +413,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.niederschlag === 0) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.niederschlag - 1;
+						    				myWetter.niederschlag = myWetter.niederschlag - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
@@ -447,7 +447,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				if (myWetter.niederschlag === 5) {
 						    					return;
 						    				}
-						    				myWetter.wind = myWetter.niederschlag + 1;
+						    				myWetter.niederschlag = myWetter.niederschlag + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
