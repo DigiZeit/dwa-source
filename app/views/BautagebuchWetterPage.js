@@ -93,8 +93,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 	        	, value: M.I18N.l('BautagebuchTemperatur')
 	        })
 			, mySliderGrid: M.GridView.design({
-				  childViews: 'mySlider TextValue'
+				  childViews: 'minusButton plusButton TextValue'
 			    , layout: M.TWO_COLUMNS
+			    , minusButton: M.ButtonView.design({
+  		                value: "-"
+		              , events: {
+		                  tap: {
+			    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+		                  }
+		              }
+			    })
+			    , plusButton: M.ButtonView.design({
+		                value: "-"
+		              , events: {
+		                  tap: {
+			    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+		                  }
+		              }
+			    })
 			    , mySlider: M.SliderView.design({
 			    	  min: -50
 			    	, max: 50
