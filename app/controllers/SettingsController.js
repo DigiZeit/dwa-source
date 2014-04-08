@@ -141,6 +141,15 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::Bautagebuch
 
+        // Start::Terminliste (423)
+        if (DigiWebApp.SettingsController.featureAvailable('423')) {
+        	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).show();
+        	DigiWebApp.SettingsController.set('terminlisteEinstellungen_titel', DigiWebApp.SettingsController.terminlisteEinstellungen_titel)
+        } else {
+        	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).hide();
+        }
+        // End::Terminliste
+
         //console.log("vor enforceChefToolOnly");
         DigiWebApp.ApplicationController.enforceChefToolOnly();
         //console.log("nach enforceChefToolOnly");
@@ -1148,42 +1157,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         });
     }
 
-    , terminlisteEinstellungen_dividedList_var: null
-    , terminlisteEinstellungen_dividedList: [
-                                             {
-                                                 "label": "First Divider",
-                                                 "items": [
-                                                     {
-                                                         name: "List Item 1",
-                                                         prop: "another property"
-                                                     },
-                                                     {
-                                                         name: "List Item 2",
-                                                         prop: "another property"
-                                                     },
-                                                     {
-                                                         name: "List Item 3",
-                                                         prop: "another property"
-                                                     }
-                                                 ]
-                                             },
-                                             {
-                                                 "label": "Second Divider",
-                                                 "items": [
-                                                     {
-                                                         name: "List Item 1",
-                                                         prop: "another property"
-                                                     },
-                                                     {
-                                                         name: "List Item 2",
-                                                         prop: "another property"
-                                                     },
-                                                     {
-                                                         name: "List Item 3",
-                                                         prop: "another property"
-                                                     }
-                                                 ]
-                                             }
-                                         ]
+    , terminlisteEinstellungen_titel: [{
+    	  "label": M.I18N.l('Terminliste')
+    	, "items": []
+    }]
 
 });
