@@ -27,6 +27,10 @@ textarea.ui-input-text {
 	color: #000 !important;
 }
 
+fieldset legend {
+	margin-bottom: 10px;
+}
+
 .terminlistePage .ui-title {
 	margin: -12px 0px 0px 20px;
 	padding: 3px 9px 0px 90px;
@@ -219,6 +223,9 @@ img.audioIcon {
 
 .ui-content .digiButton.hack .icon {
     top: -25px;
+}
+.digiButton {
+	margin-top: 20px;
 }
 
 /* custom scholppButton */
@@ -924,7 +931,6 @@ label.ui-input-text, .ui-controlgroup-label {
 {
     color: #FFFFFF;
 }
-
 
 .bautagebuchListePage .small
 {
