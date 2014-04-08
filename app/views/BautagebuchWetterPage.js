@@ -389,7 +389,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			            	  			});
 					    			}
 			                }
-			              , touchstart: {
+			              , touchend: {
 					    			action: function() {
 			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			              			}  
