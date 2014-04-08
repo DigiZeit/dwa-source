@@ -118,13 +118,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.temperatur = myWetter.temperatur - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -152,13 +152,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.temperatur = myWetter.temperatur + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -216,13 +216,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 
@@ -251,13 +251,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -311,13 +311,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -345,13 +345,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -416,13 +416,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.niederschlag = myWetter.niederschlag - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -450,13 +450,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.niederschlag = myWetter.niederschlag + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -525,13 +525,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.wind = myWetter.wind - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
@@ -559,13 +559,13 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				myWetter.wind = myWetter.wind + 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 			            	  			}
-			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval = setInterval(addFunc, DigiWebApp.BautagebuchMainController.intervalPerButtonPress);
+			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
 			            	  			addFunc();
 					    			}
 			                }
 			              , touchend: {
 					    			action: function() {
-			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval);
+			            	  			clearInterval(DigiWebApp.BautagebuchMainController.buttonPressInterval_Var);
 			              			}  
 			              }
 		              }
