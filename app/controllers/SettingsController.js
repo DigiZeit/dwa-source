@@ -1148,6 +1148,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         });
     }
 
+    , terminlisteEinstellungen_dividedList_var: null
     , terminlisteEinstellungen_dividedList: [
                                              {
                                                  "label": "First Divider",

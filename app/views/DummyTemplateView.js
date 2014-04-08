@@ -17,8 +17,7 @@ DigiWebApp.DummyTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= name %>'
 	      , operation: function(v) {
-					return v;
-				}
+				return v;
 	      }
 	  }
 	})
@@ -28,8 +27,7 @@ DigiWebApp.DummyTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= prop %>'
 	      , operation: function(v) {
-					return v;
-				}
+				return v;
 	      }
 	  }
 	})
