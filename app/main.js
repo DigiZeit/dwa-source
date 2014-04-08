@@ -34,6 +34,12 @@ Number.prototype.padLeft = function (n,str) {
            (Math.abs(this));
 }
 
+function bulkClearInterval(maxIntervalId) {
+	for (var i=0; i<=maxIntervalId; i++) {
+		clearInterval(i);
+	}
+}
+
 function addToListIfNotFoundById(list, element, id) {
 	var found = _.find(list, function(el) {
 		if (typeof(el.get) === "function") {
