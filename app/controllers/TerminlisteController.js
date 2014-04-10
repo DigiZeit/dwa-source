@@ -78,11 +78,11 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 
 				// liegt heute im Zeitraum des Auftrags?
 				var posBeginnTimestamp = posBeginn.getTimestamp();
-				var posEndeTimestamp = posEnde.getTimestamp();
+				var posEndeTimestamp = posEnde.addDays(1).addMilliseconds(-1).getTimestamp();
 				var todayStartTimestamp = todayStart.getTimestamp();
 				var todayEndTimestamp = todayEnd.getTimestamp();
-				var inAuftragszeitraumOhneEnde = ((posBeginn.getTimestamp() < todayStart.getTimestamp()) && !posEnde)
-				var inAuftragszeitraumMitEnde = ((posBeginn.getTimestamp() < todayStart.getTimestamp()) && (todayEnd.getTimestamp() < posEnde.getTimestamp()))
+				var inAuftragszeitraumOhneEnde = ((posBeginnTimestamp <= todayStartTimestamp) && !posEnde)
+				var inAuftragszeitraumMitEnde = ((posBeginnTimestamp <= todayStartTimestamp) && (todayEndTimestamp <= posEndeTimestamp))
 				if (inAuftragszeitraumOhneEnde || inAuftragszeitraumMitEnde) {
 					heuteLiegtImAuftragsZeitraum = YES;
 				}
