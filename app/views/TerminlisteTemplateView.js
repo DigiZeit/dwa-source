@@ -10,7 +10,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'betreff auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
+    , childViews: 'betreff beschreibung auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
 
     , events: {
         tap: {
@@ -57,6 +57,21 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 		}
 	}
 
+
+	, beschreibung: M.LabelView.design({
+	    cssClass: 'bold unselectable'
+	  , computedValue: {
+	        valuePattern: '<%= betreff %>'
+	      , operation: function(v) {
+				var text = v;
+				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
+					return M.I18N.l('beschreibung') + ': ' + text;
+				} else {
+					return '';
+				}
+	      }
+	  }
+	})
 
 	, betreff: M.LabelView.design({
 	    cssClass: 'bold unselectable'
