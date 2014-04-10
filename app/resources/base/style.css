@@ -1474,3 +1474,7 @@ li.ui-li {
     font-weight: bold;
     color: #FF0000;	
 }
+
+.preLine {
+	white-space: pre-line;
+}

@@ -58,21 +58,6 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	}
 
 
-	, beschreibung: M.LabelView.design({
-	    cssClass: 'bold unselectable'
-	  , computedValue: {
-	        valuePattern: '<%= beschreibung %>'
-	      , operation: function(v) {
-				var text = v;
-				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('beschreibung') + ': ' + text;
-				} else {
-					return '';
-				}
-	      }
-	  }
-	})
-
 	, betreff: M.LabelView.design({
 	    cssClass: 'bold unselectable'
 	  , computedValue: {
@@ -88,6 +73,21 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	  }
 	})
 	
+	, beschreibung: M.LabelView.design({
+	    cssClass: 'normal unselectable'
+	  , computedValue: {
+	        valuePattern: '<%= beschreibung %>'
+	      , operation: function(v) {
+				var text = v;
+				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
+					return M.I18N.l('beschreibung') + ': ' + text + "<br/>";
+				} else {
+					return '';
+				}
+	      }
+	  }
+	})
+
 	//	  auftragsBezeichnung: "6657Heim"
 	, auftragsBezeichnung: M.LabelView.design({
         cssClass: 'normal unselectable'
