@@ -61,7 +61,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	, beschreibung: M.LabelView.design({
 	    cssClass: 'bold unselectable'
 	  , computedValue: {
-	        valuePattern: '<%= betreff %>'
+	        valuePattern: '<%= beschreibung %>'
 	      , operation: function(v) {
 				var text = v;
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {

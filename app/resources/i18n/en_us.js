@@ -454,5 +454,6 @@ M.I18N.en_us = {
 	, betreff: "Subject"
 	, terminliste_keineKuenstlichenTermine: "Show only concrete appointments"
 	, terminliste_ignoriereAuftragszeitraum: "Ignore order period"
+	, beschreibung: "Description"
 
 };

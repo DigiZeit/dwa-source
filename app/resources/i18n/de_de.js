@@ -453,4 +453,5 @@ M.I18N.de_de = {
 	, betreff: "Betreff"
 	, terminliste_keineKuenstlichenTermine: "Nur konkrete Termine zeigen"
 	, terminliste_ignoriereAuftragszeitraum: "Ignoriere Auftragszeitraum"
+	, beschreibung: "Beschreibung"
 };
