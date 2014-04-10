@@ -10,7 +10,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'von bis spacer1 betreff beschreibung auftragsBezeichnung positionsBezeichnung positionBegin positionEnd'
+    , childViews: 'betreff beschreibung auftragsBezeichnung positionsBezeichnung positionBegin positionEnd spacer1 von bis'
 
     , events: {
         tap: {
