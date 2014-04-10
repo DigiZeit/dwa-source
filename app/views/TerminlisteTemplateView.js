@@ -80,7 +80,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 	      , operation: function(v) {
 				var text = v;
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
-					return M.I18N.l('beschreibung') + ': ' + text + "<br/>";
+					return M.I18N.l('beschreibung') + ': ' + text + "<br/><br/>";
 				} else {
 					return '';
 				}
