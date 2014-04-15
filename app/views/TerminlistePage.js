@@ -24,7 +24,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
     , cssClass: 'terminlistePage'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title'
+          childViews: 'backButton titleGrid'
         , cssClass: 'header'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -46,7 +46,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
                 }
             }
         })
-        , title: M.GridView.design({
+        , titleGrid: M.GridView.design({
         	, childViews: 'titleDay titleTextFieldView'
     		, cssClass: 'dateTitleGrid' 
     		, columns: { 
