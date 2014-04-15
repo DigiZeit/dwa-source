@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4926"
-	version 	= "1.7.3.4926">
+	versionCode = "4927"
+	version 	= "1.7.3.4927">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -61,15 +61,30 @@ which PhoneGap requires. -->
 <!-- include PhonegapPlugIns -->
 	<!-- <gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
  	<gap:plugin name="org.apache.cordova.camera" />
-	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.console" />
 	<gap:plugin name="org.apache.cordova.contacts" />
 	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.dialogs" />
 	<gap:plugin name="org.apache.cordova.file" />
 	<gap:plugin name="org.apache.cordova.geolocation" />
 	<gap:plugin name="org.apache.cordova.inappbrowser" />
-	<gap:plugin name="org.apache.cordova.dialogs" />
+	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.network-information" />
 	<gap:plugin name="org.apache.cordova.splashscreen" />
 	<gap:plugin name="org.apache.cordova.vibration" />
+ 
+<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.4" /> -->
+<!-- <gap:plugin name="org.apache.cordova.console" version="0.2.7" /> -->
+<!-- <gap:plugin name="org.apache.cordova.contacts" version="0.2.9" /> -->
+<!-- <gap:plugin name="org.apache.cordova.device" version="0.2.8" /> -->
+<!-- <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" /> -->
+<!-- <gap:plugin name="org.apache.cordova.file" version="1.0.1" /> -->
+<!-- <gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" /> -->
+<!-- <gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.3" /> -->
+<!-- <gap:plugin name="org.apache.cordova.media-capture" version="0.2.4" /> -->
+<!-- <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" /> -->
+<!-- <gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7" /> -->
+<!-- <gap:plugin name="org.apache.cordova.vibration" version="0.3.7" /> -->
  
 	<!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 	<!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
