@@ -24,7 +24,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
     , cssClass: 'terminlistePage'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton titleDay title'
+          childViews: 'backButton title'
         , cssClass: 'header'
         , isFixed: YES
         , backButton: M.ButtonView.design({
