@@ -58,11 +58,13 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 	            }
 	        }
         	, isInline: YES
+            , anchorLocation: M.CENTER
         })
         , title: M.TextFieldView.design({
               value: ''
             , cssClass: 'dateTitle'
             , isInline: YES
+            , anchorLocation: M.CENTER
             , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.TerminlisteController
