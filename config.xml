@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "4921"
-	version 	= "1.7.3.4921">
+	versionCode = "4922"
+	version 	= "1.7.3.4922">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -29,7 +29,7 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="false" readonly="false" />
-	<preference name="phonegap-version" value="3.3.0" />
+	<preference name="phonegap-version" value="3.0.0" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
@@ -78,7 +78,7 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
 <gap:plugin name="org.apache.cordova.file" version="1.0.1" />
 <gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" />
-<gap:plugin name="org.apache.cordova.inappbrowser" version="0.3.3" />
+<gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.3" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.2.8" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7" />
