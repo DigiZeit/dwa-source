@@ -41,7 +41,7 @@ M.I18N.en_us = {
 	, error: "Error"
 	, doClosingTime: "Closing time takes place..."
 	, confirmClosingTimeMessage: "Are you sure, you want to book closing time?"
-	, openBookingsOverwriteBySettingsUpdate : "There are open or not sent bookings. Do you indeed want to change the settings? All current bookings will be lost!"
+	, openBookingsOverwriteBySettingsUpdate : "There are not sent bookings. Do you indeed want to change the settings? All current bookings will be lost!"
 	, yes: "Yes"
 	, no: "No"
 	, assume: "accept"
