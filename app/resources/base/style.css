@@ -31,18 +31,6 @@ fieldset legend {
 	margin-bottom: 10px;
 }
 
-.terminlistePage .ui-title {
-	margin: -12px 0px 0px 20px;
-	padding: 3px 9px 0px 90px;
-	border: 0px;
-	height: 64px !important;
-}
-
-.dateTitle.ui-input-text.ui-body-a {
-	font-weight: bold !important;
-	color: #fff !important;
-}
-
   .ui-header .ui-btn-left
 , .ui-header .ui-btn-right
 {
@@ -1473,6 +1461,40 @@ li.ui-li {
     font-size: 10px;
     font-weight: bold;
     color: #FF0000;	
+}
+.terminlistePage .ui-title {
+	margin: 0px 0px 0px 90px;
+}
+
+.dateTitle.ui-input-text.ui-body-a {
+	font-weight: bold !important;
+	color: #fff !important;
+	padding-left: 8px;
+}
+
+div.dateTitleGrid div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+    width:100%;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	height: 35px !important;
+}
+
+div.dateTitleGrid .dateTitleGridColumn1, div.dateTitleGrid .dateTitleGridColumn2 {
+    float: left;
+    text-align:center;
+}
+
+div.dateTitleGrid .dateTitleGridColumn1 {
+    width:15%;
+	padding-top: 9px;
+}
+
+div.dateTitleGrid .dateTitleGridColumn2 {
+    width:80%;
+	margin-right: 5px;
 }
 
 .preLine {
