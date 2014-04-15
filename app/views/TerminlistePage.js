@@ -48,12 +48,14 @@ DigiWebApp.TerminlistePage = M.PageView.design({
         })
         , titleGrid: M.GridView.design({
         	  childViews: 'titleDay titleTextFieldView'
-    		, cssClass: 'dateTitleGrid' 
             , anchorLocation: M.CENTER
-    		, columns: { 
-    		      0: 'dateTitleGridColumn1' 
-    		    , 1: 'dateTitleGridColumn2' 
-    		}
+            , layout: { 
+        		cssClass: 'dateTitleGrid' 
+	    		, columns: { 
+	    		      0: 'dateTitleGridColumn1' 
+	    		    , 1: 'dateTitleGridColumn2' 
+	    		}
+	        }
 	        , titleDay: M.LabelView.design({
 	        	computedValue: {
 		            contentBinding: {
