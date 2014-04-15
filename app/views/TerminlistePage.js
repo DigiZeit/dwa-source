@@ -24,7 +24,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
     , cssClass: 'terminlistePage'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title'
+          childViews: 'backButton titleDay title'
         , cssClass: 'header'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -46,10 +46,23 @@ DigiWebApp.TerminlistePage = M.PageView.design({
                 }
             }
         })
+        , titleDay: M.LabelView.design({
+        	computedValue: {
+	            contentBinding: {
+	                target: DigiWebApp.TerminlisteController,
+	                property: 'datumAsDate'
+	            },
+	            value: 0,
+	            operation: function(v) {
+	                return DigiWebApp.ApplicationController.dayNamesShort[(D8.create(v).date.getDay() + 6) % 7].substring(0,2);
+	            }
+	        }
+        	, anchorLocation: M.CENTER
+        })
         , title: M.TextFieldView.design({
               value: ''
-            , anchorLocation: M.CENTER
             , cssClass: 'dateTitle'
+        	, anchorLocation: M.RIGHT
             , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.TerminlisteController
