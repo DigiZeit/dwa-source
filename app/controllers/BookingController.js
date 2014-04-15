@@ -488,7 +488,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    if (that.isHandOrder(orderId)) {
 			handOrderId = orderId;
 			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
-				if (ord) return ord.get('id') === orderId || ord.get('name') === orderId;
+				if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
 			})[0].get('name');
 			orderId = null;
 	

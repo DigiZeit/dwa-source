@@ -46,7 +46,7 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 							//console.log(records);
 	            			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	            			try {
-		                        if ((!records) || (records && records.length === 0) || (records && records.length === 1 && (typeof(records[0].get('mitarbeiterId')) === "undefined" || records[0].get('mitarbeiterId') === null))) {
+		                        if ((!records) || (records && records.length === 0) || (records && records.length === 1 && (typeof(records[0].get('mitarbeiterId')) === "undefined" || records[0].get('mitarbeiterId') == null))) {
 		                        	DigiWebApp.ZeitbuchungenController.set('items', []);
 		                        } else {
 		                        	DigiWebApp.ZeitbuchungenController.set('items', records);

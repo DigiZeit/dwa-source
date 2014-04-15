@@ -34,7 +34,7 @@ DigiWebApp.SpesenPage = M.PageView.design({
 		        spesenOptionen = _.map(spesenOptionen, function(opt) {
 		        	if (opt) {
 		                var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
-		                if(opt.get('id') === 1) {
+		                if(opt.get('id') == 1) {
 		                    obj.isSelected = YES;
 		                }
 		                return obj;
@@ -48,7 +48,7 @@ DigiWebApp.SpesenPage = M.PageView.design({
 		        uebernachtungOptionen = _.map(uebernachtungOptionen, function(opt) {
 		        	if (opt) {
 		                var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
-		                if(opt.get('id') === 1) {
+		                if(opt.get('id') == 1) {
 		                    obj.isSelected = YES;
 		                }
 		                return obj;

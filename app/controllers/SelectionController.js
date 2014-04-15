@@ -604,7 +604,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	} else {
         		var obj = null;
         		if (currentBookingActivitySelectable) {
-        			obj = { label: act.get('name'), value: act.get('id'), isSelected: act.get('id') === currentBookingActivityId ? YES : NO };
+        			obj = { label: act.get('name'), value: act.get('id'), isSelected: act.get('id') == currentBookingActivityId ? YES : NO };
         		} else {
         			obj = { label: act.get('name'), value: act.get('id'), isSelected: i === 0 ? YES : NO };
         		}

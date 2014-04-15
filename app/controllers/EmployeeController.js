@@ -77,7 +77,7 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         if (selection.length > 0) {
             _.each(selection, function(sel) { // sel is employee id
                 var employee = _.select(DigiWebApp.Employee.find(), function(e) {
-                    if (e) return e.get('id') === sel;
+                    if (e) return e.get('id') == sel;
                 });
                 employee = _.isArray(employee) ? employee[0] : employee;
                 if (employee) {

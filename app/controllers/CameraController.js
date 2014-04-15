@@ -91,9 +91,9 @@ DigiWebApp.CameraController = M.Controller.extend({
          * POSITIONS
          */
         var positionArray = _.map(positions, function(pos) {
-            if (pos.get('orderId') === orderId) {
+            if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
             	var obj = null;
-                if (pos.get('id') === positionId) {
+                if (pos.get('id') == positionId) {
                     obj = { label: pos.get('name'), value: pos.get('id'), isSelected: YES };
                 } else {
                     obj = { label: pos.get('name'), value: pos.get('id') };
@@ -160,7 +160,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
         var i = 0;
         positions = _.map(positions, function(pos) {
-            if (pos.get('orderId') === orderId) {
+            if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
                 var obj = { label: pos.get('name'), value: pos.get('id') };
                 if (i === 0) {
                     obj.isSelected = YES;
@@ -228,7 +228,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         		console.log("UNDEFINED ACTIVITY");
         		return null;
         	} else {
-				if ( act.get('id') === currentBookingActivityId ) { currentBookingActivitySelectable = true; }
+				if ( act.get('id') == currentBookingActivityId ) { currentBookingActivitySelectable = true; }
 			}
 		});
 		
@@ -239,7 +239,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         	} else {
         		var obj = null;
         		if (currentBookingActivitySelectable) {
-        			obj = { label: act.get('name'), value: act.get('id'), isSelected: act.get('id') === currentBookingActivityId ? YES : NO };
+        			obj = { label: act.get('name'), value: act.get('id'), isSelected: act.get('id') == currentBookingActivityId ? YES : NO };
         		} else {
         			obj = { label: act.get('name'), value: act.get('id'), isSelected: i === 0 ? YES : NO };
         		}
@@ -472,7 +472,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 	    if (DigiWebApp.BookingController.isHandOrder(orderId)) {
 			handOrderId = orderId;
 			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
-			    if (ord) return ord.get('id') === orderId || ord.get('name') === orderId;
+			    if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
 			})[0].get('name');
 			orderId = handOrderId;
 	

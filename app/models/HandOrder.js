@@ -31,7 +31,7 @@ DigiWebApp.HandOrder = M.Model.create({
 
         _.each(this.find(), function(el) {
             if(openBooking) {
-                if(!(el.get('id') === openBooking.get('handOrderId') || el.get('name') === openBooking.get('handOrderName'))) {
+                if(!(el.get('id') == openBooking.get('handOrderId') || el.get('name') == openBooking.get('handOrderName'))) {
                     el.del();
                 }
             } else {

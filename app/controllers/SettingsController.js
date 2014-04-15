@@ -1118,7 +1118,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		}
 	
 		var FeatureSetting = _.select(DigiWebApp.Features.find(), function(f) {
-		    if (f) return f.get('id') === featureId;
+		    if (f) return f.get('id') == featureId;
 		})[0];
 	
 		if (typeof(FeatureSetting) === "undefined") {

@@ -165,7 +165,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
-		    		if (pos.get('orderId') === auftragsId) {
+		    		if (parseInt(pos.get('orderId')) === parseInt(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
 		    			return obj;
 		    		}

@@ -68,7 +68,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                if (orderId) {
 			                var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 			                _.each(orders, function(order) {
-		                    	if (order.get('id') === orderId) {
+		                    	if (order.get('id') == orderId) {
 		                    		DigiWebApp.OrderInfoController.set('activeOrder', [order]);
 		                    		if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 		                    			var s = DigiWebApp.SelectionController.selections;
@@ -110,7 +110,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                if (positionId) {
 			                var positions = DigiWebApp.Position.findSorted();
 			                _.each(positions, function(position) {
-		                    	if (position.get('id') === positionId) {
+		                    	if (position.get('id') == positionId) {
 		                    		DigiWebApp.OrderInfoController.set('activePosition', [position]);
 		                    		if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 		                    			var s = DigiWebApp.SelectionController.selections;
