@@ -119,6 +119,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 	
 	, nativeAlertDialogView: function (obj) {
+		
+		// etwaigen Loader ausblenden
+		DigiWebApp.ApplicationController.DigiLoaderView.hide()
+		
 		if (M.Environment.getPlatform().substr(0,10) === "BlackBerry") {
 			//console.log("falling back to non-native-dialog");
 			//return M.DialogView.alert(obj);
@@ -189,6 +193,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}    
 
 	, nativeConfirmDialogView: function (obj) {
+
+		// etwaigen Loader ausblenden
+		DigiWebApp.ApplicationController.DigiLoaderView.hide()
+		
 		if (M.Environment.getPlatform().substr(0,10) === "BlackBerry") {
 			//console.log("falling back to non-native-dialog");
 			//return M.DialogView.confirm(obj);
