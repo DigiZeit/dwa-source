@@ -46,47 +46,53 @@ DigiWebApp.TerminlistePage = M.PageView.design({
                 }
             }
         })
-        , titleDay: M.LabelView.design({
-        	computedValue: {
-	            contentBinding: {
-	                target: DigiWebApp.TerminlisteController,
-	                property: 'datumAsDate'
-	            },
-	            value: 0,
-	            operation: function(v) {
-	                return DigiWebApp.ApplicationController.dayNamesShort[(D8.create(v).date.getDay() + 6) % 7].substring(0,2);
-	            }
-	        }
-        	, isInline: YES
-            , anchorLocation: M.CENTER
-        })
-        , title: M.TextFieldView.design({
-              value: ''
-            , cssClass: 'dateTitle'
-            , isInline: YES
-            , anchorLocation: M.CENTER
-            , inputType: M.INPUT_DATE
-            , contentBinding: {
-        		  target: DigiWebApp.TerminlisteController
-        		, property: 'datumAsDate'
-        	}
-	        , contentBindingReverse: {
-	    		  target: DigiWebApp.TerminlisteController
-	    		, property: 'datumAsDate'
-	    	}
-            , events: {
-            	  blur: {
-            		action: function() {
-		            	var datumArray = DigiWebApp.TerminlisteController.datumAsDate.split("-");
-						DigiWebApp.TerminlisteController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
-            		}
-            	}
-	            , tap: {
-	                action: function() {
-            			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-        			}
-	            }
-	        }
+        , title: M.GridView.design({
+        	, childViews: 'titleDay titleTextFieldView'
+    		, cssClass: 'dateTitleGrid' 
+    		, columns: { 
+    		      0: 'dateTitleGridColumn1' 
+    		    , 1: 'dateTitleGridColumn2' 
+    		}
+	        , titleDay: M.LabelView.design({
+	        	computedValue: {
+		            contentBinding: {
+		                target: DigiWebApp.TerminlisteController,
+		                property: 'datumAsDate'
+		            },
+		            value: 0,
+		            operation: function(v) {
+		                return DigiWebApp.ApplicationController.dayNamesShort[(D8.create(v).date.getDay() + 6) % 7].substring(0,2);
+		            }
+		        }
+	        	, cssClass: 'dateTitleDay'
+	        })
+	        , titleTextFieldView: M.TextFieldView.design({
+	              value: ''
+	            , cssClass: 'dateTitle'
+	            , anchorLocation: M.CENTER
+	            , inputType: M.INPUT_DATE
+	            , contentBinding: {
+	        		  target: DigiWebApp.TerminlisteController
+	        		, property: 'datumAsDate'
+	        	}
+		        , contentBindingReverse: {
+		    		  target: DigiWebApp.TerminlisteController
+		    		, property: 'datumAsDate'
+		    	}
+	            , events: {
+	            	  blur: {
+	            		action: function() {
+			            	var datumArray = DigiWebApp.TerminlisteController.datumAsDate.split("-");
+							DigiWebApp.TerminlisteController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+	            		}
+	            	}
+		            , tap: {
+		                action: function() {
+	            			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+	        			}
+		            }
+		        }
+	        })
         })
         , titleLabel: M.LabelView.design({
               value: M.I18N.l('Terminliste')
