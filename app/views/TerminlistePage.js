@@ -57,12 +57,12 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 	                return DigiWebApp.ApplicationController.dayNamesShort[(D8.create(v).date.getDay() + 6) % 7].substring(0,2);
 	            }
 	        }
-        	, anchorLocation: M.CENTER
+        	, isInline: YES
         })
         , title: M.TextFieldView.design({
               value: ''
             , cssClass: 'dateTitle'
-        	, anchorLocation: M.RIGHT
+            , isInline: YES
             , inputType: M.INPUT_DATE
             , contentBinding: {
         		  target: DigiWebApp.TerminlisteController
