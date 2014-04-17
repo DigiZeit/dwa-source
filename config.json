@@ -1,9 +1,9 @@
 {
     "name" : "DigiWebApp",
-    "mode": "production",
-    "debugLevel": 0,
+    "mode": "debug",
+    "debugLevel": 1,
     "eliminate": false,
-    "minify": true,
+    "minify": false,
     "proxies": [
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
@@ -27,15 +27,15 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.7.3.4940",
-        "debugMode": "false",
+        "version": "1.7.3.4941 beta",
+        "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
         "timeStampCreated": "created_at",
         "timeStampUpdated": "updated_at",
         "m_id": "m_id"
     },
-    "defaultDeployTarget": "digi-gps.de-latest",
+    "defaultDeployTarget": "digi-gps.de-testing",
     "deploy": {
         "digi-gps.de-testing": {
             "method": "ftp",
@@ -60,7 +60,7 @@
                 "debugLevel": 0
             }
         }
-    },    
+    },
     "libraries": [
           {"name": "xml2json", "refs": ["jquery.xml2json_1.3.js"]}
         , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}

@@ -330,7 +330,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
          */
         var orderArray = _.map(orders, function(order) {
         	if (order) {
-	            if(parseInt(order.get('id')) == parseInt(orderId)) {
+	            if(order.get('id') == orderId) {
 	                return { label: order.get('name'), value: order.get('id'), isSelected: YES };
 	            } else {
 	                return { label: order.get('name'), value: order.get('id') };
