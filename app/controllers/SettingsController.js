@@ -44,7 +44,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , bautagebuchLimit_autoStartUhrzeit: false
         , datatransfer_min_delay: 30000
         , branding: ''
-        , GPSTimeOut: 240000
+        , GPSTimeOut: 60000
+        , WebserviceTimeOut: 30000
+        , LoaderTimeOut: 30000
         , silentLoader: false
         , currentTimezoneOffset: null
         , currentTimezone: null
@@ -292,6 +294,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , datatransfer_min_delay: record.get('datatransfer_min_delay')
                 , branding: record.get('branding')
                 , GPSTimeOut: record.get('GPSTimeOut')
+                , WebserviceTimeOut: record.get('WebserviceTimeOut')
+                , LoaderTimeOut: record.get('LoaderTimeOut')
                 , silentLoader: record.get('silentLoader')
                 , currentTimezoneOffset: record.get('currentTimezoneOffset')
                 , currentTimezone: record.get('currentTimezone')
@@ -408,6 +412,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , datatransfer_min_delay: DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay')
                 , branding: DigiWebApp.SettingsController.defaultsettings.get('branding')
                 , GPSTimeOut: DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut')
+                , WebserviceTimeOut: DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut')
+                , LoaderTimeOut: DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut')
                 , silentLoader: DigiWebApp.SettingsController.defaultsettings.get('silentLoader')
                 , currentTimezoneOffset: DigiWebApp.SettingsController.defaultsettings.get('currentTimezoneOffset')
                 , currentTimezone: DigiWebApp.SettingsController.defaultsettings.get('currentTimezone')
@@ -610,6 +616,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var datatransfer_min_delay      = DigiWebApp.SettingsController.getSetting('datatransfer_min_delay');
         var branding                    = DigiWebApp.SettingsController.getSetting('branding');
         var GPSTimeOut                  = DigiWebApp.SettingsController.getSetting('GPSTimeOut');
+        var WebserviceTimeOut           = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
+        var LoaderTimeOut               = DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
         var silentLoader                = DigiWebApp.SettingsController.getSetting('silentLoader');
     	var currentTimezoneOffset       = DigiWebApp.SettingsController.getSetting('currentTimezoneOffset');
     	var currentTimezone             = DigiWebApp.SettingsController.getSetting('currentTimezone');
@@ -738,6 +746,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                                     record.set('branding', branding);
                                                     record.set('GPSTimeOut', GPSTimeOut);
+                                                    record.set('WebserviceTimeOut', WebserviceTimeOut);
+                                                    record.set('LoaderTimeOut', LoaderTimeOut);
                                                     record.set('silentLoader', silentLoader);
                                                     record.set('currentTimezoneOffset', currentTimezoneOffset);
                                                     record.set('currentTimezone', currentTimezone);
@@ -814,6 +824,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('datatransfer_min_delay', datatransfer_min_delay);
                                     record.set('branding', branding);
                                     record.set('GPSTimeOut', GPSTimeOut);
+                                    record.set('WebserviceTimeOut', WebserviceTimeOut);
+                                    record.set('LoaderTimeOut', LoaderTimeOut);
                                     record.set('silentLoader', silentLoader);
                                     record.set('currentTimezoneOffset', currentTimezoneOffset);
                                     record.set('currentTimezone', currentTimezone);
@@ -864,6 +876,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
                                 record.set('GPSTimeOut', GPSTimeOut);
+                                record.set('WebserviceTimeOut', WebserviceTimeOut);
+                                record.set('LoaderTimeOut', LoaderTimeOut);
                                 record.set('silentLoader', silentLoader);
                                 record.set('currentTimezoneOffset', currentTimezoneOffset);
                                 record.set('currentTimezone', currentTimezone);
@@ -914,6 +928,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('datatransfer_min_delay', datatransfer_min_delay);
                                 record.set('branding', branding);
                                 record.set('GPSTimeOut', GPSTimeOut);
+                                record.set('WebserviceTimeOut', WebserviceTimeOut);
+                                record.set('LoaderTimeOut', LoaderTimeOut);
                                 record.set('silentLoader', silentLoader);
                                 record.set('currentTimezoneOffset', currentTimezoneOffset);
                                 record.set('currentTimezone', currentTimezone);
@@ -966,6 +982,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , datatransfer_min_delay: datatransfer_min_delay
                                 , branding: branding
                                 , GPSTimeOut: GPSTimeOut
+                                , WebserviceTimeOut: WebserviceTimeOut
+                                , LoaderTimeOut: LoaderTimeOut
                                 , silentLoader: silentLoader
                                 , currentTimezoneOffset: currentTimezoneOffset
                                 , currentTimezone: currentTimezone

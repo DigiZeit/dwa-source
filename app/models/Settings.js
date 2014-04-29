@@ -62,6 +62,10 @@ DigiWebApp.Settings = M.Model.create({
 
     , GPSTimeOut: M.Model.attr('Integer')
     
+    , WebserviceTimeOut: M.Model.attr('Integer')
+    
+    , LoaderTimeOut: M.Model.attr('Integer')
+    
     , silentLoader: M.Model.attr('Boolean')
     
     , ServiceApp_ermittleGeokoordinate: M.Model.attr('Boolean')

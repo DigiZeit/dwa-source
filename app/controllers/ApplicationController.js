@@ -268,13 +268,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		 */
 
 		  loaderMessage: " "
+			  
+		, timeoutId: null
 
 		, isVisible: function() { 
 			return M.LoaderView.refCount !== 0;
 		} 
 
 		, hide: function() {
-			this.loaderMessage = " "; 
+			this.loaderMessage = " ";
+			window.clearTimeout(this.timeoutId);
+			this.timeoutId = null;
 			return M.LoaderView.hide(true);
 		}
 
@@ -288,6 +292,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				this.loaderMessage = title;
 			}
 
+			// Loader nach definiertem TimeOut verstecken
+			window.clearTimeout(this.timeoutId);
+			this.timeoutId = window.setTimeout(DigiWebApp.ApplicationController.DigiLoaderView.hide(), DigiWebApp.SettingsController.getSetting('LoaderTimeOut'));
+			
 			return M.LoaderView.show(this.loaderMessage);
 		}
 		
@@ -2025,6 +2033,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             //DigiWebApp.SettingsController.setSetting('useTransitionsSetting', DigiWebApp.SettingsController.defaultsettings.get('useTransitionsSetting'));
             DigiWebApp.SettingsController.setSetting('datatransfer_min_delay', DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
             DigiWebApp.SettingsController.setSetting('GPSTimeOut', DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
+            DigiWebApp.SettingsController.setSetting('WebserviceTimeOut', DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
+            DigiWebApp.SettingsController.setSetting('LoaderTimeOut', DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
             DigiWebApp.SettingsController.setSetting('debugDatabaseServer', DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
 
             DigiWebApp.ApplicationController.triggerUpdate = NO;
@@ -2084,6 +2094,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                	if (el[prefix + 'keyId'] === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
 	                	if (el[prefix + 'keyId'] === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
 	                	if (el[prefix + 'keyId'] === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
+	                	if (el[prefix + 'keyId'] === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
+	                	if (el[prefix + 'keyId'] === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
 	                }
 	                
 	                // auch bei geändertem branding neu starten

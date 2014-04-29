@@ -23,7 +23,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 4942
+    , softwareVersion: 4943
 
 
     /**
@@ -44,13 +44,18 @@ DigiWebApp.RequestController = M.Controller.extend({
     , makeRequest: function(obj) {
     
         var that = this;
-        var req = M.Request.init({
+        
+        var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
+		var timeout = obj['timeout'] ? obj['timeout'] : timeoutSetting;
+
+		var req = M.Request.init({
 
               url: 'http://' + DigiWebApp.RequestController.DatabaseServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/' + obj.url + (obj.urlParams ? '?' + obj.urlParams : '')
 
             /* alternative way by asking if in native container or not => in getUrl() */
             //  url: this.getUrl() + obj.url + (obj.urlParams ? '?' + obj.urlParams : '')
 
+            , timeout: timeout
             , method: 'GET'
             , beforeSend: function(xhr) {
                 if(obj.loaderText) {
