@@ -367,44 +367,51 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					var myMediaListToSend = {"medien": items};
 					
 	    			console.log('sending mediaFile ' + rec.record.fileName);
-						var sendObj = {
-							  data: myMediaListToSend
-							, webservice: "medien"
-							, loaderText: M.I18N.l('sendeMedien')
-							, successCallback: function(data2, msg, request) {
-						    	_.each(mediaFiles, function(mf) {
-						            if (mf.m_id === el.m_id) {
-						            	var delFunc = function() {
-						            		mf.del();
-							                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
-							                    return parseInt(mediafile.get('timeStamp'));
-							                });
-							                that.set('items', items.reverse());
-						            	}
-						            	mf.deleteFile(delFunc, delFunc);
-							    		mediaFilesIndex = mediaFilesIndex + 1;
-						            }
-						        });
-								if ( mediaFilesIndex === mediaFilesLength && done === false) {
-									// last mediaFile sent
-						    		console.log('sending last mediaFile done (with file)');
-				    				done = true;
-				    				successCallback();
-								}
+	    			
+    				var mindestMedienTimeout = 60000;
+    				var myTimeout = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
+    				if (parseInt(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) < mindestMedienTimeout) {
+    					myTimeout = mindestMedienTimeout;
+    				}
+    				
+					var sendObj = {
+						  data: myMediaListToSend
+						, webservice: "medien"
+						, loaderText: M.I18N.l('sendeMedien')
+						, successCallback: function(data2, msg, request) {
+					    	_.each(mediaFiles, function(mf) {
+					            if (mf.m_id === el.m_id) {
+					            	var delFunc = function() {
+					            		mf.del();
+						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
+						                    return parseInt(mediafile.get('timeStamp'));
+						                });
+						                that.set('items', items.reverse());
+					            	}
+					            	mf.deleteFile(delFunc, delFunc);
+						    		mediaFilesIndex = mediaFilesIndex + 1;
+					            }
+					        });
+							if ( mediaFilesIndex === mediaFilesLength && done === false) {
+								// last mediaFile sent
+					    		console.log('sending last mediaFile done (with file)');
+			    				done = true;
+			    				successCallback();
 							}
-							, errorCallback: function(xhr, err) {
-								if ( mediaFilesIndex === mediaFilesLength && done === false) {
-									// last mediaFile sent (failed)
-						    		console.log('last mediaFile done (sending last file failed)');
-				    				done = true;
-				    				successCallback();
-								}
+						}
+						, errorCallback: function(xhr, err) {
+							if ( mediaFilesIndex === mediaFilesLength && done === false) {
+								// last mediaFile sent (failed)
+					    		console.log('last mediaFile done (sending last file failed)');
+			    				done = true;
+			    				successCallback();
 							}
-							//, additionalQueryParameter:
-							, timeout: parseInt(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) * 2
-							, omitLoaderHide: true
-						};
-						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+						}
+						//, additionalQueryParameter:
+						, timeout: myTimeout
+						, omitLoaderHide: true
+					};
+					DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 							
 		        });
 
