@@ -27,13 +27,14 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, sendDataWithServer: function(sendObj) {
 		//var that = this;
 
-		var data = sendObj['data']
-		var webservice = sendObj['webservice']
-		var loaderText = sendObj['loaderText']
-		var successCallback = sendObj['successCallback']
-		var errorCallback = sendObj['errorCallback']
-		var additionalQueryParameter = sendObj['additionalQueryParameter']
-		var timeout = sendObj['timeout'] ? sendObj['timeout'] : 30000;
+		var data = sendObj['data'];
+		var webservice = sendObj['webservice'];
+		var loaderText = sendObj['loaderText'];
+		var successCallback = sendObj['successCallback'];
+		var errorCallback = sendObj['errorCallback'];
+		var additionalQueryParameter = sendObj['additionalQueryParameter'];
+		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
+		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
 		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
@@ -87,7 +88,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var successCallback = recieveObj['successCallback']
 		var errorCallback = recieveObj['errorCallback']
 		var additionalQueryParameter = recieveObj['additionalQueryParameter']
-		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : 30000;
+		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
+		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
 

@@ -401,7 +401,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								}
 							}
 							//, additionalQueryParameter:
-							, timeout: 60000
+							, timeout: parseInt(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) * 2
 							, omitLoaderHide: true
 						};
 						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
