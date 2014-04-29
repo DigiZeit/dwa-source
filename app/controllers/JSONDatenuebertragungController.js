@@ -89,7 +89,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var errorCallback = recieveObj['errorCallback']
 		var additionalQueryParameter = recieveObj['additionalQueryParameter']
 		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
-		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
+		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : timeoutSetting;
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
 
