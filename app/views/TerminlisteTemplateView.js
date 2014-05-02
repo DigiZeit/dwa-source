@@ -175,7 +175,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 				if (text !== "" && typeof(text) !== "undefined" && text !== "undefined" && text !== "null" && text !== null) {
 					return ' - ' + text;
 				} else {
-					return '';
+					return ' - ' + M.I18N.l('open');
 				}
           }
       }
