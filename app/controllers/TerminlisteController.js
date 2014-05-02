@@ -78,11 +78,13 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 
 				// liegt heute im Zeitraum des Auftrags?
 				var posBeginnTimestamp = posBeginn.getTimestamp();
-				var posEndeTimestamp = posEnde.addDays(1).addMilliseconds(-1).getTimestamp();
+				if (posEnde != null) {
+					var posEndeTimestamp = posEnde.addDays(1).addMilliseconds(-1).getTimestamp();
+				}
 				var todayStartTimestamp = todayStart.getTimestamp();
 				var todayEndTimestamp = todayEnd.getTimestamp();
 				var inAuftragszeitraumOhneEnde = ((posBeginnTimestamp <= todayStartTimestamp) && !posEnde)
-				var inAuftragszeitraumMitEnde = ((posBeginnTimestamp <= todayStartTimestamp) && (todayEndTimestamp <= posEndeTimestamp))
+				var inAuftragszeitraumMitEnde = ((posBeginnTimestamp <= todayStartTimestamp) && (posEnde && (todayEndTimestamp <= posEndeTimestamp)))
 				if (inAuftragszeitraumOhneEnde || inAuftragszeitraumMitEnde) {
 					heuteLiegtImAuftragsZeitraum = YES;
 				}
@@ -120,7 +122,12 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 						}
 					});
 				} else {
-					if (!DigiWebApp.SettingsController.getSetting("terminliste_keineKuenstlichenTermine")) {
+					if (
+							(!DigiWebApp.SettingsController.getSetting("terminliste_keineKuenstlichenTermine"))
+						&&	(    (DigiWebApp.SettingsController.getSetting("terminliste_ignoriereAuftragszeitraum"))
+							  || (heuteLiegtImAuftragsZeitraum)
+							)
+					){
 						// künstlicher Termin für diesen Auftrag
 						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("id"))});
 						var kuenstlicherTermin = {
