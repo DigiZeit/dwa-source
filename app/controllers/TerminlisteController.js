@@ -54,7 +54,9 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 			var tageZuvor = 0;
 			var tageDanach = 0;
 			var myDate = D8.create(DigiWebApp.TerminlisteController.datum).addDays(0 - tageZuvor);
+			
 			for (var x=0; x <= tageZuvor + tageDanach; x++) {
+				
 				var todayStart = D8.create(myDate.format("dd.mm.yyyy"));
 				var todayEnd = todayStart.addDays(1).addMilliseconds(-1);
 				var todayStr = todayStart.format("dd.mm.yyyy");
@@ -80,6 +82,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 				var posBeginnTimestamp;
 				if (posBeginn != null) {
 					posBeginnTimestamp = posBeginn.getTimestamp();
+				}
 				
 				var posEndeTimestamp;
 				if (posEnde != null) {
@@ -161,7 +164,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 								, zeitstempel: D8.create().getTimestamp()
 								, m_id: pos.m_id
 						}
-						addToListIfNotFoundById(ganztaegigeItems, kuenstlicherTermin, kuenstlicherTermin.terminId)
+						addToListIfNotFoundById(ganztaegigeItems, kuenstlicherTermin, kuenstlicherTermin.terminId);
 					}
 				}
 				
