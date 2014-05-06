@@ -227,7 +227,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		return null;
         	} else {
         		var obj = null;
-        		if (i === 0 ) {
+        		if (i === 0) {
         			itemSelected = YES;
         			obj = { label: act.get('name'), value: act.get('id'), isSelected:YES };
         		} else {
@@ -297,11 +297,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		    		} else if (activityName.indexOf("Pause") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectPause();
 		    		} else {
-		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+		    			//DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    		}
 	    		}
     		} else {
-    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+    			//DigiWebApp.ScholppBookingController.selectArbeitsende();
     		}
     	}
 
