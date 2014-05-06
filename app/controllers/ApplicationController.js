@@ -612,9 +612,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			console.log("unable to hide splashscreen");
 		}
 		try {
+			StatusBar.show();
 			StatusBar.overlaysWebView(false);
+			StatusBar.styleLightContent();
 		} catch(e) {
-			console.log("unable to StatusBar.overlaysWebView(false)");
+			console.log("unable to modify StatusBar");
 		}
 
 		
