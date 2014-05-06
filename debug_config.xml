@@ -95,8 +95,6 @@ which PhoneGap requires. -->
     <param name="ios-package" value="CDVStatusBar" onload="true" />
 </feature>
 
-<!-- <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" /> -->
-        
 <gap:plugin name="org.apache.cordova.console" version="0.2.7" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
  

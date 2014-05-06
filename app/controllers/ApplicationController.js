@@ -606,11 +606,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, devicereadyhandler: function() {
 
 		try {
-			//alert("hiding splash");
 			navigator.splashscreen.hide();
 		} catch(e) {
 			console.log("unable to hide splashscreen");
 		}
+		
 		try {
 			StatusBar.show();
 			StatusBar.overlaysWebView(false);
@@ -618,12 +618,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) {
 			console.log("unable to modify StatusBar");
 		}
-//		try {
-//			window.plugin.statusbarOverlay.show();
-//		} catch(e) {
-//			console.log("unable to show statusbar");
-//		}
-		
+
 		DigiWebApp.SettingsController.init(YES,YES);
         
         if (DigiWebApp.SettingsController.getSetting('debug')) { 
