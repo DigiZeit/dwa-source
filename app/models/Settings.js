@@ -42,6 +42,8 @@ DigiWebApp.Settings = M.Model.create({
 
     , autoSyncAfterBookTime: M.Model.attr('Boolean')
 
+    , stammdatenabgleichBeimAppStart: M.Model.attr('Boolean')
+    
     , autoSaveGPSData: M.Model.attr('Boolean')
 
     , GPSDataIsMandatory: M.Model.attr('Boolean')
