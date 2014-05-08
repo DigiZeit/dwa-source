@@ -744,7 +744,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         var timeString = dateMDate.format('HH:MM');
 
         var found = _.find(DigiWebApp.Booking.find(), function(booking) {
-        	return (booking.get("startDateString") == dateString && booking.get("startTimeString") == timeString && booking.get("endeDateString") == "" && booking.get("endeTimeString") == "");
+        	return (booking.get("startDateString") == dateString && booking.get("startTimeString") == timeString);
         });
         
         if (found) {
@@ -752,42 +752,70 @@ DigiWebApp.BookingController = M.Controller.extend({
         	return found;
         	
         } else {
+        	
+        	// evtl. wurde diese Buchung bereits gesendet (kann erneut gesendet werden - das wird vom Webservice erkannt (dann UPDATE statt INSERT))
         
-	        return DigiWebApp.Booking.createRecord({
-	              orderId: obj.oId ? obj.oId : null
-	            , orderName: myOrderName
-	            , handOrderId: obj.hoId ? obj.hoId : null
-	            , handOrderName: obj.hoName ? obj.hoName : null
-	            , latitude: obj.lat ? obj.lat : null
-	            , longitude: obj.lon ? obj.lon : null
-	            , latitude_bis: null
-	    		, longitude_bis: null
-	            , positionId: obj.pId ? obj.pId : null
-	            , positionName: myPositionName
-	            , activityId: obj.aId ? obj.aId : null
-	            , activityName: myActivityName
-	            , remark: obj.remark ? obj.remark : ''
-	            , istFeierabend: false
-	            , istKolonnenbuchung: false
-	            , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
-	            , genauigkeitVon: null
-	            , gps_zeitstempelVon: null
-	            , ermittlungsverfahrenVon: null
-	            , genauigkeitBis: null
-	            , gps_zeitstempelBis: null
-	            , ermittlungsverfahrenBis: null
-	            , ServiceApp_Status: "WAIT"
-	            , timezoneOffset: DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")
-	            , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
-	            , timeStampStart: timeStart.getTime()
-	            , timeStampEnd: '0'
-	            , startDateString: dateString
-	            , endeDateString: ""
-	            , startTimeString: timeString
-	            , endeTimeString: ""
-	            , modelVersion: "1"
-	            , gefahreneKilometer: 0
-	        });
+            var foundSent = _.find(DigiWebApp.SentBooking.find(), function(booking) {
+            	return (booking.get("startDateString") == dateString && booking.get("startTimeString") == timeString);
+            });
+
+            if (foundSent) {
+            	
+            	// für jede gesendete gibt es auch (falls Freischaktung aktiv) eine archivierte
+                var foundSentArchived = _.find(DigiWebApp.SentBookingArchived.find(), function(booking) {
+                	return (booking.get("startDateString") == dateString && booking.get("startTimeString") == timeString);
+                });
+                if (foundSentArchived) {
+                	foundSentArchived.del();
+                }
+
+                // gesendete Buchung als neue ungesendete zurückgeben
+	            var newUnsent = DigiWebApp.Booking.createRecord({}); // neue Buchung erzeugen
+	            newUnsent.m_id = foundSent.m_id; // Identität der kopierten Buchung
+	            newUnsent.record = JSON.parse(JSON.stringify(foundSent.record)); // Inhalt umkopieren
+	            foundSent.del(); // bereits gesendete Buchung löschen
+	            
+            	return newUnsent; // kopierte Buchung zurückgeben
+            	
+            } else {
+            	
+            	// es konnte keine Buchung mit diesem Start-Zeitstempel gefunden werden: neue erzeugen
+	            return DigiWebApp.Booking.createRecord({
+		              orderId: obj.oId ? obj.oId : null
+		            , orderName: myOrderName
+		            , handOrderId: obj.hoId ? obj.hoId : null
+		            , handOrderName: obj.hoName ? obj.hoName : null
+		            , latitude: obj.lat ? obj.lat : null
+		            , longitude: obj.lon ? obj.lon : null
+		            , latitude_bis: null
+		    		, longitude_bis: null
+		            , positionId: obj.pId ? obj.pId : null
+		            , positionName: myPositionName
+		            , activityId: obj.aId ? obj.aId : null
+		            , activityName: myActivityName
+		            , remark: obj.remark ? obj.remark : ''
+		            , istFeierabend: false
+		            , istKolonnenbuchung: false
+		            , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
+		            , genauigkeitVon: null
+		            , gps_zeitstempelVon: null
+		            , ermittlungsverfahrenVon: null
+		            , genauigkeitBis: null
+		            , gps_zeitstempelBis: null
+		            , ermittlungsverfahrenBis: null
+		            , ServiceApp_Status: "WAIT"
+		            , timezoneOffset: DigiWebApp.SettingsController.getSetting("currentTimezoneOffset")
+		            , timezone: DigiWebApp.SettingsController.getSetting("currentTimezone")
+		            , timeStampStart: timeStart.getTime()
+		            , timeStampEnd: '0'
+		            , startDateString: dateString
+		            , endeDateString: ""
+		            , startTimeString: timeString
+		            , endeTimeString: ""
+		            , modelVersion: "1"
+		            , gefahreneKilometer: 0
+		        });
+            }
         }
     }
 
