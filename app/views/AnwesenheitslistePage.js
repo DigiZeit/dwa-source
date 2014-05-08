@@ -11,7 +11,7 @@ m_require('app/views/AnwesenheitslisteTemplateView');
 DigiWebApp.AnwesenheitslistePage = M.PageView.design({
 
     events: {
-		pagebeforeshow: {
+		pageshow: {
               target: DigiWebApp.AnwesenheitslisteController
             , action: 'init'
         }
