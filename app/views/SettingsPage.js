@@ -53,7 +53,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
         //  childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory autoSaveGPSData GPSDataIsMandatory useTransitionsSetting grid'
-          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory remarkIsOptional autoSaveGPSData detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen grid'
+          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck remarkIsMandatory remarkIsOptional autoSaveGPSData detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -138,13 +138,6 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 }
             })
         })
-        , autoSyncAfterBookTimeCheck: M.SelectionListView.design({
-              selectionMode: M.MULTIPLE_SELECTION
-            , contentBinding: {
-                  target: DigiWebApp.SettingsController
-                , property: 'settings.autoSyncAfterBookTime'
-            }
-        })
         , autoTransferAfterBookTimeCheck: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
@@ -157,6 +150,20 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , contentBinding: {
                   target: DigiWebApp.SettingsController
                 , property: 'settings.autoTransferAfterClosingDay'
+            }
+        })
+        , stammdatenabgleichBeimAppStartCheck: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.stammdatenabgleichBeimAppStart'
+            }
+        })
+        , autoSyncAfterBookTimeCheck: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.autoSyncAfterBookTime'
             }
         })
         , remarkIsMandatory: M.SelectionListView.design({

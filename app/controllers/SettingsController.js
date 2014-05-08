@@ -64,6 +64,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , vibrationsDauer: 100
         , terminliste_keineKuenstlichenTermine: false
         , terminliste_ignoriereAuftragszeitraum: true
+        , stammdatenabgleichBeimAppStart: false
     }
 
     , defaultsettings: null
@@ -241,11 +242,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
                 , mapType: record.get('mapType')
-                , autoSyncAfterBookTime: [{
-                      value: record.get('autoSyncAfterBookTime')
-                    , label: M.I18N.l('autoSyncAfterBookTimeCheck')
-                    , isSelected: record.get('autoSyncAfterBookTime')
-                }]
                 , autoTransferAfterBookTime: [{
                       value: record.get('autoTransferAfterBookTime')
                     , label: M.I18N.l('autoTransferAfterBookTimeCheck')
@@ -256,6 +252,16 @@ DigiWebApp.SettingsController = M.Controller.extend({
                     , label: M.I18N.l('autoTransferAfterClosingDayCheck')
                     , isSelected: record.get('autoTransferAfterClosingDay')
                 }]
+                , autoSyncAfterBookTime: [{
+                    value: record.get('autoSyncAfterBookTime')
+                  , label: M.I18N.l('autoSyncAfterBookTimeCheck')
+                  , isSelected: record.get('autoSyncAfterBookTime')
+                }]
+	            , stammdatenabgleichBeimAppStart: [{
+	                  value: record.get('stammdatenabgleichBeimAppStart')
+	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
+	                , isSelected: record.get('stammdatenabgleichBeimAppStart')
+	            }]
                 , autoSaveGPSData: [{
                       value: record.get('autoSaveGPSData')
                     , label: M.I18N.l('autoSaveGPSData')
@@ -369,10 +375,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
                 , mapType: DigiWebApp.SettingsController.defaultsettings.get("mapType")
-                , autoSyncAfterBookTime: [{
-                      value: DigiWebApp.SettingsController.defaultsettings.get("autoSyncAfterBookTime")
-                    , label: M.I18N.l('autoSyncAfterBookTimeCheck')
-                }]
                 , autoTransferAfterBookTime: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoTransferAfterBookTime")
                     , label: M.I18N.l('autoTransferAfterBookTimeCheck')
@@ -381,6 +383,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoTransferAfterClosingDay")
                     , label: M.I18N.l('autoTransferAfterClosingDayCheck')
                 }]
+                , autoSyncAfterBookTime: [{
+                    value: DigiWebApp.SettingsController.defaultsettings.get("autoSyncAfterBookTime")
+                  , label: M.I18N.l('autoSyncAfterBookTimeCheck')
+                }]
+                , stammdatenabgleichBeimAppStart: [{
+	                  value: DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeimAppStart")
+	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
+	            }]
                 , autoSaveGPSData: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData")
                     , label: M.I18N.l('autoSaveGPSData')
@@ -572,21 +582,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
         //var connectionCode              = M.ViewManager.getView('settingsPage', 'connectionCodeInput').value;
         //var workerId                    = M.ViewManager.getView('settingsPage', 'workerIdInput').value;
 
-    	var daysToHoldBookingsOnDevice  = $('#' + M.ViewManager.getView('settingsPage', 'daysToHoldBookingsOnDeviceSlider').id).val();
-    	var company                     = $('#' + M.ViewManager.getView('settingsPage', 'companyInput').id).val();
-        var password                    = $('#' + M.ViewManager.getView('settingsPage', 'passwordInput').id).val();
-        var connectionCode              = $('#' + M.ViewManager.getView('settingsPage', 'connectionCodeInput').id).val();
-        var workerId                    = $('#' + M.ViewManager.getView('settingsPage', 'workerIdInput').id).val();
-        var timeouthappened             = DigiWebApp.ApplicationController.timeouthappened;
-        var skipEvents                  = DigiWebApp.ApplicationController.skipEvents;
-        var platform                    = M.Environment.getPlatform();
-        var userAgent                   = navigator.userAgent;
-    	var mapType                     = DigiWebApp.SettingsController.getSetting('mapType');
-        var autoSyncAfterBookTime       = $('#' + M.ViewManager.getView('settingsPage', 'autoSyncAfterBookTimeCheck').id       + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var autoTransferAfterBookTime   = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterBookTimeCheck').id   + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var autoTransferAfterClosingDay = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterClosingDayCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var autoSaveGPSData             = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                  + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var useTransitionsSetting       = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+    	var daysToHoldBookingsOnDevice     = $('#' + M.ViewManager.getView('settingsPage', 'daysToHoldBookingsOnDeviceSlider').id).val();
+    	var company                        = $('#' + M.ViewManager.getView('settingsPage', 'companyInput').id).val();
+        var password                       = $('#' + M.ViewManager.getView('settingsPage', 'passwordInput').id).val();
+        var connectionCode                 = $('#' + M.ViewManager.getView('settingsPage', 'connectionCodeInput').id).val();
+        var workerId                       = $('#' + M.ViewManager.getView('settingsPage', 'workerIdInput').id).val();
+        var timeouthappened                = DigiWebApp.ApplicationController.timeouthappened;
+        var skipEvents                     = DigiWebApp.ApplicationController.skipEvents;
+        var platform                       = M.Environment.getPlatform();
+        var userAgent                      = navigator.userAgent;
+    	var mapType                        = DigiWebApp.SettingsController.getSetting('mapType');
+        var autoTransferAfterBookTime      = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterBookTimeCheck').id      + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var autoTransferAfterClosingDay    = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterClosingDayCheck').id    + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var autoSyncAfterBookTime          = $('#' + M.ViewManager.getView('settingsPage', 'autoSyncAfterBookTimeCheck').id          + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var stammdatenabgleichBeimAppStart = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeimAppStartCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var remarkIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'remarkIsMandatory') !== null) {
@@ -733,9 +744,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('platform', platform);
                                                     record.set('userAgent', userAgent);
                                                     record.set('mapType', mapType);
-                                                    record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                                     record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
+                                                    record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
+                                                    record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
                                                     record.set('autoSaveGPSData', autoSaveGPSData);
                                                     record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -811,9 +823,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('platform', platform);
                                     record.set('userAgent', userAgent);
                                     record.set('mapType', mapType);
-                                    record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                     record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
+                                    record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
+                                    record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
                                     record.set('autoSaveGPSData', autoSaveGPSData);
                                     record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -863,9 +876,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('platform', platform);
                                 record.set('userAgent', userAgent);
                                 record.set('mapType', mapType);
-                                record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                 record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
+                                record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
+                                record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
                                 record.set('autoSaveGPSData', autoSaveGPSData);
                                 record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -915,9 +929,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('platform', platform);
                                 record.set('userAgent', userAgent);
                                 record.set('mapType', mapType);
-                                record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                 record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
+                                record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
+                                record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
                                 record.set('autoSaveGPSData', autoSaveGPSData);
                                 record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -969,9 +984,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , platform: platform
                                 , userAgent: userAgent
                                 , mapType: mapType
-                                , autoSyncAfterBookTime: autoSyncAfterBookTime
                                 , autoTransferAfterBookTime: autoTransferAfterBookTime
                                 , autoTransferAfterClosingDay: autoTransferAfterClosingDay
+                                , autoSyncAfterBookTime: autoSyncAfterBookTime
+                                , stammdatenabgleichBeimAppStart: stammdatenabgleichBeimAppStart
                                 , autoSaveGPSData: autoSaveGPSData
                                 , GPSDataIsMandatory: GPSDataIsMandatory
                                 , bautagebuchLimit_autoStartUhrzeit: bautagebuchLimit_autoStartUhrzeit

@@ -1032,6 +1032,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            if (isCurrentBookingAvailable === YES) {
 	            	//alert("go to BookTimePage");
 	            	DigiWebApp.NavigationController.toBookTimePage();
+	            	if (parseBool(DigiWebApp.SettingsController.getSetting('stammdatenabgleichBeimAppStart'))) {
+	    	        	DigiWebApp.ApplicationController.startsync();
+	            	}
 	                return;
 	            } else {
 	            	DigiWebApp.NavigationController.toBookTimePage();

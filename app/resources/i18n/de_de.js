@@ -456,4 +456,6 @@ M.I18N.de_de = {
 	, beschreibung: "Beschreibung"
 		
 	, unexpectedErrorWhileHandlingBooking: "Unerwarteter Fehler beim Abschließen einer Buchung"
+
+	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich beim jedem App-Start"
 };

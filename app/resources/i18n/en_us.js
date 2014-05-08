@@ -457,5 +457,8 @@ M.I18N.en_us = {
 	, beschreibung: "Description"
 
 	, unexpectedErrorWhileHandlingBooking: "Unexpected error while handling booking"
+		
+	, stammdatenabgleichBeimAppStart: "Transfer master data upon each app-start"
+
 
 };
