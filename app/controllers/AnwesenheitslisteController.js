@@ -11,6 +11,8 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 	  items: null
 	
 	, init: function(isFirstLoad) {
+		//console.log("Anwesenheitsliste: showing Loader");		
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('AnwesenheitslisteLaden'));
 		var that = DigiWebApp.AnwesenheitslisteController;
 		if (that.items === null) {
 			DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.AnwesenheitslisteController.initWithServer, isFirstLoad);
@@ -22,8 +24,6 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
     , initWithServer: function(isFirstLoad) {
     	var that = DigiWebApp.AnwesenheitslisteController;
 		if (that.items === null) {
-			//console.log("Anwesenheitsliste: showing Loader");		
-			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('AnwesenheitslisteLaden'));
 
 			//console.log("Anwesenheitsliste: find --> request");		
 			DigiWebApp.Anwesenheitsliste.find({

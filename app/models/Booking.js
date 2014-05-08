@@ -307,7 +307,7 @@ DigiWebApp.Booking = M.Model.create({
 	        var dateMDate = M.Date.create(dateDate.getTime());
 	        var dateString = dateMDate.format('dd.mm.yyyy');
 	        var timeString = dateMDate.format('HH:MM');
-	        var timeStringLong = dateMDate.format('HH:MM');
+	        var timeStringLong = dateMDate.format('HH:MM:ss');
 	        this.set('endeDateString', dateString);
 	        this.set('endeTimeString', timeString);
 	        			        
