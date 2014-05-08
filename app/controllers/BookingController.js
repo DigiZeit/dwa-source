@@ -1427,8 +1427,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    	try {
 					var myO_id = orderId;
 					var myHO_id = handOrderId;
-		    		if (myO_id !== null || myHO_id != null) {
-		        		var order = _.select(DigiWebApp.Order.findSorted()), function(o) {
+		    		if (myO_id != null || myHO_id != null) {
+		        		var order = _.select(DigiWebApp.Order.findSorted(), function(o) {
 		        			if (o) {
 		        				var myGetO_id = o.get('id');
 		        				return myO_id == myGetO_id; // || get('name') is for checking handOrders also
@@ -1452,17 +1452,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    	} catch(e3) { console.error(e3); }
 		    	try {
 		    		if (posId != null) {
-		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(posId));});
+		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) == parseInt(posId));});
 		    			//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId.toString()}})[0];
-		    			if (myPositionLoad && posId !== 0) myPositionName = myPositionLoad.get('name');
+		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
 		    	} catch(e4) { console.error(e4); }
 		    	try {
 		    		if (actId != null) {
 		    			//var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
-		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(actId));});
+		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) == parseInt(actId));});
 		    			//DigiWebApp.Activity.findById(obj.aId);
-		    			if (myActivityLoad && actId !== 0) myActivityName = myActivityLoad.get('name');
+		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
 		    	} catch(e5) { console.error(e5); }
 
