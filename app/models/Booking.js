@@ -218,7 +218,12 @@ DigiWebApp.Booking = M.Model.create({
 			myTimeStampEnd = timeEnd.getTime();
 		}
 
-        if (M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) {
+		if ((M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) && (that.get("timeStampEnd") == null)) {
+
+			// innerhalb einer Minute mehrfach gebucht
+	        return false;
+	        
+		} else if (M.Date.create(that.get("timeStampStart")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss')) {
 			
         	var thatToLog = this;
 
@@ -227,7 +232,7 @@ DigiWebApp.Booking = M.Model.create({
 
         	// ---
 			var found = _.find(DigiWebApp.Booking.find(), function(booking) {
-				  return (M.Date.create(that.get("timeStampEnd")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'));
+				  return (M.Date.create(that.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
 			});
 	        
 	        if (found) {
@@ -249,7 +254,7 @@ DigiWebApp.Booking = M.Model.create({
 	        	// evtl. wurde diese Buchung bereits gesendet (kann erneut gesendet werden - das wird vom Webservice erkannt (dann UPDATE statt INSERT))
 	        
 	            var found = _.find(DigiWebApp.SentBooking.find(), function(booking) {
-					  return (M.Date.create(that.get("timeStampEnd")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'));
+					  return (M.Date.create(that.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
 	            });
 	
 	            if (found) {
@@ -258,7 +263,7 @@ DigiWebApp.Booking = M.Model.create({
 
 		        	// für jede gesendete gibt es (falls Freischaktung aktiv) auch eine archivierte
 	                var foundSentArchived = _.find(DigiWebApp.SentBookingArchived.find(), function(booking) {
-	                	return (M.Date.create(that.get("timeStampEnd")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'));
+	                	return (M.Date.create(that.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
 	                });
 	                if (foundSentArchived) {
 	                	foundSentArchived.del(); // archivierte Buchung löschen (wird beim erneuten Senden wieder angelegt)
