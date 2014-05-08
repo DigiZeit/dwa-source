@@ -31,8 +31,8 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 	            , callbacks: {
 	                success: {
 	                      action: function(records) {
-	            			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                        if(records && records.length === 0) {
+		            			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                    		//console.log("Anwesenheitsliste: error length==0");		
 	            		        DigiWebApp.ApplicationController.nativeAlertDialogView({
 	            		              title: M.I18N.l('error')
@@ -53,6 +53,7 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 	                        } else {
 	                    		//console.log("Anwesenheitsliste: success");		
 	                        	DigiWebApp.AnwesenheitslisteController.set('items', records);
+		            			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                        }
 	                    }
 	                }
