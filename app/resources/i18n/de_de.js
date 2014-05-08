@@ -454,4 +454,6 @@ M.I18N.de_de = {
 	, terminliste_keineKuenstlichenTermine: "Nur konkrete Termine zeigen"
 	, terminliste_ignoriereAuftragszeitraum: "Ignoriere Auftragszeitraum"
 	, beschreibung: "Beschreibung"
+		
+	, unexpectedErrorWhileHandlingBooking: "Unerwarteter Fehler beim Abschließen einer Buchung"
 };

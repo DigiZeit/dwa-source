@@ -456,4 +456,6 @@ M.I18N.en_us = {
 	, terminliste_ignoriereAuftragszeitraum: "Ignore order period"
 	, beschreibung: "Description"
 
+	, unexpectedErrorWhileHandlingBooking: "Unexpected error while handling booking"
+
 };

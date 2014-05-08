@@ -209,24 +209,111 @@ DigiWebApp.Booking = M.Model.create({
     })
 
     , closeBooking: function(location) {
+		var myTimeStampEnd = null;
 		try {
-			this.set('timeStampEnd', DigiWebApp.BookingController.currentBookingTimesStampBook.getTime());
+			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
 		} catch (e2) {
 			var timeEnd = new Date();
-	        this.set('timeStampEnd', timeEnd.getTime());
+			myTimeStampEnd = timeEnd.getTime();
 		}
 
-		var dateDate = new Date(Number(this.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - this.get('timezoneOffset'))));
-        var dateMDate = M.Date.create(dateDate.getTime());
-        var dateString = dateMDate.format('dd.mm.yyyy');
-        var timeString = dateMDate.format('HH:MM');
-        this.set('endeDateString', dateString);
-        this.set('endeTimeString', timeString);
-        		
-        if (location) {
-        	this.set('latitude_bis',  location.latitude);
-        	this.set('longitude_bis', location.longitude);
-        }
+        if (M.Date.create(this.get("timeStampStart")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss')) {
+			
+        	var thatToLog = this;
+
+        	// bereits abgeschlossene Buchung laden und aktualisieren, um erneut gesendet zu werden (Webservice kann damit umgehen)
+        	writeToLog("bereits abgeschlossene Buchung laden und aktualisieren, um erneut gesendet zu werden (" + JSON.stringify(thatToLog));
+
+        	// ---
+			var found = _.find(DigiWebApp.Booking.find(), function(booking) {
+				  return (M.Date.create(this.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
+			});
+	        
+	        if (found) {
+	        	
+	        	writeToLog("gefunden in Bookings");
+
+	        	// etwaige Geokoordinaten nachtragen
+	            if (found.get("latitude_bis") == null) {
+	            	found.set("latitude_bis", location.latitude);
+	            }
+	            if (found.get("longitude_bis") == null) {
+	            	found.set("longitude_bis", location.longitude);
+	            }
+	
+	        	found.save();
+	        	
+	        } else {
+	        	
+	        	// evtl. wurde diese Buchung bereits gesendet (kann erneut gesendet werden - das wird vom Webservice erkannt (dann UPDATE statt INSERT))
+	        
+	            var found = _.find(DigiWebApp.SentBooking.find(), function(booking) {
+					  return (M.Date.create(this.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
+	            });
+	
+	            if (found) {
+	            	
+		        	writeToLog("gefunden in SentBookings");
+
+		        	// für jede gesendete gibt es (falls Freischaktung aktiv) auch eine archivierte
+	                var foundSentArchived = _.find(DigiWebApp.SentBookingArchived.find(), function(booking) {
+	                	return (M.Date.create(this.get("timeStampEnd")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss'));
+	                });
+	                if (foundSentArchived) {
+	                	foundSentArchived.del(); // archivierte Buchung löschen (wird beim erneuten Senden wieder angelegt)
+	                }
+	
+	                // gesendete Buchung als neue, ungesendete Buchung anlegen
+		            var newUnsent = DigiWebApp.Booking.createRecord({}); // neue Buchung erzeugen
+		            newUnsent.m_id = found.m_id; // Identität der Buchung kopieren
+		            newUnsent.record = JSON.parse(JSON.stringify(found.record)); // Inhalt umkopieren
+	
+		            // etwaige Geokoordinaten nachtragen
+		            if (newUnsent.get("latitude_bis") == null) {
+		            	newUnsent.set("latitude_bis", location.latitude);
+		            }
+		            if (newUnsent.get("longitude_bis") == null) {
+		            	newUnsent.set("longitude_bis", location.longitude);
+		            }
+	
+		            newUnsent.save(); // neue Buchung speichern
+		            found.del(); // bereits gesendete Buchung löschen
+		            
+	            } else {
+	            	
+	            	writeToLog("unexpectedErrorWhileHandlingBooking");
+	            	writeToLog("all Bookings: " + JSON.stringify(DigiWebApp.Booking.find()));
+	            	writeToLog("all SentBookings: " + JSON.stringify(DigiWebApp.SentBooking.find()));
+	                DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                    title: M.I18N.l('error')
+	                  , message: M.I18N.l('unexpectedErrorWhileHandlingBooking')
+	              });
+	                
+	            }
+	        }
+        	
+        	// ---
+			return false;
+			
+		} else {
+				
+	        if (location) {
+	        	this.set('latitude_bis',  location.latitude);
+	        	this.set('longitude_bis', location.longitude);
+	        }
+			this.set('timeStampEnd', myTimeStampEnd);
+	
+			var dateDate = new Date(Number(this.get('timeStampEnd')) + (1000 * 60 * (new Date().getTimezoneOffset() - this.get('timezoneOffset'))));
+	        var dateMDate = M.Date.create(dateDate.getTime());
+	        var dateString = dateMDate.format('dd.mm.yyyy');
+	        var timeString = dateMDate.format('HH:MM');
+	        var timeStringLong = dateMDate.format('HH:MM');
+	        this.set('endeDateString', dateString);
+	        this.set('endeTimeString', timeString);
+	        			        
+	        return true;
+	        
+		}
     }
 
     , setRemark: function(v) {
