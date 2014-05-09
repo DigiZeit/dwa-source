@@ -160,6 +160,18 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
     }
 
+    , refreshCurrentBookingClosed: function () {
+    	try {
+	        var allBookingsSorted = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking) {
+	        		return booking.get("timeStampStart");
+	        });
+	        var allClosedBookingsSorted = _.select(allBookingsSorted, function(b) {
+	            if (b) return b.get('isCurrent') === false;
+	        });
+	        DigiWebApp.BookingController.currentBookingClosed = allClosedBookingsSorted[allClosedBookingsSorted.length - 1];
+    	} catch(e) {}
+    }
+
     , book: function() {
     	var that = DigiWebApp.BookingController;
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
@@ -496,10 +508,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 	
 	                } // if(curBookingOrderId === orderId || curBookingHandOrderId === orderId)
 	
-	                return true;
 	
 	            } // if(this.currentBooking)
 	            
+	            this.refreshCurrentBookingClosed();
 	            if (this.currentBookingClosed) {
 	                var curBookingOrderId = this.currentBookingClosed.get('orderId');
 	                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
@@ -527,10 +539,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                    }
 	
 	                } // if(curBookingOrderId === orderId || curBookingHandOrderId === orderId)
-	
-	                return true;
-	
-	            } // if(this.currentBookingClosed)
+		
+	            } else { // if(this.currentBookingClosed)
+
+	            }
             }
 
 	    return true;
