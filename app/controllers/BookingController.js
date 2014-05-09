@@ -165,7 +165,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
-    		var myTimeStampEnd = null;
+
+			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
+			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
+
+			var myTimeStampEnd = null;
     		try {
     			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
     		} catch (e2) {
@@ -278,7 +282,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 					DigiWebApp.BookingController.bookWithRemark();
 				}
     		}
-		} // if (checkBooking())
+		} else { // if (checkBooking())
+			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('red');
+			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('red'); }, 500);
+		}
     }
 
     /**
@@ -1484,6 +1491,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseInt(that.currentBooking.get("timeStampEnd")) == 0))
     		
     		) {
+    			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('red');
+    			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('red'); }, 500);
     			$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
     			DigiWebApp.ApplicationController.nativeAlertDialogView({
 		              title: M.I18N.l('bookingTooShort')
@@ -1491,6 +1500,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        });
 		        return null;
 	        } else {
+    			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
+    			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
 	        	var spesencallback = function() {
 			        // Start::Bemerkungsfeld (403)
 					if (

@@ -28,11 +28,19 @@ textarea.ui-input-text {
 }
 
 .red div {
-    color: #FF0000;	
+    color: #990000;	
 }
 
 .green div {
-    color: #00FF00;	
+    color: #009900;	
+}
+
+.red span {
+    color: #990000;	
+}
+
+.green span {
+    color: #009900;	
 }
 
 fieldset legend {
