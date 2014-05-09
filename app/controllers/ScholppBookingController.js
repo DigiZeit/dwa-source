@@ -44,7 +44,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        	}
 		        });
 		DigiWebApp.SelectionController.set('activities', activityArray);
-		if (DigiWebApp.BookingController.checkBooking()) { // was YES
+		if (DigiWebApp.BookingController.checkBooking()) { // was (YES)
 			DigiWebApp.ScholppBookingController.selectFahrzeit();
 			DigiWebApp.ScholppBookingController.bucheFahrzeitTimeoutvar = setTimeout("DigiWebApp.ScholppBookingController.doBucheFahrzeit()",this.sleepFor);
 		}
@@ -74,7 +74,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        	}
 		        });
 		DigiWebApp.SelectionController.set('activities', activityArray);
-		if (DigiWebApp.BookingController.checkBooking()) { // was YES
+		if (DigiWebApp.BookingController.checkBooking()) { // was (YES)
 			DigiWebApp.ScholppBookingController.selectArbeitszeit();
 			DigiWebApp.ScholppBookingController.bucheArbeitszeitTimeoutvar = setTimeout("DigiWebApp.ScholppBookingController.doBucheArbeitszeit()",this.sleepFor);
 		}
@@ -104,7 +104,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        	}
 		        });
 		DigiWebApp.SelectionController.set('activities', activityArray);
-		if (DigiWebApp.BookingController.checkBooking()) { // was YES
+		if (DigiWebApp.BookingController.checkBooking()) { // was (YES)
 			DigiWebApp.ScholppBookingController.selectUnterbrechung();
 			DigiWebApp.ScholppBookingController.bucheUnterbrechungTimeoutvar = setTimeout("DigiWebApp.ScholppBookingController.doBucheUnterbrechung()",this.sleepFor);
 		}
@@ -134,7 +134,7 @@ DigiWebApp.ScholppBookingController = M.Controller.extend({
 		        	}
 		        });
 		DigiWebApp.SelectionController.set('activities', activityArray);
-		if (DigiWebApp.BookingController.checkBooking()) { // was YES
+		if (DigiWebApp.BookingController.checkBooking()) { // was (YES)
 			DigiWebApp.ScholppBookingController.selectPause();
 			DigiWebApp.ScholppBookingController.buchePauseTimeoutvar = setTimeout("DigiWebApp.ScholppBookingController.doBuchePause()",this.sleepFor);
 		}

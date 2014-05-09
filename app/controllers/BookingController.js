@@ -512,7 +512,16 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            } // if(this.currentBooking)
 	            
 	            this.refreshCurrentBookingClosed();
-	            if (this.currentBookingClosed) {
+	    		var that = this;
+	    		var myTimeStampEnd = null;
+	    		try {
+	    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
+	    		} catch (e2) {
+	    			var timeEnd = new Date();
+	    			myTimeStampEnd = timeEnd.getTime();
+	    		}
+
+	            if (this.currentBookingClosed && (M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM') != M.Date.create(myTimeStampEnd).format('HH:MM'))) {
 	                var curBookingOrderId = this.currentBookingClosed.get('orderId');
 	                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
 	                var curBookingPosId = this.currentBookingClosed.get('positionId');
