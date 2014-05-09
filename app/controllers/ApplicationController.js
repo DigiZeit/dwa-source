@@ -1090,6 +1090,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.daysToHoldBookingsOnDeviceSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -1105,6 +1106,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			if (DigiWebApp.SettingsController.featureAvailable('403')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
