@@ -520,6 +520,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     			var timeEnd = new Date();
     			myTimeStampEnd = timeEnd.getTime();
 
+    			var startStr = M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM');
+    			var endStr = M.Date.create(myTimeStampEnd).format('HH:MM');
 	            if (this.currentBookingClosed && (M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'))) {
 	                var curBookingOrderId = this.currentBookingClosed.get('orderId');
 	                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
