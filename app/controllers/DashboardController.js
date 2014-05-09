@@ -358,7 +358,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     		} else {
     			// evtl. Fehlermeldung, dass noch eine Datenübertragung läuft bzw. nur alle 30 Sekunden eine Datenübertragung gestartet werden darf
     			$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).addClass('red');
-    			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('red'); }, 200);
+    			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('red'); }, 500);
     		}
     	}
     	if (startTransfer === YES || DigiWebApp.DashboardController.lastTimestampDatatransfer === null) {
