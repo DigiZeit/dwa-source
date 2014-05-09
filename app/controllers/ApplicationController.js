@@ -334,6 +334,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
     , regSecEv: function(isFirstLoad) {
+    	console.log(DigiWebApp.app.config.version);
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -342,7 +343,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
 	, realregSecEv: function(isFirstLoad) {
     	console.log("in regSecEv");
-    	console.log(DigiWebApp.app.config.version);
     	
         DigiWebApp.ApplicationController.setImageClass();
         
