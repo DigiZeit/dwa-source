@@ -349,6 +349,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
     , dataTransfer: function(isClosingDay) {
 		$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+		
     	var startTransfer = NO;
     	if (DigiWebApp.DashboardController.lastTimestampDatatransfer !== null) {
     		var timestampNow = D8.now().getTimestamp();
@@ -356,6 +357,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
     			startTransfer = YES;
     		} else {
     			// evtl. Fehlermeldung, dass noch eine Datenübertragung läuft bzw. nur alle 30 Sekunden eine Datenübertragung gestartet werden darf
+    			$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).addClass('red');
+    			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('red'); }, 200);
     		}
     	}
     	if (startTransfer === YES || DigiWebApp.DashboardController.lastTimestampDatatransfer === null) {

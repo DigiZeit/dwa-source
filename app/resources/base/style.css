@@ -27,6 +27,10 @@ textarea.ui-input-text {
 	color: #000 !important;
 }
 
+.red {
+    color: #FF0000;	
+}
+
 fieldset legend {
 	margin-bottom: 10px;
 }
