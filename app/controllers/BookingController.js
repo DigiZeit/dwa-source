@@ -674,6 +674,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 			
 			if (bookingWasClosed) {
 				that.currentBookingClosed = that.currentBooking;
+			} else {
+			    if (that.autoSend()) {
+			    	that.sendCurrentBookings();
+			    }
 			}
 			
 	    } else {
