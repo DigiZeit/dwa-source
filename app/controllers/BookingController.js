@@ -259,6 +259,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 				that.currentBooking.set("activityId", actId);
 				that.currentBooking.set("activityName", myActivityName);
 				that.currentBooking.save();
+			    if (that.autoSend()) {
+			    	that.sendCurrentBookings();
+			    }
 
     		} else {
 				if (this.currentBooking) {
