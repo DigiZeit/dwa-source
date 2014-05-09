@@ -471,16 +471,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	if (bookingWasClosed) {
 				that.currentBooking.removeAsCurrent();
 			} else {
-		    	var myOrderName = M.I18N.l('notDefined');
-		    	var myHandOrderName = M.I18N.l('notDefined');
-		    	var myPositionName = M.I18N.l('notDefined');
-		    	var myActivityName = M.I18N.l('notDefined');
+		    	var myOrderName = M.I18N.l('unknown');
+		    	var myHandOrderName = M.I18N.l('unknown');
+		    	var myPositionName = M.I18N.l('unknown');
+		    	var myActivityName = M.I18N.l('unknown');
 
 			    if (that.isHandOrder(orderId)) {
 					handOrderId = orderId;
 					myHandOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 						if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
 					})[0].get('name');
+					myOrderName = myHandOrderName;
 					orderId = null;
 			
 					// a handorder has no position
