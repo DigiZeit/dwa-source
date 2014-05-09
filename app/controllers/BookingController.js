@@ -170,12 +170,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
 
 			var myTimeStampEnd = null;
-    		try {
-    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
-    		} catch (e2) {
-    			var timeEnd = new Date();
-    			myTimeStampEnd = timeEnd.getTime();
-    		}
+			var timeEnd = new Date();
+			myTimeStampEnd = timeEnd.getTime();
 
     		if (that.currentBooking && (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'))) {
 
