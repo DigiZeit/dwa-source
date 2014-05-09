@@ -460,5 +460,8 @@ M.I18N.en_us = {
 		
 	, stammdatenabgleichBeimAppStart: "Transfer master data upon each app-start"
 
+	, bookingTooShort: "Booking is too short"
+	, bookingTooShortMsg: "This booking is too short and could not get closed!"
+
 
 };
