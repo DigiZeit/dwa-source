@@ -78,6 +78,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             , onError: function(xhr, err) {
             	console.error("Error in makeRequest: " + err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                DigiWebApp.RequestController.DatabaseServer = null;
                 this.bindToCaller(that, that.handleErrorCallback, [xhr, err, obj.source])();
             }
         });
