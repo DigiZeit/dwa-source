@@ -486,16 +486,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 					// a handorder has no position
 					posId = null;
 			    } else {
-	        		var order = _.select(DigiWebApp.Order.findSorted(), function(o) {
-	        			if (o) {
-	        				var myGetO_id = o.get('id');
-	        				return myO_id == myGetO_id; // || get('name') is for checking handOrders also
-	        			}
-	                });
-	                if (order && order.length > 0) {
-	                    order = order[0];
-	                    myOrderName = order.get('name');
-	                }
+			    	try {
+			    		if (orderId != null) {
+			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseInt(a.get("id")) == parseInt(orderId));});
+			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
+			    		}
+			    	} catch(e4) { console.error(e4); }
 			    }
 
 		    	try {
@@ -504,6 +500,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
 		    	} catch(e4) { console.error(e4); }
+		    	
 		    	try {
 		    		if (actId != null) {
 		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) == parseInt(actId));});
