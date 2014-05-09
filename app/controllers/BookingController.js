@@ -499,6 +499,38 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                return true;
 	
 	            } // if(this.currentBooking)
+	            
+	            if (this.currentBookingClosed) {
+	                var curBookingOrderId = this.currentBookingClosed.get('orderId');
+	                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
+	                var curBookingPosId = this.currentBookingClosed.get('positionId');
+	                var curBookingActId = this.currentBookingClosed.get('activityId');
+	
+	                if (curBookingOrderId === orderId || curBookingHandOrderId === orderId) {
+	
+	                    if ((!this.isHandOrder(orderId)) && (curBookingPosId === posId) && (curBookingActId === actId)) {
+	                        //M.DialogView.alert({
+	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                              title: M.I18N.l('doubleBooking')
+	                            , message: M.I18N.l('doubleBookingMsg')
+	                        });
+	                        return false;
+	                    }
+	
+	                    if (this.isHandOrder(orderId) && (curBookingActId === actId)) {
+	                        //M.DialogView.alert({
+	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                              title: M.I18N.l('doubleBooking')
+	                            , message: M.I18N.l('doubleBookingMsg')
+	                        });
+	                        return false;
+	                    }
+	
+	                } // if(curBookingOrderId === orderId || curBookingHandOrderId === orderId)
+	
+	                return true;
+	
+	            } // if(this.currentBookingClosed)
             }
 
 	    return true;
