@@ -220,7 +220,7 @@ DigiWebApp.Booking = M.Model.create({
 
 		if ((M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) && (that.get("timeStampEnd") == null)) {
 
-			// innerhalb einer Minute mehrfach gebucht
+			// innerhalb einer Minute mehrfach umgebucht
 	        return false;
 	        
 		} else if (M.Date.create(that.get("timeStampStart")).format('HH:MM:ss') == M.Date.create(myTimeStampEnd).format('HH:MM:ss')) {
