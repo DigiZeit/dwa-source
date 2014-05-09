@@ -517,10 +517,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 				that.currentBooking.set("positionName", myPositionName);
 				that.currentBooking.set("activityId", actId);
 				that.currentBooking.set("activityName", myActivityName);
-				if (location) {
-					that.currentBooking.set("latitude_bis", location.latitude);
-					that.currentBooking.set("longitude_bis", location.longitude);
-				}
+				
+//				if (location) {
+//					that.currentBooking.set("latitude_bis", location.latitude);
+//					that.currentBooking.set("longitude_bis", location.longitude);
+//				}
 				
 			}
 	    	
