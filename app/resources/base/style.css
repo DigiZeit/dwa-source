@@ -31,6 +31,10 @@ textarea.ui-input-text {
     color: #FF0000;	
 }
 
+.green div {
+    color: #00FF00;	
+}
+
 fieldset legend {
 	margin-bottom: 10px;
 }
