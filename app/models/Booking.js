@@ -218,7 +218,11 @@ DigiWebApp.Booking = M.Model.create({
 			myTimeStampEnd = timeEnd.getTime();
 		}
 
-		if ((M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) && (that.get("timeStampEnd") == null)) {
+		if (
+		      (M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
+		   && ((that.get("timeStampEnd") == null) || (that.get("timeStampEnd") == "") || (parseInt(that.get("timeStampEnd")) == 0))
+		
+		) {
 
 			// innerhalb einer Minute mehrfach umgebucht
 	        return false;
