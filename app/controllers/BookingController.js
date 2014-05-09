@@ -1472,12 +1472,12 @@ DigiWebApp.BookingController = M.Controller.extend({
         if (that.currentBooking) {
         	
     		var myTimeStampEnd = null;
-    		try {
-    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
-    		} catch (e2) {
+//    		try {
+//    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
+//    		} catch (e2) {
     			var timeEnd = new Date();
     			myTimeStampEnd = timeEnd.getTime();
-    		}
+//    		}
 
     		if (
     		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
