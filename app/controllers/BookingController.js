@@ -520,38 +520,40 @@ DigiWebApp.BookingController = M.Controller.extend({
     			var timeEnd = new Date();
     			myTimeStampEnd = timeEnd.getTime();
 
-    			var startStr = M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM');
-    			var endStr = M.Date.create(myTimeStampEnd).format('HH:MM');
-	            if (this.currentBookingClosed && (M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'))) {
-	                var curBookingOrderId = this.currentBookingClosed.get('orderId');
-	                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
-	                var curBookingPosId = this.currentBookingClosed.get('positionId');
-	                var curBookingActId = this.currentBookingClosed.get('activityId');
-	
-	                if (curBookingOrderId === orderId || curBookingHandOrderId === orderId) {
-	
-	                    if ((!this.isHandOrder(orderId)) && (curBookingPosId === posId) && (curBookingActId === actId)) {
-	                        //M.DialogView.alert({
-	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                              title: M.I18N.l('doubleBooking')
-	                            , message: M.I18N.l('doubleBookingMsg')
-	                        });
-	                        return false;
-	                    }
-	
-	                    if (this.isHandOrder(orderId) && (curBookingActId === actId)) {
-	                        //M.DialogView.alert({
-	                        DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                              title: M.I18N.l('doubleBooking')
-	                            , message: M.I18N.l('doubleBookingMsg')
-	                        });
-	                        return false;
-	                    }
-	
-	                } // if(curBookingOrderId === orderId || curBookingHandOrderId === orderId)
+	            if (this.currentBookingClosed) {
+	    			var startStr = M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM');
+	    			var endStr = M.Date.create(myTimeStampEnd).format('HH:MM');
+	            	if (M.Date.create(this.currentBookingClosed.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'))) {
+		                var curBookingOrderId = this.currentBookingClosed.get('orderId');
+		                var curBookingHandOrderId = this.currentBookingClosed.get('handOrderId');
+		                var curBookingPosId = this.currentBookingClosed.get('positionId');
+		                var curBookingActId = this.currentBookingClosed.get('activityId');
 		
-	            } else { // if(this.currentBookingClosed)
-
+		                if (curBookingOrderId === orderId || curBookingHandOrderId === orderId) {
+		
+		                    if ((!this.isHandOrder(orderId)) && (curBookingPosId === posId) && (curBookingActId === actId)) {
+		                        //M.DialogView.alert({
+		                        DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                              title: M.I18N.l('doubleBooking')
+		                            , message: M.I18N.l('doubleBookingMsg')
+		                        });
+		                        return false;
+		                    }
+		
+		                    if (this.isHandOrder(orderId) && (curBookingActId === actId)) {
+		                        //M.DialogView.alert({
+		                        DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                              title: M.I18N.l('doubleBooking')
+		                            , message: M.I18N.l('doubleBookingMsg')
+		                        });
+		                        return false;
+		                    }
+		
+		                } // if(curBookingOrderId === orderId || curBookingHandOrderId === orderId)
+			
+		            } else { // if(this.currentBookingClosed)
+	
+		            }
 	            }
             }
 
