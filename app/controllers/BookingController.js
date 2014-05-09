@@ -469,8 +469,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	bookingWasClosed = that.currentBooking.closeBooking(location)
 
 	    	if (bookingWasClosed) {
+	    		
 				that.currentBooking.removeAsCurrent();
+				
 			} else {
+				
+				// Buchung gemäß geänderter Auswahl aktualisieren
 		    	var myOrderName = M.I18N.l('unknown');
 		    	var myHandOrderName = M.I18N.l('unknown');
 		    	var myPositionName = M.I18N.l('unknown');
