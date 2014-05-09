@@ -343,6 +343,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , closingTime: function() {
+		$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('bucheFeierabend'));
 		setTimeout(DigiWebApp.BookingController.closeDay,100);
     }
