@@ -173,11 +173,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     			myTimeStampEnd = timeEnd.getTime();
     		}
 
-    		if (
-    		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
-    		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseInt(that.currentBooking.get("timeStampEnd")) == 0))
-    		
-    		) {
+    		if (that.currentBooking && (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) {
 
     	    	var orderId;
     		    var handOrderId = null;
