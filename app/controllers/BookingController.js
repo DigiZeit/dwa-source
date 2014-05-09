@@ -165,34 +165,123 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in book");
 		if (this.checkBooking()) { // checkBooking checks for all booking-problems
-			if (this.currentBooking) {
-				// Start::Bemerkungsfeld (403)
-				if (
-						   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
-						|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-				){
-						// if remark-feature active and not optional: go to remarkpage
-						// or if gefahreneKilometer-Freischaltung is enabled: go to RemarkPage
-						this.refreshCurrentBooking(false);
-						DigiWebApp.NavigationController.toRemarkPage(function() {
-		    		        DigiWebApp.BookingController.set('isBackFromRemarkPage', YES);
-		    		        DigiWebApp.NavigationController.backToBookTimePagePOP();
-		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
-		    				DigiWebApp.BookingController.bookWithRemark();            					
-						});
+    		var myTimeStampEnd = null;
+    		try {
+    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
+    		} catch (e2) {
+    			var timeEnd = new Date();
+    			myTimeStampEnd = timeEnd.getTime();
+    		}
+
+    		if (
+    		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
+    		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseInt(that.currentBooking.get("timeStampEnd")) == 0))
+    		
+    		) {
+
+    	    	var orderId;
+    		    var handOrderId = null;
+    	    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    	    		orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
+    	    	} else {
+    	    		orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
+    	    	}
+    		
+    	    	var posObj;
+    	    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    	    		posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+    	    	} else {
+    	    		posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+    	    	}
+    			var posId = posObj ? posObj.value : null;
+    		
+    			var actObj;
+    	    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    	    		actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+    	    	} else {
+    	    		actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
+    	    	}
+    			var actId = actObj ? actObj.value : null;
+
+				// Buchung gemäß geänderter Auswahl aktualisieren
+		    	var myOrderName = M.I18N.l('unknown');
+		    	var myHandOrderName = M.I18N.l('unknown');
+		    	var myPositionName = M.I18N.l('unknown');
+		    	var myActivityName = M.I18N.l('unknown');
+
+			    if (that.isHandOrder(orderId)) {
+					handOrderId = orderId;
+					myHandOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
+						if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
+					})[0].get('name');
+					myOrderName = myHandOrderName;
+					orderId = null;
+			
+					// a handorder has no position
+					posId = null;
+			    } else {
+			    	try {
+			    		if (orderId != null) {
+			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseInt(a.get("id")) == parseInt(orderId));});
+			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
+			    		}
+			    	} catch(e4) { console.error(e4); }
+			    }
+
+		    	try {
+		    		if (posId != null) {
+		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) == parseInt(posId));});
+		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
+		    		}
+		    	} catch(e4) { console.error(e4); }
+		    	
+		    	try {
+		    		if (actId != null) {
+		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) == parseInt(actId));});
+		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
+		    		}
+		    	} catch(e5) { console.error(e5); }
+
+		    	that.currentBooking.set("orderId", orderId);
+		    	that.currentBooking.set("orderName", myOrderName);
+				that.currentBooking.set("handOrderId", handOrderId);
+				that.currentBooking.set("handOrderName", myHandOrderName);
+				that.currentBooking.set("positionId", posId);
+				that.currentBooking.set("positionName", myPositionName);
+				that.currentBooking.set("activityId", actId);
+				that.currentBooking.set("activityName", myActivityName);
+				that.currentBooking.save();
+
+    		} else {
+				if (this.currentBooking) {
+					// Start::Bemerkungsfeld (403)
+					if (
+							   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+							|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+					){
+							// if remark-feature active and not optional: go to remarkpage
+							// or if gefahreneKilometer-Freischaltung is enabled: go to RemarkPage
+							this.refreshCurrentBooking(false);
+							DigiWebApp.NavigationController.toRemarkPage(function() {
+			    		        DigiWebApp.BookingController.set('isBackFromRemarkPage', YES);
+			    		        DigiWebApp.NavigationController.backToBookTimePagePOP();
+			    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
+			    				DigiWebApp.BookingController.bookWithRemark();            					
+							});
+					} else {
+						// else: bookWithRemark
+	    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
+						DigiWebApp.BookingController.bookWithRemark();
+					}
+					// End::Bemerkungsfeld
 				} else {
-					// else: bookWithRemark
-    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
+					DigiWebApp.ApplicationController.DigiLoaderView.hide();
+					DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
 					DigiWebApp.BookingController.bookWithRemark();
 				}
-				// End::Bemerkungsfeld
-			} else {
-				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
-				DigiWebApp.BookingController.bookWithRemark();
-			}
+    		}
 		} // if (checkBooking())
     }
 
@@ -1386,7 +1475,6 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
         	
-    		var that = this;
     		var myTimeStampEnd = null;
     		try {
     			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
