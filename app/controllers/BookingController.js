@@ -1484,7 +1484,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseInt(that.currentBooking.get("timeStampEnd")) == 0))
     		
     		) {
-		        DigiWebApp.ApplicationController.nativeAlertDialogView({
+    			$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+    			DigiWebApp.ApplicationController.nativeAlertDialogView({
 		              title: M.I18N.l('bookingTooShort')
 		            , message: M.I18N.l('bookingTooShortMsg')
 		        });
