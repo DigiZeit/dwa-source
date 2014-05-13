@@ -457,7 +457,7 @@ M.I18N.de_de = {
 		
 	, unexpectedErrorWhileHandlingBooking: "Unerwarteter Fehler beim Abschließen einer Buchung"
 
-	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich beim jedem App-Start"
+	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich bei jedem App-Start"
 		
 	, bookingTooShort: "Buchung zu kurz"
 	, bookingTooShortMsg: "Diese Buchung ist zu kurz und kann noch nicht abgeschlossen werden!"
