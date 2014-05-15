@@ -515,12 +515,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            } // if(this.currentBooking)
 	            
 	            this.refreshCurrentBookingClosed();
+	            this.refreshCurrentBooking();
 	    		var that = this;
 	    		var myTimeStampEnd = null;
     			var timeEnd = new Date();
     			myTimeStampEnd = timeEnd.getTime();
 
-	            if (this.currentBookingClosed) {
+	            if (this.currentBookingClosed && this.currentBooking) {
 	    			var startStr = M.Date.create(this.currentBooking.get("timeStampStart")).format('HH:MM');
 	    			var endStr = M.Date.create(myTimeStampEnd).format('HH:MM');
 	            	if (startStr == endStr) {
