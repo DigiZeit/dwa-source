@@ -12,6 +12,11 @@ body {
 	text-weight: bold;
 }
 
+.ui-page {
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
+}
+
   .ui-body-c input[type="text"]
 , .ui-body-c input[type="password"]
 , .ui-body-c input[type="textarea"]

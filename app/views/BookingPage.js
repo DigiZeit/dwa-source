@@ -145,11 +145,15 @@ DigiWebApp.BookingPage = M.PageView.design({
                         this.saveSelection();
                     }
                 }
-//	            , tap: {
-//					action: function() {
-//	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
-//	  				}
-//	            }
+	            , tap: {
+					action: function(a, b, c) {
+	            		//try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
+	            		console.log(a);
+	            		console.log(b);
+	            		console.log(c);
+	            		return false;
+	  				}
+	            }
             }
         })
 
