@@ -898,6 +898,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	var myPlatform = M.Environment.getPlatform();
         if (       ( myPlatform.substr(-2)  === "86" )
+        		|| ( myPlatform.substr(-3)  === "_64" )
         		|| ( myPlatform.substr(-5)  === "Win32" )
         		|| ( myPlatform.substr(-5)  === "Win64" )
         		|| ( myPlatform.substr(0,3) === "Mac" )
