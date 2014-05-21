@@ -148,7 +148,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 	            , tap: {
 					action: function(id, event) {
 	            		//try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
-	            		event.stopPropagation();
+	        			try{event.stopImmediatePropagation();}catch(e4){try{event.stopPropagation();}catch(e4){}}
 	            		return false;
 	  				}
 	            }
