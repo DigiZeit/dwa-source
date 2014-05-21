@@ -375,6 +375,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	}
             });
 
+            // hide footer while softkeyboard is showing
+            $('input').focus(function() {
+            	$('[data-role=footer]').hide();
+            });
+            $('input').blur(function() {
+            	$('[data-role=footer]').show();
+            });
+                        
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
         		console.log("registering emergencyhandler");
         		$(document).bind('keydown', DigiWebApp.ApplicationController.keydownHandler);
@@ -605,6 +613,39 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, devicereadyhandler: function() {
+		
+		if (DigiWebApp.ApplicationController.timeouthappened) {
+	        $(window).bind('resize', function() {
+	            DigiWebApp.ApplicationController.setImageClass();
+	        });
+		} else {
+            var portraitScreenHeight;
+            var landscapeScreenHeight;
+
+            if(window.orientation === 0 || window.orientation === 180){
+                portraitScreenHeight = $(window).height();
+                landscapeScreenHeight = $(window).width();
+            }
+            else{
+                portraitScreenHeight = $(window).width();
+                landscapeScreenHeight = $(window).height();
+            }
+	        var tolerance = 25;
+	        $(window).bind('resize', function() {
+	            if ((window.orientation === 0 || window.orientation === 180) 
+	            && ((window.innerHeight + tolerance) < portraitScreenHeight)) {
+	                // keyboard visible in portrait
+	            	$('[data-role=footer]').hide();
+	            } else if((window.innerHeight + tolerance) < landscapeScreenHeight) {
+	                // keyboard visible in landscape
+	            	$('[data-role=footer]').hide();
+	            } else {
+	                // keyboard NOT visible
+	            	$('[data-role=footer]').show();
+	            }
+	            DigiWebApp.ApplicationController.setImageClass();
+	        });
+		}
 
 		try {
 			navigator.splashscreen.hide();
@@ -688,9 +729,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			
 	    	DigiWebApp.ApplicationController.setImageClass();
 	
-	    	$(window).resize(function() {
-	    		DigiWebApp.ApplicationController.setImageClass();
-	    	});
+//	    	$(window).resize(function() {
+//	    		DigiWebApp.ApplicationController.setImageClass();
+//	    	});
 	
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
 	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
