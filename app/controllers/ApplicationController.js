@@ -1540,12 +1540,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	that.setCallbackStatus('position', 'local', NO);
     	DigiWebApp.JSONDatenuebertragungController.empfangePositionen(
     			  function() {
-    				that.setCallbackStatus('position', 'remote', YES);
+      				that.setCallbackStatus('position', 'remote', YES);
     		    	that.setCallbackStatus('position', 'local', (DigiWebApp.Position.find().length > 0));
+    				that.setCallbackStatus('order', 'remote', YES);
+    		    	that.setCallbackStatus('order', 'local', (DigiWebApp.Order.find().length > 0));
     				that.getActivitiesFromRemote();
     			  }
     			, function() {
   				  	that.setCallbackStatus('position', 'remote', NO);
+  				  	that.setCallbackStatus('order', 'remote', NO);
     				that.proceedWithLocalData("getPositionsFromRemote");
     			}
     	);
@@ -2024,7 +2027,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 		//TODO: Stammdaten für Bautagebuch laden
                 		this.endSession();
                 	} else {
-                		this.getOrdersFromRemote();
+                		//this.getOrdersFromRemote();
+                		this.getPositionsFromRemote();
                 	}
                 }
             }
@@ -2032,7 +2036,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                   target: this
                 , action: function() {
         			console.error("getFeaturesFromRemote-error");
-                    this.getOrdersFromRemote();
+                    //this.getOrdersFromRemote();
+            		this.getPositionsFromRemote();
         			//this.proceedWithLocalData("getFeaturesFromRemote");
                 }
             }

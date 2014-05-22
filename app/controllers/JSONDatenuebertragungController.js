@@ -373,8 +373,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// data.positionen enthält also myLength Elemente
 
-			// alle "alten" Positionen löschen
+			// alle "alten" Positionen und Aufträge löschen
 			DigiWebApp.Position.deleteAll();
+			DigiWebApp.Order.deleteAll();
 			
 			// die empfangenen Positionen mit Model ablegen
 			var errorHappened = false;
@@ -452,6 +453,19 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						, positionBegin: positionBegin
 						, positionEnd: positionEnd
 	                });
+
+	            	// gibt es den zugehörigen Auftrag schon?
+	            	var loadedOrder = _.find(DigiWebApp.Order.find(), function(order) {
+	            		return order.get("id") == posorderId;
+	            	});
+	            	if (!loadedOrder) {
+	            		// zugehörigen Auftrag anlegen
+                        var rec = DigiWebApp.Order.createRecord({
+                              id: el.auftragsId
+                            , name: el.auftragsBezeichnung
+                        });
+                        rec.saveSorted();
+	            	}
 	            	
 					// sind Termine in der Position hinterlegt?
 					var terminList = [];
@@ -459,25 +473,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						
 						// Termine hinzufügen
 						_.each(el.mitarbeiterTermine, function(termin) {
-//							var myDateVon = D8.create(termin.von);
-//							var myDateBis = D8.create(termin.bis);
-//							var myDateVonStr = myDateVon.format("dd.mm.yyyy");
-//							var myDateBisStr = myDateBis.format("dd.mm.yyyy");
-//							if (myDateVonStr === myDateBisStr) {
-//								if (!_.contains(terminList, myDateVonStr)) {
-//									terminList.push(myDateVonStr);
-//								}
-//							} else {
-//								var myDateStr = myDateVon.format("dd.mm.yyyy");
-//								var myDate = myDateVon;
-//								while (myDateBisStr !== myDateStr) {
-//									myDateStr = myDate.format("dd.mm.yyyy");
-//									if (!_.contains(terminList,myDateStr)) {
-//										terminList.push(myDateStr);
-//									}
-//									myDate = myDate.addDays(1);
-//								}
-//							}
 							if (termin.ganzerTag) {
 								// künstliches von und bis setzen, um die Uhrzeit in der Terminliste ausblenden zu können
 								var datum = termin.von.split(" ")[0];
@@ -488,13 +483,15 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						});
 						
 					}
-					positionItem.set("appointments",JSON.stringify(terminList));
+					positionItem.set("appointments", JSON.stringify(terminList));
 					
 					//Position speichern
 					positionItem.saveSorted();
 				}
 			});
 			
+            localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_orderKeys', JSON.stringify(mIdArray));
+
 			if (errorHappened) {
 				return errorCallback();
 			} else {
