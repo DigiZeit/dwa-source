@@ -490,8 +490,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				}
 			});
 			
-            localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_orderKeys', JSON.stringify(mIdArray));
-
 			if (errorHappened) {
 				return errorCallback();
 			} else {
