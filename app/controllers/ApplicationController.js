@@ -294,7 +294,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 			// Loader nach definiertem TimeOut automatisch verstecken
 			var myTimeout = timeout;
-			if (!myTimeout) myTimeout = DigiWebApp.ApplicationController.DigiLoaderView.hide, DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
+			if (!myTimeout) myTimeout = DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = window.setTimeout(myTimeout);
 			
