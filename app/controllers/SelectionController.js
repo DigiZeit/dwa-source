@@ -151,7 +151,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    		if (typeof(activitySelection) !== "undefined") {
+    		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
+    		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
 	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === activitySelection.value);});
 	    		//var activitySelected = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
 	    		if (!activitySelected) {
@@ -281,7 +282,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    		if (typeof(activitySelection) !== "undefined") {
+    		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
+    		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
 	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === activitySelection.value);});
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
 	    		if (typeof(activitySelected) === "undefined") {
@@ -418,7 +420,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    		if (typeof(activitySelection) !== "undefined") {
+    		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
+    		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
 	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === activitySelection.value);});
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
 	    		if (typeof(activitySelected) === "undefined") {
