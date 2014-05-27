@@ -282,7 +282,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			return M.LoaderView.hide(true);
 		}
 
-		, show: function(title) {
+		, show: function(title, timeout) {
 
 			if (this.isVisible()) { 
 				this.hide(); 
@@ -292,9 +292,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				this.loaderMessage = title;
 			}
 
-			// Loader nach definiertem TimeOut verstecken
+			// Loader nach definiertem TimeOut automatisch verstecken
+			var myTimeout = timeout;
+			if (!myTimeout) myTimeout = DigiWebApp.ApplicationController.DigiLoaderView.hide, DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
 			window.clearTimeout(this.timeoutId);
-			this.timeoutId = window.setTimeout(DigiWebApp.ApplicationController.DigiLoaderView.hide, DigiWebApp.SettingsController.getSetting('LoaderTimeOut'));
+			this.timeoutId = window.setTimeout(myTimeout);
 			
 			return M.LoaderView.show(this.loaderMessage);
 		}
