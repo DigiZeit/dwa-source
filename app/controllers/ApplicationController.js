@@ -433,17 +433,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
          * 		"Linux armv7l" (HTC Desire)
          */
 		//alert("Platform: \"" + M.Environment.getPlatform() + "\"");
-    	var myPlattform = M.Environment.getPlatform();
-        if (       ( myPlatform.substr(-2)  === "86" )
-        		|| ( myPlatform.substr(-3)  === "_64" )
-        		|| ( myPlatform.substr(-5)  === "Win32" )
-        		|| ( myPlatform.substr(-5)  === "Win64" )
-        		|| ( myPlatform.substr(0,3) === "Mac" )
-        ) {
-        	this.skipEvents = true;
-        } else {
-        	this.skipEvents = false;
-        }
+//    	var myPlattform = M.Environment.getPlatform();
+//        if (       ( myPlatform.substr(-2)  === "86" )
+//        		|| ( myPlatform.substr(-3)  === "_64" )
+//        		|| ( myPlatform.substr(-5)  === "Win32" )
+//        		|| ( myPlatform.substr(-5)  === "Win64" )
+//        		|| ( myPlatform.substr(0,3) === "Mac" )
+//        ) {
+//        	this.skipEvents = true;
+//        } else {
+//        	this.skipEvents = false;
+//        }
 
         // using timeout-detection
         this.skipEvents = false;
@@ -616,11 +616,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
-		if (DigiWebApp.ApplicationController.timeouthappened) {
-	        $(window).bind('resize', function() {
-	            DigiWebApp.ApplicationController.setImageClass();
-	        });
-		} else {
+        $(window).bind('resize', function() {
+            DigiWebApp.ApplicationController.setImageClass();
+        });
+        
+//		if (DigiWebApp.ApplicationController.timeouthappened) {
+//	        $(window).bind('resize', function() {
+//	            DigiWebApp.ApplicationController.setImageClass();
+//	        });
+//		} else {
 //            var portraitScreenHeight;
 //            var landscapeScreenHeight;
 //
@@ -647,10 +651,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //	            }
 //	            DigiWebApp.ApplicationController.setImageClass();
 //	        });
-	        $(window).bind('resize', function() {
-	            DigiWebApp.ApplicationController.setImageClass();
-	        });
-		}
+//		}
 
 		try {
 			navigator.splashscreen.hide();
