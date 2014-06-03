@@ -377,13 +377,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	}
             });
 
-            // hide footer while softkeyboard is showing
-            $('input').focus(function() {
-            	$('[data-role=footer]').hide();
-            });
-            $('input').blur(function() {
-            	$('[data-role=footer]').show();
-            });
+//            // hide footer while softkeyboard is showing
+//            $('input').focus(function() {
+//            	$('[data-role=footer]').hide();
+//            });
+//            $('input').blur(function() {
+//            	$('[data-role=footer]').show();
+//            });
                         
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
         		console.log("registering emergencyhandler");
@@ -434,12 +434,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
          */
 		//alert("Platform: \"" + M.Environment.getPlatform() + "\"");
     	var myPlattform = M.Environment.getPlatform();
-        if (       ( myPlattform.substr(-2)  === "86" )
-        		|| ( myPlattform.substr(-5)  === "Win32" )
-        		|| ( myPlattform.substr(-5)  === "Win64" )
-        		|| ( myPlattform.substr(0,3) === "Mac" )
-        		|| ( myPlattform.substr(0,10) === "BlackBerry")
-        	) {
+        if (       ( myPlatform.substr(-2)  === "86" )
+        		|| ( myPlatform.substr(-3)  === "_64" )
+        		|| ( myPlatform.substr(-5)  === "Win32" )
+        		|| ( myPlatform.substr(-5)  === "Win64" )
+        		|| ( myPlatform.substr(0,3) === "Mac" )
+        ) {
         	this.skipEvents = true;
         } else {
         	this.skipEvents = false;
