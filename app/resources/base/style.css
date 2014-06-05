@@ -28,10 +28,6 @@ body {
 	color: #000 !important;
 }
 
-textarea.ui-input-text {
-	color: #000 !important;
-}
-
 .red div {
     color: #990000;	
 }
@@ -97,7 +93,7 @@ fieldset legend {
 
 /* SCHOLPP-Branding */
 .SCHOLPPbranding .ui-body-c {
-/*	color: #fff !important; */
+	color: #fff !important;
 	text-weight: bold;
 }
 .splashViewPage.SCHOLPP_w320 { background: #003366 !important }
@@ -1522,4 +1518,8 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 
 .preLine {
 	white-space: pre-line;
+}
+
+textarea.ui-input-text {
+	color: #000 !important;
 }
