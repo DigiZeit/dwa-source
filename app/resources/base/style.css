@@ -119,7 +119,7 @@ fieldset legend {
 
 /* DIGI-WEBAPP-WHITE-Branding */
 .DIGI-WEBAPP-WHITEbranding .ui-body-c {
-/*	color: #000 !important; */
+	color: #000 !important; 
 	text-weight: bold;
 }
 .splashViewPage.DIGI-WEBAPP-WHITE_w320 { background: #ffffff !important }
