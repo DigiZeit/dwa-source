@@ -259,7 +259,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             // finish the Dashboard with the Settings-, Update- and the Info-Page
             items.push({
                   label: M.I18N.l('settings')
-                , icon: 'icon_settings.png'
+                , icon: '48x48_plain_wrench.png'
                 , id: 'settings'
             });
             
