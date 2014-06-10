@@ -160,7 +160,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 
         var i = 0;
         positions = _.map(positions, function(pos) {
-            if (parseInt(pos.get('orderId')) == parseInt(orderId)) {
+            if (pos.get('orderId') == orderId) {
                 var obj = { label: pos.get('name'), value: pos.get('id') };
                 if (i === 0) {
                     obj.isSelected = YES;
@@ -205,7 +205,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 //        }});
         var workPlans = []; 
         _.each(DigiWebApp.WorkPlan.find(),function(wp){
-        	if (parseInt(wp.get("id")) === parseInt(posId)) workPlans.push(wp);
+        	if (wp.get("id") == posId) workPlans.push(wp);
         });
         var i = 0;
 
@@ -387,11 +387,14 @@ DigiWebApp.CameraController = M.Controller.extend({
         var activities = [];
         if (actIds && actIds.length > 0) {
             for (var i = 0; i < actIds.length; i++) {
-                activities.push(_.first(DigiWebApp.Activity.find({ query: {
-                      identifier: 'id' 
-                    , operator: '=' 
-                    , value: actIds[i] 
-                }})));
+            	activities.push(_.find(DigiWebApp.Activity.find(), function(act) {
+            		return act.get('id') == actIds[i];
+            	}));
+//                activities.push(_.first(DigiWebApp.Activity.find({ query: {
+//                      identifier: 'id' 
+//                    , operator: '=' 
+//                    , value: actIds[i] 
+//                }})));
             }
 
         }

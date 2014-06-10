@@ -380,7 +380,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						, loaderText: M.I18N.l('sendeMedien')
 						, successCallback: function(data2, msg, request) {
 					    	_.each(mediaFiles, function(mf) {
-					            if (mf.m_id === el.m_id) {
+					            if (mf.m_id == el.m_id) {
 					            	var delFunc = function() {
 					            		mf.del();
 						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
@@ -469,7 +469,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						//console.log("fileContent: " + fileContent);
 						if (fileContent && (fileContent !== "")) {
 					    	_.each(mediaFiles, function(mf) {
-					            if (mf.m_id === el.m_id) {
+					            if (mf.m_id == el.m_id) {
 					            	mf.set("data", fileContent);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
 				        			console.log('mediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
