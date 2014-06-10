@@ -200,7 +200,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 402 (Materialerfassung)");
                 items.push({
                       label: M.I18N.l('materialPickUp')
-                    , icon: '48x48_plain_about.png'
+                    , icon: 'icon_info.png'
                     , id: 'materialerfassung'
                 });
             }
@@ -265,7 +265,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             
             items.push({
                 label: M.I18N.l('info'),
-                icon: 'icon_info.png',
+                icon: '48x48_plain_about.png',
                 id: 'info'
             });
             
