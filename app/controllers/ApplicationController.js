@@ -2406,19 +2406,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , afterTransfer: function() {
-        this.syncStopTimestamp = D8.now().getTimestamp();
-        this.syncLastDuration = this.syncStopTimestamp - this.syncStartTimestamp;
-        if (this.profilingIntervalVar !== null) {
-        	console.log('DIGI-WebApp-Profiling ' + D8.now().format("yyyymmdd-HHMMss") + ' ' + this.syncLastDuration + 'ms');
+    	var that = DigiWebApp.ApplicationController;
+    	that.syncStopTimestamp = D8.now().getTimestamp();
+    	that.syncLastDuration = that.syncStopTimestamp - that.syncStartTimestamp;
+        if (that.profilingIntervalVar !== null) {
+        	console.log('DIGI-WebApp-Profiling ' + D8.now().format("yyyymmdd-HHMMss") + ' ' + that.syncLastDuration + 'ms');
         }
-    	if (this.profilingShowAlert) {
-    		alert('DIGI-WebApp-Profiling: ' + M.I18N.l('profilingTook') + ' ' + this.syncLastDuration + 'ms');
+    	if (that.profilingShowAlert) {
+    		alert('DIGI-WebApp-Profiling: ' + M.I18N.l('profilingTook') + ' ' + that.syncLastDuration + 'ms');
     	}
     	
     	DigiWebApp.ApplicationController.syncRunning = NO;
     	
         // go to next page
-        if(this.isReadyToProceed()) {
+        if(that.isReadyToProceed()) {
             if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
             	if (DigiWebApp.SettingsController.featureAvailable('409')) {
     	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -2471,8 +2472,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             });
         }
 
-        if (this.profilingSingleRun) {
-    		this.profilingIntervalVar = null;
+        if (that.profilingSingleRun) {
+        	that.profilingIntervalVar = null;
     	}
 
     }
