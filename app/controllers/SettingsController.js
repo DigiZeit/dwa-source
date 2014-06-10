@@ -42,7 +42,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , useTransitionsSetting: true
         , daysToHoldBookingsOnDevice: '10'
         , bautagebuchLimit_autoStartUhrzeit: false
-        , datatransfer_min_delay: 5000
+        , datatransfer_min_delay: 10000
         , branding: ''
         , GPSTimeOut: 60000
         , WebserviceTimeOut: 30000
