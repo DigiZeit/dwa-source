@@ -514,4 +514,88 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 	}
 
+	, empfangeFestepausendefinitionen: function(successCallback, errorCallback) {
+
+		var internalSuccessCallback = function(data, msg, request) {
+			// verarbeite empfangene Daten
+			
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("empfangeFestepausendefinitionen Status: " + request.status);
+			
+			// wurden Festepausendefinitionen empfangen?
+			if (typeof(data.festepausendefinitionen) === "undefined" && data.festepausendefinitionen !== null && data.festepausendefinitionen.length > 0) {
+				console.error("missing festepausendefinitionen");
+				return errorCallback();
+			}
+			
+			var myLength = null;
+			try {
+				myLength = data.festepausendefinitionen.length;
+			} catch(e2) {
+				console.error(myLength);
+				//return errorCallback();
+			}
+
+			if (data.festepausendefinitionen === null) {
+				// hier könnte man - wenn gewünscht - verhindern, dass es gar keine festepausendefinitionen gibt
+				//return errorCallback();
+			} else {
+				// ist data.festepausendefinitionen auch wirklich ein Array?
+				var myLength = null;
+				try {
+					myLength = data.festepausendefinitionen.length;
+				} catch(e2) {
+					console.error(myLength);
+					return errorCallback();
+				}
+			}
+			
+			// data.festepausendefinitionen enthält also myLength Elemente
+
+			// alle "alten" festepausendefinitionen löschen
+			DigiWebApp.Festepausendefinition.deleteAll();
+			
+			// die empfangenen festepausendefinitionen mit Model ablegen
+			_.each(data.festepausendefinitionen, function(el) {
+				//console.log(el);
+				if (typeof(el.id) === "undefined") {
+					console.error("missing id");
+					return errorCallback();
+				} else if (typeof(el.wochentagId) === "undefined") {
+					console.error("missing wochentagId");
+					return errorCallback();
+				} else if (typeof(el.von) === "undefined") {
+					console.error("missing von");
+					return errorCallback();
+				} else if (typeof(el.bis) === "undefined") {
+					console.error("missing bis");
+					return errorCallback();
+				} else {
+					// el zur Liste hinzufügen
+					DigiWebApp.Festepausendefinition.createRecord({
+						  id: el.id
+						, ressourceId: el.ressourceId
+						, wochentagId: el.wochentagId // 0 = Sonntag, 1 = Montag, ...
+						, von: el.von
+						, bis: el.bis
+					}).saveSorted();
+				}
+			});
+			
+			// weiter in der Verarbeitungskette
+			successCallback();
+		};
+		// webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
+		var recieveObj = {
+			  webservice: "festepausendefinitionen"
+			, loaderText: M.I18N.l('getFestepausendefinitionenLoader')
+			, successCallback: internalSuccessCallback
+			, errorCallback: errorCallback
+			, additionalQueryParameter: ''
+			//, timeout: 
+			, geraeteIdOverride: false
+			, modus: '1'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		
+	}
 });

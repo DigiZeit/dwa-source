@@ -462,4 +462,6 @@ M.I18N.de_de = {
 	, bookingTooShort: "Buchung zu kurz"
 	, bookingTooShortMsg: "Diese Buchung ist zu kurz und kann noch nicht abgeschlossen werden!"
 
+	, getFestepausendefinitionenLoader: "Empfange feste Pausen"
+
 };

@@ -12,7 +12,7 @@ DigiWebApp.Festepausendefinition = M.Model.create({
     __name__: 'Festepausendefinition'
 
     , id: M.Model.attr('String', {
-        isRequired: NO
+        isRequired: YES
     })
 
     , ressourceId: M.Model.attr('String', {
@@ -21,16 +21,16 @@ DigiWebApp.Festepausendefinition = M.Model.create({
 
     , wochentagId: M.Model.attr('String', {
     	// 0 = Sonntag, 1 = Montag, ...
-        isRequired: NO
+        isRequired: YES
     })
     
     , von: M.Model.attr('String', {
-    	// "01.01.2000 23:00"
+    	// "23:00"
         isRequired: NO
     })
     
     , bis: M.Model.attr('String', {
-    	// "02.01.2000 00:15"
+    	// "00:15"
         isRequired: NO
     })
 

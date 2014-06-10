@@ -2392,21 +2392,25 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         // end session on server
         this.endSession();
 
-        if (DigiWebApp.SettingsController.featureAvailable('412')) {
-	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(
-	    		  function(msg){
-	    			  var that = DigiWebApp.ApplicationController;
-	    			  that.afterTransfer();
-	    		}
-	    		, function(err){
-	    			  var that = DigiWebApp.ApplicationController;
-	    			  that.afterTransfer();
-	    		}
-	    	);
-    	} else {
-    		this.afterTransfer();
-    	}
+        var empfangeBautagebuch = function() {
+            if (DigiWebApp.SettingsController.featureAvailable('412')) {
+    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(
+    	    		  function(msg){
+    	    			  var that = DigiWebApp.ApplicationController;
+    	    			  that.afterTransfer();
+    	    		}
+    	    		, function(err){
+    	    			  var that = DigiWebApp.ApplicationController;
+    	    			  that.afterTransfer();
+    	    		}
+    	    	);
+        	} else {
+        		this.afterTransfer();
+        	}
+        }
 
+    	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch);  
+    	
     }
     
     , afterTransfer: function() {
