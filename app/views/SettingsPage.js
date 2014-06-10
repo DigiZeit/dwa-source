@@ -59,7 +59,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
 		        	  label: M.I18N.l('daysToHoldBookingsOnDeviceLabel')
 		        	, min: 1
-		        	, max: 40
+		        	, max: 60
 		        	, highlightLeftPart: YES
 		        	, cssClass: 'daysToHoldBookingsOnDeviceSlider'
 		            , contentBinding: {
