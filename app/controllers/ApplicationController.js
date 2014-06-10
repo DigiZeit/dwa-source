@@ -2401,8 +2401,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	}
         }
 
-    	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch);  
+        var empfangeFestepausendefinitionen = function() {
+        	var that = DigiWebApp.ApplicationController;
+            if (DigiWebApp.SettingsController.featureAvailable('425')) {
+            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
+        	} else {
+        		empfangeBautagebuch();
+        	}
+        }
     	
+        empfangeFestepausendefinitionen();
     }
     
     , afterTransfer: function() {
