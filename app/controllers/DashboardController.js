@@ -105,7 +105,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	            items = [
 	                          {
 	     	                      label: M.I18N.l('dataTransfer')
-	     	                    , icon: 'icon_dataTransfer.png'
+	     	                    , icon: '48x48_plain_refresh.png'
 	     	                    , id: 'dataTransfer'
 	     	                }
 	            ];
@@ -114,22 +114,22 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	            items = [
 	                  {
 	                      label: M.I18N.l('closingTime')
-	                    , icon: 'icon_closingTime.png'
+	                    , icon: '48x48_plain_home.png'
 	                    , id: 'closingTime'
 	                }
 	                , {
 	                      label: M.I18N.l('dataTransfer')
-	                    , icon: 'icon_dataTransfer.png'
+	                    , icon: '48x48_plain_refresh.png'
 	                    , id: 'dataTransfer'
 	                }
 	                , {
 	                      label: M.I18N.l('handApplications')
-	                    , icon: 'icon_handApplication.png'
+	                    , icon: '48x48_plain_handauftrag.png'
 	                    , id: 'handOrder'
 	                }
 	                , {
 	                      label: M.I18N.l('timeData')
-	                    , icon: 'icon_timeData.png'
+	                    , icon: '48x48_plain_note_view.png'
 	                    , id: 'timeData'
 	                }
 	            ];
@@ -160,7 +160,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 406 (AuftragsInfo)");
                 items.push({
                       label: M.I18N.l('orderInfo')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_folder_view.png'
                     , id: 'orderInfo'
                 });
             }
@@ -174,7 +174,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media') + " (DEMO)"
-                    , icon: 'icon_media.png'
+                    , icon: '48x48_plain_index.png'
                     , id: 'demomedia'
                 });
             }
@@ -182,7 +182,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media')
-                    , icon: 'icon_media.png'
+                    , icon: '48x48_plain_index.png'
                     , id: 'media'
                 });
             }
@@ -200,7 +200,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 402 (Materialerfassung)");
                 items.push({
                       label: M.I18N.l('materialPickUp')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_shelf.png'
                     , id: 'materialerfassung'
                 });
             }
@@ -213,7 +213,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 407 (Tagescheckliste)");
                 items.push({
                       label: M.I18N.l('dailyChecklist')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_pda_write.png'
                     , id: 'tagescheckliste'
                 });
             }
@@ -226,7 +226,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 408 (Anwesenheitsliste)");
                 items.push({
                       label: M.I18N.l('Anwesenheitsliste')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_text_code.png'
                     , id: 'anwesenheitsliste'
                 });	
             }
@@ -239,7 +239,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 412 (Bautagebuch)");
                 items.push({
                       label: M.I18N.l('Bautagebuch')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_graphics-tablet.png'
                     , id: 'bautagebuch'
                 });	
             }
@@ -259,7 +259,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             // finish the Dashboard with the Settings-, Update- and the Info-Page
             items.push({
                   label: M.I18N.l('settings')
-                , icon: '48x48_plain_wrench.png'
+                , icon: '48x48_plain_gears.png'
                 , id: 'settings'
             });
             
