@@ -13,7 +13,7 @@ body {
 }
 
 .ui-page {
-	-webkit-backface-visibility: hidden;
+	/* -webkit-backface-visibility: hidden; */
 	/* -webkit-transform: translateZ(0); */
 }
 
