@@ -174,7 +174,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media') + " (DEMO)"
-                    , icon: '48x48_plain_index.png'
+                    , icon: '48x48_plain_camera2.png'
                     , id: 'demomedia'
                 });
             }
@@ -182,7 +182,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
                       label: M.I18N.l('media')
-                    , icon: '48x48_plain_index.png'
+                    , icon: '48x48_plain_camera2.png'
                     , id: 'media'
                 });
             }
@@ -250,7 +250,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             if (TerminlisteAvailable) {
                 items.push({
                       label: M.I18N.l('TerminlisteLong')
-                    , icon: 'icon_info.png'
+                    , icon: '48x48_plain_book_blue_find.png'
                     , id: 'Terminliste'
                 });	
             }
@@ -286,7 +286,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
             // add update-button if timeouthappened (not on a mobile device) and applicationCache-available
     		itemsWithUpdate.push({
                   label: M.I18N.l('updateApplication')
-                , icon: 'icon_info.png'
+                , icon: '48x48_plain_replace2.png'
                 , id: 'updateApplication'
             });
             this.set('items', itemsWithUpdate);

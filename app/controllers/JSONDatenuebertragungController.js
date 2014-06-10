@@ -556,8 +556,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// die empfangenen festepausendefinitionen mit Model ablegen
 			_.each(data.festepausendefinitionen, function(el) {
-				//console.log(el);
-				if (typeof(el.id) === "undefined") {
+				if (typeof(el) == "undefined" || el == null) {
+					console.error("empty element");
+					//return errorCallback();
+				} else if (typeof(el.id) === "undefined") {
 					console.error("missing id");
 					return errorCallback();
 				} else if (typeof(el.wochentagId) === "undefined") {
