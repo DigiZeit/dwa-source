@@ -2393,19 +2393,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         this.endSession();
 
         var empfangeBautagebuch = function() {
+        	var that = DigiWebApp.ApplicationController;
             if (DigiWebApp.SettingsController.featureAvailable('412')) {
-    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(
-    	    		  function(msg){
-    	    			  var that = DigiWebApp.ApplicationController;
-    	    			  that.afterTransfer();
-    	    		}
-    	    		, function(err){
-    	    			  var that = DigiWebApp.ApplicationController;
-    	    			  that.afterTransfer();
-    	    		}
-    	    	);
+    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
         	} else {
-        		this.afterTransfer();
+        		that.afterTransfer();
         	}
         }
 
