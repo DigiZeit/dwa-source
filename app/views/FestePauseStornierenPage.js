@@ -21,7 +21,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
     , cssClass: 'festePauseStornierenPage'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton titleGrid'
+          childViews: 'backButton title'
         , cssClass: 'header'
         , isFixed: YES
         , backButton: M.ButtonView.design({
