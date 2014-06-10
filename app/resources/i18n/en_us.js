@@ -465,6 +465,6 @@ M.I18N.en_us = {
 
 	, getFestepausendefinitionenLoader: "Recieve constant breaks"
 	, FestePauseStornieren: "Cancel constant breaks"
-
+	, festePauseStornieren_nurAktuellerTag: "Only for the effective day"
 
 };

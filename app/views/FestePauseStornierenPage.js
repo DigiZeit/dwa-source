@@ -49,7 +49,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-            childViews: ''
+            childViews: 'gesternBalken gesternPausenList heuteBalken heutePausenList morgenBalken morgenPausenList stornierenButton'
     })
 
 });

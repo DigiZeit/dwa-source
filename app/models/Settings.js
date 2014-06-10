@@ -102,4 +102,6 @@ DigiWebApp.Settings = M.Model.create({
     
     , terminliste_ignoriereAuftragszeitraum: M.Model.attr('Boolean')
 
+    , festePauseStornieren_nurAktuellerTag: M.Model.attr('Boolean')
+
 }, M.DataProviderLocalStorage);

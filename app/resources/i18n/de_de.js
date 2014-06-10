@@ -464,5 +464,6 @@ M.I18N.de_de = {
 
 	, getFestepausendefinitionenLoader: "Empfange feste Pausen"
 	, FestePauseStornieren: "Feste Pausen stornieren"
+	, festePauseStornieren_nurAktuellerTag: "nur für den aktuellen Tag"
 
 };

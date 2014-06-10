@@ -512,6 +512,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, FestePauseStornieren: function() {
-		//DigiWebApp.NavigationController.toFestePauseStornierenPage();
+		DigiWebApp.NavigationController.toFestePauseStornierenPage();
 	}
 });

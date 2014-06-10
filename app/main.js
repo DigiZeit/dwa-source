@@ -573,6 +573,10 @@ if (searchForFeature(423)) { // Terminliste
 	DigiWebAppOrdinaryDesign.terminlistePage = DigiWebApp.TerminlistePage;
 }
 
+if (searchForFeature(425)) { // FestePauseStornieren
+	DigiWebAppOrdinaryDesign.festePauseStornierenPage = DigiWebApp.FestePauseStornieren;
+}
+
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {
