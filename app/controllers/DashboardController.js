@@ -256,6 +256,17 @@ DigiWebApp.DashboardController = M.Controller.extend({
             }
             // End::Terminliste
 
+            // Start::FestePauseStornieren (425)
+            var FestePauseStornierenAvailable = DigiWebApp.SettingsController.featureAvailable('425');
+            if (FestePauseStornierenAvailable) {
+                items.push({
+                      label: M.I18N.l('FestePauseStornieren')
+                    , icon: '48x48_plain_note_delete.png'
+                    , id: 'FestePauseStornieren'
+                });	
+            }
+            // End::FestePauseStornieren
+            
             // finish the Dashboard with the Settings-, Update- and the Info-Page
             items.push({
                   label: M.I18N.l('settings')
@@ -500,4 +511,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		DigiWebApp.NavigationController.toTerminlistePage();
 	}
 	
+	, FestePauseStornieren: function() {
+		//DigiWebApp.NavigationController.toFestePauseStornierenPage();
+	}
 });

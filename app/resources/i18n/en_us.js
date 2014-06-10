@@ -463,5 +463,8 @@ M.I18N.en_us = {
 	, bookingTooShort: "Booking is too short"
 	, bookingTooShortMsg: "This booking is too short and could not get closed!"
 
+	, getFestepausendefinitionenLoader: "Recieve constant breaks"
+	, FestePauseStornieren: "Cancel constant breaks"
+
 
 };
