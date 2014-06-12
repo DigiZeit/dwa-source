@@ -24,16 +24,18 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
     , morgenBalken: null    	
     , initBalken: function() {
 		var that = this;
+		var wochentage = DigiWebApp.ApplicationController.dayNames;
+		
 		that.set('gesternBalken', [{
-			  "label": D8.create().yesterday().format("dd.mm.yyyy")
+			  "label": wochentage[D8.create().yesterday().date.getDay()] + ", " + D8.create().yesterday().format("dd.mm.yyyy")
 			, "items": []
 		}]); 
 		that.set('heuteBalken', [{
-			  "label": D8.create().format("dd.mm.yyyy")
+			  "label": wochentage[D8.create().date.getDay()] + ", " + D8.create().format("dd.mm.yyyy")
 			, "items": []
 		}]); 
 		that.set('morgenBalken', [{
-			  "label": D8.create().tomorrow().format("dd.mm.yyyy")
+			  "label": wochentage[D8.create().tomorrow().date.getDay()] + ", " + D8.create().tomorrow().format("dd.mm.yyyy")
 			, "items": []
 		}]); 
 	}

@@ -22,22 +22,22 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, myns: "ax21"
 
     , dayNamesShort: [
-          M.I18N.l('Monday').substr(0,3)
+          M.I18N.l('Sunday').substr(0,3)
+        , M.I18N.l('Monday').substr(0,3)
         , M.I18N.l('Tuesday').substr(0,3)
         , M.I18N.l('Wednesday').substr(0,3)
         , M.I18N.l('Thursday').substr(0,3)
         , M.I18N.l('Friday').substr(0,3)
         , M.I18N.l('Saturday').substr(0,3)
-        , M.I18N.l('Sunday').substr(0,3)
     ]
     , dayNames: [
-          M.I18N.l('Monday')
+          M.I18N.l('Sunday')
+        , M.I18N.l('Monday')
         , M.I18N.l('Tuesday')
         , M.I18N.l('Wednesday')
         , M.I18N.l('Thursday')
         , M.I18N.l('Friday')
         , M.I18N.l('Saturday')
-        , M.I18N.l('Sunday')
     ]
 
     , monthNamesShort: [

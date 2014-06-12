@@ -64,7 +64,7 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 		            },
 		            value: 0,
 		            operation: function(v) {
-		                return DigiWebApp.ApplicationController.dayNamesShort[(D8.create(v).date.getDay() + 6) % 7].substring(0,2);
+		                return DigiWebApp.ApplicationController.dayNamesShort[D8.create(v).date.getDay()].substring(0,2);
 		            }
 		        }
 	        	, cssClass: 'dateTitleDay'
