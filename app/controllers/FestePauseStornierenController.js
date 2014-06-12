@@ -120,9 +120,9 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	});
         	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
         		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
-				//myContent.children[1].style.color = "lightgrey";
         	}
         });
+        
         var myHeuteList = $('#' + DigiWebApp.FestePauseStornierenPage.content.heutePausenList.id);
         _.each(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(myContent) {
         	var fp = _.find(DigiWebApp.Festepausendefinition.find(), function(n) {
@@ -136,9 +136,9 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	});
         	if (sonderbuchung && parseBool(sonderbuchung.get("uebertragen"))) {
         		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
-				//myContent.children[1].style.color = "lightgrey";
         	}
         });
+        
         var myMorgenList = $('#' + DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.id);
         _.each(DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection, function(myContent) {
         	var fp = _.find(DigiWebApp.Festepausendefinition.find(), function(n) {
@@ -152,13 +152,20 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	});
         	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
         		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
-				//myContent.children[1].style.color = "lightgrey";
         	}
         });
         
+        that.gesternOldSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
+		that.heuteOldSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
+		that.morgenOldSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
 	}
 	
+	, gesternOldSelection: null
+	, heuteOldSelection: null
+	, morgenOldSelection: null
+
 	, save: function() {
+		
 		var gesternPausenZuStornierenSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
 		var heutePausenZuStornierenSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
 		var morgenPausenZuStornierenSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
@@ -171,6 +178,23 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 			}
 		};
 		
+		var pausenZuStornierenGesternAlt = _.map(_.map(gesternOldSelection, function(el) { return el.value; }), mapIdToFestePause);
+		var pausenZuStornierenHeuteAlt   = _.map(_.map(heuteOldSelection, function(el) { return el.value; }), mapIdToFestePause);
+		var pausenZuStornierenMorgenAlt  = _.map(_.map(morgenOldSelection, function(el) { return el.value; }), mapIdToFestePause);
+		var pausenZuStornierenAlt = pausenZuStornierenGesternAlt.concat(pausenZuStornierenHeuteAlt.concat(pausenZuStornierenMorgenAlt));
+		_.each(pausenZuStornierenAlt, function(p) {
+			var fp = p.festepausendefinition;
+        	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
+        		return (   n.get("festepausendefinitionId") == fp.get("id") 
+        				&& n.get("ressourceId") == fp.get("ressourceId")
+        				&& n.get("datum") == p.date
+        			   )
+        	});
+        	if (sonderbuchung && !parseBool(sonderbuchung.get("uebertragen"))) {
+        		sonderbuchung.del();
+        	}
+		}
+
 		var pausenZuStornierenGestern = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenHeute   = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenMorgen  = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
