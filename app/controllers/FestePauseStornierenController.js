@@ -220,6 +220,13 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 			}).saveSorted();
 		});
 
+		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+		if (DigiWebApp.SettingsController.featureAvailable('404')) {
+    		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
+		} else {
+    		DigiWebApp.NavigationController.backToDashboardPagePOP();
+		}
+		
 	}
 	
 });
