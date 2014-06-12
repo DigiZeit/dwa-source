@@ -167,6 +167,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 
+		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.findSorted();
+
 		var gesternPausenZuStornierenSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
 		var heutePausenZuStornierenSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
 		var morgenPausenZuStornierenSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
