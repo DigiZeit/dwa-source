@@ -165,7 +165,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, morgenOldSelection: null
 
 	, save: function() {
-		
+		var that = this;
+
 		var gesternPausenZuStornierenSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
 		var heutePausenZuStornierenSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
 		var morgenPausenZuStornierenSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
@@ -216,9 +217,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 				, datum: p.date
 			}).saveSorted();
 		});
-		
-		
-		
+
 	}
 	
 });
