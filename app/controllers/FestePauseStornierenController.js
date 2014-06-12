@@ -44,5 +44,28 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, initPausenLists: function() {
 		var that = this;
 		
+		var allePausen = DigiWebApp.Festepausendefinition.findSorted();
+		
+		var gesternWochentag = D8.create().yesterday().date.getDay();
+		var heuteWochentag = D8.create().date.getDay();
+		var morgenWochentag = D8.create().tomorrow().date.getDay();
+		
+		var gesternPausenList = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == gesternWochentag); });
+		var heutePausenList   = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == heuteWochentag); });
+		var morgenPausenList  = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == morgenWochentag); });
+		
+		gesternPausenList = _.map(gesternPausenList, function(fp) {
+            if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
+        });
+		that.set('gesternPausenList', gesternPausenList);
+        heutePausenList = _.map(heutePausenList, function(fp) {
+            if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
+        });
+        that.set('heutePausenList', heutePausenList);
+        morgenPausenList = _.map(morgenPausenList, function(fp) {
+            if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
+        });
+        that.set('morgenPausenList', morgenPausenList);
+
 	}
 });
