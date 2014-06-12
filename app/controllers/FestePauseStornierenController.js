@@ -46,7 +46,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, initPausenLists: function() {
 		var that = this;
 		
-		var allePausen = DigiWebApp.Festepausendefinition.findSorted();
+		var allePausen = DigiWebApp.Festepausendefinition.find();
 		
 		var gestern = D8.create().yesterday();
 		var heute = D8.create();
@@ -59,7 +59,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		var heutePausenList   = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == heuteWochentag); });
 		var morgenPausenList  = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == morgenWochentag); });
 		
-		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.findSorted();
+		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.find();
 		
 		gesternPausenList = _.map(gesternPausenList, function(fp) {
             if (fp) {
@@ -167,7 +167,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 
-		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.findSorted();
+		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.find();
 
 		var gesternPausenZuStornierenSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
 		var heutePausenZuStornierenSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
@@ -217,7 +217,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 				, uebertragen: "false"
 				, festepausendefinitionId: p.festepausendefinition.get("id")
 				, datum: p.date
-			}).saveSorted();
+			}).save();
 		});
 
 		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
