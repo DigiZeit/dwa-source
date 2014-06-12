@@ -6,6 +6,8 @@
 // View: FestePauseStornierenPage
 // ==========================================================================
 
+m_require('app/views/DummyTemplateView');
+
 DigiWebApp.FestePauseStornierenPage = M.PageView.design({
 
     /* Use the 'events' property to bind events like 'pageshow' */
@@ -49,8 +51,56 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-            //childViews: 'gesternBalken gesternPausenList heuteBalken heutePausenList morgenBalken morgenPausenList stornierenButton'
-    		childviews: ''
+          childViews: 'gesternBalken gesternPausenList heuteBalken heutePausenList morgenBalken morgenPausenList stornierenButton'
+        , gesternBalken: M.ListView.design({
+	  	  	  isDividedList: YES
+	        , contentBinding: {
+            	  target: DigiWebApp.FestePausenStornierenController
+            	, property: 'gesternBalken'
+        	}
+	        , listItemTemplateView: DigiWebApp.DummyTemplateView
+      	})
+        , gesternPausenList: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , cssClass: 'infoLabel'
+            , contentBinding: {
+                  target: DigiWebApp.FestePausenStornierenController
+                , property: 'gesternPausenList'
+            }
+        })
+        , heuteBalken: M.ListView.design({
+	  	  	  isDividedList: YES
+	        , contentBinding: {
+          	  target: DigiWebApp.FestePausenStornierenController
+          	, property: 'heuteBalken'
+      	}
+	        , listItemTemplateView: DigiWebApp.DummyTemplateView
+    	})
+        , heutePausenList: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , cssClass: 'infoLabel'
+            , contentBinding: {
+                  target: DigiWebApp.FestePausenStornierenController
+                , property: 'heutePausenList'
+            }
+        })
+        , morgenBalken: M.ListView.design({
+	  	  	  isDividedList: YES
+	        , contentBinding: {
+          	  target: DigiWebApp.FestePausenStornierenController
+          	, property: 'morgenBalken'
+      	}
+	        , listItemTemplateView: DigiWebApp.DummyTemplateView
+    	})
+        , morgenPausenList: M.SelectionListView.design({
+            selectionMode: M.MULTIPLE_SELECTION
+          , cssClass: 'infoLabel'
+          , contentBinding: {
+                target: DigiWebApp.FestePausenStornierenController
+              , property: 'morgenPausenList'
+          }
+        })
+
     })
 
 });

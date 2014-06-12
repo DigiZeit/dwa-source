@@ -225,6 +225,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            var festePauseStornieren_nurAktuellerTag = DigiWebApp.SettingsController.defaultsettings.get("festePauseStornieren_nurAktuellerTag");
+            try {
+	            if (typeof(record.record.festePauseStornieren_nurAktuellerTag) !== "undefined") {
+	            	festePauseStornieren_nurAktuellerTag = record.get('festePauseStornieren_nurAktuellerTag');
+	            }
+            } catch (e) {}
+
             settings = {
             	  debug: [{
                       value: record.get('debug')
