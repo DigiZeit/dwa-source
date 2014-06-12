@@ -119,8 +119,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         			   )
         	});
         	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
-				myContent.children[0].setAttribute("disabled", "disabled");
-				myContent.children[1].style.color = "lightgrey";
+        		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
+				//myContent.children[1].style.color = "lightgrey";
         	}
         });
         var myHeuteList = $('#' + DigiWebApp.FestePauseStornierenPage.content.heutePausenList.id);
@@ -135,8 +135,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         			   )
         	});
         	if (sonderbuchung && parseBool(sonderbuchung.get("uebertragen"))) {
-				myContent.children[0].setAttribute("disabled", "disabled");
-				myContent.children[1].style.color = "lightgrey";
+        		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
+				//myContent.children[1].style.color = "lightgrey";
         	}
         });
         var myMorgenList = $('#' + DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.id);
