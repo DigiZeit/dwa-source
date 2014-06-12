@@ -123,12 +123,6 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
 	          })
 	          , icon: M.ImageView.design({
 	        	  	value: 'theme/images/icon_bookTime.png'
-	              , events: {
-		              tap: {
-		                    target: DigiWebApp.FestePauseStornierenController
-		                  , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
-		              }
-		          }
 	          })
 	    })
 
