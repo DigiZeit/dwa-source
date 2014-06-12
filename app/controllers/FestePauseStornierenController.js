@@ -181,7 +181,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		var pausenZuStornierenGesternAlt = _.map(_.map(gesternOldSelection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenHeuteAlt   = _.map(_.map(heuteOldSelection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenMorgenAlt  = _.map(_.map(morgenOldSelection, function(el) { return el.value; }), mapIdToFestePause);
-		var pausenZuStornierenAlt = pausenZuStornierenGesternAlt.concat(pausenZuStornierenHeuteAlt.concat(pausenZuStornierenMorgenAlt));
+		var pausenZuStornierenAlt = that.pausenZuStornierenGesternAlt.concat(that.pausenZuStornierenHeuteAlt.concat(that.pausenZuStornierenMorgenAlt));
 		_.each(pausenZuStornierenAlt, function(p) {
 			var fp = p.festepausendefinition;
         	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
