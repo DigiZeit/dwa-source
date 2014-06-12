@@ -94,7 +94,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 				  "date": D8.create().format("dd.mm.yyyy")
 				, "festepausendefinition": fpDef
 			}
-		});
+		};
 		
 		var pausenZuStornierenGestern = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenHeute   = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
