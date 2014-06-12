@@ -18,6 +18,14 @@ DigiWebApp.OnlinePosition = M.Model.create({
         isRequired: NO
     })
 
+    , auftragsBeginn: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , auftragsEnde: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , positionsBezeichnung: M.Model.attr('String', {
         isRequired: NO
     })

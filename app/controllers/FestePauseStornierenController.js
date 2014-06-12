@@ -62,18 +62,61 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
             if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
         });
 		that.set('gesternPausenList', gesternPausenList);
+		
         heutePausenList = _.map(heutePausenList, function(fp) {
-            if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
+            if (fp) {
+            	return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
+            }
         });
         that.set('heutePausenList', heutePausenList);
+        
         morgenPausenList = _.map(morgenPausenList, function(fp) {
             if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
         });
         that.set('morgenPausenList', morgenPausenList);
 
+        // bereits stornierte: disable
+//        var myList = $('#' + DigiWebApp.FestePauseStornierenPage.content.heutePausenList.id);
+//        var myContent = myList.contents()[0];
+//        myContent.children[0].setAttribute("disabled", "disabled");
+//        myContent.children[1].style.color = "lightgrey";
+        
 	}
 	
 	, save: function() {
+		var gesternPausenZuStornierenSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
+		var heutePausenZuStornierenSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
+		var morgenPausenZuStornierenSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
+		
+		var mapIdToFestePause = function(fpId) {
+			var fpDef = _.find(DigiWebApp.Festepausendefinition.find(),function(n) { return (n.get("id") == fpId); });
+			return {
+				  "date": D8.create().format("dd.mm.yyyy")
+				, "festepausendefinition": fpDef
+			}
+		});
+		
+		var pausenZuStornierenGestern = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
+		var pausenZuStornierenHeute   = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
+		var pausenZuStornierenMorgen  = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
+		
+		var pausenZuStornieren = pausenZuStornierenGestern.concat(pausenZuStornierenHeute.concat(pausenZuStornierenMorgen));
+		
+		_.each(pausenZuStornieren, function(p) {
+			//{"Key": "<FestepausendefinitionId>", "StringValue": "23"}
+			var sonderbuchungseigenschaft_festepausendefinitionId = {"Key": "<FestepausendefinitionId>", "StringValue": p.festepausendefinition.get("id")};
+	    	//{"Key": "<Datum>", "StringValue": "01.02.2014"}
+			var sonderbuchungseigenschaft_datum = {"Key": "<Datum>", "StringValue": p.date};
+			var sonderbuchungseigenschaften = [sonderbuchungseigenschaft_festepausendefinitionId, sonderbuchungseigenschaft_datum];
+			DigiWebApp.Sonderbuchung.createRecord({
+				  sonderbuchungsTyp: "<pausenStorno>"
+				, sonderbuchungsEigenschaften: JSON.stringify(sonderbuchungseigenschaften)
+				, ressourceId: p.festepausendefinition.get("ressourceId")
+				, uebertragen: "false"
+			}).save();
+		});
+		
+		
 		
 	}
 	

@@ -19,7 +19,7 @@ DigiWebApp.Sonderbuchung = M.Model.create({
     	isRequired: NO
     })
 
-    , sonderbuchungsTypId: M.Model.attr('String', {
+    , sonderbuchungsTyp: M.Model.attr('String', {
 //	    1	<pausenStorno>
 //	    2	<audio>
 //	    3	<spesen>
@@ -30,7 +30,10 @@ DigiWebApp.Sonderbuchung = M.Model.create({
     })
 
     , sonderbuchungsEigenschaften: M.Model.attr('String', {
-    	// z.B. {"SonderbuchungId": "123", "Key": "<FestepausendefinitionId>", "StringValue": "123"}
+    	// z.B.:
+    	// [   {"SonderbuchungId": "123", "Key": "<FestepausendefinitionId>", "StringValue": "23"}
+    	//   , {"SonderbuchungId": "123", "Key": "<Datum>", "StringValue": "01.02.2014"}
+    	// ]
         isRequired: NO
     })
     
