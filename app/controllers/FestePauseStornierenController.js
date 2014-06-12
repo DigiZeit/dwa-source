@@ -134,7 +134,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         				&& n.get("datum") == heute.format("dd.mm.yyyy")
         			   )
         	});
-        	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
+        	if (sonderbuchung && parseBool(sonderbuchung.get("uebertragen"))) {
 				myContent.children[0].setAttribute("disabled", "disabled");
 				myContent.children[1].style.color = "lightgrey";
         	}
@@ -151,8 +151,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         			   )
         	});
         	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
-				myContent.children[0].setAttribute("disabled", "disabled");
-				myContent.children[1].style.color = "lightgrey";
+        		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
+				//myContent.children[1].style.color = "lightgrey";
         	}
         });
         
