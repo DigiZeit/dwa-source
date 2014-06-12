@@ -113,6 +113,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 				, sonderbuchungsEigenschaften: JSON.stringify(sonderbuchungseigenschaften)
 				, ressourceId: p.festepausendefinition.get("ressourceId")
 				, uebertragen: "false"
+				, festepausendefinitionId: p.festepausendefinition.get("id")
 			}).save();
 		});
 		
