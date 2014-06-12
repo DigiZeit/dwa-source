@@ -194,7 +194,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		var pausenZuStornierenMorgenAlt  = _.map(_.map(that.morgenOldSelection, function(el) { return el.value; }), function(fpId) {
 			var fpDef = _.find(DigiWebApp.Festepausendefinition.find(),function(n) { return (n.get("id") == fpId); });
 			return {
-				  "date": morgen).format("dd.mm.yyyy")
+				  "date": morgen.format("dd.mm.yyyy")
 				, "festepausendefinition": fpDef
 			}
 		});
