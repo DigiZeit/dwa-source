@@ -54,6 +54,8 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		var heutePausenList   = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == heuteWochentag); });
 		var morgenPausenList  = _.filter(allePausen, function(festepausendefinition) { return (festepausendefinition.get('wochentagId') == morgenWochentag); });
 		
+		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.findSorted();
+		
 		gesternPausenList = _.map(gesternPausenList, function(fp) {
             if (fp) return { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
         });

@@ -67,6 +67,10 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
                   target: DigiWebApp.FestePauseStornierenController
                 , property: 'gesternPausenList'
             }
+	        , contentBindingReverse: {
+		          target: DigiWebApp.FestePauseStornierenController
+		        , property: 'gesternPausenList'
+	        }
         })
         , heuteBalken: M.ListView.design({
 	  	  	  isDividedList: YES
@@ -83,6 +87,10 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
                   target: DigiWebApp.FestePauseStornierenController
                 , property: 'heutePausenList'
             }
+	        , contentBindingReverse: {
+	            target: DigiWebApp.FestePauseStornierenController
+	          , property: 'heutePausenList'
+	        }
         })
         , morgenBalken: M.ListView.design({
 	  	  	  isDividedList: YES
@@ -99,6 +107,10 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
                 target: DigiWebApp.FestePauseStornierenController
               , property: 'morgenPausenList'
           }
+          , contentBindingReverse: {
+	            target: DigiWebApp.FestePauseStornierenController
+	          , property: 'morgenPausenList'
+	      }
         })
 
         , stornierenButton: M.GridView.design({

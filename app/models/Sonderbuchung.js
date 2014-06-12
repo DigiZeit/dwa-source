@@ -34,6 +34,10 @@ DigiWebApp.Sonderbuchung = M.Model.create({
         isRequired: NO
     })
     
+    , uebertragen: M.Model.attr('String', {
+    	isRequired: NO
+    })
+
     , deleteAll: function() {
     	var that = this;
         _.each(this.find(), function(el) {
