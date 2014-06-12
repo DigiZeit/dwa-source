@@ -193,7 +193,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	if (sonderbuchung && !parseBool(sonderbuchung.get("uebertragen"))) {
         		sonderbuchung.del();
         	}
-		}
+		});
 
 		var pausenZuStornierenGestern = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
 		var pausenZuStornierenHeute   = _.map(_.map(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(el) { return el.value; }), mapIdToFestePause);
