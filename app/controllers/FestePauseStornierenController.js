@@ -190,7 +190,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 				, uebertragen: "false"
 				, festepausendefinitionId: p.festepausendefinition.get("id")
 				, datum: p.date
-			}).save();
+			}).saveSorted();
 		});
 		
 		
