@@ -61,27 +61,13 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		
 		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.findSorted();
 		
-		var mapPausenToList = function(fp) {
-            if (fp) {
-            	var item = { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
-            	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
-            		return (   n.get("festepausendefinitionId") == fp.get("id") 
-            				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == gestern.format("dd.mm.yyyy")
-            			   )
-            	});
-            	if (sonderbuchung) item.isSelected = "true"
-            	return item;
-            }
-        };
-        
 		gesternPausenList = _.map(gesternPausenList, function(fp) {
             if (fp) {
             	var item = { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
             	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
             		return (   n.get("festepausendefinitionId") == fp.get("id") 
             				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == heute.format("dd.mm.yyyy")
+            				&& n.get("datum") == gestern.format("dd.mm.yyyy")
             			   )
             	});
             	if (sonderbuchung) item.isSelected = "true"
@@ -96,7 +82,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
             	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
             		return (   n.get("festepausendefinitionId") == fp.get("id") 
             				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == gestern.format("dd.mm.yyyy")
+            				&& n.get("datum") == heute.format("dd.mm.yyyy")
             			   )
             	});
             	if (sonderbuchung) item.isSelected = "true"
