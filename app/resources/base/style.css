@@ -1527,3 +1527,7 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .festePauseStornierenPage .ui-listview {
 	margin-bottom: 0px;
 }
+
+.festePauseStornierenPage .festePausen_container {
+	margin-bottom: 25px;
+}

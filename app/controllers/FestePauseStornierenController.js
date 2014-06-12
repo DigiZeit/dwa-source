@@ -68,4 +68,9 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         that.set('morgenPausenList', morgenPausenList);
 
 	}
+	
+	, save: function() {
+		
+	}
+	
 });

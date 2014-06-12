@@ -62,7 +62,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
       	})
         , gesternPausenList: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION
-            , cssClass: 'infoLabel'
+            , cssClass: 'festePausen'
             , contentBinding: {
                   target: DigiWebApp.FestePauseStornierenController
                 , property: 'gesternPausenList'
@@ -78,7 +78,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
     	})
         , heutePausenList: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION
-            , cssClass: 'infoLabel'
+            , cssClass: 'festePausen'
             , contentBinding: {
                   target: DigiWebApp.FestePauseStornierenController
                 , property: 'heutePausenList'
@@ -94,12 +94,43 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
     	})
         , morgenPausenList: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-          , cssClass: 'infoLabel'
+          , cssClass: 'festePausen'
           , contentBinding: {
                 target: DigiWebApp.FestePauseStornierenController
               , property: 'morgenPausenList'
           }
         })
+
+        , stornierenButton: M.GridView.design({
+	            childViews: 'button icon'
+	          , layout: {
+	                cssClass: 'digiButton'
+	              , columns: {
+	                    0: 'button'
+	                  , 1: 'icon'
+	              }
+	          }
+	          , button: M.ButtonView.design({
+	                value: M.I18N.l('stornieren')
+	              , cssClass: 'digiButton'
+	              , anchorLocation: M.RIGHT
+	              , events: {
+	                  tap: {
+	                        target: DigiWebApp.FestePauseStornierenController
+	                      , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
+	                  }
+	              }
+	          })
+	          , icon: M.ImageView.design({
+	        	  	value: 'theme/images/icon_bookTime.png'
+	              , events: {
+		              tap: {
+		                    target: DigiWebApp.FestePauseStornierenController
+		                  , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
+		              }
+		          }
+	          })
+	    })
 
     })
 
