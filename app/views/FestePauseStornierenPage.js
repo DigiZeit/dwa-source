@@ -55,7 +55,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
         , gesternBalken: M.ListView.design({
 	  	  	  isDividedList: YES
 	        , contentBinding: {
-            	  target: DigiWebApp.FestePausenStornierenController
+            	  target: DigiWebApp.FestePauseStornierenController
             	, property: 'gesternBalken'
         	}
 	        , listItemTemplateView: DigiWebApp.DummyTemplateView
@@ -64,30 +64,30 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
               selectionMode: M.MULTIPLE_SELECTION
             , cssClass: 'infoLabel'
             , contentBinding: {
-                  target: DigiWebApp.FestePausenStornierenController
+                  target: DigiWebApp.FestePauseStornierenController
                 , property: 'gesternPausenList'
             }
         })
         , heuteBalken: M.ListView.design({
 	  	  	  isDividedList: YES
 	        , contentBinding: {
-          	  target: DigiWebApp.FestePausenStornierenController
-          	, property: 'heuteBalken'
-      	}
+	          	  target: DigiWebApp.FestePauseStornierenController
+	          	, property: 'heuteBalken'
+	      	}
 	        , listItemTemplateView: DigiWebApp.DummyTemplateView
     	})
         , heutePausenList: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION
             , cssClass: 'infoLabel'
             , contentBinding: {
-                  target: DigiWebApp.FestePausenStornierenController
+                  target: DigiWebApp.FestePauseStornierenController
                 , property: 'heutePausenList'
             }
         })
         , morgenBalken: M.ListView.design({
 	  	  	  isDividedList: YES
 	        , contentBinding: {
-          	  target: DigiWebApp.FestePausenStornierenController
+          	  target: DigiWebApp.FestePauseStornierenController
           	, property: 'morgenBalken'
       	}
 	        , listItemTemplateView: DigiWebApp.DummyTemplateView
@@ -96,7 +96,7 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
             selectionMode: M.MULTIPLE_SELECTION
           , cssClass: 'infoLabel'
           , contentBinding: {
-                target: DigiWebApp.FestePausenStornierenController
+                target: DigiWebApp.FestePauseStornierenController
               , property: 'morgenPausenList'
           }
         })
