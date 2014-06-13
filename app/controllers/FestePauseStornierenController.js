@@ -219,7 +219,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	if (!sonderbuchung) {
 				DigiWebApp.Sonderbuchung.createRecord({
 					  sonderbuchungstyp: "<pausenStorno>"
-					, sonderbuchungseigenschaften: JSON.stringify(sonderbuchungseigenschaften)
+					, sonderbuchungseigenschaften: sonderbuchungseigenschaften//JSON.stringify(sonderbuchungseigenschaften)
 					, ressourceId: p.festepausendefinition.get("ressourceId")
 					, uebertragen: "false"
 					, festepausendefinitionId: p.festepausendefinition.get("id")
