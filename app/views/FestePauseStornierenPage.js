@@ -35,9 +35,9 @@ DigiWebApp.FestePauseStornierenPage = M.PageView.design({
         			action: function() {
         				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 						if (DigiWebApp.SettingsController.featureAvailable('404')) {
-			        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
+			        		DigiWebApp.NavigationController.backToButtonDashboardPage();
 						} else {
-			        		DigiWebApp.NavigationController.backToDashboardPagePOP();
+			        		DigiWebApp.NavigationController.backToDashboardPage();
 						}
         			}
                 }
