@@ -1998,10 +1998,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 
                           // lade Sonderbuchungen
                           var mySonderbuchungen = _.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return !parseBool(n.get("uebertragen")) });
-                          mySonderbuchungen = _.map(mySonderbuchungen, function(n) {
-                        	  n.set("sonderbuchungseigenschaften", JSON.parse(n.get("sonderbuchungseigenschaften")))
-                        	  return n.get("uebertragen") 
-                          });
+//                          mySonderbuchungen = _.map(mySonderbuchungen, function(n) {
+//                        	  n.set("sonderbuchungseigenschaften", JSON.parse(n.get("sonderbuchungseigenschaften")))
+//                        	  return n 
+//                          });
 
                           // nach Upload der Sonderbuchungen mit regulärem Stammdatenabgleich weitermachen
                           var contSync = function() {
