@@ -252,6 +252,65 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 	}
 	
+	, sendeSonderbuchungen: function(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay) {
+		
+		if (!myisClosingDay || !mybuchungen || mybuchungen.length == 0) {
+		
+			mysuccessCallback();
+			
+		} else {
+
+			var absenden = function(buchungen, successCallback, errorCallback) {
+
+				var items = [];
+				var relevanteBuchungen = buchungen;
+				var relevanteBuchungenSorted = _.sortBy(relevanteBuchungen , function(z) {
+		            return parseInt(z.get('_createdAt'));
+		        });
+									
+				_.each(relevanteBuchungenSorted, function(el) {
+					items.push(el.record);
+				});
+	
+				if (items.length !== 0) {
+					var data = {"sonderbuchungen": items};
+					
+					var internalSuccessCallback = function(data2, msg, request) {
+						
+						// verarbeite gesendete Daten
+						_.each(relevanteBuchungen, function(n) {
+							n.set("uebertragen", YES);
+						});
+						
+						// weiter in der Verarbeitungskette
+						successCallback();
+						
+					};
+	
+					var internalErrorCallback = function() {
+						errorCallback();
+					};
+	
+					var sendObj = {
+						  data: data
+						, webservice: "sonderbuchung"
+						, loaderText: M.I18N.l('sendDataMsg')
+						, successCallback: internalSuccessCallback
+						, errorCallback: internalErrorCallback
+						//, additionalQueryParameter:
+						//, timeout: 60000
+					};
+					DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				} else {
+					successCallback();
+				}
+			};
+	
+			absenden(mybuchungen, mysuccessCallback, myerrorCallback);
+			
+		}
+	}
+
 	, empfangeTaetigkeiten: function(successCallback, errorCallback) {
 
 		var internalSuccessCallback = function(data, msg, request) {

@@ -218,12 +218,13 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         	});
         	if (!sonderbuchung) {
 				DigiWebApp.Sonderbuchung.createRecord({
-					  sonderbuchungsTyp: "<pausenStorno>"
-					, sonderbuchungsEigenschaften: JSON.stringify(sonderbuchungseigenschaften)
+					  sonderbuchungstyp: "<pausenStorno>"
+					, sonderbuchungseigenschaften: JSON.stringify(sonderbuchungseigenschaften)
 					, ressourceId: p.festepausendefinition.get("ressourceId")
 					, uebertragen: "false"
 					, festepausendefinitionId: p.festepausendefinition.get("id")
 					, datum: p.date
+					, status: 0
 				}).save();
         	}
 		});
