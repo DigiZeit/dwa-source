@@ -46,11 +46,12 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	, initPausenLists: function() {
 		var that = this;
 		
-		var allePausen = DigiWebApp.Festepausendefinition.find();
+		var allePausen = _.sortBy(DigiWebApp.Festepausendefinition.find(), function(n) { return n.get("von"); });
 		
 		var gestern = D8.create().yesterday();
 		var heute = D8.create();
 		var morgen = D8.create().tomorrow();
+		
 		var gesternWochentag = gestern.date.getDay();
 		var heuteWochentag = heute.date.getDay();
 		var morgenWochentag = morgen.date.getDay();
@@ -61,98 +62,64 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		
 		var alleSonderbuchungen = DigiWebApp.Sonderbuchung.find();
 		
-		gesternPausenList = _.map(gesternPausenList, function(fp) {
+		var mapPausenList = function(fp, day) {
             if (fp) {
             	var item = { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
             	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
             		return (   n.get("festepausendefinitionId") == fp.get("id") 
             				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == gestern.format("dd.mm.yyyy")
+            				&& n.get("datum") == day.format("dd.mm.yyyy")
             			   )
             	});
             	if (sonderbuchung) item.isSelected = "true"
             	return item;
             }
+        };
+        
+		gesternPausenList = _.map(gesternPausenList, function(fp) {
+			mapPausenList(fp, gestern);
         });
 		that.set('gesternPausenList', gesternPausenList);
 		
         heutePausenList = _.map(heutePausenList, function(fp) {
-            if (fp) {
-            	var item = { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
-            	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
-            		return (   n.get("festepausendefinitionId") == fp.get("id") 
-            				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == heute.format("dd.mm.yyyy")
-            			   )
-            	});
-            	if (sonderbuchung) item.isSelected = "true"
-            	return item;
-            }
+			mapPausenList(fp, heute);
         });
         that.set('heutePausenList', heutePausenList);
         
         morgenPausenList = _.map(morgenPausenList, function(fp) {
-            if (fp) {
-            	var item = { label: fp.get('von') + " - " + fp.get('bis'), value: fp.get('id') };
-            	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
-            		return (   n.get("festepausendefinitionId") == fp.get("id") 
-            				&& n.get("ressourceId") == fp.get("ressourceId")
-            				&& n.get("datum") == morgen.format("dd.mm.yyyy")
-            			   )
-            	});
-            	if (sonderbuchung) item.isSelected = "true"
-            	return item;
-            }
+			mapPausenList(fp, morgen);
         });
         that.set('morgenPausenList', morgenPausenList);
 
         // bereits stornierte: disable
-        var myGesternList = $('#' + DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.id);
-        _.each(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(myContent) {
+        var disableExisting = function(myContent, day) {
         	var fp = _.find(DigiWebApp.Festepausendefinition.find(), function(n) {
         		return (n.get("id") == myContent.value);
         	});
         	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
         		return (   n.get("festepausendefinitionId") == fp.get("id") 
         				&& n.get("ressourceId") == fp.get("ressourceId")
-        				&& n.get("datum") == gestern.format("dd.mm.yyyy")
+        				&& n.get("datum") == day.format("dd.mm.yyyy")
         			   )
         	});
         	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
         		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
         	}
+        };
+        
+        var myGesternList = $('#' + DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.id);
+        _.each(DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection, function(myContent) {
+        	disableExisting(myContent, gestern);
         });
         
         var myHeuteList = $('#' + DigiWebApp.FestePauseStornierenPage.content.heutePausenList.id);
         _.each(DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection, function(myContent) {
-        	var fp = _.find(DigiWebApp.Festepausendefinition.find(), function(n) {
-        		return (n.get("id") == myContent.value);
-        	});
-        	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
-        		return (   n.get("festepausendefinitionId") == fp.get("id") 
-        				&& n.get("ressourceId") == fp.get("ressourceId")
-        				&& n.get("datum") == heute.format("dd.mm.yyyy")
-        			   )
-        	});
-        	if (sonderbuchung && parseBool(sonderbuchung.get("uebertragen"))) {
-        		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
-        	}
+        	disableExisting(myContent, heute);
         });
         
         var myMorgenList = $('#' + DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.id);
         _.each(DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection, function(myContent) {
-        	var fp = _.find(DigiWebApp.Festepausendefinition.find(), function(n) {
-        		return (n.get("id") == myContent.value);
-        	});
-        	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
-        		return (   n.get("festepausendefinitionId") == fp.get("id") 
-        				&& n.get("ressourceId") == fp.get("ressourceId")
-        				&& n.get("datum") == morgen.format("dd.mm.yyyy")
-        			   )
-        	});
-        	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
-        		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
-        	}
+        	disableExisting(myContent, morgen);
         });
         
         that.gesternOldSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
@@ -242,14 +209,23 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 	    	//{"Key": "<Datum>", "StringValue": "01.02.2014"}
 			var sonderbuchungseigenschaft_datum = {"Key": "<Datum>", "StringValue": p.date};
 			var sonderbuchungseigenschaften = [sonderbuchungseigenschaft_festepausendefinitionId, sonderbuchungseigenschaft_datum];
-			DigiWebApp.Sonderbuchung.createRecord({
-				  sonderbuchungsTyp: "<pausenStorno>"
-				, sonderbuchungsEigenschaften: JSON.stringify(sonderbuchungseigenschaften)
-				, ressourceId: p.festepausendefinition.get("ressourceId")
-				, uebertragen: "false"
-				, festepausendefinitionId: p.festepausendefinition.get("id")
-				, datum: p.date
-			}).save();
+        	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
+        		return (   n.get("festepausendefinitionId") == p.festepausendefinition.get("id")
+        				&& n.get("ressourceId") == p.festepausendefinition.get("ressourceId")
+        				&& n.get("datum") == p.date
+        				&& parseBool(n.get("uebertragen")) == YES
+        			   )
+        	});
+        	if (!sonderbuchung) {
+				DigiWebApp.Sonderbuchung.createRecord({
+					  sonderbuchungsTyp: "<pausenStorno>"
+					, sonderbuchungsEigenschaften: JSON.stringify(sonderbuchungseigenschaften)
+					, ressourceId: p.festepausendefinition.get("ressourceId")
+					, uebertragen: "false"
+					, festepausendefinitionId: p.festepausendefinition.get("id")
+					, datum: p.date
+				}).save();
+        	}
 		});
 
 		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
