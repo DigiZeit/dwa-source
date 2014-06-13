@@ -77,17 +77,17 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         };
         
 		gesternPausenList = _.map(gesternPausenList, function(fp) {
-			mapPausenList(fp, gestern);
+			return mapPausenList(fp, gestern);
         });
 		that.set('gesternPausenList', gesternPausenList);
 		
         heutePausenList = _.map(heutePausenList, function(fp) {
-			mapPausenList(fp, heute);
+        	return mapPausenList(fp, heute);
         });
         that.set('heutePausenList', heutePausenList);
         
         morgenPausenList = _.map(morgenPausenList, function(fp) {
-			mapPausenList(fp, morgen);
+        	return mapPausenList(fp, morgen);
         });
         that.set('morgenPausenList', morgenPausenList);
 
