@@ -102,7 +102,7 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         				&& n.get("datum") == day.format("dd.mm.yyyy")
         			   )
         	});
-        	if (sonderbuchung && sonderbuchung.get("uebertragen")) {
+        	if (sonderbuchung && parseBool(sonderbuchung.get("uebertragen"))) {
         		$('#' + myContent.id)[0].setAttribute("disabled", "disabled");
         	}
         };
