@@ -205,9 +205,9 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
 		
 		_.each(pausenZuStornieren, function(p) {
 			//{"Key": "<FestepausendefinitionId>", "StringValue": "23"}
-			var sonderbuchungseigenschaft_festepausendefinitionId = {"Key": "<FestepausendefinitionId>", "StringValue": p.festepausendefinition.get("id")};
+			var sonderbuchungseigenschaft_festepausendefinitionId = {"eigenschaftsKey": "<FestepausendefinitionId>", "eigenschaftsStringValue": "" + p.festepausendefinition.get("id")};
 	    	//{"Key": "<Datum>", "StringValue": "01.02.2014"}
-			var sonderbuchungseigenschaft_datum = {"Key": "<Datum>", "StringValue": p.date};
+			var sonderbuchungseigenschaft_datum = {"eigenschaftsKey": "<Datum>", "eigenschaftsStringValue": p.date};
 			var sonderbuchungseigenschaften = [sonderbuchungseigenschaft_festepausendefinitionId, sonderbuchungseigenschaft_datum];
         	var sonderbuchung = _.find(alleSonderbuchungen, function(n) {
         		return (   n.get("festepausendefinitionId") == p.festepausendefinition.get("id")
