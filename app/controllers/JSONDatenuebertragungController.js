@@ -491,22 +491,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	            	if (typeof(posdescription) === "object") { posdescription = ""; } 
 	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
 
-	            	// gibt es den zugehörigen Auftrag schon?
-	            	var loadedOrder = _.find(DigiWebApp.Order.find(), function(order) {
-	            		return order.get("id") == posorderId;
-	            	});
-	            	var myOrder = null;
-	            	if (!loadedOrder) {
-	            		// zugehörigen Auftrag anlegen
-                        myOrder = DigiWebApp.Order.createRecord({
-                              id: el.auftragsId
-                            , name: el.auftragsBezeichnung
-                        });
-                        myOrder.saveSorted();
-	            	} else {
-	            		myOrder = loadedOrder;
-	            	}
-	            		
 	            	var positionItem = DigiWebApp.Position.createRecord({
 	                      id: posid
 	                    , name: posname
@@ -527,8 +511,20 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , orderId: posorderId
 						, positionBegin: positionBegin
 						, positionEnd: positionEnd
-						, order: myOrder
 	                });
+
+	            	// gibt es den zugehörigen Auftrag schon?
+	            	var loadedOrder = _.find(DigiWebApp.Order.find(), function(order) {
+	            		return order.get("id") == posorderId;
+	            	});
+	            	if (!loadedOrder) {
+	            		// zugehörigen Auftrag anlegen
+                        var rec = DigiWebApp.Order.createRecord({
+                              id: el.auftragsId
+                            , name: el.auftragsBezeichnung
+                        });
+                        rec.saveSorted();
+	            	}
 	            	
 					// sind Termine in der Position hinterlegt?
 					var terminList = [];
