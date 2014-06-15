@@ -90,6 +90,10 @@ DigiWebApp.Position = M.Model.create({
     , appointments: M.Model.attr('String', {
         isRequired: NO
     })
+    
+    , order: M.Model.hasOne('Order', {
+        isRequired: NO
+    }) 
 
 	, deleteAll: function() {
 		var that = this;
