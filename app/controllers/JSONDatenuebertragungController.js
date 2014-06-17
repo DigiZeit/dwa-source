@@ -283,6 +283,15 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 							n.save();
 						});
 						
+						// alte übertragene Sonderbuchungen löschen (älter als gestern)
+						_.each(_.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return parseBool(n.get("uebertragen")) }), function(sb){
+							var yesterday = D8.create(D8.create().format("dd.mm.yyyy")).yesterday();
+							var sbdate = D8.create(sb.get('datum'));
+							if (sbdate.date.getTime() < yesterday.date.getTime()) {
+								sb.del();
+							}
+						});
+						
 						// weiter in der Verarbeitungskette
 						successCallback();
 						
