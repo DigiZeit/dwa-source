@@ -280,6 +280,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						// verarbeite gesendete Daten
 						_.each(relevanteBuchungen, function(n) {
 							n.set("uebertragen", YES);
+							n.save();
 						});
 						
 						// weiter in der Verarbeitungskette
