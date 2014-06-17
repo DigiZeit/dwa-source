@@ -2166,6 +2166,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                	if (el[prefix + 'keyId'] === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
 	                	if (el[prefix + 'keyId'] === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
 	                	if (el[prefix + 'keyId'] === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
+	                	if (el[prefix + 'keyId'] === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
 	                }
 	                
 	                // auch bei geändertem branding neu starten
