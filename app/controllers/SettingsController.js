@@ -150,7 +150,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         // Start::Terminliste (423)
         if (DigiWebApp.SettingsController.featureAvailable('423')) {
         	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).show();
-        	DigiWebApp.SettingsController.set('festePauseStornierenEinstellungen_titel', DigiWebApp.SettingsController.festePauseStornierenEinstellungen_titel)
+        	DigiWebApp.SettingsController.set('terminlisteEinstellungen_titel', DigiWebApp.SettingsController.terminlisteEinstellungen_titel)
         } else {
         	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).hide();
         }
@@ -159,11 +159,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
         // Start::FestePauseStornieren (425)
         if (DigiWebApp.SettingsController.featureAvailable('425')) {
         	$('#' + DigiWebApp.SettingsPage.content.festePauseStornierenEinstellungen.id).show();
-        	DigiWebApp.SettingsController.set('terminlisteEinstellungen_titel', DigiWebApp.SettingsController.terminlisteEinstellungen_titel)
+        	DigiWebApp.SettingsController.set('festePauseStornierenEinstellungen_titel', DigiWebApp.SettingsController.festePauseStornierenEinstellungen_titel)
         } else {
         	$('#' + DigiWebApp.SettingsPage.content.festePauseStornierenEinstellungen.id).hide();
         }
-        // End::Terminliste
+        // End::FestePauseStornieren
 
         DigiWebApp.ApplicationController.enforceChefToolOnly();
         
