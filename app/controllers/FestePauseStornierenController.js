@@ -125,6 +125,19 @@ DigiWebApp.FestePauseStornierenController = M.Controller.extend({
         that.gesternOldSelection = DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.selection;
 		that.heuteOldSelection   = DigiWebApp.FestePauseStornierenPage.content.heutePausenList.selection;
 		that.morgenOldSelection  = DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.selection;
+		
+		//festePauseStornieren_nurAktuellerTag
+		if (DigiWebApp.SettingsController.getSetting("festePauseStornieren_nurAktuellerTag")) {
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.gesternBalken.id).hide();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.id + "_container").hide();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.morgenBalken.id).hide();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.id + "_container").hide();
+		} else {
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.gesternBalken.id).show();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.gesternPausenList.id + "_container").show();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.morgenBalken.id).show();
+			$('#' + DigiWebApp.FestePauseStornierenPage.content.morgenPausenList.id + "_container").show();
+		}
 	}
 	
 	, gesternOldSelection: null

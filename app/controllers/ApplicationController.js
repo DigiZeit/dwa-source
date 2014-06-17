@@ -1191,13 +1191,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	DigiWebApp.ApplicationController.syncRunning = YES;
 
-    	//alert("vor sendConfiguration");
-        // sendConfiguration => authenticate => getOrders => getPositions => getActivities => proceed to next page.
-        DigiWebApp.SettingsController.sendConfiguration();
+        // nach Upload der Sonderbuchungen mit regulärem Stammdatenabgleich weitermachen
+        var contSync = function() {
+            DigiWebApp.SettingsController.sendConfiguration();
+        }
         
-        // authenticate => getOrders => getPositions => getActivities => proceed to next page.
-        //this.authenticate(); // --> moved to DigiWebApp.RequestController.sendConfiguration()
-    	
+        // lade Sonderbuchungen
+        var mySonderbuchungen = _.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return !parseBool(n.get("uebertragen")) });
+        DigiWebApp.JSONDatenuebertragungController.sendeSonderbuchungen(mySonderbuchungen, contSync, contSync, isClosingDay);
+            	
     }
     
     /**
