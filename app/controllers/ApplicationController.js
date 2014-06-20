@@ -2725,7 +2725,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , sonderzeichenCheck: function(str) {
-        return ( /[^\w\säöüÄÖÜß \x40"(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
+        return ( /[^\w\säöüÄÖÜß \x40'(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
     }
     
     , vibrate: function() {
