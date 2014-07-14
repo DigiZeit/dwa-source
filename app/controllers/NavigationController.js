@@ -571,6 +571,11 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToBautagebuchZusammenfassungPageTransition: function() {
     	DigiWebApp.NavigationController.switchToPage('bautagebuchZusammenfassungPage', M.TRANSITION.SLIDEUP, YES);
     }
+
+    , toBautagebuchMitarbeiterAuswahlPage: function() {
+    	DigiWebApp.NavigationController.switchToPage('bautagebuchMitarbeiterAuswahlPage', M.TRANSITION.SLIDEUP, NO);
+    }
+
     // Ende::Bautagebuch
 
     , toFileChooserPageTransition: function() {

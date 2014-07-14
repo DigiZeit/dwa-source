@@ -24,7 +24,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	, auftragsName: null // in model
 	, auftraegeList: [{label:"",value:0}] // runtime
 	
-	, positionenList: null // runtime (auftraegeComboBox-change)
+	, positionId: null // in model
+	, positionName: null // in model
+	, positionenList: null // runtime
 	
 	, latitude: null
 	, longitude: null
@@ -59,6 +61,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		that.set("projektleiterId", myItem.get("projektleiterId"));
 		that.set("auftragsId", myItem.get("orderId"));
 		that.set("auftragsName", myItem.get("orderName"));
+		that.set("positionId", myItem.get("positionId"));
+		that.set("positionName", myItem.get("positionName"));
 		that.set("mitarbeiterIds", myItem.get("selektierteMitarbeiter"));
 		that.set("startUhrzeit", myItem.get("startUhrzeit"));
 
@@ -114,6 +118,11 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		
 		that.item.set("orderId", that.auftragsId);
 		that.item.set("orderName", that.auftragsName);
+		
+		if (M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'positionComboBox').getSelection() !== "0" ) {
+			that.item.set("positionId", that.positionId);
+			that.item.set("positionName", that.positionName);
+		}
 		
 		that.item.set("selektierteMitarbeiter", that.mitarbeiterIds);
 

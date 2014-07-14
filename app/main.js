@@ -554,6 +554,7 @@ if (searchForFeature(412)) { // Bautagebuch
 	DigiWebAppOrdinaryDesign.bautagebuchWetterPage = DigiWebApp.BautagebuchWetterPage;
 	DigiWebAppOrdinaryDesign.bautagebuchZusammenfassungPage = DigiWebApp.BautagebuchZusammenfassungPage;
 	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
+	DigiWebAppOrdinaryDesign.bautagebuchMitarbeiterAuswahlPage = DigiWebApp.BautagebuchMitarbeiterAuswahlPage;
 }
 
 if ( (searchForFeature(416) || searchForFeature(424)) && !(searchForFeature(409)) ) { // Buchungsscreen mit Tätigkeitsicons und ButtonMenü
