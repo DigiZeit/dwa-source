@@ -468,4 +468,6 @@ M.I18N.en_us = {
 	, festePauseStornieren_nurAktuellerTag: "Only for the effective day"
 	, stornierenSpeichern: "Save cancellations"
 
+	, positionVorselektieren: "Preselect Position"
+
 };

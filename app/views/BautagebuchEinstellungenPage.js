@@ -125,7 +125,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 			    		  target: DigiWebApp.BautagebuchEinstellungenController
 		    			, action: function(itemValues, items) {
 			    			this.settings.positionVorselektieren = (itemValues.length === 1);
-			    			this.settings.fpositionVorselektierenItem.isSelected = (itemValues.length === 1);
+			    			this.settings.positionVorselektierenItem.isSelected = (itemValues.length === 1);
 						}
 		    		}
 				}

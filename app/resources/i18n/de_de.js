@@ -467,4 +467,6 @@ M.I18N.de_de = {
 	, festePauseStornieren_nurAktuellerTag: "nur für den aktuellen Tag"
 	, stornierenSpeichern: "Stornierung speichern"
 
+	, positionVorselektieren: "Position vorselektieren"
+		
 };
