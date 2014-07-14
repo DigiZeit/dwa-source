@@ -29,7 +29,10 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
 							return o;
 		    			});
 	            	} else {
-	            		mitarbeiterArray = DigiWebApp.BautagebuchMainController.mitarbeiter;
+    					mitarbeiterArray = _.map(DigiWebApp.BautagebuchMainController.mitarbeiter, function(o) {
+    						o.isSelected = YES;
+							return o;
+		    			});
 	            	}
     				mitarbeiterArray = _.compact(mitarbeiterArray);
 					DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterList", mitarbeiterArray);
