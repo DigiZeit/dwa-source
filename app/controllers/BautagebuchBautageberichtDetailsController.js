@@ -49,6 +49,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		if (isFirstLoad) {
 			// setting defaults for contentBinding
 			that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
+			DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
 		}
 	}
 	
@@ -181,7 +182,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		    	}
 		    });
 		    positionenArray = _.compact(positionenArray);
-		    if (positionenArray.length == 1) {
+		    if (positionenArray.length > 0) {
 		    	positionenArray[0].isSelected = YES;
 		    }
 		    that.set("positionenList", positionenArray);
