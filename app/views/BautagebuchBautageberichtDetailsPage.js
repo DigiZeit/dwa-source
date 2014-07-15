@@ -12,8 +12,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function() {
 
-					var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datum.split(".");
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
+					if (DigiWebApp.BautagebuchBautageberichtDetailsController.datum) {
+						var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datum.split(".");
+						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
+					}
 
 					//alert("pagebeforeshow");
 					// verfügbare Projektleiter kopieren und ausgewählten selektieren
@@ -170,8 +172,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
             	  blur: {
             		action: function() {
-		            	var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
-						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+            			if (DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate) {
+            				var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
+            				DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+            			}
             		}
             	}
 	            , tap: {
