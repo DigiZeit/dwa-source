@@ -52,7 +52,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
 		}
 	}
-	
+	setPositionen
 	, load: function(myItem) {
 		var that = this;
 		
@@ -89,17 +89,17 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		var projektleiterSelected = (M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'projektleiterComboBox').getSelection() !== "0" );
 		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterIds.length === 0));
 		
-		if (!projektleiterSelected) {
-            DigiWebApp.ApplicationController.nativeAlertDialogView({
-                title: M.I18N.l('noProjektleiterSelected')
-              , message: M.I18N.l('noProjektleiterSelectedMsg')
-            });
-			return false;
-		}
 		if (!orderSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                 title: M.I18N.l('noOrderSelected')
               , message: M.I18N.l('noOrderSelectedMsg')
+            });
+			return false;
+		}
+		if (!projektleiterSelected) {
+            DigiWebApp.ApplicationController.nativeAlertDialogView({
+                title: M.I18N.l('noProjektleiterSelected')
+              , message: M.I18N.l('noProjektleiterSelectedMsg')
             });
 			return false;
 		}
@@ -175,14 +175,21 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
-		    		if (parseInt(pos.get('orderId')) === parseInt(auftragsId)) {
+		    		if (parseInt(pos.get('orderId')) == parseInt(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
 		    			return obj;
 		    		}
 		    	}
 		    });
 		    positionenArray = _.compact(positionenArray);
-		    if (positionenArray.length > 0) {
+		    if (that.item.get("positionId")) {
+			    positionenArray = _.map(positionenArray, function(pos) {
+		    		if (parseInt(pos.get('value')) == parseInt(that.item.get("positionId"))) {
+		    			pos.isSelected = YES;
+		    			return pos;
+		    		}
+			    });
+		    } else if (positionenArray.length > 0) {
 		    	positionenArray[0].isSelected = YES;
 		    }
 		    that.set("positionenList", positionenArray);
