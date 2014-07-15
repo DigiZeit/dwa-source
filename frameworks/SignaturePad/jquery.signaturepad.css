@@ -210,11 +210,11 @@
   clear: both;
   height: 150px;
 
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
 }
 
 .sigWrapper.current {
-  border-color: #666;
+  /*border-color: #666;*/
 }
 
 .signed .sigWrapper {
@@ -227,11 +227,11 @@
   clear: both;
   height: 322px;
 
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
 }
 
 .sigWrapper2.current {
-  border-color: #666;
+  /*border-color: #666;*/
 }
 
 .signed .sigWrapper2 {
@@ -278,7 +278,7 @@
   margin: 0.75em 0 0.515em;
   padding: 0.515em 0 0;
 
-  border-top: 3px solid #ccc;
+  /*border-top: 3px solid #ccc;*/
 
   color: #000;
   font: italic normal 1em/1.375 Georgia,Times,serif;
