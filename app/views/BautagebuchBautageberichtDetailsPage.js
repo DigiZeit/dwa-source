@@ -48,19 +48,20 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					// verfügbare Positionen kopieren und ausgewählten selektieren
 					if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
 						DigiWebApp.BautagebuchBautageberichtDetailsController.setPositionen(DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
+    				} else {
+			            var positionenArray = _.map(DigiWebApp.BautagebuchMainController.positionen, function(o) {
+			            	if ( typeof(o) === "undefined" ) {
+			            		console.log("UNDEFINED POSITION");
+			            	} else {    
+			    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
+			    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+			    				}
+			                    return o;
+			            	}
+			            });
+			            positionenArray = _.compact(positionenArray);
+						DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionenList", positionenArray);
     				}
-//		            var positionenArray = _.map(DigiWebApp.BautagebuchMainController.positionen, function(o) {
-//		            	if ( typeof(o) === "undefined" ) {
-//		            		console.log("UNDEFINED POSITION");
-//		            	} else {    
-//		    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-//		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
-//		    				}
-//		                    return o;
-//		            	}
-//		            });
-//		            positionenArray = _.compact(positionenArray);
-//					DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionenList", positionenArray);
 
 					// verfügbare Mitarbeiter kopieren und ausgewählte selektieren
                     var mitarbeiterIds = DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterIds; 
