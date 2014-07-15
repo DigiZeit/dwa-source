@@ -46,13 +46,13 @@
   padding: 0.2em 0;
   width: 298px;
 
-  border: 1px solid #666;
+  /*border: 1px solid #666;*/
 
   font-size: 1em;
 }
 
 .sigPad input.error {
-  border-color: #f33;
+  /*border-color: #f33;*/
 }
 
 .sigPad button {
@@ -104,13 +104,13 @@
   padding: 0.2em 0;
   width: 198px;
 
-  border: 1px solid #666;
+  /*border: 1px solid #666;*/
 
   font-size: 1em;
 }
 
 .sigPad2 input.error {
-  border-color: #f33;
+  /*border-color: #f33;*/
 }
 
 .sigPad2 button {
