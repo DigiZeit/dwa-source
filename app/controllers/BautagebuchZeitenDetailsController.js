@@ -28,6 +28,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	, timeStampEnd: "" // in model
 		
 	, dauer: "00:00" // in model
+	, remark: ""
 
 	, verbuchen: YES // in model
 
@@ -54,6 +55,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		that.set("bis", myItem.get("bis"));
 		that.set("timeStampEnd", myItem.get("timeStampEnd"));
 		that.set("dauer", myItem.get("dauer"));
+		that.set("remark", myItem.get("remark"));
 	}
 	
 	, save: function() {
@@ -106,6 +108,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		that.item.set("bis", that.bis);
 		that.item.set("timeStampEnd", that.timeStampEnd);
 		that.item.set("dauer", that.dauer);
+		that.item.set("remark", that.remark);
 		if (that.item.saveSorted()) {		
 			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
 			DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
