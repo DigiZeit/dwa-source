@@ -64,7 +64,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
         }
     }
 
-    , cssClass: 'bautagebuchBautageberichtDetailsPage'
+    , cssClass: 'bautagebuchMitarbeiterAuswahlPage'
 
     , childViews: 'header content'
 
