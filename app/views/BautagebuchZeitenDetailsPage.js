@@ -15,13 +15,13 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				var itemSelected = NO;
 				var relevantDetailsController = DigiWebApp.BautagebuchZeitenDetailsController;
 				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
-//				_.each(myPositionenList, function(p) {
-//					if (parseInt(p.value) !== 0) {
-//						p.isSelected = NO;
-//					} else {
-//						p.isSelected = YES;
-//					}
-//				});
+				_.each(myPositionenList, function(p) {
+					if (parseInt(p.value) !== 0) {
+						p.isSelected = NO;
+					} else {
+						p.isSelected = YES;
+					}
+				});
 			    var positionenArray = _.map(myPositionenList, function(o) {
 			    	if ( typeof(o) === "undefined" ) {
 			    		console.log("UNDEFINED position");
