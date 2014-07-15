@@ -53,9 +53,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			            	if ( typeof(o) === "undefined" ) {
 			            		console.log("UNDEFINED POSITION");
 			            	} else {    
-			    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-			    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
-			    				}
+//			    				if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
+//			    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+//			    				}
 			                    return o;
 			            	}
 			            });
