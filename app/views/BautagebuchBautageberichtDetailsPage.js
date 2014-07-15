@@ -47,7 +47,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 
 					// verfügbare Positionen kopieren und ausgewählten selektieren
 					if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
-						DigiWebApp.BautagebuchBautageberichteListeController.setPositionen(DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
+						DigiWebApp.BautagebuchBautageberichtDetailsController.setPositionen(DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
     				}
 		            var positionenArray = _.map(DigiWebApp.BautagebuchMainController.positionen, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
