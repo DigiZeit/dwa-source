@@ -47,6 +47,7 @@ DigiWebApp.BautagebuchMedienListePage = M.PageView.design({
               value: M.I18N.l('BautagebuchAdd')
             , icon: 'new'
             , anchorLocation: M.RIGHT
+            , cssClass: 'green_background'
             , events: {
                 tap: {
         			action: function() {
