@@ -181,6 +181,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 			    		if (parseInt(pos.get('id')) == parseInt(that.item.get("positionId"))) {
 			    			obj.isSelected = YES;
 			    			itemSelected = YES;
+			    			that.set('positionId', pos.get('id'));
+			    			that.set('positionName', pos.get('name'));
 			    		}
 		    			return obj;
 		    		}
