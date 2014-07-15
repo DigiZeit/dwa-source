@@ -184,7 +184,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		    positionenArray = _.compact(positionenArray);
 		    if (that.item.get("positionId")) {
 			    positionenArray = _.map(positionenArray, function(pos) {
-		    		if (parseInt(pos.get('value')) == parseInt(that.item.get("positionId"))) {
+		    		if (parseInt(pos.value) == parseInt(that.item.get("positionId"))) {
 		    			pos.isSelected = YES;
 		    			return pos;
 		    		}
