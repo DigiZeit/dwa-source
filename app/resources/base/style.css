@@ -32,6 +32,21 @@ textarea.ui-input-text {
 	color: #000 !important;
 }
 
+/*.tmp-actionsheet {
+	zoom: 1.4 !important;
+}
+
+.bautagebuchBautageberichtDetailsPage {
+	zoom: 1.4;
+}*/
+
+@media (min-width: 767px) {
+	body {
+		zoom: 1.4;
+	}
+	
+}
+
 .red div {
     color: #990000;	
 }
@@ -45,7 +60,7 @@ textarea.ui-input-text {
 }
 
 .red_background {
-	background: red;
+	background: #b00000;
 }
 
 .red span {

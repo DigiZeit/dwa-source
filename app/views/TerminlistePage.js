@@ -85,8 +85,10 @@ DigiWebApp.TerminlistePage = M.PageView.design({
 	            , events: {
 	            	  blur: {
 	            		action: function() {
-			            	var datumArray = DigiWebApp.TerminlisteController.datumAsDate.split("-");
-							DigiWebApp.TerminlisteController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+	            			if (DigiWebApp.TerminlisteController.datumAsDate) {
+	            				var datumArray = DigiWebApp.TerminlisteController.datumAsDate.split("-");
+								DigiWebApp.TerminlisteController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+	            			}
 	            		}
 	            	}
 		            , tap: {
