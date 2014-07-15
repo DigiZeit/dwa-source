@@ -40,6 +40,10 @@ textarea.ui-input-text {
     color: #009900;	
 }
 
+.green_background {
+	background: green;
+}
+
 .red span {
     color: #FFFFFF;	
     background-color: #990000;	
