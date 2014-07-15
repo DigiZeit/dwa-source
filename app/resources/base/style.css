@@ -53,6 +53,9 @@ textarea.ui-input-text {
 		margin-left: 10%;
 		zoom: reset !important;
 	}
+	.sigWrapper2.current {
+		zoom: reset !important;
+	}
 	
 	
 }
@@ -1447,6 +1450,11 @@ li.ui-li {
 
 .tmp-dialog {
 	background-color: #003366; 
+	zoom: reset !important;
+}
+
+.ui-loader {
+	zoom: reset !important;
 }
 
 .tmp-dialog-header {

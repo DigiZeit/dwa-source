@@ -64,6 +64,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 	    	  value: M.I18N.l('deleteLabel')
 	    	, icon: 'delete'
 	    	, anchorLocation: M.RIGHT
+            , cssClass: 'red_background'
 	    	, events: {
 	          	tap: {
 	              	//target: DigiWebApp.NavigationController,
