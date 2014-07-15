@@ -14,13 +14,13 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
 				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
-				_.each(myPositionenList, function(p) {
-					if (parseInt(p.value) !== 0) {
-						p.isSelected = NO;
-					} else {
-						p.isSelected = YES;
-					}
-				});
+//				_.each(myPositionenList, function(p) {
+//					if (parseInt(p.value) !== 0) {
+//						p.isSelected = NO;
+//					} else {
+//						p.isSelected = YES;
+//					}
+//				});
 			    var positionenArray = _.map(myPositionenList, function(o) {
 			    	if ( typeof(o) === "undefined" ) {
 			    		console.log("UNDEFINED position");
@@ -32,15 +32,26 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 			            return o;
 			    	}
 			    });
+			    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
+				    positionenArray = _.map(positionenArray, function(o) {
+						if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
+							o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+							if (o.isSelected) { itemSelected = YES; 
+						    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", o.value);
+						    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", o.label);
+							}
+						}
+			            return o;
+				    });
+			    }
 			    positionenArray = _.compact(positionenArray);
-			    if (positionenArray.length !== 1) {
+			    if (positionenArray.length > 1) {
 			    	positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
-			    } else {
+			    }
+			    if (!itemSelected && positionenArray.length == 1) {
+			    	positionenArray[0].isSelected = YES;
 			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", positionenArray[0].value);
 			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", positionenArray[0].label);
-			    }
-			    if (positionenArray.length == 1) {
-			    	positionenArray[0].isSelected = YES;
 			    }
 				DigiWebApp.BautagebuchZeitenDetailsController.set("positionenList", positionenArray);
 				
