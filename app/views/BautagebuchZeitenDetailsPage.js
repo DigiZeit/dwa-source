@@ -99,6 +99,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 					$("#" + DigiWebApp.BautagebuchZeitenDetailsPage.header.delButton.id).show();
 				}
 
+				M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'remarkInput').setValue(DigiWebApp.BautagebuchZeitenDetailsController.remark);
 
 			}
         }
