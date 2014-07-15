@@ -336,10 +336,10 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             , cssClassOnInit: 'remarkInputInitial'
             , initialText: "max. 255 " + M.I18N.l('characters')
             , hasMultipleLines: YES
-            , contentBinding: {
-		            target: DigiWebApp.BautagebuchZeitenDetailsController
-		          , property: 'remark'
-		    }
+//            , contentBinding: {
+//		            target: DigiWebApp.BautagebuchZeitenDetailsController
+//		          , property: 'remark'
+//		    }
    	        , events: {
         		keyup: {
 	                /* executed in scope of DOMWindow because no target defined */
