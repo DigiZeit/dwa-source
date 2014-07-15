@@ -76,7 +76,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 
     , childViews: 'header content'
 
-    , cssClass: 'bautagebuchListePage unselectable'
+    , cssClass: 'bautagebuchListePage unselectable noZoom'
 
     , header: M.ToolbarView.design({
         childViews: 'backButton title delButton'

@@ -45,6 +45,10 @@ textarea.ui-input-text {
 		zoom: 1.4;
 	}
 	
+	.noZoom {
+		zoom: 1.0 !important;
+	}
+	
 }
 
 .red div {
@@ -1388,14 +1392,12 @@ li.ui-li {
 }
 
 .bautagebuchZusammenfassungScrollView .signaturecanvaslabel {
-	zoom: 1.0 !important;
 	color: #000 !important;
 	font-weight: bold;
 	font-size: 18px !important;
 }
 
 .signaturecanvaslabel {
-	zoom: 1.0 !important;
 	font-size: 16px !important;
     color: #FFFFFF !important;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
@@ -1408,7 +1410,6 @@ li.ui-li {
 }
 
 .signaturecanvas {
-	zoom: 1.0 !important;
 	margin-left: auto;
 	margin-right: auto;
 	width: 300px;
@@ -1422,7 +1423,6 @@ li.ui-li {
 }
 
 .signaturecanvas2 {
-	zoom: 1.0 !important;
 	margin-left: auto;
 	margin-right: auto;
 	width: 550px;
