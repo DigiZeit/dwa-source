@@ -46,9 +46,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftraegeList", auftraegeArray);
 
 					// verfügbare Positionen kopieren und ausgewählten selektieren
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
-						DigiWebApp.BautagebuchBautageberichtDetailsController.setPositionen(DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
-    				}
+//					if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
+//						DigiWebApp.BautagebuchBautageberichtDetailsController.setPositionen(DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
+//    				}
 		            var positionenArray = _.map(DigiWebApp.BautagebuchMainController.positionen, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
 		            		console.log("UNDEFINED POSITION");
