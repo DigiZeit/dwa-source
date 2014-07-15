@@ -52,7 +52,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
 		}
 	}
-	setPositionen
+	
 	, load: function(myItem) {
 		var that = this;
 		
