@@ -235,7 +235,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
     , childViews: 'header content'
 
-    , cssClass: 'remarkPage noZoom'
+    , cssClass: 'remarkPage'
 
     , header: M.ToolbarView.design({
           childViews: 'backButton title'

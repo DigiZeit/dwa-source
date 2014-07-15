@@ -49,6 +49,12 @@ textarea.ui-input-text {
 		zoom: 1.0 !important;
 	}
 	
+	.sigWrapper.current {
+		margin-left: 10%;
+		zoom: reset !important;
+	}
+	
+	
 }
 
 .red div {
@@ -1435,7 +1441,7 @@ li.ui-li {
 }
 
 .sigWrapper.current {
-	zoom: 1.0 !important;
+	zoom: reset !important;
 	border-color: transparent !important;
 }
 
