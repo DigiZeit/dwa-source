@@ -13,6 +13,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             action: function() {
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
+				var relevantDetailsController = DigiWebApp.BautagebuchZeitenDetailsController;
 				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
 //				_.each(myPositionenList, function(p) {
 //					if (parseInt(p.value) !== 0) {
@@ -25,8 +26,8 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 			    	if ( typeof(o) === "undefined" ) {
 			    		console.log("UNDEFINED position");
 			    	} else {    
-						if (DigiWebApp.BautagebuchZeitenDetailsController.positionId) {
-							o.isSelected = (o.value === DigiWebApp.BautagebuchZeitenDetailsController.positionId);
+						if (relevantDetailsController.positionId) {
+							o.isSelected = (o.value === relevantDetailsController.positionId);
 							if (o.isSelected) { itemSelected = YES; }
 						}
 			            return o;
@@ -37,8 +38,8 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 						if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
 							o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
 							if (o.isSelected) { itemSelected = YES; 
-						    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", o.value);
-						    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", o.label);
+								relevantDetailsController.set("positionId", o.value);
+								relevantDetailsController.set("positionName", o.label);
 							}
 						}
 			            return o;
@@ -50,12 +51,12 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 			    }
 			    if (!itemSelected && positionenArray.length == 1) {
 			    	positionenArray[0].isSelected = YES;
-			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", positionenArray[0].value);
-			    	DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", positionenArray[0].label);
+			    	relevantDetailsController.set("positionId", positionenArray[0].value);
+			    	relevantDetailsController.set("positionName", positionenArray[0].label);
 			    }
-				DigiWebApp.BautagebuchZeitenDetailsController.set("positionenList", positionenArray);
+			    relevantDetailsController.set("positionenList", positionenArray);
 				
-				DigiWebApp.BautagebuchZeitenDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchZeitenDetailsController.positionId);
+			    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 				
 				// im Bautagesbericht verfügbare Mitarbeiter kopieren und ausgewählte selektieren
                 var mitarbeiterIds = DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds; 
