@@ -400,6 +400,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , layout: M.TWO_COLUMNS
       	    , mitarbeiterButton: M.ButtonView.design({
     	          value: M.I18N.l('employees')
+	  	        , cssClass: 'bautagebuchButton'
     	        , events: {
     	            tap: {
     		    			action: function() {
@@ -412,6 +413,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
     	
 	  	    , zeitenButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchZeiten')
+	  	        , cssClass: 'bautagebuchButton'
 	  	        , events: {
 	  	            tap: {
 	  	    			action: function() {
@@ -428,7 +430,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , layout: M.TWO_COLUMNS
     	    , notizenButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchNotizen')
-	  	        //, cssClass: 'digiButton'
+	  	        , cssClass: 'bautagebuchButton'
 	  	        //, anchorLocation: M.CENTER
 	  	        , events: {
 	  	            tap: {
@@ -443,7 +445,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	  	
 	  	    , medienButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchMedien')
-	  	        //, cssClass: 'digiButton'
+	  	        , cssClass: 'bautagebuchButton'
 	  	        //, anchorLocation: M.CENTER
 	  	        , events: {
 	  	            tap: {
@@ -462,7 +464,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , layout: M.TWO_COLUMNS
       	    , materialienButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchMaterialien')
-	  	        //, cssClass: 'digiButton'
+	  	        , cssClass: 'bautagebuchButton'
 	  	        //, anchorLocation: M.CENTER
 	  	        , events: {
 	  	            tap: {
@@ -475,16 +477,45 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	  	          }
 	  	    })
 	
-	  	    , wetterButton: M.ButtonView.design({
-	  	          value: M.I18N.l('BautagebuchWetter')
-	  	        , events: {
-	  	            tap: {
-  		    			action: function() {
-  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
-  						}
-	  	            }
-	  	          }
-	  	    })
+	  	    , wetterButton: M.GridView.design({
+	            childViews: 'speichernButton abschliessenButton'
+	                , layout: M.TWO_COLUMNS
+	                , speichernButton: M.GridView.design({
+	      	            childViews: 'button icon'
+	      	          , layout: {
+	      	                cssClass: 'bautagebuchButton'
+	      	              , columns: {
+	      	                    0: 'button'
+	      	                  , 1: 'icon'
+	      	              }
+	      	          }
+	      	          , button: M.ButtonView.design({
+	      	                value: M.I18N.l('BautagebuchWetter')
+	      	              , cssClass: 'bautagebuchButton'
+	      	              , anchorLocation: M.RIGHT
+	      	              , events: {
+	      	                  tap: {
+	      			    			action: function() {
+	      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
+	      				    		}
+	      	                  }
+	      	              }
+	      	          })
+	      	          , icon: M.ImageView.design({
+	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	          })
+	      	      }) 
+//	  	    	M.ButtonView.design({
+//	  	          value: M.I18N.l('BautagebuchWetter')
+//	  	        , cssClass: 'bautagebuchButton'
+//	  	        , events: {
+//	  	            tap: {
+//  		    			action: function() {
+//  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
+//  						}
+//	  	            }
+//	  	          }
+//	  	    })
         })
 
 
@@ -494,7 +525,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
           , speichernButton: M.GridView.design({
 	            childViews: 'button icon'
 	          , layout: {
-	                cssClass: 'bautagebuchButton'
+	                cssClass: 'digiButton'
 	              , columns: {
 	                    0: 'button'
 	                  , 1: 'icon'
@@ -502,7 +533,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	          }
 	          , button: M.ButtonView.design({
 	                value: M.I18N.l('BautagebuchSpeichern')
-	              , cssClass: 'bautagebuchButton'
+	              , cssClass: 'digiButton'
 	              , anchorLocation: M.RIGHT
 	              , events: {
 	                  tap: {

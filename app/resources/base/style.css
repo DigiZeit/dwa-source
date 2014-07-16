@@ -234,7 +234,9 @@ img.audioIcon {
 }
 
 /* custom button */
-[data-theme="digiButton"] {
+  [data-theme="digiButton"]
+, [data-theme="bautagebuchButton"]
+{
     moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -246,18 +248,22 @@ img.audioIcon {
     border: 1px solid #000000;
 }
 
-[data-theme="digiButton"] span.ui-btn-inner {
+  [data-theme="digiButton"] span.ui-btn-inner
+{
     moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
-.ui-content .digiButton {
+  .ui-content .digiButton 
+, .ui-content .bautagebuchButton 
+{
     position: relative;
     height: 40px;
 }
 
-.ui-content .digiButton .icon {
+.ui-content .digiButton .icon
+{
     position: absolute;
     top: -5px;
     right: 0px;
@@ -265,17 +271,45 @@ img.audioIcon {
     height: 50px;
 }
 
-.ui-content .digiButton .icon img {
+.ui-content .digiButton .icon img
+{
     width: 50px;
     height: 50px;
 }
 
-.ui-content .digiButton.hack .icon {
+  .ui-content .digiButton.hack .icon 
+, .ui-content .digiButton.hack .icon 
+{
     top: -25px;
 }
-.digiButton {
+
+  .digiButton
+, .bautagebuchButton
+{
 	margin-top: 20px;
 }
+
+[data-theme="bautagebuchButton"] span.ui-btn-inner
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 40px;
+}
+.ui-content .bautagebuchButton .icon img
+{
+    width: 40px;
+    height: 40px;
+}
+.ui-content .bautagebuchButton .icon
+{
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
 
 /* custom scholppButton */
 .scholppButton
@@ -375,7 +409,7 @@ img.audioIcon {
 /* end custom scholppButton */
 
 
-/* custom bautagebuchButton */
+/* custom bautagebuchButton v1
 .bautagebuchButton
 {
     moz-border-radius: 8px;
@@ -413,17 +447,11 @@ img.audioIcon {
 .ui-content .bautagebuchButton .buttonSelected {
     background: green;
     color: #ffffff;
-		/* frei gewaehlter Name*/
         -webkit-animation-name: white_to_green_to_white;   
-        /* Abspieldauer  in Sekunden*/
         -webkit-animation-duration: .5s;
-        /* Wiederholungen in Zahlen*/   
         -webkit-iteration-count: 1; 
-        /* Verhalten am Ende bei Wiederholungen mit: normal / reverse / alternate / alternate-reverse */
         -webkit-animation-direction: normal; 
-        /* Animatioskurve mit: ease / ease-in / ease-out / ease-in-out / liner / bezier */
         -webkit-animation-timing-function: linear;
-        /* Fill-Mode für den Effekt bei einem Delay sichtbar mit: none / forwards / backwards / both */
         animation-fill-mode: forwards;
 }
 
@@ -455,6 +483,8 @@ img.audioIcon {
     top: -25px;
 }
 
+*/
+
 @-webkit-keyframes white_to_green_to_white {
         0% {
             background-color:white;
@@ -476,7 +506,6 @@ img.audioIcon {
         }
  }
  
-/* end custom scholppButton */
 
 label.ui-input-text, .ui-controlgroup-label {
 	color: #ffffff;
