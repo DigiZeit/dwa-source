@@ -397,6 +397,8 @@ M.I18N.de_de = {
 	, noProjektleiterSelectedMsg: "Bitte wählen Sie einen Projektleiter aus."
 	, noMitarbeiterSelected: "Keine Mitarbeiter ausgewählt"
 	, noMitarbeiterSelectedMsg: "Bitte wählen Sie mind. einen Mitarbeiter aus."
+	, BautagebuchSpeichern: "Speichern"
+	, BautagebuchAbschliessen: "Abschliessen"
 	, BautagebuchSpeichernAbschliessen: "Speichern / Abschliessen"
 	, BautagebuchLadeMaterialien: "Lade Materialien"
 	, BautagebuchLadeMengeneinheiten: "Lade Mengeneinheiten"

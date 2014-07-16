@@ -397,6 +397,8 @@ M.I18N.en_us = {
 	, noProjektleiterSelectedMsg: "Please select a projectleader"
 	, noMitarbeiterSelected: "No Employee(s) selected"
 	, noMitarbeiterSelectedMsg: "Please select at least one employee"
+	, BautagebuchSpeichern: "Save"
+	, BautagebuchAbschliessen: "Finish"
 	, BautagebuchSpeichernAbschliessen: "Save / Finish"
 	, BautagebuchLadeMaterialien: "Loading materials"
 	, BautagebuchLadeMengeneinheiten: "Loading quantity units"
