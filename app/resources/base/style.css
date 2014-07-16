@@ -329,17 +329,20 @@ div.timecontainer div {
     font-weight:bold;
 }
 div.timecontainer .column1, div.timecontainer .column2, div.timecontainer .column3 {
-    /*float: left;*/
+    float: left;
     text-align:center;
 }
 div.timecontainer .column1 {
-    width:40%;
+    width:45%;
 }
 div.timecontainer .column2 {
     width:10%;
 }
 div.timecontainer .column3 {
-    width:40%;
+    width:45%;
+}
+.ui-grid-a {
+	clear: both !important;
 }
 
 /* custom scholppButton */
@@ -1050,7 +1053,7 @@ label.ui-input-text, .ui-controlgroup-label {
 
   .startUhrzeit
 {
-	font-size: 2.5em !important;
+	font-size: 1.5em !important;
 }
 
 .startUhrzeit_container
