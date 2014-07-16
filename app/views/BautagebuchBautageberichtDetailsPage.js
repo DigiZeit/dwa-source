@@ -477,15 +477,11 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	
 	  	    , wetterButton: M.ButtonView.design({
 	  	          value: M.I18N.l('BautagebuchWetter')
-	  	        //, cssClass: 'digiButton'
-	  	        //, anchorLocation: M.CENTER
 	  	        , events: {
 	  	            tap: {
-	  	                //target: DigiWebApp.NavigationController,
-	  	                //action: 'toBautagebuchWetterPageTransition'
-	  		    			action: function() {
-	  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
-	  						}
+  		    			action: function() {
+  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
+  						}
 	  	            }
 	  	          }
 	  	    })
@@ -496,7 +492,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             childViews: 'speichernButton abschliessenButton'
           , layout: M.TWO_COLUMNS
           , speichernButton: M.ButtonView.design({
-                value: M.I18N.l('BautagebuchSpeichernAbschliessen')
+                value: M.I18N.l('BautagebuchSpeichern')
+              , cssClass: 'green_background'
               , anchorLocation: M.LEFT
               , events: {
                   tap: {
@@ -507,8 +504,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
               }
           })
           , abschliessenButton: M.ButtonView.design({
-                value: M.I18N.l('BautagebuchSpeichernAbschliessen')
+                value: M.I18N.l('BautagebuchAbschliessen')
               , anchorLocation: M.RIGHT
+              , cssClass: 'red_background'
               , events: {
                   tap: {
 		    			action: function() {
