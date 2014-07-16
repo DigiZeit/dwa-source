@@ -200,8 +200,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	
 	, setStartUhrzeit: function() {
   		if (DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit) {
-  			$('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit.split(":")[0]);
-  			$('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit.split(":")[1]);
+  			$('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit.split(":")[0]).padLeft(2,"0");
+  			$('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit.split(":")[1]).padLeft(2,"0");
   		}
 	}
 });
