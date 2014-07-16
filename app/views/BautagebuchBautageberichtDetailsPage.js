@@ -491,30 +491,57 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , grid: M.GridView.design({
             childViews: 'speichernButton abschliessenButton'
           , layout: M.TWO_COLUMNS
-          , speichernButton: M.ButtonView.design({
-                value: M.I18N.l('BautagebuchSpeichern')
-              , cssClass: 'green_background'
-              , anchorLocation: M.LEFT
-              , events: {
-                  tap: {
-		    			action: function() {
-    	  					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
-			    		}
-                  }
-              }
-          })
-          , abschliessenButton: M.ButtonView.design({
-                value: M.I18N.l('BautagebuchAbschliessen')
-              , anchorLocation: M.RIGHT
-              , cssClass: 'red_background'
-              , events: {
-                  tap: {
-		    			action: function() {
-	    		        	DigiWebApp.BautagebuchBautageberichtDetailsController.finish();
-			    		}
-                  }
-              }
-          })
+          , speichernButton: M.GridView.design({
+	            childViews: 'button icon'
+	          , layout: {
+	                cssClass: 'bautagebuchButton'
+	              , columns: {
+	                    0: 'button'
+	                  , 1: 'icon'
+	              }
+	          }
+	          , button: M.ButtonView.design({
+	                value: M.I18N.l('BautagebuchSpeichern')
+	              , cssClass: 'bautagebuchButton'
+	              , anchorLocation: M.RIGHT
+	              , events: {
+	                  tap: {
+			    			action: function() {
+	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+				    		}
+	                  }
+	              }
+	          })
+	          , icon: M.ImageView.design({
+	              value: 'theme/images/icon_bookTime.png'
+	          })
+	      })
+          , abschliessenButton: M.GridView.design({
+	            childViews: 'button icon'
+	          , layout: {
+	                cssClass: 'bautagebuchButton'
+	              , columns: {
+	                    0: 'button'
+	                  , 1: 'icon'
+	              }
+	          }
+	          , button: M.ButtonView.design({
+	                value: M.I18N.l('BautagebuchAbschliessen')
+	              , cssClass: 'bautagebuchButton'
+	              , anchorLocation: M.RIGHT
+	              , events: {
+	                  tap: {
+			    			action: function() {
+			    		        	DigiWebApp.BautagebuchBautageberichtDetailsController.finish();
+				    		}
+	                  }
+	              }
+	          })
+	          , icon: M.ImageView.design({
+	              value: 'theme/images/icon_bookTime.png'
+	          })
+	      })
+
       })
 
 //        , grid_old: M.GridView.design({
