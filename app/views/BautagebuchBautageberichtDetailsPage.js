@@ -353,6 +353,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 								}
 								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
 									myStunde = myStunde - 1;
+								}
+								if ((myMinute - minuteSteps) < 0) {
 									myMinute = 60;
 								}
 								myMinute = (myMinute - minuteSteps) % 60;
