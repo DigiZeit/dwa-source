@@ -211,7 +211,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
     , content: M.ScrollView.design({
 
     	  //childViews: 'projektleiterComboBox auftragComboBox mitarbeiterGroup startUhrzeit spacer2 zeitenButton materialienButton notizenButton medienButton wetterButton spacer1 grid'
-    	  childViews: 'auftragComboBox positionComboBox projektleiterComboBox startUhrzeit spacer2 mitarbeiter_zeiten_ButtonGrid material_wetter_ButtonGrid medien_notizen_ButtonGrid spacer1 grid'
+    	  childViews: 'auftragComboBox positionComboBox projektleiterComboBox startUhrzeitContainer spacer2 mitarbeiter_zeiten_ButtonGrid material_wetter_ButtonGrid medien_notizen_ButtonGrid spacer1 grid'
     		  
         , cssClass: 'content'
     	
@@ -222,6 +222,76 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , spacer2: M.LabelView.design({
             value: '&nbsp;<br>'
         })
+        
+        , startUhrzeitContainer: M.ContainerView.design({
+			  childViews: 'plusGrid startUhrzeitGrid minusGrid' 
+			, plusGrid: M.GridView.design({
+					  childViews: 'stundePlusButton trennText minutePlusButton'
+					, layout: M.THREE_COLUMNS
+					, stundePlusButton: M.ButtonView.design({
+		    	          value: "+"
+		    	        , events: {
+		    	            tap: {
+	    		    			action: function() {
+		  						}
+		    	            }
+		    	          }
+		    	    })
+		    	    , trennText: M.LabelView.design({
+		    	    	value: "&nbsp;"
+		    	    })
+					, minutePlusButton: M.ButtonView.design({
+		    	          value: "+"
+		    	        , events: {
+		    	            tap: {
+	    		    			action: function() {
+		  						}
+		    	            }
+		    	          }
+		    	    })
+			)}
+			, startUhrzeitGrid: M.GridView.design({
+				  childViews: 'stundeFeld trennText minuteFeld'
+				, layout: M.THREE_COLUMNS
+				, stundeFeld: M.TextFieldView.design({
+					cssClass: 'startUhrzeit'
+		    	  , inputType: M.INPUT_TEXT
+		        })
+		        , trennText: M.LabelView.design({
+		    	    	value: ":"
+		    	})
+				, minuteFeld: M.TextFieldView.design({
+					cssClass: 'startUhrzeit'
+		    	  , inputType: M.INPUT_TEXT
+		        })
+			)}
+			, minusGrid: M.GridView.design({
+				  childViews: 'stundeMinusButton trennText minuteMinusButton'
+				, layout: M.THREE_COLUMNS
+				, stundeMinusButton: M.ButtonView.design({
+	    	          value: "-"
+	    	        , events: {
+	    	            tap: {
+  		    			action: function() {
+	  						}
+	    	            }
+	    	          }
+	    	    })
+	    	    , trennText: M.LabelView.design({
+	    	    	value: "&nbsp;"
+	    	    })
+	    	    , minuteMinusButton: M.ButtonView.design({
+	    	          value: "-"
+	    	        , events: {
+	    	            tap: {
+  		    			action: function() {
+	  						}
+	    	            }
+	    	          }
+	    	    })
+			)}
+		)}
+          
 
         , startUhrzeit: M.TextFieldView.design({
 	    	    label: M.I18N.l('BautagebuchStartUhrzeit')
