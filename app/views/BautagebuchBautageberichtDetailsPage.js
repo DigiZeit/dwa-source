@@ -211,7 +211,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
     , content: M.ScrollView.design({
 
     	  //childViews: 'projektleiterComboBox auftragComboBox mitarbeiterGroup startUhrzeit spacer2 zeitenButton materialienButton notizenButton medienButton wetterButton spacer1 grid'
-    	  childViews: 'auftragComboBox positionComboBox projektleiterComboBox startUhrzeitContainer spacer2 mitarbeiter_zeiten_ButtonGrid material_wetter_ButtonGrid medien_notizen_ButtonGrid spacer1 grid'
+    	  childViews: 'auftragComboBox positionComboBox projektleiterComboBox startUhrzeitContainer spacer2 spacer3 mitarbeiter_zeiten_ButtonGrid material_wetter_ButtonGrid medien_notizen_ButtonGrid spacer1 grid'
     		  
         , cssClass: 'content'
     	
@@ -220,6 +220,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         })
 
         , spacer2: M.LabelView.design({
+            value: '&nbsp;<br>'
+        })
+        
+        , spacer3: M.LabelView.design({
             value: '&nbsp;<br>'
         })
         
