@@ -55,6 +55,8 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		that.set("settings.falscheZeitenIgnorierenItem", that.settings.falscheZeitenIgnorierenItem);
 		that.set("settings.positionVorselektieren", that.settings.positionVorselektieren);
 		that.set("settings.positionVorselektierenItem", that.settings.positionVorselektierenItem);
+		that.set("settings.in15MinutenSchritten", that.settings.in15MinutenSchritten);
+		that.set("settings.in15MinutenSchrittenItem", that.settings.in15MinutenSchrittenItem);
 
 		if (DigiWebApp.BautagebuchEinstellungen.find().length === 0) {
 			// erstelle Record mit Vorgabewerten
@@ -62,6 +64,8 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 				  startUhrzeit: that.settings.startUhrzeit
 				, inStundenBuchen: that.settings.inStundenBuchen
 				, falscheZeitenIgnorieren: that.settings.falscheZeitenIgnorieren
+				, positionVorselektieren: that.settings.positionVorselektieren
+				, in15MinutenSchritten: that.settings.in15MinutenSchritten
 			});
 			rec.save();
 		} else {
@@ -91,6 +95,14 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 			      , isSelected: rec.get("positionVorselektieren")
 				}]);
 			}
+			if (typeof(rec.get("in15MinutenSchritten")) !== "undefined") {
+				that.set("settings.in15MinutenSchritten", rec.get("in15MinutenSchritten"));
+				that.set("settings.in15MinutenSchrittenItem", [{
+			        value: 'in15MinutenSchritten'
+			      , label: M.I18N.l('in15MinutenSchritten')
+			      , isSelected: rec.get("in15MinutenSchritten")
+				}]);
+			}
 		}
 	}
 	
@@ -102,6 +114,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		rec.set("inStundenBuchen", that.settings.inStundenBuchen);
 		rec.set("falscheZeitenIgnorieren", that.settings.falscheZeitenIgnorieren);
 		rec.set("positionVorselektieren", that.settings.positionVorselektieren);
+		rec.set("in15MinutenSchritten", that.settings.in15MinutenSchritten);
 		rec.save();
 		
 		//M.ViewManager.setCurrentPage(that.lastPage)
