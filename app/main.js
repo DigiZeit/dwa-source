@@ -473,6 +473,7 @@ var DigiWebAppOrdinaryDesign = {
 
     , infoPage: DigiWebApp.InfoPage
             
+	, editTimeDataPage: DigiWebApp.EditTimeDataPage
 };
 
 if (searchForFeature(400)) { // Camera
@@ -495,7 +496,7 @@ if (searchForFeature(402)) { // Materialerfassung
 }
 
 if (searchForFeature(403) && !(searchForFeature(409))) { // Bemerkungsfeld
-	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
+//	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
 	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
@@ -504,7 +505,7 @@ if (searchForFeature(404)) { // Button-Menü (mit Icons alá DTC6) (aktuell nur 
 }
 
 if (searchForFeature(405) && !(searchForFeature(409))) { // Unterschrift
-	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
+//	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
 }
 
 if (searchForFeature(406) && !(searchForFeature(409))) { // Auftragsinfo
@@ -566,7 +567,7 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 }
 
 if (searchForFeature(422)) { // gefahrene Kilometer
-	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
+//	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
 	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
