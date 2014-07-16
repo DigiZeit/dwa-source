@@ -284,9 +284,10 @@ img.audioIcon {
 }
 
   .digiButton
-, .bautagebuchButton
 {
 	margin-top: 20px;
+	width: 135%;
+	height: 100% !important;
 }
 
 [data-theme="bautagebuchButton"] span.ui-btn-inner
@@ -308,6 +309,12 @@ img.audioIcon {
     left: 10px;
     width: 40px;
     height: 40px;
+}
+.bautagebuchButton
+{
+	margin-top: 20px;
+	width: 135%;
+	height: 100% !important;
 }
 
 
