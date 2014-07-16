@@ -505,6 +505,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              value: 'theme/images/48x48_plain_camera2.png'
 	      	          })
 	      	      }) 
+	        })
 //	  	    	M.ButtonView.design({
 //	  	          value: M.I18N.l('BautagebuchWetter')
 //	  	        , cssClass: 'bautagebuchButton'
