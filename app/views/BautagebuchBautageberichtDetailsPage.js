@@ -224,7 +224,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         })
         
         , startUhrzeitContainer: M.ContainerView.design({
-			  childViews: 'plusGrid startUhrzeitGrid minusGrid' 
+    	      label: M.I18N.l('BautagebuchStartUhrzeit')
+			, childViews: 'plusGrid startUhrzeitGrid minusGrid' 
 			, plusGrid: M.GridView.design({
 					  childViews: 'stundePlusButton trennText minutePlusButton'
 					, layout: M.THREE_COLUMNS
@@ -249,7 +250,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		    	            }
 		    	          }
 		    	    })
-			)}
+			})
 			, startUhrzeitGrid: M.GridView.design({
 				  childViews: 'stundeFeld trennText minuteFeld'
 				, layout: M.THREE_COLUMNS
@@ -264,7 +265,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					cssClass: 'startUhrzeit'
 		    	  , inputType: M.INPUT_TEXT
 		        })
-			)}
+			})
 			, minusGrid: M.GridView.design({
 				  childViews: 'stundeMinusButton trennText minuteMinusButton'
 				, layout: M.THREE_COLUMNS
@@ -289,8 +290,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	    	            }
 	    	          }
 	    	    })
-			)}
-		)}
+			})
+		})
           
 
         , startUhrzeit: M.TextFieldView.design({
