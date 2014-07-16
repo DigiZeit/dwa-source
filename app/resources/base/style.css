@@ -328,8 +328,8 @@ div.timecontainer div {
     color: #FFFFFF;
     font-weight:bold;
 }
-div.timecontainer .column1, div.container .column2, div.container .column3 {
-    float: left;
+div.timecontainer .column1, div.timecontainer .column2, div.timecontainer .column3 {
+    /*float: left;*/
     text-align:center;
 }
 div.timecontainer .column1 {
