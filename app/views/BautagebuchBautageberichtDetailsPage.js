@@ -424,7 +424,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              }
 	      	          })
 	      	          , icon: M.ImageView.design({
-	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	              value: 'theme/images/48x48_plain_businessmen.png'
 	      	          })
 	      	      }) 
 	        }) 
@@ -466,7 +466,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              }
 	      	          })
 	      	          , icon: M.ImageView.design({
-	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	              value: 'theme/images/48x48_plain_note_view.png'
 	      	          })
 	      	      }) 
 	        }) 
@@ -512,7 +512,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              }
 	      	          })
 	      	          , icon: M.ImageView.design({
-	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	              value: 'theme/images/48x48_plain_clipboard.png'
 	      	          })
 	      	      }) 
 	        }) 
@@ -604,7 +604,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              }
 	      	          })
 	      	          , icon: M.ImageView.design({
-	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	              value: 'theme/images/48x48_plain_shelf.png'
 	      	          })
 	      	      }) 
 	        })
@@ -648,7 +648,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              }
 	      	          })
 	      	          , icon: M.ImageView.design({
-	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	              value: 'theme/images/48x48_plain_cloud_dark.png'
 	      	          })
 	      	      }) 
 	        })
