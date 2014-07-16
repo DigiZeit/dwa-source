@@ -27,6 +27,10 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
         isRequired: NO
     })
 
+    , in15MinutenSchritten: M.Model.attr('String', {
+        isRequired: NO
+    })
+
 	, deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();

@@ -337,6 +337,7 @@ div.timecontainer .column1 {
 }
 div.timecontainer .column2 {
     width:10%;
+	padding-top: 25px;
 }
 div.timecontainer .column3 {
     width:45%;
@@ -1382,7 +1383,7 @@ div.ui-select {
     margin-bottom: 10px;
 }
 
-label.ui-select {
+label.ui-select, label {
 	color: #ffffff;
 }
 
