@@ -1061,6 +1061,10 @@ label.ui-input-text, .ui-controlgroup-label {
 	/*font-size: 1.5em !important;*/
 }
 
+.plusMinusButton {
+	background: #aaa;
+}
+
 .bautagebuchListePage {
 	color: #000 !important;
 }

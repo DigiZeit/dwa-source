@@ -242,6 +242,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 				    }
 					, stundePlusButton: M.ButtonView.design({
 		    	          value: "+"
+		    	        , cssClass: 'plusMinusButton'
 		    	        , events: {
 		    	            tap: {
 	    		    			action: function() {
@@ -254,6 +255,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		    	    })
 					, minutePlusButton: M.ButtonView.design({
 		    	          value: "+"
+		    	        , cssClass: 'plusMinusButton'
 		    	        , events: {
 		    	            tap: {
 	    		    			action: function() {
@@ -296,6 +298,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			    }
 				, stundeMinusButton: M.ButtonView.design({
 	    	          value: "-"
+	    	        , cssClass: 'plusMinusButton'
 	    	        , events: {
 	    	            tap: {
   		    			action: function() {
@@ -308,6 +311,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	    	    })
 	    	    , minuteMinusButton: M.ButtonView.design({
 	    	          value: "-"
+	    	        , cssClass: 'plusMinusButton'
 	    	        , events: {
 	    	            tap: {
   		    			action: function() {
