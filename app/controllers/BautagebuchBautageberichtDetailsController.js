@@ -191,6 +191,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		    positionenArray = _.compact(positionenArray);
 		    if (!itemSelected && auftragsId && positionenArray.length > 0) {
 		    	positionenArray[0].isSelected = YES;
+    			that.set('positionId', positionenArray[0].value);
+    			that.set('positionName', positionenArray[0].label);
 		    }
 		    that.set("positionenList", positionenArray);
 		}
