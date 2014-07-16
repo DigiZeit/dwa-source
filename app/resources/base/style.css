@@ -323,6 +323,25 @@ img.audioIcon {
 	width: 100%;
 }
 
+div.timecontainer div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+div.timecontainer .column1, div.container .column2, div.container .column3 {
+    float: left;
+    text-align:center;
+}
+div.timecontainer .column1 {
+    width:40%;
+}
+div.timecontainer .column2 {
+    width:10%;
+}
+div.timecontainer .column3 {
+    width:40%;
+}
+
 /* custom scholppButton */
 .scholppButton
 {

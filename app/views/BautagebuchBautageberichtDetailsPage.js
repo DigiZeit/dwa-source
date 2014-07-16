@@ -228,7 +228,14 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			, childViews: 'plusGrid startUhrzeitGrid minusGrid' 
 			, plusGrid: M.GridView.design({
 					  childViews: 'stundePlusButton trennText minutePlusButton'
-					, layout: M.THREE_COLUMNS
+					, layout: {
+				        cssClass: 'timecontainer',
+				        columns: {
+				            0: 'column1',
+				            1: 'column2',
+				            2: 'column3'
+				        }
+				    },
 					, stundePlusButton: M.ButtonView.design({
 		    	          value: "+"
 		    	        , events: {
@@ -253,7 +260,14 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			})
 			, startUhrzeitGrid: M.GridView.design({
 				  childViews: 'stundeFeld trennText minuteFeld'
-				, layout: M.THREE_COLUMNS
+				, layout: {
+			        cssClass: 'timecontainer',
+			        columns: {
+			            0: 'column1',
+			            1: 'column2',
+			            2: 'column3'
+			        }
+			    },
 				, stundeFeld: M.TextFieldView.design({
 					cssClass: 'startUhrzeit'
 		    	  , inputType: M.INPUT_TEXT
@@ -268,7 +282,14 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			})
 			, minusGrid: M.GridView.design({
 				  childViews: 'stundeMinusButton trennText minuteMinusButton'
-				, layout: M.THREE_COLUMNS
+						, layout: {
+				        cssClass: 'timecontainer',
+				        columns: {
+				            0: 'column1',
+				            1: 'column2',
+				            2: 'column3'
+				        }
+				    },
 				, stundeMinusButton: M.ButtonView.design({
 	    	          value: "-"
 	    	        , events: {
