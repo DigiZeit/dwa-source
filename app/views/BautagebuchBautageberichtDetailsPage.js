@@ -462,25 +462,54 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         , material_wetter_ButtonGrid: M.GridView.design({
         	  childViews: 'materialienButton wetterButton'
             , layout: M.TWO_COLUMNS
-      	    , materialienButton: M.ButtonView.design({
-	  	          value: M.I18N.l('BautagebuchMaterialien')
-	  	        , cssClass: 'bautagebuchButton'
-	  	        //, anchorLocation: M.CENTER
-	  	        , events: {
-	  	            tap: {
-	  	                //target: DigiWebApp.NavigationController,
-	  	                //action: 'toBautagebuchMaterialienListePageTransition'
-	  		    			action: function() {
-	  						DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
-	  					}
-	  	            }
-	  	          }
-	  	    })
+      	    , materialienButton: M.GridView.design({
+	            childViews: 'buttongrid'
+	                , layout: M.TWO_COLUMNS
+	                , buttongrid: M.GridView.design({
+	      	            childViews: 'button icon'
+	      	          , layout: {
+	      	                cssClass: 'bautagebuchButton'
+	      	              , columns: {
+	      	                    0: 'button'
+	      	                  , 1: 'icon'
+	      	              }
+	      	          }
+	      	          , button: M.ButtonView.design({
+	      	                value: M.I18N.l('BautagebuchWetter')
+	      	              , cssClass: 'bautagebuchButton'
+	      	              , anchorLocation: M.RIGHT
+	      	              , events: {
+	      	                  tap: {
+	      			    			action: function() {
+	      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchWetterPageTransition);
+	      				    		}
+	      	                  }
+	      	              }
+	      	          })
+	      	          , icon: M.ImageView.design({
+	      	              value: 'theme/images/48x48_plain_camera2.png'
+	      	          })
+	      	      }) 
+	        })
+//      	    	M.ButtonView.design({
+//	  	          value: M.I18N.l('BautagebuchMaterialien')
+//	  	        , cssClass: 'bautagebuchButton'
+//	  	        //, anchorLocation: M.CENTER
+//	  	        , events: {
+//	  	            tap: {
+//	  	                //target: DigiWebApp.NavigationController,
+//	  	                //action: 'toBautagebuchMaterialienListePageTransition'
+//	  		    			action: function() {
+//	  						DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
+//	  					}
+//	  	            }
+//	  	          }
+//	  	    })
 	
 	  	    , wetterButton: M.GridView.design({
-	            childViews: 'speichernButton abschliessenButton'
+	  	    		  childViews: 'buttongrid'
 	                , layout: M.TWO_COLUMNS
-	                , speichernButton: M.GridView.design({
+	                , buttongrid: M.GridView.design({
 	      	            childViews: 'button icon'
 	      	          , layout: {
 	      	                cssClass: 'bautagebuchButton'
