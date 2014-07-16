@@ -259,7 +259,7 @@ img.audioIcon {
 , .ui-content .bautagebuchButton 
 {
     position: relative;
-    height: 40px;
+    /*height: 40px;*/
 }
 
 .ui-content .digiButton .icon
@@ -303,18 +303,25 @@ img.audioIcon {
 .ui-content .bautagebuchButton .icon
 {
     position: absolute;
-    top: 1px;
-    left: 10px;
+    top: 10px;
+    left: 20px;
     width: 40px;
     height: 40px;
 }
 .bautagebuchButton
 {
 	margin-top: 20px;
-	width: 135%;
-	height: 100% !important;
+	/*width: 135%;
+	height: 100% !important;*/
+}
+.bautagebuchButton span.ui-btn-inner {
+	padding: 20px;
+	margin-left: 65px;
 }
 
+.bigButton div.ui-block-a {
+	width: 100%;
+}
 
 /* custom scholppButton */
 .scholppButton
@@ -1210,8 +1217,8 @@ label.ui-input-text, .ui-controlgroup-label {
 }
 
 .bigButton {
-	padding-top: 20px;
-	height: 60px;
+	/*padding-top: 20px;*/
+	/*height: 60px;*/
 }
 
 .bigButton .left {
