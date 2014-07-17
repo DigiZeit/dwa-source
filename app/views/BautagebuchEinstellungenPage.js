@@ -12,7 +12,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function() {
 				DigiWebApp.BautagebuchEinstellungenController.load();
-				DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeit.startUhrzeitInput.setValue(DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit);
+				//DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeit.startUhrzeitInput.setValue(DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit);
 				DigiWebApp.BautagebuchEinstellungenController.set('settings', DigiWebApp.BautagebuchEinstellungenController.settings);
 		  		DigiWebApp.BautagebuchEinstellungenController.setStartUhrzeit();		  		
 			}
