@@ -491,9 +491,22 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		// erzeuge dummy-bautagesbericht
 		DigiWebApp.BautagebuchBautageberichteListeController.neu("<materialerfassung_only>", YES);
 		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
-		// auftrag setzen?
-		// position setzen?
-		// projektleiter setzen?
+
+//		// auftrag setzen?
+////		, orderId: M.Model.attr('String',{
+////	    , orderName: M.Model.attr('String',{
+//		myBautagesbericht.set("orderId", )
+//		myBautagesbericht.set("orderName", )
+//		
+//		// position setzen?
+////	    , positionId: M.Model.attr('String',{
+////	    , positionName: M.Model.attr('String',{
+//		myBautagesbericht.set("positionId", )
+//		myBautagesbericht.set("positionName", )
+//		
+//		// projektleiter setzen?
+
+		myBautagesbericht.save();
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("item", myBautagesbericht);
 		DigiWebApp.BautagebuchBautageberichteListeController.init();
       	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
