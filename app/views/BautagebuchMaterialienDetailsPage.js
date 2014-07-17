@@ -387,29 +387,29 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         })
 
         , speichernButton: M.ButtonView.design({
-	      value: M.I18N.l('save')
-	    //, cssClass: 'digiButton'
-	    //, anchorLocation: M.CENTER
-	    , events: {
-	        tap: {
-	            target: DigiWebApp.BautagebuchMaterialienDetailsController,
-	            action: 'save'
-	        }
-	      }
+		      value: M.I18N.l('save')
+		    //, cssClass: 'digiButton'
+		    //, anchorLocation: M.CENTER
+		    , events: {
+		        tap: {
+		            target: DigiWebApp.BautagebuchMaterialienDetailsController,
+		            action: 'save'
+		        }
+		      }
+		    })
+		
+	    , loeschenButton: M.ButtonView.design({
+		      value: M.I18N.l('BautagebuchDelete')
+		    , cssClass: 'red_background'
+		    //, anchorLocation: M.CENTER
+		    , events: {
+		        tap: {
+		            target: DigiWebApp.BautagebuchMaterialienDetailsController,
+		            action: 'deleteMaterialbuchung'
+		        }
+		      }
 	    })
 
-    })
-
-    , loeschenButton: M.ButtonView.design({
-	      value: M.I18N.l('BautagebuchDelete')
-	    , cssClass: 'red_background'
-	    //, anchorLocation: M.CENTER
-	    , events: {
-	        tap: {
-	            target: DigiWebApp.BautagebuchMaterialienDetailsController,
-	            action: 'deleteMaterialbuchung'
-	        }
-	      }
     })
 
 });
