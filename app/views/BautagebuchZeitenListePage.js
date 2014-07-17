@@ -6,6 +6,7 @@
 // View: BautagebuchZeitenListePage
 // ==========================================================================
 
+m_require('app/views/BautagebuchZusammenfassungMitarbeiterSummeTemplateView');
 m_require('app/views/BautagebuchZeitenTemplateView');
 
 DigiWebApp.BautagebuchZeitenListePage = M.PageView.design({
@@ -61,7 +62,7 @@ DigiWebApp.BautagebuchZeitenListePage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'list'
+          childViews: 'leistungsnachweisList'
         , list: M.ListView.design({
               contentBinding: {
                   target: DigiWebApp.BautagebuchZeitenListeController
@@ -69,6 +70,21 @@ DigiWebApp.BautagebuchZeitenListePage = M.PageView.design({
             }
             , listItemTemplateView: DigiWebApp.BautagebuchZeitenTemplateView
         })
+        , leistungsnachweisList: M.ContainerView.design({
+	    	  	  childViews: 'list'
+	    	  	, cssClass: 'marginBottom20 leistungsnachweisList'
+	    	  	, doNotOverlapAtTop: YES
+	    	  	, doNotOverlapAtBottom: YES
+		        , list: M.ListView.design({
+		        	  cssClass: 'marginTop25important'
+		        	, isDividedList: YES
+		            , contentBinding: {
+		                  target: DigiWebApp.BautagebuchZusammenfassungController
+		                , property: 'ZeitbuchungenPerMitarbeiterList'
+		            }
+		            , listItemTemplateView: DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView
+		        })
+	      })
     })
 
 });
