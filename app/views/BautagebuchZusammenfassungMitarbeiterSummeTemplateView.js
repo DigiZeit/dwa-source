@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 			    
 			    if (M.ViewManager.getCurrentPage() === DigiWebApp.BautagebuchZeitenListePage) {
 			    	// ZeitenListePage
-				    var view_modelId = view.modelId;
+				    var view_modelId = view.value.modelId;
 				    _.each(DigiWebApp.BautagebuchZeitenListeController.items, function(selectedItem) {
 						if (selectedItem.m_id === view_modelId) {
 							DigiWebApp.BautagebuchZeitenDetailsController.load(selectedItem);
