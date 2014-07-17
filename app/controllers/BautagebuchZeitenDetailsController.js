@@ -21,10 +21,10 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	, mitarbeiterIds: null // in model
 	, mitarbeiterList: null // runtime
 	
-	, von: "" // in model
+	, von: "00:00" // in model
 	, timeStampStart: "" // in model
 
-	, bis: "" // in model
+	, bis: "00:00" // in model
 	, timeStampEnd: "" // in model
 		
 	, dauer: "00:00" // in model
