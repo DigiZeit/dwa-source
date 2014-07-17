@@ -68,6 +68,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 		that.set("positionName", myItem.get("positionName"));
 		that.set("mitarbeiterIds", myItem.get("selektierteMitarbeiter"));
 		that.set("startUhrzeit", myItem.get("startUhrzeit"));
+		that.set("bautagesberichtTyp", myItem.get('bautagesberichtTyp'));
 
 		that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
 		that.set("wetter.temperatur", myItem.get("temperatur"));
@@ -117,6 +118,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	
 		that.item.set("datum", that.datum);
 		
+		that.item.set("bautagesberichtTyp", that.bautagesberichtTyp);
+				
 		that.item.set("startUhrzeit", that.startUhrzeit);
 
 		that.item.set("projektleiterId", that.projektleiterId);
