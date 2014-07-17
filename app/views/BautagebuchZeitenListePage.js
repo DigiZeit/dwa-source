@@ -76,7 +76,7 @@ DigiWebApp.BautagebuchZeitenListePage = M.PageView.design({
 	    	  	, doNotOverlapAtTop: YES
 	    	  	, doNotOverlapAtBottom: YES
 		        , list: M.ListView.design({
-		        	  cssClass: 'marginTop25important'
+		        	  cssClass: ''
 		        	, isDividedList: YES
 		            , contentBinding: {
 		                  target: DigiWebApp.BautagebuchZusammenfassungController

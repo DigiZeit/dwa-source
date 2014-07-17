@@ -29,7 +29,20 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 //					});
 //				});
 			    //DigiWebApp.NavigationController.toBautagebuchMaterialienDetailsPageTransition();
-			    DigiWebApp.BautagebuchZeitenListeController.neu(view_mitarbeiterId);
+			    
+			    if (M.ViewManager.getCurrentPage() === DigiWebApp.BautagebuchZeitenListePage) {
+			    	// ZeitenListePage
+				    var view_modelId = view.modelId;
+				    _.each(DigiWebApp.BautagebuchZeitenListeController.items, function(selectedItem) {
+						if (selectedItem.m_id === view_modelId) {
+							DigiWebApp.BautagebuchZeitenDetailsController.load(selectedItem);
+						}
+					});
+				    DigiWebApp.NavigationController.toBautagebuchZeitenDetailsPageTransition();
+			    } else {
+			    	// Zusammenfassung
+				    DigiWebApp.BautagebuchZeitenListeController.neu(view_mitarbeiterId);			    	
+			    }
 			}
         }
     }
@@ -74,7 +87,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	  , computedValue: {
 	        valuePattern: '<%= vonbisdauer %>'
 	      , operation: function(v) {
-					return v;
+					return ": " + v;
 	      }
 	  }
 	})
