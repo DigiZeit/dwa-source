@@ -1012,6 +1012,10 @@ label.ui-input-text, .ui-controlgroup-label {
     margin-bottom: 10px;
 }
 
+.settingsPage .startUhrzeit {
+	text-align: center;
+}
+
 .terminlisteEinstellungen {
 	margin-top: 30px;
 }

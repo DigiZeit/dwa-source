@@ -58,7 +58,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox in15MinutenSchrittenCheckbox'
 
             , startUhrzeitContainer: M.ContainerView.design({
-	      	      label: M.I18N.l('BautagebuchStartUhrzeit')
+	      	      label: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
 	  			, childViews: 'plusGrid startUhrzeitGrid minusGrid' 
 	  			, plusGrid: M.GridView.design({
 	  					  childViews: 'stundePlusButton trennText minutePlusButton'
@@ -200,30 +200,30 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	  			})
 	  		})
 
-	  		, startUhrzeit: M.GridView.design({
-	            childViews: 'startUhrzeitLabel startUhrzeitInput'
-	          , layout: M.TWO_COLUMNS
-	          , startUhrzeitLabel: M.LabelView.design({
-	              value: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
-	          })
-	          , startUhrzeitInput: M.TextFieldView.design({
-	        	    inputType: M.INPUT_TIME
-	        	  , contentBindingReverse: {
-	                    target: DigiWebApp.BautagebuchEinstellungenController
-	                  , property: 'settings.startUhrzeit'
-	              }
-	              , contentBinding: {
-	                    target: DigiWebApp.BautagebuchEinstellungenController
-	                  , property: 'settings.startUhrzeit'
-	              }
-	          	  , events: {
-	          		  tap: {
-		          		  	action: function(id, event) {
-	          		  		}
-	          	  	  }
-	          	  }
-	          })
-	      })
+//	  		, startUhrzeit: M.GridView.design({
+//	            childViews: 'startUhrzeitLabel startUhrzeitInput'
+//	          , layout: M.TWO_COLUMNS
+//	          , startUhrzeitLabel: M.LabelView.design({
+//	              value: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
+//	          })
+//	          , startUhrzeitInput: M.TextFieldView.design({
+//	        	    inputType: M.INPUT_TIME
+//	        	  , contentBindingReverse: {
+//	                    target: DigiWebApp.BautagebuchEinstellungenController
+//	                  , property: 'settings.startUhrzeit'
+//	              }
+//	              , contentBinding: {
+//	                    target: DigiWebApp.BautagebuchEinstellungenController
+//	                  , property: 'settings.startUhrzeit'
+//	              }
+//	          	  , events: {
+//	          		  tap: {
+//		          		  	action: function(id, event) {
+//	          		  		}
+//	          	  	  }
+//	          	  }
+//	          })
+//	      })
 	        	          
 	      , inStundenBuchenCheckbox: M.SelectionListView.design({
 		          selectionMode: M.MULTIPLE_SELECTION
