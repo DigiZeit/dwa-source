@@ -131,7 +131,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchZeitenListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
+        				history.back();
+        			}
                 }
             }
         })
@@ -144,6 +146,17 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             , icon: 'delete'
             , anchorLocation: M.RIGHT
             , cssClass: 'red_background'
+            , events: {
+                tap: {
+                      target: DigiWebApp.BautagebuchZeitenDetailsController
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e9){} this.deleteZeitbuchung();}
+                }
+            }
+        })
+        , uebersichtButton: M.ButtonView.design({
+              value: M.I18N.l('uebersicht')
+            , icon: 'forward'
+            , anchorLocation: M.RIGHT
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchZeitenDetailsController
@@ -775,6 +788,30 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 value: 'theme/images/icon_bookTime.png'
             })
         })
+        , loeschenButton: M.GridView.design({
+            childViews: 'button icon'
+          , layout: {
+                cssClass: 'digiButton'
+              , columns: {
+                    0: 'button'
+                  , 1: 'icon'
+              }
+          }
+          , button: M.ButtonView.design({
+                value: M.I18N.l('BautagebuchDelete')
+              , cssClass: 'red_background'
+              , anchorLocation: M.RIGHT
+              , events: {
+                  tap: {
+		                target: DigiWebApp.BautagebuchZeitenDetailsController,
+		                action: 'deleteZeitbuchung'
+                  }
+              }
+          })
+          , icon: M.ImageView.design({
+              value: ''
+          })
+      })
 
     })
 

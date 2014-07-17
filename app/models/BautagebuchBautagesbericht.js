@@ -22,6 +22,10 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
     , bautagesberichtId: M.Model.attr('String', {
         isRequired: NO
     })
+    
+    , bautagesberichtTyp: M.Model.attr('String', {
+        isRequired: NO
+    })
 
     , transferCompleted: M.Model.attr('Boolean', {
         isRequired: NO
