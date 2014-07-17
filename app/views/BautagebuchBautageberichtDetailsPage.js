@@ -902,7 +902,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
         }
         , button: M.ButtonView.design({
               value: M.I18N.l('BautagebuchDelete')
-            , cssClass: 'digiButton red_background'
+            , cssClass: 'red_background'
             , anchorLocation: M.RIGHT
             , events: {
                 tap: {
@@ -913,7 +913,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             }
         })
         , icon: M.ImageView.design({
-            value: 'theme/images/icon_bookTime.png'
+            value: ''
         })
     })
 
