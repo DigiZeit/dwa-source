@@ -191,10 +191,10 @@ DigiWebApp.DashboardController = M.Controller.extend({
             // Start::Materialerfassung (402)
 			var MaterialerfassungAvailable = DigiWebApp.SettingsController.featureAvailable('402');
             
-	            // disable this Feature on small devices (except if override active)
-	            if ( ($(window).width()<=480) && (DigiWebApp.SettingsController.getSetting('treatAllAsTablet') === false) ) {
-	            	MaterialerfassungAvailable = false;
-	            }
+//	            // disable this Feature on small devices (except if override active)
+//	            if ( ($(window).width()<=480) && (DigiWebApp.SettingsController.getSetting('treatAllAsTablet') === false) ) {
+//	            	MaterialerfassungAvailable = false;
+//	            }
             
             if ( (MaterialerfassungAvailable) && !ChefToolOnly ) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 402 (Materialerfassung)");
@@ -487,7 +487,16 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, materialerfassung: function() {
-	    //DigiWebApp.NavigationController.toOrderInfoPageTransition();
+		DigiWebApp.BautagebuchBautageberichteListeController.init();
+		// erzeuge dummy-bautagesbericht
+		DigiWebApp.BautagebuchBautageberichteListeController.neu("<materialerfassung_only>", YES);
+		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
+		// auftrag setzen?
+		// position setzen?
+		// projektleiter setzen?
+		DigiWebApp.BautagebuchBautageberichtDetailsController.set("item", myBautagesbericht);
+		DigiWebApp.BautagebuchBautageberichteListeController.init();
+      	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
 	}
 	
 	, tagescheckliste: function() {
@@ -499,9 +508,13 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
         
 	, bautagebuch: function() {
-	    //DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
-		DigiWebApp.BautagebuchBautageberichteListeController.init();
-		DigiWebApp.BautagebuchBautageberichteListeController.neu();
+		if (DigiWebApp.BautagebuchBautagesbericht.find().length > 0) {
+		    DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+		} else {
+			DigiWebApp.BautagebuchBautageberichteListeController.init();
+			DigiWebApp.BautagebuchBautageberichteListeController.neu();
+		}
+
 	}
 	
 	, buttonMenu: function() {

@@ -198,7 +198,7 @@ M.I18N.de_de = {
 	, waitingForDevice: "Bitte Warten ..."
 	, recordAudio: "Sprachaufzeichnung (DEMO)"
 	, signature: "Unterschrift"
-	, materialPickUp: "Materialerfassung (DEMO)"
+	, materialPickUp: "Materialerfassung"
 	, dailyChecklist: "Tagescheckliste (DEMO)"
 	, loadSignatures: "Lade Unterschriften ..."
 	, phone: "Telefon"

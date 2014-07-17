@@ -123,7 +123,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title delButton'
+          childViews: 'backButton title uebersichtButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -134,7 +134,9 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchNotizenListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+        				history.back();
+        			}
                 }
             }
         })
@@ -154,12 +156,26 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 }
             }
         })
+        , uebersichtButton: M.ButtonView.design({
+              value: M.I18N.l('uebersicht')
+            , icon: 'forward'
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+                      target: DigiWebApp.BautagebuchNotizenDetailsController
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
+                    	//this.deleteNotiz();
+                    	DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
+                    }
+                }
+            }
+        })
         , anchorLocation: M.TOP
     })
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox dataInput grid'
+    	  childViews: 'positionComboBox activityComboBox dataInput grid loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -260,6 +276,18 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 value: 'theme/images/icon_bookTime.png'
             })
         })
+        
+        , loeschenButton: M.ButtonView.design({
+	  	      value: M.I18N.l('BautagebuchDelete')
+	  	    , cssClass: 'red_background'
+	  	    //, anchorLocation: M.CENTER
+	  	    , events: {
+	  	        tap: {
+	  	            target: DigiWebApp.BautagebuchNotizenDetailsController,
+	  	            action: 'deleteNotiz'
+	  	        }
+	  	      }
+	      })
 
     })
 

@@ -678,7 +678,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              , events: {
 	      	                  tap: {
 	      			    			action: function() {
-	      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+	      	        	  				//DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
+	      	        	  				DigiWebApp.BautagebuchNotizenListeController.init();
+	      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchNotizenListeController.neu);
 	      				    		}
 	      	                  }
 	      	              }
@@ -722,7 +724,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		      	              , events: {
 		      	                  tap: {
 		      			    			action: function() {
-		      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
+		      	        	  				//DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
+		      	        	  				DigiWebApp.BautagebuchMedienListeController.init();
+		      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchMedienListeController.neu);
 		      				    		}
 		      	                  }
 		      	              }

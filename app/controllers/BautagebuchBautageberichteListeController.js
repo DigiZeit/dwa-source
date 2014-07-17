@@ -22,7 +22,7 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 		}
 	}
 
-	, neu: function(bautagesberichtTyp) {
+	, neu: function(bautagesberichtTyp, skipRedirect) {
 		//var that = this;
 		
 		if (bautagesberichtTyp) {
@@ -49,7 +49,9 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 			, startUhrzeit: DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit
 		}));
 		
-		DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
+		if (!skipRedirect) {
+			DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
+		}
 	}
 
 });

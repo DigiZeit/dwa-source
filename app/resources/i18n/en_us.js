@@ -198,7 +198,7 @@ M.I18N.en_us = {
 	, waitingForDevice: "Please wait ..."
 	, recordAudio: "Audiorecording (DEMO)"
 	, signature: "Signature"
-	, materialPickUp: "Material pick up (DEMO)"
+	, materialPickUp: "Material pick up"
 	, dailyChecklist: "Daily checklist (DEMO)"
 	, loadSignatures: "Loading signatures ..."
 	, phone: "Phone"

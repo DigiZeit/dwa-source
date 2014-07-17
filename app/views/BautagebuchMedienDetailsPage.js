@@ -123,7 +123,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title delButton'
+          childViews: 'backButton title uebersichtButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -134,7 +134,9 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMedienListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+        				history.back();
+        			}
                 }
             }
         })
@@ -150,7 +152,23 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchMedienDetailsController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.deleteMedienBuchung();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
+                    	this.deleteMedienBuchung();
+                    }
+                }
+            }
+        })
+        , uebersichtButton: M.ButtonView.design({
+              value: M.I18N.l('uebersicht')
+            , icon: 'forward'
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+                      target: DigiWebApp.BautagebuchMedienDetailsController
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
+                    	//this.deleteMedienBuchung();
+                    	DigiWebApp.NavigationController.backToBautagebuchMedienListePageTransition();
+                    }
                 }
             }
         })
@@ -159,7 +177,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox image remarkInput grid'
+    	  childViews: 'positionComboBox activityComboBox image remarkInput grid loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -264,6 +282,18 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 	              value: 'theme/images/icon_bookTime.png'
 	          })
         })
+        
+        , loeschenButton: M.ButtonView.design({
+	  	      value: M.I18N.l('BautagebuchDelete')
+	  	    , cssClass: 'red_background'
+	  	    //, anchorLocation: M.CENTER
+	  	    , events: {
+	  	        tap: {
+	  	            target: DigiWebApp.BautagebuchMedienDetailsController,
+	  	            action: 'deleteMedienBuchung'
+	  	        }
+	  	      }
+	      })
 
     })
 
