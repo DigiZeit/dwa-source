@@ -360,7 +360,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 								}
 								myMinute = (myMinute - minuteSteps) % 60;
 								if (myMinute < 0) {
-									myMinute = 0;
+									myMinute = 60 - minuteSteps;
 								}
 								var startUhrzeitStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchBautageberichtDetailsController.set('startUhrzeit', startUhrzeitStr);
