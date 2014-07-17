@@ -474,4 +474,6 @@ M.I18N.de_de = {
 		
 	, uebersicht: "Übersicht"
 
+	, bautagebuchWeitereZeitbuchung: "Weitere Zeitbuchung für diese Auswahl anlegen?"
+
 };

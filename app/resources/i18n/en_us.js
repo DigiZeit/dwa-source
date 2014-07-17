@@ -474,5 +474,7 @@ M.I18N.en_us = {
 	, in15MinutenSchritten: "15-minutes steps"	
 
 	, uebersicht: "Overview"
-		
+
+	, bautagebuchWeitereZeitbuchung: "Add another booking with this selection?"
+	
 };
