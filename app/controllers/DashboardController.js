@@ -499,7 +499,9 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
         
 	, bautagebuch: function() {
-	    DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+	    //DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+		DigiWebApp.BautagebuchBautageberichteListeController.init();
+		DigiWebApp.BautagebuchBautageberichteListeController.neu();
 	}
 	
 	, buttonMenu: function() {

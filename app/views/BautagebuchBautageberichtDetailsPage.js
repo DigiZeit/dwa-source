@@ -144,7 +144,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title delButton'
+          childViews: 'backButton title uebersichtButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -207,7 +207,22 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
                 }
             }
         })
-        , anchorLocation: M.TOP
+        , uebersichtButton: M.ButtonView.design({
+              value: M.I18N.l('uebersicht')
+            , icon: 'forward'
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+                      //target: DigiWebApp.BautagebuchBautageberichtDetailsController
+                    //, action: 'delete'
+        			action: function() {
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
+        				DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition();
+        			}
+                }
+            }
+        })
+       , anchorLocation: M.TOP
     })
 
     , content: M.ScrollView.design({

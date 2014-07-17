@@ -473,5 +473,6 @@ M.I18N.en_us = {
 	, positionVorselektieren: "Preselect Position"
 	, in15MinutenSchritten: "15-minutes steps"	
 
-			
+	, uebersicht: "Overview"
+		
 };
