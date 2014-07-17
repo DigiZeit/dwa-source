@@ -488,8 +488,12 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	
 	, materialerfassung: function() {
 		DigiWebApp.BautagebuchBautageberichteListeController.init();
-		// erzeuge dummy-bautagesbericht
-		DigiWebApp.BautagebuchBautageberichteListeController.neu("<materialerfassung_only>", YES);
+		if (DigiWebApp.BautagebuchBautagesbericht.find().length > 0) {
+			DigiWebApp.BautagebuchBautageberichtDetailsController.load(DigiWebApp.BautagebuchBautagesbericht.find()[0]);
+		} else {
+			// erzeuge dummy-bautagesbericht
+			DigiWebApp.BautagebuchBautageberichteListeController.neu("<materialerfassung_only>", YES);
+		}
 		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
 
 //		// auftrag setzen?
