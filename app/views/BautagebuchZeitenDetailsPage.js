@@ -360,7 +360,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	    		    			action: function() {
 									var myStunde = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeVonFeld.id)[0].value);
 									var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id)[0].value);
-									myStunde = myStunde + 1;
+  									myStunde = (myStunde + 1) % 24;
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 									DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
 									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
@@ -381,7 +381,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										minuteSteps = 15;
 									}
 									if ((myMinute + minuteSteps) > 59) {
-										myStunde = myStunde + 1;										
+  										myStunde = (myStunde + 1) % 24;										
 									}
 									myMinute = (myMinute + minuteSteps) % 60;
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
@@ -402,7 +402,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	    		    			action: function() {
 									var myStunde = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id)[0].value);
 									var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id)[0].value);
-									myStunde = myStunde + 1;
+  									myStunde = (myStunde + 1) % 24;
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 									DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
 									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
@@ -423,7 +423,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										minuteSteps = 15;
 									}
 									if ((myMinute + minuteSteps) > 59) {
-										myStunde = myStunde + 1;										
+	  									myStunde = (myStunde + 1) % 24;
 									}
 									myMinute = (myMinute + minuteSteps) % 60;
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
@@ -488,11 +488,11 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id)[0].value);
 								myStunde = myStunde - 1;
 								if (myStunde < 0) {
-									myStunde = 0;
+									myStunde = 23;
 								}
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -509,17 +509,20 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
 									minuteSteps = 15;
 								}
-								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
-									myStunde = myStunde - 1;
-									myMinute = 60;
-								}
-								myMinute = (myMinute - minuteSteps) % 60;
-								if (myMinute < 0) {
-									myMinute = 0;
-								}
+  								if ((myMinute - minuteSteps) < 0) {
+  									myStunde = myStunde - 1;
+  									if (myStunde < 0) {
+  										myStunde = 23;
+  									}
+  									myMinute = 60;
+  								}
+  								myMinute = (myMinute - minuteSteps) % 60;
+  								if (myMinute < 0) {
+  									myMinute = 60 - minuteSteps;
+  								}
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -537,11 +540,11 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id)[0].value);
 								myStunde = myStunde - 1;
 								if (myStunde < 0) {
-									myStunde = 0;
+									myStunde = 23;
 								}
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -558,17 +561,20 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
 									minuteSteps = 15;
 								}
-								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
-									myStunde = myStunde - 1;
-									myMinute = 60;
-								}
-								myMinute = (myMinute - minuteSteps) % 60;
-								if (myMinute < 0) {
-									myMinute = 0;
-								}
+  								if ((myMinute - minuteSteps) < 0) {
+  									myStunde = myStunde - 1;
+  									if (myStunde < 0) {
+  										myStunde = 23;
+  									}
+  									myMinute = 60;
+  								}
+  								myMinute = (myMinute - minuteSteps) % 60;
+  								if (myMinute < 0) {
+  									myMinute = 60 - minuteSteps;
+  								}
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
