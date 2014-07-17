@@ -342,6 +342,33 @@ div.timecontainer .column2 {
 div.timecontainer .column3 {
     width:45%;
 }
+
+div.vonbiscontainer div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+div.vonbiscontainer .column1, div.vonbiscontainer .column2, div.vonbiscontainer .column3 , div.vonbiscontainer .column4 , div.vonbiscontainer .column5 {
+    float: left;
+    text-align:center;
+}
+div.vonbiscontainer .column1 {
+    width:24%;
+}
+div.vonbiscontainer .column2 {
+    width:24%;
+}
+div.vonbiscontainer .column3 {
+    width:4%;
+	padding-top: 25px;
+}
+div.vonbiscontainer .column4 {
+    width:24%;
+}
+div.vonbiscontainer .column5 {
+    width:24%;
+}
+
 .ui-grid-a {
 	clear: both !important;
 }

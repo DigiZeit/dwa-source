@@ -337,20 +337,22 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 //	      	  	  }
 //	      	  }
 //      })
-        , dauerContainer: M.ContainerView.design({
+        , VonBisContainer: M.ContainerView.design({
     	      label: M.I18N.l('bookingFrom') + "/" + M.I18N.l('bookingTo')
-			, childViews: 'plusGrid dauerGrid minusGrid' 
+			, childViews: 'plusGrid VonBisGrid minusGrid' 
 			, plusGrid: M.GridView.design({
-					  childViews: 'stundePlusButton trennText minutePlusButton'
+					  childViews: 'stundeVonPlusButton minuteVonPlusButton trennText stundeBisPlusButton minuteBisPlusButton'
 					, layout: {
-				          cssClass: 'timecontainer'
+				          cssClass: 'vonbiscontainer'
 				        , columns: {
 				              0: 'column1'
 				            , 1: 'column2'
 				            , 2: 'column3'
+				            , 3: 'column4'
+				            , 4: 'column5'
 				        }
 				    }
-					, stundePlusButton: M.ButtonView.design({
+					, stundeVonPlusButton: M.ButtonView.design({
 		    	          value: "+"
 		    	        , cssClass: 'plusMinusButton'
 		    	        , events: {
@@ -369,7 +371,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 		    	    , trennText: M.LabelView.design({
 		    	    	value: "&nbsp;"
 		    	    })
-					, minutePlusButton: M.ButtonView.design({
+					, minuteBisPlusButton: M.ButtonView.design({
 		    	          value: "+"
 		    	        , cssClass: 'plusMinusButton'
 		    	        , events: {
@@ -393,39 +395,51 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 		    	          }
 		    	    })
 			})
-			, dauerGrid: M.GridView.design({
-				  childViews: 'stundeFeld trennText minuteFeld'
+			, VonBisGrid: M.GridView.design({
+				  childViews: 'stundeFeld minuteFeld trennText stundeFeld minuteFeld'
 				, layout: {
-			          cssClass: 'timecontainer'
+			          cssClass: 'vonbiscontainer'
 			        , columns: {
 			              0: 'column1'
 			            , 1: 'column2'
 			            , 2: 'column3'
+			            , 3: 'column4'
+			            , 4: 'column5'
 			        }
 			    }
-				, stundeFeld: M.TextFieldView.design({
+				, stundeVonFeld: M.TextFieldView.design({
+					cssClass: 'startUhrzeit'
+		    	  , inputType: M.INPUT_TEXT
+		        })
+				, minuteVonFeld: M.TextFieldView.design({
 					cssClass: 'startUhrzeit'
 		    	  , inputType: M.INPUT_TEXT
 		        })
 		        , trennText: M.LabelView.design({
-		    	    	value: ":"
+		    	    	value: "-"
 		    	})
-				, minuteFeld: M.TextFieldView.design({
+				, stundeBisFeld: M.TextFieldView.design({
+					cssClass: 'startUhrzeit'
+		    	  , inputType: M.INPUT_TEXT
+		        })
+				, minuteBisFeld: M.TextFieldView.design({
 					cssClass: 'startUhrzeit'
 		    	  , inputType: M.INPUT_TEXT
 		        })
 			})
 			, minusGrid: M.GridView.design({
-				  childViews: 'stundeMinusButton trennText minuteMinusButton'
+				  childViews: 'stundeVonMinusButton minuteVonMinusButton trennText stundeBisMinusButton minuteBisMinusButton'
 				, layout: {
-			          cssClass: 'timecontainer'
+			          cssClass: 'vonbiscontainer'
 			        , columns: {
 			              0: 'column1'
 			            , 1: 'column2'
 			            , 2: 'column3'
+			            , 3: 'column4'
+			            , 4: 'column5'
 			        }
 			    }
-				, stundeMinusButton: M.ButtonView.design({
+				, stundeVonMinusButton: M.ButtonView.design({
 	    	          value: "-"
 	    	        , cssClass: 'plusMinusButton'
 	    	        , events: {
@@ -444,10 +458,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	    	            }
 	    	          }
 	    	    })
-	    	    , trennText: M.LabelView.design({
-	    	    	value: "&nbsp;"
-	    	    })
-	    	    , minuteMinusButton: M.ButtonView.design({
+	    	    , minuteVonMinusButton: M.ButtonView.design({
 	    	          value: "-"
 	    	        , cssClass: 'plusMinusButton'
 	    	        , events: {
@@ -474,10 +485,59 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	    	            }
 	    	          }
 	    	    })
+	    	    , trennText: M.LabelView.design({
+	    	    	value: "&nbsp;"
+	    	    })
+				, stundeBisMinusButton: M.ButtonView.design({
+	    	          value: "-"
+	    	        , cssClass: 'plusMinusButton'
+	    	        , events: {
+	    	            tap: {
+		    				action: function() {
+								var myStunde = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id)[0].value);
+								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id)[0].value);
+								myStunde = myStunde - 1;
+								if (myStunde < 0) {
+									myStunde = 0;
+								}
+								var dauerStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
+								DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+	  						}
+	    	            }
+	    	          }
+	    	    })
+	    	    , minuteBisMinusButton: M.ButtonView.design({
+	    	          value: "-"
+	    	        , cssClass: 'plusMinusButton'
+	    	        , events: {
+	    	            tap: {
+		    				action: function() {
+								var myStunde = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id)[0].value);
+								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id)[0].value);
+								var minuteSteps = 1;
+								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
+									minuteSteps = 15;
+								}
+								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
+									myStunde = myStunde - 1;
+									myMinute = 60;
+								}
+								myMinute = (myMinute - minuteSteps) % 60;
+								if (myMinute < 0) {
+									myMinute = 0;
+								}
+								var dauerStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
+								DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
+	  						}
+	    	            }
+	    	          }
+	    	    })
 			})
 		})
         
-        , VonBisContainer: M.ContainerView.design({
+        , dauerContainer: M.ContainerView.design({
     	      label: M.I18N.l('bookingDuration')
 			, childViews: 'plusGrid dauerGrid minusGrid' 
 			, plusGrid: M.GridView.design({
