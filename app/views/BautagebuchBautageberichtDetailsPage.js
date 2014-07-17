@@ -351,7 +351,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
 									minuteSteps = 15;
 								}
-								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
+								if ((myMinute - minuteSteps) < 0) {
 									myStunde = myStunde - 1;
 									if (myStunde < 0) {
 										myStunde = 23;
