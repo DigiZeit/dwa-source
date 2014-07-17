@@ -250,7 +250,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	    		    			action: function() {
 									var myStunde = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 									var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
-									myStunde = myStunde + 1;
+									myStunde = (myStunde + 1) % 24;
 									var startUhrzeitStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 									DigiWebApp.BautagebuchBautageberichtDetailsController.set('startUhrzeit', startUhrzeitStr);
 									DigiWebApp.BautagebuchBautageberichtDetailsController.setStartUhrzeit();
@@ -274,7 +274,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 										minuteSteps = 15;
 									}
 									if ((myMinute + minuteSteps) > 59) {
-										myStunde = myStunde + 1;										
+										myStunde = (myStunde + 1) % 24;										
 									}
 									myMinute = (myMinute + minuteSteps) % 60;
 									var startUhrzeitStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
@@ -327,7 +327,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
 								myStunde = myStunde - 1;
 								if (myStunde < 0) {
-									myStunde = 0;
+									myStunde = 23;
 								}
 								var startUhrzeitStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								DigiWebApp.BautagebuchBautageberichtDetailsController.set('startUhrzeit', startUhrzeitStr);
@@ -353,6 +353,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 								}
 								if ((myMinute - minuteSteps) < 0 && myStunde > 0) {
 									myStunde = myStunde - 1;
+									if (myStunde < 0) {
+										myStunde = 23;
+									}
 									myMinute = 60;
 								}
 								myMinute = (myMinute - minuteSteps) % 60;
