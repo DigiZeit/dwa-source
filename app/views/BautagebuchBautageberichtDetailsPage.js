@@ -177,10 +177,50 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
             	  blur: {
             		action: function() {
-            			if (DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate) {
-            				var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
-            				DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
-            			}
+//            			if (DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate) {
+//            				var datumArray = DigiWebApp.BautagebuchBautageberichtDetailsController.datumAsDate.split("-");
+//            				DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", datumArray[2] + "." + datumArray[1] + "." + datumArray[0]);
+//            			}
+    			try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+		  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+						return;
+				}
+	      		M.DatePickerView.show({
+	    		      source: M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'title')
+	    		    , initialDate: D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.datum)
+	    		    , showTimePicker: NO
+	    		    , showDatePicker: YES
+	    		    , dateOrder: 'ddMMyy'
+          		    , dateFormat: "dd.mm.yy"
+          		    , timeFormat: "HH:ii"
+          		    , minutesLabel: M.I18N.l('minute')
+          		    , hoursLabel: M.I18N.l('hour')
+          		    , dayLabel: M.I18N.l('day')
+          		    , monthLabel: M.I18N.l('month')
+          		    , yearLabel: M.I18N.l('year')
+          		    , dayNamesShort: DigiWebApp.ApplicationController.dayNamesShort
+          		    , dayNames: DigiWebApp.ApplicationController.dayNames
+          		    , monthNamesShort: DigiWebApp.ApplicationController.monthNamesShort
+          		    , monthNames: DigiWebApp.ApplicationController.monthNames
+          		    , callbacks: {
+	      				confirm: {
+	      					  target: this
+	      					, action: function(value, date) {
+	      						DigiWebApp.BautagebuchBautageberichtDetailsController.set("datum", value);
+	      					}
+	      				}
+	      				, before: {
+	      					action: function(value, date) {
+	      					
+	      					}
+	      				}
+	      				, cancel: {
+	      					action: function() {
+	      					
+	      					}
+	      				}
+	      			}
+	    		});
             		}
             	}
 	            , tap: {
