@@ -158,6 +158,16 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.content.speichernButton.id).show();
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.header.delButton.id).show();
 					}
+					
+                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
+                	if (myTyp == "<materialerfassung_only>") {
+						$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).show();
+            			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).parent().removeClass("transparent");
+                	} else {
+						$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).hide();
+            			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).parent().addClass("transparent");
+                	}
+
 			}
         }
         , pagehide: {
@@ -226,7 +236,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox materialComboBox materialInput spacer1 mengeneinheitComboBox mengeneinheitInput spacer2 mengenInput spacer3 speichernButton loeschenButton'
+    	  childViews: 'auftragComboBox positionComboBox activityComboBox materialComboBox materialInput spacer1 mengeneinheitComboBox mengeneinheitInput spacer2 mengenInput spacer3 speichernButton loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -242,6 +252,30 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             value: '&nbsp;<br>'
         })
 
+        , auftragComboBox: M.SelectionListView.design({
+
+                /* renders a selection view like check boxes */
+                  selectionMode: M.SINGLE_SELECTION_DIALOG
+                , initialText: M.I18N.l('noData')
+                , label: M.I18N.l('order')
+                , applyTheme: NO
+                /* this seleciton view has no static entries, instead it is filled via content binding. */
+                , contentBinding: {
+                      target: DigiWebApp.BautagebuchMaterialienDetailsController
+                    , property: 'auftraegeList'
+                }
+                , events: {
+                    change: {
+                    	/* executed in scope of DOMWindow because no target defined */
+                    	action: function(selectedValue, selectedItem) {
+		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES).value);
+		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderName", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES).label);
+		      				DigiWebApp.BautagebuchMaterialienDetailsController.setPositionen(M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES).value);
+                    	}
+                	}
+                }
+        })
+            	
         , positionComboBox: M.SelectionListView.design({
 
                 /* renders a selection view like check boxes */
@@ -265,7 +299,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 	}
                 }
         })
-            	
+        
         , activityComboBox: M.SelectionListView.design({
 
                 /* renders a selection view like check boxes */
