@@ -12,7 +12,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function() {
 				// lade eine evtl. zuvor gespeicherte Wetterauswahl aus dem Bautagesbericht
-				DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetterBackup', DigiWebApp.BautagebuchBautageberichtDetailsController.get('wetter'));
+				DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetterBackup', JSON.stringify(JSON.parse(DigiWebApp.BautagebuchBautageberichtDetailsController.get('wetter'))));
 			}
         }
         , pagehide: {
@@ -39,7 +39,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
                       target: DigiWebApp.NavigationController
                     , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
                     	clearAllIntervals();
-                    	DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetter', DigiWebApp.BautagebuchBautageberichtDetailsController.wetterBackup);
+                    	DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetter', JSON.stringify(JSON.parse(DigiWebApp.BautagebuchBautageberichtDetailsController.wetterBackup)));
                     	this.backToBautagebuchBautageberichtDetailsPageTransition();
                     }
                 }
