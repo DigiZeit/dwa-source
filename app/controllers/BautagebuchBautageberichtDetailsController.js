@@ -32,6 +32,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	, longitude: null
 	
 	, wetter: null // in model
+	, wetterBackup: null // als Zwischenspeicher für Wetter-Zurück-Button
+	
 	, setWetter: function(wetterObject) {
 		var that = this;
 		if (typeof(wetterObject) === "undefined") {
