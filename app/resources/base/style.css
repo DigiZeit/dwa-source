@@ -1258,15 +1258,6 @@ label.ui-input-text, .ui-controlgroup-label {
 	padding-top: 20px;
 }
 
-.bautagebuchZusammenfassungScrollView li.ui-li-static {
-	color: #000;
-}
-
-.bautagebuchListePage .leistungsnachweisList
-{
-	padding: 0px;	
-}
-
 .bautagebuchZusammenfassungScrollView .borderBottom
 {
 	border-bottom-color: #999;
@@ -1281,6 +1272,15 @@ label.ui-input-text, .ui-controlgroup-label {
 
 .bautagebuchZusammenfassungScrollView .wetterBlock {
  	right: 30px;
+}
+
+.bautagebuchListePage li.ui-li-static {
+	color: #000;
+}
+
+.bautagebuchListePage .leistungsnachweisList
+{
+	padding: 0px;	
 }
 
 .bigButton {
