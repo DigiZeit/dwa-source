@@ -253,6 +253,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 					   					, positionName: zeitbuch.get("positionName")
 					   					, activityName: zeitbuch.get("activityName")
 					   					, mitarbeiterId: maId
+					   					, modelId: zeitbuch.m_id
 					   				};
 					   				items.push(zeitbuchItem);
 				      	}
