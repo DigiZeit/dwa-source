@@ -121,11 +121,11 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	              		, action: function() {
 	    					var myOldItem = JSON.parse(JSON.stringify(that.item));
 	    					DigiWebApp.BautagebuchZeitenListeController.neu();
-	    					that.set("positionId", myOldItem.get('positionId'));
-	    					that.set("positionName", myOldItem.get('positionName'));
-	    					that.set("activityId", myOldItem.get('activityId'));
-	    					that.set("activityName", myOldItem.get('activityName'));
-	    					that.set("mitarbeiterIds", JSON.parse(myOldItem.get('mitarbeiterIds')));
+	    					that.set("positionId", myOldItem.record.positionId);
+	    					that.set("positionName", myOldItem.record.positionName);
+	    					that.set("activityId", myOldItem.record.activityId);
+	    					that.set("activityName", myOldItem.record.activityName);
+	    					that.set("mitarbeiterIds", JSON.parse(myOldItem.record.mitarbeiterIds));
 						}
 	          		}
 	          		, cancel: {
