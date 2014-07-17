@@ -766,7 +766,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	              , events: {
 	      	                  tap: {
 	      			    			action: function() {
-	      	        	  				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
+	      	        	  				//DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
+					      	        	DigiWebApp.BautagebuchBautageberichteListeController.init();
+					      	        	DigiWebApp.BautagebuchMaterialienListeController.neu();
 	      				    		}
 	      	                  }
 	      	              }
