@@ -1258,6 +1258,19 @@ label.ui-input-text, .ui-controlgroup-label {
 	padding-top: 20px;
 }
 
+, .bautagebuchListePage .leistungsnachweisList
+{
+	color: #000;
+	background: #fff;
+	opacity: 0.75;
+/*	padding: 15px;*/
+	border-top-color: #999;
+	border-top-style: solid;
+	border-top-width: 2px;
+/*	padding-top: 20px;*/
+	
+}
+
 .bautagebuchZusammenfassungScrollView .borderBottom
 {
 	border-bottom-color: #999;
