@@ -164,10 +164,20 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  		    		        	}
 			    		  		    		            break;
 			    		  		    		        case 'camera':
-			    				    		    		DigiWebApp.BautagebuchMedienDetailsController.takePicture();
+			    		  		    		        	// unterscheiden: auf Gerät oder im Browser?
+			    		  		    		        	if ( typeof navigator.camera !== 'undefined' 
+			    		  		    	        		  && typeof navigator.camera.getPicture !== 'undefined') {
+			    		  		    		        		DigiWebApp.BautagebuchMedienDetailsController.takePicture();
+			    		  		    		        	} else {
+			    		  		    		        		// Browser hat keine Kamera
+			    					    		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+			    					    		                title: M.I18N.l('error')
+			    					    		              , message: M.I18N.l('noCamera')
+			    					    		            });
+			    		  		    		        	}
 			    		  		    		            break;
 			    		  		    		        default:
-			    		  		    		            console.log("unknonw ButtonTag");
+			    		  		    		            console.log("unknowN ButtonTag");
 			    		  		    		            break;
 			    		  	  			    }
 			    		  	  			}}
