@@ -337,6 +337,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 //	      	  	  }
 //	      	  }
 //      })
+        
         , VonBisContainer: M.ContainerView.design({
     	      label: M.I18N.l('bookingFrom') + "/" + M.I18N.l('bookingTo')
 			, childViews: 'plusGrid VonBisGrid minusGrid' 
@@ -396,7 +397,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 		    	    })
 			})
 			, VonBisGrid: M.GridView.design({
-				  childViews: 'stundeFeld minuteFeld trennText stundeFeld minuteFeld'
+				  childViews: 'stundeVonFeld minuteVonFeld trennText stundeBisFeld minuteBisFeld'
 				, layout: {
 			          cssClass: 'vonbiscontainer'
 			        , columns: {
