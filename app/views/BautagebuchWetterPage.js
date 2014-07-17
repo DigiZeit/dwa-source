@@ -12,6 +12,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function() {
 				// lade eine evtl. zuvor gespeicherte Wetterauswahl aus dem Bautagesbericht
+				DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetterBackup', DigiWebApp.BautagebuchBautageberichtDetailsController.get('wetter'));
 			}
         }
         , pagehide: {
