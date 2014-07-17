@@ -154,7 +154,10 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToBautagebuchBautageberichteListePageTransition();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+                    	//this.backToBautagebuchBautageberichteListePageTransition();
+                    	history.back();
+                    }
                 }
             }
         })

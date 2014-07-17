@@ -172,7 +172,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title delButton'
+          childViews: 'backButton title uebersichtButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , backButton: M.ButtonView.design({
@@ -183,7 +183,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMaterialienListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+        				history.back();
+        			}
                 }
             }
         })
@@ -199,7 +201,23 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.deleteMaterialbuchung();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
+                    	this.deleteMaterialbuchung();
+                    }
+                }
+            }
+        })
+        , uebersichtButton: M.ButtonView.design({
+              value: M.I18N.l('uebersicht')
+            , icon: 'forward'
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+                      target: DigiWebApp.BautagebuchMaterialienDetailsController
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
+                    	//this.deleteMaterialbuchung();
+                    	DigiWebApp.NavigationController.backToBautagebuchMaterialienListePageTransition();
+                    }
                 }
             }
         })
@@ -380,6 +398,18 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 	      }
 	    })
 
+    })
+
+    , loeschenButton: M.ButtonView.design({
+	      value: M.I18N.l('delete')
+	    , cssClass: 'red_background'
+	    //, anchorLocation: M.CENTER
+	    , events: {
+	        tap: {
+	            target: DigiWebApp.BautagebuchMaterialienDetailsController,
+	            action: 'deleteMaterialbuchung'
+	        }
+	      }
     })
 
 });
