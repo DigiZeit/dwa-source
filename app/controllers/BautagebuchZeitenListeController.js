@@ -32,8 +32,8 @@ DigiWebApp.BautagebuchZeitenListeController = M.Controller.extend({
 		} else {
 			DigiWebApp.BautagebuchZeitenDetailsController.set("mitarbeiterIds", null);
 		}
-		DigiWebApp.BautagebuchZeitenDetailsController.set("von", "");
-		DigiWebApp.BautagebuchZeitenDetailsController.set("bis", "");
+		DigiWebApp.BautagebuchZeitenDetailsController.set("von", DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit);
+		DigiWebApp.BautagebuchZeitenDetailsController.set("bis", DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit);
 		DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", "00:00");
 		DigiWebApp.BautagebuchZeitenDetailsController.set("remark", "");
 		
