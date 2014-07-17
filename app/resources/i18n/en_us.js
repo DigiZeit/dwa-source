@@ -475,6 +475,7 @@ M.I18N.en_us = {
 
 	, uebersicht: "Overview"
 
-	, bautagebuchWeitereZeitbuchung: "Add another booking with this selection?"
+	, bautagebuchWeitereZeitbuchung: "Another booking?"
+	, bautagebuchWeitereZeitbuchungMsg: "Add another booking using this selection?"
 	
 };

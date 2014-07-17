@@ -112,7 +112,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		if (that.item.saveSorted()) {		
     		DigiWebApp.ApplicationController.nativeConfirmDialogView({
           	  title: M.I18N.l('bautagebuchWeitereZeitbuchung')
-		        , message: changeMsg
+		        , message: M.I18N.l('bautagebuchWeitereZeitbuchungMsg')
 	            , confirmButtonValue: M.I18N.l('yes')
 	      		, cancelButtonValue: M.I18N.l('no')
 	      		, callbacks: {
