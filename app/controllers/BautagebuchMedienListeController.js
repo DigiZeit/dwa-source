@@ -50,8 +50,8 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		    		        	M.DialogView.actionSheet({
 			    		  	          title: M.I18N.l('takePicture')
 			    		  	        , cancelButtonValue: M.I18N.l('cancel')
-			    		  	        , otherButtonValues: [M.I18N.l('library'),M.I18N.l('camera')]
-			    		  	        , otherButtonTags: ["library", "camera"]
+			    		  	        , otherButtonValues: [M.I18N.l('library'), M.I18N.l('camera'), M.I18N.l('uebersicht')]
+			    		  	        , otherButtonTags: ["library", "camera", "uebersicht"]
 			    		  	        , callbacks: {
 			    		  				  other: {action: function(buttonTag2) {
 		    		        				var that = this;
@@ -177,8 +177,11 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    					    		            });
 			    		  		    		        	}
 			    		  		    		            break;
+			    		  		    		        case 'uebersicht':
+			    		  		    		        	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
+			    		  		    		            break;
 			    		  		    		        default:
-			    		  		    		            console.log("unknowN ButtonTag");
+			    		  		    		            console.log("unknown ButtonTag");
 			    		  		    		            break;
 			    		  	  			    }
 			    		  	  			}}
