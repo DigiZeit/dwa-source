@@ -1279,7 +1279,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
 	        	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 	    		if (ChefToolOnly && Bautagebuch) {
-	        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+	        		DigiWebApp.NavigationController.startBautagebuch();    			
 	    		} else {
 					if (DigiWebApp.SettingsController.featureAvailable('404')) {
 			            DigiWebApp.NavigationController.toButtonDashboardPage();
@@ -1297,7 +1297,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
         	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     		if (ChefToolOnly && Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 				if (DigiWebApp.SettingsController.featureAvailable('404')) {
 		            DigiWebApp.NavigationController.toButtonDashboardPage();
@@ -2215,7 +2215,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	if ((DigiWebApp.SettingsController.featureAvailable('409')) && (DigiWebApp.ApplicationController.profilingIntervalVar === null)) {
 			if (DigiWebApp.SettingsController.featureAvailable('412')) {
-	            DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition(YES);
+	            //DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition(YES);
+				DigiWebApp.NavigationController.startBautagebuch();
 			} else {
 				if (DigiWebApp.SettingsController.featureAvailable('404')) {
 		            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
@@ -2436,7 +2437,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	if (DigiWebApp.SettingsController.featureAvailable('409')) {
     	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     	    		if (Bautagebuch) {
-    	        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    	    			DigiWebApp.NavigationController.startBautagebuch();    			
     	    		} else {
 	    				if (DigiWebApp.SettingsController.featureAvailable('404')) {
 	    		            DigiWebApp.NavigationController.toButtonDashboardPage(YES);
