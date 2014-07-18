@@ -72,11 +72,13 @@ textarea.ui-input-text {
 .green_background {
 	background: green;
 	color: #fff;
+    text-shadow: none;
 }
 
 .red_background {
 	background: #b00000;
 	color: #fff;
+    text-shadow: none;
 }
 
 .red span {
