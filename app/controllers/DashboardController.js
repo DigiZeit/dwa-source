@@ -508,6 +508,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 ////	    , orderName: M.Model.attr('String',{
 //		myBautagesbericht.set("orderId", );
 		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
+		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", M.I18N.l('materialPickUp'));
 //		
 //		// position setzen?
 ////	    , positionId: M.Model.attr('String',{
