@@ -420,17 +420,30 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         	}
         })
 
-        , speichernButton: M.ButtonView.design({
-		      value: M.I18N.l('save')
-		    //, cssClass: 'digiButton'
-		    //, anchorLocation: M.CENTER
-		    , events: {
-		        tap: {
-		            target: DigiWebApp.BautagebuchMaterialienDetailsController,
-		            action: 'save'
-		        }
-		      }
-		    })
+        , speichernButton: M.GridView.design({
+              childViews: 'button icon'
+            , layout: {
+                  cssClass: 'digiButton'
+                , columns: {
+                      0: 'button'
+                    , 1: 'icon'
+                }
+            }
+            , button: M.ButtonView.design({
+                  value: M.I18N.l('save')
+                , cssClass: 'digiButton green_background'
+                , anchorLocation: M.RIGHT
+                , events: {
+                    tap: {
+		                target: DigiWebApp.BautagebuchMaterialienDetailsController,
+		                action: 'save'
+                    }
+                }
+            })
+            , icon: M.ImageView.design({
+                value: 'theme/images/icon_bookTime.png'
+            })
+        })
 		
 	    , loeschenButton: M.ButtonView.design({
 		      value: M.I18N.l('BautagebuchDelete')

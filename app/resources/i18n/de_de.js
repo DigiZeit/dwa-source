@@ -382,7 +382,7 @@ M.I18N.de_de = {
 	, BautagebuchNiederschlagGraupel: "Graupel"
 	, BautagebuchNiederschlagSchnee: "Schnee"
 	, BautagebuchNiederschlagHagel: "Hagel"
-	, BautagebuchLuftfeuchtigkeit: "Relative Luftfeuchtigkeit"
+	, BautagebuchLuftfeuchtigkeit: "Rel. Luftfeuchte"
 	, BautagebuchWind: "Wind"
 	, BautagebuchWindStill: "still"
 	, BautagebuchWindMaessig: "mässig"

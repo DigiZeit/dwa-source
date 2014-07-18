@@ -118,7 +118,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'container grid transferGrid'
+          childViews: 'container grid transferGrid loeschenButton'
         	  
 	    , container: M.ContainerView.design({
     	    	childViews: 'detailsGrid leistungsnachweisList materialienList notizenList medienList signature spacer'
@@ -525,7 +525,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		      }
 		      , button: M.ButtonView.design({
 		            value: M.I18N.l('BautagebuchBautageberichtAbschliessen')
-		          , cssClass: 'digiButton'
+		          , cssClass: 'digiButton green_background'
 		          , anchorLocation: M.RIGHT
 		          , events: {
 		              tap: {
@@ -600,6 +600,30 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 	          value: 'theme/images/icon_bookTime.png'
 	      })
 	  })
+      , loeschenButton: M.GridView.design({
+          childViews: 'button icon'
+        , layout: {
+              cssClass: 'digiButton'
+            , columns: {
+                  0: 'button'
+                , 1: 'icon'
+            }
+        }
+        , button: M.ButtonView.design({
+              value: M.I18N.l('BautagebuchDelete')
+            , cssClass: 'red_background'
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+		                target: DigiWebApp.BautagebuchZeitenDetailsController,
+		                action: 'deleteZeitbuchung'
+                }
+            }
+        })
+        , icon: M.ImageView.design({
+            value: ''
+        })
+    })
 	
 	})
 	

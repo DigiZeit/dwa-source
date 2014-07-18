@@ -912,7 +912,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	          }
 	          , button: M.ButtonView.design({
 	                value: M.I18N.l('BautagebuchSpeichern')
-	              , cssClass: 'digiButton'
+	              , cssClass: 'digiButton green_background'
 	              , anchorLocation: M.RIGHT
 	              , events: {
 	                  tap: {

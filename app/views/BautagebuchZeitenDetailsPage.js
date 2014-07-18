@@ -169,7 +169,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox mitarbeiterGroup VonBisContainer dauerContainer remarkInput grid'
+    	  childViews: 'positionComboBox activityComboBox mitarbeiterGroup VonBisContainer dauerContainer remarkInput grid loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -774,8 +774,8 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 }
             }
             , button: M.ButtonView.design({
-                  value: M.I18N.l('assume')
-                , cssClass: 'digiButton'
+                  value: M.I18N.l('save')
+                , cssClass: 'digiButton green_background'
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {

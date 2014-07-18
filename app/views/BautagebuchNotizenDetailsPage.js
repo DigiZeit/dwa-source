@@ -262,8 +262,8 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 }
             }
             , button: M.ButtonView.design({
-                  value: M.I18N.l('assume')
-                , cssClass: 'digiButton'
+                  value: M.I18N.l('save')
+                , cssClass: 'digiButton green_background'
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {
