@@ -499,14 +499,14 @@ DigiWebApp.DashboardController = M.Controller.extend({
 //		// auftrag setzen?
 ////		, orderId: M.Model.attr('String',{
 ////	    , orderName: M.Model.attr('String',{
-//		myBautagesbericht.set("orderId", )
-//		myBautagesbericht.set("orderName", )
+//		myBautagesbericht.set("orderId", );
+		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
 //		
 //		// position setzen?
 ////	    , positionId: M.Model.attr('String',{
 ////	    , positionName: M.Model.attr('String',{
-//		myBautagesbericht.set("positionId", )
-//		myBautagesbericht.set("positionName", )
+//		myBautagesbericht.set("positionId", );
+//		myBautagesbericht.set("positionName", );
 //		
 //		// projektleiter setzen?
 
