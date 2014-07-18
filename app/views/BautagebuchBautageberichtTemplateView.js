@@ -59,7 +59,7 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= datum %>'
 	      , operation: function(v) {
-					if (v !== "") {
+					if (v && v !== "") {
 						return v;
 					} else {
 						return "";
@@ -74,7 +74,7 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= startUhrzeit %>'
 	      , operation: function(v) {
-					if (v !== "") {
+					if (v && v !== "") {
 						return ", " + M.I18N.l('BautagebuchStartingFrom') + " " + v;
 					} else {
 						return "";
@@ -88,7 +88,7 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= orderName %>'
 	      , operation: function(v) {
-				if (v !== "") {
+				if (v && v !== "") {
 					return v;
 				} else {
 					return "";
