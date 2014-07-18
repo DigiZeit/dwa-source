@@ -58,6 +58,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	}
 	
 	, load: function(myItem) {
+		
 		var that = this;
 		
 		that.set("item", myItem); 

@@ -533,6 +533,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 			                //, action: 'finish'
 			    			action: function() {
 			    				//var that = this;
+		    	  				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 			    				DigiWebApp.BautagebuchZusammenfassungController.finish(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
 			    				DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
 								DigiWebApp.NavigationController.toBautagebuchZusammenfassungPageTransition();
@@ -563,6 +564,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		                //  target: DigiWebApp.BautagebuchZusammenfassungController
 		                //, action: 'finish'
 		    			action: function() {
+	    	  				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 		    		    	var that = DigiWebApp.BautagebuchZusammenfassungController;
 		    		    	var startTransfer = NO;
 		    		    	if (that.lastTimestampDatatransfer !== null) {
@@ -616,7 +618,10 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
             , events: {
                 tap: {
 		                target: DigiWebApp.BautagebuchZeitenDetailsController,
-		                action: 'deleteZeitbuchung'
+		                action: function() {
+            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+            				this.deleteZeitbuchung();
+            			}
                 }
             }
         })

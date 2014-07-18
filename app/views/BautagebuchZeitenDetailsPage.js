@@ -783,7 +783,10 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 , events: {
                     tap: {
 		                target: DigiWebApp.BautagebuchZeitenDetailsController,
-		                action: 'save'
+		                action: function() {
+            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+            				this.save();
+            			}
                     }
                 }
             })
@@ -807,7 +810,10 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
               , events: {
                   tap: {
 		                target: DigiWebApp.BautagebuchZeitenDetailsController,
-		                action: 'deleteZeitbuchung'
+		                action: function() {
+            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+            				this.deleteZeitbuchung();
+            			}
                   }
               }
           })

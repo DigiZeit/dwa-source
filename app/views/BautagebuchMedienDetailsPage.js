@@ -274,7 +274,10 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 	              , events: {
 	                  tap: {
 			                target: DigiWebApp.BautagebuchMedienDetailsController,
-			                action: 'save'
+			                action: function() {
+	            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+	            				this.save();
+	            			}
 	                  }
 	              }
 	          })
@@ -290,7 +293,10 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 	  	    , events: {
 	  	        tap: {
 	  	            target: DigiWebApp.BautagebuchMedienDetailsController,
-	  	            action: 'deleteMedienBuchung'
+	  	            action: function() {
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        				this.deleteMedienBuchung();
+        			}
 	  	        }
 	  	      }
 	      })

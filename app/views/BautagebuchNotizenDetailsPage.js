@@ -268,7 +268,10 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 , events: {
                     tap: {
 		                target: DigiWebApp.BautagebuchNotizenDetailsController,
-		                action: 'save'
+		                action: function() {
+            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+            				this.save();
+            			}
                     }
                 }
             })
@@ -284,7 +287,10 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 	  	    , events: {
 	  	        tap: {
 	  	            target: DigiWebApp.BautagebuchNotizenDetailsController,
-	  	            action: 'deleteNotiz'
+	  	            action: function() {
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        				this.deleteNotiz();
+        			}
 	  	        }
 	  	      }
 	      })
