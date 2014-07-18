@@ -503,23 +503,11 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		}
 		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
 
-//		// auftrag setzen?
-////		, orderId: M.Model.attr('String',{
-////	    , orderName: M.Model.attr('String',{
-//		myBautagesbericht.set("orderId", );
 		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
 
 		myBautagesbericht.set("bautagesberichtTyp", "<materialerfassung_only>");
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
-//		
-//		// position setzen?
-////	    , positionId: M.Model.attr('String',{
-////	    , positionName: M.Model.attr('String',{
-//		myBautagesbericht.set("positionId", );
-//		myBautagesbericht.set("positionName", );
-//		
-//		// projektleiter setzen?
 
 		myBautagesbericht.save();
 		DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);

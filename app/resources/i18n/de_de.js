@@ -477,4 +477,7 @@ M.I18N.de_de = {
 	, bautagebuchWeitereZeitbuchung: "Weitere Zeitbuchung?"
 	, bautagebuchWeitereZeitbuchungMsg: "Weitere Zeitbuchung für diese Auswahl anlegen?"
 
+	, arbeitsbeginn: "Arbeitsbeginn"
+	, arbeitsende: "Arbeitsende"
+
 };

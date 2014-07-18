@@ -90,6 +90,14 @@ DigiWebApp.OnlinePosition = M.Model.create({
         isRequired: NO
     })
 
+    , arbeitsbeginn: M.Model.attr('String', {
+        isRequired: NO
+    })
+    	
+    , arbeitsende: M.Model.attr('String', {
+        isRequired: NO
+    })
+    	
     , deleteAll: function() {
         _.each(this.find(), function(el) {
             el.del();
@@ -133,6 +141,8 @@ DigiWebApp.OnlinePosition = M.Model.create({
 	      	  , positionsBeschreibung: null
 	      	  , orderId: null
 	      	  , auftragsBezeichnung: null
+	      	  , arbeitsbeginn: null
+	      	  , arbeitsende: null
     		};
     	} 
     	//console.log(obj);
@@ -173,6 +183,9 @@ DigiWebApp.OnlinePosition = M.Model.create({
     	  , orderId: obj.orderId
     	  
     	  , auftragsBezeichnung: obj.auftragsBezeichnung
+
+    	  , arbeitsbeginn: obj.arbeitsbeginn
+    	  , arbeitsende: obj.arbeitsende
 
         };
     }

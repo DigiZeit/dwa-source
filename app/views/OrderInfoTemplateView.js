@@ -16,7 +16,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
     	
     //, container: M.ContainerView.design({
     	
-	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer positionPLZundORT positionLand positionTelefon positionFax positionEmail spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
+	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer positionPLZundORT positionLand positionTelefon positionFax positionEmail spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
 
 	    , orderName: M.LabelView.design({
 	          cssClass: 'orderName'
@@ -190,6 +190,34 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    	  }
 	    })
 	    
+	    , arbeitsbeginn: M.LabelView.design({
+	          cssClass: 'positionName' 
+	        , computedValue: {
+	        	  valuePattern: '<%= arbeitsbeginn %>'
+	        	, operation: function(v) {
+						if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
+							return '';
+						} else {
+							return M.I18N.l('arbeitsbeginn') + ": " + v;
+						}
+	        	  }
+	    	  }
+	    })
+
+	    , arbeitsende: M.LabelView.design({
+	          cssClass: 'positionName' 
+	        , computedValue: {
+	        	  valuePattern: '<%= arbeitsende %>'
+	        	, operation: function(v) {
+						if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
+							return '';
+						} else {
+							return M.I18N.l('arbeitsende') + ": " + v;
+						}
+	        	  }
+	    	  }
+	    })
+
 	    , spacer1: M.LabelView.design({
 	          value: ' '
 	        , cssClass: 'marginBottom12'
@@ -211,6 +239,11 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    })
 	
 	    , spacer5: M.LabelView.design({
+	          value: ' '
+	        , cssClass: 'marginBottom12'
+	    })
+		
+	    , spacer6: M.LabelView.design({
 	          value: ' '
 	        , cssClass: 'marginBottom12'
 	    })

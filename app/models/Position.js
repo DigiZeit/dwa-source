@@ -91,6 +91,14 @@ DigiWebApp.Position = M.Model.create({
         isRequired: NO
     })
 
+    , arbeitsbeginn: M.Model.attr('String', {
+        isRequired: NO
+    })
+    	
+    , arbeitsende: M.Model.attr('String', {
+        isRequired: NO
+    })
+    	
 	, deleteAll: function() {
 		var that = this;
 	    _.each(this.find(), function(el) {

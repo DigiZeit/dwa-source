@@ -478,4 +478,7 @@ M.I18N.en_us = {
 	, bautagebuchWeitereZeitbuchung: "Another booking?"
 	, bautagebuchWeitereZeitbuchungMsg: "Add another booking using this selection?"
 	
+	, arbeitsbeginn: "Start of work"
+	, arbeitsende: "End of work"
+
 };

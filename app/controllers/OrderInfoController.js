@@ -144,6 +144,8 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
         		, positionLongitude: ''
         		, positionLatitude: ''
         		, positionBeschreibung: ''
+        		, arbeitsbeginn: ''
+        		, arbeitsende: ''
         	};
         var item = item_empty;
 		if (DigiWebApp.OrderInfoController.activeOrder !== null) item.orderName = DigiWebApp.OrderInfoController.activeOrder[0].get('name');
@@ -165,6 +167,8 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 			item.positionCountryCode = DigiWebApp.OrderInfoController.activePosition[0].get('countrycode');
 			item.positionPLZundOrt = item.positionPLZ + " " + item.positionOrt;
 			item.positionStrasseUndHausnummer = item.positionStrasse + " " + item.positionHausnummer;
+			item.arbeitsbeginn = DigiWebApp.OrderInfoController.activePosition[0].get('arbeitsbeginn');
+			item.arbeitsende = DigiWebApp.OrderInfoController.activePosition[0].get('arbeitsende');
 		}
 
 		if (item.orderName === '' && item.positionName === '') {

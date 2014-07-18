@@ -478,7 +478,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                var posdescription = el.auftragsBeschreibung;
 	                var posorderId = el.auftragsId;
 	                
-					var positionBegin = "";
+	                var arbeitsbeginn = el.arbeitsbeginn;
+	                var arbeitsende = el.arbeitsende;
+
+	                var positionBegin = "";
 					if (el.beginn) { positionBegin = el.beginn; }
 					var positionEnd = "";
 					if (el.ende && el.ende !== "01.01.1900") { positionEnd = el.ende; }
@@ -500,6 +503,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
 	            	if (typeof(posdescription) === "object") { posdescription = ""; } 
 	            	if (typeof(posorderId) === "object") { posorderId = ""; } 
+	            	if (typeof(arbeitsbeginn) === "object") { arbeitsbeginn = ""; } 
+	            	if (typeof(arbeitsende) === "object") { arbeitsende = ""; } 
 
 	            	var positionItem = DigiWebApp.Position.createRecord({
 	                      id: posid
@@ -520,7 +525,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , description: posdescription
 	                    , orderId: posorderId
 						, positionBegin: positionBegin
-						, positionEnd: positionEnd
+						, arbeitsbeginn: arbeitsbeginn
+						, arbeitsende: arbeitsende
 	                });
 
 	            	// gibt es den zugehörigen Auftrag schon?
