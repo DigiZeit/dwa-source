@@ -812,23 +812,49 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			})
 		})
 
-		, speichernButton: M.ButtonView.design({
-	          value: M.I18N.l('save')
-	        , cssClass: 'marginTop25'
-	        //, anchorLocation: M.CENTER
-	        , events: {
-		            tap: {
-		                //  target: DigiWebApp.NavigationController
-		                //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
+        , speichernButton: M.GridView.design({
+              childViews: 'button icon'
+            , layout: {
+                  cssClass: 'digiButton'
+                , columns: {
+                      0: 'button'
+                    , 1: 'icon'
+                }
+            }
+            , button: M.ButtonView.design({
+                  value: M.I18N.l('save')
+                , cssClass: 'digiButton green_background'
+                , anchorLocation: M.RIGHT
+                , events: {
+                    tap: {
 						action: function() {
 								clearAllTimeouts();
 								DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition();
 						}
-		            }
-	          }
-	    })
+                    }
+                }
+            })
+            , icon: M.ImageView.design({
+                value: 'theme/images/icon_bookTime.png'
+            })
+        })
+        
+//		, speichernButton: M.ButtonView.design({
+//	          value: M.I18N.l('save')
+//	        , cssClass: 'marginTop25'
+//	        //, anchorLocation: M.CENTER
+//	        , events: {
+//		            tap: {
+//		                //  target: DigiWebApp.NavigationController
+//		                //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
+//						action: function() {
+//								clearAllTimeouts();
+//								DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition();
+//						}
+//		            }
+//	          }
+//	    })
 	    
-
     })
 
 });

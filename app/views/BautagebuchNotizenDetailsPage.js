@@ -175,7 +175,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox dataInput grid loeschenButton'
+    	  childViews: 'positionComboBox activityComboBox dataInput speichernButton loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -252,7 +252,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 	   	    	}
         })
             
-        , grid: M.GridView.design({
+        , speichernButton: M.GridView.design({
               childViews: 'button icon'
             , layout: {
                   cssClass: 'digiButton'
