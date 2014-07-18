@@ -518,7 +518,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 //		// projektleiter setzen?
 
 		myBautagesbericht.save();
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("item", myBautagesbericht);
+		DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
 		DigiWebApp.BautagebuchBautageberichteListeController.init();
       	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
 	}
