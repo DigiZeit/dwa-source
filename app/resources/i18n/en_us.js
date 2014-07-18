@@ -481,4 +481,6 @@ M.I18N.en_us = {
 	, arbeitsbeginn: "Start of work"
 	, arbeitsende: "End of work"
 
+	, wirklichLoeschenMsg: "Do you really want to delete this record?"
+
 };

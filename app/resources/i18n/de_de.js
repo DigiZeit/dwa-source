@@ -480,4 +480,6 @@ M.I18N.de_de = {
 	, arbeitsbeginn: "Arbeitsbeginn"
 	, arbeitsende: "Arbeitsende"
 
+	, wirklichLoeschenMsg: "Möchten Sie diesen Datensatz wirklich löschen?"
+
 };
