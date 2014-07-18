@@ -481,5 +481,6 @@ M.I18N.de_de = {
 	, arbeitsende: "Arbeitsende"
 
 	, wirklichLoeschenMsg: "Möchten Sie diesen Datensatz wirklich löschen?"
+	, nurMaterialErfassung: "Dieser Bautagesbericht dient nur der unmittelbaren Materialerfassung!"
 
 };

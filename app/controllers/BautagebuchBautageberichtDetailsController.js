@@ -31,6 +31,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsController = M.Controller.extend({
 	, latitude: null
 	, longitude: null
 	
+	, bautagesberichtTyp: null
+	
 	, wetter: null // in model
 	, wetterBackup: null // als Zwischenspeicher für Wetter-Zurück-Button
 	
