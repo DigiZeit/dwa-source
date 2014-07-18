@@ -142,7 +142,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 			    		              , message: M.I18N.l('notActivatedMsg')
 			    		            });
 		    		        	}
-		    		            break;
+//		    		            break;
 //		    		        case 'video':
 //		    		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 //		    		                title: M.I18N.l('notImplemented')
