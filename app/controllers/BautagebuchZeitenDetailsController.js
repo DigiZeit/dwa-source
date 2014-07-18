@@ -208,6 +208,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	}
 
 	, setDauer: function() {
+		var that = this;
   		if (DigiWebApp.BautagebuchZeitenDetailsController.dauer) {
   			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[0]).padLeft(2,"0");
   			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[1]).padLeft(2,"0");
@@ -215,6 +216,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	}
 	
 	, setVonBis: function() {
+		var that = this;
   		if (DigiWebApp.BautagebuchZeitenDetailsController.von) {
   			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeVonFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[0]).padLeft(2,"0");
   			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id)[0].value = parseInt(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[1]).padLeft(2,"0");
@@ -231,6 +233,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 				var hoursInBetween = Math.floor(minutesInBetween / 60);
 				var remainingMinutes = minutesInBetween % 60;
 				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
+				that.setDauer();
   		}
 	}
 
