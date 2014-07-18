@@ -29,7 +29,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+    			DigiWebApp.NavigationController.startBautagebuch();
     		} else {
         		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
         		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -53,7 +53,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -77,7 +77,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -101,7 +101,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -125,7 +125,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -149,7 +149,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
     		if (Bautagebuch) {
-        		DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    			
+        		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
@@ -628,4 +628,38 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('festePauseStornierenPage', M.TRANSITION.SLIDEUP, YES);
     }
 
+    , startBautagebuch: function() {
+    	//DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    	
+		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
+		if (bautagesberichte.length > 0) {
+			var einOffenerBautagesbericht = NO;
+			var offenerBautagesbericht = null;
+			_.each(bautagesberichte, function(bautagesbericht){
+				if (!bautagesbericht.get("abgeschlossen")) {
+					if (!einOffenerBautagesbericht && !offenerBautagesbericht) {
+						einOffenerBautagesbericht = YES;
+						offenerBautagesbericht = bautagesbericht;
+					} else {
+						einOffenerBautagesbericht = NO;
+					}
+				}
+			});
+			if (einOffenerBautagesbericht) {
+				// es gibt nur einen offenen Bautagesbericht
+				DigiWebApp.BautagebuchBautageberichteListeController.init();
+				DigiWebApp.BautagebuchBautageberichtDetailsController.load(offenerBautagesbericht);
+				DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
+			} else if (offenerBautagesbericht) {
+				// es gibt mehr als einen offenen Bautagesbericht
+				DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+			} else {
+				// es gibt keinen offenen Bautagesbericht
+				DigiWebApp.BautagebuchBautageberichteListeController.init();
+				DigiWebApp.BautagebuchBautageberichteListeController.neu();
+			}
+		} else {
+			DigiWebApp.BautagebuchBautageberichteListeController.init();
+			DigiWebApp.BautagebuchBautageberichteListeController.neu();
+		}
+    }
 });

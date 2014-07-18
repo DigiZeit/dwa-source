@@ -492,6 +492,7 @@ if (searchForFeature(401)) { // Audio
 
 if (searchForFeature(402)) { // Materialerfassung
 	// hat (noch) keine eigenen Views
+	// --> benutzt weiter unten die Views des Bautagebuches
 }
 
 if (searchForFeature(403) && !(searchForFeature(409))) { // Bemerkungsfeld
@@ -539,7 +540,7 @@ if ( (searchForFeature(411)) && !(searchForFeature(409)) ) { // Buchungen X Tage
 	DigiWebAppOrdinaryDesign.timeDataArchivePage = DigiWebApp.TimeDataArchivePage;
 }
 	
-if (searchForFeature(412)) { // Bautagebuch
+if (searchForFeature(412) || searchForFeature(402)) { // Bautagebuch && Materialerfassung
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage;
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage;
 	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage;
