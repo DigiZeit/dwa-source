@@ -477,6 +477,8 @@ M.I18N.en_us = {
 
 	, bautagebuchWeitereZeitbuchung: "Another booking?"
 	, bautagebuchWeitereZeitbuchungMsg: "Add another booking using this selection?"
+	, bautagebuchWeiteresFoto: "Weiteres Foto?"
+	, bautagebuchWeiteresFotoMsg: "Weiteres Foto für diese Auswahl anlegen?"
 	
 	, arbeitsbeginn: "Start of work"
 	, arbeitsende: "End of work"

@@ -103,8 +103,8 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 				}
 				if (itemWasNew) {
 		    		DigiWebApp.ApplicationController.nativeConfirmDialogView({
-		          	  title: M.I18N.l('bautagebuchWeitereZeitbuchung')
-				        , message: M.I18N.l('bautagebuchWeitereZeitbuchungMsg')
+		          	  title: M.I18N.l('bautagebuchWeiteresFoto')
+				        , message: M.I18N.l('bautagebuchWeiteresFotoMsg')
 			            , confirmButtonValue: M.I18N.l('yes')
 			      		, cancelButtonValue: M.I18N.l('no')
 			      		, callbacks: {
