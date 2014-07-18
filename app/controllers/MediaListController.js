@@ -169,7 +169,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	}
 
     , foto: function() {
-		//var that = this;
+		var that = this;
     	M.DialogView.actionSheet({
 	          title: M.I18N.l('takePicture')
 	        , cancelButtonValue: M.I18N.l('cancel')

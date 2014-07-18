@@ -54,7 +54,8 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  	        , otherButtonTags: ["library", "camera"]
 			    		  	        , callbacks: {
 			    		  				  other: {action: function(buttonTag2) {
-			    		  	  			    switch(buttonTag2) {
+		    		        				var that = this;
+		    		        				switch(buttonTag2) {
 			    		  		    		        case 'library':
 			    		  		    		        	
 			    		  		    		        	// unterscheiden: auf Gerät oder im Browser?
