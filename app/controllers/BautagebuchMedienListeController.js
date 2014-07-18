@@ -20,7 +20,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	}
 
 	, neu: function(useLetzteFotoQuelle) {
-		var that = this;
+		var that = DigiWebApp.BautagebuchMedienListeController;
 //    	M.DialogView.actionSheet({
 //	          title: M.I18N.l('newMedia')
 //	        , cancelButtonValue: M.I18N.l('cancel')
@@ -174,7 +174,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		    		    		}
 		    		    		
 		    		    		if (useLetzteFotoQuelle) {
-    		        				switch(that.letzteFotoQuelle) {
+    		        				switch(DigiWebApp.BautagebuchMedienListeController.letzteFotoQuelle) {
 			  		    		        case 'library':
 			  		    		        	libraryFunc();
 			  		    		            break;
@@ -193,8 +193,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 				    		  	        , otherButtonTags: ["library", "camera", "uebersicht"]
 				    		  	        , callbacks: {
 				    		  				  other: {action: function(buttonTag2) {
-			    		        				var that = this;
-	    		  		    		        	that.letzteFotoQuelle = buttonTag2;
+			    		        				DigiWebApp.BautagebuchMedienListeController.letzteFotoQuelle = buttonTag2;
 			    		        				switch(buttonTag2) {
 				    		  		    		        case 'library':
 				    		  		    		        	libraryFunc();
