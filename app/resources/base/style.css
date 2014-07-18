@@ -1418,8 +1418,8 @@ label.ui-input-text, .ui-controlgroup-label {
 
 .zeitenAendernButton {
 	float: right;
-	top: -17px;
-	margin-right: 0px !important;
+	top: -6px;
+	margin-right: 10px !important;
 }
 
 /* allgemeine Klassen */
