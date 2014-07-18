@@ -508,7 +508,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 ////	    , orderName: M.Model.attr('String',{
 //		myBautagesbericht.set("orderId", );
 		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName")));
+		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
 
 		myBautagesbericht.set("bautagesberichtTyp", "<materialerfassung_only>");
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
