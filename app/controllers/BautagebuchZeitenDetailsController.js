@@ -109,38 +109,48 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		that.item.set("timeStampEnd", that.timeStampEnd);
 		that.item.set("dauer", that.dauer);
 		that.item.set("remark", that.remark);
-		if (that.item.saveSorted()) {		
-    		DigiWebApp.ApplicationController.nativeConfirmDialogView({
-          	  title: M.I18N.l('bautagebuchWeitereZeitbuchung')
-		        , message: M.I18N.l('bautagebuchWeitereZeitbuchungMsg')
-	            , confirmButtonValue: M.I18N.l('yes')
-	      		, cancelButtonValue: M.I18N.l('no')
-	      		, callbacks: {
-	          		  confirm: {
-	              		  target: this
-	              		, action: function() {
-	    					var myOldItem = JSON.parse(JSON.stringify(that.item));
-	    					DigiWebApp.BautagebuchZeitenListeController.neu();
-	    					that.set("positionId", myOldItem.record.positionId);
-	    					that.set("positionName", myOldItem.record.positionName);
-	    					that.set("activityId", myOldItem.record.activityId);
-	    					that.set("activityName", myOldItem.record.activityName);
-	    					that.set("mitarbeiterIds", JSON.parse(myOldItem.record.mitarbeiterIds));
-	    					that.set("von", "00:00");
-	    					that.set("bis", "00:00");
-	    					that.set("dauer", "00:00");
-						}
-	          		}
-	          		, cancel: {
-	              		  target: this
-	              		, action: function() {
-		        			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
-		        			DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
-		        			return true;
-	      				}
-	          		}
-	      		}
-    		});
+		var itemWasNew = (that.item.state == M.STATE_NEW);
+		if (that.item.saveSorted()) {
+			var backToListFunc = function() {
+    			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+    			DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
+			}
+			if (itemWasNew) {
+	    		DigiWebApp.ApplicationController.nativeConfirmDialogView({
+	          	  title: M.I18N.l('bautagebuchWeitereZeitbuchung')
+			        , message: M.I18N.l('bautagebuchWeitereZeitbuchungMsg')
+		            , confirmButtonValue: M.I18N.l('yes')
+		      		, cancelButtonValue: M.I18N.l('no')
+		      		, callbacks: {
+		          		  confirm: {
+		              		  target: this
+		              		, action: function() {
+		    					var myOldItem = JSON.parse(JSON.stringify(that.item));
+		    					DigiWebApp.BautagebuchZeitenListeController.neu();
+		    					that.set("positionId", myOldItem.record.positionId);
+		    					that.set("positionName", myOldItem.record.positionName);
+		    					that.set("activityId", myOldItem.record.activityId);
+		    					that.set("activityName", myOldItem.record.activityName);
+		    					that.set("mitarbeiterIds", JSON.parse(myOldItem.record.mitarbeiterIds));
+		    					that.set("von", "00:00");
+		    					that.set("bis", "00:00");
+		    					that.set("dauer", "00:00");
+							}
+		          		}
+		          		, cancel: {
+		              		  target: this
+		              		, action: function() {
+		          				backToListFunc();
+			        			return true;
+		      				}
+		          		}
+		      		}
+	    		});
+			} else {
+				// item wurde editiert
+				backToListFunc();
+				return true;
+			}
 		} else {
 			return false;
 		}
