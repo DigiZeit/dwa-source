@@ -525,8 +525,26 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
         
 	, bautagebuch: function() {
-		if (DigiWebApp.BautagebuchBautagesbericht.find().length > 0) {
-		    DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
+		if (bautagesberichte.length > 0) {
+			var einOffenerBautagesbericht = NO;
+			var offenerBautagesbericht = null;
+			_.each(bautagesberichte, function(bautagesbericht){
+				if (!bautagesbericht.get("abgeschlossen")) {
+					if (!einOffenerBautagesbericht) {
+						einOffenerBautagesbericht = YES;
+						offenerBautagesbericht = bautagesbericht;
+					} else {
+						einOffenerBautagesbericht = NO;
+					}
+				}
+			});
+			if (einOffenerBautagesbericht) {
+				DigiWebApp.BautagebuchBautageberichteListeController.init();
+				DigiWebApp.BautagebuchBautageberichtDetailsController.load(offenerBautagesbericht);
+			} else {
+				DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+			}
 		} else {
 			DigiWebApp.BautagebuchBautageberichteListeController.init();
 			DigiWebApp.BautagebuchBautageberichteListeController.neu();

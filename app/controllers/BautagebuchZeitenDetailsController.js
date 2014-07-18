@@ -129,12 +129,15 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    					DigiWebApp.BautagebuchZeitenListeController.neu();
 		    					that.set("positionId", myOldItem.record.positionId);
 		    					that.set("positionName", myOldItem.record.positionName);
-		    					that.set("activityId", myOldItem.record.activityId);
-		    					that.set("activityName", myOldItem.record.activityName);
+		    					//that.set("activityId", myOldItem.record.activityId);
+		    					//that.set("activityName", myOldItem.record.activityName);
+		    					that.setTaetigkeiten(myOldItem.record.positionId);
 		    					that.set("mitarbeiterIds", JSON.parse(myOldItem.record.mitarbeiterIds));
 		    					that.set("von", "00:00");
 		    					that.set("bis", "00:00");
+		    					that.setVonBis();
 		    					that.set("dauer", "00:00");
+		    					that.setDauer();
 							}
 		          		}
 		          		, cancel: {
