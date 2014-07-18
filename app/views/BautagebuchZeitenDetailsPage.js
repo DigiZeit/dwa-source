@@ -120,7 +120,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
-          childViews: 'backButton title delButton'
+          childViews: 'backButton title uebersichtButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , backButton: M.ButtonView.design({
