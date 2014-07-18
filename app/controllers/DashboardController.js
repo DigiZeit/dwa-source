@@ -540,10 +540,16 @@ DigiWebApp.DashboardController = M.Controller.extend({
 				}
 			});
 			if (einOffenerBautagesbericht) {
+				// es gibt nur einen offenen Bautagesbericht
 				DigiWebApp.BautagebuchBautageberichteListeController.init();
 				DigiWebApp.BautagebuchBautageberichtDetailsController.load(offenerBautagesbericht);
-			} else {
+			} else if (offenerBautagesbericht) {
+				// es gibt mehr als einen offenen Bautagesbericht
 				DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+			} else {
+				// es gibt keinen offenen Bautagesbericht
+				DigiWebApp.BautagebuchBautageberichteListeController.init();
+				DigiWebApp.BautagebuchBautageberichteListeController.neu();
 			}
 		} else {
 			DigiWebApp.BautagebuchBautageberichteListeController.init();
