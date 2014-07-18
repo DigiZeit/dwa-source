@@ -161,11 +161,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
                 	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
                 	if (myTyp == "<materialerfassung_only>") {
-						$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).show();
-            			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).parent().removeClass("transparent");
+                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id + "_container").show()
                 	} else {
-						$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).hide();
-            			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id).parent().addClass("transparent");
+                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id + "_container").hide()
                 	}
 
 			}
