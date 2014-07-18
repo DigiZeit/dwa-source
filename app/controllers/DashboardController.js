@@ -538,7 +538,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			var offenerBautagesbericht = null;
 			_.each(bautagesberichte, function(bautagesbericht){
 				if (!bautagesbericht.get("abgeschlossen")) {
-					if (!einOffenerBautagesbericht) {
+					if (!einOffenerBautagesbericht && !offenerBautagesbericht) {
 						einOffenerBautagesbericht = YES;
 						offenerBautagesbericht = bautagesbericht;
 					} else {
