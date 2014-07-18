@@ -543,6 +543,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 				// es gibt nur einen offenen Bautagesbericht
 				DigiWebApp.BautagebuchBautageberichteListeController.init();
 				DigiWebApp.BautagebuchBautageberichtDetailsController.load(offenerBautagesbericht);
+				DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
 			} else if (offenerBautagesbericht) {
 				// es gibt mehr als einen offenen Bautagesbericht
 				DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
