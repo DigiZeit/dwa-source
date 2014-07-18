@@ -100,9 +100,10 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 			    		  		    		        	
 			    		  			    		        	// im Browser:
 			    		  			    		        	DigiWebApp.FileChooserPage.set("successCallback", function(imgData, fileName) {
+			    		  			    		        		var that = DigiWebApp.BautagebuchMedienDetailsController;
 			    		  				    		        	if (imgData !== null) {
 		    		  	    		        				          var image = document.getElementById(DigiWebApp.BautagebuchMedienDetailsPage.content.image.id);
-		    		  					    		        		  DigiWebApp.BautagebuchMedienDetailsController.set("loadedFileName", fileName);
+		    		  					    		        		  that.set("loadedFileName", fileName);
 		    		  					    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.CONSTImageFiletype;
 		    		  					    		        		  var tmp = fileName;
 		    		  					    		        		  var i = 0;
