@@ -140,6 +140,8 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    					that.setVonBis();
 		    					that.set("dauer", "00:00");
 		    					that.setDauer();
+		    					that.set("remark", "");
+		    					$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.remarkInput.id)[0].value = "";
 							}
 		          		}
 		          		, cancel: {
