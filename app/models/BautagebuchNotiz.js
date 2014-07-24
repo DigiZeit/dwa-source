@@ -35,6 +35,14 @@ DigiWebApp.BautagebuchNotiz = M.Model.create({
         isRequired: NO
     })
 
+    , handOrderId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , handOrderName: M.Model.attr('String',{
+        isRequired: NO
+    })
+
     , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();

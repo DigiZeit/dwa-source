@@ -95,10 +95,10 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 				$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].blur();
 				
 				if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen")) {
-					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.grid.id).hide();
+					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.speichernButton.id).hide();
 					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.header.delButton.id).hide();
 				} else {
-					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.grid.id).show();
+					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.speichernButton.id).show();
 					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.header.delButton.id).show();
 				}
 

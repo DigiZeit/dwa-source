@@ -172,6 +172,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
         that.set('materialien', materialienArray);
 
 		var mengeneinheitenArray = [];
+		// TODO Materialerfassung: Jedes Material enthält die Mengeneinheiten
         // Mengeneinheiten
 		if (DigiWebApp.BautagebuchMengeneinheit.findSorted().length !== 0) {
             itemSelected = NO;
@@ -179,8 +180,13 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED MATERIAL");
-            	} else {        	
-            		var obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
+            	} else {       
+            		var obj = null;
+            		if (o.get("bezeichnung").length > 0) {
+            			obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
+            		} else {
+            			obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
+            		}
 //            		if(obj.value === that.selections.activity) {
 //            			obj.isSelected = YES;
 //            			itemSelected = YES;

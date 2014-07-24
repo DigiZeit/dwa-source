@@ -101,6 +101,8 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 					$("#" + DigiWebApp.BautagebuchMedienDetailsPage.content.grid.id).show();
 					$("#" + DigiWebApp.BautagebuchMedienDetailsPage.header.delButton.id).show();
 				}
+				
+				$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.activityComboBox.id + "_container").hide();
 
 			}
         }

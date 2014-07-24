@@ -617,10 +617,11 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
             , anchorLocation: M.RIGHT
             , events: {
                 tap: {
-		                target: DigiWebApp.BautagebuchZeitenDetailsController,
+		                target: DigiWebApp.BautagebuchBautageberichtDetailsController,
 		                action: function() {
             				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-            				this.deleteZeitbuchung();
+            				this.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+
             			}
                 }
             }
