@@ -630,7 +630,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
 
     , startBautagebuch: function() {
     	//DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    	
+		//var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find({query:{identifier: 'bautagesberichtTyp', operator: '!=', value: "" + "<materialerfassung_only>"}});
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
+		bautagesberichte = _.filter(bautagesberichte, function(n) {return (n.get('bautageberichtsTyp') == "<materialerfassung_only>")}); // <materialerfassung_only> rausfiltern
 		if (bautagesberichte.length > 0) {
 			var einOffenerBautagesbericht = NO;
 			var offenerBautagesbericht = null;
