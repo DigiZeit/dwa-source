@@ -133,7 +133,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		that.item.set("einheit", that.einheit);
 		that.item.set("menge", that.menge);
 		if (that.item.saveSorted()) {		
-			DigiWebApp.BautagebuchMaterialienListeController.set("items", DigiWebApp.BautagebuchMaterialBuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+			DigiWebApp.BautagebuchMaterialienListeController.set("items", DigiWebApp.BautagebuchMaterialBuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
 			DigiWebApp.NavigationController.backToBautagebuchMaterialienListePageTransition();
 			return true;
 		} else {
@@ -153,7 +153,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
             		  target: this
             		, action: function() {
 						if (that.item.deleteSorted()) {		
-							DigiWebApp.BautagebuchMaterialienListeController.set("items", DigiWebApp.BautagebuchMaterialBuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+							DigiWebApp.BautagebuchMaterialienListeController.set("items", DigiWebApp.BautagebuchMaterialBuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
 							DigiWebApp.NavigationController.backToBautagebuchMaterialienListePageTransition();
 							return true;
 						} else {

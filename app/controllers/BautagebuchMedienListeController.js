@@ -15,7 +15,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	, init: function(isFirstLoad) {
 		var that = this;
 		
-		that.set("items", DigiWebApp.BautagebuchMediaFile.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+		that.set("items", DigiWebApp.BautagebuchMediaFile.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
 		
 	}
 

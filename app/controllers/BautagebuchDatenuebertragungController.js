@@ -366,7 +366,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeBautagesbericht: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
-		item.set("bautagesberichtId", item.get('id'));
+		if (item.get('id')) {
+			item.set("bautagesberichtId", item.get('id'));
+		}
 		item.set("transferCompleted", NO);
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten

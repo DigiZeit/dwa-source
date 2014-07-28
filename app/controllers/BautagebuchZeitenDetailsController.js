@@ -114,7 +114,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		var itemWasNew = (that.item.state == M.STATE_NEW);
 		if (that.item.saveSorted()) {
 			var backToListFunc = function() {
-    			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+    			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
     			DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
 			}
 			if (itemWasNew) {
@@ -175,7 +175,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
               		  target: this
               		, action: function() {
 						if (that.item.deleteSorted()) {		
-							DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+							DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
 							DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
 							return true;
 						} else {

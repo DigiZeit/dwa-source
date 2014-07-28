@@ -13,7 +13,7 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 	, init: function(isFirstLoad) {
 		var that = this;
 		
-		that.set("items", DigiWebApp.BautagebuchNotiz.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id));
+		that.set("items", DigiWebApp.BautagebuchNotiz.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')));
 		
 	}
 

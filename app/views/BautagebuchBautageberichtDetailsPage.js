@@ -684,7 +684,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	                  tap: {
 	      			    			action: function() {
 	      	        	  				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-	      	        	  				if (DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id).length > 0) {
+	      	        	  				if (DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')).length > 0) {
 	      	        	  					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
 	      	        	  				} else {
 	      	        	  					DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchZeitenListeController.neu);
