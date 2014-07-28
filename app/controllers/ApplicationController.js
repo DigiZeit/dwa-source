@@ -2399,7 +2399,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
         var empfangeBautagebuch = function() {
         	var that = DigiWebApp.ApplicationController;
-            if (DigiWebApp.SettingsController.featureAvailable('412')) {
+            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
     	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
         	} else {
         		that.afterTransfer();
@@ -2726,7 +2726,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , sonderzeichenCheck: function(str) {
-        return ( /[^\w\säöüÄÖÜß \x40'(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
+        return ( /[^\w\säöüÄÖÜß \x40(){}*%\$§€=/\\!?.,;:+-]+/.test(str) );
     }
     
     , vibrate: function() {

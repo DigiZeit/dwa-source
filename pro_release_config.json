@@ -66,5 +66,6 @@
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}
         , {"name": "digiUI", "refs": ["*"]}
+        , {"name": "Math.uuid.js", "refs": ["*"]}
     ]
 }

@@ -44,69 +44,69 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		// direkt weiter in der Verarbeitungskette
 		successCallback();
 
-//		var internalSuccessCallback = function(data, msg, request) {
-//			// verarbeite empfangene Daten
-//						
-//		if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("empfangeMengeneinheiten Status: " + request.status);
-//
-//			// wurde eine Mengeneinheitenliste erhalten?
-//			if (typeof(data.mengeneinheiten) === "undefined") {
-//				console.error("missing mengeneinheiten");
-//				return errorCallback();
-//			}
-//			
-//			// enthält die Mengeneinheitenliste Mengeneinheiten?
-//			if (data.mengeneinheiten === null) {
-//				// ohne Mengeneinheiten geht im Bautagebuch nichts
-//				return errorCallback();
-//			} else {
-//				// ist data.mengeneinheiten auch wirklich ein Array?
-//				var myLength = null;
-//				try {
-//					myLength = data.mengeneinheiten.length;
-//				} catch(e) {
-//					return errorCallback();
-//				}
-//			}
-//			
-//			// data.mengeneinheiten enthält also myLength Elemente
-//			// alle "alten" Mengeneinheiten löschen
-//			DigiWebApp.BautagebuchMengeneinheiten.deleteAll();
-//			
-//			// die empfangenen Mengeneinheiten mit Model ablegen
-//			_.each(data.mengeneinheiten, function(el) {
-//				if (typeof(el.id) === "undefined") {
-//					console.error("missing mengeneinheit id");
-//					return errorCallback();
-//				} else if (typeof(el.bezeichnung) === "undefined") {
-//					console.error("missing mengeneinheit bezeichnung");
-//					return errorCallback();
-//				} else if (typeof(el.kuerzel) === "undefined") {
-//					console.error("missing mengeneinheit kuerzel");
-//					return errorCallback();
-//				} else {
-//					
-//					// mengeneinheit (el) zur Liste hinzufügen
-//					DigiWebApp.BautagebuchMengeneinheit.createRecord({id: el.id, bezeichnung: el.bezeichnung, kuerzel: el.kuerzel}).saveSorted();
-//
-//				}
-//			});
-//			
-//			// weiter in der Verarbeitungskette
-//			successCallback();
-//		};
-//		
-//		var recieveObj = {
-//				  webservice: "mengeneinheiten"
-//				, loaderText: M.I18N.l('BautagebuchLadeMengeneinheiten')
-//				, successCallback: internalSuccessCallback
-//				, errorCallback: errorCallback
-//				//, additionalQueryParameter: 
-//				//, timeout: 
-//				//, geraeteIdOverride: 
-//				//, modus: 
-//		};
-//		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		var internalSuccessCallback = function(data, msg, request) {
+			// verarbeite empfangene Daten
+						
+		if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("empfangeMengeneinheiten Status: " + request.status);
+
+			// wurde eine Mengeneinheitenliste erhalten?
+			if (typeof(data.mengeneinheiten) === "undefined") {
+				console.error("missing mengeneinheiten");
+				return errorCallback();
+			}
+			
+			// enthält die Mengeneinheitenliste Mengeneinheiten?
+			if (data.mengeneinheiten === null) {
+				// ohne Mengeneinheiten geht im Bautagebuch nichts
+				return errorCallback();
+			} else {
+				// ist data.mengeneinheiten auch wirklich ein Array?
+				var myLength = null;
+				try {
+					myLength = data.mengeneinheiten.length;
+				} catch(e) {
+					return errorCallback();
+				}
+			}
+			
+			// data.mengeneinheiten enthält also myLength Elemente
+			// alle "alten" Mengeneinheiten löschen
+			DigiWebApp.BautagebuchMengeneinheiten.deleteAll();
+			
+			// die empfangenen Mengeneinheiten mit Model ablegen
+			_.each(data.mengeneinheiten, function(el) {
+				if (typeof(el.id) === "undefined") {
+					console.error("missing mengeneinheit id");
+					return errorCallback();
+				} else if (typeof(el.bezeichnung) === "undefined") {
+					console.error("missing mengeneinheit bezeichnung");
+					return errorCallback();
+				} else if (typeof(el.kuerzel) === "undefined") {
+					console.error("missing mengeneinheit kuerzel");
+					return errorCallback();
+				} else {
+					
+					// mengeneinheit (el) zur Liste hinzufügen
+					DigiWebApp.BautagebuchMengeneinheit.createRecord({id: el.id, bezeichnung: el.bezeichnung, kuerzel: el.kuerzel}).saveSorted();
+
+				}
+			});
+			
+			// weiter in der Verarbeitungskette
+			successCallback();
+		};
+		
+		var recieveObj = {
+				  webservice: "mengeneinheiten"
+				, loaderText: M.I18N.l('BautagebuchLadeMengeneinheiten')
+				, successCallback: internalSuccessCallback
+				, errorCallback: errorCallback
+				//, additionalQueryParameter: 
+				//, timeout: 
+				//, geraeteIdOverride: 
+				//, modus: 
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
 	
@@ -152,7 +152,12 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					return errorCallback();
 				} else {
 					// el.materialbezeichnung zur Liste hinzufügen
-					DigiWebApp.BautagebuchMaterial.createRecord({bezeichnung: el.materialbezeichnung, id: el.materialbezeichnung}).saveSorted();
+					DigiWebApp.BautagebuchMaterial.createRecord({
+						  bezeichnung: el.materialbezeichnung
+						, id: el.materialbezeichnung
+						, einheit: el.einheit
+						, einheiten: el.einheiten
+					}).saveSorted();
 				}
 			});
 			
@@ -361,7 +366,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeBautagesbericht: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
-		item.set("bautagesberichtId", item.m_id);
+		item.set("bautagesberichtId", item.get('id'));
 		item.set("transferCompleted", NO);
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
@@ -403,14 +408,14 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
 		var items = [];
-		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}); 
+		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}); 
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
             return parseInt(z.get('_createdAt'));
         });
 		_.each(relevanteZeitbuchungenSorted, function(el) {
 			_.each(JSON.parse(el.get("mitarbeiterIds")), function(maId) {
 				var zeitbuch = DigiWebApp.BautagebuchZeitbuchung.createRecord({
-					  bautagesberichtId: item.m_id
+					  bautagesberichtId: item.get('id')
 				});
 				for (var prop in el.record) {
 					try {
@@ -457,7 +462,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		
 		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var items = [];
-		_.each(DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}), function(el) {
+		_.each(DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}), function(el) {
 			var tmp = el.record;
 			tmp.menge = parseInt(tmp.menge);
 			items.push(tmp);
@@ -493,7 +498,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		
 		//var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var items = [];
-		_.each(DigiWebApp.BautagebuchNotiz.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}}), function(el) {
+		_.each(DigiWebApp.BautagebuchNotiz.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}), function(el) {
 			items.push(el.record);
 		});
 		
@@ -564,7 +569,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
     	};
 
-		var mediaFiles = DigiWebApp.BautagebuchMediaFile.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.m_id}});
+		var mediaFiles = DigiWebApp.BautagebuchMediaFile.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}});
 		var mediaFilesLength = mediaFiles.length;
     	var mediaFilesIndex = 0;
     	var done = false;
@@ -624,7 +629,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, sendeBautagesberichtFertig: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		//var that = this;
-		item.set("bautagesberichtId", item.m_id);
+		item.set("bautagesberichtId", item.get('id'));
 		item.set("transferCompleted", YES);
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten

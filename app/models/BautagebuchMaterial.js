@@ -21,6 +21,14 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
         isRequired: NO
     })
 
+    , einheit: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , einheiten: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();

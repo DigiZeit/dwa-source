@@ -11,6 +11,10 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
     /* Define the name of your model. Do not delete this property! */
     __name__: 'BautagebuchBautagesbericht'
 
+    , id: M.Model.attr('String', {
+        isRequired: YES
+    })
+
     , datum: M.Model.attr('String', {
         isRequired: YES
     })
@@ -18,11 +22,11 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
     , startUhrzeit: M.Model.attr('String', {
         isRequired: YES
     })
-
+    
     , bautagesberichtId: M.Model.attr('String', {
         isRequired: NO
     })
-    
+
     , bautagesberichtTyp: M.Model.attr('String', {
         isRequired: NO
     })
@@ -437,22 +441,22 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
 	    var that = this;
 	    
 	    // alle zugehörigen Zeiten löschen
-	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({bautagesberichtId: that.m_id}), function(el) {
+	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({bautagesberichtId: that.get('id')}), function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Materialbuchungen löschen
-	    _.each(DigiWebApp.BautagebuchMaterialBuchung.find({bautagesberichtId: that.m_id}), function(el) {
+	    _.each(DigiWebApp.BautagebuchMaterialBuchung.find({bautagesberichtId: that.get('id')}), function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Notizen löschen
-	    _.each(DigiWebApp.BautagebuchNotiz.find({bautagesberichtId: that.m_id}), function(el) {
+	    _.each(DigiWebApp.BautagebuchNotiz.find({bautagesberichtId: that.get('id')}), function(el) {
 	    	el.deleteSorted();
 	    });
 
 	    // alle zugehörigen Medien löschen
-	    _.each(DigiWebApp.BautagebuchMediaFile.find({bautagesberichtId: that.m_id}), function(el) {
+	    _.each(DigiWebApp.BautagebuchMediaFile.find({bautagesberichtId: that.get('id')}), function(el) {
 	    	el.deleteSorted();
 	    });
 

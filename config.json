@@ -27,7 +27,7 @@
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.8.0.5309 beta",
+        "version": "1.8.0.5310 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
@@ -67,5 +67,6 @@
         , {"name": "SignaturePad", "refs": ["*"]}
         , {"name": "jstz", "refs": ["*"]}
         , {"name": "digiUI", "refs": ["*"]}
+        , {"name": "Math.uuid.js", "refs": ["*"]}
     ]
 }

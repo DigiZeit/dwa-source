@@ -39,7 +39,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 //		    		            break;
 //		    		        case 'photo':
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("item", DigiWebApp.BautagebuchMediaFile.createRecord({
-			    		  			    bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id
+			    		  			    bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')
 			    		  			  , fileType: DigiWebApp.ApplicationController.CONSTImageFiletype
 			    		  		}));
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("positionId", null);

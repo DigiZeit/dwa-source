@@ -21,7 +21,7 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 		//var that = this;
 		
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("item", DigiWebApp.BautagebuchMaterialBuchung.createRecord({
-			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id
+			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')
 		}));
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionName", null);

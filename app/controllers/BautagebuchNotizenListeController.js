@@ -20,7 +20,7 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 	, neu: function() {
 		
 		DigiWebApp.BautagebuchNotizenDetailsController.set("item", DigiWebApp.BautagebuchNotiz.createRecord({
-			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id
+			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')
 		}));
 		DigiWebApp.BautagebuchNotizenDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchNotizenDetailsController.set("positionName", null);

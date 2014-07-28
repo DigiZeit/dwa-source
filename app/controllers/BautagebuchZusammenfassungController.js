@@ -61,7 +61,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		
 		that.set("item", myItem); 
 		
-		that.set("bautagesberichtId", myItem.m_id);
+		that.set("bautagesberichtId", myItem.get('id'));
 		
 		that.set("datum", myItem.get("datum"));
 		that.set("projektleiterId", myItem.get("projektleiterId"));

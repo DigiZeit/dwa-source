@@ -24,7 +24,7 @@ DigiWebApp.BautagebuchZeitenListeController = M.Controller.extend({
 		//var that = this;
 		
 		DigiWebApp.BautagebuchZeitenDetailsController.set("item", DigiWebApp.BautagebuchZeitbuchung.createRecord({
-			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.m_id
+			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')
 		}));
 		DigiWebApp.BautagebuchZeitenDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", null);
