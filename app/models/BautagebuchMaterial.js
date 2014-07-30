@@ -145,6 +145,13 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		return resultList;
 	}
 
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
     , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();

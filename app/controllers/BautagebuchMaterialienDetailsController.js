@@ -48,6 +48,16 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 	, menge: null // in model
 	  	
+	, getMaterialFilterObj: function() {
+		var that = this;
+		return {
+			  lieferantId: that.lieferantId
+			, herstellerId: that.herstellerId
+			, materialgruppeId: that.materialgruppeId
+			, materialtypId: that.materialtypId
+		}
+	}
+
 	, init: function(isFirstLoad) {
 		//var that = this;
 	}
@@ -275,7 +285,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	}
 	
 	, setMaterialien: function() {
-		
+		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
+		var paramObj = relevantDetailsController.getMaterialFilterObj();
+		paramObj.selectedId = relevantDetailsController.materialId;
+		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
 	}
 
 });

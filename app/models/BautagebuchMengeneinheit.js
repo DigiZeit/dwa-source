@@ -35,7 +35,12 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
 		if (!paramObj) paramObj = {};
 		var that = this;
 		var resultList = [];
-		var items = DigiWebApp[that.name].findSorted();
+		var items = null;
+		if (paramObj.items) {
+			items = paramObj.items;
+		} else {
+			items = DigiWebApp[that.name].findSorted();
+		}
 		var itemSelected = NO;
 		_.each(items, function(obj){
 			var item = { label: obj.get('kuerzel'), value: obj.get('id') };
@@ -51,6 +56,13 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
 		return resultList;
 	}
 	
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
     , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();
