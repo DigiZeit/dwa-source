@@ -289,6 +289,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.lieferantId;
 		relevantDetailsController.set("lieferantenList", DigiWebApp.BautagebuchLieferant.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.lieferantenList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('lieferantId', selectedId); }
 		//relevantDetailsController.setMaterialgruppen();
 	}
 
@@ -297,6 +299,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.herstellerId;
 		relevantDetailsController.set("herstellerList", DigiWebApp.BautagebuchHersteller.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.herstellerList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('herstellerId', selectedId); }
 		//relevantDetailsController.setMaterialgruppen();
 	}
 
@@ -305,6 +309,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.materialtypId;
 		relevantDetailsController.set("materialtypenList", DigiWebApp.BautagebuchMaterialtyp.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.materialtypenList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('materialtypId', selectedId); }
 		relevantDetailsController.setMaterialgruppen();
 	}
 
@@ -313,6 +319,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.materialgruppeId;
 		relevantDetailsController.set("materialgruppenList", DigiWebApp.BautagebuchMaterialgruppe.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.materialgruppenList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('materialgruppeId', selectedId); }
 		relevantDetailsController.setMaterialien();
 	}
 
@@ -321,6 +329,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.materialId;
 		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('materialId', selectedId); }
 		relevantDetailsController.setMengeneinheiten();
 	}
 
@@ -339,5 +349,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			paramObj.selectedId = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).get('standardEinheitId');
 		}
 		relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList(paramObj));
+		var selectedId = _.find(relevantDetailsController.mengeneinheitenList, function(item) { return item.isSelected; })[0];
+		if (selectedId && selectedId > 0) { relevantDetailsController.set('mengeneinheitId', selectedId); }
 	}
 });
