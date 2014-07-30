@@ -10,7 +10,7 @@ DigiWebApp.BautagebuchMaterialienTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'positionName activityName spacer menge einheit artikel'
+    , childViews: 'positionName handOrderName activityName spacer menge einheit artikel'
 
     , events: {
         tap: {
@@ -36,6 +36,21 @@ DigiWebApp.BautagebuchMaterialienTemplateView = M.ListItemView.design({
   	  , isInline: YES
 	  , computedValue: {
 	        valuePattern: '<%= positionName %>'
+	      , operation: function(v) {
+					if (v !== "" && v !== null) {
+						return v;
+					} else {
+						return "";
+					}
+	          }
+	  }
+	})
+	
+	, handOrderName: M.LabelView.design({
+	    cssClass: 'normal unselectable'
+  	  , isInline: YES
+	  , computedValue: {
+	        valuePattern: '<%= handOrderName %>'
 	      , operation: function(v) {
 					if (v !== "" && v !== null) {
 						return v;

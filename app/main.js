@@ -26,6 +26,10 @@ function parseBool(val) {
 	}
 }
 
+function isGUID(guidString) {
+	return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(guidString);
+}
+
 // Extend Number with padLeft-Member
 Number.prototype.padLeft = function (n,str) {
     return (this < 0 ? '-' : '') + 

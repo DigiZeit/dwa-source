@@ -75,7 +75,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			} else {
 				return (auftrag.get('id') == myPosition.get('orderId'));
 			}
-		});
+		})[0];
 		var myAuftragId = myAuftrag.get('id');
 		var myAuftragName = myAuftrag.get('name');
 		that.set("auftragId", myAuftragId);
@@ -160,8 +160,13 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		// jetzt noch die menge endgültig als number casten 
 		that.set("menge", parseFloat(that.menge));
 
-		that.item.set("positionId", that.positionId);
-		that.item.set("positionName", that.positionName);
+		if (that.handOrderId) {
+			that.item.set("handOrderId", that.handOrderId);
+			that.item.set("handOrderName", that.handOrderName);
+		} else {
+			that.item.set("positionId", that.positionId);
+			that.item.set("positionName", that.positionName);
+		}
 		if (parseInt(that.activityId) !== 0) {
 			that.item.set("activityId", that.activityId);
 			that.item.set("activityName", that.activityName);
