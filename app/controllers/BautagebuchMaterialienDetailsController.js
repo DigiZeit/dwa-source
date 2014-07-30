@@ -68,7 +68,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		//console.log(myItem);
 		var myPosition = _.filter(DigiWebApp.Position.findSorted(), function(position) {
 			return (position.get('id') == myItem.get("positionId"));
-		});
+		})[0];
 		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()), function(auftrag) {
 			if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
 				return (auftrag.get('id') == myPosition.get('handOrderId'));
