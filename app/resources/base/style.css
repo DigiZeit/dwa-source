@@ -1697,3 +1697,10 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .dw {
 	zoom: reset;	
 }
+
+.bautagebuchMaterialienDetailsPage div.ui-input-text {
+	height: 40px;
+}
+.bautagebuchMaterialienDetailsPage input.ui-input-text {
+	font-size: 18px;
+}
