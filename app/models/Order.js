@@ -18,7 +18,14 @@ DigiWebApp.Order = M.Model.create({
     , name: M.Model.attr('String', {
         isRequired: NO
     })
-    
+
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
     , getList: function(parentId, selectedId) {
 		var resultList = [];
 		var auftraege = DigiWebApp.Order.findSorted();

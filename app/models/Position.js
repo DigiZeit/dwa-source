@@ -99,8 +99,15 @@ DigiWebApp.Position = M.Model.create({
         isRequired: NO
     })
     	
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
     , getAuftrag: function() {
-		return DigiWebApp.Order.find({query:{identifier: 'id', operator: '=', value: "" + this.get('orderId')}})[0];
+		return DigiWebApp.Order.getById(this.get('orderId'));
 	}
 
 	, getTaetigkeiten: function() {

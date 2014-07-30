@@ -35,6 +35,13 @@ DigiWebApp.Activity = M.Model.create({
             isRequired: NO // 0: nicht MA-zugeordnet, 1: MA-zugeordnet
     })
 
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
 	, getList: function(parentId, selectedId) {
 		var resultList = [];
 		var position = _.find(DigiWebApp.Position.find(), function(p) {return p.get('id') == parentId});
