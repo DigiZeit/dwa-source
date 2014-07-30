@@ -48,11 +48,15 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 //					DigiWebApp.BautagebuchMaterialienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMaterialienDetailsController.positionId);
 					var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
 
-					if (DigiWebApp.BookingController.currentBooking) {
+					if (relevantDetailsController.auftragId) {
+						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList({selectedId: relevantDetailsController.auftragId}));
+					} else if (DigiWebApp.BookingController.currentBooking) {
 						if (DigiWebApp.BookingController.currentBooking.get('handOrderId')) {
 							relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('handOrderId')}));
+							relevantDetailsController.set('auftragId', DigiWebApp.BookingController.currentBooking.get('handOrderId'));
 						} else {
 							relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('orderId')}));
+							relevantDetailsController.set('auftragId', DigiWebApp.BookingController.currentBooking.get('orderId'));
 						}
 					} else {
 						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
