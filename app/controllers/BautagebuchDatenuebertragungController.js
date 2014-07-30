@@ -164,7 +164,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!lief) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchLieferant.createRecord({
-								  id: lieferant.id
+								  id: parseInt(lieferant.id)
 								, bezeichnung: lieferant.bezeichnung
 								, nummer: lieferant.nummer
 							}).saveSorted();
@@ -176,7 +176,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					if (!herst) {
 						// Hersteller anlegen
 						DigiWebApp.BautagebuchHersteller.createRecord({
-							  id: el.herstellerId
+							  id: parseInt(el.herstellerId)
 							, bezeichnung: el.hersteller
 						}).saveSorted();
 					}
@@ -189,7 +189,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!matgr) {
 							// Materialgruppe anlegen
 							DigiWebApp.BautagebuchMaterialgruppe.createRecord({
-								  id: materialgruppe.id
+								  id: parseInt(materialgruppe.id)
 								, bezeichnung: materialgruppe.bezeichnung
 								, vaterId: materialgruppe.vaterId
 							}).saveSorted();
@@ -204,7 +204,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!matTyp) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchMaterialtyp.createRecord({
-								  id: el.materialtyp.id
+								  id: parseInt(el.materialtyp.id)
 								, bezeichnung: el.materialtyp.bezeichnung
 							}).saveSorted();
 						}
@@ -212,7 +212,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					
 					// Material anlegen
 					DigiWebApp.BautagebuchMaterial.createRecord({
-						  id: el.id
+						  id: parseInt(el.id)
 						, bezeichnung: "" + el.bezeichnung
 						, nummer: "" + el.nummer
 						, standardEinheitId: parseInt(el.standardEinheitId)
@@ -220,7 +220,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						, einheitenIds: JSON.stringify(el.einheitenIds)
 						, lieferantenIds: JSON.stringify(lieferantenIds)
 						, materialgruppenIds: JSON.stringify(materialgruppenIds)
-						, materialtypId: materialtypId
+						, materialtypId: parseInt(materialtypId)
 						, einzelpreis: el.einzelpreis
 					}).saveSorted();
 				}
