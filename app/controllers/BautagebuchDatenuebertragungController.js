@@ -213,10 +213,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					// Material anlegen
 					DigiWebApp.BautagebuchMaterial.createRecord({
 						  id: el.id
-						, bezeichnung: el.bezeichnung
-						, nummer: el.nummer
-						, standardEinheitId: el.standardEinheitId
-						, herstellerId: el.herstellerId
+						, bezeichnung: "" + el.bezeichnung
+						, nummer: "" + el.nummer
+						, standardEinheitId: parseInt(el.standardEinheitId)
+						, herstellerId: parseInt(el.herstellerId)
 						, einheitenIds: JSON.stringify(el.einheitenIds)
 						, lieferantenIds: JSON.stringify(lieferantenIds)
 						, materialgruppenIds: JSON.stringify(materialgruppenIds)
