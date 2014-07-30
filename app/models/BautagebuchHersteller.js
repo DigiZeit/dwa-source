@@ -23,7 +23,7 @@ DigiWebApp.BautagebuchHersteller = M.Model.create({
 
 	, getMaterialien: function() {
 		var that = this;
-		return _.filter(DigiWebApp.BautagebuchHersteller.findSorted(), function(mat) {
+		return _.filter(DigiWebApp.BautagebuchMaterial.findSorted(), function(mat) {
 			var foundIndex = _.find([JSON.parse(mat.get('herstellerId'))], function(myId) {
 				return (that.get('id') == myId);
 			});
