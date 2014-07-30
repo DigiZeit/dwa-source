@@ -1704,3 +1704,6 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .bautagebuchMaterialienDetailsPage input.ui-input-text {
 	font-size: 18px;
 }
+.bautagebuchMaterialienDetailsPage div.ui-block-b div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-icon-right.ui-btn-up-c {
+	margin-right: 0px;
+}
