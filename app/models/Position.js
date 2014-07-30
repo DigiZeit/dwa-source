@@ -110,14 +110,52 @@ DigiWebApp.Position = M.Model.create({
         });
         var activities;
         if (workPlans.length > 0) {
-            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
+            activities = that.getActivitiesFromWorkplan(workPlans[0]);
         } else {
-            activities = DigiWebApp.SelectionController.getActivities();
+            activities = _.filter(DigiWebApp.Activity.findSorted(), function(act){ return (act.get('positionId') == 1)});
         }
         return _.compact(activities);
 	}
 
-	, getList: function(parentId, selectedId) {
+    , getActivitiesFromWorkplan: function(workplan) {
+        var actIds = workplan.get('activityIds').split(',');
+        var activities = [];
+        if (actIds && actIds.length > 0) {
+        	var alleTaetigkeiten = DigiWebApp.Activity.find(); 
+            for (var i = 0; i < actIds.length; i++) {
+            	var taet = _.find(alleTaetigkeiten, function(t){ return parseInt(t.get("id")) === parseInt(actIds[i])});
+            	if (taet) activities.push(taet);
+            }
+
+        }
+        if (parseInt(workplan.get("workplanType")) === 1) {
+        	// only those activities which are bound to employee
+            activities = _.map(activities, function(act) {
+            	if ( typeof(act) === "undefined" ) {
+            		console.log("UNDEFINED ACTIVITY");
+            		return null;
+            	} else {
+        			var zugeordnet = NO;
+            		var allActivities = DigiWebApp.Activity.findSorted();
+            		_.each(allActivities, function(acti) {
+            			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
+            			if (act.get("id") === acti.get("id") && parseInt(acti.get("positionId")) === 1) {
+            				zugeordnet = YES;
+            			}
+            		});
+        			if (zugeordnet) {
+        				return act;
+        			} else {
+        				return null;	
+        			}
+            	}
+            });
+        }
+        activities = _.compact(activities);
+        return activities;
+    }
+
+    , getList: function(parentId, selectedId) {
 		var resultList = [];
 		var items = DigiWebApp.Position.findSorted();
 		items = _.filter(items, function(item){

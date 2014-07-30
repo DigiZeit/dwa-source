@@ -380,7 +380,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 /* this seleciton view has no static entries, instead it is filled via content binding. */
                 , contentBinding: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , property: 'materialtypList'
+                    , property: 'materialtypenList'
                 }
                 , events: {
                     change: {
@@ -452,7 +452,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 /* this seleciton view has no static entries, instead it is filled via content binding. */
                 , contentBinding: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , property: 'lieferantList'
+                    , property: 'lieferantenList'
                 }
                 , events: {
                     change: {
