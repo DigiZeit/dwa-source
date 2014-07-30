@@ -159,39 +159,39 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					// Lieferanten
 					var lieferantenIds = [];
 					_.each(el.lieferanten, function(lieferant) {
-						lieferantenIds.push(parseInt(lieferant.id));
-						var lief = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: parseInt(lieferant.id)}})[0];
+						lieferantenIds.push("" + lieferant.id);
+						var lief = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + lieferant.id}})[0];
 						if (!lief) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchLieferant.createRecord({
-								  id: parseInt(lieferant.id)
-								, bezeichnung: lieferant.bezeichnung
-								, nummer: lieferant.nummer
+								  id: "" + lieferant.id
+								, bezeichnung: "" + lieferant.bezeichnung
+								, nummer: "" + lieferant.nummer
 							}).saveSorted();
 						}
 					});
 					
 					// Hersteller
-					var herst = DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: parseInt(el.herstellerId)}})[0];
+					var herst = DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + el.herstellerId}})[0];
 					if (!herst) {
 						// Hersteller anlegen
 						DigiWebApp.BautagebuchHersteller.createRecord({
-							  id: parseInt(el.herstellerId)
-							, bezeichnung: el.hersteller
+							  id: "" + el.herstellerId
+							, bezeichnung: "" + el.hersteller
 						}).saveSorted();
 					}
 
 					// Materialgruppen
 					var materialgruppenIds = [];
 					_.each(el.materialgruppen, function(materialgruppe) {
-						materialgruppenIds.push(parseInt(materialgruppe.id));
-						var matgr = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: parseInt(materialgruppe.id)}})[0];
+						materialgruppenIds.push("" + materialgruppe.id);
+						var matgr = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + materialgruppe.id}})[0];
 						if (!matgr) {
 							// Materialgruppe anlegen
 							DigiWebApp.BautagebuchMaterialgruppe.createRecord({
-								  id: parseInt(materialgruppe.id)
-								, bezeichnung: materialgruppe.bezeichnung
-								, vaterId: materialgruppe.vaterId
+								  id: "" + materialgruppe.id
+								, bezeichnung: "" + materialgruppe.bezeichnung
+								, vaterId: "" + materialgruppe.vaterId
 							}).saveSorted();
 						}
 					});
@@ -199,29 +199,29 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					// Materialtypen
 					var materialtypId = 0;
 					if (el.materialtyp) {
-						materialtypId = el.materialtyp.id;
-						var matTyp = DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: parseInt(el.materialtyp.id)}})[0];
+						materialtypId = "" + el.materialtyp.id;
+						var matTyp = DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: "" + el.materialtyp.id}})[0];
 						if (!matTyp) {
-							// Materialtyp anlegen
+							// Lieferant anlegen
 							DigiWebApp.BautagebuchMaterialtyp.createRecord({
-								  id: parseInt(el.materialtyp.id)
-								, bezeichnung: el.materialtyp.bezeichnung
+								  id: "" + el.materialtyp.id
+								, bezeichnung: "" + el.materialtyp.bezeichnung
 							}).saveSorted();
 						}
 					}
 					
 					// Material anlegen
 					DigiWebApp.BautagebuchMaterial.createRecord({
-						  id: parseInt(el.id)
+						  id: "" + el.id
 						, bezeichnung: "" + el.bezeichnung
 						, nummer: "" + el.nummer
-						, standardEinheitId: parseInt(el.standardEinheitId)
-						, herstellerId: parseInt(el.herstellerId)
+						, standardEinheitId: "" + el.standardEinheitId
+						, herstellerId: "" + el.herstellerId
 						, einheitenIds: JSON.stringify(el.einheitenIds)
 						, lieferantenIds: JSON.stringify(lieferantenIds)
 						, materialgruppenIds: JSON.stringify(materialgruppenIds)
-						, materialtypId: parseInt(materialtypId)
-						, einzelpreis: el.einzelpreis
+						, materialtypId: "" + materialtypId
+						, einzelpreis: "" + el.einzelpreis
 					}).saveSorted();
 				}
 			});
