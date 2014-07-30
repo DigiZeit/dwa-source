@@ -243,7 +243,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'auftragComboBox positionComboBox activityComboBox materialtypComboBox materialgruppeComboBox herstellerComboBox lieferantComboBox materialComboBox materialInput spacer1 mengeGrid spacer3 speichernButton loeschenButton'
+    	  childViews: 'auftragComboBox positionComboBox activityComboBox materialtypComboBox materialgruppeComboBox herstellerComboBox lieferantComboBox materialComboBox materialInput spacer1 mengeGrid speichernButton loeschenButton'
         	  
         , cssClass: 'content'
     	
