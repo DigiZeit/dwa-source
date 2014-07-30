@@ -159,8 +159,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					// Lieferanten
 					var lieferantenIds = [];
 					_.each(el.lieferanten, function(lieferant) {
-						lieferantenIds.push(lieferant.id);
-						var lief = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + lieferant.id}});
+						lieferantenIds.push(parseInt(lieferant.id));
+						var lief = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + lieferant.id}})[0];
 						if (!lief) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchLieferant.createRecord({
@@ -172,7 +172,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					});
 					
 					// Hersteller
-					var herst = DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + el.herstellerId}});
+					var herst = DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + el.herstellerId}})[0];
 					if (!herst) {
 						// Hersteller anlegen
 						DigiWebApp.BautagebuchHersteller.createRecord({
@@ -184,8 +184,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					// Materialgruppen
 					var materialgruppenIds = [];
 					_.each(el.materialgruppen, function(materialgruppe) {
-						materialgruppenIds.push(materialgruppe.id);
-						var matgr = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + materialgruppe.id}});
+						materialgruppenIds.push(parseInt(materialgruppe.id));
+						var matgr = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + materialgruppe.id}})[0];
 						if (!matgr) {
 							// Materialgruppe anlegen
 							DigiWebApp.BautagebuchMaterialgruppe.createRecord({
@@ -200,7 +200,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					var materialtypId = 0;
 					if (el.materialtyp) {
 						materialtypId = el.materialtyp.id;
-						var matTyp = DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: "" + el.materialtyp.id}});
+						var matTyp = DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: "" + el.materialtyp.id}})[0];
 						if (!matTyp) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchMaterialtyp.createRecord({
