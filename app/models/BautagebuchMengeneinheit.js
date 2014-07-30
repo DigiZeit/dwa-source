@@ -50,8 +50,10 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
 			}
 			resultList.push(item);
 		});
-		if (!itemSelected) {
+		if (!itemSelected && resultList.length > 0) {
 			resultList.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
+		} else if (resultList.length == 0) {
+			resultList.push({label: M.I18N.l('noData'), value: '0', isSelected:YES});
 		}
 		return resultList;
 	}
