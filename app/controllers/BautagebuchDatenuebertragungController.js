@@ -209,15 +209,24 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 							}).saveSorted();
 						}
 					}
+					var myEinheitenIds = [];
+					_.each(el.einheitenIds, function(einheitId) {
+						myEinheitenIds.push("" + einheitId);
+					});
+					
+					var myNummer = null;
+					if (el.nummer) {
+						myNummer = "" + el.nummer;
+					}
 					
 					// Material anlegen
 					DigiWebApp.BautagebuchMaterial.createRecord({
 						  id: "" + el.id
 						, bezeichnung: "" + el.bezeichnung
-						, nummer: "" + el.nummer
+						, nummer: myNummer
 						, standardEinheitId: "" + el.standardEinheitId
 						, herstellerId: "" + el.herstellerId
-						, einheitenIds: JSON.stringify(el.einheitenIds)
+						, einheitenIds: JSON.stringify(myEinheitenIds)
 						, lieferantenIds: JSON.stringify(lieferantenIds)
 						, materialgruppenIds: JSON.stringify(materialgruppenIds)
 						, materialtypId: "" + materialtypId
