@@ -348,7 +348,19 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		paramObj.selectedId = relevantDetailsController.materialId;
 		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
 		var selectedId = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; }).value;
-		if (selectedId && selectedId > 0) { relevantDetailsController.set('materialId', selectedId); }
+		var selectedLabel = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; }).value;
+		if (selectedId && selectedId > 0) { 
+			relevantDetailsController.set('artikel', selectedLabel);
+			relevantDetailsController.set('materialId', selectedId);
+		}
+		if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
+		} else {
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
+			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.artikel);
+		}
 		relevantDetailsController.setMengeneinheiten();
 	}
 
@@ -368,6 +380,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		}
 		relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList(paramObj));
 		var selectedId = _.find(relevantDetailsController.mengeneinheitenList, function(item) { return item.isSelected; }).value;
-		if (selectedId && selectedId > 0) { relevantDetailsController.set('mengeneinheitId', selectedId); }
+		var selectedLabel = _.find(relevantDetailsController.mengeneinheitenList, function(item) { return item.isSelected; }).label;
+		if (selectedId && selectedId > 0) { 
+			relevantDetailsController.set('einheit', selectedLabel); 
+			relevantDetailsController.set('mengeneinheitId', selectedId); 
+		}
 	}
 });
