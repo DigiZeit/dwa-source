@@ -486,4 +486,9 @@ M.I18N.en_us = {
 	, wirklichLoeschenMsg: "Do you really want to delete this record?"
 	, nurMaterialErfassung: "This construction record is for immediate material pick-up only!"
 
+	, BautagebuchLieferant: "Supplier"
+	, BautagebuchHersteller: "Manufacturer"
+	, BautagebuchMaterialgruppe: "Material group"
+	, BautagebuchMaterialtyp: "Material type"
+			
 };

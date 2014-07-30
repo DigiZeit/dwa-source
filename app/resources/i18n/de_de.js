@@ -485,4 +485,9 @@ M.I18N.de_de = {
 	, wirklichLoeschenMsg: "Möchten Sie diesen Datensatz wirklich löschen?"
 	, nurMaterialErfassung: "Dieser Bautagesbericht dient nur der unmittelbaren Materialerfassung!"
 
+	, BautagebuchLieferant: "Lieferant"
+	, BautagebuchHersteller: "Hersteller"
+	, BautagebuchMaterialgruppe: "Materialgruppe"
+	, BautagebuchMaterialtyp: "Materialtyp"
+	
 };

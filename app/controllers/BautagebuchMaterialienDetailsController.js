@@ -26,6 +26,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, mengeneinheitenList: null // runtime
 	, einheit: null // in model
 	
+	, materialgruppeId: null // in model
+	, materialgruppeBezeichnung: null // runtime
+	, materialgruppeList: null // runtime
+
 	, materialtypId: null // in model
 	, materialtypBezeichnung: null // runtime
 	, materialtypenList: null // runtime
@@ -251,6 +255,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomethingOptional'), value: '0', isSelected: !itemSelected});
 			that.set("activityList", taetigkeitenArray);
 		}
+	}
+	
+	, setMaterialien: function() {
+		
 	}
 
 });
