@@ -36,7 +36,7 @@ DigiWebApp.Order = M.Model.create({
 		var itemSelected = NO;
 		_.each(alleAuftraege, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
-    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
+    		if ((paramObj.selectedId && obj.get('id') == paramObj.selectedId) || alleAuftraege.length == 1) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}

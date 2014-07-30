@@ -130,7 +130,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		}
 		_.each(alleMaterialien, function(obj){
     		var item = { label: obj.get('bezeichnung'), value: obj.get('id') };
-    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
+    		if ((paramObj.selectedId && obj.get('id') == paramObj.selectedId) || alleMaterialien.length == 1) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}
