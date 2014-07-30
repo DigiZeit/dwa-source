@@ -348,7 +348,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		paramObj.selectedId = relevantDetailsController.materialId;
 		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
 		var selectedId = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; }).value;
-		var selectedLabel = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; }).value;
+		var selectedLabel = _.find(relevantDetailsController.materialienList, function(item) { return item.isSelected; }).label;
 		if (selectedId && selectedId > 0) { 
 			relevantDetailsController.set('artikel', selectedLabel);
 			relevantDetailsController.set('materialId', selectedId);
