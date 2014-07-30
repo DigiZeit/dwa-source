@@ -26,9 +26,10 @@ DigiWebApp.BautagebuchMaterialgruppe = M.Model.create({
     })
 
 	, getMaterialien: function() {
+		var that = this;
 		_.filter(DigiWebApp.BautagebuchMaterial.findSorted(), function(mat) {
-			var foundIndex = _.find(mat.get('materialgruppenIds'), function(matGrId) {
-				return (this.get('id') == matGrId);
+			var foundIndex = _.find(mat.get('materialgruppenIds'), function(myId) {
+				return (that.get('id') == myId);
 			});
 			return (foundIndex);
 		});
