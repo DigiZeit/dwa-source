@@ -221,7 +221,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						, lieferantenIds: JSON.stringify(lieferantenIds)
 						, materialgruppenIds: JSON.stringify(materialgruppenIds)
 						, materialtypId: "" + materialtypId
-						, einzelpreis: "" + el.einzelpreis
+						, einzelpreis: el.einzelpreis
 					}).saveSorted();
 				}
 			});
