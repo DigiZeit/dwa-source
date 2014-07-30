@@ -26,7 +26,7 @@ DigiWebApp.Order = M.Model.create({
 		});
 	}
 
-    , getList: function(parentId, selectedId) {
+    , getList: function(paramObj) {
 		var resultList = [];
 		var auftraege = DigiWebApp.Order.findSorted();
 		var handauftraege = DigiWebApp.HandOrder.findSorted();
@@ -34,7 +34,7 @@ DigiWebApp.Order = M.Model.create({
 		var itemSelected = NO;
 		_.each(alleAuftraege, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
-    		if (selectedId && obj.get('id') == selectedId) {
+    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}

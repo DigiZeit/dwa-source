@@ -102,7 +102,46 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		return result;
 	}
 
-	, deleteAll: function() {
+    , getList: function(paramObj) {
+    	var that = this;
+		var resultList = [];
+		var alleMaterialien = DigiWebApp[that.name].findSorted();
+		var itemSelected = NO;
+		if (paramObj.lieferantId) {
+			alleMaterialien = _.filter(alleMaterialien, function(mat) {
+				return _.contains(mat.get('lieferantenIds'), "" + paramObj.lieferantId);
+			});
+		}
+		if (paramObj.herstellerId) {
+			alleMaterialien = _.filter(alleMaterialien, function(mat) {
+				return _.contains([mat.get('herstellerId')], "" + paramObj.herstellerId);
+			});
+		}
+		if (paramObj.materialgruppeId) {
+			alleMaterialien = _.filter(alleMaterialien, function(mat) {
+				return _.contains(mat.get('materialgruppeIds'), "" + paramObj.materialgruppeId);
+			});
+		}
+		if (paramObj.materialtypId) {
+			alleMaterialien = _.filter(alleMaterialien, function(mat) {
+				return _.contains([mat.get('materialtypId')], "" + paramObj.materialtypId);
+			});
+		}
+		_.each(alleMaterialien, function(obj){
+    		var item = { label: obj.get('name'), value: obj.get('id') };
+    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
+    			item.isSelected = YES;
+    			itemSelected = YES;
+    		}
+    		resultList.push(item);
+		});
+		if (!itemSelected) {
+			resultList.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
+		}
+		return resultList;
+	}
+
+    , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();
         });

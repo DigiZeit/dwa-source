@@ -162,16 +162,18 @@ DigiWebApp.Position = M.Model.create({
         return activities;
     }
 
-    , getList: function(parentId, selectedId) {
+    , getList: function(paramObj) {
 		var resultList = [];
 		var items = DigiWebApp.Position.findSorted();
-		items = _.filter(items, function(item){
-			return (item.get('orderId') == parentId);
-		});
+		if (paramObj.parentId) {
+			items = _.filter(items, function(item){
+				return (item.get('orderId') == paramObj.parentId);
+			});
+		}
 		var itemSelected = NO;
 		_.each(items, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
-    		if (selectedId && obj.get('id') == selectedId) {
+    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}

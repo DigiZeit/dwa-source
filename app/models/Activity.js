@@ -42,9 +42,12 @@ DigiWebApp.Activity = M.Model.create({
 		});
 	}
 
-	, getList: function(parentId, selectedId) {
+	, getList: function(paramObj) {
 		var resultList = [];
-		var position = _.find(DigiWebApp.Position.find(), function(p) {return p.get('id') == parentId});
+		var position = null;
+		if (paramObj.parentId) {
+			position = _.find(DigiWebApp.Position.find(), function(p) {return p.get('id') == paramObj.parentId});
+		}
 		var items = null
 		if (position) {
 			items = position.getTaetigkeiten();
@@ -54,7 +57,7 @@ DigiWebApp.Activity = M.Model.create({
 		var itemSelected = NO;
 		_.each(items, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
-    		if (selectedId && obj.get('id') == selectedId) {
+    		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}
