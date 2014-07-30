@@ -99,7 +99,25 @@ DigiWebApp.Position = M.Model.create({
         isRequired: NO
     })
     	
-    , getList: function(parentId, selectedId) {
+    , getAuftrag: function() {
+		return DigiWebApp.Order.find({query:{identifier: 'id', operator: '=', value: "" + this.get('orderId')}})[0];
+	}
+
+	, getTaetigkeiten: function() {
+		var that = this;
+		var workPlans = _.select(DigiWebApp.WorkPlan.find(), function(wp) {
+            if (wp) return wp.get('id') == positionId;
+        });
+        var activities;
+        if (workPlans.length > 0) {
+            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
+        } else {
+            activities = DigiWebApp.SelectionController.getActivities();
+        }
+        return _.compact(activities);
+	}
+
+	, getList: function(parentId, selectedId) {
 		var items = DigiWebApp.Position.findSorted();
 		items = _.filter(items, function(item){
 			return (item.get('orderId') == parentId);
@@ -115,7 +133,7 @@ DigiWebApp.Position = M.Model.create({
 		return resultList;
 	}
 
-, deleteAll: function() {
+	, deleteAll: function() {
 		var that = this;
 	    _.each(this.find(), function(el) {
 	        el.del();
