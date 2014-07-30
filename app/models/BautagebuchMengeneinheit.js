@@ -21,6 +21,16 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
         isRequired: NO
     })
 
+	, getMaterialien: function() {
+		var that = this;
+		return _.filter(DigiWebApp.BautagebuchMaterial.findSorted(), function(mat) {
+			var foundIndex = _.find(JSON.parse(mat.get('einheitenIds')), function(myId) {
+				return (that.get('id') == myId);
+			});
+			return (foundIndex);
+		});
+	}
+
     , deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();
