@@ -113,7 +113,7 @@ DigiWebApp.Position = M.Model.create({
 	, getTaetigkeiten: function() {
 		var that = this;
 		var workPlans = _.select(DigiWebApp.WorkPlan.find(), function(wp) {
-            if (wp) return wp.get('id') == positionId;
+            if (wp) return wp.get('id') == that.get('id');
         });
         var activities;
         if (workPlans.length > 0) {
