@@ -181,12 +181,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED MATERIAL");
             	} else {       
-            		var obj = null;
-            		if (o.get("bezeichnung").length > 0) {
-            			obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
-            		} else {
-            			obj = { label: o.get("bezeichnung") + " (" + o.get("kuerzel") + ")", value: o.get('id') };
-            		}
+            		var obj = { label: o.get("kuerzel"), value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {
 //            			obj.isSelected = YES;
 //            			itemSelected = YES;
