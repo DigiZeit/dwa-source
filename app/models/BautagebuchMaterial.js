@@ -133,9 +133,6 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
     		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
     			item.isSelected = YES;
     			itemSelected = YES;
-    		} else if (!paramObj.selectedId && that.get('standardEinheitId') && obj.get('id') == that.get('standardEinheitId')) {
-    			item.isSelected = YES;
-    			itemSelected = YES;
     		}
     		resultList.push(item);
 		});

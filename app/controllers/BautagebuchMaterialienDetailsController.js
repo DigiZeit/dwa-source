@@ -291,4 +291,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
 	}
 
+	, setMengeneinheiten: function() {
+		var MEs = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).getMengeneinheiten();
+		var paramObj = {items: MEs};
+		paramObj.selectedId = relevantDetailsController.mengeneinheitId;
+		relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList(paramObj));
+	}
 });

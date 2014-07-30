@@ -92,9 +92,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 //					mengeneinheitenArray = _.compact(mengeneinheitenArray);
 //					DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitenList", mengeneinheitenArray);
 					
-					var MEs = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).getMengeneinheiten();
-					relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList({items: MEs}));
-
+					relevantDetailsController.setMengeneinheiten();
+					
 					M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.menge);
 					
 					if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen")) {
