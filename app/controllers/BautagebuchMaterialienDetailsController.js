@@ -80,6 +80,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var myAuftragName = myAuftrag.get('name');
 		that.set("auftragId", myAuftragId);
 		that.set("auftragName", myAuftragName);
+		that.set("handOrderId", myItem.get("handOrderId"));
+		that.set("handOrderName", myItem.get("handOrderName"));
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
