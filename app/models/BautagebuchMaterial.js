@@ -110,22 +110,22 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		var itemSelected = NO;
 		if (paramObj.lieferantId) {
 			alleMaterialien = _.filter(alleMaterialien, function(mat) {
-				return !_.contains(JSON.parse(mat.get('lieferantenIds')), "" + paramObj.lieferantId);
+				return _.contains(JSON.parse(mat.get('lieferantenIds')), "" + paramObj.lieferantId);
 			});
 		}
 		if (paramObj.herstellerId) {
 			alleMaterialien = _.filter(alleMaterialien, function(mat) {
-				return !_.contains([JSON.parse(mat.get('herstellerId'))], "" + paramObj.herstellerId);
+				return _.contains([JSON.parse(mat.get('herstellerId'))], "" + paramObj.herstellerId);
 			});
 		}
 		if (paramObj.materialgruppeId) {
 			alleMaterialien = _.filter(alleMaterialien, function(mat) {
-				return !_.contains(JSON.parse(mat.get('materialgruppenIds')), "" + paramObj.materialgruppeId);
+				return _.contains(JSON.parse(mat.get('materialgruppenIds')), "" + paramObj.materialgruppeId);
 			});
 		}
 		if (paramObj.materialtypId) {
 			alleMaterialien = _.filter(alleMaterialien, function(mat) {
-				return !_.contains([JSON.parse(mat.get('materialtypId'))], "" + paramObj.materialtypId);
+				return _.contains([JSON.parse(mat.get('materialtypId'))], "" + paramObj.materialtypId);
 			});
 		}
 		_.each(alleMaterialien, function(obj){
