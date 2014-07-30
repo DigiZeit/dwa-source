@@ -300,7 +300,11 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			MEs = DigiWebApp.BautagebuchMengeneinheit.findSorted();
 		}
 		var paramObj = {items: MEs};
-		paramObj.selectedId = relevantDetailsController.mengeneinheitId;
+		if (relevantDetailsController.mengeneinheitId) {
+			paramObj.selectedId = relevantDetailsController.mengeneinheitId;	
+		} else if (relevantDetailsController.materialId) {
+			paramObj.selectedId = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).get('standardEinheitId');
+		}
 		relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList(paramObj));
 	}
 });
