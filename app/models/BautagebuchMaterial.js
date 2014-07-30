@@ -129,7 +129,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 			});
 		}
 		_.each(alleMaterialien, function(obj){
-    		var item = { label: obj.get('name'), value: obj.get('id') };
+    		var item = { label: obj.get('bezeichnung'), value: obj.get('id') };
     		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
     			item.isSelected = YES;
     			itemSelected = YES;
