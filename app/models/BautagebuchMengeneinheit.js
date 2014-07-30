@@ -17,10 +17,6 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
         isRequired: NO
     })
     
-    , bezeichnung: M.Model.attr('String', {
-        isRequired: NO
-    })
-    
     , kuerzel: M.Model.attr('String', {
         isRequired: NO
     })

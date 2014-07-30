@@ -71,7 +71,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// data.mengeneinheiten enthält also myLength Elemente
 			// alle "alten" Mengeneinheiten löschen
-			DigiWebApp.BautagebuchMengeneinheiten.deleteAll();
+			DigiWebApp.BautagebuchMengeneinheit.deleteAll();
 			
 			// die empfangenen Mengeneinheiten mit Model ablegen
 			_.each(data.mengeneinheiten, function(el) {
@@ -87,7 +87,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				} else {
 					
 					// mengeneinheit (el) zur Liste hinzufügen
-					DigiWebApp.BautagebuchMengeneinheit.createRecord({id: el.id, bezeichnung: el.bezeichnung, kuerzel: el.kuerzel}).saveSorted();
+					DigiWebApp.BautagebuchMengeneinheit.createRecord({id: el.id, kuerzel: el.kuerzel}).saveSorted();
 
 				}
 			});
