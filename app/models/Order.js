@@ -37,7 +37,7 @@ DigiWebApp.Order = M.Model.create({
 	, getPositionen: function() {
 		var that = this;
 		return _.compact(_.filter(DigiWebApp.Position.findSorted(), function(item) {
-			var foundIndex = _.find(item.get('orderId')), function(myId) {
+			var foundIndex = _.find(item.get('orderId'), function(myId) {
 				return (that.get('id') == myId);
 			});
 			return (foundIndex);
