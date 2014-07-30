@@ -168,13 +168,18 @@ DigiWebApp.Position = M.Model.create({
 		items = _.filter(items, function(item){
 			return (item.get('orderId') == parentId);
 		});
+		var itemSelected = NO;
 		_.each(items, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
     		if (selectedId && obj.get('id') == selectedId) {
     			item.isSelected = YES;
+    			itemSelected = YES;
     		}
     		resultList.push(item);
 		});
+		if (!itemSelected) {
+			resultList.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
+		}
 		return resultList;
 	}
 

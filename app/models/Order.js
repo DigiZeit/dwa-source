@@ -31,13 +31,18 @@ DigiWebApp.Order = M.Model.create({
 		var auftraege = DigiWebApp.Order.findSorted();
 		var handauftraege = DigiWebApp.HandOrder.findSorted();
 		var alleAuftraege = handauftraege.concat(auftraege);
+		var itemSelected = NO;
 		_.each(alleAuftraege, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
     		if (selectedId && obj.get('id') == selectedId) {
     			item.isSelected = YES;
+    			itemSelected = YES;
     		}
     		resultList.push(item);
 		});
+		if (!itemSelected) {
+			resultList.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
+		}
 		return resultList;
 	}
 
