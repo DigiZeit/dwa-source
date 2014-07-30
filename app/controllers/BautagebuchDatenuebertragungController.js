@@ -164,9 +164,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!lief) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchLieferant.createRecord({
-								  id: el.id
-								, bezeichnung: el.bezeichnung
-								, nummer: el.nummer
+								  id: lieferant.id
+								, bezeichnung: lieferant.bezeichnung
+								, nummer: lieferant.nummer
 							}).saveSorted();
 						}
 					});
@@ -189,9 +189,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!matgr) {
 							// Materialgruppe anlegen
 							DigiWebApp.BautagebuchMaterialgruppe.createRecord({
-								  id: el.id
-								, bezeichnung: el.bezeichnung
-								, vaterId: el.vaterId
+								  id: materialgruppe.id
+								, bezeichnung: materialgruppe.bezeichnung
+								, vaterId: materialgruppe.vaterId
 							}).saveSorted();
 						}
 					});
@@ -204,8 +204,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						if (!matTyp) {
 							// Lieferant anlegen
 							DigiWebApp.BautagebuchMaterialtyp.createRecord({
-								  id: el.herstellerId
-								, bezeichnung: el.hersteller
+								  id: el.materialtyp.id
+								, bezeichnung: el.materialtyp.bezeichnung
 							}).saveSorted();
 						}
 					}
