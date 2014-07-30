@@ -395,6 +395,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().hide()
     		      				relevantDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).label);
                 			}
+                			relevantDetailsController.set('mengeneinheitId', null);
         					relevantDetailsController.setMengeneinheiten();
                     	}
                 	}
