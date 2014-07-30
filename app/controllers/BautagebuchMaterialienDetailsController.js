@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	
 	, materialgruppeId: null // in model
 	, materialgruppeBezeichnung: null // runtime
-	, materialgruppeList: null // runtime
+	, materialgruppenList: null // runtime
 
 	, materialtypId: null // in model
 	, materialtypBezeichnung: null // runtime
@@ -284,11 +284,44 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		}
 	}
 	
+	, setLieferanten: function() {
+		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
+		var paramObj = relevantDetailsController.getMaterialFilterObj();
+		paramObj.selectedId = relevantDetailsController.lieferantId;
+		relevantDetailsController.set("lieferantenList", DigiWebApp.BautagebuchLieferant.getList(paramObj));
+		//relevantDetailsController.setMaterialgruppen();
+	}
+
+	, setHersteller: function() {
+		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
+		var paramObj = relevantDetailsController.getMaterialFilterObj();
+		paramObj.selectedId = relevantDetailsController.herstellerId;
+		relevantDetailsController.set("herstellerList", DigiWebApp.BautagebuchHersteller.getList(paramObj));
+		//relevantDetailsController.setMaterialgruppen();
+	}
+
+	, setMaterialtypen: function() {
+		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
+		var paramObj = relevantDetailsController.getMaterialFilterObj();
+		paramObj.selectedId = relevantDetailsController.materialtypId;
+		relevantDetailsController.set("materialtypenList", DigiWebApp.BautagebuchMaterialtyp.getList(paramObj));
+		relevantDetailsController.setMaterialgruppen();
+	}
+
+	, setMaterialgruppen: function() {
+		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
+		var paramObj = relevantDetailsController.getMaterialFilterObj();
+		paramObj.selectedId = relevantDetailsController.materialgruppeId;
+		relevantDetailsController.set("materialgruppenList", DigiWebApp.BautagebuchMaterialgruppe.getList(paramObj));
+		relevantDetailsController.setMaterialien();
+	}
+
 	, setMaterialien: function() {
 		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
 		var paramObj = relevantDetailsController.getMaterialFilterObj();
 		paramObj.selectedId = relevantDetailsController.materialId;
 		relevantDetailsController.set("materialienList", DigiWebApp.BautagebuchMaterial.getList(paramObj));
+		relevantDetailsController.setMengeneinheiten();
 	}
 
 	, setMengeneinheiten: function() {

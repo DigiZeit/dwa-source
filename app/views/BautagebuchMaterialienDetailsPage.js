@@ -32,6 +32,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
 				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 
+				    relevantDetailsController.setMaterialgruppen();
+				    
 //					// verfügbare Materialien kopieren und ausgewähltes selektieren
 //					var myMaterialienList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchMainController.materialien));
 //							
@@ -307,7 +309,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 /* this seleciton view has no static entries, instead it is filled via content binding. */
                 , contentBinding: {
                       target: DigiWebApp.BautagebuchMaterialienDetailsController
-                    , property: 'materialgruppeList'
+                    , property: 'materialgruppenList'
                 }
                 , events: {
                     change: {
