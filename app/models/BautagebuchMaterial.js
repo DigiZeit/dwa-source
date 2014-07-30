@@ -63,7 +63,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 	
 	, getLieferanten: function() {
 		var result = [];
-		_.each(this.get('lieferantenIds'), function(myId){
+		_.each(JSON.parse(this.get('lieferantenIds')), function(myId){
 			var item = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + myId}})[0];
 			if (item) {
 				result.push(item);
@@ -74,7 +74,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 
 	, getMaterialgruppen: function() {
 		var result = [];
-		_.each(this.get('materialgruppenIds'), function(myId){
+		_.each(JSON.parse(this.get('materialgruppenIds')), function(myId){
 			var item = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + myId}})[0];
 			if (item) {
 				result.push(item);
