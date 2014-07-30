@@ -20,10 +20,10 @@ DigiWebApp.Order = M.Model.create({
     })
     
     , getList: function(parentId, selectedId) {
+		var resultList = [];
 		var auftraege = DigiWebApp.Order.findSorted();
 		var handauftraege = DigiWebApp.HandOrder.findSorted();
 		var alleAuftraege = handauftraege.concat(auftraege);
-		var resultList = [];
 		_.each(alleAuftraege, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
     		if (selectedId && obj.get('id') == selectedId) {

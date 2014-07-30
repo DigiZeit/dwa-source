@@ -36,16 +36,18 @@ DigiWebApp.Activity = M.Model.create({
     })
 
 	, getList: function(parentId, selectedId) {
-		var position = _.find(DigiWebApp.Position.find(), function(p) {return p.get('id') == parentId});
-		var items = position.getTaetigkeiten();
 		var resultList = [];
-		_.each(items, function(obj){
-    		var item = { label: obj.get('name'), value: obj.get('id') };
-    		if (selectedId && obj.get('id') == selectedId) {
-    			item.isSelected = YES;
-    		}
-    		resultList.push(item);
-		});
+		var position = _.find(DigiWebApp.Position.find(), function(p) {return p.get('id') == parentId});
+		if (position) {
+			var items = position.getTaetigkeiten();
+			_.each(items, function(obj){
+	    		var item = { label: obj.get('name'), value: obj.get('id') };
+	    		if (selectedId && obj.get('id') == selectedId) {
+	    			item.isSelected = YES;
+	    		}
+	    		resultList.push(item);
+			});
+		}
 		return resultList;
 	}
 

@@ -118,11 +118,11 @@ DigiWebApp.Position = M.Model.create({
 	}
 
 	, getList: function(parentId, selectedId) {
+		var resultList = [];
 		var items = DigiWebApp.Position.findSorted();
 		items = _.filter(items, function(item){
 			return (item.get('orderId') == parentId);
 		});
-		var resultList = [];
 		_.each(items, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
     		if (selectedId && obj.get('id') == selectedId) {
