@@ -78,9 +78,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				if (typeof(el.id) === "undefined") {
 					console.error("missing mengeneinheit id");
 					return errorCallback();
-				} else if (typeof(el.bezeichnung) === "undefined") {
-					console.error("missing mengeneinheit bezeichnung");
-					return errorCallback();
+//				} else if (typeof(el.bezeichnung) === "undefined") {
+//					console.error("missing mengeneinheit bezeichnung");
+//					return errorCallback();
 				} else if (typeof(el.kuerzel) === "undefined") {
 					console.error("missing mengeneinheit kuerzel");
 					return errorCallback();
@@ -143,20 +143,85 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// data.materialliste enthält also myLength (oder gar keine) Elemente
 			// alle "alten" Materialien löschen
 			DigiWebApp.BautagebuchMaterial.deleteAll();
+			DigiWebApp.BautagebuchLieferant.deleteAll();
+			DigiWebApp.BautagebuchHersteller.deleteAll();
+			DigiWebApp.BautagebuchMaterialtyp.deleteAll();
+			DigiWebApp.BautagebuchMaterialgruppe.deleteAll();
 			
 			// die empfangenen Materialien mit Model ablegen
 			_.each(data.materialliste, function(el) {
 				//console.log(el);
-				if (typeof(el.materialbezeichnung) === "undefined") {
-					console.error("missing materialbezeichnung");
+				if (typeof(el.bezeichnung) === "undefined") {
+					console.error("missing bezeichnung");
 					return errorCallback();
 				} else {
-					// el.materialbezeichnung zur Liste hinzufügen
+					
+					// Lieferanten
+					var lieferantenIds = [];
+					_.each(el.lieferanten, function(lieferant) {
+						lieferantenIds.push(lieferant.id);
+						var lief = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + lieferant.id}});
+						if (!lief) {
+							// Lieferant anlegen
+							DigiWebApp.BautagebuchLieferant.createRecord({
+								  id: el.id
+								, bezeichnung: el.bezeichnung
+								, nummer: el.nummer
+							}).saveSorted();
+						}
+					});
+					
+					// Hersteller
+					var herst = DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + el.herstellerId}});
+					if (!herst) {
+						// Hersteller anlegen
+						DigiWebApp.BautagebuchHersteller.createRecord({
+							  id: el.herstellerId
+							, bezeichnung: el.hersteller
+						}).saveSorted();
+					}
+
+					// Materialgruppen
+					var materialgruppenIds = [];
+					_.each(el.materialgruppen, function(materialgruppe) {
+						materialgruppenIds.push(materialgruppe.id);
+						var matgr = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + materialgruppe.id}});
+						if (!matgr) {
+							// Materialgruppe anlegen
+							DigiWebApp.BautagebuchMaterialgruppe.createRecord({
+								  id: el.id
+								, bezeichnung: el.bezeichnung
+								, vaterId: el.vaterId
+							}).saveSorted();
+						}
+					});
+
+					// Materialtypen
+					var materialtypId = 0;
+					if (el.materialtyp) {
+						materialtypId = el.materialtyp.id;
+						var matTyp = DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: "" + el.materialtyp.id}});
+						if (!matTyp) {
+							// Lieferant anlegen
+							DigiWebApp.BautagebuchMaterialtyp.createRecord({
+								  id: el.herstellerId
+								, bezeichnung: el.hersteller
+							}).saveSorted();
+						}
+					}
+					
+					// Material anlegen
 					DigiWebApp.BautagebuchMaterial.createRecord({
-						  bezeichnung: el.materialbezeichnung
-						, id: el.materialbezeichnung
-						, einheit: el.einheit
-						, einheiten: el.einheiten
+						  id: el.id
+						, bezeichnung: el.bezeichnung
+						, nummer: el.nummer
+						, standardEinheitId: el.standardEinheitId
+						, herstellerId: el.herstellerId
+						, einheitenIds: JSON.stringify(el.einheitenIds)
+						, lieferantenIds: JSON.stringify(lieferantenIds)
+						, materialgruppenIds: JSON.stringify(materialgruppenIds)
+						, materialtypId: materialtypId
+						, einzelpreis: el.einzelpreis
 					}).saveSorted();
 				}
 			});

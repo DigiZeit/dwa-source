@@ -26,6 +26,18 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, mengeneinheitenList: null // runtime
 	, einheit: null // in model
 	
+	, materialtypId: null // in model
+	, materialtypBezeichnung: null // runtime
+	, materialtypenList: null // runtime
+
+	, herstellerId: null // in model
+	, herstellerBezeichnung: null // runtime
+	, herstellerList: null // runtime
+
+	, lieferantId: null // in model
+	, lieferantBezeichnung: null // runtime
+	, lieferantenList: null // runtime
+
 	, menge: null // in model
 	  	
 	, init: function(isFirstLoad) {
@@ -44,7 +56,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		that.set("mengeneinheitId", myItem.get("mengeneinheitId"));
 		that.set("artikel", myItem.get("artikel"));
 		that.set("menge", myItem.get("menge"));
-		that.set("einheit", myItem.get("einheit"));
+		that.set("einheitId", myItem.get("einheitId"));
 		that.setTaetigkeiten(myItem.get("positionId"));
 	}
 	

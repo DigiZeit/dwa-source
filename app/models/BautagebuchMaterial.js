@@ -21,11 +21,35 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
         isRequired: NO
     })
 
-    , einheit: M.Model.attr('String', {
+    , nummer: M.Model.attr('String', {
         isRequired: NO
     })
 
-    , einheiten: M.Model.attr('String', {
+    , standardEinheitId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , einheitenIds: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , lieferantenIds: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , herstellerId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , materialgruppenIds: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , einzelpreis: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , materialtypId: M.Model.attr('String', {
         isRequired: NO
     })
 
