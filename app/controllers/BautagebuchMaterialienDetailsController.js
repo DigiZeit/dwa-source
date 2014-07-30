@@ -163,7 +163,11 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		if (that.handOrderId) {
 			that.item.set("handOrderId", that.handOrderId);
 			that.item.set("handOrderName", that.handOrderName);
+			that.item.set("positionId", null);
+			that.item.set("positionName", null);
 		} else {
+			that.item.set("handOrderId", null);
+			that.item.set("handOrderName", null);
 			that.item.set("positionId", that.positionId);
 			that.item.set("positionName", that.positionName);
 		}
