@@ -57,15 +57,34 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		return DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + this.get('herstellerId')}})[0];
 	}
     
+	, getMaterialtyp: function() {
+		return DigiWebApp.BautagebuchMaterialtyp.find({query:{identifier: 'id', operator: '=', value: "" + this.get('materialtypId')}})[0];
+	}
+	
 	, getLieferanten: function() {
-		var lieferanten = [];
-		_.each(this.get('lieferantenIds'), function(liefId){
-			var l = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + liefId}});
-			if (l) {
-				lieferanten.push(l);
+		var result = [];
+		_.each(this.get('lieferantenIds'), function(myId){
+			var item = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + myId}})[0];
+			if (item) {
+				result.push(item);
 			}
 		});
-		return lieferanten;
+		return result;
+	}
+
+	, getMaterialgruppen: function() {
+		var result = [];
+		_.each(this.get('materialgruppenIds'), function(myId){
+			var item = DigiWebApp.BautagebuchMaterialgruppe.find({query:{identifier: 'id', operator: '=', value: "" + myId}})[0];
+			if (item) {
+				result.push(item);
+			}
+		});
+		return result;
+	}
+
+	, getMaterialbuchungen: function() {
+		return DigiWebApp.BautagebuchMaterialbuchung.find({query:{identifier: 'materialId', operator: '=', value: "" + this.get('id')}});
 	}
 
 	, deleteAll: function() {
