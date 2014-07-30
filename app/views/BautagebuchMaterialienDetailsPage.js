@@ -47,47 +47,87 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 //					
 //					DigiWebApp.BautagebuchMaterialienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMaterialienDetailsController.positionId);
 					var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
-					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
-					_.each(myPositionenList, function(p) {
+
+					var myAuftraegeList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.auftraegeList));
+					_.each(myAuftraegeList, function(p) {
 						if (parseInt(p.value) !== 0) {
 							p.isSelected = NO;
 						} else {
 							p.isSelected = YES;
 						}
 					});
-				    var positionenArray = _.map(myPositionenList, function(o) {
+				    var auftraegeArray = _.map(myAuftraegeList, function(o) {
 				    	if ( typeof(o) === "undefined" ) {
 				    		console.log("UNDEFINED position");
 				    	} else {    
-							if (relevantDetailsController.positionId) {
-								o.isSelected = (o.value === relevantDetailsController.positionId);
+							if (relevantDetailsController.auftragId) {
+								o.isSelected = (o.value === relevantDetailsController.auftragId);
 								if (o.isSelected) { itemSelected = YES; }
 							}
 				            return o;
 				    	}
 				    });
-				    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
-					    positionenArray = _.map(positionenArray, function(o) {
-							if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-								o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+				    if (!itemSelected) {
+				    	auftraegeArray = _.map(auftraegeArray, function(o) {
+							if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragId) {
+								o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.auftragId);
 								if (o.isSelected) { itemSelected = YES; 
-									relevantDetailsController.set("positionId", o.value);
-									relevantDetailsController.set("positionName", o.label);
+									relevantDetailsController.set("auftragId", o.value);
+									relevantDetailsController.set("auftragName", o.label);
 								}
 							}
 				            return o;
 					    });
 				    }
-				    positionenArray = _.compact(positionenArray);
-				    if (positionenArray.length > 1) {
-				    	positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
+				    auftraegeArray = _.compact(auftraegeArray);
+				    if (auftraegeArray.length > 1 && !DigiWebApp.BookingController.currentBooking) {
+				    	auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
 				    }
-				    if (!itemSelected && positionenArray.length == 1) {
-				    	positionenArray[0].isSelected = YES;
-				    	relevantDetailsController.set("positionId", positionenArray[0].value);
-				    	relevantDetailsController.set("positionName", positionenArray[0].label);
-				    }
-				    relevantDetailsController.set("positionenList", positionenArray);
+				    relevantDetailsController.set("auftraegeList", auftraegeArray);
+
+				    relevantDetailsController.setPositionen(relevantDetailsController.auftragId);
+
+//					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+//					_.each(myPositionenList, function(p) {
+//						if (parseInt(p.value) !== 0) {
+//							p.isSelected = NO;
+//						} else {
+//							p.isSelected = YES;
+//						}
+//					});
+//				    var positionenArray = _.map(myPositionenList, function(o) {
+//				    	if ( typeof(o) === "undefined" ) {
+//				    		console.log("UNDEFINED position");
+//				    	} else {    
+//							if (relevantDetailsController.positionId) {
+//								o.isSelected = (o.value === relevantDetailsController.positionId);
+//								if (o.isSelected) { itemSelected = YES; }
+//							}
+//				            return o;
+//				    	}
+//				    });
+//				    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
+//					    positionenArray = _.map(positionenArray, function(o) {
+//							if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
+//								o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+//								if (o.isSelected) { itemSelected = YES; 
+//									relevantDetailsController.set("positionId", o.value);
+//									relevantDetailsController.set("positionName", o.label);
+//								}
+//							}
+//				            return o;
+//					    });
+//				    }
+//				    positionenArray = _.compact(positionenArray);
+//				    if (positionenArray.length > 1) {
+//				    	positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
+//				    }
+//				    if (!itemSelected && positionenArray.length == 1) {
+//				    	positionenArray[0].isSelected = YES;
+//				    	relevantDetailsController.set("positionId", positionenArray[0].value);
+//				    	relevantDetailsController.set("positionName", positionenArray[0].label);
+//				    }
+//				    relevantDetailsController.set("positionenList", positionenArray);
 					
 				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 
@@ -134,7 +174,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 				    	if ( typeof(o) === "undefined" ) {
 				    		console.log("UNDEFINED mengeneinheit");
 				    	} else {    
-//							if (DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== null) {
+							if (DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId !== null) {
 								o.isSelected = (o.value === DigiWebApp.BautagebuchMaterialienDetailsController.mengeneinheitId);				    			
 //	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).hide();
 //	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().addClass("transparent");
@@ -142,7 +182,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 //								$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).show();
 //	                			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeneinheitInput.id).parent().removeClass("transparent");
 //	                			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.einheit);
-//							}
+							}
 				            return o;
 				    	}
 				    });

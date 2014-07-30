@@ -10,6 +10,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 	  item: null
 	 
+	, auftragId: null // runtime
+	, auftragName: null // runtime
+	, auftraegeList: null // runtime
+
 	, positionId: null // in model
 	, positionName: null // in model
 	, positionenList: null // runtime
@@ -52,6 +56,20 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var that = this;
 		that.set("item", myItem);
 		//console.log(myItem);
+		var myPosition = _.filter(DigiWebApp.Position.findSorted(), function(position) {
+			return (position.get('id') == myItem.get("positionId"));
+		});
+		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()), function(auftrag) {
+			if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
+				return (auftrag.get('id') == myPosition.get('handOrderId'));
+			} else {
+				return (auftrag.get('id') == myPosition.get('orderId'));
+			}
+		});
+		var myAuftragId = myAuftrag.get('id');
+		var myAuftragName = myAuftrag.get('name');
+		that.set("auftragId", myAuftragId);
+		that.set("auftragName", myAuftragName);
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
@@ -60,7 +78,6 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		that.set("mengeneinheitId", myItem.get("mengeneinheitId"));
 		that.set("artikel", myItem.get("artikel"));
 		that.set("menge", myItem.get("menge"));
-		that.set("einheitId", myItem.get("einheitId"));
 		that.setTaetigkeiten(myItem.get("positionId"));
 	}
 	
@@ -93,7 +110,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
             return false;
 		}
 		
-		if (!that.einheit) {
+		if (!that.mengeneinheitId) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                 title: M.I18N.l('BautagebuchKeineEinheit')
               , message: M.I18N.l('BautagebuchKeineEinheitMsg')

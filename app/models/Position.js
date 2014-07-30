@@ -99,7 +99,23 @@ DigiWebApp.Position = M.Model.create({
         isRequired: NO
     })
     	
-	, deleteAll: function() {
+    , getList: function(parentId, selectedId) {
+		var items = DigiWebApp.Position.findSorted();
+		items = _.filter(items, function(item){
+			return (item.get('orderId') == parentId);
+		});
+		var resultList = [];
+		_.each(items, function(obj){
+    		var item = { label: obj.get('name'), value: obj.get('id') };
+    		if (selectedId && obj.get('id') == selectedId) {
+    			item.isSelected = YES;
+    		}
+    		resultList.push(item);
+		});
+		return resultList;
+	}
+
+, deleteAll: function() {
 		var that = this;
 	    _.each(this.find(), function(el) {
 	        el.del();
