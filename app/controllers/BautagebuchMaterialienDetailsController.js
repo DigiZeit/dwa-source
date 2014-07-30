@@ -354,11 +354,9 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			relevantDetailsController.set('materialId', selectedId);
 		}
 		if (DigiWebApp.BautagebuchMaterialienDetailsController.materialId && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "0" && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== null && DigiWebApp.BautagebuchMaterialienDetailsController.materialId !== "") {
-			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).hide();
-			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().addClass("transparent");
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().hide();
 		} else {
-			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).show();
-			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().removeClass("transparent");
+			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().show();
 			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.artikel);
 		}
 		relevantDetailsController.setMengeneinheiten();
@@ -367,7 +365,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, setMengeneinheiten: function() {
 		var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
 		var MEs = null
-		if (relevantDetailsController.materialId) {
+		if (relevantDetailsController.materialId && relevantDetailsController.materialId > 0) {
 			MEs = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).getMengeneinheiten();
 		} else {
 			MEs = DigiWebApp.BautagebuchMengeneinheit.findSorted();
@@ -375,7 +373,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		var paramObj = {items: MEs};
 		if (relevantDetailsController.mengeneinheitId) {
 			paramObj.selectedId = relevantDetailsController.mengeneinheitId;	
-		} else if (relevantDetailsController.materialId) {
+		} else if (relevantDetailsController.materialId && relevantDetailsController.materialId > 0) {
 			paramObj.selectedId = DigiWebApp.BautagebuchMaterial.getById(relevantDetailsController.materialId).get('standardEinheitId');
 		}
 		relevantDetailsController.set("mengeneinheitenList", DigiWebApp.BautagebuchMengeneinheit.getList(paramObj));
