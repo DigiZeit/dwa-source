@@ -103,6 +103,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 	}
 
     , getList: function(paramObj) {
+		if (!paramObj) paramObj = {};
     	var that = this;
 		var resultList = [];
 		var alleMaterialien = DigiWebApp[that.name].findSorted();
@@ -130,6 +131,9 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		_.each(alleMaterialien, function(obj){
     		var item = { label: obj.get('name'), value: obj.get('id') };
     		if (paramObj.selectedId && obj.get('id') == paramObj.selectedId) {
+    			item.isSelected = YES;
+    			itemSelected = YES;
+    		} else if (!paramObj.selectedId && that.get('standardEinheitId') && obj.get('id') == that.get('standardEinheitId')) {
     			item.isSelected = YES;
     			itemSelected = YES;
     		}

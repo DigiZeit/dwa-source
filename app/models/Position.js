@@ -163,6 +163,8 @@ DigiWebApp.Position = M.Model.create({
     }
 
     , getList: function(paramObj) {
+		if (!paramObj) paramObj = {};
+		var that = this;
 		var resultList = [];
 		var items = DigiWebApp.Position.findSorted();
 		if (paramObj.parentId) {

@@ -32,6 +32,7 @@ DigiWebApp.BautagebuchHersteller = M.Model.create({
 	}
 	
 	, getList: function(paramObj) {
+		if (!paramObj) paramObj = {};
 		var that = this;
 		var resultList = [];
 		var items = DigiWebApp[that.name].findSorted();

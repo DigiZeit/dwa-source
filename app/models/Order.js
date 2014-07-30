@@ -27,6 +27,8 @@ DigiWebApp.Order = M.Model.create({
 	}
 
     , getList: function(paramObj) {
+		if (!paramObj) paramObj = {};
+		var that = this;
 		var resultList = [];
 		var auftraege = DigiWebApp.Order.findSorted();
 		var handauftraege = DigiWebApp.HandOrder.findSorted();

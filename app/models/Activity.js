@@ -43,6 +43,7 @@ DigiWebApp.Activity = M.Model.create({
 	}
 
 	, getList: function(paramObj) {
+		if (!paramObj) paramObj = {};
 		var resultList = [];
 		var position = null;
 		if (paramObj.parentId) {
