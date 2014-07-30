@@ -87,7 +87,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		that.set("activityId", myItem.get("activityId"));
 		that.set("activityName", myItem.get("activityName"));
 		that.set("materialId", myItem.get("materialId"));
-		that.set("mengeneinheitId", myItem.get("mengeneinheitId"));
+		that.set("materialgruppeId", myItem.get("materialgruppeId"));
+		that.set("materialtypId", myItem.get("materialtypId"));
+		that.set("lieferantId", myItem.get("lieferantId"));
+		that.set("herstellerId", myItem.get("herstellerId"));
 		that.set("artikel", myItem.get("artikel"));
 		that.set("menge", myItem.get("menge"));
 		that.setTaetigkeiten(myItem.get("positionId"));
@@ -183,6 +186,10 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		//console.log(that.materialId);
 		that.item.set("materialId", that.materialId);
 		that.item.set("mengeneinheitId", that.mengeneinheitId);
+		that.item.set("materialgruppeId", that.materialgruppeId);
+		that.item.set("materialtypId", that.materialtypId);
+		that.item.set("lieferantId", that.lieferantId);
+		that.item.set("herstellerId", that.herstellerId);
 		that.item.set("artikel", that.artikel);
 		that.item.set("einheit", that.einheit);
 		that.item.set("menge", that.menge);
