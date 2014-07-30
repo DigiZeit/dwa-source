@@ -53,7 +53,22 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
         isRequired: NO
     })
 
-    , deleteAll: function() {
+    , getHersteller: function() {
+		return DigiWebApp.BautagebuchHersteller.find({query:{identifier: 'id', operator: '=', value: "" + this.herstellerId}})[0];
+	}
+    
+	, getLieferanten: function() {
+		var lieferanten = [];
+		_.each(this.lieferantenIds, function(liefId){
+			var l = DigiWebApp.BautagebuchLieferant.find({query:{identifier: 'id', operator: '=', value: "" + liefId}});
+			if (l) {
+				lieferanten.push(l);
+			}
+		});
+		return lieferanten;
+	}
+
+	, deleteAll: function() {
         _.each(this.find(), function(el) {
     		el.deleteSorted();
         });
