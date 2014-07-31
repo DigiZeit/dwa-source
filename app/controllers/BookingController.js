@@ -2012,7 +2012,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
 					    						DigiWebApp.BautagebuchZusammenfassungController.item
 					    					    , function(msg) {
-					    							startSyncFunc();
+					    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(startSyncFunc);
 					    						}
 					    						, function(xhr,err) {
 					    							startSyncFunc();
