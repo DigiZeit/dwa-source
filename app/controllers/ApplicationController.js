@@ -1090,7 +1090,39 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	DigiWebApp.NavigationController.toBookTimePage();
 	                DigiWebApp.BookingController.sendBookings(NO, YES);
 	            }
-	        } else {
+	        } else if (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) {
+                	// Datenübertragung für Materialerfassung-only und Feierabend
+              	  sendBautageberichtFunc = function() {
+                	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
+			    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
+			    						DigiWebApp.BautagebuchZusammenfassungController.item
+			    					    , function(msg) {
+			    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.ApplicationController.startsync);
+			    						}
+			    						, function(xhr,err) {
+			    							DigiWebApp.ApplicationController.startsync();
+			    						}
+			    				);
+                	  	}
+                	  	
+              		DigiWebApp.BautagebuchBautageberichteListeController.init();
+              		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
+              		var matBautagesbericht = null;
+              		_.each(bautagesberichte, function(bautagesbericht){
+              			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
+              				matBautagesbericht = bautagesbericht;
+              			}
+              		});
+              		
+              		if (matBautagesbericht) {
+              			DigiWebApp.BautagebuchBautageberichtDetailsController.load(matBautagesbericht);
+                  	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
+                  	  	DigiWebApp.BautagebuchZusammenfassungController.finish(sendBautageberichtFunc);
+              		} else {
+              			DigiWebApp.ApplicationController.startsync();
+              		}
+
+            } else {
 	        	DigiWebApp.NavigationController.toBookTimePage();
 	        	DigiWebApp.ApplicationController.startsync();
 	        }
