@@ -415,7 +415,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         })
             	
         , materialInput: M.TextFieldView.design({
-	         events: {
+        	   cssClass: 'materialInput'
+	         , events: {
         		keyup: {
 	                /* executed in scope of DOMWindow because no target defined */
 	            	action: function(selectedValue, selectedItem) {

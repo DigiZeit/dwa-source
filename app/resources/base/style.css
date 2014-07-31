@@ -1705,6 +1705,9 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 	font-size: 18px;
 	text-align: right;
 }
+.bautagebuchMaterialienDetailsPage input.ui-input-text .materialInput {
+	text-align: center;
+}
 .bautagebuchMaterialienDetailsPage div.ui-block-b div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-icon-right.ui-btn-up-c {
 	margin-right: 0px;
 }
