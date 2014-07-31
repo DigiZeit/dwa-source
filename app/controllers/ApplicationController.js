@@ -1097,7 +1097,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
 			    						DigiWebApp.BautagebuchZusammenfassungController.item
 			    					    , function(msg) {
-			    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.ApplicationController.startsync);
+			    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.ApplicationController.startsync, DigiWebApp.ApplicationController.startsync, YES);
 			    						}
 			    						, function(xhr,err) {
 			    							DigiWebApp.ApplicationController.startsync();
