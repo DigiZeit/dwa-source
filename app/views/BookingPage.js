@@ -32,6 +32,11 @@ DigiWebApp.BookingPage = M.PageView.design({
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide();
         		}
+        		if (DigiWebApp.SettingsController.featureAvailable('402')) {
+        			$('#' + DigiWebApp.BookingPage.header.materialButton.id).show(); 			
+        		} else {
+        			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
+        		}
         	}
         }
     }
@@ -39,9 +44,20 @@ DigiWebApp.BookingPage = M.PageView.design({
     , cssClass: 'bookTimePage'
 
     , header: M.ToolbarView.design({
-          childViews: 'title feierabendButton'
+          childViews: 'materialButton title feierabendButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
+        , materialButton: M.ButtonView.design({
+	            value: M.I18N.l('BautagebuchMaterial')
+	          , anchorLocation: M.LEFT
+	          , events: {
+	              tap: {
+		      			action: function() {
+	        				DigiWebApp.DashboardController.materialerfassung();
+						}
+	              }
+	          }
+	      })
         , pauseButton: M.ButtonView.design({
               value: M.I18N.l('back')
             , icon: 'arrow-l'
