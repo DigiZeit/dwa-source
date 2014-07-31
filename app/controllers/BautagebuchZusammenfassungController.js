@@ -195,7 +195,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			var letztesBis = letztesBisArr["0"];
 			_.each(m.get('mitarbeiterIds'), function(mId){
 				if (typeof(letztesBisArr["" + mId]) != "undefined") {
-					if (letztesBisArr["" + mId].getTimestamp() > letztesBis.getTimestamp()) { letztesBis = letztesBisArr["" + mId];
+					if (letztesBisArr["" + mId].getTimestamp() > letztesBis.getTimestamp()) letztesBis = letztesBisArr["" + mId];
 				}
 			});
 
