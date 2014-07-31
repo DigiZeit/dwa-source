@@ -28,7 +28,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
 					}
 
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController == "<standard>") {
+					if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
 						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
 						_.each(myPositionenList, function(p) {
 							if (parseInt(p.value) !== 0) {
