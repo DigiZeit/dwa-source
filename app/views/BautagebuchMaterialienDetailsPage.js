@@ -506,7 +506,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
                 			var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
                 			relevantDetailsController.set("materialId", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).value);
-                			if (selectedValue === 0 || parseInt(selectedValue) === 0) {
+                			var selectedValue = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialComboBox').getSelection(YES).value;
+                			if (selectedValue == 0 || parseInt(selectedValue) == 0) {
                 				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().show()
                 			} else {
                 				$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().hide()
