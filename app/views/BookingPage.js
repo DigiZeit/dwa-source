@@ -53,6 +53,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 	          , events: {
 	              tap: {
 		      			action: function() {
+        					try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 	        				DigiWebApp.DashboardController.materialerfassung();
 						}
 	              }
@@ -82,6 +83,7 @@ DigiWebApp.BookingPage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
         				DigiWebApp.BookingController.closeDay();
 					}
                 }
