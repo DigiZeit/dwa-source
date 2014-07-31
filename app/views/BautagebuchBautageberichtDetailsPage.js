@@ -129,7 +129,14 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			  			$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().hide();
 			  		}
 			  		
-			  		DigiWebApp.BautagebuchBautageberichtDetailsController.setStartUhrzeit();		  		
+			  		DigiWebApp.BautagebuchBautageberichtDetailsController.setStartUhrzeit();
+			  		
+	            	if (DigiWebApp.BautagebuchBautageberichtDetailsController.get('handOrderId')) {
+	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").hide();
+	            	} else {
+	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").show();
+	            	}
+
 			}
         }
         , pagehide: {
@@ -584,9 +591,11 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	        				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
 			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderId", mySelection.value);
 			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", mySelection.label);
+			            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").hide();
 	        				} else {
 			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderId", null);
 			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", null);
+			            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").show();
 	        				}
 		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsId", mySelection.value);
 		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", mySelection.label);

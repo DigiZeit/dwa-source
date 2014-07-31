@@ -14,6 +14,9 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, auftragName: null // runtime
 	, auftraegeList: null // runtime
 
+	, handOrderId: null // runtime
+	, handOrderName: null // runtime
+
 	, positionId: null // in model
 	, positionName: null // in model
 	, positionenList: null // runtime

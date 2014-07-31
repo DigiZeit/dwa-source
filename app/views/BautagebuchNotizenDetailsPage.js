@@ -101,6 +101,12 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.speichernButton.id).show();
 					$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.header.delButton.id).show();
 				}
+				
+            	if (relevantDetailsController.get('handOrderId')) {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.positionComboBox.id + "_container").hide();
+            	} else {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.positionComboBox.id + "_container").show();
+            	}
 
 			}
         }

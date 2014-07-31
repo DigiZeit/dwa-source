@@ -106,22 +106,6 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                     	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialgruppeComboBox.id + "_container").hide();
                 	}
 
-//                	var hidePosition = NO;
-//                	var myAuftragsId = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsId");
-//                	if (myAuftragsId) {
-//	                	var myAuftragsName = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsName");
-//	                	var auftragsIdIsGUID = isGUID(myAuftragsId);
-//	                	hidePosition = (myAuftragsId == myAuftragsName || auftragsIdIsGUID);
-//                	} else {
-//                		myAuftragsId = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsId");
-//	                	var myAuftragsName = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsName");
-//	                	var auftragsIdIsGUID = isGUID(myAuftragsId);
-//	                	if (myAuftragsId == myAuftragsName || auftragsIdIsGUID) {
-//	                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").hide();
-//	                	} else {
-//	                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").show();
-//	                	}
-//                	}
                 	if (relevantDetailsController.get('handOrderId')) {
                 		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").hide();
                 	} else {

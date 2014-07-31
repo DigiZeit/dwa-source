@@ -82,6 +82,14 @@ DigiWebApp.BautagebuchZeitbuchung = M.Model.create({
         isRequired: NO
     })
 
+    , handOrderId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , handOrderName: M.Model.attr('String',{
+        isRequired: NO
+    })
+
     , activityId: M.Model.attr('String', {
         isRequired: NO
     })

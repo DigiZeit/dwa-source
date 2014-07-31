@@ -10,6 +10,13 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 
 	  item: null
 
+	, handOrderId: null // runtime
+	, handOrderName: null // runtime
+
+	, auftragId: null // runtime
+	, auftragName: null // runtime
+	, auftraegeList: null // runtime
+
 	, positionId: null // in model
 	, positionName: null // in model
 	, positionenList: null // runtime
@@ -44,6 +51,22 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	, load: function(myItem) {
 		var that = this;
 		that.set("item", myItem);
+		var myPosition = _.filter(DigiWebApp.Position.findSorted(), function(position) {
+			return (position.get('id') == myItem.get("positionId"));
+		})[0];
+		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()), function(auftrag) {
+			if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
+				return (auftrag.get('id') == myItem.get('handOrderId'));
+			} else {
+				return (auftrag.get('id') == myPosition.get('orderId'));
+			}
+		})[0];
+		var myAuftragId = myAuftrag.get('id');
+		var myAuftragName = myAuftrag.get('name');
+		that.set("auftragId", myAuftragId);
+		that.set("auftragName", myAuftragName);
+		that.set("handOrderId", myItem.get("handOrderId"));
+		that.set("handOrderName", myItem.get("handOrderName"));
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
@@ -99,8 +122,19 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 				return false;
 			}
 		}
-		that.item.set("positionId", that.positionId);
-		that.item.set("positionName", that.positionName);
+		
+		if (that.handOrderId) {
+			that.item.set("handOrderId", that.handOrderId);
+			that.item.set("handOrderName", that.handOrderName);
+			that.item.set("positionId", null);
+			that.item.set("positionName", null);
+		} else {
+			that.item.set("handOrderId", null);
+			that.item.set("handOrderName", null);
+			that.item.set("positionId", that.positionId);
+			that.item.set("positionName", that.positionName);
+		}
+
 		that.item.set("activityId", that.activityId);
 		that.item.set("activityName", that.activityName);
 		that.item.set("mitarbeiterIds", JSON.stringify(that.mitarbeiterIds));
@@ -131,6 +165,8 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    					DigiWebApp.BautagebuchZeitenListeController.neu();
 		    					that.set("positionId", myOldItem.record.positionId);
 		    					that.set("positionName", myOldItem.record.positionName);
+		    					that.set("handOrderId", myOldItem.record.positionId);
+		    					that.set("handOrderName", myOldItem.record.positionName);
 		    					//that.set("activityId", myOldItem.record.activityId);
 		    					//that.set("activityName", myOldItem.record.activityName);
 		    					that.setTaetigkeiten(myOldItem.record.positionId);

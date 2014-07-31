@@ -106,6 +106,12 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				DigiWebApp.BautagebuchZeitenDetailsController.setDauer();		  		
 				DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();		  		
 
+            	if (relevantDetailsController.get('handOrderId')) {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.positionComboBox.id + "_container").hide();
+            	} else {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.positionComboBox.id + "_container").show();
+            	}
+
 			}
         }
         , pagehide: {
