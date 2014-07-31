@@ -2005,7 +2005,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                           }
                           
                           // Datenübertragung für Materialerfassung-only und Feierabend
-                          if (DigiWebApp.SettingsController.featureAvailable("402") && DigiWebApp.BookingController.currentBooking) {
+                          if (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) {
 	                      	  	
                         	  sendBautageberichtFunc = function() {
 	                      	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
