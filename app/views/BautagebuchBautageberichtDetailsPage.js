@@ -580,8 +580,16 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	        , events: {
 		            change: {
 		                action: function(itemValues, items) {
-		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsId", M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'auftragComboBox').getSelection(YES).value);
-		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'auftragComboBox').getSelection(YES).label);
+	        				var mySelection = M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'auftragComboBox').getSelection(YES);
+	        				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
+			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderId", mySelection.value);
+			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", mySelection.label);
+	        				} else {
+			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderId", null);
+			      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", null);
+	        				}
+		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsId", mySelection.value);
+		      				DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", mySelection.label);
 		      				DigiWebApp.BautagebuchBautageberichtDetailsController.setPositionen(M.ViewManager.getView('bautagebuchBautageberichtDetailsPage', 'auftragComboBox').getSelection(YES).value);
 		              }
 		          }
@@ -651,18 +659,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	          })
 	      	      }) 
 	        }) 
-//      	    	M.ButtonView.design({
-//    	          value: M.I18N.l('employees')
-//	  	        , cssClass: 'bautagebuchButton'
-//    	        , events: {
-//    	            tap: {
-//    		    			action: function() {
-//  							//DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMaterialienListePageTransition);
-//      	    				DigiWebApp.NavigationController.toBautagebuchMitarbeiterAuswahlPage();
-//  						}
-//    	            }
-//    	          }
-//    	    })
     	
 	  	    , zeitenButton: M.GridView.design({
 	            childViews: 'buttongrid'
@@ -698,17 +694,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	          })
 	      	      }) 
 	        }) 
-//	  	    	M.ButtonView.design({
-//	  	          value: M.I18N.l('BautagebuchZeiten')
-//	  	        , cssClass: 'bautagebuchButton'
-//	  	        , events: {
-//	  	            tap: {
-//	  	    			action: function() {
-//	  	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchZeitenListePageTransition);
-//	  	    			}
-//	  	            }
-//	  	          }
-//	  	    })
 
         })
         	
@@ -747,20 +732,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      	          })
 	      	      }) 
 	        }) 
-//    	    	M.ButtonView.design({
-//	  	          value: M.I18N.l('BautagebuchNotizen')
-//	  	        , cssClass: 'bautagebuchButton'
-//	  	        //, anchorLocation: M.CENTER
-//	  	        , events: {
-//	  	            tap: {
-//	  	                //target: DigiWebApp.NavigationController,
-//	  	                //action: 'toBautagebuchNotizenListePageTransition'
-//	  	    			action: function() {
-//	  	    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchNotizenListePageTransition);
-//	  					}
-//	  	            }
-//	  	          }
-//	  	    })
 	  	
 	  	    , medienButton: M.GridView.design({
 		            childViews: 'buttongrid'
@@ -794,20 +765,6 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		      	          })
 		      	      }) 
 		        })
-//	  	    	M.ButtonView.design({
-//	  	          value: M.I18N.l('BautagebuchMedien')
-//	  	        , cssClass: 'bautagebuchButton'
-//	  	        //, anchorLocation: M.CENTER
-//	  	        , events: {
-//	  	            tap: {
-//	  	                //target: DigiWebApp.NavigationController,
-//	  	                //action: 'toBautagebuchMedienListePageTransition'
-//	  		    			action: function() {
-//	  		    				DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.toBautagebuchMedienListePageTransition);
-//	  						}
-//	  	            }
-//	  	          }
-//	  	    })
         })
 
         , material_wetter_ButtonGrid: M.GridView.design({

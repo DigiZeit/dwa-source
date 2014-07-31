@@ -30,19 +30,31 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", null);
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", null);
 		}
+		if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('handOrderId')) {
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('handOrderId'));
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('handOrderName'));
+		} else {
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", null);
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", null);
+		}
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionName", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("activityId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("activityName", null);
-		DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", null);
-		DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", null);
+
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", null);
-		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", null);
+
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", null);
+		
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", null);
+
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialtypId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialgruppeId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("herstellerId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("lieferantId", null);
+
 		DigiWebApp.NavigationController.toBautagebuchMaterialienDetailsPageTransition();
 	
 	}

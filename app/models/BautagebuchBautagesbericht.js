@@ -52,6 +52,14 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
         isRequired: NO
     })
 	
+    , handOrderId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , handOrderName: M.Model.attr('String',{
+        isRequired: NO
+    })
+
     , positionId: M.Model.attr('String',{
         isRequired: NO
     })
