@@ -78,14 +78,14 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
 				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 
-					relevantDetailsController.setLieferanten();
-					relevantDetailsController.setHersteller();
-					relevantDetailsController.setMaterialtypen();
-					relevantDetailsController.setMaterialgruppen();
+					relevantDetailsController.setLieferanten(YES);
+					relevantDetailsController.setHersteller(YES);
+					relevantDetailsController.setMaterialtypen(YES);
+					relevantDetailsController.setMaterialgruppen(YES);
 				    
-					relevantDetailsController.setMaterialien();
+					relevantDetailsController.setMaterialien(YES);
 					
-					relevantDetailsController.setMengeneinheiten();
+					relevantDetailsController.setMengeneinheiten(YES);
 					
 					M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.menge);
 					
