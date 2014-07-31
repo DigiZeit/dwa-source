@@ -204,9 +204,6 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			var dauer = m.get("dauer");
 			
 			var naechstesBis = letztesBis.addHours(parseInt(dauer.split(":")[0])).addMinutes(parseInt(dauer.split(":")[1]));
-			_.each(m.get('mitarbeiterIds'), function(mId){
-				letztesBisArr[mId] = naechstesBis;
-			});
 			letztesBis = naechstesBis;
 			
 			// letztesBis für alle MAs dieser Zeitbuchung setzen
