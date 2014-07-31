@@ -226,11 +226,13 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderName", null);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", mySelection.value);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", mySelection.label);
+                        		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").hide();
                 			} else {
     		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", mySelection.value);
     		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", mySelection.label);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", null);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", null);
+                        		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").show();
                 			}
 		      				DigiWebApp.BautagebuchMaterialienDetailsController.setPositionen(M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES).value);
                     	}
