@@ -91,7 +91,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
 					M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.menge);
 					
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen")) {
+                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
+					if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen") && myTyp == "<standard>") {
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.content.speichernButton.id).hide();
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.header.delButton.id).hide();
 					} else {
@@ -99,7 +100,6 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.header.delButton.id).show();
 					}
 					
-                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
                 	if (myTyp == "<materialerfassung_only>") {
                 		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id + "_container").show();
                     	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialgruppeComboBox.id + "_container").show();
