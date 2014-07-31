@@ -414,7 +414,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         , materialInput: M.TextFieldView.design({
         	   cssClass: 'materialInput'
 	         , events: {
-        		change: {
+        		keyup: {
 	                /* executed in scope of DOMWindow because no target defined */
 	            	action: function(selectedValue, selectedItem) {
 	        				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').getValue());
@@ -476,7 +476,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 	            //, label: M.I18N.l('BautagebuchMenge')
 	        	, cssClass: 'mengeInput'
 		        , events: {
-	        		change: {
+	        		keyup: {
 	                    /* executed in scope of DOMWindow because no target defined */
 		            	action: function(selectedValue, selectedItem) {
 	            				DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').getValue());
@@ -504,6 +504,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 		                target: DigiWebApp.BautagebuchMaterialienDetailsController,
 		                action: function() {
             				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+	        				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').getValue());
+            				DigiWebApp.BautagebuchMaterialienDetailsController.set("einheit", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengeneinheitInput').getValue());
+            				DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').getValue());
             				this.save();
             			}
                     }
