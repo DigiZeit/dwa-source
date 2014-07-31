@@ -182,17 +182,30 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	, berechneVonBis: function(saveit) {
 		var that = this;
 		var result = [];
-		var letztesBis = D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("datum") + " " + DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit);
+		var letztesBisArr = [];
+		letztesBisArr[0] = D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("datum") + " " + DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit);
 		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
             return parseInt(z.get('_createdAt'));
         });
 		_.each(relevanteZeitbuchungenSorted, function(m) {
-			//console.log("von", letztesBis.format("HH:MM"));
+
+			// höchstes letztesBis per Mitarbeiter suchen
+			var letztesBis = letztesBisArr[0];
+			_.each(m.get('mitarbeiterIds'), function(mId){
+				if (letztesBisArr[mId]) {
+					if (letztesBisArr[mId].getTimestamp() > letztesBis.getTimestamp()) letztesBis = letztesBisArr[mId];
+				}
+			});
+
 			m.set("von", letztesBis.format("HH:MM"));
 			m.set("timeStampStart", letztesBis.getTimestamp());
 			var dauer = m.get("dauer");
+			
 			var naechstesBis = letztesBis.addHours(parseInt(dauer.split(":")[0])).addMinutes(parseInt(dauer.split(":")[1]));
+			_.each(m.get('mitarbeiterIds'), function(mId){
+				letztesBisArr[mId] = naechstesBis;
+			});
 			letztesBis = naechstesBis;
 			//console.log("bis", letztesBis.format("HH:MM"));
 			m.set("bis", letztesBis.format("HH:MM"));
