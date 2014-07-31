@@ -106,6 +106,15 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                     	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialgruppeComboBox.id + "_container").hide();
                 	}
 
+                	var myAuftragsId = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsId");
+                	var myAuftragsName = DigiWebApp.BautagebuchBautageberichtDetailsController.get("auftragsName");
+                	var auftragsIdIsGUID = isGUID(myAuftragsId);
+                	if (myAuftragsId == myAuftragsName || auftragsIdIsGUID) {
+                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").hide();
+                	} else {
+                		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").show();
+                	}
+
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.activityComboBox.id + "_container").hide();
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialtypComboBox.id + "_container").hide();
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.herstellerComboBox.id + "_container").hide();
