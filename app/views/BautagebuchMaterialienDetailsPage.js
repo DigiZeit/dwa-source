@@ -19,7 +19,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					} else if (DigiWebApp.BookingController.currentBooking) {
 						if (DigiWebApp.BookingController.currentBooking.get('handOrderId')) {
 							relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('handOrderId')}));
-							relevantDetailsController.set('auftragId', DigiWebApp.BookingController.currentBooking.get('handOrderId'));
+							relevantDetailsController.set('handOrderId', DigiWebApp.BookingController.currentBooking.get('handOrderId'));
 						} else {
 							relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('orderId')}));
 							relevantDetailsController.set('auftragId', DigiWebApp.BookingController.currentBooking.get('orderId'));
