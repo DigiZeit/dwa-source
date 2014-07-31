@@ -1703,7 +1703,8 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 }
 .bautagebuchMaterialienDetailsPage input.ui-input-text {
 	font-size: 18px;
-	text-align: right;
+	/*text-align: right;*/
+	text-align: center;
 }
 .bautagebuchMaterialienDetailsPage input.ui-input-text .materialInput {
 	text-align: center;
