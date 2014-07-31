@@ -59,7 +59,11 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	}
 
 	, init: function(isFirstLoad) {
-		//var that = this;
+		var that = this;
+		if (DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId) {
+			that.set('auftragsId',  DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsId);
+			that.set('auftragsName',  DigiWebApp.BautagebuchBautageberichtDetailsController.auftragsName);
+		}
 	}
 
 	, load: function(myItem) {
