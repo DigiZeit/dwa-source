@@ -379,7 +379,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('starteDatenuebertragung'));
     		DigiWebApp.DashboardController.set("lastTimestampDatatransfer", D8.now().getTimestamp());
 	        var bookings = DigiWebApp.Booking.find();
-	        if(bookings.length > 0) {
+	        if (bookings.length > 0) {
 	    	    var finishBooking = function() {
 	    	    	DigiWebApp.BookingController.sendBookings(isClosingDay, true);
 	    	    };
@@ -428,6 +428,38 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	        	} else {
 	        		finishBooking();
 	        	}
+	        } else if (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) {
+            	// Datenübertragung für Materialerfassung-only und Feierabend
+          	  sendBautageberichtFunc = function() {
+            	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
+		    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
+		    						DigiWebApp.BautagebuchZusammenfassungController.item
+		    					    , function(msg) {
+		    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(function() {DigiWebApp.ApplicationController.startsync(YES);});
+		    						}
+		    						, function(xhr,err) {
+		    							DigiWebApp.ApplicationController.startsync(YES)
+		    						}
+		    				);
+            	  	}
+            	  	
+          		DigiWebApp.BautagebuchBautageberichteListeController.init();
+          		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
+          		var matBautagesbericht = null;
+          		_.each(bautagesberichte, function(bautagesbericht){
+          			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
+          				matBautagesbericht = bautagesbericht;
+          			}
+          		});
+          		
+          		if (matBautagesbericht) {
+          			DigiWebApp.BautagebuchBautageberichtDetailsController.load(matBautagesbericht);
+              	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
+              	  	DigiWebApp.BautagebuchZusammenfassungController.finish(sendBautageberichtFunc);
+          		} else {
+          			DigiWebApp.ApplicationController.startsync(YES)
+          		}
+
 	        } else {
 	            // calling startsync here
 	            DigiWebApp.ApplicationController.startsync(YES);
