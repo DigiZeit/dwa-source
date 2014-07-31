@@ -489,5 +489,9 @@ M.I18N.de_de = {
 	, BautagebuchHersteller: "Hersteller"
 	, BautagebuchMaterialgruppe: "Materialgruppe"
 	, BautagebuchMaterialtyp: "Materialtyp"
-	
+	, BautagebuchLieferantFilter: "Lieferantenfilter"
+	, BautagebuchHerstellerFilter: "Herstellerfilter"
+	, BautagebuchMaterialgruppeFilter: "Materialgruppenfilter"
+	, BautagebuchMaterialtypFilter: "Materialtypfilter"
+	, alle: "alle"
 };

@@ -490,5 +490,10 @@ M.I18N.en_us = {
 	, BautagebuchHersteller: "Manufacturer"
 	, BautagebuchMaterialgruppe: "Material group"
 	, BautagebuchMaterialtyp: "Material type"
-			
+	, BautagebuchLieferantFilter: "Supplier filter"
+	, BautagebuchHerstellerFilter: "Manufacturer filter"
+	, BautagebuchMaterialgruppeFilter: "Material group filter"
+	, BautagebuchMaterialtypFilter: "Material type filter"
+	, alle: "all"
+		
 };

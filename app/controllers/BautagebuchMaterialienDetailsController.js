@@ -359,6 +359,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id).parent().show();
 			M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.artikel);
 		}
+		relevantDetailsController.set('mengeneinheitId', null);
 		relevantDetailsController.setMengeneinheiten();
 	}
 

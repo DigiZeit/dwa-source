@@ -49,11 +49,7 @@ DigiWebApp.BautagebuchMaterialgruppe = M.Model.create({
 			}
 			resultList.push(item);
 		});
-		if (!itemSelected && resultList.length > 0) {
-			resultList.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
-		} else if (resultList.length == 0) {
-			resultList.push({label: M.I18N.l('noData'), value: '0', isSelected:YES});
-		}
+		resultList.push({label: M.I18N.l('alle'), value: '0', isSelected:!itemSelected});
 		return resultList;
 	}
 
