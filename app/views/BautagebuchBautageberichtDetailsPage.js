@@ -510,23 +510,23 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 					          		    , monthNamesShort: DigiWebApp.ApplicationController.monthNamesShort
 					          		    , monthNames: DigiWebApp.ApplicationController.monthNames
 					          		    , callbacks: {
-					      				confirm: {
-					      					  target: this
-					      					, action: function(value, date) {
-					      						DigiWebApp.BautagebuchBautageberichtDetailsController.set("startUhrzeit", value);
-					      					}
-					      				}
-					      				, before: {
-					      					action: function(value, date) {
-					      					
-					      					}
-					      				}
-					      				, cancel: {
-					      					action: function() {
-					      					
-					      					}
-					      				}
-					      			}
+						      				confirm: {
+						      					  target: this
+						      					, action: function(value, date) {
+						      						DigiWebApp.BautagebuchBautageberichtDetailsController.set("startUhrzeit", value);
+						      					}
+						      				}
+						      				, before: {
+						      					action: function(value, date) {
+						      					
+						      					}
+						      				}
+						      				, cancel: {
+						      					action: function() {
+						      					
+						      					}
+						      				}
+						      			}
 					          		});
 	          		  		}
 	          	  	  }

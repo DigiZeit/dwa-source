@@ -23,6 +23,13 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("item", DigiWebApp.BautagebuchMaterialBuchung.createRecord({
 			  bautagesberichtId: DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('id')
 		}));
+		if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('auftragId')) {
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('auftragId'));
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", DigiWebApp.BautagebuchBautageberichtDetailsController.item.get('auftragName'));
+		} else {
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", null);
+			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", null);
+		}
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("positionName", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("activityId", null);
@@ -32,6 +39,10 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialId", null);
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("mengeneinheitId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialtypId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("materialgruppeId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("herstellerId", null);
+		DigiWebApp.BautagebuchMaterialienDetailsController.set("lieferantId", null);
 		DigiWebApp.NavigationController.toBautagebuchMaterialienDetailsPageTransition();
 	
 	}
