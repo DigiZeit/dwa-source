@@ -414,7 +414,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         , materialInput: M.TextFieldView.design({
         	   cssClass: 'materialInput'
 	         , events: {
-        		keyup: {
+        		change: {
 	                /* executed in scope of DOMWindow because no target defined */
 	            	action: function(selectedValue, selectedItem) {
 	        				DigiWebApp.BautagebuchMaterialienDetailsController.set("artikel", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'materialInput').getValue());
@@ -476,7 +476,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 	            //, label: M.I18N.l('BautagebuchMenge')
 	        	, cssClass: 'mengeInput'
 		        , events: {
-	        		keyup: {
+	        		change: {
 	                    /* executed in scope of DOMWindow because no target defined */
 		            	action: function(selectedValue, selectedItem) {
 	            				DigiWebApp.BautagebuchMaterialienDetailsController.set("menge", M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').getValue());
