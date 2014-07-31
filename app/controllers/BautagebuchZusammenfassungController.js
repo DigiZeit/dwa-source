@@ -193,12 +193,12 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 
 			// höchstes letztesBis per Mitarbeiter suchen
 			var letztesBis = letztesBisArr["0"];
-			_.each(m.get('mitarbeiterIds'), function(mId){
+			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId){
 				if (typeof(letztesBisArr["" + mId]) != "undefined") {
 					if (letztesBisArr["" + mId].getTimestamp() > letztesBis.getTimestamp()) {
 						letztesBis = letztesBisArr["" + mId];
 					}
-					console.log(mId, letztesBis.format('dd.MM.yyyy HH:mm'));
+					console.log(mId, letztesBis.format('dd.mm.yyyy HH:MM'));
 				}
 			});
 
@@ -210,9 +210,9 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			letztesBis = naechstesBis;
 			
 			// letztesBis für alle MAs dieser Zeitbuchung setzen
-			_.each(m.get('mitarbeiterIds'), function(mId){
+			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId){
 				letztesBisArr["" + mId] = letztesBis;
-				console.log(mId, letztesBis.format('dd.MM.yyyy HH:mm'));
+				console.log(mId, letztesBis.format('dd.mm.yyyy HH:MM'));
 			});
 			
 			//console.log("bis", letztesBis.format("HH:MM"));
