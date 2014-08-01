@@ -115,7 +115,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		}
 		if (paramObj.herstellerId) {
 			items = _.filter(items, function(mat) {
-				return _.contains([JSON.parse(mat.get('herstellerId'))], "" + paramObj.herstellerId);
+				return _.contains([mat.get('herstellerId')], "" + paramObj.herstellerId);
 			});
 		}
 		if (paramObj.materialgruppeId) {
@@ -125,7 +125,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		}
 		if (paramObj.materialtypId) {
 			items = _.filter(items, function(mat) {
-				return _.contains([JSON.parse(mat.get('materialtypId'))], "" + paramObj.materialtypId);
+				return _.contains([mat.get('materialtypId')], "" + paramObj.materialtypId);
 			});
 		}
 		_.each(items, function(obj){
