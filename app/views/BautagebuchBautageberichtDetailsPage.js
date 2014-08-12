@@ -327,6 +327,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		    	        , events: {
 		    	            tap: {
 	    		    			action: function() {
+							  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+											return;
+									}
 									var myStunde = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 									var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
 									myStunde = (myStunde + 1) % 24;
@@ -346,6 +349,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 		    	        , events: {
 		    	            tap: {
 	    		    			action: function() {
+							  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+											return;
+									}
 									var myStunde = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 									var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
 									var minuteSteps = 1;
@@ -402,6 +408,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	    	        , events: {
 	    	            tap: {
   		    				action: function() {
+						  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+										return;
+								}
 								var myStunde = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
 								myStunde = myStunde - 1;
@@ -424,6 +433,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	    	        , events: {
 	    	            tap: {
   		    				action: function() {
+						  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
+										return;
+								}
 								var myStunde = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 								var myMinute = parseInt($('#'+DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
 								var minuteSteps = 1;

@@ -8,7 +8,9 @@
 // manuell var-checked
 DigiWebApp.RequestController = M.Controller.extend({
 
-	  GatewayServer: 'www.digi-gps.de'
+	  //GatewayServer: 'www.digi-gps.de'
+	  GatewayServer: 'primary.digi-gateway.de'
+	, GatewayPool: 'pool.digi-gateway.de'
 	, DatabaseServer: null
 	, DatabaseServerTimestamp: null
 	, handy2WebServicesUrl: '/Handy2WebServices/services/DatenTransfer'
@@ -23,7 +25,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 5429
+    , softwareVersion: 5430
 
 
     /**
@@ -123,7 +125,7 @@ DigiWebApp.RequestController = M.Controller.extend({
         var firmenId = DigiWebApp.SettingsController.getSetting('company');
 
     	var myGatewayServer = DigiWebApp.RequestController.GatewayServer;
-    	
+    	    	
     	if (typeof(device) === "undefined") {
     		myGatewayServer = location.host;
     	}
@@ -134,96 +136,102 @@ DigiWebApp.RequestController = M.Controller.extend({
 
 		//alert('http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf());
 		
+    	var successFunc = function(xmldata, msg, xhr) {
+        	//alert("xmldata: " + xmldata);
+        	//alert("msg: " + msg);
+        	//alert("xhr.status: " + xhr.status);
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
+        	var data = DigiWebApp.RequestController.transformResultToJson(xmldata);
+	    	if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
+	    	if (data['return'] !== "") {
+	    		DigiWebApp.RequestController.DatabaseServer = data['return'];
+	    	} else {
+	    		console.log("FALLBACK: empty DatabaseServer --> falling back to GatewayServer"); 
+	    		DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayServer;
+	    	}
+	    	DigiWebApp.RequestController.DatabaseServerTimestamp = new Date().getTime();
+	    	if (typeof(device) === "undefined") {
+	    		if ((location.host !== DigiWebApp.RequestController.DatabaseServer)) {
+        		        /*DigiWebApp.ApplicationController.nativeAlertDialogView({
+        		            title: M.I18N.l('wrongServer'),
+        		            message: M.I18N.l('wrongServerMessage'),
+        		            callbacks: {
+        		                confirm: {
+        		                      target: this
+        		                    , action: function () {
+        		                    	//alert(location.host);
+        		                    	//alert('http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname);
+						    			location.href = 'http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname;
+        		                    }
+        		                }
+        		            }
+        		        });*/
+		        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
+			            	  title: M.I18N.l('wrongServer')
+		    		        , message: M.I18N.l('wrongServerMessage')
+				            , confirmButtonValue: M.I18N.l('yes')
+		            		, cancelButtonValue: M.I18N.l('appZuruecksetzen')
+		            		, callbacks: {
+		                		  confirm: {
+		                    		  target: this
+		                    		, action: function() {
+								    			location.href = 'http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname;
+		                    				}
+		                			}
+		                		, cancel: {
+		                    		  target: this
+		                    		, action: function() {
+	                        					DigiWebApp.ApplicationController.deleteAllData(); 
+				    							if (typeof(navigator.app) !== "undefined") {
+													if (typeof(location.origin) !== "undefined") {
+														navigator.app.loadUrl(location.origin + location.pathname);					
+													} else {
+														navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+													}
+				    							} else {
+				    								window.location.reload();
+				    							}
+		                    				}
+		                		}
+		            		}
+		        		});
+        		        
+	    		} else {
+	    			//console.log(myFunc);
+					myFunc(obj);
+	    		}
+	    	} else {
+    			//console.log(myFunc);
+				myFunc(obj);
+			}
+        }
+    	
         var req = M.Request.init({
-        
               url: 'http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf()
-
             , method: 'GET'
             , beforeSend: function(xhr) {
                 DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('empfangeUrlLoader'));
                 xhr.setRequestHeader('Cache-Control', 'no-cache');
             }
-            , onSuccess: function(xmldata, msg, xhr) {
-            	//alert("xmldata: " + xmldata);
-            	//alert("msg: " + msg);
-            	//alert("xhr.status: " + xhr.status);
-				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-            	var data = DigiWebApp.RequestController.transformResultToJson(xmldata);
-		    	if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
-		    	if (data['return'] !== "") {
-		    		DigiWebApp.RequestController.DatabaseServer = data['return'];
-		    	} else {
-		    		console.log("FALLBACK: empty DatabaseServer --> falling back to GatewayServer"); 
-		    		DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayServer;
-		    	}
-		    	DigiWebApp.RequestController.DatabaseServerTimestamp = new Date().getTime();
-		    	if (typeof(device) === "undefined") {
-		    		if ((location.host !== DigiWebApp.RequestController.DatabaseServer)) {
-	        		        /*DigiWebApp.ApplicationController.nativeAlertDialogView({
-	        		            title: M.I18N.l('wrongServer'),
-	        		            message: M.I18N.l('wrongServerMessage'),
-	        		            callbacks: {
-	        		                confirm: {
-	        		                      target: this
-	        		                    , action: function () {
-	        		                    	//alert(location.host);
-	        		                    	//alert('http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname);
-							    			location.href = 'http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname;
-	        		                    }
-	        		                }
-	        		            }
-	        		        });*/
-			        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
-				            	  title: M.I18N.l('wrongServer')
-			    		        , message: M.I18N.l('wrongServerMessage')
-					            , confirmButtonValue: M.I18N.l('yes')
-			            		, cancelButtonValue: M.I18N.l('appZuruecksetzen')
-			            		, callbacks: {
-			                		  confirm: {
-			                    		  target: this
-			                    		, action: function() {
-									    			location.href = 'http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname;
-			                    				}
-			                			}
-			                		, cancel: {
-			                    		  target: this
-			                    		, action: function() {
-		                        					DigiWebApp.ApplicationController.deleteAllData(); 
-					    							if (typeof(navigator.app) !== "undefined") {
-														if (typeof(location.origin) !== "undefined") {
-															navigator.app.loadUrl(location.origin + location.pathname);					
-														} else {
-															navigator.app.loadUrl(location.protocol + '//' + location.pathname);
-														}
-					    							} else {
-					    								window.location.reload();
-					    							}
-			                    				}
-			                		}
-			            		}
-			        		});
-	        		        
-		    		} else {
-		    			//console.log(myFunc);
-						myFunc(obj);
-		    		}
-		    	} else {
-	    			//console.log(myFunc);
-					myFunc(obj);
-				}
-            }
+            , onSuccess: successFunc
             , onError: function(xhr, err) {
-            	//writeToLog(xhr, function(){trackError(err);}, function(){trackError(err);});
-            	//writeToLog(xhr);
-            	trackError("Error in getDatabaseServer: " + err + "\nXHR: " + JSON.stringify(xhr));
-            	//alert("Error in getDatabaseServer: " + err.message);
-            	//console.error("Error in getDatabaseServer: " + err);
-                DigiWebApp.ApplicationController.DigiLoaderView.hide();
-				DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
+                var req = M.Request.init({
+	                    url: 'http://' + DigiWebApp.RequestController.GatewayPool + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf()
+	                  , method: 'GET'
+	                  , beforeSend: function(xhr) {
+	                      	DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('empfangeUrlLoader'));
+	                      	xhr.setRequestHeader('Cache-Control', 'no-cache');
+	                  }
+	                  , onSuccess: successFunc
+	                  , onError: function(xhr, err) {
+	                      	DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	      					DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
+	      			  }
+                });
+                req.send(); // with gateway-pool
 			}
         });
-
-        req.send();
+        req.send(); // with primary-gateway (or localhost)
 		
     }
     , myRequest: null
