@@ -142,7 +142,10 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    					return;
 						    				}
 						    				var timeSinceIntervalSet = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.intervalSetTimestamp;
-						    				if (!param) alert(timeSinceIntervalSet);
+						    				if (!param) {
+					            	  			clearAllIntervals();
+						    					alert(timeSinceIntervalSet);
+						    				}
 						    				if (timeSinceIntervalSet >= DigiWebApp.BautagebuchMainController.buttonPressInterval) {
 						    					myWetter.temperatur = myWetter.temperatur - 1;
 						    					DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
