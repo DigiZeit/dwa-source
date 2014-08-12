@@ -116,8 +116,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
@@ -139,8 +139,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+	            	  					if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
@@ -177,8 +177,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+	            	  					if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === 50) {
 						    					return;
@@ -200,8 +200,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === 50) {
 						    					return;
@@ -268,8 +268,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
 						    					return;
@@ -291,8 +291,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
 						    					return;
@@ -330,8 +330,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 100) {
 						    					return;
@@ -353,8 +353,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 100) {
 						    					return;
@@ -417,8 +417,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 0) {
 						    					return;
@@ -440,8 +440,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 0) {
 						    					return;
@@ -478,8 +478,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 3) {
 						    					return;
@@ -501,8 +501,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 3) {
 						    					return;
@@ -576,8 +576,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 0) {
 						    					return;
@@ -599,8 +599,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 0) {
 						    					return;
@@ -637,8 +637,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 5) {
 						    					return;
@@ -660,8 +660,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 5) {
 						    					return;
@@ -739,8 +739,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.wind === 0) {
 						    					return;
@@ -762,8 +762,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.wind === 0) {
 						    					return;
@@ -800,8 +800,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.wind === 3) {
 						    					return;
@@ -823,8 +823,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-			            	  				if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.wind === 3) {
 						    					return;
