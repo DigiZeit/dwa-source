@@ -138,12 +138,16 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 							)
 					){
 						// künstlicher Termin für diesen Auftrag
-						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("id"))});
+						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("orderId"))});
+						var orderName = "";
+						if (order) {
+							orderName = ", " + order.get("name");
+						}
 						var kuenstlicherTermin = {
 								  _createdAt: D8.create().getTimestamp()
 								, _updatedAt: D8.create().getTimestamp()
 								, beschreibung: null
-								, betreff: pos.get("name") + ", " + order.get("name")
+								, betreff: pos.get("name") + orderName
 								, von: todayStr + " 00:00:00"
 								, bis: todayStr + " 23:59:59"
 								, erinnert: false
