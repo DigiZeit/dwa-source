@@ -22,7 +22,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
         }
     }
 	
-	, myCounter = 0;
+	, myCounter: 0;
     , cssClass: 'bautagebuchWetterPage'
 
     , childViews: 'header content'
