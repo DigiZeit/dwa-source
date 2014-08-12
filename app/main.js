@@ -373,7 +373,7 @@ $(window).bind('load', function(e) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				console.log("Browser downloaded a new app cache");
 				window.newAppVersionAvailable = YES;
-				if (confirm(M.I18N.l('applicationUpdateAvailableMsg'))) { 
+				if (confirm(M.I18N.l('applicationUpdateAvailableMsg') + "\n\n" + DigiWebApp.app.config.version)) { 
 					// Swap it in and reload the page to get the new hotness.
 					try {
 						window.applicationCache.swapCache();
