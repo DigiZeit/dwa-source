@@ -20,7 +20,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 
 	, buttonPressInterval_var: null
 	
-	, buttonPressInterval: 500
+	, buttonPressInterval: 200
 	
 	, wetterDefaults: {
 	      temperatur: 10   // -50 bis +50
