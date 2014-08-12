@@ -599,4 +599,4 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 
-var onMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
