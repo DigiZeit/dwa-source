@@ -117,10 +117,14 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
-			            	  			if (new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+			            	  			var myDiff = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd;
+			            	  			if (myDiff < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+			            	  			console.log("myDiff: " + myDiff);
 			            	  			console.log("DigiWebApp.BautagebuchWetterPage.eventLoopInAction: " + DigiWebApp.BautagebuchWetterPage.eventLoopInAction);
 			            	  			var addFunc = function() {
-				            	  			if (new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+				            	  			var myDiff = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd;
+				            	  			if (myDiff < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+				            	  			console.log("myDiff: " + myDiff);
 				            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction && DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 				            	  			console.log("addFunc DigiWebApp.BautagebuchWetterPage.eventLoopInAction: " + DigiWebApp.BautagebuchWetterPage.eventLoopInAction);
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
@@ -140,17 +144,23 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 			            	  			clearAllIntervals();
 			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction == "mousedown") {
-			            	  				console.log("mousedown");
 			            	  				DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
 			            	  				DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd = new Date().getTime();
+			            	  				console.log("mouseup @ " + DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd);
 			            	  			}
 			              			}  
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
+			            	  			var myDiff = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd;
+			            	  			if (myDiff < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+			            	  			console.log("myDiff: " + myDiff);
 	            	  					if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction && DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			console.log("DigiWebApp.BautagebuchWetterPage.eventLoopInAction: " + DigiWebApp.BautagebuchWetterPage.eventLoopInAction);
 			            	  			var addFunc = function() {
+				            	  			var myDiff = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd;
+				            	  			if (myDiff < DigiWebApp.BautagebuchMainController.buttonPressInterval) return;
+				            	  			console.log("myDiff: " + myDiff);
 				            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction && DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 				            	  			console.log("addFunc DigiWebApp.BautagebuchWetterPage.eventLoopInAction: " + DigiWebApp.BautagebuchWetterPage.eventLoopInAction);
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
@@ -170,9 +180,9 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 			            	  			clearAllIntervals();
 			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction == "touchstart") {
-			            	  				console.log("touchstart");
 			            	  				DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
 			            	  				DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd = new Date().getTime();
+			            	  				console.log("touchend @ " + DigiWebApp.BautagebuchWetterPage.eventLoopLastEnd);
 			            	  			}
 			              			}  
 			              }
