@@ -137,7 +137,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              , mouseup: {
 					    			action: function(m_id, event) {
 			            	  			clearAllIntervals();
-			            	  			DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction == "mousedown") DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
 			              			}  
 			              }
 			              , touchstart: {
@@ -163,7 +163,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              , touchend: {
 					    			action: function(m_id, event) {
 			            	  			clearAllIntervals();
-			            	  			DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
+			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction == "touchstart") DigiWebApp.BautagebuchWetterPage.eventLoopInAction = null;
 			              			}  
 			              }
 		              }
