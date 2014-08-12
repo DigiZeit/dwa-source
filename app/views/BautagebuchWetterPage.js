@@ -254,8 +254,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				    			}
 		                  }
 			              , mousedown: {
-					    			action: function() {
-			            	  			alert("mousedown");
+					    			action: function(a,b,c,d) {
+			            	  			console.log("a:",a,"b:",b,"c:",c,"d:",d);
 			            	  			var addFunc = function(){
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
@@ -275,8 +275,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              			}  
 			              }
 			              , touchstart: {
-					    			action: function() {
-			            	  			alert("touchstart");
+					    			action: function(event) {
 			            	  			var addFunc = function(){
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
