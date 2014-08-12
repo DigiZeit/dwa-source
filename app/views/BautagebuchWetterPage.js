@@ -13,7 +13,6 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
             action: function(m_id, event) {
 				// lade eine evtl. zuvor gespeicherte Wetterauswahl aus dem Bautagesbericht
 				DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetterBackup', JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.get('wetter'))));
-				if (typeof(device) !== "undefined") alert(device.version);
 			}
         }
         , pagehide: {
@@ -116,17 +115,18 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
-			            	  			var addFunc = function() {
+			            	  			var addFunc = function(param) {
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				alert("param" + param);
 			            	  			}
 			            	  			clearAllIntervals();
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
-			            	  			addFunc(); event.preventDefault();
+			            	  			addFunc(YES); event.preventDefault();
 					    			}
 			              }
 			              , mouseup: {
@@ -136,17 +136,18 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              }
 			              , touchstart: {
 					    			action: function(m_id, event) {
-			            	  			var addFunc = function() {
+			            	  			var addFunc = function(param) {
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur - 1;
 						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				alert("param" + param);
 			            	  			}
 			            	  			clearAllIntervals();
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
-			            	  			addFunc(); event.preventDefault();
+			            	  			addFunc(YES); event.preventDefault();
 					    			}
 			                }
 			              , touchend: {
