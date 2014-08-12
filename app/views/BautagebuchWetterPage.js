@@ -123,6 +123,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				}
 						    				var timeSinceIntervalSet = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.intervalSetTimestamp;
 						    				if (timeSinceIntervalSet >= DigiWebApp.BautagebuchMainController.buttonPressInterval || override) {
+						    					console.log("mousedown", "timeSinceIntervalSet: " + timeSinceIntervalSet, "DigiWebApp.BautagebuchMainController.buttonPressInterval: " + DigiWebApp.BautagebuchMainController.buttonPressInterval);
 						    					myWetter.temperatur = myWetter.temperatur - 1;
 						    					DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 						    				}
@@ -147,7 +148,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 						    				}
 						    				var timeSinceIntervalSet = new Date().getTime() - DigiWebApp.BautagebuchWetterPage.intervalSetTimestamp;
 						    				if (timeSinceIntervalSet >= DigiWebApp.BautagebuchMainController.buttonPressInterval || override) {
-						    					console.log("timeSinceIntervalSet: " + timeSinceIntervalSet);
+						    					console.log("touchstart", "timeSinceIntervalSet: " + timeSinceIntervalSet, "DigiWebApp.BautagebuchMainController.buttonPressInterval: " + DigiWebApp.BautagebuchMainController.buttonPressInterval);
 						    					myWetter.temperatur = myWetter.temperatur - 1;
 						    					DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
 						    				}
