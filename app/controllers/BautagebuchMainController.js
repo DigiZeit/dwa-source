@@ -98,7 +98,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
             	} else {        	
             		var obj = { label: o.vollername(), value: o.get('id') };
 //            		if(obj.value === that.selections.activity) {
-//            			obj.isSelected = YES;
+            			obj.isSelected = NO;
 //            			itemSelected = YES;
 //            		}
                     return obj;
