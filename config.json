@@ -24,10 +24,11 @@
         "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">",
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />",
         "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />",
-        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />",
+        "<script src=\"http://81.169.231.31:8080/target/target-script-min.js\"></script>"
     ],
     "application": {
-        "version": "1.8.1.5470 beta",
+        "version": "1.8.1.5472 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
