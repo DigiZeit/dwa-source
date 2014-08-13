@@ -121,7 +121,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
           childViews: 'container grid transferGrid loeschenButton'
         	  
 	    , container: M.ContainerView.design({
-    	    	childViews: 'detailsGrid leistungsnachweisList materialienList notizenList medienList signature spacer'
+    	    	childViews: 'detailsGrid leistungsnachweisList materialienList notizenList medienList signature'
     	      , cssClass: 'bautagebuchZusammenfassungScrollView'
     	    	  
     	      , spacer: M.LabelView.design({
