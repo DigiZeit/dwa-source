@@ -133,8 +133,8 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 			  		
 	            	if (DigiWebApp.BautagebuchBautageberichtDetailsController.get('handOrderId')) {
 	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").hide();
-	            	} else {
-	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").show();
+//	            	} else {
+//	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").show();
 	            	}
 
 			}
