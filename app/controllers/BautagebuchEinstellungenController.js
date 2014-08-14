@@ -35,6 +35,12 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 	      , label: M.I18N.l('in15MinutenSchritten')
 	      , isSelected: YES
 		}]
+		, alleMitarbeiterVorselektiert: NO
+		, alleMitarbeiterVorselektiertItem: [{
+	        value: 'alleMitarbeiterVorselektiert'
+	      , label: M.I18N.l('alleMitarbeiterVorselektiert')
+	      , isSelected: NO
+		}]
 	}
 
 	, init: function(isFirstLoad) {
@@ -57,6 +63,8 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		that.set("settings.positionVorselektierenItem", that.settings.positionVorselektierenItem);
 		that.set("settings.in15MinutenSchritten", that.settings.in15MinutenSchritten);
 		that.set("settings.in15MinutenSchrittenItem", that.settings.in15MinutenSchrittenItem);
+		that.set("settings.alleMitarbeiterVorselektiert", that.settings.alleMitarbeiterVorselektiert);
+		that.set("settings.alleMitarbeiterVorselektiertItem", that.settings.alleMitarbeiterVorselektiertItem);
 
 		if (DigiWebApp.BautagebuchEinstellungen.find().length === 0) {
 			// erstelle Record mit Vorgabewerten
@@ -66,6 +74,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 				, falscheZeitenIgnorieren: that.settings.falscheZeitenIgnorieren
 				, positionVorselektieren: that.settings.positionVorselektieren
 				, in15MinutenSchritten: that.settings.in15MinutenSchritten
+				, alleMitarbeiterVorselektiert: that.settings.alleMitarbeiterVorselektiert
 			});
 			rec.save();
 		} else {
@@ -103,6 +112,14 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 			      , isSelected: rec.get("in15MinutenSchritten")
 				}]);
 			}
+			if (typeof(rec.get("alleMitarbeiterVorselektiert")) !== "undefined") {
+				that.set("settings.alleMitarbeiterVorselektiert", rec.get("alleMitarbeiterVorselektiert"));
+				that.set("settings.alleMitarbeiterVorselektiertItem", [{
+			        value: 'alleMitarbeiterVorselektiert'
+			      , label: M.I18N.l('alleMitarbeiterVorselektiert')
+			      , isSelected: rec.get("alleMitarbeiterVorselektiert")
+				}]);
+			}
 		}
 	}
 	
@@ -115,6 +132,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		rec.set("falscheZeitenIgnorieren", that.settings.falscheZeitenIgnorieren);
 		rec.set("positionVorselektieren", that.settings.positionVorselektieren);
 		rec.set("in15MinutenSchritten", that.settings.in15MinutenSchritten);
+		rec.set("alleMitarbeiterVorselektiert", that.settings.alleMitarbeiterVorselektiert);
 		rec.save();
 		
 		//M.ViewManager.setCurrentPage(that.lastPage)

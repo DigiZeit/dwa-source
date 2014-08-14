@@ -495,5 +495,6 @@ M.I18N.en_us = {
 	, BautagebuchMaterialgruppeFilter: "Material group filter"
 	, BautagebuchMaterialtypFilter: "Material type filter"
 	, alle: "all"
-		
+	
+	, alleMitarbeiterVorselektiert: "Preselect all employees"
 };

@@ -55,7 +55,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox in15MinutenSchrittenCheckbox'
+	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox in15MinutenSchrittenCheckbox alleMitarbeiterVorselektiertCheckbox'
 
             , startUhrzeitContainer: M.ContainerView.design({
 	      	      label: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
@@ -292,7 +292,23 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 		    		}
 				}
 	      })
-	
+	      
+	      , alleMitarbeiterVorselektiertCheckbox: M.SelectionListView.design({
+		          selectionMode: M.MULTIPLE_SELECTION
+	            , contentBinding: {
+	                  target: DigiWebApp.BautagebuchEinstellungenController
+	                , property: 'settings.alleMitarbeiterVorselektiert'
+	            }
+			    , events: {
+		    		change: {
+			    		  target: DigiWebApp.BautagebuchEinstellungenController
+		    			, action: function(itemValues, items) {
+			    			this.settings.alleMitarbeiterVorselektiert = (itemValues.length === 1);
+			    			this.settings.alleMitarbeiterVorselektiertItem.isSelected = (itemValues.length === 1);
+						}
+		    		}
+				}
+	      })
 
       //	      , sliderContainer: M.ContainerView.design({
 //	    	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'

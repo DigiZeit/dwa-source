@@ -494,4 +494,6 @@ M.I18N.de_de = {
 	, BautagebuchMaterialgruppeFilter: "Materialgruppenfilter"
 	, BautagebuchMaterialtypFilter: "Materialtypfilter"
 	, alle: "alle"
+		
+	, alleMitarbeiterVorselektiert: "Alle Mitarbeiter vorselektieren"
 };

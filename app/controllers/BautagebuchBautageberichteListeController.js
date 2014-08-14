@@ -44,7 +44,7 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", null);
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionName", null);
-		if (false) {
+		if (DigiWebApp.BautagebuchEinstellungenController.settings.alleMitarbeiterVorselektiert) {
 			DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
 		} else {
 			DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", null);
