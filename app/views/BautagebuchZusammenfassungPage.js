@@ -41,7 +41,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
         			$('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.container.signature.id).show();
 					// init canvas
 					var sigPadOptions = {
-							    bgColour : '#aaa'
+							    bgColour : 'transparent'
 							  , lineTop: 300
 							  , drawOnly : true
 							};

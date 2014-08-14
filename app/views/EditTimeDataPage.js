@@ -28,7 +28,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         			$('#' + DigiWebApp.EditTimeDataPage.content.signature.id).show();
 					// init canvas
 					var sigPadOptions = {
-							    bgColour : '#fff'
+							    bgColour : 'transparent'
 							  , lineTop: 130
 							  , drawOnly : true
 							};
