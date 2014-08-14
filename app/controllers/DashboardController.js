@@ -479,18 +479,20 @@ DigiWebApp.DashboardController = M.Controller.extend({
      		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
      	    ){
                  
-     	        	sendBautageberichtFunc = function(callback) {
-           	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-     	    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-     	    						DigiWebApp.BautagebuchZusammenfassungController.item
-     	    					    , function(msg) {
-     	    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
-     	    						}
-     	    						, function(xhr,err) {
-     	    							callback();
-     	    						}
-     	    				);
-                 	}
+	 	        	sendBautageberichtFunc = function(callback) {
+	 	        		if (DigiWebApp.BautagebuchZusammenfassungController.item) {
+	           	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
+	 	    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
+	 	    						DigiWebApp.BautagebuchZusammenfassungController.item
+	 	    					    , function(msg) {
+	 	    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
+	 	    						}
+	 	    						, function(xhr,err) {
+	 	    							callback();
+	 	    						}
+	 	    				);
+	 	        		}	     	    				
+	             	}
                  	
              		var processMaterialerfassungOnly = function(callback) { 
      	        		// Datenübertragung für Materialerfassung-only und Feierabend
