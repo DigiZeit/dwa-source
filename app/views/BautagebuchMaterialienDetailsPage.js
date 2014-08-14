@@ -76,6 +76,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					} else {
 						
 						relevantDetailsController.setPositionen(relevantDetailsController.auftragId);
+						
 					}
 					
 				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);

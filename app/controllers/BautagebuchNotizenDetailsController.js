@@ -10,12 +10,12 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 
 	  item: null
 	
-	, handOrderId: null // runtime
-	, handOrderName: null // runtime
-
 	, auftragId: null // runtime
 	, auftragName: null // runtime
 	, auftraegeList: null // runtime
+
+	, handOrderId: null // runtime
+	, handOrderName: null // runtime
 
 	, positionId: null // in model
 	, positionName: null // in model
@@ -137,6 +137,39 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		});
 	}
 	
+	, setPositionen: function(auftragsId) {
+		var that = this;
+		if (typeof(auftragsId) === "undefined") {
+			return false;
+		} else {
+			// verfügbare Positionen kopieren und ausgewähltes selektieren
+			var itemSelected = NO;
+		    var positionenArray = _.map(DigiWebApp.Position.find(), function(pos) {
+		    	if ( typeof(pos) === "undefined" ) {
+		    		console.log("UNDEFINED Position");
+		    	} else {
+		    		if (parseInt(pos.get('orderId')) == parseInt(auftragsId)) {
+		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
+			    		if (parseInt(pos.get('id')) == parseInt(that.item.get("positionId"))) {
+			    			obj.isSelected = YES;
+			    			itemSelected = YES;
+			    			that.set('positionId', pos.get('id'));
+			    			that.set('positionName', pos.get('name'));
+			    		}
+		    			return obj;
+		    		}
+		    	}
+		    });
+		    positionenArray = _.compact(positionenArray);
+		    if (!itemSelected && auftragsId && positionenArray.length > 0) {
+		    	positionenArray[0].isSelected = YES;
+    			that.set('positionId', positionenArray[0].value);
+    			that.set('positionName', positionenArray[0].label);
+		    }
+		    that.set("positionenList", positionenArray);
+		}
+	}
+
 	, setTaetigkeiten: function(positionId) {
 		var that = this;
 		if (typeof(positionId) !== "undefined") {
