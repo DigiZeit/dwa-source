@@ -2177,7 +2177,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                if ((el[prefix + 'value'] === "true" && !activeFeatureFound) || (el[prefix + 'value'] === "false" && activeFeatureFound)) {
 	                	if (el[prefix + 'keyId'] === "400") DigiWebApp.ApplicationController.restartApp = YES;		// Foto
 	                	if (el[prefix + 'keyId'] === "401") DigiWebApp.ApplicationController.restartApp = YES;		// Sprachaufzeichnung
-	                	//if (el[prefix + 'keyId'] === "402") DigiWebApp.ApplicationController.restartApp = YES;	// Materialerfassung 
+	                	if (el[prefix + 'keyId'] === "402") DigiWebApp.ApplicationController.restartApp = YES;	    // Materialerfassung only
 	                	if (el[prefix + 'keyId'] === "403") DigiWebApp.ApplicationController.restartApp = YES;		// Bemerkungsfeld
 	                	if (el[prefix + 'keyId'] === "404") DigiWebApp.ApplicationController.restartApp = YES;		// Button-Menü
 	                	if (el[prefix + 'keyId'] === "405") DigiWebApp.ApplicationController.restartApp = YES;		// Unterschrift
@@ -2192,13 +2192,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                	if (el[prefix + 'keyId'] === "414") DigiWebApp.ApplicationController.restartApp = YES;		// Kommen/Gehen-Only
 	                	//if (el[prefix + 'keyId'] === "415") DigiWebApp.ApplicationController.restartApp = YES;	// Feierabend-Icon oben rechts
 	                	if (el[prefix + 'keyId'] === "416") DigiWebApp.ApplicationController.restartApp = YES;		// Tätigkeitsicons auf Buchungs-Screen
-	                	if (el[prefix + 'keyId'] === "417") DigiWebApp.ApplicationController.restartApp = YES;	// DIGI-ServiceApp
+	                	if (el[prefix + 'keyId'] === "417") DigiWebApp.ApplicationController.restartApp = YES;		// DIGI-ServiceApp
 	                	if (el[prefix + 'keyId'] === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
 	                	if (el[prefix + 'keyId'] === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
 	                	if (el[prefix + 'keyId'] === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
 	                	if (el[prefix + 'keyId'] === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
 	                	if (el[prefix + 'keyId'] === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
 	                	if (el[prefix + 'keyId'] === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
+	                	if (el[prefix + 'keyId'] === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
 	                }
 	                
 	                // auch bei geändertem branding neu starten

@@ -544,7 +544,7 @@ if ( (searchForFeature(411)) && !(searchForFeature(409)) ) { // Buchungen X Tage
 	DigiWebAppOrdinaryDesign.timeDataArchivePage = DigiWebApp.TimeDataArchivePage;
 }
 	
-if (searchForFeature(412) || searchForFeature(402)) { // Bautagebuch && Materialerfassung
+if (searchForFeature(412) || searchForFeature(402) || searchForFeature(426)) { // Bautagebuch, Materialerfassung & Notizen 
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage;
 	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage;
 	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage;
@@ -581,6 +581,11 @@ if (searchForFeature(423)) { // Terminliste
 
 if (searchForFeature(425)) { // FestePauseStornieren
 	DigiWebAppOrdinaryDesign.festePauseStornierenPage = DigiWebApp.FestePauseStornierenPage;
+}
+
+if (searchForFeature(426)) { // Notizen-Only
+	// hat (noch) keine eigenen Views
+	// --> benutzt weiter unten die Views des Bautagebuches
 }
 
 var restartOnBlackBerry = true;
