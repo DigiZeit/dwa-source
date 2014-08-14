@@ -297,7 +297,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 		          selectionMode: M.MULTIPLE_SELECTION
 	            , contentBinding: {
 	                  target: DigiWebApp.BautagebuchEinstellungenController
-	                , property: 'settings.alleMitarbeiterVorselektiert'
+	                , property: 'settings.alleMitarbeiterVorselektiertItem'
 	            }
 			    , events: {
 		    		change: {
