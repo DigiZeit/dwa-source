@@ -96,7 +96,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.header.delButton.id).show();
 					}
 					
-                	if (myTyp == "<materialerfassung_only>") {
+                	if (myTyp == "<notizen_only>") {
                 		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.auftragComboBox.id + "_container").show();
                 	} else {
                 		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.auftragComboBox.id + "_container").hide();
