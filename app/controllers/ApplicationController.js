@@ -1151,11 +1151,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
               		}
         		}
 
-        		processMaterialerfassungOnly(function(){ 
-        			processNotizenOnly(function(){
-        				DigiWebApp.ApplicationController.startsync();
-        			}); 
-        		})	        		              	  	
+         		processMaterialerfassungOnly(function(){
+    				sendBautageberichtFunc(function(){
+    					processNotizenOnly(function(){
+    						sendBautageberichtFunc(function(){
+    							DigiWebApp.ApplicationController.startsync();
+    						});
+    					});
+         			}); 
+         		});	        		              	  	
             		
             } else {
 

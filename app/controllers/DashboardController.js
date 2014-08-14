@@ -535,11 +535,15 @@ DigiWebApp.DashboardController = M.Controller.extend({
                    		}
              		}
 
-             		processMaterialerfassungOnly(function(){ 
-             			processNotizenOnly(function(){
-             				DigiWebApp.ApplicationController.startsync(YES);
+             		processMaterialerfassungOnly(function(){
+        				sendBautageberichtFunc(function(){
+        					processNotizenOnly(function(){
+        						sendBautageberichtFunc(function(){
+        							DigiWebApp.ApplicationController.startsync(YES);
+        						});
+        					});
              			}); 
-             		})	        		              	  	
+             		});	        		              	  	
                  		
              } else {
 	            // calling startsync here

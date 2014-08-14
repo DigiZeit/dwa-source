@@ -2102,11 +2102,15 @@ DigiWebApp.BookingController = M.Controller.extend({
                                  		}
                            		}
 
-                           		processMaterialerfassungOnly(function(){ 
-                           			processNotizenOnly(function(){
-                           				startSyncFunc();
-                           			}); 
-                           		})	        		              	  	
+                         		processMaterialerfassungOnly(function(){
+                    				sendBautageberichtFunc(function(){
+                    					processNotizenOnly(function(){
+                    						sendBautageberichtFunc(function(){
+                    							startSyncFunc();
+                    						});
+                    					});
+                         			}); 
+                         		});	        		              	  	
                                		
                                } else {
                             	   startSyncFunc();
