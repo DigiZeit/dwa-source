@@ -1157,6 +1157,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				sendBautageberichtFunc(function(){
     					processNotizenOnly(function(){
     						sendBautageberichtFunc(function(){
+    							DigiWebApp.NavigationController.toBookTimePage();
     							DigiWebApp.ApplicationController.startsync();
     						});
     					});
