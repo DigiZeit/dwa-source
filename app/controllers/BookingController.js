@@ -2058,7 +2058,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	             	    							callback();
 	             	    						}
 	             	    				);
-	             	        		}	     	    				
+	             	        		} else {
+	             	        			callback();
+	             	        		}     	    				
 	                         	}
                                	
                            		var processMaterialerfassungOnly = function(callback) { 

@@ -491,6 +491,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	 	    							callback();
 	 	    						}
 	 	    				);
+	 	        		} else {
+	 	        			callback();
 	 	        		}	     	    				
 	             	}
                  	
