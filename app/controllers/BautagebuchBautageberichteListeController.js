@@ -44,7 +44,7 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("handOrderName", null);
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("positionName", null);
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
+		//DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;}));
 		DigiWebApp.BautagebuchBautageberichtDetailsController.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
 		DigiWebApp.BautagebuchBautageberichtDetailsController.set("item", DigiWebApp.BautagebuchBautagesbericht.createRecord({
 			  id: Math.uuid()
