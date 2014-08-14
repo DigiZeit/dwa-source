@@ -10,7 +10,7 @@ DigiWebApp.BautagebuchNotizenTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
-    , childViews: 'positionName handOrderName activityName spacer data'
+    , childViews: 'orderName positionName handOrderName activityName spacer data'
 
     , events: {
         tap: {
@@ -31,6 +31,21 @@ DigiWebApp.BautagebuchNotizenTemplateView = M.ListItemView.design({
 	    value: ''
 	})
 	
+	, orderName: M.LabelView.design({
+	    cssClass: 'normal unselectable'
+  	  , isInline: YES
+	  , computedValue: {
+	        valuePattern: '<%= orderName %>'
+	      , operation: function(v) {
+					if (v !== "" && v !== null && DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp != "<standard>") {
+						return v;
+					} else {
+						return "";
+					}
+	          }
+	  }
+	})
+	
 	, positionName: M.LabelView.design({
 	    cssClass: 'normal unselectable'
   	  , isInline: YES
@@ -38,7 +53,11 @@ DigiWebApp.BautagebuchNotizenTemplateView = M.ListItemView.design({
 	        valuePattern: '<%= positionName %>'
 	      , operation: function(v) {
 					if (v !== "" && v !== null) {
-						return v;
+						if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
+							return v;
+						} else {
+							return ", " + v;
+						}
 					} else {
 						return "";
 					}
