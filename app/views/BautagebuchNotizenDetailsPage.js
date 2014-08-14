@@ -203,14 +203,14 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                     	action: function(selectedValue, selectedItem) {
                 			var mySelection = M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection(YES);
                 			if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-			      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderId", null);
-			      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderName", null);
+			      				DigiWebApp.BautagebuchNotizenDetailsController.set("auftragId", null);
+			      				DigiWebApp.BautagebuchNotizenDetailsController.set("auftragName", null);
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderId", mySelection.value);
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderName", mySelection.label);
                         		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.positionComboBox.id + "_container").hide();
                 			} else {
-    		      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderId", mySelection.value);
-    		      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderId", mySelection.label);
+    		      				DigiWebApp.BautagebuchNotizenDetailsController.set("auftragId", mySelection.value);
+    		      				DigiWebApp.BautagebuchNotizenDetailsController.set("auftragName", mySelection.label);
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderId", null);
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderName", null);
                         		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.positionComboBox.id + "_container").show();

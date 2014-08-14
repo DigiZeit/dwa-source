@@ -222,14 +222,14 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                     	action: function(selectedValue, selectedItem) {
                 			var mySelection = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES);
                 			if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", null);
-			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderName", null);
+			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", null);
+			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", null);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", mySelection.value);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", mySelection.label);
                         		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").hide();
                 			} else {
-    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", mySelection.value);
-    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("orderId", mySelection.label);
+    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", mySelection.value);
+    		      				DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", mySelection.label);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", null);
 			      				DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", null);
                         		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id + "_container").show();
