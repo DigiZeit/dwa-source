@@ -29,10 +29,17 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
 								DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
 							}
 						} else {
-				            DigiWebApp.ApplicationController.nativeAlertDialogView({
-				                title: M.I18N.l('materialPickUp')
-				              , message: M.I18N.l('nurMaterialErfassung')
-				            });
+							if (selectedItem.get("bautagesberichtTyp") == "<materialerfassung_only>") {
+					            DigiWebApp.ApplicationController.nativeAlertDialogView({
+					                title: M.I18N.l('materialPickUp')
+					              , message: M.I18N.l('nurMaterialErfassung')
+					            });
+							} else if (selectedItem.get("bautagesberichtTyp") == "<notizen_only>") {
+					            DigiWebApp.ApplicationController.nativeAlertDialogView({
+					                title: M.I18N.l('BautagebuchNotizen')
+					              , message: M.I18N.l('nurNotizenErfassung')
+					            });
+							} 
 						}
 					}
 				});

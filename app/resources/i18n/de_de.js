@@ -484,6 +484,7 @@ M.I18N.de_de = {
 
 	, wirklichLoeschenMsg: "Möchten Sie diesen Datensatz wirklich löschen?"
 	, nurMaterialErfassung: "Dieser Bautagesbericht dient nur der unmittelbaren Materialerfassung!"
+	, nurNotizenErfassung: "Dieser Bautagesbericht dient nur der unmittelbaren Erfassung von Notizen!"
 
 	, BautagebuchLieferant: "Lieferant"
 	, BautagebuchHersteller: "Hersteller"
