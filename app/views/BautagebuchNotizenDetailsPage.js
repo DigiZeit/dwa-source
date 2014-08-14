@@ -201,7 +201,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                     change: {
                     	/* executed in scope of DOMWindow because no target defined */
                     	action: function(selectedValue, selectedItem) {
-                			var mySelection = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection(YES);
+                			var mySelection = M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection(YES);
                 			if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderId", null);
 			      				DigiWebApp.BautagebuchNotizenDetailsController.set("orderName", null);
