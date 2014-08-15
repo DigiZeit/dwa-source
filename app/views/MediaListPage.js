@@ -73,8 +73,6 @@ DigiWebApp.MediaListPage = M.PageView.design({
 
     , newButton: M.ButtonView.design({
           value: M.I18N.l('BautagebuchAdd')
-        , icon: 'new'
-        , anchorLocation: M.RIGHT
         , cssClass: 'green_background'
         , events: {
             tap: {
