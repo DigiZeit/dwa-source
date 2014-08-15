@@ -7,7 +7,7 @@
 // ==========================================================================
 
 m_require('app/views/MediaListTemplateView.js');
-m_require('app/views/MediaActionTemplateView.js');
+//m_require('app/views/MediaActionTemplateView.js');
 
 DigiWebApp.MediaListPage = M.PageView.design({
 
@@ -21,7 +21,7 @@ DigiWebApp.MediaListPage = M.PageView.design({
 
     , needsUpdate: true
 
-    , childViews: 'header actions mediafiles'
+    , childViews: 'header uebertragenButton mediafiles'
 
     , cssClass: 'mediaListPage unselectable'
 
@@ -60,6 +60,17 @@ DigiWebApp.MediaListPage = M.PageView.design({
         , anchorLocation: M.TOP
     })
 
+    , uebertragenButton: M.ButtonView.design({
+	        value: M.I18N.l('uploadMediaFiles')
+	      , events: {
+	          tap: {
+	                action: function() {
+    					DigiWebApp.MediaListController.uploadMediaFiles();
+	    			}
+	          }
+	      }
+     })
+
     , mediafiles: M.ScrollView.design({
 
           childViews: 'mediafileslist'
@@ -75,20 +86,20 @@ DigiWebApp.MediaListPage = M.PageView.design({
         })
     })
     
-    , actions: M.ScrollView.design({
-
-          childViews: 'actionslist'
-        	  
-        , cssClass: 'actionsList'
-
-        , actionslist: M.ListView.design({
-              contentBinding: {
-                  target: DigiWebApp.MediaListController
-                , property: 'actions'
-              }
-            , listItemTemplateView: DigiWebApp.MediaActionTemplateView
-        })
-    })
+//    , actions: M.ScrollView.design({
+//
+//          childViews: 'actionslist'
+//        	  
+//        , cssClass: 'actionsList'
+//
+//        , actionslist: M.ListView.design({
+//              contentBinding: {
+//                  target: DigiWebApp.MediaListController
+//                , property: 'actions'
+//              }
+//            , listItemTemplateView: DigiWebApp.MediaActionTemplateView
+//        })
+//    })
     
 });
 

@@ -20,13 +20,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			that.senden(
 				  item
 				, function(msg) {
-//					//console.log("successHandler");
-//					DigiWebApp.BautagebuchZusammenfassungController.set("item", null);
-//					DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition();
 					DigiWebApp.BautagebuchBautageberichteListeController.init();
 				}
 				, function(xhr,err) {
-					//console.log("errorHandler");
 					console.error(xhr,err);
 		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                title: M.I18N.l('BautagebuchUebertragungsfehler')

@@ -11,8 +11,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
     /* mediafiles */
       items: null
 
-    /* Aktionen um neue MediaFiles zu erzeugen */
-    , actions: null
+//    /* Aktionen um neue MediaFiles zu erzeugen */
+//    , actions: null
 
     , latestId: null
     
@@ -58,14 +58,21 @@ DigiWebApp.MediaListController = M.Controller.extend({
 //            }
 //            // End::RecordAudio
 
-        	actions.push({
-                  label: M.I18N.l('uploadMediaFiles')
-                , icon: 'icon_dataTransfer.png'
-                , id: 'uploadMediaFiles'
-            });
-
-        	that.set('actions', actions);
+//        	actions.push({
+//                  label: M.I18N.l('uploadMediaFiles')
+//                , icon: 'icon_dataTransfer.png'
+//                , id: 'uploadMediaFiles'
+//            });
+//
+//        	that.set('actions', actions);
             DigiWebApp.MediaListPage.needsUpdate = false;
+
+    		var myMedien = DigiWebApp.MediaFile.find();
+    		if (myMedien.length == 0) {
+    			$('#' + DigiWebApp.MediaListPage.uebertragenButton.id).hide();
+    		} else {
+    			$('#' + DigiWebApp.MediaListPage.uebertragenButton.id).show();
+    		}
         }
 
         var list;
