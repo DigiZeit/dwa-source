@@ -17,7 +17,7 @@ DigiWebApp.BautagebuchMaterialienListePage = M.PageView.design({
         }
     }
 
-    , childViews: 'header content'
+    , childViews: 'header uebertragenButton content'
 
     , cssClass: 'bautagebuchListePage unselectable'
 
@@ -66,7 +66,20 @@ DigiWebApp.BautagebuchMaterialienListePage = M.PageView.design({
         , anchorLocation: M.TOP
     })
 
-    , content: M.ScrollView.design({
+    , uebertragenButton: M.ButtonView.design({
+	        value: M.I18N.l('BautagebuchUebertragen')
+	      , events: {
+	          tap: {
+	                action: function() {
+				    	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteMaterialerfassungSenden(function(){
+				    		DigiWebApp.BautagebuchMaterialienListeController.init();
+						});
+	    			}
+	          }
+	      }
+     })
+
+     , content: M.ScrollView.design({
           childViews: 'list'
         , list: M.ListView.design({
               contentBinding: {

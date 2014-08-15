@@ -70,8 +70,10 @@ DigiWebApp.MediaListController = M.Controller.extend({
     		var myMedien = DigiWebApp.MediaFile.find();
     		if (myMedien.length == 0) {
     			$('#' + DigiWebApp.MediaListPage.uebertragenButton.id).hide();
+    			$('#' + DigiWebApp.MediaListPage.newButton.id).show();
     		} else {
     			$('#' + DigiWebApp.MediaListPage.uebertragenButton.id).show();
+    			$('#' + DigiWebApp.MediaListPage.newButton.id).hide();
     		}
         }
 
