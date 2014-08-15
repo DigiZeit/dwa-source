@@ -939,6 +939,7 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 	      })
 
       })
+      
       , loeschenButton: M.ButtonView.design({
           value: M.I18N.l('BautagebuchDelete')
         , cssClass: 'red_background'

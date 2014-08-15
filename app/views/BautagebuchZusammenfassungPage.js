@@ -603,33 +603,20 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 	          value: 'theme/images/icon_bookTime.png'
 	      })
 	  })
-      , loeschenButton: M.GridView.design({
-          childViews: 'button icon'
-        , layout: {
-              cssClass: 'digiButton'
-            , columns: {
-                  0: 'button'
-                , 1: 'icon'
+	  
+      , loeschenButton: M.ButtonView.design({
+          value: M.I18N.l('BautagebuchDelete')
+        , cssClass: 'red_background'
+        , events: {
+            tap: {
+	                target: DigiWebApp.BautagebuchBautageberichtDetailsController,
+	                action: function() {
+        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        				this.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+
+        			}
             }
         }
-        , button: M.ButtonView.design({
-              value: M.I18N.l('BautagebuchDelete')
-            , cssClass: 'red_background'
-            , anchorLocation: M.RIGHT
-            , events: {
-                tap: {
-		                target: DigiWebApp.BautagebuchBautageberichtDetailsController,
-		                action: function() {
-            				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-            				this.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
-
-            			}
-                }
-            }
-        })
-        , icon: M.ImageView.design({
-            value: ''
-        })
     })
 	
 	})

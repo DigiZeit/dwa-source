@@ -296,7 +296,6 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
         , loeschenButton: M.ButtonView.design({
 	  	      value: M.I18N.l('BautagebuchDelete')
 	  	    , cssClass: 'red_background'
-	  	    //, anchorLocation: M.CENTER
 	  	    , events: {
 	  	        tap: {
 	  	            target: DigiWebApp.BautagebuchMedienDetailsController,
