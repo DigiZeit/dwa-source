@@ -667,11 +667,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			console.log("unable to modify StatusBar");
 		}
 		
-		try {
-			window.plugin.backgroundMode.enable();
-		} catch(e) {
-			console.log("unable to enable BackgroundMode");
-		}
+//		try {
+//			window.plugin.backgroundMode.enable();
+//		} catch(e) {
+//			console.log("unable to enable BackgroundMode");
+//		}
 
 		DigiWebApp.SettingsController.init(YES,YES);
         
