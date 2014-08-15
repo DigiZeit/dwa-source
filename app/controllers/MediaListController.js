@@ -346,7 +346,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 
 		var successCallback = function() {
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('cleanMediaFiles'));
-			DigiWebApp.MediaListController.init();
+			//DigiWebApp.MediaListController.init();
 			//DigiWebApp.MediaFile.deleteAll(DigiWebApp.MediaListController.init);
 		};
 		
@@ -395,7 +395,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
 						                    return parseIntRadixTen(mediafile.get('timeStamp'));
 						                });
-						                that.set('items', items.reverse());
+						                that.init();
 					            	}
 					            	mf.deleteFile(delFunc, delFunc);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
@@ -405,7 +405,6 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								// last mediaFile sent
 					    		console.log('sending last mediaFile done (with file)');
 			    				done = true;
-			    				DigiWebApp.MediaListController.init();
 			    				successCallback();
 							}
 						}
