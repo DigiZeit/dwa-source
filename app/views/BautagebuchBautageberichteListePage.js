@@ -18,7 +18,7 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
         }
     }
 	
-    , childViews: 'header content tabBar'
+    , childViews: 'header uebertragenButton content tabBar'
 
     , cssClass: 'bautagebuchListePage unselectable'
 
@@ -60,7 +60,18 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
         , anchorLocation: M.TOP
     })
 
-    , content: M.ScrollView.design({
+    , uebertragenButton: M.ButtonView.design({
+	        value: M.I18N.l('BautagebuchUebertragen')
+	      , events: {
+	          tap: {
+	                action: function() {
+    					DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneUebertragen();
+	    			}
+	          }
+	      }
+     })
+
+     , content: M.ScrollView.design({
           childViews: 'list'
         , list: M.ListView.design({
               contentBinding: {

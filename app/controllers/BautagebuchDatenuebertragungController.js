@@ -13,6 +13,31 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	, consoleLogOutput: NO
 	
+	, abgeschlosseneUebertragen: function() {
+		var that = this;
+		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
+		_.each(abgeschlosseneBautagesberichte, function(item) {
+			that.senden(
+				  item
+				, function(msg) {
+//					//console.log("successHandler");
+//					DigiWebApp.BautagebuchZusammenfassungController.set("item", null);
+//					DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition();
+					DigiWebApp.BautagebuchBautageberichteListeController.init();
+				}
+				, function(xhr,err) {
+					//console.log("errorHandler");
+					console.error(xhr,err);
+		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('BautagebuchUebertragungsfehler')
+		              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
+		            });
+				}
+			);
+		});
+		
+	}
+	
 	, empfangen: function(successReturnCallback, errorReturnCallback) {
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
@@ -711,7 +736,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// verarbeite empfangene Daten
 			
 			if (request.status > 199 && request.status < 300) {
-				// scheint alles gut gengen zu sein
+				// scheint alles gut gegangen zu sein
 				item.deleteSorted(function() {
 					DigiWebApp.BautagebuchBautageberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
 					if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeBautagesberichtFertig Status: " + request.status);

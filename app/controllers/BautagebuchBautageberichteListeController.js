@@ -20,6 +20,12 @@ DigiWebApp.BautagebuchBautageberichteListeController = M.Controller.extend({
 		if (ChefToolOnly) {
 			DigiWebApp.BautagebuchBautageberichteListePage.header.backButton.setValue(M.I18N.l("mainMenu"));
 		}
+		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
+		if (abgeschlosseneBautagesberichte.length == 0) {
+			$('#' + DigiWebApp.BautagebuchBautageberichteListePage.uebertragenButton.id).hide();
+		} else {
+			$('#' + DigiWebApp.BautagebuchBautageberichteListePage.uebertragenButton.id).show();
+		}
 	}
 
 	, neu: function(bautagesberichtTyp, skipRedirect) {
