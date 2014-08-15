@@ -447,114 +447,11 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	        	} else {
 	        		finishBooking();
 	        	}
-//	        } else if (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) {
-//            	// Datenübertragung für Materialerfassung-only und Feierabend
-//          	  sendBautageberichtFunc = function() {
-//            	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-//		    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-//		    						DigiWebApp.BautagebuchZusammenfassungController.item
-//		    					    , function(msg) {
-//		    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(function() {DigiWebApp.ApplicationController.startsync(YES);}, function() {DigiWebApp.ApplicationController.startsync(YES);}, YES);
-//		    						}
-//		    						, function(xhr,err) {
-//		    							DigiWebApp.ApplicationController.startsync(YES)
-//		    						}
-//		    				);
-//            	  	}
-//            	  	
-//          		DigiWebApp.BautagebuchBautageberichteListeController.init();
-//          		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//          		var matBautagesbericht = null;
-//          		_.each(bautagesberichte, function(bautagesbericht){
-//          			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
-//          				matBautagesbericht = bautagesbericht;
-//          			}
-//          		});
-//          		
-//          		if (matBautagesbericht) {
-//          			DigiWebApp.BautagebuchBautageberichtDetailsController.load(matBautagesbericht);
-//              	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
-//              	  	DigiWebApp.BautagebuchZusammenfassungController.finish(sendBautageberichtFunc);
-//          		} else {
-//          			DigiWebApp.ApplicationController.startsync(YES)
-//          		}
-//
-//	        } else {
 	        } else if (
      	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
      		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
      	    ){
                  
-//	 	        	sendBautageberichtFunc = function(callback) {
-//	 	        		if (DigiWebApp.BautagebuchZusammenfassungController.item) {
-//	           	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-//	 	    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-//	 	    						DigiWebApp.BautagebuchZusammenfassungController.item
-//	 	    					    , function(msg) {
-//	 	    							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
-//	 	    						}
-//	 	    						, function(xhr,err) {
-//	 	    							callback();
-//	 	    						}
-//	 	    				);
-//	 	        		} else {
-//	 	        			callback();
-//	 	        		}	     	    				
-//	             	}
-//                 	
-//             		var processMaterialerfassungOnly = function(callback) { 
-//     	        		// Datenübertragung für Materialerfassung-only und Feierabend
-//                     	  	
-//                   		DigiWebApp.BautagebuchBautageberichteListeController.init();
-//                   		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//                   		var myBautagesbericht = null;
-//                   		_.each(bautagesberichte, function(bautagesbericht){
-//                   			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
-//                   				myBautagesbericht = bautagesbericht;
-//                   			}
-//                   		});
-//                   		
-//                   		if (myBautagesbericht) {
-//                   			DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-//                       	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
-//                       	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//                   		} else {
-//                   			callback();
-//                   		}
-//             		}
-//
-//             		var processNotizenOnly = function(callback) { 
-//
-//             			// Datenübertragung für Notiz-only und Feierabend           
-//             			
-//                   		DigiWebApp.BautagebuchBautageberichteListeController.init();
-//                   		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//                   		var myBautagesbericht = null;
-//                   		_.each(bautagesberichte, function(bautagesbericht){
-//                   			if (bautagesbericht.get('bautagesberichtTyp') == "<notizen_only>") {
-//                   				myBautagesbericht = bautagesbericht;
-//                   			}
-//                   		});
-//                   		
-//                   		if (myBautagesbericht) {
-//                   			DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-//                       	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
-//                       	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//                   		} else {
-//                   			callback();
-//                   		}
-//             		}
-//
-//             		processMaterialerfassungOnly(function(){
-//        				sendBautageberichtFunc(function(){
-//        					processNotizenOnly(function(){
-//        						sendBautageberichtFunc(function(){
-//        							DigiWebApp.ApplicationController.startsync(YES);
-//        						});
-//        					});
-//             			}); 
-//             		});	        		              	  	
-
 	        	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteSenden(function(){
 	        		DigiWebApp.ApplicationController.startsync(YES);
     			});
@@ -588,6 +485,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     
     , media: function() {
         DigiWebApp.NavigationController.toMediaListPageTransition();
+        DigiWebApp.MediaListController.neu();
     }
     
     , orderInfo: function() {
