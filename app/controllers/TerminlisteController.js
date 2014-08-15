@@ -138,7 +138,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 							)
 					){
 						// künstlicher Termin für diesen Auftrag
-						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseInt(o.get("id")) == parseInt(pos.get("orderId"))});
+						var order = _.find(DigiWebApp.Order.find(), function(o) { return parseIntRadixTen(o.get("id")) == parseIntRadixTen(pos.get("orderId"))});
 						var orderName = "";
 						if (order) {
 							orderName = ", " + order.get("name");

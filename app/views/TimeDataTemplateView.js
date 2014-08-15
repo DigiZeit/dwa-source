@@ -267,7 +267,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v) {
                 	var activity = null;
-                	if (parseInt(v) !== 0) {
+                	if (parseIntRadixTen(v) !== 0) {
                         activity = _.select(DigiWebApp.Activity.findSorted(), function(a) {
                         	if (a) return v == a.get('id');
                         });
@@ -439,7 +439,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
           , operation: function(v) {
               if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
               	try {
-	                	var a = M.Date.create(parseInt(v));
+	                	var a = M.Date.create(parseIntRadixTen(v));
 	               		return M.I18N.l('gpszeitstempel_von') + ': ' + a.format('dd.mm.yyyy HH:MM');
               	} catch (eDate1) {
               		return '';
@@ -459,7 +459,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
           , operation: function(v) {
               if (v > 0 && DigiWebApp.SettingsController.getSetting("detailierteZeitdaten")) {
               	try {
-	                	var a = M.Date.create(parseInt(v));
+	                	var a = M.Date.create(parseIntRadixTen(v));
 	               		return M.I18N.l('gpszeitstempel_bis') + ': ' + a.format('dd.mm.yyyy HH:MM');
               	} catch (eDate2) {
               		return '';

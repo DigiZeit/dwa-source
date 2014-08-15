@@ -2482,7 +2482,7 @@
                     var attributeNode = elem.getAttributeNode("tabindex");
 
                     return attributeNode && attributeNode.specified ?
-                        parseInt( attributeNode.value, 10 ) :
+                        parseIntRadixTen( attributeNode.value, 10 ) :
                         rfocusable.test( elem.nodeName ) || rclickable.test( elem.nodeName ) && elem.href ?
                             0 :
                             undefined;

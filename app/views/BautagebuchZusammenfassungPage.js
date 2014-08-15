@@ -176,7 +176,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 						        , value: ''
 						        , operation: function(v) {
 						        	// projekleiterName nachladen
-					        		var myProjektleiter = _.find(DigiWebApp.BautagebuchProjektleiter.find(), function(a) { return (parseInt(a.get("id")) === v);});
+					        		var myProjektleiter = _.find(DigiWebApp.BautagebuchProjektleiter.find(), function(a) { return (parseIntRadixTen(a.get("id")) === v);});
 					        		//DigiWebApp.BautagebuchProjektleiter.find({query:{identifier: 'id', operator: '=', value: v}})[0];
 					        		if (typeof myProjektleiter !== "undefined") {
 					        			return M.I18N.l('BautagebuchProjektleiter') + ": " + myProjektleiter.vollername();
@@ -570,7 +570,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		    		    	var startTransfer = NO;
 		    		    	if (that.lastTimestampDatatransfer !== null) {
 		    		    		var timestampNow = D8.now().getTimestamp();
-		    		    		if (timestampNow - that.lastTimestampDatatransfer > parseInt(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
+		    		    		if (timestampNow - that.lastTimestampDatatransfer > parseIntRadixTen(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
 		    		    			startTransfer = YES;
 		    		    		} else {
 		    		    			// evtl. Fehlermeldung, dass noch eine Datenübertragung läuft bzw. nur alle 30 Sekunden eine Datenübertragung gestartet werden darf

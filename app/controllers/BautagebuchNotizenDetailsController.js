@@ -152,9 +152,9 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
-		    		if (parseInt(pos.get('orderId')) == parseInt(auftragsId)) {
+		    		if (parseIntRadixTen(pos.get('orderId')) == parseIntRadixTen(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
-			    		if (parseInt(pos.get('id')) == parseInt(that.item.get("positionId"))) {
+			    		if (parseIntRadixTen(pos.get('id')) == parseIntRadixTen(that.item.get("positionId"))) {
 			    			obj.isSelected = YES;
 			    			itemSelected = YES;
 			    			that.set('positionId', pos.get('id'));

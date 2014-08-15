@@ -13,8 +13,8 @@
         }
 
         var height = this.outerHeight();
-        height += parseInt(this.css('margin-bottom'));
-        height += parseInt(this.css('margin-top'));
+        height += parseIntRadixTen(this.css('margin-bottom'));
+        height += parseIntRadixTen(this.css('margin-top'));
 
         if(visible){
             page.removeClass('ui-page-active').css('left', left);
@@ -36,8 +36,8 @@
         }
 
         var width = this.outerWidth();
-        width += parseInt(this.css('margin-left'));
-        width += parseInt(this.css('margin-right'));
+        width += parseIntRadixTen(this.css('margin-left'));
+        width += parseIntRadixTen(this.css('margin-right'));
 
         if(visible){
             page.removeClass('ui-page-active').css('left', left);

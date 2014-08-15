@@ -29,7 +29,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
         }
         /* do something, for any other load. */
         items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
-            return parseInt(mediafile.get('timeStamp'));
+            return parseIntRadixTen(mediafile.get('timeStamp'));
         });
         that.set('items', items.reverse());
 
@@ -317,7 +317,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     	var startTransfer = NO;
     	if (that.lastTimestampDatatransfer !== null) {
     		var timestampNow = D8.now().getTimestamp();
-    		if (timestampNow - that.lastTimestampDatatransfer > parseInt(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
+    		if (timestampNow - that.lastTimestampDatatransfer > parseIntRadixTen(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
     			startTransfer = YES;
     		} else {
     			// evtl. Fehlermeldung, dass noch eine Datenübertragung läuft bzw. nur alle 30 Sekunden eine Datenübertragung gestartet werden darf
@@ -370,7 +370,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	    			
     				var mindestMedienTimeout = 60000;
     				var myTimeout = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
-    				if (parseInt(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) < mindestMedienTimeout) {
+    				if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) < mindestMedienTimeout) {
     					myTimeout = mindestMedienTimeout;
     				}
     				
@@ -384,7 +384,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					            	var delFunc = function() {
 					            		mf.del();
 						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
-						                    return parseInt(mediafile.get('timeStamp'));
+						                    return parseIntRadixTen(mediafile.get('timeStamp'));
 						                });
 						                that.set('items', items.reverse());
 					            	}

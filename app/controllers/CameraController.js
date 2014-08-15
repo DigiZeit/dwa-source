@@ -91,7 +91,7 @@ DigiWebApp.CameraController = M.Controller.extend({
          * POSITIONS
          */
         var positionArray = _.map(positions, function(pos) {
-            if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
+            if (parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(orderId)) {
             	var obj = null;
                 if (pos.get('id') == positionId) {
                     obj = { label: pos.get('name'), value: pos.get('id'), isSelected: YES };
@@ -370,7 +370,7 @@ DigiWebApp.CameraController = M.Controller.extend({
     		activities = DigiWebApp.Activity.findSorted();
     	}
     	activities = _.map(activities, function(acti) {
-	    	if(parseInt(acti.get("positionId")) === 1) {
+	    	if(parseIntRadixTen(acti.get("positionId")) === 1) {
 	            // normale Tätigkeit
 	            return acti;
 	         } else {
@@ -398,7 +398,7 @@ DigiWebApp.CameraController = M.Controller.extend({
             }
 
         }
-        if (parseInt(workplan.get("workplanType")) === 1) {
+        if (parseIntRadixTen(workplan.get("workplanType")) === 1) {
         	// only those activities which are bound to employee
             activities = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
@@ -409,7 +409,7 @@ DigiWebApp.CameraController = M.Controller.extend({
             		var allActivities = DigiWebApp.Activity.findSorted();
             		_.each(allActivities, function(acti) {
             			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
-            			if (parseInt(acti.get("positionId")) === 1) {
+            			if (parseIntRadixTen(acti.get("positionId")) === 1) {
             				zugeordnet = YES;
             			}
             		});
@@ -533,13 +533,13 @@ DigiWebApp.CameraController = M.Controller.extend({
     		}
     	} catch(e1) { console.error(e1); }
     	try {
-    		if (parseInt(myMediaFile.get("positionId")) !== 0) {
-    			myPositionName = _.find(DigiWebApp.Position.find(), function(p){ return parseInt(p.get("id")) === parseInt(myMediaFile.get("positionId"))}).get('name');
+    		if (parseIntRadixTen(myMediaFile.get("positionId")) !== 0) {
+    			myPositionName = _.find(DigiWebApp.Position.find(), function(p){ return parseIntRadixTen(p.get("id")) === parseIntRadixTen(myMediaFile.get("positionId"))}).get('name');
     		}
     	} catch(e2) { console.error(e2); }
     	try {
-    		if (parseInt(myMediaFile.get("activityId")) !== 0) {
-    			myActivityName = _.find(DigiWebApp.Activity.find(), function(p){ return parseInt(p.get("id")) === parseInt(myMediaFile.get("activityId"))}).get('name');
+    		if (parseIntRadixTen(myMediaFile.get("activityId")) !== 0) {
+    			myActivityName = _.find(DigiWebApp.Activity.find(), function(p){ return parseIntRadixTen(p.get("id")) === parseIntRadixTen(myMediaFile.get("activityId"))}).get('name');
     		}
     	} catch(e3) { console.error(e3); }
 	    myMediaFile.set('orderName', myOrderName);

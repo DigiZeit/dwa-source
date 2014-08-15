@@ -298,8 +298,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (this._hTracker)
 		{
-			var cw = parseInt(c.css("width"), 10);
-			var vw = parseInt(v.css("width"), 10);
+			var cw = parseIntRadixTen(c.css("width"), 10);
+			var vw = parseIntRadixTen(v.css("width"), 10);
 			this._maxX = cw - vw;
 			if (this._maxX > 0) this._maxX = 0;
 			if (this._$hScrollBar)
@@ -308,8 +308,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (this._vTracker)
 		{
-			var ch = parseInt(c.css("height"), 10);
-			var vh = parseInt(v.css("height"), 10);
+			var ch = parseIntRadixTen(c.css("height"), 10);
+			var vh = parseIntRadixTen(v.css("height"), 10);
 			this._maxY = ch - vh;
 			if (this._maxY > 0) this._maxY = 0;
 			if (this._$vScrollBar)

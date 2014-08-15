@@ -15,7 +15,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 				var itemSelected = NO;
 //				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
 //				_.each(myPositionenList, function(p) {
-//					if (parseInt(p.value) !== 0) {
+//					if (parseIntRadixTen(p.value) !== 0) {
 //						p.isSelected = NO;
 //					} else {
 //						p.isSelected = YES;
@@ -48,7 +48,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 				var relevantDetailsController = DigiWebApp.BautagebuchMedienDetailsController;
 				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
 				_.each(myPositionenList, function(p) {
-					if (parseInt(p.value) !== 0) {
+					if (parseIntRadixTen(p.value) !== 0) {
 						p.isSelected = NO;
 					} else {
 						p.isSelected = YES;

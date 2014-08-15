@@ -431,7 +431,7 @@
 
     // Build the duration/easing/delay attributes for it.
     var attribs = '' + toMS(duration) + ' ' + easing;
-    if (parseInt(delay, 10) > 0) { attribs += ' ' + toMS(delay); }
+    if (parseIntRadixTen(delay, 10) > 0) { attribs += ' ' + toMS(delay); }
 
     // For more properties, add them this way:
     // "margin 200ms ease, padding 200ms ease, ..."
@@ -524,7 +524,7 @@
     // Compute delay until callback.
     // If this becomes 0, don't bother setting the transition property.
     var work = $.transit.enabled && support.transition;
-    var i = work ? (parseInt(duration, 10) + parseInt(delay, 10)) : 0;
+    var i = work ? (parseIntRadixTen(duration, 10) + parseIntRadixTen(delay, 10)) : 0;
 
     // If there's nothing to do...
     if (i === 0) {

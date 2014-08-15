@@ -165,7 +165,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
-		    		if (parseInt(pos.get('orderId')) === parseInt(auftragsId)) {
+		    		if (parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
 		    			return obj;
 		    		}
@@ -186,7 +186,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		letztesBisArr["0"] = D8.create(DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("datum") + " " + DigiWebApp.BautagebuchBautageberichtDetailsController.startUhrzeit);
 		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
-            return parseInt(z.get('_createdAt'));
+            return parseIntRadixTen(z.get('_createdAt'));
         });
 		var letztesBis = letztesBisArr[0];
 		_.each(relevanteZeitbuchungenSorted, function(m) {
@@ -205,7 +205,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			m.set("timeStampStart", letztesBis.getTimestamp());
 			var dauer = m.get("dauer");
 			
-			var naechstesBis = letztesBis.addHours(parseInt(dauer.split(":")[0])).addMinutes(parseInt(dauer.split(":")[1]));
+			var naechstesBis = letztesBis.addHours(parseIntRadixTen(dauer.split(":")[0])).addMinutes(parseIntRadixTen(dauer.split(":")[1]));
 			letztesBis = naechstesBis;
 			
 			// letztesBis für alle MAs dieser Zeitbuchung setzen
@@ -222,7 +222,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			result.push(m);
 		});
 		var resultSorted = _.sortBy(result , function(z) {
-            return parseInt(z.get('von'));
+            return parseIntRadixTen(z.get('von'));
         });
 		return resultSorted;
 	}
@@ -235,7 +235,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			// Zeitbuchungen wurden bereits berechnet oder es wird nicht in Stunden gebucht (sondern mit Von/Bis)
 			var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
 			zeitbuchungenList = _.sortBy(relevanteZeitbuchungen , function(z) {
-	            return parseInt(z.get('von'));
+	            return parseIntRadixTen(z.get('von'));
 	        });
 		} else {
 			zeitbuchungenList = that.berechneVonBis();

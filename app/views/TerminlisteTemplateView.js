@@ -27,7 +27,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 						
 						if (position !== null) {
 							var auftrag = _.find(DigiWebApp.Order.find(), function(el) { 
-								return parseInt(position.get("orderId")) === parseInt(el.get("id"));
+								return parseIntRadixTen(position.get("orderId")) === parseIntRadixTen(el.get("id"));
 							});
 							if (DigiWebApp.SettingsController.featureAvailable("406")) {
 								// Auftragsinfo
@@ -96,11 +96,11 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
           , operation: function(v) {
 				var text = "";
 				var pos = _.find(DigiWebApp.Position.find(), function(el) {
-					return parseInt(el.get("id")) === parseInt(v);
+					return parseIntRadixTen(el.get("id")) === parseIntRadixTen(v);
 				});
 				if (pos) {
 					var obj = _.find(DigiWebApp.Order.find(), function(el) {
-						return parseInt(el.get("id")) === parseInt(pos.get("orderId"));
+						return parseIntRadixTen(el.get("id")) === parseIntRadixTen(pos.get("orderId"));
 					});
 					if (obj) {
 						text = obj.get("name");
@@ -123,7 +123,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
           , operation: function(v) {
 				var text = "";
 				var obj = _.find(DigiWebApp.Position.find(), function(el) {
-					return parseInt(el.get("id")) === parseInt(v);
+					return parseIntRadixTen(el.get("id")) === parseIntRadixTen(v);
 				});
 				if (obj) {
 					text = obj.get("name");
@@ -145,7 +145,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
           , operation: function(v) {
 				var text = "";
 				var obj = _.find(DigiWebApp.Position.find(), function(el) {
-					return parseInt(el.get("id")) === parseInt(v);
+					return parseIntRadixTen(el.get("id")) === parseIntRadixTen(v);
 				});
 				if (obj) {
 					text = obj.get("positionBegin");
@@ -167,7 +167,7 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
           , operation: function(v) {
 				var text = "";
 				var obj = _.find(DigiWebApp.Position.find(), function(el) {
-					return parseInt(el.get("id")) === parseInt(v);
+					return parseIntRadixTen(el.get("id")) === parseIntRadixTen(v);
 				});
 				if (obj) {
 					text = obj.get("positionEnd");

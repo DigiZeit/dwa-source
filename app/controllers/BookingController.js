@@ -230,7 +230,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    } else {
 			    	try {
 			    		if (orderId != null) {
-			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseInt(a.get("id")) == parseInt(orderId));});
+			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
 			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
 			    		}
 			    	} catch(e4) { console.error(e4); }
@@ -238,14 +238,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 		    	try {
 		    		if (posId != null) {
-		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) == parseInt(posId));});
+		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
 		    	} catch(e4) { console.error(e4); }
 		    	
 		    	try {
 		    		if (actId != null) {
-		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) == parseInt(actId));});
+		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
 		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
 		    	} catch(e5) { console.error(e5); }
@@ -424,7 +424,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} else {
             orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
     	}
-        if (!orderId || (orderId && parseInt(orderId) === 0)) {
+        if (!orderId || (orderId && parseIntRadixTen(orderId) === 0)) {
             //M.DialogView.alert({
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                   title: M.I18N.l('noOrderSelected')
@@ -560,7 +560,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 	    return true;
 		
-        } // end of else of: if(!orderId || (orderId && parseInt(orderId) === 0))
+        } // end of else of: if(!orderId || (orderId && parseIntRadixTen(orderId) === 0))
     }
 
     
@@ -638,7 +638,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    } else {
 			    	try {
 			    		if (orderId != null) {
-			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseInt(a.get("id")) == parseInt(orderId));});
+			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
 			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
 			    		}
 			    	} catch(e4) { console.error(e4); }
@@ -646,14 +646,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 		    	try {
 		    		if (posId != null) {
-		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) == parseInt(posId));});
+		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
 		    	} catch(e4) { console.error(e4); }
 		    	
 		    	try {
 		    		if (actId != null) {
-		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) == parseInt(actId));});
+		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
 		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
 		    	} catch(e5) { console.error(e5); }
@@ -939,7 +939,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} catch(e3) { console.error(e3); }
     	try {
     		if (obj.pId != null) {
-    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.pId));});
+    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.pId));});
     			//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId.toString()}})[0];
     			if (myPositionLoad && obj.pId !== 0) myPositionName = myPositionLoad.get('name');
     		}
@@ -947,7 +947,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try {
     		if (obj.aId != null) {
     			//var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
-    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.aId));});
+    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.aId));});
     			//DigiWebApp.Activity.findById(obj.aId);
     			if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
     		}
@@ -1049,7 +1049,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		myPositionName = obj.get('positionName');
     	} else {
         	try {
-	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('positionId')));}).get('name');
+	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
     		} catch(e8) { console.error(e8); }
     	}
@@ -1057,7 +1057,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		myActivityName = obj.get('activityName');
     	} else {
         	try {
-	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('activityId')));}).get('name');
+	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
     		} catch(e9) { console.error(e9); }
     	}
@@ -1143,7 +1143,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myPositionName = obj.get('positionName');
     	} else {
         	try {
-	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('positionId')));}).get('name');
+	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
     		} catch(e11) { console.error(e11); }
     	}
@@ -1152,7 +1152,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myActivityName = obj.get('activityName');
     	} else {
         	try {
-	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseInt(a.get("id")) === parseInt(obj.get('activityId')));}).get('name');
+	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
     		} catch(e12) { console.error(e12); }
     	}
@@ -1235,7 +1235,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
+	                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
@@ -1243,7 +1243,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            
 	            // newest booking at the top => first sort than reverse order
 	            bookings = _.sortBy(bookings, function(booking) {
-	                return parseInt(booking.get('timeStampStart'));
+	                return parseIntRadixTen(booking.get('timeStampStart'));
 	            });
 	            this.set('timeData', bookings.reverse());
 	            
@@ -1303,14 +1303,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
+	                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
 	            });
 	            // newest booking at the top => first sort than reverse order
 	            bookings = _.sortBy(bookings, function(booking) {
-	                return parseInt(booking.get('timeStampStart'));
+	                return parseIntRadixTen(booking.get('timeStampStart'));
 	            });
 	            this.set('timeDataSent', bookings.reverse());
 	        } else {
@@ -1327,7 +1327,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        if (days.length > 0) {
 	            // newest day at the top => first sort than reverse order
 	        	days = _.sortBy(days, function(day) {
-	                return parseInt(D8.create(day.get('tagLabel')).getTimestamp());
+	                return parseIntRadixTen(D8.create(day.get('tagLabel')).getTimestamp());
 	            });
 	            this.set('timeDataSentDays', days.reverse());
 	        } else {
@@ -1383,14 +1383,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	}
 		
 		                // set the handOrderId as orderId for correct display in list item view
-		                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
+		                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
 		                    booking.set('orderId', booking.get('handOrderId'));
 		                }
 		
 		            });
 		            // newest booking at the top => first sort than reverse order
 		            bookings = _.sortBy(bookings, function(booking) {
-		                return parseInt(booking.get('timeStampStart'));
+		                return parseIntRadixTen(booking.get('timeStampStart'));
 		            });
 		            this.set('timeDataSentArchived', bookings.reverse());
 		        } else {
@@ -1443,14 +1443,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
+	                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
 	            });
 	            // newest booking at the top => first sort than reverse order
 	            bookings = _.sortBy(bookings, function(booking) {
-	                return parseInt(booking.get('timeStampStart'));
+	                return parseIntRadixTen(booking.get('timeStampStart'));
 	            });
 	            this.set('timeDataForEdit', bookings.reverse());
 	        } else {
@@ -1500,14 +1500,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	}
 	                
 	                // set the handOrderId as orderId for correct display in list item view
-	                if (parseInt(booking.get('orderId')) === 0 && parseInt(booking.get('handOrderId')) !== 0) {
+	                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
 	                    booking.set('orderId', booking.get('handOrderId'));
 	                }
 	
 	            });
 	            // newest booking at the top => first sort than reverse order
 	            bookings = _.sortBy(bookings, function(booking) {
-	                return parseInt(booking.get('timeStampStart'));
+	                return parseIntRadixTen(booking.get('timeStampStart'));
 	            });
 	            this.set('timeDataForEdit', bookings.reverse());
 	        } else {
@@ -1545,12 +1545,12 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     		if (
     		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
-    		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseInt(that.currentBooking.get("timeStampEnd")) == 0))
+    		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseIntRadixTen(that.currentBooking.get("timeStampEnd")) == 0))
     		
     		) {
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('red');
     			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('red'); }, 500);
-    			$('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+    			if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
     			DigiWebApp.ApplicationController.nativeAlertDialogView({
 		              title: M.I18N.l('bookingTooShort')
 		            , message: M.I18N.l('bookingTooShortMsg')

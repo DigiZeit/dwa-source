@@ -34,7 +34,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
 						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
 						_.each(myPositionenList, function(p) {
-							if (parseInt(p.value) !== 0) {
+							if (parseIntRadixTen(p.value) !== 0) {
 								p.isSelected = NO;
 							} else {
 								p.isSelected = YES;

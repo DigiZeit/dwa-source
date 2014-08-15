@@ -54,7 +54,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         		if (DigiWebApp.SettingsController.featureAvailable('422')) {
         			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 	        			var currentActivity = null;
-	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseInt(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
+	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseIntRadixTen(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
 	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 			        		// show label
 							$('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
@@ -178,7 +178,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	            	
 	    			// save booking
 	    			DigiWebApp.BookingController.currentBooking.set('remark', M.ViewManager.getView('remarkPage', 'remarkInput').value);
-	    			DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', parseInt(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value));
+	    			DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', parseIntRadixTen(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value));
 	    			DigiWebApp.BookingController.currentBooking.save();
 	    			
 	    			DigiWebApp.RemarkPage.myCallback();

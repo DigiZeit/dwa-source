@@ -194,7 +194,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			that.item.set("orderId", that.auftragId);
 			that.item.set("orderName", that.auftragName);
 		}
-		if (parseInt(that.activityId) !== 0) {
+		if (parseIntRadixTen(that.activityId) !== 0) {
 			that.item.set("activityId", that.activityId);
 			that.item.set("activityName", that.activityName);
 		} else {
@@ -265,9 +265,9 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
-		    		if (parseInt(pos.get('orderId')) == parseInt(auftragsId)) {
+		    		if (parseIntRadixTen(pos.get('orderId')) == parseIntRadixTen(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
-			    		if (parseInt(pos.get('id')) == parseInt(that.item.get("positionId"))) {
+			    		if (parseIntRadixTen(pos.get('id')) == parseIntRadixTen(that.item.get("positionId"))) {
 			    			obj.isSelected = YES;
 			    			itemSelected = YES;
 			    			that.set('positionId', pos.get('id'));

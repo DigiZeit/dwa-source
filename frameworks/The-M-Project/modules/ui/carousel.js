@@ -317,7 +317,7 @@ M.CarouselView = M.View.extend(
         }
 
         /* if the container is not ready yet, try again in 25ms */
-        if(parseInt($('#' + this.id).css('opacity')) > 0 || $('#' + this.id).parent().width() === 0 || $('#' + this.id).parent().width() === this.lastWidth) {
+        if(parseIntRadixTen($('#' + this.id).css('opacity')) > 0 || $('#' + this.id).parent().width() === 0 || $('#' + this.id).parent().width() === this.lastWidth) {
             window.setTimeout(function() {
                 that.theme();
             }, 25);
@@ -339,7 +339,7 @@ M.CarouselView = M.View.extend(
                         }
                     });
                 } else if(that.sizeCalculator === M.CAROUSEL_SIZE_SURROUNDING_ELEMENT) {
-                    height = parseInt($('#' + that.id).parent().css('height'));
+                    height = parseIntRadixTen($('#' + that.id).parent().css('height'));
                 }
 
                 $('#' + that.id).css('width', width);
@@ -351,10 +351,10 @@ M.CarouselView = M.View.extend(
 
                 /* add negative margin for any padding of outer element */
                 var margin = {
-                    top: -parseInt($('#' + that.id).parent().css('padding-top')),
-                    right: -parseInt($('#' + that.id).parent().css('padding-right')),
-                    bottom: -parseInt($('#' + that.id).parent().css('padding-bottom')),
-                    left: -parseInt($('#' + that.id).parent().css('padding-left'))
+                    top: -parseIntRadixTen($('#' + that.id).parent().css('padding-top')),
+                    right: -parseIntRadixTen($('#' + that.id).parent().css('padding-right')),
+                    bottom: -parseIntRadixTen($('#' + that.id).parent().css('padding-bottom')),
+                    left: -parseIntRadixTen($('#' + that.id).parent().css('padding-left'))
                 };
                 _.each(margin, function(m, key) {
                     switch(key) {
@@ -388,10 +388,10 @@ M.CarouselView = M.View.extend(
                         onScrollEnd: function () {
                             var nextItem = null;
                             if(that.direction === M.HORIZONTAL) {
-                                var width = parseInt($('#' + that.id + ' ul.tmp-carousel-list li').css('width'));
+                                var width = parseIntRadixTen($('#' + that.id + ' ul.tmp-carousel-list li').css('width'));
                                 nextItem = Math.abs(Math.floor(that.iScroll.x / width)) + 1;
                             } else {
-                                var height = parseInt($('#' + that.id + ' ul.tmp-carousel-list li').css('height'));
+                                var height = parseIntRadixTen($('#' + that.id + ' ul.tmp-carousel-list li').css('height'));
                                 nextItem = Math.abs(Math.ceil(that.iScroll.y / height)) + 1;
                             }
 
@@ -423,9 +423,9 @@ M.CarouselView = M.View.extend(
                     /* css stuff */
                     if(that.direction === M.HORIZONTAL) {
                         paginatorDOM.css('width', width);
-                        paginatorDOM.css('top', $('#' + that.id).position().top + parseInt($('#' + that.id + ' .tmp-carousel-scroller').css('height')) - parseInt($('#' + that.id + '_paginator').css('height')));
+                        paginatorDOM.css('top', $('#' + that.id).position().top + parseIntRadixTen($('#' + that.id + ' .tmp-carousel-scroller').css('height')) - parseIntRadixTen($('#' + that.id + '_paginator').css('height')));
                     } else {
-                        paginatorDOM.css('top', $('#' + that.id).position().top + (parseInt($('#' + that.id).css('height')) - parseInt(paginatorDOM.height()))/2);
+                        paginatorDOM.css('top', $('#' + that.id).position().top + (parseIntRadixTen($('#' + that.id).css('height')) - parseIntRadixTen(paginatorDOM.height()))/2);
                     }
                     paginatorDOM.css('margin-top', margin['top']);
                     paginatorDOM.animate({

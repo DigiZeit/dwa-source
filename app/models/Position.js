@@ -130,12 +130,12 @@ DigiWebApp.Position = M.Model.create({
         if (actIds && actIds.length > 0) {
         	var alleTaetigkeiten = DigiWebApp.Activity.find(); 
             for (var i = 0; i < actIds.length; i++) {
-            	var taet = _.find(alleTaetigkeiten, function(t){ return parseInt(t.get("id")) === parseInt(actIds[i])});
+            	var taet = _.find(alleTaetigkeiten, function(t){ return parseIntRadixTen(t.get("id")) === parseIntRadixTen(actIds[i])});
             	if (taet) activities.push(taet);
             }
 
         }
-        if (parseInt(workplan.get("workplanType")) === 1) {
+        if (parseIntRadixTen(workplan.get("workplanType")) === 1) {
         	// only those activities which are bound to employee
             activities = _.map(activities, function(act) {
             	if ( typeof(act) === "undefined" ) {
@@ -146,7 +146,7 @@ DigiWebApp.Position = M.Model.create({
             		var allActivities = DigiWebApp.Activity.findSorted();
             		_.each(allActivities, function(acti) {
             			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
-            			if (act.get("id") === acti.get("id") && parseInt(acti.get("positionId")) === 1) {
+            			if (act.get("id") === acti.get("id") && parseIntRadixTen(acti.get("positionId")) === 1) {
             				zugeordnet = YES;
             			}
             		});

@@ -84,7 +84,7 @@ DigiWebApp.Activity = M.Model.create({
 		var foundElement = null;
 		var that = this;
 		$.each(that.find(),function(key, el){
-			if (parseInt(queryId) === parseInt(el.get("id"))) {
+			if (parseIntRadixTen(queryId) === parseIntRadixTen(el.get("id"))) {
 				foundElement = el;
 				return false; // break
 			}

@@ -26,6 +26,10 @@ function parseBool(val) {
 	}
 }
 
+function parseIntRadixTen(myString) {
+	return parseInt(myString, 10);
+}
+
 function isGUID(guidString) {
 	return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(guidString);
 }
@@ -93,9 +97,9 @@ window.clearAllIntervals = function() {
 function addToListIfNotFoundById(list, element, id) {
 	var found = _.find(list, function(el) {
 		if (typeof(el.get) === "function") {
-			return parseInt(el.get("id")) === parseInt(id);
+			return parseIntRadixTen(el.get("id")) === parseIntRadixTen(id);
 		} else {
-			return parseInt(el.id) === parseInt(id)
+			return parseIntRadixTen(el.id) === parseIntRadixTen(id)
 		}
 	});
 	if (!found) {

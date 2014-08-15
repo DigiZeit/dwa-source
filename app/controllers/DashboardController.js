@@ -378,7 +378,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     	var startTransfer = NO;
     	if (DigiWebApp.DashboardController.lastTimestampDatatransfer !== null) {
     		var timestampNow = D8.now().getTimestamp();
-    		if (timestampNow - DigiWebApp.DashboardController.lastTimestampDatatransfer > parseInt(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
+    		if (timestampNow - DigiWebApp.DashboardController.lastTimestampDatatransfer > parseIntRadixTen(DigiWebApp.SettingsController.getSetting('datatransfer_min_delay'))) {
     			startTransfer = YES;
     			if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).addClass('green');
     			var t = window.setTimeout(function(){ 
@@ -437,7 +437,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 						var idsToPoll = [];
 						if (DigiWebApp.BookingController.currentBooking !== null
 						&& (   typeof(DigiWebApp.BookingController.currentBooking.get("timeStampEnd")) !== "undefined"
-						    && parseInt(DigiWebApp.BookingController.currentBooking.get("timeStampEnd")) > 0)
+						    && parseIntRadixTen(DigiWebApp.BookingController.currentBooking.get("timeStampEnd")) > 0)
 						) { idsToPoll.push(DigiWebApp.BookingController.currentBooking.m_id); }
 						if (DigiWebApp.BookingController.currentBookingClosed !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBookingClosed.m_id); }
 						//alert(idsToPoll);

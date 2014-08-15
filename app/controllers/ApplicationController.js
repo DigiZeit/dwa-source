@@ -2760,7 +2760,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (
     	   (typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) === "undefined") 
     	|| (DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "")
-    	|| (parseInt(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) === 0)
+    	|| (parseIntRadixTen(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) === 0)
     	) {
     		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");

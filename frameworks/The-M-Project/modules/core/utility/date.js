@@ -474,9 +474,9 @@ M.Date = M.Object.extend(
      */
     getCalendarWeek: function(year, month, day){
         if(!year) {
-            year = parseInt(this.format('yyyy'));
-            month = parseInt(this.format('m'));
-            day = parseInt(this.format('d'));
+            year = parseIntRadixTen(this.format('yyyy'));
+            month = parseIntRadixTen(this.format('m'));
+            day = parseIntRadixTen(this.format('d'));
         } else {
             month += 1;
         }

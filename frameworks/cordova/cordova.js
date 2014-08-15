@@ -881,7 +881,7 @@ PhoneGap.UUIDcreatePart = function(length) {
     var uuidpart = "";
     var i, uuidchar;
     for (i=0; i<length; i++) {
-        uuidchar = parseInt((Math.random() * 256),0).toString(16);
+        uuidchar = parseIntRadixTen((Math.random() * 256),0).toString(16);
         if (uuidchar.length === 1) {
             uuidchar = "0" + uuidchar;
         }

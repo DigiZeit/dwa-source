@@ -101,7 +101,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		if (DigiWebApp.SettingsController.featureAvailable('422')) {
         			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 	        			var currentActivity = null;
-	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseInt(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
+	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseIntRadixTen(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
 	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 			        		// show label
 							$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {

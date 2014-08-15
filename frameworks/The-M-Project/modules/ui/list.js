@@ -663,7 +663,7 @@ M.ListView = M.View.extend(
                 this.swipeButton.registerEvents();
                 $('#' + this.swipeButton.id).css('height', 0.7 * $('#' + id).outerHeight());
                 $('#' + this.swipeButton.id).css('top', Math.floor(0.15 * $('#' + id).outerHeight()));
-                $('#' + id + '>div.ui-btn-inner').css('margin-right', parseInt($('#' + this.swipeButton.id).css('width')) + parseInt($('#' + this.swipeButton.id).css('right')));
+                $('#' + id + '>div.ui-btn-inner').css('margin-right', parseIntRadixTen($('#' + this.swipeButton.id).css('width')) + parseIntRadixTen($('#' + this.swipeButton.id).css('right')));
 
                 /* register tap/click for the page so we can hide the button again */
                 var that = this;

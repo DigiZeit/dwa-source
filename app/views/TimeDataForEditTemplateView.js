@@ -134,7 +134,7 @@ DigiWebApp.TimeDataForEditTemplateView = M.ListItemView.design({
             , operation: function(v) {
                 if (v) {
                 	var activity = null;
-                	if (parseInt(v) !== 0) {
+                	if (parseIntRadixTen(v) !== 0) {
                         activity = _.select(DigiWebApp.Activity.findSorted(), function(a) {
                         	if (a) return v == a.get('id');
                         });

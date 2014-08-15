@@ -136,7 +136,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			var items = [];
 			var relevanteZeitbuchungen = buchungen;
 			var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
-	            return parseInt(z.get('_createdAt'));
+	            return parseIntRadixTen(z.get('_createdAt'));
 	        });
 			
 			var employeeIds = localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) || localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
@@ -166,7 +166,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						}
 					}
 					
-					if (parseInt(zeitbuch.get("timeStampEnd")) === 0) {
+					if (parseIntRadixTen(zeitbuch.get("timeStampEnd")) === 0) {
 						zeitbuch.set("timeStampEnd", null);
 						
 						// compability
@@ -265,7 +265,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				var items = [];
 				var relevanteBuchungen = buchungen;
 				var relevanteBuchungenSorted = _.sortBy(relevanteBuchungen , function(z) {
-		            return parseInt(z.get('_createdAt'));
+		            return parseIntRadixTen(z.get('_createdAt'));
 		        });
 									
 				_.each(relevanteBuchungenSorted, function(el) {

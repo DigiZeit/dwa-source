@@ -362,8 +362,8 @@ M.DashboardView = M.View.extend(
         var latest = event.originalEvent ? (event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : null) : null;
 
         if(latest) {
-            var left = latest.pageX - parseInt($('#' + id).css('width')) / 2;
-            var top = latest.pageY - parseInt($('#' + id).css('height')) / 2;
+            var left = latest.pageX - parseIntRadixTen($('#' + id).css('width')) / 2;
+            var top = latest.pageY - parseIntRadixTen($('#' + id).css('height')) / 2;
             $('#' + id).css('position', 'absolute');
             $('#' + id).css('left', left + 'px');
             $('#' + id).css('top', top + 'px');
@@ -455,8 +455,8 @@ M.DashboardView = M.View.extend(
     editMouseMove: function(id, event) {
         this.latestTouchEventType = 'mousemove';
 
-        var left = event.pageX - parseInt($('#' + id).css('width')) / 2;
-        var top = event.pageY - parseInt($('#' + id).css('height')) / 2;
+        var left = event.pageX - parseIntRadixTen($('#' + id).css('width')) / 2;
+        var top = event.pageY - parseIntRadixTen($('#' + id).css('height')) / 2;
         $('#' + id).css('position', 'absolute');
         $('#' + id).css('left', left + 'px');
         $('#' + id).css('top', top + 'px');

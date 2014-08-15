@@ -123,7 +123,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
        */
       var positionArray = _.map(positions, function(pos) {
     	if (pos) {
-          if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
+          if (parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(orderId)) {
           	var obj = null;
               if (pos.get('id') == positionId) {
                   obj = { label: pos.get('name'), value: pos.get('id'), isSelected: YES };
@@ -194,7 +194,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
       var i = 0;
       positions = _.map(positions, function(pos) {
     	  if (pos) {
-	          if (parseInt(pos.get('orderId')) === parseInt(orderId)) {
+	          if (parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(orderId)) {
 	              var obj = { label: pos.get('name'), value: pos.get('id') };
 	              if(i === 0) {
 	                  obj.isSelected = YES;
@@ -239,7 +239,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 //      }});
       var workPlans = []; 
       _.each(DigiWebApp.WorkPlan.find(),function(wp){
-      	if (parseInt(wp.get("id")) === parseInt(posId)) workPlans.push(wp);
+      	if (parseIntRadixTen(wp.get("id")) === parseIntRadixTen(posId)) workPlans.push(wp);
       });
       var i = 0;
 
@@ -404,7 +404,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
   		activities = DigiWebApp.Activity.findSorted();
   	}
   	activities = _.map(activities, function(acti) {
-	    	if(parseInt(acti.get("positionId")) === 1) {
+	    	if(parseIntRadixTen(acti.get("positionId")) === 1) {
 	            // normale Tätigkeit
 	            return acti;
 	         } else {
@@ -429,7 +429,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
           }
 
       }
-      if (parseInt(workplan.get("workplanType")) === 1) {
+      if (parseIntRadixTen(workplan.get("workplanType")) === 1) {
       	// only those activities which are bound to employee
           activities = _.map(activities, function(act) {
           	if ( typeof(act) === "undefined" ) {
@@ -440,7 +440,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
           		var allActivities = DigiWebApp.Activity.findSorted();
           		_.each(allActivities, function(acti) {
           			// herausfinden, ob diese Tätigkeit dem Mitarbeiter zugeordnet ist.
-          			if (parseInt(acti.get("positionId")) === 1) {
+          			if (parseIntRadixTen(acti.get("positionId")) === 1) {
           				zugeordnet = YES;
           			}
           		});

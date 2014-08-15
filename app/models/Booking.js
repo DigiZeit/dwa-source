@@ -220,7 +220,7 @@ DigiWebApp.Booking = M.Model.create({
 
 		if (
 		      (M.Date.create(that.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
-		   && ((that.get("timeStampEnd") == null) || (that.get("timeStampEnd") == "") || (parseInt(that.get("timeStampEnd")) == 0))
+		   && ((that.get("timeStampEnd") == null) || (that.get("timeStampEnd") == "") || (parseIntRadixTen(that.get("timeStampEnd")) == 0))
 		
 		) {
 

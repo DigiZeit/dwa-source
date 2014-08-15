@@ -287,7 +287,7 @@ M.ButtonGroupView = M.View.extend(
             
             /* iterate through all lines */
             for(var line in this.lines) {
-                line = parseInt(line);
+                line = parseIntRadixTen(line);
 
                 /* style the current line */
                 $('#' + this.lines[line]).controlgroup();
@@ -297,7 +297,7 @@ M.ButtonGroupView = M.View.extend(
                 /* if isCompact, iterate through all buttons */
                 if(this.isCompact) {
                     for(var i in childViews) {
-                        i = parseInt(i);
+                        i = parseIntRadixTen(i);
                         if(this[childViews[i]] && this[childViews[i]].type === 'M.ButtonView') {
                             currentButtonIndex = currentButtonIndex + 1;
                             var currentLine = M.Math.round(currentButtonIndex / this.buttonsPerLine, M.CEIL) - 1;

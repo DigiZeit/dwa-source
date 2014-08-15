@@ -263,7 +263,7 @@ function buildOptions($cont, $slides, els, options, o) {
 		$cont.height(opts.height);
 
 	if (opts.startingSlide !== undefined) {
-		opts.startingSlide = parseInt(opts.startingSlide,10);
+		opts.startingSlide = parseIntRadixTen(opts.startingSlide,10);
 		if (opts.startingSlide >= els.length || opts.startSlide < 0)
 			opts.startingSlide = 0; // catch bogus input
 		else 
@@ -437,10 +437,10 @@ function buildOptions($cont, $slides, els, options, o) {
 	$($slides[first]).css(opts.cssFirst);
 
 	if (opts.timeout) {
-		opts.timeout = parseInt(opts.timeout,10);
+		opts.timeout = parseIntRadixTen(opts.timeout,10);
 		// ensure that timeout and speed settings are sane
 		if (opts.speed.constructor == String)
-			opts.speed = $.fx.speeds[opts.speed] || parseInt(opts.speed,10);
+			opts.speed = $.fx.speeds[opts.speed] || parseIntRadixTen(opts.speed,10);
 		if (!opts.sync)
 			opts.speed = opts.speed / 2;
 		
@@ -933,7 +933,7 @@ $.fn.cycle.hopsFromLast = function(opts, fwd) {
 function clearTypeFix($slides) {
 	debug('applying clearType background-color hack');
 	function hex(s) {
-		s = parseInt(s,10).toString(16);
+		s = parseIntRadixTen(s,10).toString(16);
 		return s.length < 2 ? '0'+s : s;
 	}
 	function getBg(e) {
@@ -1251,7 +1251,7 @@ $.fn.cycle.transitions.shuffle = function($cont, $slides, opts) {
 			}
 			else {
 				var z = $(curr).css('z-index');
-				$el.css('z-index', parseInt(z,10)+1+count);
+				$el.css('z-index', parseIntRadixTen(z,10)+1+count);
 			}
 			$el.animate({left:0, top:0}, opts.speedOut, opts.easeOut, function() {
 				$(fwd ? this : curr).hide();
@@ -1510,8 +1510,8 @@ $.fn.cycle.transitions.wipe = function($cont, $slides, opts) {
 		else if (/b2t/.test(opts.clip))
 			clip = 'rect('+h+'px '+w+'px '+h+'px 0px)';
 		else if (/zoom/.test(opts.clip)) {
-			var top = parseInt(h/2,10);
-			var left = parseInt(w/2,10);
+			var top = parseIntRadixTen(h/2,10);
+			var left = parseIntRadixTen(w/2,10);
 			clip = 'rect('+top+'px '+left+'px '+top+'px '+left+'px)';
 		}
 	}
@@ -1519,7 +1519,7 @@ $.fn.cycle.transitions.wipe = function($cont, $slides, opts) {
 	opts.cssBefore.clip = opts.cssBefore.clip || clip || 'rect(0px 0px 0px 0px)';
 
 	var d = opts.cssBefore.clip.match(/(\d+)/g);
-	var t = parseInt(d[0],10), r = parseInt(d[1],10), b = parseInt(d[2],10), l = parseInt(d[3],10);
+	var t = parseIntRadixTen(d[0],10), r = parseIntRadixTen(d[1],10), b = parseIntRadixTen(d[2],10), l = parseIntRadixTen(d[3],10);
 
 	opts.before.push(function(curr, next, opts) {
 		if (curr == next) return;
@@ -1527,12 +1527,12 @@ $.fn.cycle.transitions.wipe = function($cont, $slides, opts) {
 		$.fn.cycle.commonReset(curr,next,opts,true,true,false);
 		opts.cssAfter.display = 'block';
 
-		var step = 1, count = parseInt((opts.speedIn / 13),10) - 1;
+		var step = 1, count = parseIntRadixTen((opts.speedIn / 13),10) - 1;
 		(function f() {
-			var tt = t ? t - parseInt(step * (t/count),10) : 0;
-			var ll = l ? l - parseInt(step * (l/count),10) : 0;
-			var bb = b < h ? b + parseInt(step * ((h-b)/count || 1),10) : h;
-			var rr = r < w ? r + parseInt(step * ((w-r)/count || 1),10) : w;
+			var tt = t ? t - parseIntRadixTen(step * (t/count),10) : 0;
+			var ll = l ? l - parseIntRadixTen(step * (l/count),10) : 0;
+			var bb = b < h ? b + parseIntRadixTen(step * ((h-b)/count || 1),10) : h;
+			var rr = r < w ? r + parseIntRadixTen(step * ((w-r)/count || 1),10) : w;
 			$next.css({ clip: 'rect('+tt+'px '+rr+'px '+bb+'px '+ll+'px)' });
 			(step++ <= count) ? setTimeout(f, 13) : $curr.css('display', 'none');
 		})();

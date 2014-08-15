@@ -108,7 +108,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 			that.item.set("positionName", that.positionName);
 		}
 
-		if (parseInt(that.activityId) !== 0) {
+		if (parseIntRadixTen(that.activityId) !== 0) {
 			that.item.set("activityId", that.activityId);
 			that.item.set("activityName", that.activityName);
 		} else {

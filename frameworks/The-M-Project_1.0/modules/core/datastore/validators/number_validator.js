@@ -41,7 +41,7 @@ M.NumberValidator = M.Validator.extend(
         }
 
         /* == makes implicit conversion */ 
-        if(typeof(obj.value) === 'string' && (parseInt(obj.value) == obj.value || parseFloat(obj.value) == obj.value)) {
+        if(typeof(obj.value) === 'string' && (parseIntRadixTen(obj.value) == obj.value || parseFloat(obj.value) == obj.value)) {
             return YES;        
         }
 

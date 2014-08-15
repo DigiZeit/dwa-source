@@ -486,7 +486,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var items = [];
 		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}); 
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
-            return parseInt(z.get('_createdAt'));
+            return parseIntRadixTen(z.get('_createdAt'));
         });
 		_.each(relevanteZeitbuchungenSorted, function(el) {
 			_.each(JSON.parse(el.get("mitarbeiterIds")), function(maId) {
@@ -540,7 +540,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var items = [];
 		_.each(DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}), function(el) {
 			var tmp = el.record;
-			tmp.menge = parseInt(tmp.menge);
+			tmp.menge = parseIntRadixTen(tmp.menge);
 			items.push(tmp);
 		});
 		
