@@ -33,9 +33,9 @@ DigiWebApp.MediaListController = M.Controller.extend({
         });
         that.set('items', items.reverse());
 
-        if (DigiWebApp.MediaListPage.needsUpdate) {
-            var actions = [];
-                        
+//        if (DigiWebApp.MediaListPage.needsUpdate) {
+//            var actions = [];
+//                        
 //            // Start::TakePicture (400)
 //            if (DigiWebApp.SettingsController.featureAvailable('400')) {
 //            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature 400 (TakePicture)");
@@ -65,7 +65,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 //            });
 //
 //        	that.set('actions', actions);
-            DigiWebApp.MediaListPage.needsUpdate = false;
+//            DigiWebApp.MediaListPage.needsUpdate = false;
 
     		var myMedien = DigiWebApp.MediaFile.find();
     		if (myMedien.length == 0) {
@@ -75,7 +75,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     			$('#' + DigiWebApp.MediaListPage.uebertragenButton.id).show();
     			$('#' + DigiWebApp.MediaListPage.newButton.id).hide();
     		}
-        }
+//        }
 
         var list;
 
