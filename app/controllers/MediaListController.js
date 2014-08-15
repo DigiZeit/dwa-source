@@ -405,6 +405,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								// last mediaFile sent
 					    		console.log('sending last mediaFile done (with file)');
 			    				done = true;
+			    				DigiWebApp.MediaListController.init();
 			    				successCallback();
 							}
 						}
