@@ -11,7 +11,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
       isSelectable: NO
 
     //, childViews: 'grid'
-	, childViews: 'positionName handOrderName activity vonbisdauer mitarbeiterId'
+	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity mitarbeiterId'
 
     , events: {
         tap: {
@@ -58,6 +58,10 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	  }
 	})
 
+	, endOfLine: M.LabelView.design({
+		value: ''
+	})
+
 	, positionName: M.LabelView.design({
 	    cssClass: 'normal unselectable'
   	  , isInline: YES
@@ -90,7 +94,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	
 	, activity: M.LabelView.design({
 		    cssClass: 'normal unselectable normalLabel'
-	  	  , isInline: YES
+//	  	  , isInline: YES
 		  , computedValue: {
 		        valuePattern: '<%= activityName %>'
 		      , operation: function(v) {
