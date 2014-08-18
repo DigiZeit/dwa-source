@@ -94,11 +94,12 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	
 	, activity: M.LabelView.design({
 		    cssClass: 'normal unselectable normalLabel'
-//	  	  , isInline: YES
+	  	  , isInline: YES
 		  , computedValue: {
 		        valuePattern: '<%= activityName %>'
 		      , operation: function(v) {
-					return ", " + v;
+//					return ", " + v;
+					return v;
 		      }
 		  }
 	})
