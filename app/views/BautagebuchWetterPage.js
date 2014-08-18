@@ -886,7 +886,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
                     tap: {
 						action: function(m_id, event) {
 								clearAllTimeouts();
-								DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition();
+								DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition);
 						}
                     }
                 }
