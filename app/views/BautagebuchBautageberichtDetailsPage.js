@@ -137,6 +137,9 @@ DigiWebApp.BautagebuchBautageberichtDetailsPage = M.PageView.design({
 //	            		$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.positionComboBox.id + "_container").show();
 	            	}
 
+	            	$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id).prop('disabled', true)
+	            	$('#' + DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id).prop('disabled', true)
+
 			}
         }
         , pagehide: {

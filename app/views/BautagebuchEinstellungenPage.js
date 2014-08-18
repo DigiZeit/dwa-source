@@ -14,7 +14,11 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 				DigiWebApp.BautagebuchEinstellungenController.load();
 				//DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeit.startUhrzeitInput.setValue(DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit);
 				DigiWebApp.BautagebuchEinstellungenController.set('settings', DigiWebApp.BautagebuchEinstellungenController.settings);
-		  		DigiWebApp.BautagebuchEinstellungenController.setStartUhrzeit();		  		
+		  		DigiWebApp.BautagebuchEinstellungenController.setStartUhrzeit();
+		  		
+            	$('#' + DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id).prop('disabled', true)
+
 			}
         }
         , pagebeforehide: {

@@ -112,6 +112,13 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.positionComboBox.id + "_container").show();
             	}
 
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeVonFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id).prop('disabled', true)
+            	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id).prop('disabled', true)
+            	
 			}
         }
         , pagehide: {
