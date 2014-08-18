@@ -820,7 +820,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 
 			            	  			var addFunc = function() {
 						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
-						    				if (myWetter.wind === 3) {
+						    				if (myWetter.wind === 4) {
 						    					return;
 						    				}
 						    				myWetter.wind = myWetter.wind + 1;
