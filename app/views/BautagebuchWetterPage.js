@@ -858,6 +858,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 				    				return M.I18N.l('BautagebuchWindBoeig');
 					    		case 3:
 				    				return M.I18N.l('BautagebuchWindStuermisch');
+					    		case 4:
+				    				return M.I18N.l('BautagebuchWindOrkan');
 					    		default:
 					    		    return "";
 				    		}

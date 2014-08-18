@@ -388,6 +388,7 @@ M.I18N.de_de = {
 	, BautagebuchWindMaessig: "mässig"
 	, BautagebuchWindBoeig: "böig"
 	, BautagebuchWindStuermisch: "stürmisch"
+	, BautagebuchWindOrkan: "Orkan"
 	, BautagebuchWechselhaft: "wechselhaft"
 	, BautagebuchInStundenBuchen: "Erfassung in Stunden"
 	, BautagebuchStartingFrom: "ab"

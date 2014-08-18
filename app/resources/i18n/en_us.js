@@ -388,6 +388,7 @@ M.I18N.en_us = {
 	, BautagebuchWindMaessig: "modest"
 	, BautagebuchWindBoeig: "squally"
 	, BautagebuchWindStuermisch: "stormy"
+	, BautagebuchWindOrkan: "hurricane"
 	, BautagebuchWechselhaft: "unsettled"
 	, BautagebuchInStundenBuchen: "Recording of hours"
 	, BautagebuchStartingFrom: "starting from"

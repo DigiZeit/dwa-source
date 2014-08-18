@@ -475,7 +475,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                var poskundenname = el.kundenname;
 	                var poslongitude = el.longitude;
 	                var poslatitude = el.latitude;
-	                var posdescription = el.auftragsBeschreibung;
+	                var posdescription = el.positionsBeschreibung;
 	                var posorderId = el.auftragsId;
 	                
 	                var arbeitsbeginn = el.arbeitsbeginn;
