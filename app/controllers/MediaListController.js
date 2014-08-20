@@ -86,7 +86,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	                $(this).removeClass('selected');
 	            });
 	        }
-		} catch(e2) { console.error(e2); }
+		} catch(e2) { trackError(e2); }
 
         
         try {
@@ -96,7 +96,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	                $(this).removeClass('selected');
 	            });
 	        }
-        } catch(e2) { console.error(e2); }
+        } catch(e2) { trackError(e2); }
 
 		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
@@ -351,7 +351,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		};
 		
 		var errorCallback = function(err) {
-			console.error(err);
+			trackError(err);
 			DigiWebApp.MediaListController.init();
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		};

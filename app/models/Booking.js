@@ -357,7 +357,7 @@ DigiWebApp.Booking = M.Model.create({
 		    		el.del();
 		    	}
 		    });
-    	} catch(e4) { console.error(e4); }
+    	} catch(e4) { trackError(e4); }
     }
 	
 	, hasFileName: function() {
@@ -383,7 +383,7 @@ DigiWebApp.Booking = M.Model.create({
 	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
-			console.error("saveToFileError: successCallback is not a function");
+			trackError("saveToFileError: successCallback is not a function");
 	        return false;
 	    }
 	
@@ -391,7 +391,7 @@ DigiWebApp.Booking = M.Model.create({
 		var errorCallback;
 	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 	    	errorCallback = function(evt) {
-	    		console.error("saveToFileError", evt);
+	    		trackError("saveToFileError");
 	    	};
 	    } else {
 	    	errorCallback = myErrorCallback;
@@ -399,7 +399,7 @@ DigiWebApp.Booking = M.Model.create({
 		
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
-			console.error("saveToFileError: no LocalFileSystem available");
+			trackError("saveToFileError: no LocalFileSystem available");
 			successCallback("");
 	        return true;
 	    }
@@ -420,7 +420,7 @@ DigiWebApp.Booking = M.Model.create({
 					    		fileEntry.createWriter(function(writer) {
 					    				
 					    			writer.onerror = function(evt) {
-					    				console.error("writeError", evt);
+					    				trackError("writeError");
 					    				errorCallback(evt);
 					    			};
 					    			
@@ -440,7 +440,7 @@ DigiWebApp.Booking = M.Model.create({
 					   	}, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  console.error('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -460,7 +460,7 @@ DigiWebApp.Booking = M.Model.create({
 				    		fileEntry.createWriter(function(writer) {
 				    				
 				    			writer.onerror = function(evt) {
-				    				console.error("writeError", evt);
+				    				trackError("writeError");
 				    				errorCallback(evt);
 				    			};
 				    			
@@ -491,7 +491,7 @@ DigiWebApp.Booking = M.Model.create({
 		var errorCallback;
 	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 	    	errorCallback = function(evt) {
-	    		console.error("readFromFileError", evt);
+	    		trackError("readFromFileError");
 	    	};
 	    } else {
 	    	errorCallback = myErrorCallback;
@@ -499,21 +499,21 @@ DigiWebApp.Booking = M.Model.create({
 	    
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
-			console.error("readFromFileError: successCallback is not a function");
+			trackError("readFromFileError: successCallback is not a function");
 	        return false;
 	    }
 		
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
 		if (!that.hasFileName()) {
-			console.error("readFromFileError: no fileName given");
+			trackError("readFromFileError: no fileName given");
 			errorCallback();
 	        return false;
 	    }
 
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
-			console.error("readFromFileError: no LocalFileSystem available");
+			trackError("readFromFileError: no LocalFileSystem available");
 			successCallback("");
 	        return true;
 	    }
@@ -549,7 +549,7 @@ DigiWebApp.Booking = M.Model.create({
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  console.error('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -594,13 +594,13 @@ DigiWebApp.Booking = M.Model.create({
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
 		if (!that.hasFileName()) {
-			console.error("deleteFileError: no fileName given");
+			trackError("deleteFileError: no fileName given");
 	        return false;
 	    }
 	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
-			console.error("deleteFileError: successCallback is not a function");
+			trackError("deleteFileError: successCallback is not a function");
 	        return false;
 	    }
 		
@@ -608,7 +608,7 @@ DigiWebApp.Booking = M.Model.create({
 		var errorCallback;
 	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 	    	errorCallback = function(evt) {
-	    		console.error("deleteFileError", evt);
+	    		trackError("deleteFileError");
 	    	};
 	    } else {
 	    	errorCallback = myErrorCallback;
@@ -616,7 +616,7 @@ DigiWebApp.Booking = M.Model.create({
 	    
 		// check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
-			console.error("deleteFileError: no LocalFileSystem available");
+			trackError("deleteFileError: no LocalFileSystem available");
 			successCallback("");
 	        return true;
 	    }
@@ -641,7 +641,7 @@ DigiWebApp.Booking = M.Model.create({
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  console.error('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err

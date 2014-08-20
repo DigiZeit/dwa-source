@@ -30,7 +30,7 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 				) {
 					c.renderUpdate();
 				}
-			} catch(e2) { /*console.error(e2);*/ } 
+			} catch(e2) { /*trackError(e2);*/ } 
 		});							
 	}
 

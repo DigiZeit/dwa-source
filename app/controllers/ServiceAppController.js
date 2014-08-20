@@ -130,7 +130,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			  var errorCallback;
 		      if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 		         errorCallback = function(evt) {
-		               console.error("readFromFileError", evt);
+		               trackError("readFromFileError");
 		         };
 		      } else {
 		    	  errorCallback = myErrorCallback;
@@ -138,20 +138,20 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		      
 		        // check for successCallback is a function
 		        if (typeof successCallback !== "function") {
-		               console.error("readFromFileError: successCallback is not a function");
+		               trackError("readFromFileError: successCallback is not a function");
 		          return false;
 		      }
 		        
 		        // check if fileName is set
 		        if (!fileName || (fileName) && (fileName.length === 0)) {
-		               console.error("readFromFileError: no fileName given");
+		               trackError("readFromFileError: no fileName given");
 		               errorCallback();
 		          return false;
 		      }
 		
 		        // check if LocalFileSystem is defined
 		        if (typeof window.requestFileSystem === "undefined") {
-		               console.error("readFromFileError: no LocalFileSystem available");
+		               trackError("readFromFileError: no LocalFileSystem available");
 		               successCallback("");
 		          return true;
 		      }
@@ -187,7 +187,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		                                 }, errorCallback);         // fileSystem.root.getDirectory
 		                          }, errorCallback);             // window.requestFileSystem
 		                      }, function(e) {
-		                               console.error('Error while requesting Quota', e);
+		                               trackError('Error while requesting Quota');
 		                           DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                               title: M.I18N.l('error')
 		                             , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -231,13 +231,13 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		      
 		    // check if fileName is set
 		    if (!fileName || (fileName) && (fileName.length === 0)) {
-		    	  console.error("deleteFileError: no fileName given");
+		    	  trackError("deleteFileError: no fileName given");
 		    	  return false;
 		    }
 			
 		    // check for successCallback is a function
 		    if (typeof successCallback !== "function") {
-		             console.error("deleteFileError: successCallback is not a function");
+		             trackError("deleteFileError: successCallback is not a function");
 		        return false;
 		    }
 		      
@@ -245,7 +245,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			  var errorCallback;
 		      if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 		         errorCallback = function(evt) {
-		               console.error("deleteFileError", evt);
+		               trackError("deleteFileError");
 		         };
 		      } else {
 		    	  errorCallback = myErrorCallback;
@@ -253,7 +253,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		    
 		    // check if LocalFileSystem is defined
 		    if (typeof window.requestFileSystem === "undefined") {
-		             console.error("deleteFileError: no LocalFileSystem available");
+		             trackError("deleteFileError: no LocalFileSystem available");
 		             successCallback("");
 		        return true;
 		    }
@@ -280,7 +280,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 		                               }, errorCallback);         // fileSystem.root.getDirectory
 		                        }, errorCallback);             // window.requestFileSystem
 		                    }, function(e) {
-		                             console.error('Error while requesting Quota', e);
+		                             trackError('Error while requesting Quota');
 		                         DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                             title: M.I18N.l('error')
 		                           , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -315,7 +315,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			  var errorCallback;
 		      if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 		         errorCallback = function(evt) {
-		               console.error("deleteFileError", evt);
+		               trackError("deleteFileError");
 		         };
 		      } else {
 		    	  errorCallback = myErrorCallback;
@@ -323,13 +323,13 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 			  
 			// check for successCallback is a function
 			if (typeof successCallback !== "function") {
-				console.error("listDataDirectoryError: successCallback is not a function");
+				trackError("listDataDirectoryError: successCallback is not a function");
 				return false;
 			}
 	
 	        // check if LocalFileSystem is defined
 	        if (typeof window.requestFileSystem === "undefined") {
-	               console.error("listDataDirectoryError: no LocalFileSystem available");
+	               trackError("listDataDirectoryError: no LocalFileSystem available");
 	               successCallback("");
 	          return true;
 	      }
@@ -369,7 +369,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 //	                            				 entries = entries.concat(toArray(results));
 //	                            				 readEntries();
 //	                            			 }
-	                            		 }, function(err){console.error("error in readEntries:", err);});
+	                            		 }, function(err){trackError("error in readEntries:" + err);});
 	                            	  };
 
 	                            	  readEntries(); // Start reading dirs.
@@ -377,7 +377,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 	                             }, errorCallback);         // fileSystem.root.getDirectory
 	                          }, errorCallback);             // window.requestFileSystem
 	                      }, function(e) {
-	                           console.error('Error while requesting Quota', e);
+	                           trackError('Error while requesting Quota: ' + e);
 	                           DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                               title: M.I18N.l('error')
 	                             , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -423,7 +423,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 //                        					 //if (DigiWebApp.SettingsController.getSetting("debug"))  console.log(entries);
 //                            			 }
 //                        			 }
-                        		 }, function(err){console.error("error in readEntries:", err);});
+                        		 }, function(err){trackError("error in readEntries: " + err);});
                         	  };
 
                         	  readEntries(); // Start reading dirs.
@@ -521,7 +521,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 				//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("pollBookings Success mit " + datensaetze.length + " Datensätzen");
 				successCallback(datensaetze);
 			} catch(e10) {
-				console.error(e10);
+				trackError(e10);
 				errorCallback(e10.message);
 			}
 		};

@@ -23,7 +23,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				return true;
 			} else if (DigiWebApp.ApplicationController.timeouthappened && window.applicationCache.status !== window.applicationCache.UNCACHED) {
-				try { window.applicationCache.update(); } catch(e2) { console.error(e2); }
+				try { window.applicationCache.update(); } catch(e2) { trackError(e2); }
 				return (window.applicationCache.status == window.applicationCache.UPDATEREADY);
 			} else {
 				return (window.applicationCache.status == window.applicationCache.UPDATEREADY);
@@ -340,7 +340,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 //	            perspective: '20px',
 //	            rotateX: '+=360deg'
 //	        }, 500);
-//        } catch(e) { console.error(e); }
+//        } catch(e) { trackError(e); }
 
         this.latestId = id;
 

@@ -271,7 +271,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    				if (DigiWebApp.OrderInfoController.items.length === 0) {
 	    					DigiWebApp.OrderInfoController.set('items', DigiWebApp.OrderDetailsController.positionForDetails);
 	    				}
-	    				try { ev.preventDefault(); } catch(e3) { console.error(e3); }
+	    				try { ev.preventDefault(); } catch(e3) { trackError(e3); }
 						var country = DigiWebApp.OrderInfoController.items[0].positionCountryCode;
 						var zip = DigiWebApp.OrderInfoController.items[0].positionPLZ;
 						var city = DigiWebApp.OrderInfoController.items[0].positionOrt;

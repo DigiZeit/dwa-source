@@ -25,7 +25,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 5528
+    , softwareVersion: 5529
 
 
     /**
@@ -78,7 +78,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                 this.bindToCaller(that, that.handleSuccessCallback, [data, msg, xhr, workPlan, kolonne, source])();
             }
             , onError: function(xhr, err) {
-            	console.error("Error in makeRequest: " + err);
+            	trackError(err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
                 this.bindToCaller(that, that.handleErrorCallback, [xhr, err, obj.source])();
@@ -634,7 +634,7 @@ DigiWebApp.RequestController = M.Controller.extend({
                 , action: function() {
                     //this.connectionError();
                     DigiWebApp.ApplicationController.authenticate();
-                    console.error("ConnectionError while sendConfiguration");
+                    trackError("ConnectionError while sendConfiguration");
                 }
             }
         });

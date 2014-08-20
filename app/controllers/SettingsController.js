@@ -502,7 +502,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 //					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 					DigiWebApp.BookingController.init(YES);
-				},function(err){console.error(err);}
+				},function(err){trackError(err);}
 				, fileNamesToDelete);
 			};
 			if (false) {
@@ -1153,7 +1153,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		try {
         			propvalue = DigiWebApp.SettingsController.defaultsettings_object[prop];
         			setting.set(prop, propvalue);
-        		} catch(e4) { console.error("ERROR: setting.get for prop=" + prop); }
+        		} catch(e4) { trackError("ERROR: setting.get for prop=" + prop); }
         	}
             return propvalue;
         }
@@ -1164,7 +1164,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-    		} catch(e5) { console.error("ERROR: setting.set for prop=" + prop); }
+    		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES, YES);
@@ -1201,14 +1201,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	DigiWebApp.Anwesenheitsliste.find({urlParams:{},callbacks: {success: { action: function(records) {
         		try { 
         			_.each(records, function(record) {
-        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e6) { console.error(e6); }
+        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e6) { trackError(e6); }
         			}); 
         			if (callback) {
         				callback();
         			}
-        		} catch(e7) { console.error(e7); }
+        		} catch(e7) { trackError(e7); }
         	}}, error: { action: function(){}}}});
-        } catch(e8) { console.error(e8); }
+        } catch(e8) { trackError(e8); }
 	}
 
     , sendConfiguration: function() {
@@ -1216,7 +1216,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var settings = DigiWebApp.Settings.find();    		
     	//alert("typeof(settings)=" + typeof(settings));
     	//var MitarbeiterWebAppID = "0";
-    	//try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { console.error(e); }
+    	//try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { trackError(e); }
     	//alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
         DigiWebApp.RequestController.sendConfiguration({
               settings: settings
@@ -1244,7 +1244,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 //				        		}
 //				        	}
 //		    				, errorCallback: function(error) {
-//		    					console.error(error);
+//		    					trackError(error);
 //	    		        	}
 //		    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
 //		    				//, timeout: 

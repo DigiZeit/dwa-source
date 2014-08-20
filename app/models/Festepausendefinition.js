@@ -61,7 +61,7 @@ DigiWebApp.Festepausendefinition = M.Model.create({
         try {
             keys = JSON.parse(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + this.name.toLowerCase() + 'Keys'));
         } catch(e2) {
-        	console.error("ERROR in findSorted: " + e2);
+        	trackError(e2);
         }
 
         var records = [];
@@ -86,7 +86,7 @@ DigiWebApp.Festepausendefinition = M.Model.create({
 	    		keys = JSON.parse(keyString);
 	    	}
 	    } catch(e3) {
-	    	console.error("ERROR in " + that.name + ".saveSorted: " + e3);
+	    	trackError(e3);
 	    }
         var found = NO;
         _.each(keys, function(k) {

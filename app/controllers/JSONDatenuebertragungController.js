@@ -330,7 +330,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// wurden tätigkeiten empfangen?
 			if (typeof(data.leistungen) === "undefined" && data.leistungen !== null && data.leistungen.length > 0) {
-				console.error("missing leistungen");
+				trackError("missing leistungen");
 				return errorCallback();
 			}
 			
@@ -338,7 +338,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			try {
 				myLength = data.leistungen.length;
 			} catch(e2) {
-				console.error(myLength);
+				trackError("data.leistungen hat Länge " + myLength);
 				//return errorCallback();
 			}
 
@@ -351,7 +351,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				try {
 					myLength = data.leistungen.length;
 				} catch(e2) {
-					console.error(myLength);
+					trackError("data.leistungen hat Länge " + myLength);
 					return errorCallback();
 				}
 			}
@@ -365,10 +365,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			_.each(data.leistungen, function(el) {
 				//console.log(el);
 				if (typeof(el.leistungsId) === "undefined") {
-					console.error("missing leistungsId");
+					trackError("missing leistungsId");
 					return errorCallback();
 				} else if (typeof(el.leistungsBezeichnung) === "undefined") {
-					console.error("missing leistungsBezeichnung");
+					trackError("missing leistungsBezeichnung");
 					return errorCallback();
 				} else {
 					var istMitarbeiterZugeordnet = 0; // 0: nicht MA-zugeordnet, 1: MA-zugeordnet
@@ -414,7 +414,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// wurden Positionen empfangen?
 			if (typeof(data.positionen) === "undefined" && data.positionen !== null && data.positionen.length > 0) {
-				console.error("missing positionen");
+				trackError("missing positionen");
 				return errorCallback();
 			}
 
@@ -422,7 +422,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			try {
 				myLength = data.positionen.length;
 			} catch(e2) {
-				console.error(myLength);
+				trackError("data.positionen hat Länge " + myLength);
 				//return errorCallback();
 			}
 
@@ -435,7 +435,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				try {
 					myLength = data.positionen.length;
 				} catch(e2) {
-					console.error(myLength);
+					trackError("data.positionen hat Länge " + myLength);
 					return errorCallback();
 				}
 			}
@@ -451,11 +451,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			_.each(data.positionen, function(el) {
 				//console.log(el);
 				if (typeof(el.positionsId) === "undefined") {
-					console.error("missing positionsId");
+					trackError("missing positionsId");
 					errorHappened = true;
 					return;
 				} else if (typeof(el.positionsBezeichnung) === "undefined") {
-					console.error("missing positionsBezeichnung");
+					trackError("missing positionsBezeichnung");
 					errorHappened = true;
 					return;
 				} else {
@@ -598,7 +598,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// wurden Festepausendefinitionen empfangen?
 			if (typeof(data.festepausendefinitionen) === "undefined" && data.festepausendefinitionen !== null && data.festepausendefinitionen.length > 0) {
-				console.error("missing festepausendefinitionen");
+				trackError("missing festepausendefinitionen");
 				return errorCallback();
 			}
 			
@@ -606,7 +606,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			try {
 				myLength = data.festepausendefinitionen.length;
 			} catch(e2) {
-				console.error(myLength);
+				trackError("data.festepausendefinitionen hat Länge " + myLength);
 				//return errorCallback();
 			}
 
@@ -619,7 +619,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				try {
 					myLength = data.festepausendefinitionen.length;
 				} catch(e2) {
-					console.error(myLength);
+					trackError("data.festepausendefinitionen hat Länge " + myLength);
 					return errorCallback();
 				}
 			}
@@ -632,19 +632,19 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			// die empfangenen festepausendefinitionen mit Model ablegen
 			_.each(data.festepausendefinitionen, function(el) {
 				if (typeof(el) == "undefined" || el == null) {
-					console.error("empty element");
+					trackError("empty element");
 					//return errorCallback();
 				} else if (typeof(el.id) === "undefined") {
-					console.error("missing id");
+					trackError("missing id");
 					return errorCallback();
 				} else if (typeof(el.wochentagId) === "undefined") {
-					console.error("missing wochentagId");
+					trackError("missing wochentagId");
 					return errorCallback();
 				} else if (typeof(el.von) === "undefined") {
-					console.error("missing von");
+					trackError("missing von");
 					return errorCallback();
 				} else if (typeof(el.bis) === "undefined") {
-					console.error("missing bis");
+					trackError("missing bis");
 					return errorCallback();
 				} else {
 					// el zur Liste hinzufügen

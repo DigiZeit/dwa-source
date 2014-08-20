@@ -23,7 +23,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					DigiWebApp.BautagebuchBautageberichteListeController.init();
 				}
 				, function(xhr,err) {
-					console.error(xhr,err);
+					trackError(err);
 		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                title: M.I18N.l('BautagebuchUebertragungsfehler')
 		              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
@@ -72,7 +72,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 			// wurde eine Mengeneinheitenliste erhalten?
 			if (typeof(data.mengeneinheiten) === "undefined") {
-				console.error("missing mengeneinheiten");
+				trackError("missing mengeneinheiten");
 				return errorCallback();
 			}
 			
@@ -97,13 +97,13 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// die empfangenen Mengeneinheiten mit Model ablegen
 			_.each(data.mengeneinheiten, function(el) {
 				if (typeof(el.id) === "undefined") {
-					console.error("missing mengeneinheit id");
+					trackError("missing mengeneinheit id");
 					return errorCallback();
 //				} else if (typeof(el.bezeichnung) === "undefined") {
-//					console.error("missing mengeneinheit bezeichnung");
+//					trackError("missing mengeneinheit bezeichnung");
 //					return errorCallback();
 				} else if (typeof(el.kuerzel) === "undefined") {
-					console.error("missing mengeneinheit kuerzel");
+					trackError("missing mengeneinheit kuerzel");
 					return errorCallback();
 				} else {
 					
@@ -142,7 +142,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// wurde eine materialliste erhalten?
 			if (typeof(data.materialliste) === "undefined") {
-				console.error("missing materialliste");
+				trackError("missing materialliste");
 				return errorCallback();
 			}
 			
@@ -156,7 +156,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				try {
 					myLength = data.materialliste.length;
 				} catch(e2) {
-					console.error(myLength);
+					trackError("data.materialliste hat Länge " + myLength);
 					//return errorCallback();
 				}
 			}
@@ -173,7 +173,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			_.each(data.materialliste, function(el) {
 				//console.log(el);
 				if (typeof(el.bezeichnung) === "undefined") {
-					console.error("missing bezeichnung");
+					trackError("missing bezeichnung");
 					return errorCallback();
 				} else {
 					
@@ -283,7 +283,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 			// wurde eine Projektleiterliste erhalten?
 			if (typeof(data.projektleiter) === "undefined") {
-				console.error("missing mitarbeiterliste");
+				trackError("missing mitarbeiterliste");
 				return errorCallback();
 			}
 			
@@ -298,7 +298,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					myLength = data.projektleiter.length;
 				} catch(e1) {
 					// ohne Projektleiter geht im Bautagebuch nichts
-					console.error(myLength);
+					trackError("data.projektleiter hat Länge " + myLength);
 					return errorCallback();
 				}
 			}
@@ -310,16 +310,16 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// die empfangenen Projektleiter mit Model ablegen
 			_.each(data.projektleiter, function(el) {
 				if (typeof(el.id) === "undefined") {
-					console.error("missing id");
+					trackError("missing id");
 					return errorCallback();
 //				} else if (typeof(el.projektleiterId) === "undefined") {
-//					console.error("missing projektleiterId");
+//					trackError("missing projektleiterId");
 //					return errorCallback();
 				} else if (typeof(el.vorname) === "undefined") {
-					console.error("missing projektleiter vorname");
+					trackError("missing projektleiter vorname");
 					return errorCallback();
 				} else if (typeof(el.nachname) === "undefined") {
-					console.error("missing projektleiter nachname");
+					trackError("missing projektleiter nachname");
 					return errorCallback();
 				} else {
 					
@@ -361,7 +361,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// wurde eine Mitarbeiterliste erhalten?
 			if (typeof(data.mitarbeiter) === "undefined") {
-				console.error("missing projektleiterliste");
+				trackError("missing projektleiterliste");
 				return errorCallback();
 			}
 			
@@ -376,7 +376,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					myLength = data.mitarbeiter.length;
 				} catch(e2) {
 					// ohne Mitarbeiter geht im Bautagebuch nichts
-					console.error(myLength);
+					trackError("data.mitarbeiter hat Länge " + myLength);
 					return errorCallback();
 				}
 			}
@@ -388,16 +388,16 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// die empfangenen Projektleiter im Model ablegen
 			_.each(data.mitarbeiter, function(el) {
 				if (typeof(el.id) === "undefined") {
-					console.error("missing mitarbeiter id");
+					trackError("missing mitarbeiter id");
 					return errorCallback();
 				} else if (typeof(el.vorname) === "undefined") {
-					console.error("missing mitarbeiter vorname");
+					trackError("missing mitarbeiter vorname");
 					return errorCallback();
 				} else if (typeof(el.nachname) === "undefined") {
-					console.error("missing mitarbeiter nachname");
+					trackError("missing mitarbeiter nachname");
 					return errorCallback();
 				} else if (typeof(el.projektleiterId) === "undefined") {
-					console.error("missing mitarbeiter projektleiterId");
+					trackError("missing mitarbeiter projektleiterId");
 					return errorCallback();
 				} else {
 					
@@ -739,7 +739,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					if (typeof(successCallback) === "function") successCallback(data, msg, request);
 				});
 			} else {
-				console.error("Request ended with status: " + request.status);
+				trackError("Request ended with status: " + request.status);
 			}
 						
 		};

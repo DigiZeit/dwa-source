@@ -342,8 +342,8 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	   	var phoneNumbers = [];
 	   	var myTel = '';
 	   	var myFax = '';
-	   	try { myTel = item.positionTelefon; } catch(e1) { console.error(e1); }
-	   	try { myFax = item.positionFax; } catch(e2) { console.error(e2); }
+	   	try { myTel = item.positionTelefon; } catch(e1) { trackError(e1); }
+	   	try { myFax = item.positionFax; } catch(e2) { trackError(e2); }
 	   	phoneNumbers[0] = new ContactField('work', myTel, true);
 	   	phoneNumbers[1] = new ContactField('fax', myFax, false);
 	   	myContact.phoneNumbers = phoneNumbers;
@@ -351,7 +351,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		//emails: An array of all the contact's email addresses. (ContactField[])
 	   	var eMail = [];
 	   	var myemail = '';
-	   	try { myemail = item.positionEmail; } catch(e3) { console.error(e3); }
+	   	try { myemail = item.positionEmail; } catch(e3) { trackError(e3); }
 	   	eMail[0] = new ContactField('work', myemail, true);
 	   	myContact.emails = eMail;
 

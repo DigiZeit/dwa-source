@@ -233,7 +233,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
 			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
 			    		}
-			    	} catch(e4) { console.error(e4); }
+			    	} catch(e4) { trackError(e4); }
 			    }
 
 		    	try {
@@ -241,14 +241,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
-		    	} catch(e4) { console.error(e4); }
+		    	} catch(e4) { trackError(e4); }
 		    	
 		    	try {
 		    		if (actId != null) {
 		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
 		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
-		    	} catch(e5) { console.error(e5); }
+		    	} catch(e5) { trackError(e5); }
 
 		    	that.currentBooking.set("orderId", orderId);
 		    	that.currentBooking.set("orderName", myOrderName);
@@ -358,10 +358,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
 		        	
 		            M.LocationManager.getLocation(that, successCallback, function(error) {
-		            	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		            	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
 		
 		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-		                	//if (DigiWebApp.SettingsController.globalDebugMode) console.error("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+		                	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
 		                	/*
 		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
 		                    */
@@ -641,7 +641,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
 			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
 			    		}
-			    	} catch(e4) { console.error(e4); }
+			    	} catch(e4) { trackError(e4); }
 			    }
 
 		    	try {
@@ -649,14 +649,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
-		    	} catch(e4) { console.error(e4); }
+		    	} catch(e4) { trackError(e4); }
 		    	
 		    	try {
 		    		if (actId != null) {
 		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
 		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
-		    	} catch(e5) { console.error(e5); }
+		    	} catch(e5) { trackError(e5); }
 
 		    	that.currentBooking.set("orderId", orderId);
 		    	that.currentBooking.set("orderName", myOrderName);
@@ -788,7 +788,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //			            }
 //					});
 //		    	}
-				//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
+				//try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); }; // this line is for pre TMP 1.1
 		    }
 	    };
 	    
@@ -860,7 +860,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 									finishBooking();
 								},function(err){
 									DigiWebApp.ApplicationController.DigiLoaderView.hide();
-									console.error(err);
+									trackError(err);
 								});
 							};
 							if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("put currentBooking");
@@ -936,14 +936,14 @@ DigiWebApp.BookingController = M.Controller.extend({
                     myOrderName = order.get('name');
                 }
     		}
-    	} catch(e3) { console.error(e3); }
+    	} catch(e3) { trackError(e3); }
     	try {
     		if (obj.pId != null) {
     			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.pId));});
     			//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.pId.toString()}})[0];
     			if (myPositionLoad && obj.pId !== 0) myPositionName = myPositionLoad.get('name');
     		}
-    	} catch(e4) { console.error(e4); }
+    	} catch(e4) { trackError(e4); }
     	try {
     		if (obj.aId != null) {
     			//var myActivityLoad = DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.aId.toString()}})[0];
@@ -951,7 +951,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     			//DigiWebApp.Activity.findById(obj.aId);
     			if (myActivityLoad && obj.aId !== 0) myActivityName = myActivityLoad.get('name');
     		}
-    	} catch(e5) { console.error(e5); }
+    	} catch(e5) { trackError(e5); }
     	
     	var timeStart;
 		try {
@@ -1043,7 +1043,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                     }
         		}
         		//if (obj.get('orderId') !== 0) myOrderName = DigiWebApp.Order.find({query:{identifier: 'id', operator: '=', value: obj.get('orderId')}})[0].get('name');    		
-        	} catch(e7) { console.error(e7); }
+        	} catch(e7) { trackError(e7); }
     	}
     	if (typeof(obj.get('positionName')) !== "undefined") {
     		myPositionName = obj.get('positionName');
@@ -1051,7 +1051,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         	try {
 	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
-    		} catch(e8) { console.error(e8); }
+    		} catch(e8) { trackError(e8); }
     	}
     	if (typeof(obj.get('activityName')) !== "undefined") {
     		myActivityName = obj.get('activityName');
@@ -1059,7 +1059,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         	try {
 	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
-    		} catch(e9) { console.error(e9); }
+    		} catch(e9) { trackError(e9); }
     	}
     	
         return DigiWebApp.SentBooking.createRecord({
@@ -1104,7 +1104,8 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , sentBookingArchived: function(obj) {
     	
-    	if (obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString")) {
+    	if (!(obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString"))) {
+    		trackError("skip Zeitbuchung start==ende");
     		return null;
     	};
 
@@ -1113,6 +1114,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     	
     	// speichere die Namen von Auftrag, Position und Tätigkeit,
     	// falls beim nächsten Stammdatenabgleich eines davon vom Gerät entfernt werden 
+    	var myOrderId = M.I18N.l('notDefined');
+
+    	var myHandOrderId = M.I18N.l('notDefined');
+    	var myHandOrderName = M.I18N.l('notDefined');
+
     	var myOrderName = M.I18N.l('notDefined');
     	var myPositionName = M.I18N.l('notDefined');
     	var myActivityName = M.I18N.l('notDefined');
@@ -1136,7 +1142,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                     }
         		}
         		//if (obj.get('orderId') !== 0) myOrderName = DigiWebApp.Order.find({query:{identifier: 'id', operator: '=', value: obj.get('orderId')}})[0].get('name');    		
-        	} catch(e10) { console.error(e10); }
+        	} catch(e10) { trackError(e10); }
     	}
 
 		if (typeof(obj.get('positionName')) !== "undefined") {
@@ -1145,7 +1151,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         	try {
 	    		if (obj.get('positionId') !== 0) myPositionName = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('positionId')));}).get('name');
 	    		//DigiWebApp.Position.find({query:{identifier: 'id', operator: '=', value: obj.get('positionId')}})[0].get('name');
-    		} catch(e11) { console.error(e11); }
+    		} catch(e11) { trackError(e11); }
     	}
 
 		if (typeof(obj.get('activityName')) !== "undefined") {
@@ -1154,7 +1160,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         	try {
 	    		if (obj.get('activityId') !== 0) myActivityName = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === parseIntRadixTen(obj.get('activityId')));}).get('name');
 	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: obj.get('activityId')}})[0].get('name');
-    		} catch(e12) { console.error(e12); }
+    		} catch(e12) { trackError(e12); }
     	}
     	
     	return DigiWebApp.SentBookingArchived.createRecord({
@@ -1734,7 +1740,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 							DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 								finishBooking();
-							},function(err){console.error(err);finishBooking();});
+							},function(err){trackError(err);finishBooking();});
 						};
 						if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("post currentBookingClosed");
 						DigiWebApp.ServiceAppController.postBookings([that.currentBookingClosed], getWAITFunc, getWAITFunc);
@@ -1755,7 +1761,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
-			console.error("loadSignaturesError: successCallback is not a function");
+			trackError("loadSignaturesError: successCallback is not a function");
 	        return;
 	    }
 		

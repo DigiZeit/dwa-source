@@ -169,7 +169,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 	    		keys = JSON.parse(keyString);
 	    	}
 	    } catch(e2) {
-	    	console.error("ERROR in " + that.name + ".deleteSorted: " + e2);
+	    	trackError(e2);
 	    }
 	    if (keys) {
 	        _.each(keys, function(k) {
@@ -195,7 +195,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 	    		keys = JSON.parse(keyString);
 	    	}
 	    } catch(e3) {
-	    	console.error("ERROR in " + that.name + ".saveSorted: " + e3);
+	    	trackError(e3);
 	    }
         var found = NO;
         _.each(keys, function(k) {
@@ -215,7 +215,7 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 	    		keys = JSON.parse(keyString);
 	    	}
 	    } catch(e4) {
-	    	console.error("ERROR in " + that.name + ".findSorted: " + e4);
+	    	trackError(e4);
 	    }
 	
 	    var records = [];

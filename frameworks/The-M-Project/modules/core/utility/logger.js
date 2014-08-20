@@ -89,7 +89,7 @@ M.Logger = M.Object.extend(
         /* Prevent a console.log from blowing things up if we are on a browser that doesn't support this. */
         if (typeof console === 'undefined') {
             window.console = {} ;
-            console.log = console.info = console.warn = console.error = function(){};
+            console.log = console.info = console.warn = trackError = function(){};
         }
 
         switch (level) {
@@ -128,7 +128,7 @@ M.Logger = M.Object.extend(
      * @param {String} msg The logging message.
      */
     error: function(msg) {
-        console.error(msg);
+        trackError(msg);
     },
 
     /**

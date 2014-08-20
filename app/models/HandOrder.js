@@ -51,7 +51,7 @@ DigiWebApp.HandOrder = M.Model.create({
         try {
             keys = JSON.parse(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + this.name.toLowerCase() + 'Keys'));
         } catch(e2) {
-        	console.error("ERROR in findSorted: " + e2);
+        	trackError(e2);
         }
 
         var records = [];

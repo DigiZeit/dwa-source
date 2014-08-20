@@ -480,7 +480,7 @@ jQuery.extend({
 
 			try {
 				toplevel = window.frameElement == null;
-			} catch(e) { console.error(e); }
+			} catch(e) { trackError(e); }
 
 			if ( document.documentElement.doScroll && toplevel ) {
 				doScrollCheck();
@@ -1742,7 +1742,7 @@ function dataAttr( elem, key, data ) {
 				!jQuery.isNaN( data ) ? parseFloat( data ) :
 					rbrace.test( data ) ? jQuery.parseJSON( data ) :
 					data;
-			} catch(e) { console.error(e); }
+			} catch(e) { trackError(e); }
 
 			// Make sure we set the data so it isn't changed later
 			jQuery.data( elem, key, data );
@@ -1974,7 +1974,7 @@ jQuery.fn.extend({
 			try {
 				this[ name ] = undefined;
 				delete this[ name ];
-			} catch(e) { console.error(e); }
+			} catch(e) { trackError(e); }
 		});
 	},
 
@@ -4934,7 +4934,7 @@ if ( document.querySelectorAll ) {
 					
 					try {
 						return makeArray( context.querySelectorAll(query), extra );
-					} catch(e) { console.error(e); }
+					} catch(e) { trackError(e); }
 
 				// qSA works strangely on Element-rooted queries
 				// We can work around this by specifying an extra ID on the root
@@ -5018,7 +5018,7 @@ if ( document.querySelectorAll ) {
 							return ret;
 						}
 					}
-				} catch(e) { console.error(e); }
+				} catch(e) { trackError(e); }
 			}
 
 			return Sizzle(expr, null, null, [node]).length > 0;
@@ -6401,7 +6401,7 @@ jQuery.extend({
 				// Fixes bug #5509
 				try {
 					style[ name ] = value;
-				} catch(e) { console.error(e); }
+				} catch(e) { trackError(e); }
 			}
 
 		} else {
@@ -7859,13 +7859,13 @@ var // #5280: Internet Explorer will keep connections alive if we don't abort on
 function createStandardXHR() {
 	try {
 		return new window.XMLHttpRequest();
-	} catch(e) { console.error(e); }
+	} catch(e) { trackError(e); }
 }
 
 function createActiveXHR() {
 	try {
 		return new window.ActiveXObject( "Microsoft.XMLHTTP" );
-	} catch(e) { console.error(e); }
+	} catch(e) { trackError(e); }
 }
 
 // Create the request object
@@ -7942,7 +7942,7 @@ if ( jQuery.support.ajax ) {
 						for ( i in headers ) {
 							xhr.setRequestHeader( i, headers[ i ] );
 						}
-					} catch(e) { console.error(e); }
+					} catch(e) { trackError(e); }
 
 					// Do send the request
 					// This may raise an exception which is actually
@@ -8688,7 +8688,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 
 		try {
 			box = elem.getBoundingClientRect();
-		} catch(e) { console.error(e); }
+		} catch(e) { trackError(e); }
 
 		var doc = elem.ownerDocument,
 			docElem = doc.documentElement;

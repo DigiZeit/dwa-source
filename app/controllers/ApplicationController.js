@@ -139,7 +139,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				if (typeof(obj.callbacks.confirm.action) === "function") {
 					mycallback = obj.callbacks.confirm.action;
 				} else {
-					console.error("ERROR: callback without target given but action is not a function!");
+					trackError("ERROR: callback without target given but action is not a function!");
 				}
 			} else if (typeof(obj.callbacks.confirm.target) === "function") {
 				// with function-target
@@ -151,7 +151,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				} else if (typeof(obj.callbacks.confirm.action) === "function") {
 					mycallback = obj.callbacks.confirm.action;
 				} else {
-					console.error("ERROR: action is neither a string nor a function!");
+					trackError("ERROR: action is neither a string nor a function!");
 				}
 			}
 		};
@@ -184,7 +184,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						alert("ERROR: yet unknown button \"" + button + "\" pressed.");
 						return;
 					}
-					//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
+					//try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); }; // this line is for pre TMP 1.1
 				} // callback
 				, obj.title						// title
 				, obj.confirmButtonValue			// buttonLabel
@@ -247,7 +247,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 							alert("ERROR: yet unknown button \"" + button + "\" pressed.");
 							return;
 					}
-					//try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); }; // this line is for pre TMP 1.1
+					//try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); }; // this line is for pre TMP 1.1
 				}  // callback to invoke with index of button pressed
 				, obj.title // title
 				, [obj.confirmButtonValue, obj.cancelButtonValue]          // buttonLabels
@@ -734,7 +734,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		//$(document).keydown(DigiWebApp.ApplicationController.keypressedHandler);
 			} else {
 				// refresh fixed toolbars every second
-				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { console.error(e); };}, 1000);
+				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); };}, 1000);
 			}
 	    	
 	    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
@@ -764,7 +764,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 //		} catch(e) {
 //			//trackError(e);
-//			console.error(e);
+//			trackError(e);
 //		}
 	}
 	
@@ -1413,7 +1413,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-            		console.error("authenticate-error");
+            		trackError("authenticate-error");
         			this.proceedWithLocalData("authenticate");
                 }
             }
@@ -1552,7 +1552,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-        			console.error("getOrdersFromRemote-error");
+        			trackError("getOrdersFromRemote-error");
                     this.proceedWithLocalData("getOrdersFromRemote");
                 }
             }
@@ -1609,7 +1609,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     mIdArray.push(rec.m_id);
                 } catch(e) {
                     // maybe do something here
-                	console.error("ERROR in getOrdersFromRemoteSuccess: " + e);
+                	trackError(e);
                 }
             });
 
@@ -1662,7 +1662,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //            , error: {
 //                  target: this
 //                , action: function() {
-//            		console.error("getPositionsFromRemote-error");
+//            		trackError("getPositionsFromRemote-error");
 //            		this.proceedWithLocalData("getPositionsFromRemote");
 //                }
 //            }
@@ -1785,7 +1785,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //                    rec.save();
 //                    mIdArray.push(rec.m_id);
 //                } catch(e) {
-//                	console.error("ERROR in getPositionsFromRemoteSuccess: " + e);
+//                	trackError(e);
 //                }
 //                
 //            });
@@ -1829,7 +1829,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //            , error: {
 //                  target: this
 //                , action: function() {
-//        			console.error("getActivitiesFromRemote-error");
+//        			trackError("getActivitiesFromRemote-error");
 //                    this.proceedWithLocalData("getActivitiesFromRemote");
 //                }
 //            }
@@ -1891,7 +1891,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //	                    rec.save();
 //	                    mIdArray.push(rec.m_id);
 //	                } catch(e) {
-//	                	console.error("ERROR in getActivitiesFromRemoteSuccess: " + e);
+//	                	trackError(e);
 //	                }
 //            	}
 //            });
@@ -1920,7 +1920,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: that
                 , action: function() {
-            		console.error("getWorkPlansFromRemote-error");
+            		trackError("getWorkPlansFromRemote-error");
             		that.proceedWithLocalData("getWorkPlansFromRemote");
                 }
             }
@@ -1996,7 +1996,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-            		console.error("getHandOrdersFromRemote-error");
+            		trackError("getHandOrdersFromRemote-error");
                     this.proceedWithLocalData("getHandOrdersFromRemote");
                 }
             }
@@ -2080,7 +2080,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     	}
                     });
                 } catch(e) {
-                	console.error("ERROR in getHandOrdersFromRemoteSuccess: " + e);
+                	trackError(e);
                 }
             });
 
@@ -2133,7 +2133,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-        			console.error("getFeaturesFromRemote-error");
+        			trackError("getFeaturesFromRemote-error");
                     //this.getOrdersFromRemote();
             		this.getPositionsFromRemote();
         			//this.proceedWithLocalData("getFeaturesFromRemote");
@@ -2371,7 +2371,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-        			console.error("getKolonneFromRemote-error");
+        			trackError("getKolonneFromRemote-error");
         			this.proceedWithLocalData("getKolonneFromRemote");
                 }
             }
@@ -2447,7 +2447,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 	k.save();
                     mIdArray.push(k.m_id);
                 } catch(e) {
-                	console.error("ERROR in getKolonneFromRemoteSuccess: " + e);
+                	trackError(e);
                 }
 
             });
@@ -2596,7 +2596,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-    				console.error("endSession-error");
+    				trackError("endSession-error");
             	}
             }
         });
@@ -2640,7 +2640,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    				DigiWebApp.ApplicationController.profilingSingleRun = NO;
 	    				DigiWebApp.ApplicationController.profilingIntervalVar = setInterval(function() { DigiWebApp.ApplicationController.startsync(); }, interval);
 	    			} else {
-	    				console.error("Profiling-Interval too low!");
+	    				trackError("Profiling-Interval too low!");
 	    			}
 	    		} else {
     				DigiWebApp.ApplicationController.profilingSingleRun = YES;
@@ -2648,7 +2648,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		}
 	    	}
     	} else {
-			console.error("Profiling already running!");
+			trackError("Profiling already running!");
     	}
     }
 
@@ -2660,13 +2660,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , deleteAllData: function() {
 		try {
 			DigiWebApp.Booking.deleteAll();
-		} catch(e) { console.error(e); }
+		} catch(e) { trackError(e); }
 		try {
 			DigiWebApp.MediaFile.deleteAll();
-		} catch(e) { console.error(e); }
+		} catch(e) { trackError(e); }
 		try {
 			localStorage.clear('f');
-		} catch(e) { console.error(e); }
+		} catch(e) { trackError(e); }
     }
 
     , updateModels: function(callback) {

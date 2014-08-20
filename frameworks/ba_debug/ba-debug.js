@@ -161,7 +161,7 @@ window.debug = (function(){
       
       // Method: debug.error
       // 
-      // Call the console.error method if available, otherwise call console.log.
+      // Call the trackError method if available, otherwise call console.log.
       // Adds an entry into the logs array for a callback specified via
       // <debug.setCallback>.
       // 

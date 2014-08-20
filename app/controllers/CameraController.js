@@ -531,17 +531,17 @@ DigiWebApp.CameraController = M.Controller.extend({
                     myOrderName = order.get('name');
                 }
     		}
-    	} catch(e1) { console.error(e1); }
+    	} catch(e1) { trackError(e1); }
     	try {
     		if (parseIntRadixTen(myMediaFile.get("positionId")) !== 0) {
     			myPositionName = _.find(DigiWebApp.Position.find(), function(p){ return parseIntRadixTen(p.get("id")) === parseIntRadixTen(myMediaFile.get("positionId"))}).get('name');
     		}
-    	} catch(e2) { console.error(e2); }
+    	} catch(e2) { trackError(e2); }
     	try {
     		if (parseIntRadixTen(myMediaFile.get("activityId")) !== 0) {
     			myActivityName = _.find(DigiWebApp.Activity.find(), function(p){ return parseIntRadixTen(p.get("id")) === parseIntRadixTen(myMediaFile.get("activityId"))}).get('name');
     		}
-    	} catch(e3) { console.error(e3); }
+    	} catch(e3) { trackError(e3); }
 	    myMediaFile.set('orderName', myOrderName);
 	    myMediaFile.set('positionName', myPositionName);
 	    myMediaFile.set('activityName', myActivityName);

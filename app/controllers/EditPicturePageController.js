@@ -28,7 +28,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 	  //console.log(myMediaFile);
 	  try {
 		  myMediaFile.del();
-	  } catch(e2) { console.error(e2); }
+	  } catch(e2) { trackError(e2); }
 	  DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	  DigiWebApp.NavigationController.backToMediaListPageTransition();
   }

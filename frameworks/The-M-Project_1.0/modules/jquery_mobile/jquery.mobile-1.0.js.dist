@@ -1626,7 +1626,7 @@ $.each({
               if ( event.propertyName === 'title' ) {
                 iframe.document.title = doc.title;
               }
-            } catch(e) { console.error(e); }
+            } catch(e) { trackError(e); }
           };
           
         }
@@ -3053,7 +3053,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			} else {
 				$( "input:focus, textarea:focus, select:focus" ).blur();
 			}
-		} catch(e) { console.error(e); }
+		} catch(e) { trackError(e); }
 
 		// If we're displaying the page as a dialog, we don't want the url
 		// for the dialog content to be used in the hash. Instead, we want
