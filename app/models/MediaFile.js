@@ -184,7 +184,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					    		fileEntry.createWriter(function(writer) {
 					    				
 					    			writer.onerror = function(evt) {
-					    				trackError("writeError", evt);
+					    				trackError("writeError");
 					    				errorCallback(evt);
 					    			};
 					    			
@@ -204,7 +204,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					   	}, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  trackError('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -225,7 +225,7 @@ DigiWebApp.MediaFile = M.Model.create({
 				    		fileEntry.createWriter(function(writer) {
 				    				
 				    			writer.onerror = function(evt) {
-				    				trackError("writeError", evt);
+				    				trackError("writeError");
 				    				errorCallback(evt);
 				    			};
 				    			
@@ -269,7 +269,7 @@ DigiWebApp.MediaFile = M.Model.create({
 		var errorCallback;
 	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 	    	errorCallback = function(evt) {
-	    		trackError("readFromFileError", evt);
+	    		trackError("readFromFileError");
 	    	};
 	    } else {
 	    	errorCallback = myErrorCallback;
@@ -314,7 +314,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  trackError('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
@@ -372,7 +372,7 @@ DigiWebApp.MediaFile = M.Model.create({
 		var errorCallback;
 	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
 	    	errorCallback = function(evt) {
-	    		trackError("deleteFileError", evt);
+	    		trackError("deleteFileError");
 	    	};
 	    } else {
 	    	errorCallback = myErrorCallback;
@@ -405,7 +405,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
 				}, function(e) {
-					  trackError('Error while requesting Quota', e);
+					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err

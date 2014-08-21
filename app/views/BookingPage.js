@@ -110,6 +110,12 @@ DigiWebApp.BookingPage = M.PageView.design({
                     change: {
                           target: DigiWebApp.SelectionController
                         , action: function() {
+		    				var mySelection = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
+		    				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
+			            		$('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide();
+		    				} else {
+			            		$('#' + DigiWebApp.BookingPage.content.position.id + "_container").show();
+		    				}
                             this.setPositions();
                         }
                     }
