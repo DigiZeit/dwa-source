@@ -448,23 +448,27 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
 	, deleteSorted: function(successCallback,errorCallback) {
 	    var that = this;
 	    
+	    var myBautagesberichtId = that.get('id');
+
 	    // alle zugehörigen Zeiten löschen
-	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({bautagesberichtId: that.get('id')}), function(el) {
+	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({bautagesberichtId: myBautagesberichtId}), function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Materialbuchungen löschen
-	    _.each(DigiWebApp.BautagebuchMaterialBuchung.find({bautagesberichtId: that.get('id')}), function(el) {
+	    var myMaterialBuchungen = DigiWebApp.BautagebuchMaterialBuchung.find({bautagesberichtId: myBautagesberichtId});
+	    _.each(myMaterialBuchungen, function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Notizen löschen
-	    _.each(DigiWebApp.BautagebuchNotiz.find({bautagesberichtId: that.get('id')}), function(el) {
+	    var myNotizBuchungen = DigiWebApp.BautagebuchNotiz.find({bautagesberichtId: myBautagesberichtId});
+	    _.each(myNotizBuchungen, function(el) {
 	    	el.deleteSorted();
 	    });
 
 	    // alle zugehörigen Medien löschen
-	    _.each(DigiWebApp.BautagebuchMediaFile.find({bautagesberichtId: that.get('id')}), function(el) {
+	    _.each(DigiWebApp.BautagebuchMediaFile.find({bautagesberichtId: myBautagesberichtId}), function(el) {
 	    	el.deleteSorted();
 	    });
 

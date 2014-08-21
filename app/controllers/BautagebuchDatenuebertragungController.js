@@ -796,7 +796,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
            	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
            	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
        		} else {
-       			callback();
+				if (typeof(callback) == "function") callback();
        		}
  		}
 
@@ -826,7 +826,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
            	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
            	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
        		} else {
-       			callback();
+				if (typeof(callback) == "function") callback();
        		}
  		}
  		
