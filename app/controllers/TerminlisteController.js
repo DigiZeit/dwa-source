@@ -64,13 +64,13 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 				// läuft der Auftrag bereits?
 				var posBeginnStr = pos.get("positionBegin");
 				var posBeginn = null;
-				if (posBeginnStr !== "") {
+				if (typeof(posBeginnStr) != "undefined" && posBeginnStr !== "") {
 					posBeginn = D8.create(posBeginnStr);
 				}
 				// Wurde der Auftrag bereits abgeschlossen?
 				var posEndeStr = pos.get("positionEnd");
 				var posEnde = null;
-				if (posEndeStr !== "") {
+				if (typeof(posEndeStr) != "undefined" && posEndeStr !== "") {
 					posEnde = D8.create(posEndeStr);
 				}
 	
