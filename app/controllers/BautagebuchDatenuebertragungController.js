@@ -763,14 +763,15 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	  			that.senden(
 						DigiWebApp.BautagebuchZusammenfassungController.item
 					    , function(msg) {
-							DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
+							//DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
+							if (typeof(callback) == "function") callback();
 						}
 						, function(xhr,err) {
-							callback();
+							if (typeof(callback) == "function") callback();
 						}
 				);
  		} else {
- 			callback();
+ 			if (typeof(callback) == "function") callback();
  		}	     	    				
  	}
 

@@ -112,9 +112,9 @@ DigiWebApp.BookingPage = M.PageView.design({
                         , action: function() {
 		    				var mySelection = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
 		    				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-			            		$('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide();
+		    					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
 		    				} else {
-			            		$('#' + DigiWebApp.BookingPage.content.position.id + "_container").show();
+		    					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
 		    				}
                             this.setPositions();
                         }

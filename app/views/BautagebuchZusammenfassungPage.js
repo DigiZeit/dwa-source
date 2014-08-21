@@ -589,7 +589,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 			    						}
 			    						, function(xhr,err) {
 			    							//console.log("errorHandler");
-			    							trackError(xhr,err);
+			    							trackError(err);
 			    				            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			    				                title: M.I18N.l('BautagebuchUebertragungsfehler')
 			    				              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
