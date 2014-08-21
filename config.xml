@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5536"
-	version 	= "1.8.1.5536">
+	versionCode = "5537"
+	version 	= "1.8.1.5537">
 
 	<name>DIGI-WebApp Beta</name>
 

@@ -451,24 +451,24 @@ DigiWebApp.BautagebuchBautagesbericht = M.Model.create({
 	    var myBautagesberichtId = that.get('id');
 
 	    // alle zugehörigen Zeiten löschen
-	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({bautagesberichtId: myBautagesberichtId}), function(el) {
+	    _.each(DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: myBautagesberichtId}}), function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Materialbuchungen löschen
-	    var myMaterialBuchungen = DigiWebApp.BautagebuchMaterialBuchung.find({bautagesberichtId: myBautagesberichtId});
+	    var myMaterialBuchungen = DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: myBautagesberichtId}});
 	    _.each(myMaterialBuchungen, function(el) {
 	    	el.deleteSorted();
 	    });
 	    
 	    // alle zugehörigen Notizen löschen
-	    var myNotizBuchungen = DigiWebApp.BautagebuchNotiz.find({bautagesberichtId: myBautagesberichtId});
+	    var myNotizBuchungen = DigiWebApp.BautagebuchNotiz.find({query:{identifier: 'bautagesberichtId', operator: '=', value: myBautagesberichtId}});
 	    _.each(myNotizBuchungen, function(el) {
 	    	el.deleteSorted();
 	    });
 
 	    // alle zugehörigen Medien löschen
-	    _.each(DigiWebApp.BautagebuchMediaFile.find({bautagesberichtId: myBautagesberichtId}), function(el) {
+	    _.each(DigiWebApp.BautagebuchMediaFile.find({query:{identifier: 'bautagesberichtId', operator: '=', value: myBautagesberichtId}}), function(el) {
 	    	el.deleteSorted();
 	    });
 
