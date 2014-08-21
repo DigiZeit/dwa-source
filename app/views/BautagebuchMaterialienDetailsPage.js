@@ -30,8 +30,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
 					}
 
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
-						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.bautagesberichtTyp == "<standard>") {
+						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 						_.each(myPositionenList, function(p) {
 							if (parseIntRadixTen(p.value) !== 0) {
 								p.isSelected = NO;
@@ -52,8 +52,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					    });
 					    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
 						    positionenArray = _.map(positionenArray, function(o) {
-								if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-									o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+								if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
+									o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
 									if (o.isSelected) { itemSelected = YES; 
 										relevantDetailsController.set("positionId", o.value);
 										relevantDetailsController.set("positionName", o.label);
@@ -92,8 +92,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
 					M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'mengenInput').setValue(DigiWebApp.BautagebuchMaterialienDetailsController.menge);
 					
-                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen") && myTyp == "<standard>") {
+                	var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("bautagesberichtTyp");
+					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("abgeschlossen") && myTyp == "<standard>") {
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.content.speichernButton.id).hide();
 						$("#" + DigiWebApp.BautagebuchMaterialienDetailsPage.header.delButton.id).hide();
 					} else {

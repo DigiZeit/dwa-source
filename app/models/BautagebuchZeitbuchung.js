@@ -45,12 +45,12 @@ DigiWebApp.BautagebuchZeitbuchung = M.Model.create({
     })
 
     , timeStampStart: M.Model.attr('String', {
-    	// wird nach Abschluss eines Bautageberichtes berechnet (dient nur der Übertragung)
+    	// wird nach Abschluss eines Bautagesberichtes berechnet (dient nur der Übertragung)
         isRequired: NO
     })
 
     , timeStampEnd: M.Model.attr('String', {
-    	// wird nach Abschluss eines Bautageberichtes berechnet (dient nur der Übertragung)
+    	// wird nach Abschluss eines Bautagesberichtes berechnet (dient nur der Übertragung)
         isRequired: NO
     })
 

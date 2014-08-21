@@ -20,7 +20,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			that.senden(
 				  item
 				, function(msg) {
-					DigiWebApp.BautagebuchBautageberichteListeController.init();
+					DigiWebApp.BautagebuchBautagesberichteListeController.init();
 				}
 				, function(xhr,err) {
 					trackError(err);
@@ -734,7 +734,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			if (request.status > 199 && request.status < 300) {
 				// scheint alles gut gegangen zu sein
 				item.deleteSorted(function() {
-					DigiWebApp.BautagebuchBautageberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+					DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
 					if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeBautagesberichtFertig Status: " + request.status);
 					if (typeof(successCallback) === "function") successCallback(data, msg, request);
 				});
@@ -756,14 +756,14 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		
 	}
 
- 	, sendBautageberichtFunc: function(callback) {
+ 	, sendBautagesberichtFunc: function(callback) {
  		var that = this;
  		if (DigiWebApp.BautagebuchZusammenfassungController.item) {
 	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
 	  			that.senden(
 						DigiWebApp.BautagebuchZusammenfassungController.item
 					    , function(msg) {
-							//DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
+							//DigiWebApp.BautagebuchBautagesberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
 							if (typeof(callback) == "function") callback();
 						}
 						, function(xhr,err) {
@@ -782,7 +782,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
  			// Datenübertragung für Notiz-only und Feierabend           
  			
-       		DigiWebApp.BautagebuchBautageberichteListeController.init();
+       		DigiWebApp.BautagebuchBautagesberichteListeController.init();
        		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
        		var myBautagesbericht = null;
        		_.each(bautagesberichte, function(bautagesbericht){
@@ -792,8 +792,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
        		});
        		
        		if (myBautagesbericht) {
-       			DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-           	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
+       			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
+           	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
            	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
        		} else {
 				if (typeof(callback) == "function") callback();
@@ -801,7 +801,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
  		}
 
 		processNotizenOnly(function(){
-			that.sendBautageberichtFunc(mainCallback);
+			that.sendBautagesberichtFunc(mainCallback);
 		});
 		
 	}
@@ -812,7 +812,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
  		var processMaterialerfassungOnly = function(callback) { 
      		// Datenübertragung für Materialerfassung-only und Feierabend
          	  	
-       		DigiWebApp.BautagebuchBautageberichteListeController.init();
+       		DigiWebApp.BautagebuchBautagesberichteListeController.init();
        		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
        		var myBautagesbericht = null;
        		_.each(bautagesberichte, function(bautagesbericht){
@@ -822,8 +822,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
        		});
        		
        		if (myBautagesbericht) {
-       			DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-           	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautageberichtDetailsController.item);
+       			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
+           	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
            	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
        		} else {
 				if (typeof(callback) == "function") callback();
@@ -831,7 +831,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
  		}
  		
  		processMaterialerfassungOnly(function(){
- 			that.sendBautageberichtFunc(mainCallback);
+ 			that.sendBautagesberichtFunc(mainCallback);
  		});	        		              	  	
 
 	}

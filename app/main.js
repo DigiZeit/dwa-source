@@ -549,8 +549,8 @@ if ( (searchForFeature(411)) && !(searchForFeature(409)) ) { // Buchungen X Tage
 }
 	
 if (searchForFeature(412) || searchForFeature(402) || searchForFeature(426)) { // Bautagebuch, Materialerfassung & Notizen 
-	DigiWebAppOrdinaryDesign.bautagebuchBautageberichteListePage = DigiWebApp.BautagebuchBautageberichteListePage;
-	DigiWebAppOrdinaryDesign.bautagebuchBautageberichtDetailsPage = DigiWebApp.BautagebuchBautageberichtDetailsPage;
+	DigiWebAppOrdinaryDesign.bautagebuchBautagesberichteListePage = DigiWebApp.BautagebuchBautagesberichteListePage;
+	DigiWebAppOrdinaryDesign.bautagebuchBautagesberichtDetailsPage = DigiWebApp.BautagebuchBautagesberichtDetailsPage;
 	DigiWebAppOrdinaryDesign.bautagebuchMaterialienListePage = DigiWebApp.BautagebuchMaterialienListePage;
 	DigiWebAppOrdinaryDesign.bautagebuchMaterialienDetailsPage = DigiWebApp.BautagebuchMaterialienDetailsPage;
 	DigiWebAppOrdinaryDesign.bautagebuchMedienListePage = DigiWebApp.BautagebuchMedienListePage;

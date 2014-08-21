@@ -348,11 +348,11 @@ M.I18N.en_us = {
 
 	// Start::Bautagebuch
 	, Bautagebuch: "Builder's Diary"
-	, BautagebuchBautageberichte: "Construction Records"
-	, BautagebuchBautagebericht: "Construction Record"
+	, BautagebuchBautagesberichte: "Construction Records"
+	, BautagebuchBautagesbericht: "Construction Record"
 	, BautagebuchAdd: "new"
 	, BautagebuchDelete: "delete"
-	, BautagebuchBautageberichtAbschliessen: "finish this Construction Record"
+	, BautagebuchBautagesberichtAbschliessen: "finish this Construction Record"
 	, BautagebuchSaveOrClose: "save or finish"
 	, BautagebuchWetter: "Weather"
 	, BautagebuchMaterial: "Material"

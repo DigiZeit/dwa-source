@@ -31,8 +31,8 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
 					}
 
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
-						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.bautagesberichtTyp == "<standard>") {
+						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 						_.each(myPositionenList, function(p) {
 							if (parseIntRadixTen(p.value) !== 0) {
 								p.isSelected = NO;
@@ -53,8 +53,8 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					    });
 					    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
 						    positionenArray = _.map(positionenArray, function(o) {
-								if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-									o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+								if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
+									o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
 									if (o.isSelected) { itemSelected = YES; 
 										relevantDetailsController.set("positionId", o.value);
 										relevantDetailsController.set("positionName", o.label);
@@ -87,8 +87,8 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].blur();
 					
 
-                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
-					if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen") && myTyp == "<standard>") {
+                	var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("bautagesberichtTyp");
+					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("abgeschlossen") && myTyp == "<standard>") {
 						$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.content.speichernButton.id).hide();
 						$("#" + DigiWebApp.BautagebuchNotizenDetailsPage.header.delButton.id).hide();
 					} else {

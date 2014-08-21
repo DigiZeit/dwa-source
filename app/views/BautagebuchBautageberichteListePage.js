@@ -3,17 +3,17 @@
 // Generated with: Espresso 
 //
 // Project: DigiWebApp
-// View: BautagebuchBautageberichteListePage
+// View: BautagebuchBautagesberichteListePage
 // ==========================================================================
 
 m_require('app/views/BautagebuchTabBar.js');
-m_require('app/views/BautagebuchBautageberichtTemplateView');
+m_require('app/views/BautagebuchBautagesberichtTemplateView');
 
-DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
+DigiWebApp.BautagebuchBautagesberichteListePage = M.PageView.design({
 
     events: {
 		pagebeforeshow: {
-              target: DigiWebApp.BautagebuchBautageberichteListeController
+              target: DigiWebApp.BautagebuchBautagesberichteListeController
             , action: 'init'
         }
     }
@@ -40,7 +40,7 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('BautagebuchBautageberichte')
+              value: M.I18N.l('BautagebuchBautagesberichte')
             , anchorLocation: M.CENTER
         })
         , newButton: M.ButtonView.design({
@@ -52,7 +52,7 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
                 tap: {
         			action: function() {
         				try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-        				DigiWebApp.BautagebuchBautageberichteListeController.neu();
+        				DigiWebApp.BautagebuchBautagesberichteListeController.neu();
 					}
                 }
             }
@@ -75,10 +75,10 @@ DigiWebApp.BautagebuchBautageberichteListePage = M.PageView.design({
           childViews: 'list'
         , list: M.ListView.design({
               contentBinding: {
-                  target: DigiWebApp.BautagebuchBautageberichteListeController
+                  target: DigiWebApp.BautagebuchBautagesberichteListeController
                 , property: 'items'
             }
-            , listItemTemplateView: DigiWebApp.BautagebuchBautageberichtTemplateView
+            , listItemTemplateView: DigiWebApp.BautagebuchBautagesberichtTemplateView
         })
     })
     

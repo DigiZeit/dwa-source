@@ -3,10 +3,10 @@
 // Generated with: Espresso 
 //
 // Project: DigiWebApp
-// View: BautagebuchBautageberichtTemplateView
+// View: BautagebuchBautagesberichtTemplateView
 // ==========================================================================
 
-DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
+DigiWebApp.BautagebuchBautagesberichtTemplateView = M.ListItemView.design({
 
       isSelectable: YES
 
@@ -18,15 +18,15 @@ DigiWebApp.BautagebuchBautageberichtTemplateView = M.ListItemView.design({
 				//console.log("tap");
 			    var view = M.ViewManager.getViewById(id);
 			    var view_modelId = view.modelId;
-			    _.each(DigiWebApp.BautagebuchBautageberichteListeController.items, function(selectedItem) {
+			    _.each(DigiWebApp.BautagebuchBautagesberichteListeController.items, function(selectedItem) {
 					if (selectedItem.m_id === view_modelId) {
 						if (selectedItem.get("bautagesberichtTyp") == "<standard>") {
-							DigiWebApp.BautagebuchBautageberichtDetailsController.load(selectedItem);
+							DigiWebApp.BautagebuchBautagesberichtDetailsController.load(selectedItem);
 							if (selectedItem.get("abgeschlossen") === YES) {
 								DigiWebApp.BautagebuchZusammenfassungController.load(selectedItem);
 								DigiWebApp.NavigationController.toBautagebuchZusammenfassungPageTransition();
 							} else {
-								DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
+								DigiWebApp.NavigationController.toBautagebuchBautagesberichtDetailsPageTransition();
 							}
 						} else {
 							if (selectedItem.get("bautagesberichtTyp") == "<materialerfassung_only>") {

@@ -482,18 +482,18 @@ DigiWebApp.NavigationController = M.Controller.extend({
     
     // Start::Bautagebuch
     
-    , toBautagebuchBautageberichteListePageTransition: function() {
-    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautageberichteListePage', M.TRANSITION.SLIDEUP, NO);
+    , toBautagebuchBautagesberichteListePageTransition: function() {
+    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautagesberichteListePage', M.TRANSITION.SLIDEUP, NO);
     }
-    , backToBautagebuchBautageberichteListePageTransition: function() {
-    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautageberichteListePage', M.TRANSITION.SLIDEUP, YES);
+    , backToBautagebuchBautagesberichteListePageTransition: function() {
+    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautagesberichteListePage', M.TRANSITION.SLIDEUP, YES);
     }
 
-    , toBautagebuchBautageberichtDetailsPageTransition: function() {
-    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautageberichtDetailsPage', M.TRANSITION.SLIDEUP, NO);
+    , toBautagebuchBautagesberichtDetailsPageTransition: function() {
+    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautagesberichtDetailsPage', M.TRANSITION.SLIDEUP, NO);
     }
-    , backToBautagebuchBautageberichtDetailsPageTransition: function() {
-    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautageberichtDetailsPage', M.TRANSITION.SLIDEUP, YES);
+    , backToBautagebuchBautagesberichtDetailsPageTransition: function() {
+    	DigiWebApp.NavigationController.switchToPage('bautagebuchBautagesberichtDetailsPage', M.TRANSITION.SLIDEUP, YES);
     }
 
     , toBautagebuchMaterialienListePageTransition: function() {
@@ -629,7 +629,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , startBautagebuch: function() {
-    	//DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();    	
+    	//DigiWebApp.NavigationController.toBautagebuchBautagesberichteListePageTransition();    	
 		//var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find({query:{identifier: 'bautagesberichtTyp', operator: '!=', value: "" + "<materialerfassung_only>"}});
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
 		bautagesberichte = _.filter(bautagesberichte, function(n) {return (n.get('bautagesberichtTyp') == "<standard>")}); // <materialerfassung_only> und <notizen_only> rausfiltern
@@ -648,20 +648,20 @@ DigiWebApp.NavigationController = M.Controller.extend({
 			});
 			if (einOffenerBautagesbericht) {
 				// es gibt nur einen offenen Bautagesbericht
-				DigiWebApp.BautagebuchBautageberichteListeController.init();
-				DigiWebApp.BautagebuchBautageberichtDetailsController.load(offenerBautagesbericht);
-				DigiWebApp.NavigationController.toBautagebuchBautageberichtDetailsPageTransition();
+				DigiWebApp.BautagebuchBautagesberichteListeController.init();
+				DigiWebApp.BautagebuchBautagesberichtDetailsController.load(offenerBautagesbericht);
+				DigiWebApp.NavigationController.toBautagebuchBautagesberichtDetailsPageTransition();
 			} else if (offenerBautagesbericht) {
 				// es gibt mehr als einen offenen Bautagesbericht
-				DigiWebApp.NavigationController.toBautagebuchBautageberichteListePageTransition();
+				DigiWebApp.NavigationController.toBautagebuchBautagesberichteListePageTransition();
 			} else {
 				// es gibt keinen offenen Bautagesbericht
-				DigiWebApp.BautagebuchBautageberichteListeController.init();
-				DigiWebApp.BautagebuchBautageberichteListeController.neu();
+				DigiWebApp.BautagebuchBautagesberichteListeController.init();
+				DigiWebApp.BautagebuchBautagesberichteListeController.neu();
 			}
 		} else {
-			DigiWebApp.BautagebuchBautageberichteListeController.init();
-			DigiWebApp.BautagebuchBautageberichteListeController.neu();
+			DigiWebApp.BautagebuchBautagesberichteListeController.init();
+			DigiWebApp.BautagebuchBautagesberichteListeController.neu();
 		}
     }
 });

@@ -516,7 +516,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, materialerfassung: function() {
-		DigiWebApp.BautagebuchBautageberichteListeController.init();
+		DigiWebApp.BautagebuchBautagesberichteListeController.init();
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
 		var matBautagesbericht = null;
 		_.each(bautagesberichte, function(bautagesbericht){
@@ -525,27 +525,27 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			}
 		});
 		if (matBautagesbericht) {
-			DigiWebApp.BautagebuchBautageberichtDetailsController.load(matBautagesbericht);
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(matBautagesbericht);
 		} else {
 			// erzeuge dummy-bautagesbericht
-			DigiWebApp.BautagebuchBautageberichteListeController.neu("<materialerfassung_only>", YES);
+			DigiWebApp.BautagebuchBautagesberichteListeController.neu("<materialerfassung_only>", YES);
 		}
-		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
+		var myBautagesbericht = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("item");
 
 		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
 
 		myBautagesbericht.set("bautagesberichtTyp", "<materialerfassung_only>");
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
 
 		myBautagesbericht.save();
-		DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-		DigiWebApp.BautagebuchBautageberichteListeController.init();
-      	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
+		DigiWebApp.BautagebuchBautagesberichteListeController.init();
+      	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
 	}
 	
 	, notizen: function() {
-		DigiWebApp.BautagebuchBautageberichteListeController.init();
+		DigiWebApp.BautagebuchBautagesberichteListeController.init();
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
 		var notizBautagesbericht = null;
 		_.each(bautagesberichte, function(bautagesbericht){
@@ -554,23 +554,23 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			}
 		});
 		if (notizBautagesbericht) {
-			DigiWebApp.BautagebuchBautageberichtDetailsController.load(notizBautagesbericht);
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(notizBautagesbericht);
 		} else {
 			// erzeuge dummy-bautagesbericht
-			DigiWebApp.BautagebuchBautageberichteListeController.neu("<notizen_only>", YES);
+			DigiWebApp.BautagebuchBautagesberichteListeController.neu("<notizen_only>", YES);
 		}
-		var myBautagesbericht = DigiWebApp.BautagebuchBautageberichtDetailsController.get("item");
+		var myBautagesbericht = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("item");
 
 		myBautagesbericht.set("orderName", M.I18N.l('BautagebuchNotizen'));
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
 
 		myBautagesbericht.set("bautagesberichtTyp", "<notizen_only>");
-		DigiWebApp.BautagebuchBautageberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp", myBautagesbericht.get("bautagesberichtTyp"));
 
 		myBautagesbericht.save();
-		DigiWebApp.BautagebuchBautageberichtDetailsController.load(myBautagesbericht);
-		DigiWebApp.BautagebuchBautageberichteListeController.init();
-      	DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.BautagebuchNotizenListeController.neu, function(){}, YES);
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
+		DigiWebApp.BautagebuchBautagesberichteListeController.init();
+      	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.BautagebuchNotizenListeController.neu, function(){}, YES);
 	}
 
 	, tagescheckliste: function() {

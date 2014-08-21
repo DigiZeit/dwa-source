@@ -37,7 +37,7 @@ DigiWebApp.BautagebuchNotizenTemplateView = M.ListItemView.design({
 	  , computedValue: {
 	        valuePattern: '<%= orderName %>'
 	      , operation: function(v) {
-					if (v !== "" && v !== null && DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp != "<standard>") {
+					if (v !== "" && v !== null && DigiWebApp.BautagebuchBautagesberichtDetailsController.bautagesberichtTyp != "<standard>") {
 						return v;
 					} else {
 						return "";
@@ -53,7 +53,7 @@ DigiWebApp.BautagebuchNotizenTemplateView = M.ListItemView.design({
 	        valuePattern: '<%= positionName %>'
 	      , operation: function(v) {
 					if (v !== "" && v !== null) {
-						if (DigiWebApp.BautagebuchBautageberichtDetailsController.bautagesberichtTyp == "<standard>") {
+						if (DigiWebApp.BautagebuchBautagesberichtDetailsController.bautagesberichtTyp == "<standard>") {
 							return v;
 						} else {
 							return ", " + v;

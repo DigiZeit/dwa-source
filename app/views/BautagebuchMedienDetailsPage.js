@@ -13,7 +13,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
             action: function() {
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
-//				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+//				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 //				_.each(myPositionenList, function(p) {
 //					if (parseIntRadixTen(p.value) !== 0) {
 //						p.isSelected = NO;
@@ -46,7 +46,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 //				
 //				DigiWebApp.BautagebuchMedienDetailsController.setTaetigkeiten(DigiWebApp.BautagebuchMedienDetailsController.positionId);
 				var relevantDetailsController = DigiWebApp.BautagebuchMedienDetailsController;
-				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 				_.each(myPositionenList, function(p) {
 					if (parseIntRadixTen(p.value) !== 0) {
 						p.isSelected = NO;
@@ -67,8 +67,8 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 			    });
 			    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
 				    positionenArray = _.map(positionenArray, function(o) {
-						if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-							o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+						if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
+							o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
 							if (o.isSelected) { itemSelected = YES; 
 								relevantDetailsController.set("positionId", o.value);
 								relevantDetailsController.set("positionName", o.label);
@@ -94,7 +94,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 				$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].focus();
 				$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].blur();
 
-				if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen")) {
+				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("abgeschlossen")) {
 					$("#" + DigiWebApp.BautagebuchMedienDetailsPage.content.grid.id).hide();
 					$("#" + DigiWebApp.BautagebuchMedienDetailsPage.header.delButton.id).hide();
 				} else {

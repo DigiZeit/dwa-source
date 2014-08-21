@@ -13,7 +13,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
             action: function() {
 
 					// verfügbare Mitarbeiter kopieren und ausgewählte selektieren
-                    var mitarbeiterIds = DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterIds; 
+                    var mitarbeiterIds = DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds; 
                     var mitarbeiterList = [];
                     var myMitarbeiterList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchMainController.mitarbeiter));
                     var mitarbeiterArray = mitarbeiterList;
@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
     					mitarbeiterArray = DigiWebApp.BautagebuchMainController.mitarbeiter;
 	            	}
     				mitarbeiterArray = _.compact(mitarbeiterArray);
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterList", mitarbeiterArray);
+					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterList", mitarbeiterArray);
 					
 					// set mitarbeiterListSelected
                     var mitarbeiterListSelected = [];
@@ -53,7 +53,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
 		    			});
 	            	}
     				mitarbeiterArraySelected = _.compact(mitarbeiterArraySelected);
-					DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterListSelected", mitarbeiterArraySelected);
+					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterListSelected", mitarbeiterArraySelected);
 
 			}
         }
@@ -115,7 +115,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
 
             /* this seleciton view has no static entries, instead it is filled via content binding. */
             , contentBinding: {
-                  target: DigiWebApp.BautagebuchBautageberichtDetailsController
+                  target: DigiWebApp.BautagebuchBautagesberichtDetailsController
                 , property: 'mitarbeiterList'
             }
 
@@ -128,7 +128,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
 	                        for(var i = 0; i < itemValues.length; i++) {
 	                        	mitarbeiterIds.push(itemValues[i]);
 	                        }
-	                        DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterIds", mitarbeiterIds);
+	                        DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", mitarbeiterIds);
 	                        
 	                        var mitarbeiterList = [];
 	                        var mitarbeiterArray = mitarbeiterList;
@@ -147,7 +147,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
 	    		    			});
     		            	}
 		    				mitarbeiterArray = _.compact(mitarbeiterArray);
-	    					DigiWebApp.BautagebuchBautageberichtDetailsController.set("mitarbeiterListSelected", mitarbeiterArray);
+	    					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterListSelected", mitarbeiterArray);
             		}
                 }
             }
@@ -168,7 +168,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {
-		                //target: DigiWebApp.BautagebuchBautageberichtDetailsController,
+		                //target: DigiWebApp.BautagebuchBautagesberichtDetailsController,
 		                //action: 'save'
 		    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
                     }

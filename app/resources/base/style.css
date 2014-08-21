@@ -36,7 +36,7 @@ textarea.ui-input-text {
 	zoom: 1.4 !important;
 }
 
-.bautagebuchBautageberichtDetailsPage {
+.bautagebuchBautagesberichtDetailsPage {
 	zoom: 1.4;
 }*/
 
@@ -1063,7 +1063,7 @@ label.ui-input-text, .ui-controlgroup-label {
 	background: #fff;
 }
 
-/*.bautagebuchBautageberichtDetailsPage .ui-title {
+/*.bautagebuchBautagesberichtDetailsPage .ui-title {
 	margin: -12px 20px 20px 20px;
 	padding: 3px 90px 0px 90px;
 	border: 0px;
@@ -1071,7 +1071,7 @@ label.ui-input-text, .ui-controlgroup-label {
 }*/
 
   .bautagebuchWetterPage .whiteText 
-, .bautagebuchBautageberichtDetailsPage .whiteText 
+, .bautagebuchBautagesberichtDetailsPage .whiteText 
 , .bautagebuchZeitenDetailsPage .whiteText 
 , .bautagebuchNotizenDetailsPage .whiteText 
 , .bautagebuchMedienDetailsPage .whiteText 
@@ -1126,7 +1126,7 @@ label.ui-input-text, .ui-controlgroup-label {
 }*/
 
   .bautagebuchZeitenDetailsPage input.ui-input-text
-, .bautagebuchBautageberichtDetailsPage input.ui-input-text
+, .bautagebuchBautagesberichtDetailsPage input.ui-input-text
 {
 	text-align: center !important;
 	width: 98% !important;

@@ -89,7 +89,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
             , events: {
                 tap: {
                     //  target: DigiWebApp.NavigationController
-                    //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
+                    //, action: 'backToBautagebuchBautagesberichtDetailsPageTransition'
         			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
                 }
             }
@@ -105,11 +105,11 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
             , cssClass: 'red_background'
             , events: {
                 tap: {
-                      //target: DigiWebApp.BautagebuchBautageberichtDetailsController
+                      //target: DigiWebApp.BautagebuchBautagesberichtDetailsController
                     //, action: 'delete'
         			action: function() {
         				try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} 
-        				DigiWebApp.BautagebuchBautageberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+        				DigiWebApp.BautagebuchBautagesberichtDetailsController.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautagesberichteListePageTransition);
         			}
                 }
             }
@@ -527,7 +527,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 		          }
 		      }
 		      , button: M.ButtonView.design({
-		            value: M.I18N.l('BautagebuchBautageberichtAbschliessen')
+		            value: M.I18N.l('BautagebuchBautagesberichtAbschliessen')
 		          , cssClass: 'digiButton green_background'
 		          , anchorLocation: M.RIGHT
 		          , events: {
@@ -537,7 +537,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 			    			action: function() {
 			    				//var that = this;
 		    	  				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-			    				DigiWebApp.BautagebuchZusammenfassungController.finish(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+			    				DigiWebApp.BautagebuchZusammenfassungController.finish(DigiWebApp.NavigationController.backToBautagebuchBautagesberichteListePageTransition);
 			    				DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
 								DigiWebApp.NavigationController.toBautagebuchZusammenfassungPageTransition();
 				    		}
@@ -585,7 +585,7 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
 			    					    , function(msg) {
 			    							//console.log("successHandler");
 			    							DigiWebApp.BautagebuchZusammenfassungController.set("item", null);
-			    							DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition();
+			    							DigiWebApp.NavigationController.backToBautagebuchBautagesberichteListePageTransition();
 			    						}
 			    						, function(xhr,err) {
 			    							//console.log("errorHandler");
@@ -611,10 +611,10 @@ DigiWebApp.BautagebuchZusammenfassungPage = M.PageView.design({
         , cssClass: 'red_background'
         , events: {
             tap: {
-	                target: DigiWebApp.BautagebuchBautageberichtDetailsController,
+	                target: DigiWebApp.BautagebuchBautagesberichtDetailsController,
 	                action: function() {
         				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-        				this.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautageberichteListePageTransition);
+        				this.deleteBautagesbericht(DigiWebApp.NavigationController.backToBautagebuchBautagesberichteListePageTransition);
 
         			}
             }

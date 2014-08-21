@@ -36,10 +36,10 @@ DigiWebApp.BautagebuchNotizenListePage = M.PageView.design({
                 tap: {
                       target: DigiWebApp.NavigationController
                     , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//                    	this.backToBautagebuchBautageberichtDetailsPageTransition();
-	                	var myTyp = DigiWebApp.BautagebuchBautageberichtDetailsController.get("bautagesberichtTyp");
+//                    	this.backToBautagebuchBautagesberichtDetailsPageTransition();
+	                	var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("bautagesberichtTyp");
 	                	if (myTyp == "<standard>") {
-	                		this.backToBautagebuchBautageberichtDetailsPageTransition();
+	                		this.backToBautagebuchBautagesberichtDetailsPageTransition();
 	                	} else if (myTyp == "<notizen_only>") {
 	                		DigiWebApp.NavigationController.backToDashboardPage();
 	                	} else {

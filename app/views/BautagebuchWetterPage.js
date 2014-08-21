@@ -12,7 +12,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function(m_id, event) {
 				// lade eine evtl. zuvor gespeicherte Wetterauswahl aus dem Bautagesbericht
-				DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetterBackup', JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.get('wetter'))));
+				DigiWebApp.BautagebuchBautagesberichtDetailsController.set('wetterBackup', JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.get('wetter'))));
 			}
         }
         , pagehide: {
@@ -39,8 +39,8 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
                       target: DigiWebApp.NavigationController
                     , action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
                     	clearAllIntervals();
-                    	DigiWebApp.BautagebuchBautageberichtDetailsController.set('wetter', JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.wetterBackup)));
-                    	this.backToBautagebuchBautageberichtDetailsPageTransition();
+                    	DigiWebApp.BautagebuchBautagesberichtDetailsController.set('wetter', JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.wetterBackup)));
+                    	this.backToBautagebuchBautagesberichtDetailsPageTransition();
                     }
                 }
             }
@@ -76,12 +76,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
         , wechselhaftCheckbox: M.SelectionListView.design({
 	          selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
-                  target: DigiWebApp.BautagebuchBautageberichtDetailsController
+                  target: DigiWebApp.BautagebuchBautagesberichtDetailsController
                 , property: 'wetter.wechselhaftItem'
             }
 		    , events: {
 		    		change: {
-        				  target: DigiWebApp.BautagebuchBautageberichtDetailsController
+        				  target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 						, action: function(itemValues, items) {
 				  			this.wetter.wechselhaft = (itemValues.length === 1);
 				  			this.wetter.wechselhaftItem.isSelected = (itemValues.length === 1);
@@ -105,24 +105,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.temperatur === -50) {
 //				    					return;
 //				    				}
 //				    				myWetter.temperatur = myWetter.temperatur - 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
@@ -137,12 +137,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			              , touchstart: {
 					    			action: function(m_id, event) {
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === -50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 			            	  			DigiWebApp.BautagebuchMainController.buttonPressInterval_Var = setInterval(addFunc, DigiWebApp.BautagebuchMainController.buttonPressInterval);
@@ -161,24 +161,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.temperatur === 50) {
 //				    					return;
 //				    				}
 //				    				myWetter.temperatur = myWetter.temperatur + 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === 50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -196,12 +196,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.temperatur === 50) {
 						    					return;
 						    				}
 						    				myWetter.temperatur = myWetter.temperatur + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -221,11 +221,11 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.temperatur'
 				        }
 				        , contentBindingReverse: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.temperatur'
 					    }
 			    		, value: 10
@@ -252,24 +252,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.luftfeuchtigkeit === 0) {
 //				    					return;
 //				    				}
 //				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 10;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
 						    					return;
 						    				}
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -287,12 +287,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 0) {
 						    					return;
 						    				}
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -314,24 +314,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.luftfeuchtigkeit === 100) {
 //				    					return;
 //				    				}
 //				    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 10;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 100) {
 						    					return;
 						    				}
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -349,12 +349,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.luftfeuchtigkeit === 100) {
 						    					return;
 						    				}
 						    				myWetter.luftfeuchtigkeit = myWetter.luftfeuchtigkeit + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -374,7 +374,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.luftfeuchtigkeit'
 				        }
 			    		, value: 0
@@ -401,24 +401,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.bewoelkung === 0) {
 //				    					return;
 //				    				}
 //				    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 0) {
 						    					return;
 						    				}
 						    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -436,12 +436,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 0) {
 						    					return;
 						    				}
 						    				myWetter.bewoelkung = myWetter.bewoelkung - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -462,24 +462,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.bewoelkung === 3) {
 //				    					return;
 //				    				}
 //				    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 3) {
 						    					return;
 						    				}
 						    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -497,12 +497,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.bewoelkung === 3) {
 						    					return;
 						    				}
 						    				myWetter.bewoelkung = myWetter.bewoelkung + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -522,7 +522,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.bewoelkung'
 				        }
 			    		, value: 0
@@ -560,24 +560,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.niederschlag === 0) {
 //				    					return;
 //				    				}
 //				    				myWetter.niederschlag = myWetter.niederschlag - 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 			            	  			if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 0) {
 						    					return;
 						    				}
 						    				myWetter.niederschlag = myWetter.niederschlag - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -595,12 +595,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 0) {
 						    					return;
 						    				}
 						    				myWetter.niederschlag = myWetter.niederschlag - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -621,24 +621,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.niederschlag === 5) {
 //				    					return;
 //				    				}
 //				    				myWetter.niederschlag = myWetter.niederschlag + 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 	            	  					if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 5) {
 						    					return;
 						    				}
 						    				myWetter.niederschlag = myWetter.niederschlag + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -656,12 +656,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 			            	  			if (DigiWebApp.BautagebuchWetterPage.eventLoopInAction && DigiWebApp.BautagebuchWetterPage.eventLoopInAction && DigiWebApp.BautagebuchWetterPage.eventLoopInAction != event.type) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.niederschlag === 5) {
 						    					return;
 						    				}
 						    				myWetter.niederschlag = myWetter.niederschlag + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -681,7 +681,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.niederschlag'
 				        }
 			    		, value: 0
@@ -723,24 +723,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.wind === 0) {
 //				    					return;
 //				    				}
 //				    				myWetter.wind = myWetter.wind - 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 	            	  					if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.wind === 0) {
 						    					return;
 						    				}
 						    				myWetter.wind = myWetter.wind - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -758,12 +758,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.wind === 0) {
 						    					return;
 						    				}
 						    				myWetter.wind = myWetter.wind - 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -784,24 +784,24 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 		              , events: {
 		                  tap: {
 				    			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-//				    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+//				    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 //				    				if (myWetter.wind === 3) {
 //				    					return;
 //				    				}
 //				    				myWetter.wind = myWetter.wind + 1;
-//				    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+//				    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 				    			}
 		                  }
 			              , mousedown: {
 					    			action: function(m_id, event) {
 	            	  					if (typeof(device) != "undefined" || onMobile) return;
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.wind === 4) {
 						    					return;
 						    				}
 						    				myWetter.wind = myWetter.wind + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -819,12 +819,12 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 					    			action: function(m_id, event) {
 
 			            	  			var addFunc = function() {
-						    				var myWetter = DigiWebApp.BautagebuchBautageberichtDetailsController.wetter;
+						    				var myWetter = DigiWebApp.BautagebuchBautagesberichtDetailsController.wetter;
 						    				if (myWetter.wind === 4) {
 						    					return;
 						    				}
 						    				myWetter.wind = myWetter.wind + 1;
-						    				DigiWebApp.BautagebuchBautageberichtDetailsController.set("wetter", myWetter);
+						    				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("wetter", myWetter);
 			            	  			}
 			            	  			clearAllIntervals();
 
@@ -844,7 +844,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 			    	  cssClass: 'whiteText centerText bold'
 			    	, computedValue: {
 				          contentBinding: {
-				              target: DigiWebApp.BautagebuchBautageberichtDetailsController
+				              target: DigiWebApp.BautagebuchBautagesberichtDetailsController
 				            , property: 'wetter.wind'
 				        }
 			    		, value: 0
@@ -886,7 +886,7 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
                     tap: {
 						action: function(m_id, event) {
 								clearAllTimeouts();
-								DigiWebApp.BautagebuchBautageberichtDetailsController.save(DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition);
+								DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition);
 						}
                     }
                 }
@@ -903,10 +903,10 @@ DigiWebApp.BautagebuchWetterPage = M.PageView.design({
 //	        , events: {
 //		            tap: {
 //		                //  target: DigiWebApp.NavigationController
-//		                //, action: 'backToBautagebuchBautageberichtDetailsPageTransition'
+//		                //, action: 'backToBautagebuchBautagesberichtDetailsPageTransition'
 //						action: function(m_id, event) {
 //								clearAllTimeouts();
-//								DigiWebApp.NavigationController.backToBautagebuchBautageberichtDetailsPageTransition();
+//								DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 //						}
 //		            }
 //	          }

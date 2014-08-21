@@ -348,11 +348,11 @@ M.I18N.de_de = {
 		
 	// Start::Bautagebuch
 	, Bautagebuch: "Bautagebuch"
-	, BautagebuchBautageberichte: "Bautageberichte"
-	, BautagebuchBautagebericht: "Bautagebericht"
+	, BautagebuchBautagesberichte: "Bautagesberichte"
+	, BautagebuchBautagesbericht: "Bautagesbericht"
 	, BautagebuchAdd: "neu"
 	, BautagebuchDelete: "löschen"
-	, BautagebuchBautageberichtAbschliessen: "diesen Bautagebericht abschließen"
+	, BautagebuchBautagesberichtAbschliessen: "diesen Bautagesbericht abschließen"
 	, BautagebuchSaveOrClose: "Speichern oder Abschließen"
 	, BautagebuchWetter: "Wetter"
 	, BautagebuchMaterial: "Material"

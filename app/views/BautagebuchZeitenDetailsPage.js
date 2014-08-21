@@ -14,7 +14,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
 				var relevantDetailsController = DigiWebApp.BautagebuchZeitenDetailsController;
-				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.positionenList));
+				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 				_.each(myPositionenList, function(p) {
 					if (parseIntRadixTen(p.value) !== 0) {
 						p.isSelected = NO;
@@ -35,8 +35,8 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 			    });
 			    if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
 				    positionenArray = _.map(positionenArray, function(o) {
-						if (DigiWebApp.BautagebuchBautageberichtDetailsController.positionId) {
-							o.isSelected = (o.value === DigiWebApp.BautagebuchBautageberichtDetailsController.positionId);
+						if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
+							o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
 							if (o.isSelected) { itemSelected = YES; 
 								relevantDetailsController.set("positionId", o.value);
 								relevantDetailsController.set("positionName", o.label);
@@ -62,7 +62,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                 var mitarbeiterIds = DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds; 
                 var mitarbeiterList = [];
                 var mitarbeiterArray = mitarbeiterList;
-				mitarbeiterArray = _.map(JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautageberichtDetailsController.mitarbeiterListSelected)), function(o) {
+				mitarbeiterArray = _.map(JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterListSelected)), function(o) {
 					var mitarbeiterSelected = NO;
 					_.each(mitarbeiterIds, function(m) {
 						if (parseIntRadixTen(m) === parseIntRadixTen(o.value)) {
@@ -88,12 +88,12 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 				}
 				
 //		  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-//					$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit.startUhrzeitInput)[0].disable();
+//					$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeit.startUhrzeitInput)[0].disable();
 //				} else {
-//					$(DigiWebApp.BautagebuchBautageberichtDetailsPage.content.startUhrzeit.startUhrzeitInput)[0].enable();
+//					$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeit.startUhrzeitInput)[0].enable();
 //				}
 				
-				if (DigiWebApp.BautagebuchBautageberichtDetailsController.item.get("abgeschlossen")) {
+				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("abgeschlossen")) {
 					$("#" + DigiWebApp.BautagebuchZeitenDetailsPage.content.grid.id).hide();
 					$("#" + DigiWebApp.BautagebuchZeitenDetailsPage.header.delButton.id).hide();
 				} else {
