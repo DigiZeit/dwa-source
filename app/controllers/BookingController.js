@@ -1105,7 +1105,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , sentBookingArchived: function(obj) {
     	
     	if (obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString")) {
-    		trackError("skip Zeitbuchung start==ende: " + obj.get("startDateString") + ", " + obj.get("endeDateString") + ", " + obj.get("startTimeString") + ", " + obj.get("endeTimeString"));
+    		trackError("skip Zeitbuchung start==ende: " + obj.get("startDateString") + ", " + obj.get("startTimeString") + " - " + obj.get("endeDateString") + ", " + obj.get("endeTimeString"));
     		return null;
     	};
 
