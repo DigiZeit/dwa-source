@@ -1896,7 +1896,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         		, function() {
         			  var that = DigiWebApp.BookingController;
         			  var CurrentAvailable = false;
-        			  _.each(DigiWebApp.Booking.find(), function(el) {
+        			  _.each(bookings, function(el) {
         				  if (el.get('isCurrent')) {
         					  CurrentAvailable = true;
         				  }
@@ -1911,7 +1911,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						if (DigiWebApp.SettingsController.featureAvailable('411')) {
 							try {
 								// move Bookings to SentBookingArchived
-							      _.each(DigiWebApp.Booking.find(), function(el) {
+							      _.each(bookings, function(el) {
 							          if (!el.get('isCurrent')) {
 							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
 							      		  if (sentBookingArchivedEl != null) {
