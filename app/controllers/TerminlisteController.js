@@ -49,7 +49,7 @@ DigiWebApp.TerminlisteController = M.Controller.extend({
 		ganztaegigeItems = [];
 		nachUhrzeitItems = [];
 
-		_.each(DigiWebApp.Position.find(), function(pos) {
+		_.each(DigiWebApp.Position.findSorted(), function(pos) {
 			
 			var tageZuvor = 0;
 			var tageDanach = 0;
