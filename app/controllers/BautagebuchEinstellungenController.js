@@ -146,6 +146,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 					if (n.value = rec.get("minutenSchritte")) {
 						n.isSelected = YES;
 					}
+					return n;
 				});
 				that.set("settings.minutenSchritteItem", myItems);
 			}
