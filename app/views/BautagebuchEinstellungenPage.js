@@ -279,7 +279,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
                 , label: M.I18N.l('minutenSchritte')
 	            , contentBinding: {
 	                  target: DigiWebApp.BautagebuchEinstellungenController
-	                , property: 'settings.minutenSchritte'
+	                , property: 'settings.minutenSchritteItem'
 	            }
 			    , events: {
 		    		change: {

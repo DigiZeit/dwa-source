@@ -143,7 +143,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 				that.set("settings.minutenSchritte", rec.get("minutenSchritte"));
 				var myItems = _.map(that.settings.minutenSchritteItem, function(n) {
 					n.isSelected = NO;
-					if (n.value = rec.get("minutenSchritte")) {
+					if (parseIntRadixTen(n.value) == parseIntRadixTen(rec.get("minutenSchritte"))) {
 						n.isSelected = YES;
 					}
 					return n;
