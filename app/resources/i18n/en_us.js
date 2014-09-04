@@ -472,7 +472,7 @@ M.I18N.en_us = {
 	, stornierenSpeichern: "Save cancellations"
 
 	, positionVorselektieren: "Preselect Position"
-	, in15MinutenSchritten: "15-minutes steps"	
+	, minutenSchritte: "minute per steps"	
 
 	, uebersicht: "Overview"
 

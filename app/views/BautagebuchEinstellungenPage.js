@@ -59,7 +59,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox in15MinutenSchrittenCheckbox alleMitarbeiterVorselektiertCheckbox'
+	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox minutenSchritteCombobox alleMitarbeiterVorselektiertCheckbox'
 
             , startUhrzeitContainer: M.ContainerView.design({
 	      	      label: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
@@ -101,10 +101,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	  	    		    			action: function() {
 	  									var myStunde = parseIntRadixTen($('#'+DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 	  									var myMinute = parseIntRadixTen($('#'+DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
-	  									var minuteSteps = 1;
-	  									if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
-	  										minuteSteps = 15;
-	  									}
+										var minuteSteps = minutenSchritteDigiWebApp.BautagebuchEinstellungenController.settings.minutenSchritte;
 	  									if ((myMinute + minuteSteps) > 59) {
 	  										myStunde = (myStunde + 1) % 24;										
 	  									}
@@ -179,10 +176,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 	    		    				action: function() {
 	  								var myStunde = parseIntRadixTen($('#'+DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 	  								var myMinute = parseIntRadixTen($('#'+DigiWebApp.BautagebuchEinstellungenPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
-	  								var minuteSteps = 1;
-	  								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
-	  									minuteSteps = 15;
-	  								}
+									var minuteSteps = minutenSchritteDigiWebApp.BautagebuchEinstellungenController.settings.minutenSchritte;
 	  								if ((myMinute - minuteSteps) < 0) {
 	  									myStunde = myStunde - 1;
 	  									if (myStunde < 0) {
@@ -280,18 +274,21 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 				}
 	      })
 
-	      , in15MinutenSchrittenCheckbox: M.SelectionListView.design({
-		          selectionMode: M.MULTIPLE_SELECTION
+	      , minutenSchritteCombobox: M.SelectionListView.design({
+		          selectionMode: M.SINGLE_SELECTION_DIALOG
+                , label: M.I18N.l('minutenSchritte')
 	            , contentBinding: {
 	                  target: DigiWebApp.BautagebuchEinstellungenController
-	                , property: 'settings.in15MinutenSchrittenItem'
+	                , property: 'settings.minutenSchritte'
 	            }
 			    , events: {
 		    		change: {
 			    		  target: DigiWebApp.BautagebuchEinstellungenController
 		    			, action: function(itemValues, items) {
-			    			this.settings.in15MinutenSchritten = (itemValues.length === 1);
-			    			this.settings.in15MinutenSchrittenItem.isSelected = (itemValues.length === 1);
+			    			var mySelection = M.ViewManager.getView('bautagebuchEinstellungenPage', 'minutenSchritteCombobox').getSelection(YES);
+			    			this.set("settings.minutenSchritte", mySelection.value); 
+//			    			this.settings.in15MinutenSchritten = (itemValues.length === 1);
+//			    			this.settings.in15MinutenSchrittenItem.isSelected = (itemValues.length === 1);
 						}
 		    		}
 				}

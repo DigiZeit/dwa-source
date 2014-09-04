@@ -471,7 +471,7 @@ M.I18N.de_de = {
 	, stornierenSpeichern: "Stornierung speichern"
 
 	, positionVorselektieren: "Position vorselektieren"
-	, in15MinutenSchritten: "15-Minuten Schritten"
+	, minutenSchritte: "Minuten pro Schritt"
 		
 	, uebersicht: "Übersicht"
 

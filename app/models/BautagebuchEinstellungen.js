@@ -27,7 +27,7 @@ DigiWebApp.BautagebuchEinstellungen = M.Model.create({
         isRequired: NO
     })
 
-    , in15MinutenSchritten: M.Model.attr('String', {
+    , minutenSchritte: M.Model.attr('String', {
         isRequired: NO
     })
 

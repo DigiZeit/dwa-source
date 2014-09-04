@@ -357,10 +357,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 									}
 									var myStunde = parseIntRadixTen($('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 									var myMinute = parseIntRadixTen($('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
-									var minuteSteps = 1;
-									if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
-										minuteSteps = 15;
-									}
+									var minuteSteps = minutenSchritteDigiWebApp.BautagebuchEinstellungenController.settings.minutenSchritte;
 									if ((myMinute + minuteSteps) > 59) {
 										myStunde = (myStunde + 1) % 24;										
 									}
@@ -441,10 +438,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 								}
 								var myStunde = parseIntRadixTen($('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value);
 								var myMinute = parseIntRadixTen($('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value);
-								var minuteSteps = 1;
-								if (DigiWebApp.BautagebuchEinstellungenController.settings.in15MinutenSchritten) {
-									minuteSteps = 15;
-								}
+								var minuteSteps = minutenSchritteDigiWebApp.BautagebuchEinstellungenController.settings.minutenSchritte;
 								if ((myMinute - minuteSteps) < 0) {
 									myStunde = myStunde - 1;
 									if (myStunde < 0) {
