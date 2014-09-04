@@ -287,8 +287,14 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 		    			, action: function(itemValues, items) {
 			    			var mySelection = M.ViewManager.getView('bautagebuchEinstellungenPage', 'minutenSchritteCombobox').getSelection(YES);
 			    			this.set("settings.minutenSchritte", mySelection.value); 
-//			    			this.settings.in15MinutenSchritten = (itemValues.length === 1);
-//			    			this.settings.in15MinutenSchrittenItem.isSelected = (itemValues.length === 1);
+							var myItems = _.map(that.settings.minutenSchritteItem, function(n) {
+								n.isSelected = NO;
+								if (parseIntRadixTen(n.value) == parseIntRadixTen(this.settings.minutenSchritte)) {
+									n.isSelected = YES;
+								}
+								return n;
+							});
+			    			this.set("settings.minutenSchritteItem", myItems);
 						}
 		    		}
 				}
