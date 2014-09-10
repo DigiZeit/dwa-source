@@ -84,6 +84,10 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.7" />
 
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+
+<gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
+	<string>@version@.@versionCode@</string> 
+</gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
 </gap:config-file>
