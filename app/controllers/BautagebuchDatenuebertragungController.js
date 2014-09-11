@@ -16,22 +16,28 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, abgeschlosseneUebertragen: function() {
 		var that = this;
 		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
-		_.each(abgeschlosseneBautagesberichte, function(item) {
-			that.senden(
-				  item
-				, function(msg) {
-					DigiWebApp.BautagebuchBautagesberichteListeController.init();
-				}
-				, function(xhr,err) {
-					trackError(err);
-		            DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                title: M.I18N.l('BautagebuchUebertragungsfehler')
-		              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
-		            });
-				}
-			);
-		});
-		
+		if (abgeschlosseneBautagesberichte.length > 0) {
+			var doSenden = function(item, callback) {
+				that.senden(
+						  item
+						, function(msg) {
+							  DigiWebApp.BautagebuchBautagesberichteListeController.init(); // Liste aktualisieren
+							  callback();
+						}
+						, function(xhr,err) {
+							trackError(err);
+				            DigiWebApp.ApplicationController.nativeAlertDialogView({
+				                title: M.I18N.l('BautagebuchUebertragungsfehler')
+				              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
+				            });
+						}
+				);
+			});
+			var itemToSend = abgeschlosseneBautagesberichte(0);
+			doSenden(itemToSend, that.abgeschlosseneUebertragen);
+		} else {
+			// nothing to do
+		}
 	}
 	
 	, empfangen: function(successReturnCallback, errorReturnCallback) {
