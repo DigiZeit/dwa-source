@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				            });
 						}
 				);
-			});
+			};
 			var itemToSend = abgeschlosseneBautagesberichte(0);
 			doSenden(itemToSend, that.abgeschlosseneUebertragen);
 		} else {
