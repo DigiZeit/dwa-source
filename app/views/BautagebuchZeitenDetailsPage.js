@@ -247,6 +247,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 
         , activityButton: M.ButtonView.design({
 			    value: M.I18N.l('activity')
+              , label: M.I18N.l('activity')
 		      , events: {
 		          tap: {
 		                target: DigiWebApp.ActivityListController,
