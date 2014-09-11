@@ -18,6 +18,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
 		if (abgeschlosseneBautagesberichte.length > 0) {
 			var doSenden = function(item, callback) {
+				var that = this;
 				that.senden(
 						  item
 						, function(msg) {
