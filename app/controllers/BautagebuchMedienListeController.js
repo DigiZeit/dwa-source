@@ -64,7 +64,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("remark", null);
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("fileType", DigiWebApp.ApplicationController.CONSTImageFiletype);
 		    		    		
-		    		    		libraryFunc = function() {
+		    		    		var libraryFunc = function() {
 	  		    		        	// unterscheiden: auf Gerät oder im Browser?
 	  		    		        	if ( typeof navigator.camera !== 'undefined' 
 	  		    	        		  && typeof navigator.camera.getPicture !== 'undefined') {
