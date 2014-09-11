@@ -1712,3 +1712,21 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .bautagebuchMaterialienDetailsPage div.ui-block-b div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-icon-right.ui-btn-up-c {
 	margin-right: 0px;
 }
+
+.activityListPage .ui-content li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.activityListPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
