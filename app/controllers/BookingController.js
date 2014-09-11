@@ -2004,7 +2004,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                           DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
 
-                          startSyncFunc = function() {
+                          var startSyncFunc = function() {
 	                          // now call startsync again
 	                          if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
 	                          		DigiWebApp.ApplicationController.startsync(YES);
