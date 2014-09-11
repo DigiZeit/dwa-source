@@ -119,6 +119,14 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id).prop('disabled', true)
             	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id).prop('disabled', true)
             	
+//            	if (DigiWebApp.SettingsController.featureAvailable('427')) {
+//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").hide();
+//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).show();
+//            	} else {
+//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").show();
+//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).hide();
+//            	}
+
 			}
         }
         , pagehide: {
@@ -185,7 +193,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'positionComboBox activityComboBox mitarbeiterGroup VonBisContainer dauerContainer remarkInput grid loeschenButton'
+    	  childViews: 'positionComboBox activityComboBox activityButton mitarbeiterGroup VonBisContainer dauerContainer remarkInput grid loeschenButton'
         	  
         , cssClass: 'content'
     	
@@ -231,12 +239,28 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                     	action: function(selectedValue, selectedItem) {
 		      				DigiWebApp.BautagebuchZeitenDetailsController.set("activityId", M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection(YES).value);
 		      				DigiWebApp.BautagebuchZeitenDetailsController.set("activityName", M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection(YES).label);
+		      				DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.setValue(M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection(YES).label)
                     	}
                 	}
                 }
         })
 
-        , mitarbeiterGroup: M.SelectionListView.design({
+        , activityButton: M.ButtonView.design({
+			    value: M.I18N.l('activity')
+		      , events: {
+		          tap: {
+		                target: DigiWebApp.ActivityListController,
+		                action: function() {
+		    				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+		    				this.init();
+		    				this.comboBoxToUpdate = DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox;
+		    				DigiWebApp.NavigationController.toActivityListPage();
+		    			}
+		          }
+		      }
+		})
+
+      , mitarbeiterGroup: M.SelectionListView.design({
 
             /* renders a selection view like check boxes */
               selectionMode: M.MULTIPLE_SELECTION
@@ -287,84 +311,6 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             }
         })
         
-//        , GridVonBis: M.GridView.design({
-//              childViews: 'vonInput bisInput'
-//            , layout: M.TWO_COLUMNS
-//            , vonInput: M.TextFieldView.design({
-//	        	    label: M.I18N.l('bookingFrom')
-//	        	  , inputType: M.INPUT_TIME
-//	        	  , contentBindingReverse: {
-//	                    target: DigiWebApp.BautagebuchZeitenDetailsController
-//	                  , property: 'von'
-//	              }
-//	              , contentBinding: {
-//	                    target: DigiWebApp.BautagebuchZeitenDetailsController
-//	                  , property: 'von'
-//	              }
-//	          	  , events: {
-//	          		  blur: {
-//		          		  	action: function(id, event) {
-//		    		  			try {
-//		      		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
-//		      		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
-//		      		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
-//		      		  				var hoursInBetween = Math.floor(minutesInBetween / 60);
-//		      		  				var remainingMinutes = minutesInBetween % 60;
-//		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
-//		      		  			} catch(e) {}
-//	          		  		}
-//	          	  	  }
-//	          	  }
-//		    })
-//	
-//	        , bisInput: M.TextFieldView.design({
-//	        	    label: M.I18N.l('bookingTo')
-//	        	  , inputType: M.INPUT_TIME
-//	        	  , contentBindingReverse: {
-//	                    target: DigiWebApp.BautagebuchZeitenDetailsController
-//	                  , property: 'bis'
-//	              }
-//	              , contentBinding: {
-//	                    target: DigiWebApp.BautagebuchZeitenDetailsController
-//	                  , property: 'bis'
-//	              }
-//	          	  , events: {
-//	          		  blur: {
-//		          		  	action: function(id, event) {
-//	          		  			try {
-//		      		  				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
-//		      		  				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
-//		      		  				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
-//		      		  				var hoursInBetween = Math.floor(minutesInBetween / 60);
-//		      		  				var remainingMinutes = minutesInBetween % 60;
-//		      		  				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
-//	          		  			} catch(e) {}
-//	          		  		}
-//	          	  	  }
-//	          	  }
-//	        })
-//        })
-                
-//        , dauerInput: M.TextFieldView.design({
-//	    	    label: M.I18N.l('bookingDuration')
-//	    	  , cssClass: 'dauerInput'
-//    		  , inputType: M.INPUT_TIME
-//	    	  , contentBindingReverse: {
-//	                target: DigiWebApp.BautagebuchZeitenDetailsController
-//	              , property: 'dauer'
-//	          }
-//	          , contentBinding: {
-//	                target: DigiWebApp.BautagebuchZeitenDetailsController
-//	              , property: 'dauer'
-//	          }
-//	      	  , events: {
-//	      		  tap: {
-//	          		  	action: function(id, event) {
-//	      		  				//$(DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerInput).blur();
-//	      		  		}
-//	      	  	  }
-//	      	  }
-//      })
         
         , VonBisContainer: M.ContainerView.design({
     	      label: M.I18N.l('bookingFrom') + "/" + M.I18N.l('bookingTo')

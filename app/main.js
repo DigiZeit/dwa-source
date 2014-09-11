@@ -592,6 +592,11 @@ if (searchForFeature(426)) { // Notizen-Only
 	// --> benutzt weiter unten die Views des Bautagebuches
 }
 
+if (searchForFeature(427)) { // Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
+	DigiWebAppOrdinaryDesign.activityListPage = DigiWebApp.ActivityListPage;
+}
+
+
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {

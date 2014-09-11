@@ -664,4 +664,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautagesberichteListeController.neu();
 		}
     }
+    
+    , toActivityListPage: function() {
+    	DigiWebApp.NavigationController.switchToPage('activityListPage', M.TRANSITION.POP, NO);
+    }
+    
 });
