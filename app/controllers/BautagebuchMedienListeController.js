@@ -173,7 +173,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	  		    		        	}
 		    		    		}
 		    		    		
-		    		    		cameraFunc = function() {
+		    		    		var cameraFunc = function() {
 	  		    		        	// unterscheiden: auf Gerät oder im Browser?
 	  		    		        	if ( typeof navigator.camera !== 'undefined' 
 	  		    	        		  && typeof navigator.camera.getPicture !== 'undefined') {
