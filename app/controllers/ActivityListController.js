@@ -39,7 +39,7 @@ DigiWebApp.ActivityListController = M.Controller.extend({
 	    
 	    this.latestId = id;
 	
-	    this.comboBoxToUpdate.setSelection(that.items[m_id]);
+	    this.comboBoxToUpdate.setSelection(that.items[m_id].value);
 	    history.back();
 	}
 
