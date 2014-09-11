@@ -119,13 +119,13 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id).prop('disabled', true)
             	$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id).prop('disabled', true)
             	
-//            	if (DigiWebApp.SettingsController.featureAvailable('427')) {
-//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").hide();
-//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).show();
-//            	} else {
-//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").show();
-//            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).hide();
-//            	}
+            	if (DigiWebApp.SettingsController.featureAvailable('427')) {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").hide();
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).show();
+            	} else {
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.id + "_container").show();
+            		$('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.id).hide();
+            	}
 
 			}
         }
