@@ -28,10 +28,27 @@ DigiWebApp.ActivityListPage = M.PageView.design({
     }
     
     , header: M.ToolbarView.design({
-        value: M.I18N.l('activity')
+          childViews: 'backButton title'
         , cssClass: 'header unselectable'
         , isFixed: YES
-        , anchorLocation: M.TOP
+        , title: M.LabelView.design({
+              value: M.I18N.l('activity')
+            , anchorLocation: M.CENTER
+        })
+        , backButton: M.ButtonView.design({
+            value: M.I18N.l('back')
+          , icon: 'arrow-l'
+          , anchorLocation: M.LEFT
+          , events: {
+              tap: {
+                  //  target: DigiWebApp.NavigationController
+                  //, action: 'backToBautagebuchZeitenListePageTransition'
+      			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
+      				history.back();
+      			}
+              }
+          }
+      })
     })
 
     , content: M.ScrollView.design({

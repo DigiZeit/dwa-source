@@ -18,10 +18,14 @@ DigiWebApp.ActivityListController = M.Controller.extend({
 	
 	, init: function(isFirstLoad) {
 		var that = this;
-		that.set('items', that.itemsToUse);
-//		that.set('items', _.map(that.itemsToUse, function(){
-//			
-//		}));
+		//that.set('items', that.itemsToUse);
+		that.items = [];
+		_.each(that.itemsToUse, function(el){
+			if (el.label != M.I18N.l('selectSomething')) {
+				that.items.push(el);
+			}
+		});
+		that.set('items', that.items);
 	}
 
 	, itemSelected: function(id, m_id) {
@@ -35,7 +39,7 @@ DigiWebApp.ActivityListController = M.Controller.extend({
 	    
 	    this.latestId = id;
 	
-	    this.comboBoxToUpdate.setSelection(id);
+	    this.comboBoxToUpdate.setSelection(m_id);
 	    history.back();
 	}
 

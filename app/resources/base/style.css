@@ -1715,13 +1715,15 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 
 .activityListPage .ui-content li {
     border:  none;
-    font-size: 20px;
+    font-size: 15px;
     padding: 0px;
     margin: 0px;
-    padding-left: 64px;
-    min-height: 36px;
-    height: 36px;
-    padding-top: 16px;
+    padding-left: 10px;
+	border-bottom-color: grey;
+	border-bottom-style: double;
+	min-height: 26px;
+    height: 26px;
+    padding-top: 10px;
     text-shadow: none;
     background: url('images/arrow_white.png') 100% 50% no-repeat;
 }
@@ -1729,4 +1731,9 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .activityListPage .ui-content li.selected {
     background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
     color: #FFFFFF;
+}
+
+.activityListPage .ui-content li:nth-child(1) {
+	border-top-color: grey;
+	border-top-style: double;
 }
