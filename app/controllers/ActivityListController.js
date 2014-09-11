@@ -39,7 +39,9 @@ DigiWebApp.ActivityListController = M.Controller.extend({
 	    
 	    this.latestId = id;
 	
-	    this.comboBoxToUpdate.setSelection(that.items[m_id].value);
+	    var selectedItem = that.items[m_id];
+	    this.comboBoxToUpdate.setSelection(selectedItem.value);
+	    DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.events.change.action();
 	    history.back();
 	}
 
