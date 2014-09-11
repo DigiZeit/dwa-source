@@ -14,7 +14,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, consoleLogOutput: NO
 	
 	, abgeschlosseneUebertragen: function() {
-		var that = this;
+		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
 		if (abgeschlosseneBautagesberichte.length > 0) {
 			var doSenden = function(item, callback) {
@@ -37,7 +37,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				);
 			};
 			var itemToSend = abgeschlosseneBautagesberichte[0];
-			doSenden(itemToSend, that.abgeschlosseneUebertragen);
+			doSenden(itemToSend, DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneUebertragen);
 		} else {
 			// nothing to do
 		}
