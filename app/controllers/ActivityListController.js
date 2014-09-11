@@ -25,6 +25,7 @@ DigiWebApp.ActivityListController = M.Controller.extend({
 	}
 
 	, itemSelected: function(id, m_id) {
+		console.log(id, m_id);
 		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 		var that = this;
 	    if (this.latestId) {
