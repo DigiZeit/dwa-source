@@ -45,6 +45,14 @@ M.ButtonView = M.View.extend(
     isIconOnly: NO,
 
     /**
+     * The label proeprty defines a text that is shown above or next to the button as a 'title'
+     * for the button. e.g. "Name:". If no label is specified, no label will be displayed.
+     *
+     * @type String
+     */
+    label: null,
+
+    /**
      * This property can be used to specify a certain hyperlink type for this button. It only
      * works in combination with the hyperlinkTarget property.
      *
@@ -92,7 +100,13 @@ M.ButtonView = M.View.extend(
      */
     render: function() {
         this.computeValue();
-        this.html = '<a data-role="button" id="' + this.id + '"' + this.style() + ' ';
+        this.html = "";
+        
+        if (this.label) {
+            this.html += '<label for="' + this.id + '">' + this.label + '</label>';
+        }
+
+        this.html += '<a data-role="button" id="' + this.id + '"' + this.style() + ' ';
 
         if(this.hyperlinkTarget && this.hyperlinkType) {
             switch (this.hyperlinkType) {
