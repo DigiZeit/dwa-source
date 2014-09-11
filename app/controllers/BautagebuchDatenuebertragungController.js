@@ -21,6 +21,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				that.senden(
 						  item
 						, function(msg) {
+							  abgeschlosseneBautagesberichte = _.filter(abgeschlosseneBautagesberichte, function(el){
+								  return (item.get('id') != el.get('id'));
+							  });
 							  DigiWebApp.BautagebuchBautagesberichteListeController.init(); // Liste aktualisieren
 							  callback();
 						}
