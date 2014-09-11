@@ -19,6 +19,8 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 		} else {
 			if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('bautagesberichtTyp') != "<standard>") {
 				$('#' + DigiWebApp.BautagebuchNotizenListePage.uebertragenButton.id).show();
+			} else {
+				$('#' + DigiWebApp.BautagebuchNotizenListePage.uebertragenButton.id).hide();
 			}
 		}
 

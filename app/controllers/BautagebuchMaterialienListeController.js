@@ -19,6 +19,8 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 		} else {
 			if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('bautagesberichtTyp') != "<standard>") {
 				$('#' + DigiWebApp.BautagebuchMaterialienListePage.uebertragenButton.id).show();
+			} else {
+				$('#' + DigiWebApp.BautagebuchMaterialienListePage.uebertragenButton.id).hide();
 			}
 		}
 

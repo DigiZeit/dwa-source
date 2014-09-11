@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5584"
-	version 	= "1.8.1.5584">
+	versionCode = "5585"
+	version 	= "1.8.1.5585">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -89,7 +89,7 @@ which PhoneGap requires. -->
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5584</string> 
+	<string>5585</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
