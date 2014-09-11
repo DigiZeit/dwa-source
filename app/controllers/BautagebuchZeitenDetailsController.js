@@ -256,6 +256,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	    			if (parseIntRadixTen(that.activityId) === parseIntRadixTen(obj.value)) {
 	    				obj.isSelected = YES;
 	    				itemSelected = YES;
+	    				//try {DigiWebApp.BautagebuchZeitenDetailsPage.content.activityButton.setValue(obj.label)}catch(e2){};
 	    			}
 	    			return obj;
 		    	}
@@ -263,6 +264,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
 		    taetigkeitenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
 			that.set("activityList", taetigkeitenArray);
+			try {DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.setSelection(that.activityId)}catch(e2){};
 		}
 	}
 
