@@ -9,12 +9,19 @@
 DigiWebApp.ActivityListController = M.Controller.extend({
 
 	  items: null
+	
+	, itemsToUse: null
 	  
 	, comboBoxToUpdate: null
 	
 	, latestId: null
 	
 	, init: function(isFirstLoad) {
+		var that = this;
+		that.set('items', that.itemsToUse);
+//		that.set('items', _.map(that.itemsToUse, function(){
+//			
+//		}));
 	}
 
 	, itemSelected: function(id, m_id) {

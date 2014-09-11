@@ -252,6 +252,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 		                target: DigiWebApp.ActivityListController,
 		                action: function() {
 		    				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+		    				this.itemsToUse = DigiWebApp.BautagebuchZeitenDetailsController.activityList
 		    				this.init();
 		    				this.comboBoxToUpdate = DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox;
 		    				DigiWebApp.NavigationController.toActivityListPage();
