@@ -608,7 +608,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 
-setTestLogin = function() {
+var setTestLogin = function() {
 	$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val("312");
 	$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val("stuttgart11");
 	$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val("digi$");

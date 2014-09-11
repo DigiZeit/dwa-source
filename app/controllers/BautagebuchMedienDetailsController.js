@@ -128,7 +128,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 
 		if (that.item.saveSorted()) {
 			var image = document.getElementById(DigiWebApp.BautagebuchMedienDetailsPage.content.image.id);
-		    saveCallback = function() {
+		    var saveCallback = function() {
 				var backToListFunc = function() {
 	  		        DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					DigiWebApp.BautagebuchMedienListeController.set("items", DigiWebApp.BautagebuchMediaFile.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
