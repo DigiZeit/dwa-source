@@ -56,8 +56,11 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		    		    			DigiWebApp.BautagebuchMedienDetailsController.set("handOrderId", null);
 		    		    			DigiWebApp.BautagebuchMedienDetailsController.set("handOrderName", null);
 		    		    		}
-		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("positionId", null);
-		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("positionName", null);
+		    		    		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('positionId')) {
+		    		    			DigiWebApp.BautagebuchMedienDetailsController.set("positionId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('positionId'));
+		    		    			DigiWebApp.BautagebuchMedienDetailsController.set("positionName", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('positionName'));
+		    		    		}
+		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("mitarbeiterId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('projektleiterId'));
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("activityId", null);
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("activityName", null);
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("data", null);

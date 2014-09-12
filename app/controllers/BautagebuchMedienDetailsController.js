@@ -25,6 +25,8 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 	, activityName: null // in model
 	, activityList: null // runtime
 
+	, mitarbeiterId: null // in model
+
 	, data: null // runtime (base64-string)
 	, remark: null // in model
 	, fileType: null // in model
@@ -57,6 +59,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
 		that.set("activityName", myItem.get("activityName"));
+		that.set("mitarbeiterId", myItem.get("mitarbeiterId"));
 		var image = document.getElementById(DigiWebApp.BautagebuchMedienDetailsPage.content.image.id);
 	    image.src = '';
 	    myItem.readFromFile(function(fileContent){
@@ -120,7 +123,10 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 		} else {
 			that.item.set("remark", null);
 		}
-	    //var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
+		
+		that.item.set("mitarbeiterId", that.mitarbeiterId);
+
+		//var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
 
 	    //that.item.set('fileType', DigiWebApp.ApplicationController.CONSTImageFiletype);
 
@@ -146,10 +152,20 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 			              		, action: function() {
 			    					var myOldItem = JSON.parse(JSON.stringify(that.item));
 			    					DigiWebApp.BautagebuchMedienListeController.neu(YES);
-			    					that.set("positionId", myOldItem.record.positionId);
-			    					that.set("positionName", myOldItem.record.positionName);
+			    					if (that.handOrderId) {
+				    					that.set("handOrderId", myOldItem.record.handOrderId);
+				    					that.set("handOrderName", myOldItem.record.handOrderName);
+			    						that.set("positionId", null);
+			    						that.set("positionName", null);
+			    					} else {
+				    					that.set("handOrderId", null);
+				    					that.set("handOrderName", null);
+				    					that.set("positionId", myOldItem.record.positionId);
+				    					that.set("positionName", myOldItem.record.positionName);
+			    					}
 			    					that.set("activityId", myOldItem.record.activityId);
 			    					that.set("activityName", myOldItem.record.activityName);
+			    					that.set("mitarbeiterId", myOldItem.record.mitarbeiterId);
 			    					//that.setTaetigkeiten(myOldItem.record.positionId);
 								}
 			          		}
