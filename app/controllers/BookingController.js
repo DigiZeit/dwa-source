@@ -1105,6 +1105,9 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , sentBookingArchived: function(obj) {
     	
+    	// funktionalität deaktiviert
+    	return null;
+    	
     	if (obj.get("startDateString") == obj.get("endeDateString") && obj.get("startTimeString") == obj.get("endeTimeString")) {
     		trackError("skip Zeitbuchung (sentArchived) start==ende: " + obj.get("startDateString") + ", " + obj.get("startTimeString") + " - " + obj.get("endeDateString") + ", " + obj.get("endeTimeString"));
     		return null;
@@ -1330,16 +1333,41 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     , setArchivedDays: function() {
     	try {
+    		// alte archivierte Daten löschen
 	        var days = DigiWebApp.SentTimeDataDays.find();
-	        if (days.length > 0) {
-	            // newest day at the top => first sort than reverse order
-	        	days = _.sortBy(days, function(day) {
-	                return parseIntRadixTen(D8.create(day.get('tagLabel')).getTimestamp());
-	            });
-	            this.set('timeDataSentDays', days.reverse());
-	        } else {
-	            this.set('timeDataSentDays', []);
+	        if (typeof(days) != "undefined" && days.length > 0) {
+	        	DigiWebApp.SentTimeDataDays.deleteAll();
+	        	var ba = DigiWebApp.SentBookingArchived.find();
+	        	if (typeof(ba) != "undefined" && ba.length > 0) {
+	        		DigiWebApp.SentBookingArchived.deleteAll();
+	        	}
 	        }
+			var daysToHoldBookingsOnDevice = 0;
+			try {
+				daysToHoldBookingsOnDevice = 0 + new Number(DigiWebApp.SettingsController.getSetting('daysToHoldBookingsOnDevice'));
+			} catch(e2) {
+				daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get('daysToHoldBookingsOnDevice');
+			}
+			days = [];
+			var today = D8.create();
+			for (i=0; i<10; i++) {
+				var day = today.addDays(0 - i);
+				var dayString = day.format("dd.mm.yyyy");
+				var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
+					tagLabel: dayString
+				});
+				days.push(dayRecord);
+    		}
+        	this.set('timeDataSentDays', days);
+//	        if (days.length > 0) {
+//	            // newest day at the top => first sort than reverse order
+//	        	days = _.sortBy(days, function(day) {
+//	                return parseIntRadixTen(D8.create(day.get('tagLabel')).getTimestamp());
+//	            });
+//	            this.set('timeDataSentDays', days.reverse());
+//	        } else {
+//	            this.set('timeDataSentDays', []);
+//	        }
     	} catch(e15) {
             this.set('timeDataSentDays', []);    		
     	}
@@ -1908,46 +1936,46 @@ DigiWebApp.BookingController = M.Controller.extend({
         				  DigiWebApp.SentBooking.deleteAll();
         			  }
       			
-						// Feature 411 : Zeitbuchungen für X Tage auf Gerät belassen
-						if (DigiWebApp.SettingsController.featureAvailable('411')) {
-							try {
-								// move Bookings to SentBookingArchived
-							      _.each(bookings, function(el) {
-							          if (!el.get('isCurrent')) {
-							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
-							      		  if (sentBookingArchivedEl != null) {
-								      		  sentBookingArchivedEl.save();
-								      		  // check if that day is already in archive
-								      		  var dayFound = NO;
-								      		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
-								      		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
-								      			  if (day.get('tagLabel') === dayToFind) {
-								      				  dayFound = YES;
-								      			  }
-								      		  });
-								      		  if (dayFound === NO) {
-								      			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
-								      				  tagLabel: dayToFind
-								      			  });
-								      			  dayRecord.save();
-								      		  }
-							      		  }
-							          }
-							      });
-							  
-							      // veraltete Buchungen aus Archiv entfernen
-							      DigiWebApp.SentBookingArchived.deleteOld();
-							      DigiWebApp.SentTimeDataDays.deleteOld();
-							
-							} catch(e20) {
-							    DigiWebApp.ApplicationController.nativeAlertDialogView({
-							          title: M.I18N.l('error')
-							        , message: M.I18N.l('errorWhileArchivingBookings')
-							        });
-							}
-							
-						}
-						// Feature 411 : End
+//						// Feature 411 : Zeitbuchungen für X Tage auf Gerät belassen
+//						if (DigiWebApp.SettingsController.featureAvailable('411')) {
+//							try {
+//								// move Bookings to SentBookingArchived
+//							      _.each(bookings, function(el) {
+//							          if (!el.get('isCurrent')) {
+//							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
+//							      		  if (sentBookingArchivedEl != null) {
+//								      		  sentBookingArchivedEl.save();
+//								      		  // check if that day is already in archive
+//								      		  var dayFound = NO;
+//								      		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
+//								      		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
+//								      			  if (day.get('tagLabel') === dayToFind) {
+//								      				  dayFound = YES;
+//								      			  }
+//								      		  });
+//								      		  if (dayFound === NO) {
+//								      			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
+//								      				  tagLabel: dayToFind
+//								      			  });
+//								      			  dayRecord.save();
+//								      		  }
+//							      		  }
+//							          }
+//							      });
+//							  
+//							      // veraltete Buchungen aus Archiv entfernen
+//							      DigiWebApp.SentBookingArchived.deleteOld();
+//							      DigiWebApp.SentTimeDataDays.deleteOld();
+//							
+//							} catch(e20) {
+//							    DigiWebApp.ApplicationController.nativeAlertDialogView({
+//							          title: M.I18N.l('error')
+//							        , message: M.I18N.l('errorWhileArchivingBookings')
+//							        });
+//							}
+//							
+//						}
+//						// Feature 411 : End
 
 						// Buchungen aufräumen
 						var deleteBuchungsIds = [];
