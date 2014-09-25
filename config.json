@@ -28,7 +28,7 @@
         "<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>"
     ],
     "application": {
-        "version": "1.8.1.5594 beta",
+        "version": "1.8.1.5595 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",

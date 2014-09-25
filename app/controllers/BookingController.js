@@ -1350,7 +1350,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			}
 			days = [];
 			var today = D8.create();
-			for (i=0; i<10; i++) {
+			for (var i=0; i<10; i++) {
 				var day = today.addDays(0 - i);
 				var dayString = day.format("dd.mm.yyyy");
 				var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
