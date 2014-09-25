@@ -18,6 +18,8 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	
 	, mitarbeiterNameVorname: null
 	
+	, backFunction: DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition
+	
 	, init: function(isFirstLoad) {
 		DigiWebApp.VorZurueckTabBar.setActiveTab(DigiWebApp.VorZurueckTabBar.tabItemDayToShow);
 		var that = DigiWebApp.ZeitbuchungenController;
@@ -60,7 +62,8 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	            		                    target: this,
 	            		                    action: function () {
 	            		        				//DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
-	            		        				history.back();
+	            		        				//history.back();
+	            		        				this.backFunction();
 	            		                    }
 	            		                }
 	            		            }
@@ -80,7 +83,8 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	        		                      target: this
 	        		                    , action: function () {
 		        							//DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
-	        		        				history.back();
+					        				//history.back();
+					        				this.backFunction();
 	        		                    }
 	        		                }
 	        		            }

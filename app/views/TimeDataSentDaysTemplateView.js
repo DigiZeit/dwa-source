@@ -39,6 +39,7 @@ DigiWebApp.TimeDataSentDaysTemplateView = M.ListItemView.design({
 						var settings = DigiWebApp.Settings.find()[0];
 						DigiWebApp.ZeitbuchungenController.set('mitarbeiterID', settings.get("mitarbeiterId"));
 						DigiWebApp.ZeitbuchungenController.set('mitarbeiterNameVorname', settings.get("mitarbeiterNachname") + ", " + settings.get("mitarbeiterVorname"));
+						DigiWebApp.ZeitbuchungenController.set('backFunction', DigiWebApp.NavigationController.backToTimeDataPage);
 						doShow = YES;
 					}
 				});
