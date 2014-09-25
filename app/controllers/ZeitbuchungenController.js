@@ -59,7 +59,8 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	            		                confirm: {
 	            		                    target: this,
 	            		                    action: function () {
-	            		        				DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
+	            		        				//DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
+	            		        				history.back();
 	            		                    }
 	            		                }
 	            		            }
@@ -78,7 +79,8 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	        		                confirm: {
 	        		                      target: this
 	        		                    , action: function () {
-		        							DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
+		        							//DigiWebApp.NavigationController.backToAnwesenheitslistePageTransition();
+	        		        				history.back();
 	        		                    }
 	        		                }
 	        		            }
