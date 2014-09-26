@@ -22,7 +22,7 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	
 	, init: function(isFirstLoad) {
 		DigiWebApp.VorZurueckTabBar.setActiveTab(DigiWebApp.VorZurueckTabBar.tabItemDayToShow);
-		if (DigiWebApp.SettingsController.featureAvailable('411')) {
+		if (DigiWebApp.SettingsController.featureAvailable('408')) {
 			$('#' + DigiWebApp.ZeitbuchungenPage.tabBar.id).show();
 		} else {
 			$('#' + DigiWebApp.ZeitbuchungenPage.tabBar.id).hide();
