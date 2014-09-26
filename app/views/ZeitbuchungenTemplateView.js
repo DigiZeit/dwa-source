@@ -15,6 +15,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
     , events: {
         tap: {
 			action: function(id, m_id) {
+					if (DigiWebApp.SettingsController.featureAvailable('411')) {
 						var doShow = NO;
 					    var view = M.ViewManager.getViewById(id);
 					    var mitarbeiter_modelId = view.modelId;
@@ -29,6 +30,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
 						if (doShow === YES) {
 							DigiWebApp.NavigationController.toZeitbuchungDetailsPageTransition();
 						}
+					}
 			}
 		}
 	}

@@ -22,6 +22,11 @@ DigiWebApp.ZeitbuchungenController = M.Controller.extend({
 	
 	, init: function(isFirstLoad) {
 		DigiWebApp.VorZurueckTabBar.setActiveTab(DigiWebApp.VorZurueckTabBar.tabItemDayToShow);
+		if (DigiWebApp.SettingsController.featureAvailable('411')) {
+			$('#' + DigiWebApp.ZeitbuchungenPage.tabBar.id).show();
+		} else {
+			$('#' + DigiWebApp.ZeitbuchungenPage.tabBar.id).hide();
+		}
 		var that = DigiWebApp.ZeitbuchungenController;
 		if(that.items === null) {
 			DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.ZeitbuchungenController.initWithServer, isFirstLoad);
