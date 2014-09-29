@@ -100,6 +100,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
 //		        }
 //	        } catch(e2) { trackError(e2); }
 
+        }
+        
 		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
 	}
