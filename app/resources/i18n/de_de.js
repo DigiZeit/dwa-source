@@ -212,7 +212,7 @@ M.I18N.de_de = {
 	, AnwesenheitslisteLaden: "Empfange Anwesenheitsliste"
 	, Zeitbuchungen: "Zeitbuchungen"
 	, Zeitbuchung: "Zeitbuchung"
-	, ZeitbuchungenKonntenNichtGeladenWerden: "Die Zeitbuchungen konnten nicht geladen werden!"
+	, ZeitbuchungenKonntenNichtGeladenWerden: "Die Zeitbuchungen konnten nicht geladen werden! Prüfen Sie Ihre Internetverbindung!"
 	, ZeitbuchungenLaden: "Empfange Zeitbuchungen"
 	, since: "seit"
 	, bookingSince: "aktuelle Buchung seit"

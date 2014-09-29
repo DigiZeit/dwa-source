@@ -35,7 +35,7 @@ DigiWebApp.TimeDataSentDaysTemplateView = M.ListItemView.design({
 				_.each(DigiWebApp.BookingController.timeDataSentDays, function(day) {
 					if (day.m_id === m_id) {
 //						DigiWebApp.BookingController.dayToDisplay = day;
-						DigiWebApp.ZeitbuchungenController.set('datum', day.get('tagLabel'));
+						DigiWebApp.ZeitbuchungenController.set('datum', day.get('tagLabel').substring(4));
 						var settings = DigiWebApp.Settings.find()[0];
 						DigiWebApp.ZeitbuchungenController.set('mitarbeiterID', settings.get("mitarbeiterId"));
 						DigiWebApp.ZeitbuchungenController.set('mitarbeiterNameVorname', settings.get("mitarbeiterNachname") + ", " + settings.get("mitarbeiterVorname"));

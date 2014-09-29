@@ -212,7 +212,7 @@ M.I18N.en_us = {
 	, AnwesenheitslisteLaden: "Receiving attendance list"
 	, Zeitbuchungen: "Bookings"
 	, Zeitbuchung: "Booking"
-	, ZeitbuchungenKonntenNichtGeladenWerden: "The bookings could not be loaded!"
+	, ZeitbuchungenKonntenNichtGeladenWerden: "The bookings could not be loaded! Check your internet connection!"
 	, ZeitbuchungenLaden: "Receiving bookings"
 	, since: "since"
 	, bookingSince: "current booking since"
