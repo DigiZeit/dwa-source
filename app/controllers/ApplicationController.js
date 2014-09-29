@@ -1457,7 +1457,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            this.setCallbackStatus('features', 'local', NO);
                 DigiWebApp.ApplicationController.triggerUpdate = YES;
                 DigiWebApp.DashboardController.init(YES);
-                DigiWebApp.MediaListController.init(YES);
+            	DigiWebApp.MediaListController.init(YES);
                 	
         		var timestampNow = D8.now().getTimestamp();
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
