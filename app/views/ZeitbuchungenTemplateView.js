@@ -128,7 +128,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= gpsBreite %>'
           , operation: function(v) {
-			        if (v != "0.0" && v !== "null" && v !== null) { 
+			        if (v != "0.0" && v !== "null" && v !== null && DigiWebApp.SettingsController.featureAvailable('408')) { 
 			        	var str = new Number(v);
 			       		return M.I18N.l('latitude') + ': ' + str.toFixed(6);
 			        } else {
@@ -144,7 +144,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= gpsBreitePosition %>'
           , operation: function(v) {
-		        if (v != "0.0" && v !== "null" && v !== null) { 
+		        if (v != "0.0" && v !== "null" && v !== null && DigiWebApp.SettingsController.featureAvailable('408')) { 
 		        	var str = new Number(v);
 		       		return M.I18N.l('position') + '-' + M.I18N.l('latitude') + ': ' + str.toFixed(6);
 		        } else {
@@ -160,7 +160,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= gpsLaenge %>'
           , operation: function(v) {
-		        if (v != "0.0" && v !== "null" && v !== null) { 
+		        if (v != "0.0" && v !== "null" && v !== null && DigiWebApp.SettingsController.featureAvailable('408')) { 
 		        	var str = new Number(v);
 		       		return M.I18N.l('longitude') + ': ' + str.toFixed(6);
 		        } else {
@@ -176,7 +176,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
       , computedValue: {
             valuePattern: '<%= gpsLaengePosition %>'
           , operation: function(v) {
-			        if (v != "0.0" && v !== "null" && v !== null) { 
+			        if (v != "0.0" && v !== "null" && v !== null && DigiWebApp.SettingsController.featureAvailable('408')) { 
 			        	var str = new Number(v);
 			       		return M.I18N.l('position') + '-' + M.I18N.l('longitude') + ': ' + str.toFixed(6);
 			        } else {
