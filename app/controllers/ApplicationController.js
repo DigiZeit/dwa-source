@@ -581,7 +581,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
-        this.skipEvents = true;
+        //this.skipEvents = true;
 		this.devicereadyhandler();
 	}
 	
