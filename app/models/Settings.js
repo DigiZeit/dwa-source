@@ -104,4 +104,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , festePauseStornieren_nurAktuellerTag: M.Model.attr('Boolean')
 
+    , startTimeout: M.Model.attr('String')
+    
 }, M.DataProviderLocalStorage);

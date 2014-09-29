@@ -66,6 +66,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , terminliste_ignoriereAuftragszeitraum: true
         , stammdatenabgleichBeimAppStart: false
         , festePauseStornieren_nurAktuellerTag: true
+        , startTimeout: 10000
     }
 
     , defaultsettings: null
@@ -368,6 +369,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('festePauseStornieren_nurAktuellerTag')
 	                 , isSelected: festePauseStornieren_nurAktuellerTag
     	       }]
+    	       , startTimeout: record.get('startTimeout')
 
             };
         /* default values */
@@ -487,6 +489,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                   value: DigiWebApp.SettingsController.defaultsettings.get('festePauseStornieren_nurAktuellerTag')
 	                 , label: M.I18N.l('festePauseStornieren_nurAktuellerTag')
 		       }]
+    	       , startTimeout: DigiWebApp.SettingsController.defaultsettings.get('startTimeout')
 
             };
             
@@ -691,6 +694,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
         var festePauseStornieren_nurAktuellerTag = $('#' + M.ViewManager.getView('settingsPage', 'festePauseStornieren_nurAktuellerTag').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
+        var startTimeout					= DigiWebApp.SettingsController.getSetting('startTimeout');
+        
         var numberRegex = /^[0-9]+$/;
         if (company) {
             if(!numberRegex.test(company)) {
@@ -805,6 +810,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
                                                     record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
+                                                    record.set('startTimeout', startTimeout);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -885,6 +891,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
                                     record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
+                                    record.set('startTimeout', startTimeout);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -939,6 +946,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
                                 record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
+                                record.set('startTimeout', startTimeout);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -993,6 +1001,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('terminliste_keineKuenstlichenTermine', terminliste_keineKuenstlichenTermine);
                                 record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
+                                record.set('startTimeout', startTimeout);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1049,6 +1058,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , terminliste_keineKuenstlichenTermine: terminliste_keineKuenstlichenTermine
                                 , terminliste_ignoriereAuftragszeitraum: terminliste_ignoriereAuftragszeitraum
                                 , festePauseStornieren_nurAktuellerTag: festePauseStornieren_nurAktuellerTag
+                                , startTimeout: startTimeout
 
                           });
 
