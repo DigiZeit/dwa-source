@@ -25,6 +25,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -49,6 +50,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePagePOP: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -73,6 +75,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -97,6 +100,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -121,6 +125,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toBookTimePageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -145,6 +150,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , backToBookTimePageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	if (ChefToolOnly) {
         	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -232,22 +238,27 @@ DigiWebApp.NavigationController = M.Controller.extend({
     
  // START::normales Menü
     , toDashboardPage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.NONE, NO);
     }
 
     , toDashboardPageTransition: function() { // 404 checked
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.SLIDEUP, NO);
     }
 
     , backToDashboardPage: function() { // 404 checked
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.SLIDEUP, YES);
     }
 
     , backToDashboardPagePOP: function() {   // 404 checked
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.POP, YES);
     }
 
     , backToDashboardPageFlipTransition: function() {  // 404 checked
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('dashboard', M.TRANSITION.FLIP, YES);
     }
 
@@ -258,26 +269,32 @@ DigiWebApp.NavigationController = M.Controller.extend({
     
 // START:ButtonMenü
     , toButtonDashboardPage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.NONE, NO);
     }
 
     , toButtonDashboardPageTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, NO);
     }
 
     , backToButtonDashboardPage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, YES);
     }
 
     , backToButtonDashboardPagePOP: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.POP, YES);
     }
 
     , backToButtonDashboardPageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, YES);
     }
 
     , toButtonDashboardPageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, NO);
     }
 // ENDE:ButtonMenü
@@ -584,26 +601,32 @@ DigiWebApp.NavigationController = M.Controller.extend({
 
     // Start::ButtonsDashboardPage   
     , toButtonsDashboardPage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.NONE, NO);
     }
 
     , toButtonsDashboardPageTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, NO);
     }
 
     , backToButtonsDashboardPage: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, YES);
     }
 
     , backToButtonsDashboardPagePOP: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.POP, YES);
     }
 
     , backToButtonsDashboardPageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, YES);
     }
 
     , toButtonsDashboardPageFlipTransition: function() {
+    	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, NO);
     }
     // Ende::ButtonsDashboardPage   
