@@ -108,22 +108,22 @@ DigiWebApp.BautagebuchMaterial = M.Model.create({
 		var resultList = [];
 		var items = DigiWebApp[that.name].findSorted();
 		var itemSelected = NO;
-		if (paramObj.lieferantId) {
+		if (paramObj.lieferantId && parseIntRadixTen(paramObj.lieferantId) != 0) {
 			items = _.filter(items, function(mat) {
 				return _.contains(JSON.parse(mat.get('lieferantenIds')), "" + paramObj.lieferantId);
 			});
 		}
-		if (paramObj.herstellerId) {
+		if (paramObj.herstellerId && parseIntRadixTen(paramObj.herstellerId) != 0) {
 			items = _.filter(items, function(mat) {
 				return _.contains([mat.get('herstellerId')], "" + paramObj.herstellerId);
 			});
 		}
-		if (paramObj.materialgruppeId) {
+		if (paramObj.materialgruppeId && parseIntRadixTen(paramObj.materialgruppeId) != 0) {
 			items = _.filter(items, function(mat) {
 				return _.contains(JSON.parse(mat.get('materialgruppenIds')), "" + paramObj.materialgruppeId);
 			});
 		}
-		if (paramObj.materialtypId) {
+		if (paramObj.materialtypId && parseIntRadixTen(paramObj.materialtypId) != 0) {
 			items = _.filter(items, function(mat) {
 				return _.contains([mat.get('materialtypId')], "" + paramObj.materialtypId);
 			});
