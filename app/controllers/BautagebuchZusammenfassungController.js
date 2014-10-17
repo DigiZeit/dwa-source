@@ -119,6 +119,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		that.item.set("abgeschlossen", YES);
 		if (DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")) {
 			that.berechneVonBis(YES);
+		} else {
+			that.setzeTimestamps(YES);
 		}
 
 		var unterschriftString = "";
@@ -229,6 +231,34 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		return resultSorted;
 	}
 	
+	, setzeTimestamps: function(saveit) {
+		var that = this;
+		var result = [];
+		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
+		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
+            return parseIntRadixTen(z.get('_createdAt'));
+        });
+
+		_.each(relevanteZeitbuchungenSorted, function(m) {
+
+			m.set("timeStampStart", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("von")).getTimestamp(););
+			m.set("timeStampEnd", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("bis")).getTimestamp(););
+
+			if (typeof saveit !== "undefined" && parseBool(saveit)) {
+				m.saveSorted();
+			}
+			result.push(m);
+			
+		});
+		
+		var resultSorted = _.sortBy(result , function(z) {
+            return parseIntRadixTen(z.get('von'));
+        });
+		
+		return resultSorted;
+		
+	}
+
 	, getZeitbuchungenPerMitarbeiterList: function() {
 		var that = this;
 		var MAList = [];
