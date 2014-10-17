@@ -88,7 +88,21 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 			    }
 			    relevantDetailsController.set("positionenList", positionenArray);
 				
-			    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
+				_.each(relevantDetailsController.positionenList, function(a) {
+					if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
+						relevantDetailsController.set('positionId', parseIntRadixTen(p.value));
+					}
+				});
+
+				relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
+
+				try {
+					_.each(relevantDetailsController.activityList, function(a) {
+						if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
+							relevantDetailsController.set('activityId', parseIntRadixTen(p.value));
+						}
+					});
+        		} catch (e) {trackError(e);}
 
 				M.ViewManager.getView('bautagebuchMedienDetailsPage', 'remarkInput').setValue(DigiWebApp.BautagebuchMedienDetailsController.remark);
 				$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].focus();

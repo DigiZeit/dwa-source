@@ -31,6 +31,12 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
 					}
 
+					_.each(relevantDetailsController.auftraegeList, function(a) {
+						if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
+							relevantDetailsController.set('auftragId', parseIntRadixTen(p.value));
+						}
+					});
+
 					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.bautagesberichtTyp == "<standard>") {
 						var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
 						_.each(myPositionenList, function(p) {
@@ -80,8 +86,22 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						
 					}
 					
-				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
+					_.each(relevantDetailsController.positionenList, function(a) {
+						if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
+							relevantDetailsController.set('positionId', parseIntRadixTen(p.value));
+						}
+					});
+
+					relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 					
+					try {
+						_.each(relevantDetailsController.activityList, function(a) {
+							if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
+								relevantDetailsController.set('activityId', parseIntRadixTen(p.value));
+							}
+						});
+            		} catch (e) {trackError(e);}
+            
 					M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'dataInput').setValue(DigiWebApp.BautagebuchNotizenDetailsController.data);
 					$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].focus();
 					$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].blur();
