@@ -117,7 +117,9 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		var that = this;
 
 		that.item.set("abgeschlossen", YES);
-		that.berechneVonBis(YES);
+		if (DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")) {
+			that.berechneVonBis(YES);
+		}
 
 		var unterschriftString = "";
     	// Feature 405 (Unterschrift)
