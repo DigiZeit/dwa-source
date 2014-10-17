@@ -34,6 +34,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					_.each(relevantDetailsController.auftraegeList, function(a) {
 						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
 							relevantDetailsController.set('auftragId', parseIntRadixTen(a.value));
+							relevantDetailsController.set('auftragName', parseIntRadixTen(a.label));
 						}
 					});
 
@@ -89,6 +90,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 					_.each(relevantDetailsController.positionenList, function(a) {
 						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
 							relevantDetailsController.set('positionId', parseIntRadixTen(a.value));
+							relevantDetailsController.set('positionName', parseIntRadixTen(a.label));
 						}
 					});
 
@@ -98,6 +100,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						_.each(relevantDetailsController.activityList, function(a) {
 							if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
 								relevantDetailsController.set('activityId', parseIntRadixTen(a.value));
+								relevantDetailsController.set('activityName', parseIntRadixTen(a.label));
 							}
 						});
             		} catch (e) {trackError(e);}
