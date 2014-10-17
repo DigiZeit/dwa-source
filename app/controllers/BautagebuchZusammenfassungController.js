@@ -241,8 +241,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 
 		_.each(relevanteZeitbuchungenSorted, function(m) {
 
-			m.set("timeStampStart", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("von")).getTimestamp(););
-			m.set("timeStampEnd", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("bis")).getTimestamp(););
+			m.set("timeStampStart", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("von")).getTimestamp());
+			m.set("timeStampEnd", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("bis")).getTimestamp());
 
 			if (typeof saveit !== "undefined" && parseBool(saveit)) {
 				m.saveSorted();
