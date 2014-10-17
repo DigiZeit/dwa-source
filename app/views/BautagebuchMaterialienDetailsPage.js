@@ -31,8 +31,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					}
 
 					_.each(relevantDetailsController.auftraegeList, function(a) {
-						if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
-							relevantDetailsController.set('auftragId', parseIntRadixTen(p.value));
+						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
+							relevantDetailsController.set('auftragId', parseIntRadixTen(a.value));
 						}
 					});
 					
@@ -86,8 +86,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					}
 					
 					_.each(relevantDetailsController.positionenList, function(a) {
-						if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
-							relevantDetailsController.set('positionId', parseIntRadixTen(p.value));
+						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
+							relevantDetailsController.set('positionId', parseIntRadixTen(a.value));
 						}
 					});
 
@@ -95,8 +95,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
 				    try {
 						_.each(relevantDetailsController.activityList, function(a) {
-							if (a.isSelected == YES && parseIntRadixTen(p.value) != 0) {
-								relevantDetailsController.set('activityId', parseIntRadixTen(p.value));
+							if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
+								relevantDetailsController.set('activityId', parseIntRadixTen(a.value));
 							}
 						});
 				    } catch (e) {trackError(e);}
