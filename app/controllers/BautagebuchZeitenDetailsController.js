@@ -113,7 +113,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		}
 		
 		var ueberschneidungFound = NO;
-		if (DigiWebApp.BautagebuchEinstellungenController.settings.ueberschneidungenPruefen) {
+		if (!DigiWebApp.BautagebuchEinstellungenController.settings.falscheZeitenIgnorieren && !DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
 			// prüfen, ob einer der selektierten MAs bereits eine ggfs. überschneidende Zeitbuchung hat
 			var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
 				  identifier: 'datum'

@@ -502,6 +502,4 @@ M.I18N.de_de = {
 	, BautagebuchUeberschneidendeZeitbuchung: "Überschneidung gefunden"
 	, BautagebuchUeberschneidendeZeitbuchungMsg: "Diese Zeitbuchung würde zu einer Überschneidung mit einem anderen Bautagesbericht führen! Trotzdem speichern?"
 		
-	, ueberschneidungenPruefen: "Auf Zeitbuchungsüberschneidungen prüfen?"
-
 };

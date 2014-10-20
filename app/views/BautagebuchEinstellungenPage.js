@@ -59,7 +59,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox minutenSchritteCombobox alleMitarbeiterVorselektiertCheckbox ueberschneidungenPruefenCheckbox'
+	        childViews: 'startUhrzeitContainer inStundenBuchenCheckbox falscheZeitenIgnorierenCheckbox positionVorselektierenCheckbox minutenSchritteCombobox alleMitarbeiterVorselektiertCheckbox'
 
             , startUhrzeitContainer: M.ContainerView.design({
 	      	      label: M.I18N.l('BautagebuchTaeglicheStartUhrzeit')
@@ -318,23 +318,6 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 				}
 	      })
 	      
-	      , ueberschneidungenPruefenCheckbox: M.SelectionListView.design({
-	          selectionMode: M.MULTIPLE_SELECTION
-            , contentBinding: {
-                  target: DigiWebApp.BautagebuchEinstellungenController
-                , property: 'settings.ueberschneidungenPruefenItem'
-            }
-		    , events: {
-	    		change: {
-		    		  target: DigiWebApp.BautagebuchEinstellungenController
-	    			, action: function(itemValues, items) {
-		    			this.settings.ueberschneidungenPruefen = (itemValues.length === 1);
-		    			this.settings.ueberschneidungenPruefenItem.isSelected = (itemValues.length === 1);
-					}
-	    		}
-			}
-      })
-
       //	      , sliderContainer: M.ContainerView.design({
 //	    	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 //			        , slider: M.SliderView.design({
