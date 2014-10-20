@@ -388,6 +388,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
   										myStunde = (myStunde + 1) % 24;										
 									}
 									myMinute = (myMinute + minuteSteps) % 60;
+									if (myMinute % minuteSteps != 0) { myMinute = myMinute - (myMinute % minuteSteps); }
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 									if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 										var myStartUhrzeit = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("startUhrzeit");
@@ -449,6 +450,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 	  									myStunde = (myStunde + 1) % 24;
 									}
 									myMinute = (myMinute + minuteSteps) % 60;
+									if (myMinute % minuteSteps != 0) { myMinute = myMinute - (myMinute % minuteSteps); }
 									var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 									if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 										var myStartUhrzeit = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("startUhrzeit");
@@ -562,6 +564,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
   								if (myMinute < 0) {
   									myMinute = 60 - minuteSteps;
   								}
+								if (myMinute % minuteSteps != 0) { myMinute = myMinute - (myMinute % minuteSteps); }
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 									var myStartUhrzeit = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("startUhrzeit");
@@ -633,6 +636,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
   								if (myMinute < 0) {
   									myMinute = 60 - minuteSteps;
   								}
+								if (myMinute % minuteSteps != 0) { myMinute = myMinute - (myMinute % minuteSteps); }
 								var myStr = myStunde.padLeft(2,"0") + ":"+ myMinute.padLeft(2,"0");
 								if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
 									var myStartUhrzeit = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("startUhrzeit");
