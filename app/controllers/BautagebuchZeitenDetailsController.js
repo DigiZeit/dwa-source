@@ -114,12 +114,12 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		
 		// prüfen, ob einer der selektierten MAs bereits eine ggfs. überschneidende Zeitbuchung hat
 		var ueberschneidungFound = NO;
+		var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
+			  identifier: 'datum'
+			, operator: '='
+			, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+		}});
 		_.each(that.mitarbeiterIds, function(m) {
-			var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
-					  identifier: 'datum'
-					, operator: '='
-					, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
-			}});
 			_.each(bautagesberichteAmGleichenDatum, function(b) {
 				var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
 						  identifier: 'bautagesberichtId'
