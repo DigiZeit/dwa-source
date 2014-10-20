@@ -37,7 +37,7 @@ DigiWebApp.TimeDataPage = M.PageView.design({
 				} else {
 					$('#' + DigiWebApp.TimeDataPage.contentSent.id).hide();
 				}
-				if (DigiWebApp.BookingController.timeDataSentDays) {
+				if (DigiWebApp.BookingController.timeDataSentDays && DigiWebApp.SettingsController.featureAvailable('411')) {
 					if (DigiWebApp.BookingController.timeDataSentDays.length !== 0) {
 						$('#' + DigiWebApp.TimeDataPage.contentDays.id).show();
 					} else {
