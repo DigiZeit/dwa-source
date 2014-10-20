@@ -142,7 +142,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 					earliestTimestamp = zVonTimestamp;
 				}
 			});
-			that.item.set("startUhrzeit", D8.create(earliestTimestamp).format("HH:mm"));
+			that.item.set("startUhrzeit", D8.create(earliestTimestamp).format("HH:MM"));
 		} else {
 			that.item.set("startUhrzeit", that.startUhrzeit);
 		}
