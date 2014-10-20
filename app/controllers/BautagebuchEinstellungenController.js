@@ -68,11 +68,11 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
     		      , isSelected: NO
     			}
         ]
-		, ueberschneidungenPruefen: NO
+		, ueberschneidungenPruefen: YES
 		, ueberschneidungenPruefenItem: [{
 	        value: 'ueberschneidungenPruefen'
 	      , label: M.I18N.l('ueberschneidungenPruefen')
-	      , isSelected: NO
+	      , isSelected: YES
 		}]
 	}
 
