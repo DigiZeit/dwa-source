@@ -68,6 +68,12 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
     		      , isSelected: NO
     			}
         ]
+		, ueberschneidungenPruefen: NO
+		, ueberschneidungenPruefenItem: [{
+	        value: 'ueberschneidungenPruefen'
+	      , label: M.I18N.l('ueberschneidungenPruefen')
+	      , isSelected: NO
+		}]
 	}
 
 	, init: function(isFirstLoad) {
@@ -92,7 +98,9 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		that.set("settings.alleMitarbeiterVorselektiertItem", that.settings.alleMitarbeiterVorselektiertItem);
 		that.set("settings.minutenSchritte", that.settings.minutenSchritte);
 		that.set("settings.minutenSchritteItem", that.settings.minutenSchritteItem);
-
+		that.set("settings.ueberschneidungenPruefen", that.settings.ueberschneidungenPruefen);
+		that.set("settings.ueberschneidungenPruefenItem", that.settings.ueberschneidungenPruefenItem);
+		
 		if (DigiWebApp.BautagebuchEinstellungen.find().length === 0) {
 			// erstelle Record mit Vorgabewerten
 			var rec = DigiWebApp.BautagebuchEinstellungen.createRecord({
@@ -102,6 +110,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 				, positionVorselektieren: that.settings.positionVorselektieren
 				, minutenSchritte: that.settings.minutenSchritte
 				, alleMitarbeiterVorselektiert: that.settings.alleMitarbeiterVorselektiert
+				, ueberschneidungenPruefen: that.settings.ueberschneidungenPruefen
 			});
 			rec.save();
 		} else {
@@ -150,6 +159,14 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 				});
 				that.set("settings.minutenSchritteItem", myItems);
 			}
+			if (typeof(rec.get("ueberschneidungenPruefen")) !== "undefined") {
+				that.set("settings.ueberschneidungenPruefen", rec.get("ueberschneidungenPruefen"));
+				that.set("settings.ueberschneidungenPruefenItem", [{
+			        value: 'ueberschneidungenPruefen'
+			      , label: M.I18N.l('ueberschneidungenPruefen')
+			      , isSelected: rec.get("ueberschneidungenPruefen")
+				}]);
+			}
 		}
 	}
 	
@@ -163,6 +180,7 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 		rec.set("positionVorselektieren", that.settings.positionVorselektieren);
 		rec.set("alleMitarbeiterVorselektiert", that.settings.alleMitarbeiterVorselektiert);
 		rec.set("minutenSchritte", that.settings.minutenSchritte);
+		rec.set("ueberschneidungenPruefen", that.settings.ueberschneidungenPruefen);
 		rec.save();
 		
 		//M.ViewManager.setCurrentPage(that.lastPage)
