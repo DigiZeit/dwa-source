@@ -144,6 +144,10 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 						if (thatVonTimestamp < zVonD8Timestamp && zBisD8Timestamp < thatBisTimestamp) {
 							ueberschneidungFound = YES;
 						}
+						// identische Zeitbuchung?
+						if (thatVonTimestamp = zVonD8Timestamp && zBisD8Timestamp = thatBisTimestamp) {
+							ueberschneidungFound = YES;
+						}
 					}
 				});
 			});
