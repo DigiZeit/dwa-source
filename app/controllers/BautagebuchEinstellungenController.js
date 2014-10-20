@@ -11,11 +11,11 @@ DigiWebApp.BautagebuchEinstellungenController = M.Controller.extend({
 	  settings: {
 		// Vorgabewerte (werden zur Laufzeit überschrieben)
 		  startUhrzeit: "08:00"
-		, inStundenBuchen: YES
+		, inStundenBuchen: NO
 		, inStundenBuchenItem: [{
 	        value: 'inStundenBuchen'
 	      , label: M.I18N.l('BautagebuchInStundenBuchen')
-	      , isSelected: YES
+	      , isSelected: NO
 		}]
 		, falscheZeitenIgnorieren: NO
 		, falscheZeitenIgnorierenItem: [{

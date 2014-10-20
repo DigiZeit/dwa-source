@@ -368,11 +368,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 											return false;
 										}
-										
-										DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-										DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();	
-										
-									}
+									} 
+									DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
+									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();	
 								}
 		    	            }
 		    	          }
@@ -401,10 +399,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 											return false;
 										}
-										
-										DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-										DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 									}
+									DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
+									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 		  						}
 		    	            }
 		    	          }
@@ -432,10 +429,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 											return false;
 										}
-										
-										DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-										DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 									}
+									DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
+									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 								}
 		    	            }
 		    	          }
@@ -464,10 +460,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 										if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 											return false;
 										}
-										
-										DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-										DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 									}
+									DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
+									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 		  						}
 		    	            }
 		    	          }
@@ -540,10 +535,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -579,10 +573,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('von', myStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -613,10 +606,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -652,10 +644,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('bis', myStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();
 	  						}
 	    	            }
 	    	          }
@@ -771,10 +762,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
 	  						}
 	    	            }
 	    	          }
@@ -810,10 +800,9 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 									if (parseIntRadixTen(myMinute) < parseIntRadixTen(myStartUhrzeitMinute)) {
 										return false;
 									}
-									
-									DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
-									DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
 								}
+								DigiWebApp.BautagebuchZeitenDetailsController.set('dauer', dauerStr);
+								DigiWebApp.BautagebuchZeitenDetailsController.setDauer();
 	  						}
 	    	            }
 	    	          }
