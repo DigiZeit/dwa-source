@@ -501,6 +501,6 @@ M.I18N.en_us = {
 	, alleMitarbeiterVorselektiert: "Preselect all employees"
 
 	, BautagebuchUeberschneidendeZeitbuchung: "Overlapping found"
-	, BautagebuchUeberschneidendeZeitbuchungMsg: "This booking might lead to an overlapping with another construction record! Save anyway?"
+	, BautagebuchUeberschneidendeZeitbuchungMsg: "This booking might lead to an overlapping with another construction record! Save it anyway?"
 
 };

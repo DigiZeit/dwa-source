@@ -140,9 +140,9 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 						if (zVonD8Timestamp < thatBisTimestamp && thatBisTimestamp < zBisD8Timestamp) {
 							ueberschneidungFound = YES;
 						}
-					};
-				})
-			}
+					}
+				});
+			});
 		});
 			
 		var continueSave = function() {
