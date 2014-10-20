@@ -128,6 +128,22 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		
 		that.item.set("bautagesberichtTyp", that.bautagesberichtTyp);
 				
+		if (!DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
+			// startUhrzeit anhand der frühesten Zeitbuchung ermitteln
+			var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
+				  identifier: 'bautagesberichtId'
+				, operator: '='
+				, value: that.tem.get("id")
+			}});
+			var earliestTimestamp = null;
+			_.each(myZeitbuchungen, function(z) {
+				var zVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
+				if (!earliestTimestamp || earliestTimestamp > zVonTimestamp) {
+					earliestTimestamp = zVonTimestamp;
+				}
+			});
+			that.set("startUhrzeit", D8.create(earliestTimestamp).format("HH:mm"));
+		}
 		that.item.set("startUhrzeit", that.startUhrzeit);
 
 		that.item.set("projektleiterId", that.projektleiterId);
