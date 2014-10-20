@@ -142,10 +142,11 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 					earliestTimestamp = zVonTimestamp;
 				}
 			});
-			that.set("startUhrzeit", D8.create(earliestTimestamp).format("HH:mm"));
+			that.item.set("startUhrzeit", D8.create(earliestTimestamp).format("HH:mm"));
+		} else {
+			that.item.set("startUhrzeit", that.startUhrzeit);
 		}
-		that.item.set("startUhrzeit", that.startUhrzeit);
-
+		
 		that.item.set("projektleiterId", that.projektleiterId);
 		
 		that.item.set("orderId", that.auftragsId);
