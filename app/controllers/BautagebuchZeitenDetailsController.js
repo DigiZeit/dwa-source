@@ -146,7 +146,6 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		});
 			
 		var continueSave = function() {
-			var that = this;
 			if (!DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen") && !DigiWebApp.BautagebuchEinstellungen.find()[0].get("falscheZeitenIgnorieren")) {
 				var myVon = D8.create("01.01.1993 " + DigiWebApp.BautagebuchZeitenDetailsController.get("von"));
 				var myBis = D8.create("01.01.1993 " + DigiWebApp.BautagebuchZeitenDetailsController.get("bis"));
