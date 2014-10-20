@@ -1342,32 +1342,27 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        		DigiWebApp.SentBookingArchived.deleteAll();
 	        	}
 	        }
-			var daysToHoldBookingsOnDevice = 0;
-			try {
-				daysToHoldBookingsOnDevice = 0 + new Number(DigiWebApp.SettingsController.getSetting('daysToHoldBookingsOnDevice'));
-			} catch(e2) {
-				daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get('daysToHoldBookingsOnDevice');
-			}
-			days = [];
-			var today = D8.create();
-			for (var i=0; i<daysToHoldBookingsOnDevice; i++) {
-				var day = today.addDays(0 - i);
-				var dayString = M.I18N.l(day.format("dddd")).substring(0,2) + ", " + day.format("dd.mm.yyyy");
-				var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
-					tagLabel: dayString
-				});
-				days.push(dayRecord);
-    		}
-        	this.set('timeDataSentDays', days);
-//	        if (days.length > 0) {
-//	            // newest day at the top => first sort than reverse order
-//	        	days = _.sortBy(days, function(day) {
-//	                return parseIntRadixTen(D8.create(day.get('tagLabel')).getTimestamp());
-//	            });
-//	            this.set('timeDataSentDays', days.reverse());
-//	        } else {
-//	            this.set('timeDataSentDays', []);
-//	        }
+	        if (DigiWebApp.SettingsController.featureAvailable('411')) {
+				var daysToHoldBookingsOnDevice = 0;
+				try {
+					daysToHoldBookingsOnDevice = 0 + new Number(DigiWebApp.SettingsController.getSetting('daysToHoldBookingsOnDevice'));
+				} catch(e2) {
+					daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get('daysToHoldBookingsOnDevice');
+				}
+				days = [];
+				var today = D8.create();
+				for (var i=0; i<daysToHoldBookingsOnDevice; i++) {
+					var day = today.addDays(0 - i);
+					var dayString = M.I18N.l(day.format("dddd")).substring(0,2) + ", " + day.format("dd.mm.yyyy");
+					var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
+						tagLabel: dayString
+					});
+					days.push(dayRecord);
+	    		}
+	        	this.set('timeDataSentDays', days);
+	        } else {
+	            this.set('timeDataSentDays', []);    		
+	        }
     	} catch(e15) {
             this.set('timeDataSentDays', []);    		
     	}
