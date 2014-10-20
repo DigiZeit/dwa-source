@@ -498,4 +498,8 @@ M.I18N.de_de = {
 	, alle: "alle"
 		
 	, alleMitarbeiterVorselektiert: "Alle Mitarbeiter vorselektieren"
+		
+	, BautagebuchUeberschneidendeZeitbuchung: "Überschneidung gefunden"
+	, BautagebuchUeberschneidendeZeitbuchungMsg: "Diese Zeitbuchung würde zu einer Überschneidung mit einem anderen Bautagesbericht führen! Trotzdem speichern?"
+
 };
