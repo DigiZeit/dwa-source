@@ -112,51 +112,52 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 			return false;
 		}
 		
-		// prüfen, ob einer der selektierten MAs bereits eine ggfs. überschneidende Zeitbuchung hat
 		var ueberschneidungFound = NO;
-		
-		var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
-			  identifier: 'datum'
-			, operator: '='
-			, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
-		}});
-		_.each(that.mitarbeiterIds, function(m) {
-			_.each(bautagesberichteAmGleichenDatum, function(b) {
-				var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
-						  identifier: 'bautagesberichtId'
-						, operator: '='
-						, value: b.get("id")
-				}});
-				_.each(myZeitbuchungen, function(z) {
-					if (JSON.parse(z.get("mitarbeiterIds")).indexOf(m) != -1) {
-						var zVonD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
-						var zBisD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("bis")).getTimestamp();
-						var thatVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.von).getTimestamp();
-						var thatBisTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.bis).getTimestamp();
-						// neuer Von-Zeitpunkt in anderer Zeitbuchung?
-						if (zVonD8Timestamp < thatVonTimestamp && thatVonTimestamp < zBisD8Timestamp) {
-							ueberschneidungFound = YES;
+		if (DigiWebApp.BautagebuchEinstellungenController.settings.ueberschneidungenPruefen) {
+			// prüfen, ob einer der selektierten MAs bereits eine ggfs. überschneidende Zeitbuchung hat
+			var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
+				  identifier: 'datum'
+				, operator: '='
+				, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+			}});
+			_.each(that.mitarbeiterIds, function(m) {
+				_.each(bautagesberichteAmGleichenDatum, function(b) {
+					var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
+							  identifier: 'bautagesberichtId'
+							, operator: '='
+							, value: b.get("id")
+					}});
+					_.each(myZeitbuchungen, function(z) {
+						if (JSON.parse(z.get("mitarbeiterIds")).indexOf(m) != -1) {
+							var zVonD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
+							var zBisD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("bis")).getTimestamp();
+							var thatVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.von).getTimestamp();
+							var thatBisTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.bis).getTimestamp();
+							// neuer Von-Zeitpunkt in anderer Zeitbuchung?
+							if (zVonD8Timestamp < thatVonTimestamp && thatVonTimestamp < zBisD8Timestamp) {
+								ueberschneidungFound = YES;
+							}
+							// neuer Bis-Zeitpunkt in anderer Zeitbuchung?
+							if (zVonD8Timestamp < thatBisTimestamp && thatBisTimestamp < zBisD8Timestamp) {
+								ueberschneidungFound = YES;
+							}
+							// andere Zeitbuchung enthalten?
+							if (thatVonTimestamp < zVonD8Timestamp && zBisD8Timestamp < thatBisTimestamp) {
+								ueberschneidungFound = YES;
+							}
+							// diese Zeitbuchung enthalten?
+							if (zVonD8Timestamp < thatVonTimestamp && thatBisTimestamp < zBisD8Timestamp) {
+								ueberschneidungFound = YES;
+							}
+							// identische Zeitbuchung?
+							if (thatVonTimestamp == zVonD8Timestamp && zBisD8Timestamp == thatBisTimestamp) {
+								ueberschneidungFound = YES;
+							}
 						}
-						// neuer Bis-Zeitpunkt in anderer Zeitbuchung?
-						if (zVonD8Timestamp < thatBisTimestamp && thatBisTimestamp < zBisD8Timestamp) {
-							ueberschneidungFound = YES;
-						}
-						// andere Zeitbuchung enthalten?
-						if (thatVonTimestamp < zVonD8Timestamp && zBisD8Timestamp < thatBisTimestamp) {
-							ueberschneidungFound = YES;
-						}
-						// diese Zeitbuchung enthalten?
-						if (zVonD8Timestamp < thatVonTimestamp && thatBisTimestamp < zBisD8Timestamp) {
-							ueberschneidungFound = YES;
-						}
-						// identische Zeitbuchung?
-						if (thatVonTimestamp == zVonD8Timestamp && zBisD8Timestamp == thatBisTimestamp) {
-							ueberschneidungFound = YES;
-						}
-					}
+					});
 				});
 			});
-		});
+		}
 			
 		var continueSave = function() {
 			if (!DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen") && !DigiWebApp.BautagebuchEinstellungen.find()[0].get("falscheZeitenIgnorieren")) {
