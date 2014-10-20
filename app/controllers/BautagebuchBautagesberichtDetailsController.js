@@ -133,7 +133,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 			var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
 				  identifier: 'bautagesberichtId'
 				, operator: '='
-				, value: that.tem.get("id")
+				, value: that.item.get("id")
 			}});
 			var earliestTimestamp = null;
 			_.each(myZeitbuchungen, function(z) {
