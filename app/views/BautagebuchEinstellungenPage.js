@@ -317,7 +317,8 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
 		    		}
 				}
 	      })
-	      , aueberschneidungenPruefenCheckbox: M.SelectionListView.design({
+	      
+	      , ueberschneidungenPruefenCheckbox: M.SelectionListView.design({
 	          selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
                   target: DigiWebApp.BautagebuchEinstellungenController
