@@ -1714,18 +1714,16 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 }
 
 .activityListPage .ui-content li {
-    border:  none;
-    font-size: 15px;
-    padding: 0px;
-    margin: 0px;
-    padding-left: 10px;
+	border: none;
+	font-size: 15px;
+	padding-left: 10px;
 	border-bottom-color: grey;
 	border-bottom-style: double;
 	min-height: 26px;
-    height: 26px;
-    padding-top: 10px;
-    text-shadow: none;
-    background: url('images/arrow_white.png') 100% 50% no-repeat;
+	text-shadow: none;
+	background: url('images/arrow_white.png') 100% 50% no-repeat;
+	padding-right: 26px;
+	padding-bottom: 2px;
 }
 
 .activityListPage .ui-content li.selected {
