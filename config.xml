@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		    = "com.digi.webapp"
-	versionCode = "5690"
-	version 	= "1.8.2.5690">
+	id		    = "com.digi.webappbeta"
+	versionCode = "5691"
+	version 	= "1.8.2.5691">
 
-	<name>DIGI-WebApp</name>
+	<name>DIGI-WebApp Beta</name>
 
 	<description>
 		Die mobile Zeiterfassung für das Handwerk!
@@ -53,12 +53,12 @@ which PhoneGap requires. -->
 <!-- to enable single features use the following examples -->
 	<feature name="http://api.phonegap.com/1.0/geolocation" />
 	<feature name="http://api.phonegap.com/1.0/network" />
-	<!-- <feature name="http://api.phonegap.com/1.0/camera" /> Kamera nur in Pro-Version -->
+	<feature name="http://api.phonegap.com/1.0/camera" />
 	<feature name="http://api.phonegap.com/1.0/file" />
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
-<!-- include ChildBrowserPlugIn -->
+<!-- include PhonegapPlugIns -->
 	<!-- <gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
 <!--  	<gap:plugin name="org.apache.cordova.camera" /> -->
 <!-- 	<gap:plugin name="org.apache.cordova.console" /> -->
@@ -93,7 +93,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5690</string> 
+	<string>5691</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -105,6 +105,18 @@ which PhoneGap requires. -->
     <param name="ios-package" value="CDVStatusBar" onload="true" />
 </feature>
 
+<!-- geolocation on ios8 -->
+	<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"> 
+		<array> 
+			<string>GPS immer erlauben</string> 
+		</array> 
+	</gap:config-file> 
+	<gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"> 
+		<array> 
+			<string>Erlaube GPS wenn die DIGI-WebApp benutzt wird</string> 
+		</array> 
+	</gap:config-file>
+	
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="icon.png" />
 
@@ -135,7 +147,7 @@ which PhoneGap requires. -->
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-    <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
 
 	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
