@@ -95,11 +95,13 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
     		mitarbeiter = _.sortBy(mitarbeiter, function(m){ 
 				return m.get('nachname') + ", " + m.get('vorname');
 			});
+    		var myOrder = -1;
             var mitarbeiterArray = _.map(mitarbeiter, function(o) {
+            	myOrder = myOrder + 1;
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED WORKER");
             	} else {        	
-            		var obj = { label: o.vollername(), value: o.get('id') };
+            		var obj = { label: o.vollername(), value: o.get('id'), order: myOrder};
 //            		if(obj.value === that.selections.activity) {
             			obj.isSelected = NO;
 //            			itemSelected = YES;
