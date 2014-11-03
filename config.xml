@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5692"
-	version 	= "1.8.2.5692">
+	versionCode = "5693"
+	version 	= "1.8.2.5693">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -93,7 +93,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5692</string> 
+	<string>5693</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -105,7 +105,7 @@ which PhoneGap requires. -->
     <param name="ios-package" value="CDVStatusBar" onload="true" />
 </feature>
 
-<!-- geolocation on ios8 
+<!-- geolocation on ios8 --> 
 	<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"> 
 		<array> 
 			<string>GPS immer erlauben</string> 
@@ -113,10 +113,9 @@ which PhoneGap requires. -->
 	</gap:config-file> 
 	<gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"> 
 		<array> 
-			<string>Erlaube GPS wenn die DIGI-WebApp benutzt wird</string> 
+			<string>GPS erlauben, wenn App benutzt wird</string> 
 		</array> 
 	</gap:config-file>
--->
 	
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="icon.png" />
