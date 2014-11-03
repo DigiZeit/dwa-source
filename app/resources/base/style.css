@@ -821,7 +821,7 @@ label.ui-input-text, .ui-controlgroup-label {
 
 /* timeDataPage & remarkPage */
 .timeDataPage .sentBookings .ui-listview {
-	background: #003366 !important;
+	background: #003366;
 	font-style: italic !important;
     padding-left: 0.7em;
 }
@@ -1742,6 +1742,7 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 }
 
 .scholppSent {
+    padding-left: 0.7em;
 	background: green !important;
 }
 
