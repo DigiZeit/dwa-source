@@ -46,10 +46,13 @@ DigiWebApp.TimeDataPage = M.PageView.design({
 				} else {
 					$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide();
 				}
+				
     			if (DigiWebApp.SettingsController.featureAvailable('416')) {
-    				//DigiWebApp.NavigationController.switchToPage('bookingPageWithIconsScholpp', M.TRANSITION.SLIDEUP, YES);
+    				$('#' + DigiWebApp.TimeDataPage.contentNotSent.list.id).addClass("scholppNotSent");
+    				$('#' + DigiWebApp.TimeDataPage.contentSent.list.id).addClass("scholppSent");
     			} else {
-    				//DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, YES);
+    				$('#' + DigiWebApp.TimeDataPage.contentNotSent.list.id).removeClass("scholppNotSent");
+    				$('#' + DigiWebApp.TimeDataPage.contentSent.list.id).removeClass("scholppSent");
     			}
 			}
 		}
