@@ -70,11 +70,16 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		if (DigiWebApp.BautagebuchProjektleiter.findSorted().length !== 0) {
             itemSelected = NO;
     		var projektleiter = DigiWebApp.BautagebuchProjektleiter.findSorted();
+    		projektleiter = _.sortBy(projektleiter, function(m){ 
+				return m.get('nachname') + ", " + m.get('vorname');
+			});
+    		var myOrder = -1;
             var projektleiterArray = _.map(projektleiter, function(o) {
+            	myOrder = myOrder + 1;
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED PROJEKTLEADER");
             	} else {        	
-            		var obj = { label: o.vollername(), value: o.get('id') };
+            		var obj = { label: o.vollername(), value: o.get('id'), order: myOrder };
 //            		if(obj.value === that.selections.activity) {
 //            			obj.isSelected = YES;
 //            			itemSelected = YES;
