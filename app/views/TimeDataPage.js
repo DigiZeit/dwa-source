@@ -46,6 +46,11 @@ DigiWebApp.TimeDataPage = M.PageView.design({
 				} else {
 					$('#' + DigiWebApp.TimeDataPage.contentDays.id).hide();
 				}
+    			if (DigiWebApp.SettingsController.featureAvailable('416')) {
+    				//DigiWebApp.NavigationController.switchToPage('bookingPageWithIconsScholpp', M.TRANSITION.SLIDEUP, YES);
+    			} else {
+    				//DigiWebApp.NavigationController.switchToPage('bookingPage', M.TRANSITION.SLIDEUP, YES);
+    			}
 			}
 		}
     }

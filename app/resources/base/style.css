@@ -820,16 +820,20 @@ label.ui-input-text, .ui-controlgroup-label {
 }
 
 /* timeDataPage & remarkPage */
-.timeDataPage .notSentBookings .ui-listview {
-	background: red !important;
-    padding-left: 0.7em;
-}
-
 .timeDataPage .sentBookings .ui-listview {
-	background: green !important;
+	background: #003366 !important;
 	font-style: italic !important;
     padding-left: 0.7em;
 }
+
+.timeDataPage .notSentBookings .ui-listview .scholpp {
+	background: red !important;
+}
+
+.timeDataPage .sentBookings .ui-listview .scholpp {
+	background: green !important;
+}
+
 
 .remarkPage .ui-listview li {
     padding-left: 0.7em;
