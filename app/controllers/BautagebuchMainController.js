@@ -92,6 +92,9 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		if (DigiWebApp.BautagebuchMitarbeiter.findSorted().length !== 0) {
             itemSelected = NO;
     		var mitarbeiter = DigiWebApp.BautagebuchMitarbeiter.findSorted();
+    		mitarbeiter = _.sortBy(mitarbeiter, function(m){ 
+				return m.get('nachname') + ", " + m.get('vorname');
+			});
             var mitarbeiterArray = _.map(mitarbeiter, function(o) {
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED WORKER");
