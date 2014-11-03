@@ -825,6 +825,10 @@ label.ui-input-text, .ui-controlgroup-label {
 	font-style: italic !important;
     padding-left: 0.7em;
 }
+.timeDataPage .notSentBookings .ui-listview {
+	background: red !important;
+    padding-left: 0.7em;
+}
 
 .remarkPage .ui-listview li {
     padding-left: 0.7em;
@@ -1735,3 +1739,4 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 	border-top-color: grey;
 	border-top-style: double;
 }
+

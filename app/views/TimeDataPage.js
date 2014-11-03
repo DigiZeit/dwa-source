@@ -78,6 +78,7 @@ DigiWebApp.TimeDataPage = M.PageView.design({
 
     , contentNotSent: M.ScrollView.design({
           childViews: 'list'
+        , cssClass: 'notSentBookings'
         , list: M.ListView.design({
               contentBinding: {
                   target: DigiWebApp.BookingController
