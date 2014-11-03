@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5691"
-	version 	= "1.8.2.5691">
+	versionCode = "5692"
+	version 	= "1.8.2.5692">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -29,7 +29,7 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="false" readonly="false" />
-	<preference name="phonegap-version" value="3.6.3" />
+	<preference name="phonegap-version" value="3.5.0" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
@@ -81,7 +81,7 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
 <!-- <gap:plugin name="org.apache.cordova.file" version="0.2.4" /> -->
 <gap:plugin name="org.apache.cordova.file" version="1.3.1" />
-<gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
+<gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
 <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
@@ -93,7 +93,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5691</string> 
+	<string>5692</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -105,7 +105,7 @@ which PhoneGap requires. -->
     <param name="ios-package" value="CDVStatusBar" onload="true" />
 </feature>
 
-<!-- geolocation on ios8 -->
+<!-- geolocation on ios8 
 	<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"> 
 		<array> 
 			<string>GPS immer erlauben</string> 
@@ -116,6 +116,7 @@ which PhoneGap requires. -->
 			<string>Erlaube GPS wenn die DIGI-WebApp benutzt wird</string> 
 		</array> 
 	</gap:config-file>
+-->
 	
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="icon.png" />
