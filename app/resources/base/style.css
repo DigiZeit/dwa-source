@@ -820,13 +820,14 @@ label.ui-input-text, .ui-controlgroup-label {
 }
 
 /* timeDataPage & remarkPage */
-.timeDataPage .sentBookings .ui-listview {
-	background: #003366 !important;
-	font-style: italic !important;
-    padding-left: 0.7em;
-}
 .timeDataPage .notSentBookings .ui-listview {
 	background: red !important;
+    padding-left: 0.7em;
+}
+
+.timeDataPage .sentBookings .ui-listview {
+	background: green !important;
+	font-style: italic !important;
     padding-left: 0.7em;
 }
 
