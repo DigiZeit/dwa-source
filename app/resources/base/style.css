@@ -826,15 +826,6 @@ label.ui-input-text, .ui-controlgroup-label {
     padding-left: 0.7em;
 }
 
-.timeDataPage .notSentBookings .ui-listview .scholpp {
-	background: red !important;
-}
-
-.timeDataPage .sentBookings .ui-listview .scholpp {
-	background: green !important;
-}
-
-
 .remarkPage .ui-listview li {
     padding-left: 0.7em;
     margin-bottom: 30px;
@@ -1743,5 +1734,13 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 .activityListPage .ui-content li:nth-child(1) {
 	border-top-color: grey;
 	border-top-style: double;
+}
+
+.scholppNotSent {
+	background: red !important;
+}
+
+.scholppSent {
+	background: green !important;
 }
 
