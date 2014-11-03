@@ -32,7 +32,7 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
     					mitarbeiterArray = DigiWebApp.BautagebuchMainController.mitarbeiter;
 	            	}
     				mitarbeiterArray = _.compact(mitarbeiterArray);
-    				mitarbeiterArray = _.sortBy(mitarbeiter, function(m){ 
+    				mitarbeiterArray = _.sortBy(mitarbeiterArray, function(m){ 
     					return m.order;
     				});
 					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterList", mitarbeiterArray);
