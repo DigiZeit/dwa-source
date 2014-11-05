@@ -27,7 +27,7 @@ DigiWebApp.BautagebuchLieferant = M.Model.create({
 
 	, getMaterialien: function() {
 		var that = this;
-		return _.filter(DigiWebApp.BautagebuchLieferant.findSorted(), function(mat) {
+		return _.filter(DigiWebApp.BautagebuchMaterial.findSorted(), function(mat) {
 			var foundIndex = _.find(JSON.parse(mat.get('lieferantenIds')), function(myId) {
 				return (that.get('id') == myId);
 			});
@@ -40,7 +40,6 @@ DigiWebApp.BautagebuchLieferant = M.Model.create({
 		var that = this;
 		var resultList = [];
 		var items = DigiWebApp[that.name].findSorted();
-		items = _.sortBy(items, function(n) { return n.get("bezeichnung");});
 		var itemSelected = NO;
 		_.each(items, function(obj){
 			var item = { label: obj.get('bezeichnung'), value: obj.get('id') };
@@ -128,6 +127,7 @@ DigiWebApp.BautagebuchLieferant = M.Model.create({
 	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
 	        });
 	    }
+	    _.sortBy(records, function(n) { return n.get("bezeichnung");})
 	    return records;
 	}
 

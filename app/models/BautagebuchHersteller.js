@@ -36,7 +36,6 @@ DigiWebApp.BautagebuchHersteller = M.Model.create({
 		var that = this;
 		var resultList = [];
 		var items = DigiWebApp[that.name].findSorted();
-		items = _.sortBy(items, function(n) { return n.get("bezeichnung");});
 		var itemSelected = NO;
 		_.each(items, function(obj){
 			var item = { label: obj.get('bezeichnung'), value: obj.get('id') };
@@ -124,6 +123,7 @@ DigiWebApp.BautagebuchHersteller = M.Model.create({
 	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
 	        });
 	    }
+	    _.sortBy(records, function(n) { return n.get("bezeichnung");})
 	    return records;
 	}
 
