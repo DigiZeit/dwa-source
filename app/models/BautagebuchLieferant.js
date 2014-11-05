@@ -127,7 +127,7 @@ DigiWebApp.BautagebuchLieferant = M.Model.create({
 	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
 	        });
 	    }
-	    _.sortBy(records, function(n) { return n.get("bezeichnung");})
+	    records = _.sortBy(records, function(n) { return n.get("bezeichnung");})
 	    return records;
 	}
 
