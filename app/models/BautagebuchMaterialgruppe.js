@@ -40,6 +40,7 @@ DigiWebApp.BautagebuchMaterialgruppe = M.Model.create({
 		var that = this;
 		var resultList = [];
 		var items = DigiWebApp[that.name].findSorted();
+		items = _.sortBy(items, function(n) { return n.get("bezeichnung");});
 		var itemSelected = NO;
 		_.each(items, function(obj){
 			var item = { label: obj.get('bezeichnung'), value: obj.get('id') };
