@@ -217,9 +217,11 @@ DigiWebApp.SettingsPage = M.PageView.design({
 			            if (M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy') !== null) {
 			            	GPSenableHighAccuracy = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 			            }
-	    				if (GPSenableHighAccuracy) {
+	    				if (!GPSenableHighAccuracy) {
+	    					// war NO, jetzt YES
 	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 	    				} else {
+	    					// war YES, jetzt NO
 	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
 	    				}
 	                }
