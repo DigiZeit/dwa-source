@@ -379,17 +379,25 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		successCallback();
 	                	}
                 	} else if ( error === "TIMEOUT" ) {
-                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-                			  title: M.I18N.l('GPSError')
-                			, message: M.I18N.l('GPStimeout')
-                		});
-	                	successCallback();
+	                	if (nextFunction) {
+	                		nextFunction(successCallback, nextOptions)
+	                	} else {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPStimeout')
+	                		});
+		                	successCallback();
+	                	}
                 	} else if ( error === "PERMISSION_DENIED" ) {
-                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-                			  title: M.I18N.l('GPSError')
-                			, message: M.I18N.l('GPSmissingPermission')
-                		});
-	                	successCallback();
+	                	if (nextFunction) {
+	                		nextFunction(successCallback, nextOptions)
+	                	} else {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSmissingPermission')
+	                		});
+	                		successCallback();
+	                	}
                 	} else {
 	                	if (nextFunction) {
 	                		nextFunction(successCallback, nextOptions)
