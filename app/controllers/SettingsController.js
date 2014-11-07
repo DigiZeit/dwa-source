@@ -387,11 +387,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	       }]
     	       , startTimeout: record.get('startTimeout')
                , GPSenableHighAccuracy: [{
-	                   value: record.get('GPSenableHighAccuracy')
+	                   value: GPSenableHighAccuracy
 	                 , label: M.I18N.l('GPSenableHighAccuracy')
-	                 , isSelected: record.get('GPSenableHighAccuracy')
+	                 , isSelected: GPSenableHighAccuracy
                }]
-               , GPSmaximumAgeMinutes: record.get('GPSmaximumAgeMinutes')
+               , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
 
             };
         /* default values */
