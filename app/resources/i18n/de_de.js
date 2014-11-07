@@ -502,7 +502,7 @@ M.I18N.de_de = {
 	, BautagebuchUeberschneidendeZeitbuchung: "Überschneidung gefunden"
 	, BautagebuchUeberschneidendeZeitbuchungMsg: "Diese Zeitbuchung würde zu einer Überschneidung mit einem anderen Bautagesbericht führen! Trotzdem speichern?"
 	
-	, GPSenableHighAccuracy: 'GPS mit hoher Genauigkeit (sonst niedrig)'
+	, GPSenableHighAccuracy: 'GPS mit hoher Genauigkeit (sonst niedrig/schnell)'
 	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
 	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter'
 		
