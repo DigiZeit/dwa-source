@@ -108,6 +108,8 @@ DigiWebApp.Settings = M.Model.create({
 
     , GPSenableHighAccuracy: M.Model.attr('Boolean')
     
+    , GPSenableHighAccuracyFallback: M.Model.attr('Boolean')
+    
     , GPSmaximumAgeMinutes: M.Model.attr('Integer')
 
 }, M.DataProviderLocalStorage);

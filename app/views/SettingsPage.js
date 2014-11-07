@@ -52,7 +52,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy GPSmaximumAgeMinutesGrid detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
+          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy GPSenableHighAccuracyFallback GPSmaximumAgeMinutesGrid detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -208,6 +208,29 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , contentBinding: {
                   target: DigiWebApp.SettingsController
                 , property: 'settings.GPSenableHighAccuracy'
+            }
+	        , events: {
+	            change: {
+	                  target: this
+	                , action: function() {
+			            var GPSenableHighAccuracy = NO;
+			            if (M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy') !== null) {
+			            	GPSenableHighAccuracy = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+			            }
+	    				if (GPSenableHighAccuracy) {
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    				} else {
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    				}
+	                }
+	            }
+	        }
+        })
+        , GPSenableHighAccuracyFallback: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.GPSenableHighAccuracyFallback'
             }
         })
         , GPSmaximumAgeMinutesGrid: M.GridView.design({

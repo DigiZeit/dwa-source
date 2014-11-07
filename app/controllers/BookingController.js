@@ -343,7 +343,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var that = DigiWebApp.BookingController;
     	
 		// Get GPS-Position if set in Settings
-    	var getLocationNow = function(successCallback) {
+    	var getLocationNow = function(successCallback, nextOptions, nextFunction) {
+    		
 	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
 	            /*var getLocationOptions =  { 
@@ -356,30 +357,46 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
 	            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
 	            };
+	            if (nextOptions && !nextFunction) {
+	            	getLocationOptions.enableHighAccuracy = nextOptions.enableHighAccuracy;
+	            	getLocationOptions.maximumAge = nextOptions.maximumAge;
+	            	getLocationOptions.timeout = nextOptions.timeout;
+	            }
 			        	
 	            M.LocationManager.getLocation(that, successCallback, function(error) {
 	                	if ( error === "POSITION_UNAVAILABLE" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunavailable')
-	                		});
+		                	if (nextFunction) {
+		                		nextFunction(successCallback, nextOptions)
+		                	} else {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunavailable')
+		                		});
+		                		successCallback();
+		                	}
 	                	} else if ( error === "TIMEOUT" ) {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPStimeout')
 	                		});
+		                	successCallback();
 	                	} else if ( error === "PERMISSION_DENIED" ) {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSmissingPermission')
 	                		});
+		                	successCallback();
 	                	} else {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSunknownError') + error
-	                		});
+		                	if (nextFunction) {
+		                		nextFunction(successCallback, nextOptions)
+		                	} else {
+		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                			  title: M.I18N.l('GPSError')
+		                			, message: M.I18N.l('GPSunknownError') + error
+		                		});
+		                		successCallback();
+		                	}
 	                	}
-	                	successCallback();
 	            }, getLocationOptions);
         	};
     	
@@ -392,7 +409,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	mysuccessCallback();
 		            }, function() {
 		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
-		            	getLocationNow(mysuccessCallback);
+		            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
+		            	&& DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback")) {
+		    	            var nextLocationOptions =  { 
+		    	            		enableHighAccuracy: YES
+		    	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
+		    	            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
+		    	            };
+		            		getLocationNow(mysuccessCallback, nextLocationOptions, getLocationNow);
+		            	} else {
+		            		getLocationNow(mysuccessCallback);
+		            	}
 		            });
 				} else {
 					mysuccessCallback();

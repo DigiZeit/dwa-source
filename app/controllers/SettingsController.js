@@ -68,6 +68,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , festePauseStornieren_nurAktuellerTag: true
         , startTimeout: 10000
         , GPSenableHighAccuracy: NO
+        , GPSenableHighAccuracyFallback: YES
         , GPSmaximumAgeMinutes: 3
     }
 
@@ -168,7 +169,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::FestePauseStornieren
 
-        DigiWebApp.ApplicationController.enforceChefToolOnly();
+        var GPSenableHighAccuracy = DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy");
+		if (GPSenableHighAccuracy) {
+			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+		} else {
+			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
+		}
+
+		DigiWebApp.ApplicationController.enforceChefToolOnly();
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();
         // Start::TransitionsAvailable
@@ -239,6 +247,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
             try {
 	            if (typeof(record.record.GPSenableHighAccuracy) !== "undefined") {
 	            	GPSenableHighAccuracy = record.get('GPSenableHighAccuracy');
+	            }
+            } catch (e) {}
+
+            var GPSenableHighAccuracyFallback = DigiWebApp.SettingsController.defaultsettings.get("GPSenableHighAccuracyFallback");
+            try {
+	            if (typeof(record.record.GPSenableHighAccuracyFallback) !== "undefined") {
+	            	GPSenableHighAccuracyFallback = record.get('GPSenableHighAccuracyFallback');
 	            }
             } catch (e) {}
 
@@ -391,6 +406,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('GPSenableHighAccuracy')
 	                 , isSelected: GPSenableHighAccuracy
                }]
+               , GPSenableHighAccuracyFallback: [{
+	                   value: GPSenableHighAccuracyFallback
+	                 , label: M.I18N.l('GPSenableHighAccuracyFallback')
+	                 , isSelected: GPSenableHighAccuracyFallback
+               }]
                , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
 
             };
@@ -515,6 +535,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , GPSenableHighAccuracy: [{
                    value: DigiWebApp.SettingsController.defaultsettings.get('GPSenableHighAccuracy')
                  , label: M.I18N.l('GPSenableHighAccuracy')
+               }]
+               , GPSenableHighAccuracyFallback: [{
+                   value: DigiWebApp.SettingsController.defaultsettings.get('GPSenableHighAccuracyFallback')
+                 , label: M.I18N.l('GPSenableHighAccuracyFallback')
                }]
                , GPSmaximumAgeMinutes: DigiWebApp.SettingsController.defaultsettings.get("GPSmaximumAgeMinutes")
 
@@ -728,6 +752,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	GPSenableHighAccuracy = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         }
 
+        var GPSenableHighAccuracyFallback = NO;
+        if (M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracyFallback') !== null) {
+        	GPSenableHighAccuracyFallback = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracyFallback').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        }
+
         var GPSmaximumAgeMinutes            = $('#' + M.ViewManager.getView('settingsPage', 'GPSmaximumAgeMinutesInput').id).val();
 
         var numberRegex = /^[0-9]+$/;
@@ -846,6 +875,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                                     record.set('startTimeout', startTimeout);
                                                     record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                                    record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                                     /* now save */
@@ -929,6 +959,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                     record.set('startTimeout', startTimeout);
                                     record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                    record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                     /* now save */
@@ -986,6 +1017,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                 record.set('startTimeout', startTimeout);
                                 record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                 /* now save */
@@ -1043,6 +1075,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                 record.set('startTimeout', startTimeout);
                                 record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                 /* now save */
@@ -1102,6 +1135,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , festePauseStornieren_nurAktuellerTag: festePauseStornieren_nurAktuellerTag
                                 , startTimeout: startTimeout
                                 , GPSenableHighAccuracy: GPSenableHighAccuracy
+                                , GPSenableHighAccuracyFallback: GPSenableHighAccuracyFallback
                                 , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
 
                           });

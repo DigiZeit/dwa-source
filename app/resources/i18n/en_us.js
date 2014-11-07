@@ -503,7 +503,8 @@ M.I18N.en_us = {
 	, BautagebuchUeberschneidendeZeitbuchung: "Overlapping found"
 	, BautagebuchUeberschneidendeZeitbuchungMsg: "This booking might lead to an overlapping with another construction record! Save it anyway?"
 
-	, GPSenableHighAccuracy: 'GPS with high Accuracy'
-	, GPSmaximumAgeMinutes: 'Maximum GPS-Age'
+	, GPSenableHighAccuracy: 'GPS with high accuracy (else low accuracy)'
+	, GPSenableHighAccuracyFallback: 'GPS-search with high accuracy after unsuccessful GPS-search with low accuracy'
+	, GPSmaximumAgeMinutes: 'Maximum GPS-age'
 
 };
