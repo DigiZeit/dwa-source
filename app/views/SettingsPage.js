@@ -202,6 +202,28 @@ DigiWebApp.SettingsPage = M.PageView.design({
                   target: DigiWebApp.SettingsController
                 , property: 'settings.autoSaveGPSData'
             }
+	        , events: {
+	            change: {
+	                  target: this
+	                , action: function() {
+			            var autoSaveGPSData = NO;
+			            if (M.ViewManager.getView('settingsPage', 'autoSaveGPSData') !== null) {
+			            	autoSaveGPSData = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+			            }
+	    				if (autoSaveGPSData) {
+	    					// war YES, jetzt NO
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSmaximumAgeMinutesGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    				} else {
+	    					// war NO, jetzt YES
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    					try{$('[id=' + DigiWebApp.SettingsPage.content.GPSmaximumAgeMinutesGrid.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    				}
+	                }
+	            }
+	        }
         })
         , GPSenableHighAccuracy: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION

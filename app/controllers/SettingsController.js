@@ -262,7 +262,23 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
-            settings = {
+            var autoSaveGPSData = DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData");
+            try {
+	            if (typeof(record.record.autoSaveGPSData) !== "undefined") {
+	            	autoSaveGPSData = record.get('autoSaveGPSData');
+	        		if (!autoSaveGPSData) {
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSmaximumAgeMinutesGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	        		} else {
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	    				try{$('[id=' + DigiWebApp.SettingsPage.content.GPSmaximumAgeMinutesGrid.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	        		}
+	            }
+            } catch (e) {}
+
+			settings = {
             	  debug: [{
                       value: record.get('debug')
                     , label: 'debug'
