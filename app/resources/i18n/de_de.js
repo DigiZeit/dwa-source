@@ -393,7 +393,7 @@ M.I18N.de_de = {
 	, BautagebuchInStundenBuchen: "Erfassung in Stunden"
 	, BautagebuchStartingFrom: "ab"
 	, BautagebuchStartUhrzeit: "Startuhrzeit"
-	, bautagebuchLimit_autoStartUhrzeit: "automatische Startuhrzeit"
+	, bautagebuchLimit_autoStartUhrzeit: "automatische Startuhrzeit im Bautagebuch"
 	, noProjektleiterSelected: "Kein Projektleiter ausgewählt"
 	, noProjektleiterSelectedMsg: "Bitte wählen Sie einen Projektleiter aus."
 	, noMitarbeiterSelected: "Keine Mitarbeiter ausgewählt"
