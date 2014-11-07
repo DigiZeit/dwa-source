@@ -235,6 +235,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            var GPSenableHighAccuracy = DigiWebApp.SettingsController.defaultsettings.get("GPSenableHighAccuracy");
+            try {
+	            if (typeof(record.record.GPSenableHighAccuracy) !== "undefined") {
+	            	GPSenableHighAccuracy = record.get('GPSenableHighAccuracy');
+	            }
+            } catch (e) {}
+
+            var GPSmaximumAgeMinutes = DigiWebApp.SettingsController.defaultsettings.get("GPSmaximumAgeMinutes");
+            try {
+	            if (typeof(record.record.GPSmaximumAgeMinutes) !== "undefined") {
+	            	GPSmaximumAgeMinutes = record.get('GPSmaximumAgeMinutes');
+	            }
+            } catch (e) {}
+
             settings = {
             	  debug: [{
                       value: record.get('debug')
