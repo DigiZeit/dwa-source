@@ -411,7 +411,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	mysuccessCallback();
 		            }, function() {
 		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
-		            	alert("GPSenableHighAccuracy: " + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) + ", GPSenableHighAccuracyFallback: " + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback")));
 		            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
 		            	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
 		    	            var nextLocationOptions =  { 
@@ -428,7 +427,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 					mysuccessCallback();
 				}
 			} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
-				getLocationNow(mysuccessCallback);
+            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
+            	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
+    	            var nextLocationOptions =  { 
+    	            		enableHighAccuracy: YES
+    	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
+    	            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
+    	            };
+            		getLocationNow(mysuccessCallback, nextLocationOptions, getLocationNow);
+            	} else {
+            		getLocationNow(mysuccessCallback);
+            	}
 			} else {
 				mysuccessCallback();
 			}
