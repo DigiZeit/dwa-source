@@ -68,7 +68,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , festePauseStornieren_nurAktuellerTag: true
         , startTimeout: 10000
         , GPSenableHighAccuracy: NO
-        , GPSmaximumAgeMinutes: 5
+        , GPSmaximumAgeMinutes: 3
     }
 
     , defaultsettings: null
