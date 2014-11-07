@@ -411,7 +411,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		            	mysuccessCallback();
 		            }, function() {
 		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
-		            	alert("GPSenableHighAccuracy: ", + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy") + ", GPSenableHighAccuracyFallback: " + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback")));
+		            	alert("GPSenableHighAccuracy: " + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) + ", GPSenableHighAccuracyFallback: " + parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback")));
 		            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
 		            	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
 		    	            var nextLocationOptions =  { 
