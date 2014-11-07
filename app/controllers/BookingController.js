@@ -367,6 +367,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 		        	
     		alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy);
 
+    		try {
+    			navigator.geolocation.clearWatch();
+    		} catch(e) {}
+    		
     		M.LocationManager.getLocation(that, successCallback, function(error) {
                 	if ( error === "POSITION_UNAVAILABLE" ) {
 	                	if (nextFunction) {
