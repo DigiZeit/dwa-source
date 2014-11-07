@@ -169,13 +169,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::FestePauseStornieren
 
-        var GPSenableHighAccuracy = DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy");
-		if (GPSenableHighAccuracy) {
-			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-		} else {
-			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
-		}
-
 		DigiWebApp.ApplicationController.enforceChefToolOnly();
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();
@@ -247,6 +240,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
             try {
 	            if (typeof(record.record.GPSenableHighAccuracy) !== "undefined") {
 	            	GPSenableHighAccuracy = record.get('GPSenableHighAccuracy');
+	        		if (GPSenableHighAccuracy) {
+	        			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+	        		} else {
+	        			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
+	        		}
 	            }
             } catch (e) {}
 
