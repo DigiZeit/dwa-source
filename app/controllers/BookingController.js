@@ -365,7 +365,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             	getLocationOptions.timeout = nextOptions.timeout;
             }
 		        	
-    		alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy);
+    		alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy + ", timeout: " + getLocationOptions.timeout);
 
     		try {
     			navigator.geolocation.clearWatch();
@@ -374,7 +374,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     		M.LocationManager.getLocation(that, successCallback, function(error) {
                 	if ( error === "POSITION_UNAVAILABLE" ) {
 	                	if (nextFunction) {
-	                		nextFunction(successCallback, nextOptions)
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
+	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
@@ -384,7 +385,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === "TIMEOUT" ) {
 	                	if (nextFunction) {
-	                		nextFunction(successCallback, nextOptions)
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
+	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
@@ -394,7 +396,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === "PERMISSION_DENIED" ) {
 	                	if (nextFunction) {
-	                		nextFunction(successCallback, nextOptions)
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
+	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
@@ -404,7 +407,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else {
 	                	if (nextFunction) {
-	                		nextFunction(successCallback, nextOptions)
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
+	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
