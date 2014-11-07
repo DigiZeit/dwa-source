@@ -345,58 +345,61 @@ DigiWebApp.BookingController = M.Controller.extend({
 		// Get GPS-Position if set in Settings
     	var getLocationNow = function(successCallback, nextOptions, nextFunction) {
     		
-	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
+    		alert("nextOptions: " + nextOptions);
+    		alert("nextFunction: " + nextFunction);
+
+    		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
-	            /*var getLocationOptions =  { 
-	            		enableHighAccuracy: YES, 
-	            		maximumAge: 0, 
-	            		timeout: 240000 
-	            };*/
-	            var getLocationOptions =  { 
-	            		enableHighAccuracy: parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy"))
-	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
-	            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
-	            };
-	            if (nextOptions && !nextFunction) {
-	            	getLocationOptions.enableHighAccuracy = nextOptions.enableHighAccuracy;
-	            	getLocationOptions.maximumAge = nextOptions.maximumAge;
-	            	getLocationOptions.timeout = nextOptions.timeout;
-	            }
-			        	
-	            M.LocationManager.getLocation(that, successCallback, function(error) {
-	                	if ( error === "POSITION_UNAVAILABLE" ) {
-		                	if (nextFunction) {
-		                		nextFunction(successCallback, nextOptions)
-		                	} else {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPSunavailable')
-		                		});
-		                		successCallback();
-		                	}
-	                	} else if ( error === "TIMEOUT" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPStimeout')
-	                		});
-		                	successCallback();
-	                	} else if ( error === "PERMISSION_DENIED" ) {
-	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSmissingPermission')
-	                		});
-		                	successCallback();
+            /*var getLocationOptions =  { 
+            		enableHighAccuracy: YES, 
+            		maximumAge: 0, 
+            		timeout: 240000 
+            };*/
+            var getLocationOptions =  { 
+            		enableHighAccuracy: parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy"))
+            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
+            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
+            };
+            if (nextOptions && !nextFunction) {
+            	getLocationOptions.enableHighAccuracy = nextOptions.enableHighAccuracy;
+            	getLocationOptions.maximumAge = nextOptions.maximumAge;
+            	getLocationOptions.timeout = nextOptions.timeout;
+            }
+		        	
+            M.LocationManager.getLocation(that, successCallback, function(error) {
+                	if ( error === "POSITION_UNAVAILABLE" ) {
+	                	if (nextFunction) {
+	                		nextFunction(successCallback, nextOptions)
 	                	} else {
-		                	if (nextFunction) {
-		                		nextFunction(successCallback, nextOptions)
-		                	} else {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPSunknownError') + error
-		                		});
-		                		successCallback();
-		                	}
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSunavailable')
+	                		});
+	                		successCallback();
 	                	}
+                	} else if ( error === "TIMEOUT" ) {
+                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+                			  title: M.I18N.l('GPSError')
+                			, message: M.I18N.l('GPStimeout')
+                		});
+	                	successCallback();
+                	} else if ( error === "PERMISSION_DENIED" ) {
+                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+                			  title: M.I18N.l('GPSError')
+                			, message: M.I18N.l('GPSmissingPermission')
+                		});
+	                	successCallback();
+                	} else {
+	                	if (nextFunction) {
+	                		nextFunction(successCallback, nextOptions)
+	                	} else {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSunknownError') + error
+	                		});
+	                		successCallback();
+	                	}
+                	}
 	            }, getLocationOptions);
         	};
     	
