@@ -365,7 +365,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             	getLocationOptions.timeout = nextOptions.timeout;
             }
 		        	
-    		alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy + ", timeout: " + getLocationOptions.timeout);
+    		//alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy + ", timeout: " + getLocationOptions.timeout);
 
     		try {
     			navigator.geolocation.clearWatch();
