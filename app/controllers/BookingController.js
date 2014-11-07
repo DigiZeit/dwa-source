@@ -345,8 +345,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		// Get GPS-Position if set in Settings
     	var getLocationNow = function(successCallback, nextOptions, nextFunction) {
     		
-    		alert("nextOptions: " + nextOptions);
-    		alert("nextFunction: " + nextFunction);
+    		alert("typeof(nextOptions): '" + typeof(nextOptions) + "', typeof(nextFunction): '" + typeof(nextFunction) + "'");
 
     		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
