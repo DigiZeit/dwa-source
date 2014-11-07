@@ -67,6 +67,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , stammdatenabgleichBeimAppStart: false
         , festePauseStornieren_nurAktuellerTag: true
         , startTimeout: 10000
+        , GPSenableHighAccuracy: NO
+        , GPSmaximumAgeMinutes: 5
     }
 
     , defaultsettings: null
@@ -370,6 +372,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , isSelected: festePauseStornieren_nurAktuellerTag
     	       }]
     	       , startTimeout: record.get('startTimeout')
+               , GPSenableHighAccuracy: [{
+	                   value: record.get('GPSenableHighAccuracy')
+	                 , label: M.I18N.l('GPSenableHighAccuracy')
+	                 , isSelected: record.get('GPSenableHighAccuracy')
+               }]
+               , GPSmaximumAgeMinutes: record.get('GPSmaximumAgeMinutes')
 
             };
         /* default values */
@@ -490,6 +498,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('festePauseStornieren_nurAktuellerTag')
 		       }]
     	       , startTimeout: DigiWebApp.SettingsController.defaultsettings.get('startTimeout')
+               , GPSenableHighAccuracy: [{
+                   value: DigiWebApp.SettingsController.defaultsettings.get('GPSenableHighAccuracy')
+                 , label: M.I18N.l('GPSenableHighAccuracy')
+               }]
+               , GPSmaximumAgeMinutes: DigiWebApp.SettingsController.defaultsettings.get("GPSmaximumAgeMinutes")
 
             };
             
@@ -696,6 +709,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
         var startTimeout					= DigiWebApp.SettingsController.getSetting('startTimeout');
         
+        var GPSenableHighAccuracy = NO;
+        if (M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy') !== null) {
+        	GPSenableHighAccuracy = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        }
+
+        var GPSmaximumAgeMinutes            = $('#' + M.ViewManager.getView('settingsPage', 'GPSmaximumAgeMinutesInput').id).val();
+
         var numberRegex = /^[0-9]+$/;
         if (company) {
             if(!numberRegex.test(company)) {
@@ -811,6 +831,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                                     record.set('startTimeout', startTimeout);
+                                                    record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                                    record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -892,6 +914,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                     record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                     record.set('startTimeout', startTimeout);
+                                    record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                    record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -947,6 +971,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                 record.set('startTimeout', startTimeout);
+                                record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1002,6 +1028,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('terminliste_ignoriereAuftragszeitraum', terminliste_ignoriereAuftragszeitraum);
                                 record.set('festePauseStornieren_nurAktuellerTag', festePauseStornieren_nurAktuellerTag);
                                 record.set('startTimeout', startTimeout);
+                                record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
+                                record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1059,6 +1087,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , terminliste_ignoriereAuftragszeitraum: terminliste_ignoriereAuftragszeitraum
                                 , festePauseStornieren_nurAktuellerTag: festePauseStornieren_nurAktuellerTag
                                 , startTimeout: startTimeout
+                                , GPSenableHighAccuracy: GPSenableHighAccuracy
+                                , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
 
                           });
 

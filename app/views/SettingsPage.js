@@ -52,8 +52,7 @@ DigiWebApp.SettingsPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-        //  childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck remarkIsMandatory autoSaveGPSData GPSDataIsMandatory useTransitionsSetting grid'
-          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck remarkIsMandatory remarkIsOptional autoSaveGPSData detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
+          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy GPSmaximumAgeMinutesGrid detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -203,6 +202,27 @@ DigiWebApp.SettingsPage = M.PageView.design({
                   target: DigiWebApp.SettingsController
                 , property: 'settings.autoSaveGPSData'
             }
+        })
+        , GPSenableHighAccuracy: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.GPSenableHighAccuracy'
+            }
+        })
+        , GPSmaximumAgeMinutesGrid: M.GridView.design({
+              childViews: 'GPSmaximumAgeMinutesLabel GPSmaximumAgeMinutesInput'
+            , layout: M.TWO_COLUMNS
+            , GPSmaximumAgeMinutesLabel: M.LabelView.design({
+                value: M.I18N.l('GPSmaximumAgeMinutes')
+            })
+            , GPSmaximumAgeMinutesInput: M.TextFieldView.design({
+            	    inputType: M.INPUT_NUMBER
+                  , contentBinding: {
+                      target: DigiWebApp.SettingsController
+                    , property: 'settings.GPSmaximumAgeMinutes'
+                }
+            })
         })
         , bautagebuchLimit_autoStartUhrzeit: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION

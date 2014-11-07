@@ -336,7 +336,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		this.getBookingLocation(this.proceedBooking);
 		
     }
-    
+
     , getBookingLocation: function(mysuccessCallback) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
 
@@ -344,55 +344,48 @@ DigiWebApp.BookingController = M.Controller.extend({
     	
 		// Get GPS-Position if set in Settings
     	var getLocationNow = function(successCallback) {
-	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut') * 2);
+	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
 	            /*var getLocationOptions =  { 
 	            		enableHighAccuracy: YES, 
 	            		maximumAge: 0, 
 	            		timeout: 240000 
-	            	};*/
-	            var getLocationOptions =  { enableHighAccuracy: NO, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
-	
+	            };*/
+	            var getLocationOptions =  { 
+	            		enableHighAccuracy: parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy"))
+	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
+	            	  , timeout: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut'))
+	            };
+			        	
 	            M.LocationManager.getLocation(that, successCallback, function(error) {
-	            	
-		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
-		        	
-		            M.LocationManager.getLocation(that, successCallback, function(error) {
-		            	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-		
-		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-		                	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-		                	/*
-		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
-		                    */
-		                	if ( error === "POSITION_UNAVAILABLE" ) {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPSunavailable')
-		                		});
-		                	} else if ( error === "TIMEOUT" ) {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPStimeout')
-		                		});
-		                	} else if ( error === "PERMISSION_DENIED" ) {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPSmissingPermission')
-		                		});
-		                	} else {
-		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                			  title: M.I18N.l('GPSError')
-		                			, message: M.I18N.l('GPSunknownError') + error
-		                		});
-		                	}
-		                    //M.LocationManager.getLocation(that, successCallback, successCallback);
-		                	successCallback();
-		            }, getLocationOptions);
+	                	if ( error === "POSITION_UNAVAILABLE" ) {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSunavailable')
+	                		});
+	                	} else if ( error === "TIMEOUT" ) {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPStimeout')
+	                		});
+	                	} else if ( error === "PERMISSION_DENIED" ) {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSmissingPermission')
+	                		});
+	                	} else {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSunknownError') + error
+	                		});
+	                	}
+	                	successCallback();
 	            }, getLocationOptions);
         	};
     	
-			if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") && DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
+			if (DigiWebApp.SettingsController.featureAvailable('417') 
+			&& DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") 
+			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
 				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
 		            DigiWebApp.ServiceAppController.knockknock(function(data) {
 		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is available");
@@ -411,6 +404,83 @@ DigiWebApp.BookingController = M.Controller.extend({
 			}
 
    	}
+
+//    , getBookingLocation: function(mysuccessCallback) {
+//    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
+//
+//    	var that = DigiWebApp.BookingController;
+//    	
+//		// Get GPS-Position if set in Settings
+//    	var getLocationNow = function(successCallback) {
+//	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut') * 2);
+//	
+//	            /*var getLocationOptions =  { 
+//	            		enableHighAccuracy: YES, 
+//	            		maximumAge: 0, 
+//	            		timeout: 240000 
+//	            	};*/
+//	            var getLocationOptions =  { enableHighAccuracy: NO, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
+//	
+//	            M.LocationManager.getLocation(that, successCallback, function(error) {
+//	            	
+//		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
+//		        	
+//		            M.LocationManager.getLocation(that, successCallback, function(error) {
+//		            	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+//		
+//		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
+//		                	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
+//		                	/*
+//		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
+//		                    */
+//		                	if ( error === "POSITION_UNAVAILABLE" ) {
+//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+//		                			  title: M.I18N.l('GPSError')
+//		                			, message: M.I18N.l('GPSunavailable')
+//		                		});
+//		                	} else if ( error === "TIMEOUT" ) {
+//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+//		                			  title: M.I18N.l('GPSError')
+//		                			, message: M.I18N.l('GPStimeout')
+//		                		});
+//		                	} else if ( error === "PERMISSION_DENIED" ) {
+//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+//		                			  title: M.I18N.l('GPSError')
+//		                			, message: M.I18N.l('GPSmissingPermission')
+//		                		});
+//		                	} else {
+//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+//		                			  title: M.I18N.l('GPSError')
+//		                			, message: M.I18N.l('GPSunknownError') + error
+//		                		});
+//		                	}
+//		                    //M.LocationManager.getLocation(that, successCallback, successCallback);
+//		                	successCallback();
+//		            }, getLocationOptions);
+//	            }, getLocationOptions);
+//        	};
+//    	
+//			if (DigiWebApp.SettingsController.featureAvailable('417') 
+//			&& DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") 
+//			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
+//				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
+//		            DigiWebApp.ServiceAppController.knockknock(function(data) {
+//		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is available");
+//		            	mysuccessCallback();
+//		            }, function() {
+//		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
+//		            	getLocationNow(mysuccessCallback);
+//		            });
+//				} else {
+//					mysuccessCallback();
+//				}
+//			} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
+//				getLocationNow(mysuccessCallback);
+//			} else {
+//				mysuccessCallback();
+//			}
+//
+//   	}
     
     , checkBooking: function(skipSelection) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in checkBooking");

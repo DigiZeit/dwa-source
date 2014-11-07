@@ -105,5 +105,9 @@ DigiWebApp.Settings = M.Model.create({
     , festePauseStornieren_nurAktuellerTag: M.Model.attr('Boolean')
 
     , startTimeout: M.Model.attr('String')
+
+    , GPSenableHighAccuracy: M.Model.attr('Boolean')
     
+    , GPSmaximumAgeMinutes: M.Model.attr('Integer')
+
 }, M.DataProviderLocalStorage);
