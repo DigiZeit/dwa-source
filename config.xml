@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5740"
-	version 	= "1.8.2.5740">
+	versionCode = "5741"
+	version 	= "1.8.2.5741">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -35,7 +35,7 @@
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
-	<preference name="keepRunning" value="true" />
+<!--	<preference name="keepRunning" value="true" /> -->
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
@@ -96,7 +96,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5740</string> 
+	<string>5741</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>

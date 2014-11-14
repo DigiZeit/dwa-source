@@ -628,11 +628,27 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		    //DigiWebApp.SettingsController.init(YES,YES);
 
-		    var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
+			var yourAjaxCallback = function(response) {
+		        bgGeo.finish();
+		    };
+
+		    /**
+		    * This callback will be executed every time a geolocation is recorded in the background.
+		    */
+		    var callbackFn = function(location) {
+		        console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+		        yourAjaxCallback.call(this);
+		    };
+
+		    var failureFn = function(error) {
+		        console.log('BackgroundGeoLocation error');
+		    }
+		    
+			var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
 		    if (myLocationTimeout == 0) {
 		    	myLocationTimeout = 10;
 		    }
-		    DigiWebApp.ApplicationController.bgGeo.configure(function(){}, function(){}, {
+		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
 		        desiredAccuracy: 10,
 		        stationaryRadius: 20,
 		        distanceFilter: 30,

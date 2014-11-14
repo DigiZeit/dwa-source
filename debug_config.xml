@@ -35,7 +35,7 @@
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
-	<preference name="keepRunning" value="true" />
+<!--	<preference name="keepRunning" value="true" /> -->
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
