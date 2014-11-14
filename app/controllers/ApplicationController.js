@@ -643,12 +643,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		        console.log('BackgroundGeoLocation error');
 		    }
 		    
-			var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
-		    if (myLocationTimeout == 0) {
+			//var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
+		    //if (myLocationTimeout == 0) {
 		    	myLocationTimeout = 10;
-		    }
+		    //}
 		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
-		        desiredAccuracy: 10,
+		        desiredAccuracy: 50,
 		        stationaryRadius: 20,
 		        distanceFilter: 30,
 		        locationTimeout: myLocationTimeout,
