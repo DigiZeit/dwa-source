@@ -654,7 +654,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    }
 		    	
 		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
-		        desiredAccuracy: 50,
+		        desiredAccuracy: 100,
 		        stationaryRadius: 20,
 		        distanceFilter: 30,
 		        locationTimeout: myLocationTimeout,
