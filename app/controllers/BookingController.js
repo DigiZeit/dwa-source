@@ -337,14 +337,22 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
     }
 
+    , startGetLocationTimestamp: null
     , getBookingLocation: function(mysuccessCallback) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
 
     	var that = DigiWebApp.BookingController;
     	
-		// Get GPS-Position if set in Settings
+    	that.startGetLocationTimestamp = new Date().getTime();
+
+    	// Get GPS-Position if set in Settings
     	var getLocationNow = function(successCallback, nextOptions, nextFunction) {
     		
+    		var nowTimestamp = new Date().getTime();
+    		
+    		if (parseIntRadixTen(that.startGetLocationTimestamp) + parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut')) < nowTimestamp) {
+    			successCallback();
+    		}
     		//alert("typeof(nextOptions): '" + typeof(nextOptions) + "', typeof(nextFunction): '" + typeof(nextFunction) + "'");
 
     		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
@@ -393,6 +401,17 @@ DigiWebApp.BookingController = M.Controller.extend({
                 	} else if ( error === "PERMISSION_DENIED" ) {
 	                	if (nextFunction) {
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
+	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	                	} else {
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSmissingPermission')
+	                		});
+	                		successCallback();
+	                	}
+                	} else if ( error === "ALREADY_RECIEVING" ) {
+	                	if (nextFunction) {
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions, nextFunction); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
