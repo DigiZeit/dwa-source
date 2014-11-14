@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5741"
-	version 	= "1.8.2.5741">
+	versionCode = "5742"
+	version 	= "1.8.2.5742">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -35,7 +35,7 @@
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
-<!--	<preference name="keepRunning" value="true" /> -->
+	<preference name="keepRunning" value="true" />
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
@@ -89,14 +89,14 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
-<gap:plugin name="org.transistorsoft.cordova.background-notification" version="0.1.0" />
+<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
 
 <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5741</string> 
+	<string>5742</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
