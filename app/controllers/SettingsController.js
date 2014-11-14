@@ -1172,7 +1172,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
     , saveSettings: function(record, reloadApplication, silent, superSilent) {
 
-        /* clear the LS if its a reload */
+		/* clear the LS if its a reload */
         if (reloadApplication) {
 			DigiWebApp.ApplicationController.deleteAllData(); 
         	DigiWebApp.BookingController.currentBooking = null;
@@ -1237,6 +1237,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                });
 	            }
         	}
+
+        	DigiWebApp.ApplicationController.startBgGeo();
+
         } else {
             //M.DialogView.alert({
             DigiWebApp.ApplicationController.nativeAlertDialogView({

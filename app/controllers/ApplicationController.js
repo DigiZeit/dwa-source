@@ -619,11 +619,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, startBgGeo: function() {
 		try {
-			// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
-		    //  in order to prompt the user for Location permission.
-		    window.navigator.geolocation.getCurrentPosition(function(location) {
-		        console.log('Location from Phonegap');
-		    });
+			try {
+				DigiWebApp.ApplicationController.bgGeo.stop()
+			} catch(e) {}
+			
 			DigiWebApp.ApplicationController.bgGeo = window.plugins.backgroundGeoLocation;
 
 		    //DigiWebApp.SettingsController.init(YES,YES);
@@ -673,7 +672,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
-        $(window).bind('resize', function() {
+		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
+	    //  in order to prompt the user for Location permission.
+	    window.navigator.geolocation.getCurrentPosition(function(location) {
+	        console.log('Location from Phonegap');
+	    });
+
+	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
         });
         
