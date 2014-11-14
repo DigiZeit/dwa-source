@@ -636,18 +636,23 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    */
 		    var callbackFn = function(location) {
 		        console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+		        writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
 		        yourAjaxCallback.call(this);
 		    };
 
 		    var failureFn = function(error) {
-		        console.log('BackgroundGeoLocation error');
+		        console.log('BackgroundGeoLocation error: ' + error);
+		        writeToLog('BackgroundGeoLocation error: ' + error);
 		    }
 		    
-		    var myLocationTimeout = 10;
-			//var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
-		    //if (myLocationTimeout == 0) {
-		    //	myLocationTimeout = 10;
-		    //}
+		    //var myLocationTimeout = 10;
+			var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
+		    if (myLocationTimeout == 0) {
+		    	myLocationTimeout = 10;
+		    } else {
+		    	myLocationTimeout = myLocationTimeout - 1;
+		    }
+		    	
 		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
 		        desiredAccuracy: 50,
 		        stationaryRadius: 20,
