@@ -675,7 +675,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    window.navigator.geolocation.getCurrentPosition(function(location) {
 		        console.log('Location from Phonegap');
 		    });
-			DigiWebApp.ApplicationController.gGeo = window.plugins.backgroundGeoLocation;
+			DigiWebApp.ApplicationController.bgGeo = window.plugins.backgroundGeoLocation;
 		    /**
 			    * This would be your own callback for Ajax-requests after POSTing background geolocation to your server.
 			    */
@@ -686,6 +686,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			        // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
 			        //
 			        //
+			    	
 			    	DigiWebApp.ApplicationController.bgGeo.finish();
 			    };
 
@@ -694,6 +695,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    */
 			    var callbackFn = function(location) {
 			        console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+			        writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
 			        // Do your HTTP request here to POST location to your server.
 			        //
 			        //
