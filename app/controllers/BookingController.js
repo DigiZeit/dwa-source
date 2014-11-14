@@ -409,8 +409,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		});
 	                		successCallback();
 	                	}
-                	} else if ( error === "ALREADY_RECIEVING" ) {
+                	} else if ( error === "ALREADY_RECEIVING" ) {
 	                	if (nextFunction) {
+	                		// solange weiterversuchen bis GPS-Timeout abgelaufen
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions, nextFunction); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
