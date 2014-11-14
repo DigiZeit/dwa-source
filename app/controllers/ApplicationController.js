@@ -649,8 +649,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
 		    if (myLocationTimeout == 0) {
 		    	myLocationTimeout = 10;
-		    } else {
-		    	myLocationTimeout = myLocationTimeout - 1;
+//		    } else {
+//		    	myLocationTimeout = myLocationTimeout - 1;
 		    }
 		    	
 		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
