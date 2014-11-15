@@ -2967,7 +2967,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
 	    	}
     	} catch (vibrateError) {}
-		if (typeof(window.vibrate) == 'undefined' {
+		if (typeof(window.vibrate) == 'undefined') {
             DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
         	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
 		} else {
