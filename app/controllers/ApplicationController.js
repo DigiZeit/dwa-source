@@ -3143,5 +3143,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 			navigator.app.exitApp();
 		}
+		DigiWebApp.ApplicationController.DigiLoaderView.hide(); // just in case
     }
 });
