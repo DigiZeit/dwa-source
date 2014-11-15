@@ -2967,13 +2967,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
 	    	}
     	} catch (vibrateError) {}
-	    try {
-	    	if (vibrationsDauer > 0) {
-	            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
-	    		navigator.vibrate(vibrationsDauer);
-	        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
-	    	}
-    	} catch (vibrateError) {}
+		if (typeof(window.vibrate) == 'undefined' {
+            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
+        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
+		} else {
+		    try {
+		    	if (vibrationsDauer > 0) {
+		            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
+		    		navigator.vibrate(vibrationsDauer);
+		        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
+		    	}
+	    	} catch (vibrateError) {}
+		}
     }
     
     , afterVibrarte: function() {
