@@ -505,11 +505,12 @@ M.I18N.en_us = {
 
 	, GPSenableHighAccuracy: 'GPS with high accuracy (else low accuracy / networks)'
 	, GPSenableHighAccuracyFallback: 'GPS-search with high accuracy after unsuccessful GPS-search with low accuracy'
-	, GPSmaximumAgeMinutes: 'Maximum GPS-age'
+	, GPSmaximumAgeMinutes: 'Maximum GPS-age (in minutes)'
 	, GPSBackgroundService: 'GPS-Backgroundservice'
 	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Cache'
 	, GPSBackgroundServiceNotificationMessage: 'active'
 	
+	, BookingReminderHours: 'Remind to close day after (in hours)'
 	, BookingReminderTitle: 'Forgot closing time?'
 	, BookingReminderMessage: 'current booking > '
 	, BookingReminderMessageTail: ' hours!'

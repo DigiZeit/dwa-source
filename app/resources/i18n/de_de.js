@@ -504,12 +504,12 @@ M.I18N.de_de = {
 	
 	, GPSenableHighAccuracy: 'GPS mit hoher Genauigkeit (sonst niedrig/Netzwerke)'
 	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
-	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter'
+	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter (in Minuten)'
 	, GPSBackgroundService: 'GPS-Hintergrunddienst'
 	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Cache'
 	, GPSBackgroundServiceNotificationMessage: 'aktiviert'
 	
-	, BookingReminderHours: 'Feierabenderinnerung'
+	, BookingReminderHours: 'Feierabenderinnerung nach (in Stunden)'
 	, BookingReminderTitle: 'Feierabend vergessen?'
 	, BookingReminderMessage: 'laufende Buchung > '
 	, BookingReminderMessageTail: ' Stunden!'
