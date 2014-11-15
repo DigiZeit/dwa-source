@@ -619,6 +619,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, notificationID: null
 	, startNotification: function() {
+		var that = this;
 
 		if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.notification) == "undefined" || typeof(window.plugins.notification.local) == "undefined") {
 			return false;
@@ -643,15 +644,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	//		});
 		} catch(e) {}
 		try {
-			if (DigiWebApp.ApplicationController.notificationID != null) {
-				try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
-				DigiWebApp.ApplicationController.notificationID = "" + (parseIntRadixTen(DigiWebApp.ApplicationController.notificationID) + 1);
+			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
+			if (that.notificationID != null && typeof(that.notificationID) != "undefined") {
+				try{window.plugin.notification.local.cancel(that.notificationID);}catch(e){}
+				that.notificationID = "" + (parseIntRadixTen(that.notificationID) + 1);
 			} else {
-				DigiWebApp.ApplicationController.notificationID = '1';
+				that.notificationID = '1';
 			}
+			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID', that.notificationID);
+			
 			//DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
 			window.plugin.notification.local.add({
-			    id:         DigiWebApp.ApplicationController.notificationID,
+			    id:         that.notificationID,
 			    message:    '',  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
 				sound:      null,  // A sound to be played
@@ -690,14 +694,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		    * This callback will be executed every time a geolocation is recorded in the background.
 		    */
 		    var callbackFn = function(location) {
-		        console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-		        writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+		        //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+		        //writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
 		        yourAjaxCallback.call(this);
 		    };
 
 		    var failureFn = function(error) {
-		        console.log('BackgroundGeoLocation error: ' + error);
-		        writeToLog('BackgroundGeoLocation error: ' + error);
+		        //console.log('BackgroundGeoLocation error: ' + error);
+		        //writeToLog('BackgroundGeoLocation error: ' + error);
 		    }
 		    
 		    //var myLocationTimeout = 10;
@@ -713,8 +717,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		        stationaryRadius: 20,
 		        distanceFilter: 30,
 		        locationTimeout: myLocationTimeout,
-		        notificationTitle: 'DIGI-WebApp Hintergrunddienst', // <-- android only, customize the title of the notification
-		        notificationText: 'aktiviert', // <-- android only, customize the text of the notification
+		        notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
+		        notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
 		        activityType: 'AutomotiveNavigation',
 		        debug: true // <-- enable this hear sounds for background-geolocation life-cycle.
 		    });

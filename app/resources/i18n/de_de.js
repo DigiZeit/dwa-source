@@ -506,5 +506,10 @@ M.I18N.de_de = {
 	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
 	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter'
 	, GPSBackgroundService: 'GPS-Hintergrunddienst'
+	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Hintergrunddienst'
+	, GPSBackgroundServiceNotificationMessage: 'aktiviert'
+	
+	, BookingReminderTitle: 'Feierabend vergessen?'
+	, BookingReminderMessage: 'Die laufende Buchung läuft schon 10 Stunden. Haben Sie evtl. vergessen Feierabend zu buchen?'
 		
 };

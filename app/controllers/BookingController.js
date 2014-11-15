@@ -259,6 +259,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 				that.currentBooking.set("activityId", actId);
 				that.currentBooking.set("activityName", myActivityName);
 				that.currentBooking.save();
+				
+				var myDate = D8.create();
+				myDate = myDate.addMinutes(1);
+				try{that.startBookingNotification(myDate.date);}catch(e){}
+				
 			    if (that.autoSend()) {
 			    	that.sendCurrentBookings();
 			    }
@@ -1708,6 +1713,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
         	
+        	try{that.clearBookingNotification();}catch(e){}
+        	
     		var myTimeStampEnd = null;
 //    		try {
 //    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
@@ -2440,5 +2447,55 @@ DigiWebApp.BookingController = M.Controller.extend({
     
     , uebernachtungOptionen: null
     
+	, currentBookingNotificationID: null
+	, startBookingNotification: function(myDate) {
+
+		var that = this;
+		
+		if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.notification) == "undefined" || typeof(window.plugins.notification.local) == "undefined") {
+			return false;
+		}
+		
+		if (typeof(myDate) == "undefined") {
+			myDate = D8.create();
+			myDate = myDate.AddHours(10);
+			myDate = myDate.date;
+		}
+		
+		try {
+			window.plugin.notification.local.hasPermission(function (granted) {
+			    // console.log('Permission has been granted: ' + granted);
+			});
+			window.plugin.notification.local.promptForPermission();
+		} catch(e) {}
+		
+		try {
+			that.currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
+			if (that.currentBookingNotificationID != null && typeof(that.currentBookingNotificationID) != "undefined") {
+				try{window.plugin.notification.local.cancel(that.currentBookingNotificationID);}catch(e){}
+				that.currentBookingNotificationID = "" + (parseIntRadixTen(that.currentBookingNotificationID) + 1);
+			} else {
+				that.currentBookingNotificationID = '1';
+			}
+			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID', that.currentBookingNotificationID);
+
+			window.plugin.notification.local.add({
+			    id:         that.currentBookingNotificationID,
+				date:       myDate,    // This expects a date object
+			    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
+			    message:    M.I18N.l('BookingReminderMessage'),  // The message that is displayed
+			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
+			    ongoing:    false, // Prevent clearing of notification (Android only)
+			});
+		}catch(e){}
+	}
+	, clearBookingNotification: function() {
+		var that = this;
+		that.currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
+		if (that.currentBookingNotificationID != null) {
+			try{window.plugin.notification.local.cancel(that.currentBookingNotificationID);}catch(e){}
+		}
+        localStorage.removeItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
+	}
 
 });

@@ -507,4 +507,10 @@ M.I18N.en_us = {
 	, GPSenableHighAccuracyFallback: 'GPS-search with high accuracy after unsuccessful GPS-search with low accuracy'
 	, GPSmaximumAgeMinutes: 'Maximum GPS-age'
 	, GPSBackgroundService: 'GPS-Backgroundservice'
+	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Backgroundservice'
+	, GPSBackgroundServiceNotificationMessage: 'active'
+	
+	, BookingReminderTitle: 'Forgot closing time?'
+	, BookingReminderMessage: 'The current booking has been going on since 10 hours! Did you maybe forgot to book cloosing time?'
+
 };
