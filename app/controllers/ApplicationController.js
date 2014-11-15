@@ -640,14 +640,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		try {
 			if (DigiWebApp.ApplicationController.notificationID != null) {
 				try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
+				DigiWebApp.ApplicationController.notificationID = "" + (parseIntRadixTen(DigiWebApp.ApplicationController.notificationID) + 1);
+			} else {
+				DigiWebApp.ApplicationController.notificationID = '1';
 			}
-			DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
+			//DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
 			window.plugin.notification.local.add({
 			    id:         DigiWebApp.ApplicationController.notificationID,
 			    date:       new Date(),    // This expects a date object
 			    message:    '',  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
-			    repeat:     'daily',  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+				sound:      null,  // A sound to be played
 			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    true, // Prevent clearing of notification (Android only)
 			});
