@@ -2460,6 +2460,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     	
 		var that = this;
 		
+		that.clearBookingNotification();
+		
 		// notification.local is supposed to reside in "window.plugin"
 		var pluginObj = window.plugin;
 		if (typeof(pluginObj) == "undefined") {
