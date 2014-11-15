@@ -3119,7 +3119,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		vibrationsDauer = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("vibrationsDauer"));
 	    	}
     	} catch (vibrateError) {}
-		if (typeof(navigator.vibrate) =! 'undefined') {
+		if (typeof(navigator.vibrate) != 'undefined') {
 		    try {
 		    	if (vibrationsDauer > 0) {
 		            //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
