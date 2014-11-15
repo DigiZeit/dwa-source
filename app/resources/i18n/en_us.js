@@ -506,5 +506,5 @@ M.I18N.en_us = {
 	, GPSenableHighAccuracy: 'GPS with high accuracy (else low accuracy / networks)'
 	, GPSenableHighAccuracyFallback: 'GPS-search with high accuracy after unsuccessful GPS-search with low accuracy'
 	, GPSmaximumAgeMinutes: 'Maximum GPS-age'
-
+	, GPSBackgroundService: 'GPS-Backgroundservice'
 };

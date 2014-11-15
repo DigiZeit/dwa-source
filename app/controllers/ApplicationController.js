@@ -645,7 +645,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			window.plugin.notification.local.add({
 			    id:         DigiWebApp.ApplicationController.notificationID,
 			    date:       new Date(),    // This expects a date object
-			    message:    'läuft',  // The message that is displayed
+			    message:    '',  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
 			    repeat:     'daily',  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
 			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
@@ -662,8 +662,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			
 			DigiWebApp.ApplicationController.bgGeo = window.plugins.backgroundGeoLocation;
 
-		    //DigiWebApp.SettingsController.init(YES,YES);
+		    DigiWebApp.SettingsController.init(YES,YES);
 
+		    if (!DigiWebApp.SettingsController.getSetting('GPSBackgroundService')) {
+		    	return false;
+		    }
+		    
 			var yourAjaxCallback = function(response) {
 		        bgGeo.finish();
 		    };
@@ -911,6 +915,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    		  target: this
 	                    		, action: function() {
 	        								try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
+	        								if (DigiWebApp.ApplicationController.notificationID != null) {
+	        									try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
+	        								}
 	        								navigator.app.exitApp();
 	                    				}
 	                			}

@@ -70,6 +70,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , GPSenableHighAccuracy: NO
         , GPSenableHighAccuracyFallback: YES
         , GPSmaximumAgeMinutes: 3
+        , GPSBackgroundService: NO
     }
 
     , defaultsettings: null
@@ -256,6 +257,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            	GPSmaximumAgeMinutes = record.get('GPSmaximumAgeMinutes');
 	            }
             } catch (e) {}
+            var GPSBackgroundService = DigiWebApp.SettingsController.defaultsettings.get("GPSBackgroundService");
+            try {
+	            if (typeof(record.record.GPSBackgroundService) !== "undefined") {
+	            	GPSmaximumAgeMinutes = record.get('GPSBackgroundService');
+	            }
+            } catch (e) {}
+            
 
             var autoSaveGPSData = DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData");
             try {
@@ -425,7 +433,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , isSelected: GPSenableHighAccuracyFallback
                }]
                , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
-
+               , GPSBackgroundService: [{
+	                   value: GPSBackgroundService
+	                 , label: M.I18N.l('GPSBackgroundService')
+	                 , isSelected: GPSBackgroundService
+	           }]
+               
             };
         /* default values */
         } else {
@@ -554,7 +567,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
                  , label: M.I18N.l('GPSenableHighAccuracyFallback')
                }]
                , GPSmaximumAgeMinutes: DigiWebApp.SettingsController.defaultsettings.get("GPSmaximumAgeMinutes")
-
+               , GPSBackgroundService: [{
+                   value: DigiWebApp.SettingsController.defaultsettings.get('GPSBackgroundService')
+                 , label: M.I18N.l('GPSBackgroundService')
+               }]
+               
             };
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -772,6 +789,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
         var GPSmaximumAgeMinutes            = $('#' + M.ViewManager.getView('settingsPage', 'GPSmaximumAgeMinutesInput').id).val();
 
+        var GPSBackgroundService = NO;
+        if (M.ViewManager.getView('settingsPage', 'GPSBackgroundService') !== null) {
+        	GPSBackgroundService = $('#' + M.ViewManager.getView('settingsPage', 'GPSBackgroundService').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        }
+
+        
         var numberRegex = /^[0-9]+$/;
         if (company) {
             if(!numberRegex.test(company)) {
@@ -890,7 +913,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
                                                     record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
-
+                                                    record.set('GPSBackgroundService', GPSBackgroundService);
+                                                    
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
                                                     DigiWebApp.SettingsController.saveSettings(record, YES);
@@ -974,6 +998,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
                                     record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
+                                    record.set('GPSBackgroundService', GPSBackgroundService);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1032,6 +1057,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
                                 record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
+                                record.set('GPSBackgroundService', GPSBackgroundService);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1090,6 +1116,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSenableHighAccuracy', GPSenableHighAccuracy);
                                 record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
+                                record.set('GPSBackgroundService', GPSBackgroundService);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1150,6 +1177,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , GPSenableHighAccuracy: GPSenableHighAccuracy
                                 , GPSenableHighAccuracyFallback: GPSenableHighAccuracyFallback
                                 , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
+                                , GPSBackgroundService: GPSBackgroundService
 
                           });
 

@@ -112,4 +112,6 @@ DigiWebApp.Settings = M.Model.create({
     
     , GPSmaximumAgeMinutes: M.Model.attr('Integer')
 
+    , GPSBackgroundService: M.Model.attr('Boolean')
+
 }, M.DataProviderLocalStorage);

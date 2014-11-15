@@ -505,5 +505,6 @@ M.I18N.de_de = {
 	, GPSenableHighAccuracy: 'GPS mit hoher Genauigkeit (sonst niedrig/Netzwerke)'
 	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
 	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter'
+	, GPSBackgroundService: 'GPS-Hintergrunddienst'
 		
 };
