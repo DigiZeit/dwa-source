@@ -656,13 +656,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	, startBgGeo: function() {
 		try {
+			
+			if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.backgroundGeoLocation) == "undefined") {
+				return false;
+			}
+			
 			try {
-				DigiWebApp.ApplicationController.bgGeo.stop()
+				if (DigiWebApp.ApplicationController.bgGeo != null) {
+					DigiWebApp.ApplicationController.bgGeo.stop();
+				}
 			} catch(e) {}
 			
 			DigiWebApp.ApplicationController.bgGeo = window.plugins.backgroundGeoLocation;
 
-		    DigiWebApp.SettingsController.init(YES,YES);
+		    //DigiWebApp.SettingsController.init(YES,YES);
 
 		    if (!DigiWebApp.SettingsController.getSetting('GPSBackgroundService')) {
 		    	return false;
