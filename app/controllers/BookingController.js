@@ -1713,7 +1713,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var autoSyncAfterCD = DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay');
     	var closeAppAfterCD = DigiWebApp.SettingsController.getSetting('closeAppAfterCloseDay');
     	if (closeAppAfterCD) {
-	    	if (autoTransferAfterClosingDay) {
+	    	if (autoSyncAfterCD) {
 	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
 	    	} else {
 	    		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
