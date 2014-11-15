@@ -3104,14 +3104,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	}
     	} catch (vibrateError) {}
 		if (typeof(window.vibrate) == 'undefined') {
-            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
-        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
+            //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
+        	//window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
 		} else {
 		    try {
 		    	if (vibrationsDauer > 0) {
-		            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
+		            //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
 		    		navigator.vibrate(vibrationsDauer);
-		        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
+		        	//window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
 		    	}
 	    	} catch (vibrateError) {}
 		}
