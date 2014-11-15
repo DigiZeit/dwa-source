@@ -2493,7 +2493,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    id:         that.currentBookingNotificationID,
 				date:       myDate,    // This expects a date object
 			    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-			    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('M.I18N.l('BookingReminderMessage')'),  // The message that is displayed
+			    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
 			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    false, // Prevent clearing of notification (Android only)
 			});
