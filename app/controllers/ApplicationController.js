@@ -619,6 +619,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, notificationID: null
 	, startNotification: function() {
+
+		if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.notification) == "undefined" || typeof(window.plugins.notification.local) == "undefined") {
+			return false;
+		}
+		
 		try {
 			window.plugin.notification.local.hasPermission(function (granted) {
 			    // console.log('Permission has been granted: ' + granted);
