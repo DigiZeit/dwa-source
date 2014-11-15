@@ -771,21 +771,32 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) {}
 		try {
 
-			var currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
-			var currentBookingNotificationTimestamp = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
+			var currentBookingNotificationID = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID'));
+			var currentBookingNotificationTimestamp = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp'));
+			var nowTimestamp = new Date().getTime();
 			if (
 				   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
 				&& (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
 			) {
 				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
-				pluginObj.notification.local.add({
-				    id:         currentBookingNotificationID,
-					date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
-				    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-				    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
-				    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
-				    ongoing:    false, // Prevent clearing of notification (Android only)
-				});
+				if (currentBookingNotificationTimestamp < nowTimestamp) {
+					pluginObj.notification.local.add({
+					    id:         currentBookingNotificationID,
+					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
+					    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
+					    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
+					    ongoing:    false, // Prevent clearing of notification (Android only)
+					});
+				} else {
+					pluginObj.notification.local.add({
+					    id:         currentBookingNotificationID,
+						date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
+					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
+					    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
+					    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
+					    ongoing:    false, // Prevent clearing of notification (Android only)
+					});
+				}
 			}
 
 			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
