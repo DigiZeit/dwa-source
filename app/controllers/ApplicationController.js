@@ -30,6 +30,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         , M.I18N.l('Friday').substr(0,3)
         , M.I18N.l('Saturday').substr(0,3)
     ]
+    		
     , dayNames: [
           M.I18N.l('Sunday')
         , M.I18N.l('Monday')
@@ -769,6 +770,24 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	//		});
 		} catch(e) {}
 		try {
+
+			var currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
+			var currentBookingNotificationTimestamp = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
+			if (
+				   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
+				&& (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
+			{
+				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
+				pluginObj.notification.local.add({
+				    id:         currentBookingNotificationID,
+					date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
+				    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
+				    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
+				    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
+				    ongoing:    false, // Prevent clearing of notification (Android only)
+				});
+			}
+
 			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
 			if (that.notificationID != null && typeof(that.notificationID) != "undefined") {
 				try{pluginObj.notification.local.cancel(that.notificationID);}catch(e){}
@@ -778,7 +797,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID', that.notificationID);
 			
-			//DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
 			pluginObj.notification.local.add({
 			    id:         that.notificationID,
 			    message:    '',  // The message that is displayed
@@ -870,46 +888,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
 	    window.navigator.geolocation.getCurrentPosition(function(location) {
-	        console.log('Location from Phonegap');
+	        //console.log('Location from Phonegap');
 	    });
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
         });
         
-//		if (DigiWebApp.ApplicationController.timeouthappened) {
-//	        $(window).bind('resize', function() {
-//	            DigiWebApp.ApplicationController.setImageClass();
-//	        });
-//		} else {
-//            var portraitScreenHeight;
-//            var landscapeScreenHeight;
-//
-//            if(window.orientation === 0 || window.orientation === 180){
-//                portraitScreenHeight = $(window).height();
-//                landscapeScreenHeight = $(window).width();
-//            }
-//            else{
-//                portraitScreenHeight = $(window).width();
-//                landscapeScreenHeight = $(window).height();
-//            }
-//	        var tolerance = 25;
-//	        $(window).bind('resize', function() {
-//	            if ((window.orientation === 0 || window.orientation === 180) 
-//	            && ((window.innerHeight + tolerance) < portraitScreenHeight)) {
-//	                // keyboard visible in portrait
-//	            	$('[data-role=footer]').hide();
-//	            } else if((window.innerHeight + tolerance) < landscapeScreenHeight) {
-//	                // keyboard visible in landscape
-//	            	$('[data-role=footer]').hide();
-//	            } else {
-//	                // keyboard NOT visible
-//	            	$('[data-role=footer]').show();
-//	            }
-//	            DigiWebApp.ApplicationController.setImageClass();
-//	        });
-//		}
-
 		try {
 			navigator.splashscreen.hide();
 		} catch(e) {
@@ -924,12 +909,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			console.log("unable to modify StatusBar");
 		}
 		
-//		try {
-//			window.plugin.backgroundMode.enable();
-//		} catch(e) {
-//			console.log("unable to enable BackgroundMode");
-//		}
-
 		DigiWebApp.SettingsController.init(YES,YES);
         
 		DigiWebApp.ApplicationController.startBgGeo();
@@ -1360,78 +1339,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
 		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
 	        ){
-            
-// 	        	sendBautagesberichtFunc = function(callback) {
-// 	        		if (DigiWebApp.BautagebuchZusammenfassungController.item) {
-//           	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-// 	    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-// 	    						DigiWebApp.BautagebuchZusammenfassungController.item
-// 	    					    , function(msg) {
-// 	    							DigiWebApp.BautagebuchBautagesberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
-// 	    						}
-// 	    						, function(xhr,err) {
-// 	    							callback();
-// 	    						}
-// 	    				);
-// 	        		} else {
-// 	        			callback();
-// 	        		}
-//             	}
-//            	
-//        		var processMaterialerfassungOnly = function(callback) { 
-//	        		// Datenübertragung für Materialerfassung-only und Feierabend
-//                	  	
-//              		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-//              		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//              		var myBautagesbericht = null;
-//              		_.each(bautagesberichte, function(bautagesbericht){
-//              			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
-//              				myBautagesbericht = bautagesbericht;
-//              			}
-//              		});
-//              		
-//              		if (myBautagesbericht) {
-//              			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
-//                  	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
-//                  	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//              		} else {
-//              			callback();
-//              		}
-//        		}
-//
-//        		var processNotizenOnly = function(callback) { 
-//
-//        			// Datenübertragung für Notiz-only und Feierabend           
-//        			
-//              		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-//              		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//              		var myBautagesbericht = null;
-//              		_.each(bautagesberichte, function(bautagesbericht){
-//              			if (bautagesbericht.get('bautagesberichtTyp') == "<notizen_only>") {
-//              				myBautagesbericht = bautagesbericht;
-//              			}
-//              		});
-//              		
-//              		if (myBautagesbericht) {
-//              			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
-//                  	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
-//                  	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//              		} else {
-//              			callback();
-//              		}
-//        		}
-//
-//         		processMaterialerfassungOnly(function(){
-//    				sendBautagesberichtFunc(function(){
-//    					processNotizenOnly(function(){
-//    						sendBautagesberichtFunc(function(){
-//    							DigiWebApp.NavigationController.toBookTimePage();
-//    							DigiWebApp.ApplicationController.startsync();
-//    						});
-//    					});
-//         			}); 
-//         		});
-	        	
+            	        	
 	        	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteSenden(function(){
 					DigiWebApp.NavigationController.toBookTimePage();
 					DigiWebApp.ApplicationController.startsync();
