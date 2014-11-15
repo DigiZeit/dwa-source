@@ -272,7 +272,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		  loaderMessage: " "
 		, loaderTitle: ""
 			  
-		, useNativeActivity: NO
+		, useNativeActivity: YES
 		
 		, timeoutId: null
 
