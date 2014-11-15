@@ -784,8 +784,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		        stationaryRadius: 20,
 		        distanceFilter: 30,
 		        locationTimeout: myLocationTimeout,
-		        //notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
-		        //notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
+		        notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
+		        notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
 		        activityType: 'AutomotiveNavigation',
 		        debug: true // <-- enable this hear sounds for background-geolocation life-cycle.
 		    });

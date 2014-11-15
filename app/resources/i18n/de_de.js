@@ -506,7 +506,7 @@ M.I18N.de_de = {
 	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
 	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter'
 	, GPSBackgroundService: 'GPS-Hintergrunddienst'
-	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Hintergrunddienst'
+	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Cache'
 	, GPSBackgroundServiceNotificationMessage: 'aktiviert'
 	
 	, BookingReminderTitle: 'Feierabend vergessen?'
