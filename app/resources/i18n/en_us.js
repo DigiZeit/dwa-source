@@ -514,4 +514,8 @@ M.I18N.en_us = {
 	, BookingReminderMessage: 'current booking > '
 	, BookingReminderMessageTail: ' hours!'
 
+	, orders: 'Orders'
+	, positions: 'Positions'
+	, activities: 'Activities'
+
 };

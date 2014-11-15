@@ -373,6 +373,68 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	, DigiProgressView: {
 		
+		// usage:
+		// DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('positions'), myLength, 0);
+		// DigiWebApp.ApplicationController.DigiProgressView.increase();
+		// DigiWebApp.ApplicationController.DigiProgressView.hide();
+		
+		  maxValue: 100
+		, currentValue: 0
+		
+		, increase: function(by) {
+			if (!this.nativeProgressAvailable()) return false;
+			if (typeof(by) != "undefined") {
+				this.currentValue = this.currentValue + parseIntRadixTen(by);
+			} else {
+				this.currentValue += 1;
+			}
+			if (this.currentValue > this.maxValue) this.currentValue = this.maxValue;
+			var value = this.currentValue / this.maxValue * 100;
+			navigator.notification.progressValue(value);
+		}
+
+		, decrease: function(by) {
+			if (!this.nativeProgressAvailable()) return false;
+			if (typeof(by) != "undefined") {
+				this.currentValue = this.currentValue - parseIntRadixTen(by);
+			} else {
+				this.currentValue -= 1;
+			}
+			if (this.currentValue < 0) this.currentValue = 0;
+			var value = this.currentValue / this.maxValue * 100;
+			navigator.notification.progressValue(value);
+		}
+		
+		, show: function(title, message, maxV, currentV) {
+			if (!this.nativeProgressAvailable()) return false;
+			if (typeof(maxV) != "undefined") this.maxValue = parseIntRadixTen(maxV);
+			if (this.maxValue < 1) this.maxValue = 1;
+			navigator.notification.progressStart(title, message);
+			if (typeof(currentV) != "undefined") {
+				this.currentValue = parseIntRadixTen(currentV);
+				if (this.currentValue < 0) this.currentValue = 0;
+				if (this.currentValue > this.maxValue) this.currentValue = this.maxValue;
+				var value = this.currentValue / this.maxValue * 100;
+				navigator.notification.progressValue(value);
+			}
+		}
+		
+		, hide: function() {
+			if (!this.nativeProgressAvailable()) return false;
+			this.maxV = 100;
+			this.currentV = 0;
+			navigator.notification.progressStop();
+		}
+		
+		, nativeProgressAvailable: function() {
+			if (typeof(navigator) == "undefined" || typeof(navigator.notification) == "undefined" || typeof(navigator.notification.progressStart) == "undefined" || typeof(navigator.notification.progressStop) == "undefined") {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+		
 	} // End of DigiProgressView
 
     , infoMsg: ''

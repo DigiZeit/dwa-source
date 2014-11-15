@@ -357,6 +357,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.leistungen enthält also myLength Elemente
+			DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('activities'), myLength, 0);
 
 			// alle "alten" Tätigkeiten löschen
 			DigiWebApp.Activity.deleteAll();
@@ -384,10 +385,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						, istUnterschriftsAbnahme: el.istUnterschriftsAbnahme
 						, istFahrzeitRelevant: el.istFahrzeitRelevant
 					}).saveSorted();
+					DigiWebApp.ApplicationController.DigiProgressView.increase();
 				}
 			});
 			
 			// weiter in der Verarbeitungskette
+			DigiWebApp.ApplicationController.DigiProgressView.hide();
 			successCallback();
 		};
 		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
@@ -441,6 +444,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.positionen enthält also myLength Elemente
+			DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('positions'), myLength, 0);
 
 			// alle "alten" Positionen und Aufträge löschen
 			DigiWebApp.Position.deleteAll();
@@ -562,9 +566,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					
 					//Position speichern
 					positionItem.saveSorted();
+					DigiWebApp.ApplicationController.DigiProgressView.increase();
 				}
 			});
 			
+			DigiWebApp.ApplicationController.DigiProgressView.hide();
+
 			if (errorHappened) {
 				return errorCallback();
 			} else {

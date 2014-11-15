@@ -513,5 +513,9 @@ M.I18N.de_de = {
 	, BookingReminderTitle: 'Feierabend vergessen?'
 	, BookingReminderMessage: 'laufende Buchung > '
 	, BookingReminderMessageTail: ' Stunden!'
-		
+	
+	, orders: 'Aufträge'
+	, positions: 'Positionen'
+	, activities: 'Tätigkeiten'
+
 };
