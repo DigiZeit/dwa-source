@@ -2950,15 +2950,26 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , vibrate: function() {
+        var vibrationsDauer = 100;
     	try {
-	    	var vibrationsDauer = DigiWebApp.ApplicationController.CONSTVibrateDuration;
+	    	vibrationsDauer = DigiWebApp.ApplicationController.CONSTVibrateDuration;
+    	} catch (vibrateError) {}
+	    try {                      
 	    	if (typeof(DigiWebApp.SettingsController.getSetting("vibrationsDauer")) !== "undefined") {
 	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
 	    	}
+    	} catch (vibrateError) {}
+	    try {
 	    	if (vibrationsDauer > 0) {
-	    		navigator.vibrate(vibrationsDauer)
+	            DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
+	    		navigator.vibrate(vibrationsDauer);
+	        	window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
 	    	}
     	} catch (vibrateError) {}
+    }
+    
+    , afterVibrarte: function() {
+    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
     }
 
 });
