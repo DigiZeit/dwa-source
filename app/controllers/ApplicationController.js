@@ -3135,12 +3135,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
     , exitApp: function() {
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
 		try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
 		if (DigiWebApp.ApplicationController.notificationID != null) {
 			try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
 		}
 		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
-			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
 			navigator.app.exitApp();
 		}
     }
