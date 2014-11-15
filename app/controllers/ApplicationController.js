@@ -433,7 +433,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				return true;
 			}
 		}
-	}
 		
 	} // End of DigiProgressView
 
