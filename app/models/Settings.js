@@ -115,5 +115,7 @@ DigiWebApp.Settings = M.Model.create({
     , GPSBackgroundService: M.Model.attr('Boolean')
     
     , BookingReminderHours: M.Model.attr('Integer')
+    
+    , closeAppAfterCloseDay: M.Model.attr('Boolean')
 
 }, M.DataProviderLocalStorage);

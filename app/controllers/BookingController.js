@@ -173,6 +173,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , book: function() {
+    	DigiWebApp.ApplicationController.closeAppAfterCloseDay = NO;
     	var that = DigiWebApp.BookingController;
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in book");
@@ -1709,6 +1710,17 @@ DigiWebApp.BookingController = M.Controller.extend({
      *  6) If not, the employee selection is cleared
      */
     , closeDay: function() {
+    	var autoSyncAfterCD = DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay');
+    	var closeAppAfterCD = DigiWebApp.SettingsController.getSetting('closeAppAfterCloseDay');
+    	if (closeAppAfterCD) {
+	    	if (autoTransferAfterClosingDay) {
+	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
+	    	} else {
+	    		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigatorapp.exitApp) != "undefined") {
+	    			navigator.app.exitApp();
+	    		}
+	    	}
+    	}
     	var that = DigiWebApp.BookingController;
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
@@ -1840,7 +1852,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         var finishBooking = function() {
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
         	if (DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
-	            DigiWebApp.DashboardController.dataTransfer(YES); // yes means: is closing day
+    			DigiWebApp.DashboardController.dataTransfer(YES); // yes means: is closing day
 	        } else {
 	            // clear employee selection, but only if not auto data transfer and save it before to have it while sending the data
 	            localStorage.setItem(DigiWebApp.EmployeeController.empSelectionKeyTmp, localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey));
@@ -2080,47 +2092,6 @@ DigiWebApp.BookingController = M.Controller.extend({
         			  if (!CurrentAvailable) {
         				  DigiWebApp.SentBooking.deleteAll();
         			  }
-      			
-//						// Feature 411 : Zeitbuchungen für X Tage auf Gerät belassen
-//						if (DigiWebApp.SettingsController.featureAvailable('411')) {
-//							try {
-//								// move Bookings to SentBookingArchived
-//							      _.each(bookings, function(el) {
-//							          if (!el.get('isCurrent')) {
-//							      		  var sentBookingArchivedEl = that.sentBookingArchived(el);
-//							      		  if (sentBookingArchivedEl != null) {
-//								      		  sentBookingArchivedEl.save();
-//								      		  // check if that day is already in archive
-//								      		  var dayFound = NO;
-//								      		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
-//								      		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
-//								      			  if (day.get('tagLabel') === dayToFind) {
-//								      				  dayFound = YES;
-//								      			  }
-//								      		  });
-//								      		  if (dayFound === NO) {
-//								      			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
-//								      				  tagLabel: dayToFind
-//								      			  });
-//								      			  dayRecord.save();
-//								      		  }
-//							      		  }
-//							          }
-//							      });
-//							  
-//							      // veraltete Buchungen aus Archiv entfernen
-//							      DigiWebApp.SentBookingArchived.deleteOld();
-//							      DigiWebApp.SentTimeDataDays.deleteOld();
-//							
-//							} catch(e20) {
-//							    DigiWebApp.ApplicationController.nativeAlertDialogView({
-//							          title: M.I18N.l('error')
-//							        , message: M.I18N.l('errorWhileArchivingBookings')
-//							        });
-//							}
-//							
-//						}
-//						// Feature 411 : End
 
 						// Buchungen aufräumen
 						var deleteBuchungsIds = [];
@@ -2180,121 +2151,23 @@ DigiWebApp.BookingController = M.Controller.extend({
                           var startSyncFunc = function() {
 	                          // now call startsync again
 	                          if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
-	                          		DigiWebApp.ApplicationController.startsync(YES);
+	                        	  	if (DigiWebApp.ApplicationController.closeAppAfterCloseDay) {
+										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigatorapp.exitApp) != "undefined") {
+											navigator.app.exitApp();
+										} else {
+			                          		DigiWebApp.ApplicationController.startsync(YES);
+										}
+	                        	  	} else {
+		                          		DigiWebApp.ApplicationController.startsync(YES);
+	                        	  	}
 	                          }
                           }
                           
-//                          // Datenübertragung für Materialerfassung-only und Feierabend
-//                          if (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) {
-//	                      	  	
-//                        	  sendBautagesberichtFunc = function() {
-//	                      	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-//					    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-//					    						DigiWebApp.BautagebuchZusammenfassungController.item
-//					    					    , function(msg) {
-//					    							DigiWebApp.BautagebuchBautagesberichtDetailsController.deleteBautagesbericht(startSyncFunc, startSyncFunc, YES);
-//					    						}
-//					    						, function(xhr,err) {
-//					    							startSyncFunc();
-//					    						}
-//					    				);
-//	                      	  	}
-//	                      	  	
-//	                    		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-//	                    		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//	                    		var matBautagesbericht = null;
-//	                    		_.each(bautagesberichte, function(bautagesbericht){
-//	                    			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
-//	                    				matBautagesbericht = bautagesbericht;
-//	                    			}
-//	                    		});
-//	                    		
-//	                    		if (matBautagesbericht) {
-//	                    			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(matBautagesbericht);
-//	                        	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
-//	                        	  	DigiWebApp.BautagebuchZusammenfassungController.finish(sendBautagesberichtFunc);
-//	                    		} else {
-//	                    			startSyncFunc();
-//	                    		}
-//
-//                          } else {
-//                        	  startSyncFunc();
-//                          }
-
                           if (
                    	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
                    		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
                    	        ){
                                
-//	               	        	sendBautagesberichtFunc = function(callback) {
-//	             	        		if (DigiWebApp.BautagebuchZusammenfassungController.item) {
-//	        	           	  			DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchZusammenfassungController.item);
-//	             	    				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-//	             	    						DigiWebApp.BautagebuchZusammenfassungController.item
-//	             	    					    , function(msg) {
-//	             	    							DigiWebApp.BautagebuchBautagesberichtDetailsController.deleteBautagesbericht(callback, callback, YES);
-//	             	    						}
-//	             	    						, function(xhr,err) {
-//	             	    							callback();
-//	             	    						}
-//	             	    				);
-//	             	        		} else {
-//	             	        			callback();
-//	             	        		}     	    				
-//	                         	}
-//                               	
-//                           		var processMaterialerfassungOnly = function(callback) { 
-//                   	        		// Datenübertragung für Materialerfassung-only und Feierabend
-//                                   	  	
-//                                 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-//                                 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//                                 		var myBautagesbericht = null;
-//                                 		_.each(bautagesberichte, function(bautagesbericht){
-//                                 			if (bautagesbericht.get('bautagesberichtTyp') == "<materialerfassung_only>") {
-//                                 				myBautagesbericht = bautagesbericht;
-//                                 			}
-//                                 		});
-//                                 		
-//                                 		if (myBautagesbericht) {
-//                                 			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
-//                                     	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
-//                                     	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//                                 		} else {
-//                                 			callback();
-//                                 		}
-//                           		}
-//
-//                           		var processNotizenOnly = function(callback) { 
-//
-//                           			// Datenübertragung für Notiz-only und Feierabend           
-//                           			
-//                                 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-//                                 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
-//                                 		var myBautagesbericht = null;
-//                                 		_.each(bautagesberichte, function(bautagesbericht){
-//                                 			if (bautagesbericht.get('bautagesberichtTyp') == "<notizen_only>") {
-//                                 				myBautagesbericht = bautagesbericht;
-//                                 			}
-//                                 		});
-//                                 		
-//                                 		if (myBautagesbericht) {
-//                                 			DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
-//                                     	  	DigiWebApp.BautagebuchZusammenfassungController.load(DigiWebApp.BautagebuchBautagesberichtDetailsController.item);
-//                                     	  	DigiWebApp.BautagebuchZusammenfassungController.finish(callback);
-//                                 		} else {
-//                                 			callback();
-//                                 		}
-//                           		}
-//
-//                         		processMaterialerfassungOnly(function(){
-//                    				sendBautagesberichtFunc(function(){
-//                    					processNotizenOnly(function(){
-//                    						sendBautagesberichtFunc(function(){
-//                    							startSyncFunc();
-//                    						});
-//                    					});
-//                         			}); 
-//                         		});	        		              	  	
 
 	              	        	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteSenden(function(){
 	              	        		startSyncFunc();
@@ -2315,113 +2188,6 @@ DigiWebApp.BookingController = M.Controller.extend({
         		  , isClosingDay
         		  , doSync
         	);
-
-//		Alte XML-Übertragungsvariante:        	
-//            DigiWebApp.RequestController.sendData({
-//                  bookings: bookings
-//                , success: {
-//                    target: this,
-//                    action: function() {
-//            			var CurrentAvailable = false
-//                        _.each(DigiWebApp.Booking.find(), function(el) {
-//                            if(el.get('isCurrent')) {
-//                            	CurrentAvailable = true;
-//                            }
-//                        });
-//            			
-//            			// no current booking: after closing-time
-//            			if (!CurrentAvailable) {
-//            				DigiWebApp.SentBooking.deleteAll();
-//            			}
-//            			
-//        				// Feature 411 : Zeitbuchungen für X Tage auf Gerät belassen
-//        				if (DigiWebApp.SettingsController.featureAvailable('411')) {
-//        					try {
-//	            				// move Bookings to SentBookingArchived
-//	                            _.each(DigiWebApp.Booking.find(), function(el) {
-//	                                if(!el.get('isCurrent')) {
-//	                            		  var sentBookingArchivedEl = DigiWebApp.BookingController.sentBookingArchived(el);
-//	                            		  sentBookingArchivedEl.save();
-//	                            		  // check if that day is already in archive
-//	                            		  var dayFound = NO;
-//	                            		  var dayToFind = D8.create(el.get('timeStampStart')).format("dd.mm.yyyy");
-//	                            		  _.each(DigiWebApp.SentTimeDataDays.find(), function(day){
-//	                            			  if (day.get('tagLabel') === dayToFind) {
-//	                            				  dayFound = YES;
-//	                            			  }
-//	                            		  });
-//	                            		  if (dayFound === NO) {
-//	                            			  var dayRecord = DigiWebApp.SentTimeDataDays.createRecord({
-//	                            				  tagLabel: dayToFind
-//	                            			  });
-//	                            			  dayRecord.save();
-//	                            		  }
-//	                                }
-//	                            });
-//                            
-//	                            // veraltete Buchungen aus Archiv entfernen
-//	                            DigiWebApp.SentBookingArchived.deleteOld();
-//	                            DigiWebApp.SentTimeDataDays.deleteOld();
-//
-//        					} catch(e) {
-//        			            DigiWebApp.ApplicationController.nativeAlertDialogView({
-//        			                  title: M.I18N.l('error')
-//        			                , message: M.I18N.l('errorWhileArchivingBookings')
-//        			            });
-//        					}
-//
-//        				}
-//        				// Feature 411 : End
-//
-//        				_.each(DigiWebApp.Booking.find(), function(el) {
-//                          if(!el.get('isCurrent')) {
-//                        	  if (CurrentAvailable) {
-//                        		  try {
-//	                        		  // save booking as sentBooking for later view in sentBookingsListView
-//	                        		  var sentBookingEl = DigiWebApp.BookingController.sentBooking(el);
-//	                            	  sentBookingEl.save();
-//                        		  } catch(e) {
-//              			            DigiWebApp.ApplicationController.nativeAlertDialogView({
-//	          			                  title: M.I18N.l('error')
-//	          			                , message: M.I18N.l('errorWhileBackingUpBookings')
-//	          			            });
-//                        		  }
-//                        	  }
-//                              el.del();
-//                          }
-//                        });
-//                        
-//                        DigiWebApp.SelectionController.resetSelection();
-//                        if(this.currentBooking) {
-//                            DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-//                        } else {
-//                            DigiWebApp.SelectionController.initSelection();
-//                        }
-//
-//                        if(isClosingDay) {
-//                            this.set('currentBookingStr', '');
-//
-//                            if(DigiWebApp.EmployeeController.getEmployeeState() == 2) {
-//                                DigiWebApp.EmployeeController.setEmployeeState(1);
-//                            }
-//                            // clear employee selection
-//                            localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
-//                            localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
-//                        }
-//                        
-//                    }
-//                }
-//                , error: {
-//                      target: this
-//                    , action: function() {
-//                		// die Buchung(en) konnte(n) nicht gesendet werden
-//                        DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                            title: M.I18N.l('sendDataFail'),
-//                            message: M.I18N.l('sendDataFailMsg')
-//                        });
-//                    }
-//                }
-//            }, isClosingDay, doSync); // is closingDay is passed to request controller.sendData to check whether local Storage remove of emp selection tmp shall be proceed
 
         }
     }

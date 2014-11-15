@@ -72,6 +72,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , GPSmaximumAgeMinutes: 3
         , GPSBackgroundService: NO
         , BookingReminderHours: 10
+        , closeAppAfterCloseDay: YES
     }
 
     , defaultsettings: null
@@ -272,6 +273,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
             
+            var closeAppAfterCloseDay = DigiWebApp.SettingsController.defaultsettings.get("closeAppAfterCloseDay");
+            try {
+	            if (typeof(record.record.closeAppAfterCloseDay) !== "undefined") {
+	            	closeAppAfterCloseDay = record.get('closeAppAfterCloseDay');
+	            }
+            } catch (e) {}
+            
+            
 
             var autoSaveGPSData = DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData");
             try {
@@ -449,6 +458,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , isSelected: GPSBackgroundService
 	           }]
                , BookingReminderHours: BookingReminderHours
+               , closeAppAfterCloseDay: [{
+	                   value: closeAppAfterCloseDay
+	                 , label: M.I18N.l('closeAppAfterCloseDay')
+	                 , isSelected: closeAppAfterCloseDay
+	           }]
+               
             };
         /* default values */
         } else {
@@ -582,6 +597,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
                  , label: M.I18N.l('GPSBackgroundService')
                }]
                , BookingReminderHours: DigiWebApp.SettingsController.defaultsettings.get("BookingReminderHours")
+               , closeAppAfterCloseDay: [{
+                   value: DigiWebApp.SettingsController.defaultsettings.get('closeAppAfterCloseDay')
+                 , label: M.I18N.l('closeAppAfterCloseDay')
+               }]
+               
+               
             };
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -806,6 +827,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
         var BookingReminderHours            = $('#' + M.ViewManager.getView('settingsPage', 'BookingReminderHoursInput').id).val();
         
+        var closeAppAfterCloseDay = NO;
+        if (M.ViewManager.getView('settingsPage', 'closeAppAfterCloseDay') !== null) {
+        	closeAppAfterCloseDay = $('#' + M.ViewManager.getView('settingsPage', 'closeAppAfterCloseDay').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        }
+        
+        
         var numberRegex = /^[0-9]+$/;
         if (company) {
             if(!numberRegex.test(company)) {
@@ -926,6 +953,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                                     record.set('GPSBackgroundService', GPSBackgroundService);
                                                     record.set('BookingReminderHours', BookingReminderHours);
+                                                    record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
+                                                    
+                                                    
+                                                    
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1012,6 +1043,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                     record.set('GPSBackgroundService', GPSBackgroundService);
                                     record.set('BookingReminderHours', BookingReminderHours);
+                                    record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1072,6 +1104,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                 record.set('GPSBackgroundService', GPSBackgroundService);
                                 record.set('BookingReminderHours', BookingReminderHours);
+                                record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1132,6 +1165,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                 record.set('GPSBackgroundService', GPSBackgroundService);
                                 record.set('BookingReminderHours', BookingReminderHours);
+                                record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1194,6 +1228,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
                                 , GPSBackgroundService: GPSBackgroundService
                                 , BookingReminderHours: BookingReminderHours
+                                , closeAppAfterCloseDay: closeAppAfterCloseDay
 
                           });
 
