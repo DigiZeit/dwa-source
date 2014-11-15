@@ -259,7 +259,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				that.currentBooking.set("activityId", actId);
 				that.currentBooking.set("activityName", myActivityName);
 				that.currentBooking.save();
-				
+
 				var myDate = D8.create();
 				myDate = myDate.addMinutes(1);
 				try{that.startBookingNotification(myDate.date);}catch(e){}
@@ -823,7 +823,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			}
 	    	
 			that.currentBooking.save();
-			
+
 			if (bookingWasClosed) {
 				that.currentBookingClosed = that.currentBooking;
 			} else {
@@ -910,7 +910,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    that.currentBooking.setAsCurrent();
 		    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving new ' + that.currentBooking.get('orderId'));
 		    that.currentBooking.save();
-		    
+
+			var myDate = D8.create();
+			myDate = myDate.addMinutes(1);
+			try{that.startBookingNotification(myDate.date);}catch(e){}
+
 		    that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
     	}
 	    
@@ -1712,9 +1716,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     	var that = DigiWebApp.BookingController;
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
-        	
-        	try{that.clearBookingNotification();}catch(e){}
-        	
+        	        	
     		var myTimeStampEnd = null;
 //    		try {
 //    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
@@ -1810,6 +1812,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	
 			that.currentBooking.save();
 			
+        	try{that.clearBookingNotification();}catch(e){}
+
 			if (bookingWasClosed) {
 				that.currentBookingClosed = that.currentBooking;
 	        	that.currentBooking = null;
