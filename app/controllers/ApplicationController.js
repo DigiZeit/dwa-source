@@ -774,8 +774,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			var currentBookingNotificationID = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID'));
 			var currentBookingNotificationTimestamp = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp'));
 			var nowTimestamp = new Date().getTime();
-			if (
-				   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
+			if (   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
 				&& (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
 			) {
 				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
