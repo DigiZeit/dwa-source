@@ -524,4 +524,8 @@ M.I18N.de_de = {
 	, mengeneinheiten: 'Mengeneinheiten'	
 	, materialien: 'Materialien'
 	, projektleiter: 'Projektleiter'
+	, closeAppAfterCloseDay: 'App nach Feierabend schließen'
+	
+	, exitApp: 'App wird geschlossen...'
+		
 };

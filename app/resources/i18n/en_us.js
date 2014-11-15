@@ -518,5 +518,14 @@ M.I18N.en_us = {
 	, positions: 'Positions'
 	, activities: 'Activities'
 	, festepausendefinitionen: 'Constant breaks'
+	, workplans: 'Work plans'
+	, handorders: 'Hand orders'
+	, features: 'Configurations'
+	, mengeneinheiten: 'Units'	
+	, materialien: 'Materials'
+	, projektleiter: 'Project leaders'
+	, closeAppAfterCloseDay: 'Close App after closing day'
+
+	, exitApp: 'Closing app...'
 
 };

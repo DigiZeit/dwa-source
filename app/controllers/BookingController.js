@@ -1716,9 +1716,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	if (autoSyncAfterCD) {
 	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
 	    	} else {
-	    		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
-	    			navigator.app.exitApp();
-	    		}
+				DigiWebApp.ApplicationController.exitApp();
 	    	}
     	}
     	var that = DigiWebApp.BookingController;
@@ -2153,7 +2151,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                          if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
 	                        	  	if (DigiWebApp.ApplicationController.closeAppAfterCloseDay) {
 										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
-											navigator.app.exitApp();
+	        								DigiWebApp.ApplicationController.exitApp();
 										} else {
 			                          		DigiWebApp.ApplicationController.startsync(YES);
 										}

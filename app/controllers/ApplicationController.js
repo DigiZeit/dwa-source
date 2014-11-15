@@ -1062,11 +1062,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                		  confirm: {
 	                    		  target: this
 	                    		, action: function() {
-	        								try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
-	        								if (DigiWebApp.ApplicationController.notificationID != null) {
-	        									try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
-	        								}
-	        								navigator.app.exitApp();
+	        								DigiWebApp.ApplicationController.exitApp();
 	                    				}
 	                			}
 	                		, cancel: {
@@ -3138,4 +3134,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	DigiWebApp.ApplicationController.DigiLoaderView.hide();
     }
 
+    , exitApp: function() {
+		try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
+		if (DigiWebApp.ApplicationController.notificationID != null) {
+			try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
+		}
+		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
+			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
+			navigator.app.exitApp();
+		}
+    }
 });
