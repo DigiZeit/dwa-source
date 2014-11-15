@@ -617,6 +617,43 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, fixToobarsIntervalVar: null
 	
+	, notificationID: null
+	, startNotification: function() {
+		try {
+			window.plugin.notification.local.hasPermission(function (granted) {
+			    // console.log('Permission has been granted: ' + granted);
+			});
+			window.plugin.notification.local.promptForPermission();
+	//		window.plugin.notification.local.add({
+	//		    id:         String,  // A unique id of the notifiction
+	//		    date:       Date,    // This expects a date object
+	//		    message:    String,  // The message that is displayed
+	//		    title:      String,  // The title of the message
+	//		    repeat:     String,  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+	//		    badge:      Number,  // Displays number badge to notification
+	//		    sound:      String,  // A sound to be played
+	//		    json:       String,  // Data to be passed through the notification
+	//		    autoCancel: Boolean, // Setting this flag and the notification is automatically canceled when the user clicks it
+	//		    ongoing:    Boolean, // Prevent clearing of notification (Android only)
+	//		});
+		} catch(e) {}
+		try {
+			if (DigiWebApp.ApplicationController.notificationID != null) {
+				try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
+			}
+			DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
+			window.plugin.notification.local.add({
+			    id:         DigiWebApp.ApplicationController.notificationID,
+			    date:       new Date(),    // This expects a date object
+			    message:    'läuft',  // The message that is displayed
+			    title:      'DIGI-WebApp',  // The title of the message
+			    repeat:     'daily',  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
+			    ongoing:    true, // Prevent clearing of notification (Android only)
+			});
+		}catch(e){}
+	}
+
 	, startBgGeo: function() {
 		try {
 			try {
@@ -744,6 +781,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		DigiWebApp.SettingsController.init(YES,YES);
         
 		DigiWebApp.ApplicationController.startBgGeo();
+		DigiWebApp.ApplicationController.startNotification();
 
 		if (DigiWebApp.SettingsController.getSetting('debug')) { 
         	DigiWebApp.SettingsController.globalDebugMode = YES; 
@@ -2904,7 +2942,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
 	    	}
 	    	if (vibrationsDauer > 0) {
-	    		navigator.notification.vibrate(vibrationsDauer)
+	    		navigator.vibrate(vibrationsDauer)
 	    	}
     	} catch (vibrateError) {}
     }
