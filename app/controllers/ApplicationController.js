@@ -374,9 +374,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, DigiProgressView: {
 		
 		// usage:
-		// DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('positions'), myLength, 0);
-		// DigiWebApp.ApplicationController.DigiProgressView.increase();
-		// DigiWebApp.ApplicationController.DigiProgressView.hide();
+		//DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('positions'), myLength, 0);
+		//DigiWebApp.ApplicationController.DigiProgressView.increase();
+		//DigiWebApp.ApplicationController.DigiProgressView.hide();
 		
 		  maxValue: 100
 		, currentValue: 0
@@ -2236,6 +2236,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.WorkPlan.deleteAll();
             this.setCallbackStatus('workPlan', 'local', NO);
             // create a record for each order returned from the server and save it
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('workplans'), data['return'].length, 0);
             _.each(data['return'], function(el) {
                 DigiWebApp.WorkPlan.createRecord({
                       id: el.arbeitsplanId
@@ -2243,8 +2244,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     , activityPositions: el.positionen.join(',') // join collects references to positionen in a string
                     , activityIds: el.taetigkeitsIds.join(',')    // join collects references to taetigkeitsIds in a string
                 }).save();
+        		DigiWebApp.ApplicationController.DigiProgressView.increase();
             });
 
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('workPlan', 'local', YES);
         }
     }
@@ -2320,6 +2323,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
 
             // create a record for each order returned from the server and save it
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('handorders'), data['return'].length, 0);
             _.each(data['return'], function(el) {
             	if (
             			(DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0)
@@ -2354,6 +2358,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 } catch(e) {
                 	trackError(e);
                 }
+        		DigiWebApp.ApplicationController.DigiProgressView.increase();
             });
 
             // get locally saved hand orders and push them into mId array
@@ -2367,6 +2372,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
             localStorage.setItem(this.storagePrefix + '_handorderKeys', JSON.stringify(mIdArray));
 
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('handOrder', 'local', YES);
         } else {
         	
@@ -2374,6 +2380,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
             // Clear handorders from storage
             DigiWebApp.HandOrder.deleteAll();
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('handOrder', 'local', NO);
             
         }
@@ -2452,6 +2459,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 data['return'] = [data['return']];
             }
 
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('features'), data['return'].length, 0);
             // reset settings without gui-elements
             //DigiWebApp.SettingsController.setSetting('debug', false);
             DigiWebApp.SettingsController.setSetting('treatAllAsTablet', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
@@ -2475,6 +2483,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
             // create a record for each feature returned from the server and save it
             _.each(data['return'], function(el, i) {
+        		DigiWebApp.ApplicationController.DigiProgressView.increase();
             	var prefix = "";
             	if ( typeof(el.valueType) === "undefined" ) {
             		// we are probably in InternetExplorer
@@ -2549,6 +2558,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.MediaListController.init(YES);
             }
             DigiWebApp.ApplicationController.triggerUpdate = NO;
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('features', 'local', YES);
             
         } else {
@@ -2556,6 +2566,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
 
         	// keine Features empfangen
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('features', 'remote', YES);
 
             // Clear Features from storage
@@ -2708,7 +2719,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
 
             // create a record for each order returned from the server and save it
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), data['return'].length, 0);
             _.each(data['return'], function(el) {
+        		DigiWebApp.ApplicationController.DigiProgressView.increase();
                 k = DigiWebApp.Employee.createRecord({
                       id: el.id
                     , name: el.name
@@ -2727,6 +2740,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
             localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
             
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('kolonne', 'local', YES);
 
             // clear local storage when switch from no kolonne
@@ -2739,6 +2753,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
         } else {
             // no kolonne => mitarbeiterId = 0
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('kolonne', 'remote', YES);
 
             // Clear employees from storage
@@ -2782,7 +2797,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , afterTransfer: function() {
-    	var that = DigiWebApp.ApplicationController;
+		DigiWebApp.ApplicationController.DigiProgressView.hide(); // just in case
+		var that = DigiWebApp.ApplicationController;
     	that.syncStopTimestamp = D8.now().getTimestamp();
     	that.syncLastDuration = that.syncStopTimestamp - that.syncStartTimestamp;
         if (that.profilingIntervalVar !== null) {
@@ -3103,10 +3119,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		vibrationsDauer = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("vibrationsDauer"));
 	    	}
     	} catch (vibrateError) {}
-		if (typeof(navigator.vibrate) == 'undefined') {
-            //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
-        	//window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
-		} else {
+		if (typeof(navigator.vibrate) =! 'undefined') {
 		    try {
 		    	if (vibrationsDauer > 0) {
 		            //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);

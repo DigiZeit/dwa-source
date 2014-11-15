@@ -47,7 +47,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
 		that.successReturnCallback = successReturnCallback;
-		that.errorReturnCallback = errorReturnCallback;
+		that.errorReturnCallback = function() {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+			errorReturnCallback();
+		}
 
 		//var successCallback = function(data, msg, request) {};
 		//var errorCallback = function(request, msg) {};
@@ -82,7 +85,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			// wurde eine Mengeneinheitenliste erhalten?
 			if (typeof(data.mengeneinheiten) === "undefined") {
 				trackError("missing mengeneinheiten");
-				return errorCallback();
+	    		return errorCallback();
 			}
 			
 			// enthält die Mengeneinheitenliste Mengeneinheiten?
@@ -100,11 +103,14 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.mengeneinheiten enthält also myLength Elemente
-			// alle "alten" Mengeneinheiten löschen
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('mengeneinheiten'), myLength, 0);
+
+    		// alle "alten" Mengeneinheiten löschen
 			DigiWebApp.BautagebuchMengeneinheit.deleteAll();
 			
 			// die empfangenen Mengeneinheiten mit Model ablegen
 			_.each(data.mengeneinheiten, function(el) {
+	    		DigiWebApp.ApplicationController.DigiProgressView.increase();
 				if (typeof(el.id) === "undefined") {
 					trackError("missing mengeneinheit id");
 					return errorCallback();
@@ -123,6 +129,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			});
 			
 			// weiter in der Verarbeitungskette
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			successCallback();
 		};
 		
@@ -171,6 +178,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.materialliste enthält also myLength (oder gar keine) Elemente
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('materialien'), myLength, 0);
+
 			// alle "alten" Materialien löschen
 			DigiWebApp.BautagebuchMaterial.deleteAll();
 			DigiWebApp.BautagebuchLieferant.deleteAll();
@@ -180,6 +189,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			
 			// die empfangenen Materialien mit Model ablegen
 			_.each(data.materialliste, function(el) {
+	    		DigiWebApp.ApplicationController.DigiProgressView.increase();
 				//console.log(el);
 				if (typeof(el.bezeichnung) === "undefined") {
 					trackError("missing bezeichnung");
@@ -266,6 +276,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			});
 			
 			// weiter in der Verarbeitungskette
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			successCallback();
 		};
 		
@@ -313,11 +324,14 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.projektleiter enthält also myLength Elemente
-			// alle "alten" Projektleiter löschen
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('projektleiter'), myLength, 0);
+
+    		// alle "alten" Projektleiter löschen
 			DigiWebApp.BautagebuchProjektleiter.deleteAll();
 			
 			// die empfangenen Projektleiter mit Model ablegen
 			_.each(data.projektleiter, function(el) {
+	    		DigiWebApp.ApplicationController.DigiProgressView.increase();
 				if (typeof(el.id) === "undefined") {
 					trackError("missing id");
 					return errorCallback();
@@ -344,7 +358,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			});
 			
 			// weiter in der Verarbeitungskette
-			successCallback();
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		successCallback();
 		};
 		
 		var recieveObj = {
@@ -391,11 +406,14 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.projektleiter enthält also myLength Elemente
+    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), myLength, 0);
+
 			// alle "alten" Mitarbeiter löschen
 			DigiWebApp.BautagebuchMitarbeiter.deleteAll();
 			
 			// die empfangenen Projektleiter im Model ablegen
 			_.each(data.mitarbeiter, function(el) {
+	    		DigiWebApp.ApplicationController.DigiProgressView.increase();
 				if (typeof(el.id) === "undefined") {
 					trackError("missing mitarbeiter id");
 					return errorCallback();
@@ -419,6 +437,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			});
 			
 			// weiter in der Verarbeitungskette
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			successCallback();
 		};
 		// getAll=true  Alle
@@ -443,7 +462,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
 		that.successReturnCallback = successReturnCallback;
-		that.errorReturnCallback = errorReturnCallback;
+		that.errorReturnCallback = function() {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+			errorReturnCallback();
+		}
 
 		//var successCallback = function(data, msg, request) {};
 		//var errorCallback = function(request, msg) {};

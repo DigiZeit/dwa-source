@@ -632,6 +632,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.festepausendefinitionen enthält also myLength Elemente
+			DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('festepausendefinitionen'), myLength, 0);
 
 			// alle "alten" festepausendefinitionen löschen
 			DigiWebApp.Festepausendefinition.deleteAll();
@@ -662,10 +663,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						, von: el.von
 						, bis: el.bis
 					}).saveSorted();
+					DigiWebApp.ApplicationController.DigiProgressView.increase();
 				}
 			});
 			
 			// weiter in der Verarbeitungskette
+			DigiWebApp.ApplicationController.DigiProgressView.hide();
 			successCallback();
 		};
 		// webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus

@@ -517,5 +517,6 @@ M.I18N.en_us = {
 	, orders: 'Orders'
 	, positions: 'Positions'
 	, activities: 'Activities'
+	, festepausendefinitionen: 'Constant breaks'
 
 };

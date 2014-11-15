@@ -517,5 +517,11 @@ M.I18N.de_de = {
 	, orders: 'Aufträge'
 	, positions: 'Positionen'
 	, activities: 'Tätigkeiten'
-
+	, festepausendefinitionen: 'Festepausendefinitionen'
+	, workplans: 'Arbeitspläne'
+	, handorders: 'Handaufträge'
+	, features: 'Konfigurationen'
+	, mengeneinheiten: 'Mengeneinheiten'	
+	, materialien: 'Materialien'
+	, projektleiter: 'Projektleiter'
 };
