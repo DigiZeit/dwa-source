@@ -172,6 +172,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         // End::FestePauseStornieren
 
+		if (typeof(navigator) == "undefined" || typeof(navigator.app) == "undefined" || typeof(navigator.app.exitApp) != "function") {
+			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+		}
+
 		DigiWebApp.ApplicationController.enforceChefToolOnly();
         
         $('#' + DigiWebApp.SettingsPage.content.useTransitionsSetting.id).hide();

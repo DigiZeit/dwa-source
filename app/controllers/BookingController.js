@@ -1716,7 +1716,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	if (autoTransferAfterClosingDay) {
 	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
 	    	} else {
-	    		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigatorapp.exitApp) != "undefined") {
+	    		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 	    			navigator.app.exitApp();
 	    		}
 	    	}
@@ -2152,7 +2152,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                          // now call startsync again
 	                          if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
 	                        	  	if (DigiWebApp.ApplicationController.closeAppAfterCloseDay) {
-										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigatorapp.exitApp) != "undefined") {
+										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 											navigator.app.exitApp();
 										} else {
 			                          		DigiWebApp.ApplicationController.startsync(YES);
