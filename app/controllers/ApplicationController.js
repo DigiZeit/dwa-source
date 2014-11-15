@@ -270,6 +270,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		 */
 
 		  loaderMessage: " "
+		, loaderTitle: ""
 			  
 		, timeoutId: null
 
@@ -279,45 +280,98 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		, hide: function() {
 			this.loaderMessage = " ";
+			this.loaderTitle = "";
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = null;
-			return M.LoaderView.hide(true);
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStop) != "undefined") {
+				navigator.notification.activityStop();
+				return true;
+			} else {
+				return M.LoaderView.hide(true);
+			}
 		}
 
-		, show: function(title, timeout) {
+		, show: function(message, timeout, title) {
+			var that = this;
 
+			var mytitle = '';
+			if (typeof(title) != "undefined") {
+				mytitle = title;
+			}
+			
 			if (this.isVisible()) { 
 				this.hide(); 
 			}
 		
 			if (DigiWebApp.SettingsController.getSetting('silentLoader') !== YES) {
-				this.loaderMessage = title;
+				this.loaderMessage = message;
+				this.loaderTitle = mytitle;
+			} else {
+				if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+					if (this.loaderMessage == " ") {
+						this.loaderMessage = "";	
+					}
+				}
 			}
 
 			// Loader nach definiertem TimeOut automatisch verstecken
 			var myTimeout = timeout;
 			if (!myTimeout) myTimeout = DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
 			window.clearTimeout(this.timeoutId);
-			this.timeoutId = window.setTimeout(myTimeout);
+			this.timeoutId = window.setTimeout(myTimeout, this.hide);
 			
-			return M.LoaderView.show(this.loaderMessage);
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
+			} else {
+				return M.LoaderView.show(this.loaderMessage);
+			}
 		}
 		
 		, getTitle: function() {
-			return this.loaderMessage;
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				return this.loaderTitle;
+			} else {
+				return this.loaderMessage;
+			} 
+		}
+
+		, getMessage: function() {
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				return this.loaderMessage;
+			} else {
+				return this.loaderMessage;
+			} 
 		}
 
 		, setTitle: function(title) {
-			return this.show(title);
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				return this.show(this.loaderMessage, title);
+			} else {
+				return this.show(title);
+			}
+		}
+		
+		, setMessage: function(message) {
+			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				return this.show(message, this.loaderTitle);
+			} else {
+				return this.show(message);
+			}
 		}
 		
 		, changeTitle: function(title) {
 			return this.setTitle(title);
+		}
 
+		, changeMessage: function(message) {
+			return this.setMessage(message);
 		}
 
 	} // End of DigiLoaderView
 
+	, DigiProgressView: {
+		
+	} // End of DigiProgressView
 
     , infoMsg: ''
     
@@ -621,15 +675,21 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.notification) == "undefined" || typeof(window.plugins.notification.local) == "undefined") {
+		// notification.local is supposed to reside in "window.plugin"
+		var pluginObj = window.plugin;
+		if (typeof(pluginObj) == "undefined") {
+			pluginObj = window.plugins;
+		}
+
+		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
 			return false;
 		}
 		
 		try {
-			window.plugin.notification.local.hasPermission(function (granted) {
+			pluginObj.notification.local.hasPermission(function (granted) {
 			    // console.log('Permission has been granted: ' + granted);
 			});
-			window.plugin.notification.local.promptForPermission();
+			pluginObj.notification.local.promptForPermission();
 	//		window.plugin.notification.local.add({
 	//		    id:         String,  // A unique id of the notifiction
 	//		    date:       Date,    // This expects a date object
@@ -646,7 +706,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		try {
 			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
 			if (that.notificationID != null && typeof(that.notificationID) != "undefined") {
-				try{window.plugin.notification.local.cancel(that.notificationID);}catch(e){}
+				try{pluginObj.notification.local.cancel(that.notificationID);}catch(e){}
 				that.notificationID = "" + (parseIntRadixTen(that.notificationID) + 1);
 			} else {
 				that.notificationID = '1';
@@ -654,7 +714,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID', that.notificationID);
 			
 			//DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
-			window.plugin.notification.local.add({
+			pluginObj.notification.local.add({
 			    id:         that.notificationID,
 			    message:    '',  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
@@ -668,7 +728,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startBgGeo: function() {
 		try {
 			
-			if (typeof(window.plugins) == 'undefined' || typeof(window.plugins.backgroundGeoLocation) == "undefined") {
+			// backgroundGeoLocation is supposed to reside in "window.plugins"
+			var pluginObj = window.plugins;
+			if (typeof(pluginObj) == "undefined") {
+				pluginObj = window.plugin;
+			}
+			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.backgroundGeoLocation) == "undefined") {
 				return false;
 			}
 			
@@ -678,7 +743,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				}
 			} catch(e) {}
 			
-			DigiWebApp.ApplicationController.bgGeo = window.plugins.backgroundGeoLocation;
+			DigiWebApp.ApplicationController.bgGeo = pluginObj.backgroundGeoLocation;
 
 		    //DigiWebApp.SettingsController.init(YES,YES);
 
