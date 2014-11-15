@@ -3100,10 +3100,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	} catch (vibrateError) {}
 	    try {                      
 	    	if (typeof(DigiWebApp.SettingsController.getSetting("vibrationsDauer")) !== "undefined") {
-	    		vibrationsDauer = DigiWebApp.SettingsController.getSetting("vibrationsDauer");
+	    		vibrationsDauer = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("vibrationsDauer"));
 	    	}
     	} catch (vibrateError) {}
-		if (typeof(window.vibrate) == 'undefined') {
+		if (typeof(navigator.vibrate) == 'undefined') {
             //DigiWebApp.ApplicationController.DigiLoaderView.show(' ', vibrationsDauer);
         	//window.setTimeout(vibrationsDauer, DigiWebApp.ApplicationController.afterVibrate);
 		} else {
