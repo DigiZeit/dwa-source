@@ -776,7 +776,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (
 				   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
 				&& (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
-			{
+			) {
 				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
 				pluginObj.notification.local.add({
 				    id:         currentBookingNotificationID,
