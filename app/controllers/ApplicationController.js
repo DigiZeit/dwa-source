@@ -272,6 +272,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		  loaderMessage: " "
 		, loaderTitle: ""
 			  
+		, useNativeActivity: NO
+		
 		, timeoutId: null
 
 		, isVisible: function() { 
@@ -283,7 +285,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			this.loaderTitle = "";
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = null;
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStop) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStop) != "undefined") {
 				navigator.notification.activityStop();
 				return true;
 			} else {
@@ -307,7 +309,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				this.loaderMessage = message;
 				this.loaderTitle = mytitle;
 			} else {
-				if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 					if (this.loaderMessage == " ") {
 						this.loaderMessage = "";	
 					}
@@ -320,7 +322,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = window.setTimeout(myTimeout, this.hide);
 			
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
 			} else {
 				return M.LoaderView.show(this.loaderMessage);
@@ -328,7 +330,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 		
 		, getTitle: function() {
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.loaderTitle;
 			} else {
 				return this.loaderMessage;
@@ -336,7 +338,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, getMessage: function() {
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.loaderMessage;
 			} else {
 				return this.loaderMessage;
@@ -344,7 +346,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, setTitle: function(title) {
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.show(this.loaderMessage, title);
 			} else {
 				return this.show(title);
@@ -352,7 +354,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 		
 		, setMessage: function(message) {
-			if (typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (useNativeActivity && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.show(message, this.loaderTitle);
 			} else {
 				return this.show(message);
@@ -782,8 +784,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		        stationaryRadius: 20,
 		        distanceFilter: 30,
 		        locationTimeout: myLocationTimeout,
-		        notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
-		        notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
+		        //notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
+		        //notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
 		        activityType: 'AutomotiveNavigation',
 		        debug: true // <-- enable this hear sounds for background-geolocation life-cycle.
 		    });
@@ -3026,6 +3028,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , vibrate: function() {
+    	
         var vibrationsDauer = 100;
     	try {
 	    	vibrationsDauer = DigiWebApp.ApplicationController.CONSTVibrateDuration;
@@ -3049,7 +3052,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
     }
     
-    , afterVibrarte: function() {
+    , afterVibrate: function() {
     	DigiWebApp.ApplicationController.DigiLoaderView.hide();
     }
 

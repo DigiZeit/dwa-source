@@ -270,13 +270,13 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , GPSmaximumAgeMinutesLabel: M.LabelView.design({
                 value: M.I18N.l('GPSmaximumAgeMinutes')
             })
-            , GPSmaximumAgeMinutesInput: M.TextFieldView.design({
-            	    inputType: M.INPUT_NUMBER
-                  , contentBinding: {
-                      target: DigiWebApp.SettingsController
-                    , property: 'settings.GPSmaximumAgeMinutes'
-                }
-            })
+	        , GPSmaximumAgeMinutesInput: M.TextFieldView.design({
+	        	    inputType: M.INPUT_NUMBER
+	              , contentBinding: {
+	                  target: DigiWebApp.SettingsController
+	                , property: 'settings.GPSmaximumAgeMinutes'
+	            }
+	        })
         })
         , bautagebuchLimit_autoStartUhrzeit: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION
