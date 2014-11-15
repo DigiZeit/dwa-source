@@ -652,7 +652,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			//DigiWebApp.ApplicationController.notificationID = 'DIGI-WebApp StartedNotification ' + Math.uuid();
 			window.plugin.notification.local.add({
 			    id:         DigiWebApp.ApplicationController.notificationID,
-			    date:       new Date(),    // This expects a date object
 			    message:    '',  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
 				sound:      null,  // A sound to be played
