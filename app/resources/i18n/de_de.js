@@ -509,6 +509,7 @@ M.I18N.de_de = {
 	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Cache'
 	, GPSBackgroundServiceNotificationMessage: 'aktiviert'
 	
+	, BookingReminderHours: 'Feierabenderinnerung'
 	, BookingReminderTitle: 'Feierabend vergessen?'
 	, BookingReminderMessage: 'laufende Buchung > '
 	, BookingReminderMessageTail: ' Stunden!'

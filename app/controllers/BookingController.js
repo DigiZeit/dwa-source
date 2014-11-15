@@ -2454,6 +2454,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 	, currentBookingNotificationID: null
 	, startBookingNotification: function(myDate) {
     	
+    	if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')) == 0) {
+    		return false;
+    	}
+    	
 		var that = this;
 		
 		// notification.local is supposed to reside in "window.plugin"
