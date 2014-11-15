@@ -510,6 +510,7 @@ M.I18N.de_de = {
 	, GPSBackgroundServiceNotificationMessage: 'aktiviert'
 	
 	, BookingReminderTitle: 'Feierabend vergessen?'
-	, BookingReminderMessage: 'Die laufende Buchung läuft schon 10 Stunden. Haben Sie evtl. vergessen Feierabend zu buchen?'
+	, BookingReminderMessage: 'laufende Buchung > '
+	, BookingReminderMessageTail: ' Stunden!'
 		
 };

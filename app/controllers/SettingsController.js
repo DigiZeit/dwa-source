@@ -71,6 +71,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , GPSenableHighAccuracyFallback: YES
         , GPSmaximumAgeMinutes: 3
         , GPSBackgroundService: NO
+        , BookingReminderHours: 10
     }
 
     , defaultsettings: null
@@ -260,7 +261,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var GPSBackgroundService = DigiWebApp.SettingsController.defaultsettings.get("GPSBackgroundService");
             try {
 	            if (typeof(record.record.GPSBackgroundService) !== "undefined") {
-	            	GPSmaximumAgeMinutes = record.get('GPSBackgroundService');
+	            	GPSBackgroundService = record.get('GPSBackgroundService');
+	            }
+            } catch (e) {}
+            
+            var BookingReminderHours = DigiWebApp.SettingsController.defaultsettings.get("BookingReminderHours");
+            try {
+	            if (typeof(record.record.BookingReminderHours) !== "undefined") {
+	            	BookingReminderHours = record.get('BookingReminderHours');
 	            }
             } catch (e) {}
             
@@ -440,7 +448,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('GPSBackgroundService')
 	                 , isSelected: GPSBackgroundService
 	           }]
-               
+               , BookingReminderHours: BookingReminderHours
             };
         /* default values */
         } else {
@@ -573,7 +581,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                    value: DigiWebApp.SettingsController.defaultsettings.get('GPSBackgroundService')
                  , label: M.I18N.l('GPSBackgroundService')
                }]
-               
+               , BookingReminderHours: DigiWebApp.SettingsController.defaultsettings.get("BookingReminderHours")
             };
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -796,6 +804,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	GPSBackgroundService = $('#' + M.ViewManager.getView('settingsPage', 'GPSBackgroundService').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         }
 
+        var BookingReminderHours            = $('#' + M.ViewManager.getView('settingsPage', 'BookingReminderHoursInput').id).val();
         
         var numberRegex = /^[0-9]+$/;
         if (company) {
@@ -916,6 +925,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                                     record.set('GPSBackgroundService', GPSBackgroundService);
+                                                    record.set('BookingReminderHours', BookingReminderHours);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1001,6 +1011,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                     record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                     record.set('GPSBackgroundService', GPSBackgroundService);
+                                    record.set('BookingReminderHours', BookingReminderHours);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1060,6 +1071,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                 record.set('GPSBackgroundService', GPSBackgroundService);
+                                record.set('BookingReminderHours', BookingReminderHours);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1119,6 +1131,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSenableHighAccuracyFallback', GPSenableHighAccuracyFallback);
                                 record.set('GPSmaximumAgeMinutes', GPSmaximumAgeMinutes);
                                 record.set('GPSBackgroundService', GPSBackgroundService);
+                                record.set('BookingReminderHours', BookingReminderHours);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1180,6 +1193,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , GPSenableHighAccuracyFallback: GPSenableHighAccuracyFallback
                                 , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
                                 , GPSBackgroundService: GPSBackgroundService
+                                , BookingReminderHours: BookingReminderHours
 
                           });
 

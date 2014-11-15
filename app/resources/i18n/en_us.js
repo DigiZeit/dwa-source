@@ -511,6 +511,7 @@ M.I18N.en_us = {
 	, GPSBackgroundServiceNotificationMessage: 'active'
 	
 	, BookingReminderTitle: 'Forgot closing time?'
-	, BookingReminderMessage: 'The current booking has been going on since 10 hours! Did you maybe forgot to book cloosing time?'
+	, BookingReminderMessage: 'current booking > '
+	, BookingReminderMessageTail: ' hours!'
 
 };
