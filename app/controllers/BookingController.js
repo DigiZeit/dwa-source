@@ -2226,17 +2226,17 @@ DigiWebApp.BookingController = M.Controller.extend({
     , startBrowserBookingNotificationObject: null
     , startBrowserBookingNotification: function(myDate) {
     	var that = this;
-		console.log('in startBrowserBookingNotification');
+		console.__original.log('in startBrowserBookingNotification');
 
     	if (that.startBrowserBookingNotificationTimeout != null) {
     		window.clearTimeout(that.startBrowserBookingNotificationTimeout);
     		that.startBrowserBookingNotificationTimeout = null;
     	}
 
-		console.log('closing notification');
+		console.__original.log('closing notification');
     	try{that.startBrowserBookingNotificationObject.close();}catch(e){}
 
-		console.log('loading startBooking');
+		console.__original.log('loading startBooking');
 		var startBooking = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking){
 			return booking.get('timeStampStart');
 		})[0]; 
@@ -2250,20 +2250,20 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 			myDate = myDate.date;
 		}
-		console.log('myDate: ' + myDate);
+		console.__original.log('myDate: ' + myDate);
 		
 		var nowTimestamp = new Date().getTime();
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
-		console.log('showInMilliseconds: ' + showInMilliseconds);
+		console.__original.log('showInMilliseconds: ' + showInMilliseconds);
 		
 		var showNotificationFunc = function() {
-			console.log("showing notification");
+			console.__original.log("showing notification");
 	    	Notification.requestPermission( function(status) {
 	    		if (Notification.permission !== status) {
 	    			Notification.permission = status;
 	    		}
 	    		if (status === "granted") {
-	    			console.log(status);
+	    			console.__original.log(status);
 					that.startBrowserBookingNotificationObject = new Notification(M.I18N.l('BookingReminderTitle'), {
 							  body: M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail')
 							, icon: "theme/images/Icon.png"
