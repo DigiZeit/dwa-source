@@ -780,7 +780,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			) {
 				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
 				if (currentBookingNotificationTimestamp > nowTimestamp) {
-					alert(currentBookingNotificationTimestamp + ", " + nowTimestamp);
+					alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 					pluginObj.notification.local.add({
 					    id:         currentBookingNotificationID,
 					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
@@ -789,6 +789,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					    ongoing:    false, // Prevent clearing of notification (Android only)
 					});
 				} else {
+					alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 					pluginObj.notification.local.add({
 					    id:         currentBookingNotificationID,
 						date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
