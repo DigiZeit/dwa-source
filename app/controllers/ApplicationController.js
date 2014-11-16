@@ -800,7 +800,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 			
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
-			
+			if (that.notificationMessage == null) {
+				that.notificationMessage = M.I18N.l('abwesend');
+			}
 			try{window.plugin.notification.local.cancel('1');}catch(e){}
 			pluginObj.notification.local.add({
 			    id:         '1',
