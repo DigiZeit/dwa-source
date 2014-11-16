@@ -770,13 +770,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	//		});
 		} catch(e) {}
 		try {
-
-			var currentBookingNotificationTimestamp = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp'));
+			
+			var currentBookingNotificationTimestampString = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
+			var currentBookingNotificationTimestamp = parseIntRadixTen(currentBookingNotificationTimestampString);
 			var nowTimestamp = new Date().getTime();
 			if (   (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
 			) {
 				try{window.plugin.notification.local.cancel('2');}catch(e){}
-				alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
+				alert(currentBookingNotificationTimestampString + ", " + currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 				if (currentBookingNotificationTimestamp > nowTimestamp) {
 					pluginObj.notification.local.add({
 					    id:         '2',

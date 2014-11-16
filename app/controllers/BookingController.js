@@ -2256,7 +2256,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
 		try {
 			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
-
+			var currentBookingNotificationTimestampString = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
+			alert(currentBookingNotificationTimestampString);
 			pluginObj.notification.local.add({
 			    id:         '2',
 				date:       myDate,    // This expects a date object
