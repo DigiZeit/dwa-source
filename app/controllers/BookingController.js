@@ -2252,11 +2252,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 					//n.onshow = function () { 
 					//	setTimeout(n.close.bind(n), 5000); 
 					//}
-					that.startBrowserBookingNotificationObject.onclose = function() {
+					var myFuncClose = function() {
 						// show another notification in one hour
 						var myNewDate = D8.create(myDate.getTime()).addHours(1).date;
 						that.startBrowserBookingNotification(myNewDate);
 					}
+					var myFuncClick = function() {
+						DigiWebApp.NavigationController.toBookTimePage();
+						myFuncClose();
+					}
+					that.startBrowserBookingNotificationObject.onclose = myFuncClose;
+					that.startBrowserBookingNotificationObject.onclick = myFuncClick;
 	    		} else {
 	    			alert(M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'));
 	    		}
