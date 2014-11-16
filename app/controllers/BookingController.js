@@ -2253,7 +2253,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
 		
 		var showNotificationFunc = function() {
-			console.log(showing notification);
+			console.log("showing notification");
 	    	Notification.requestPermission( function(status) {
 	    		if (Notification.permission !== status) {
 	    			Notification.permission = status;
