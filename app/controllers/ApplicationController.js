@@ -747,15 +747,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (that.notificationMessage == null) {
 			that.notificationMessage = M.I18N.l('abwesend');
 		}
-		if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
-			that.notificationInitiated = YES;
-			DigiWebApp.BookingController.startBookingNotification();
-		}
-
 		// notification.local is supposed to reside in "window.plugin"
 		var pluginObj = window.plugin;
 		if (typeof(pluginObj) == "undefined") {
 			pluginObj = window.plugins;
+		}
+		if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
+			that.notificationInitiated = YES;
+			try{pluginObj.notification.local.cancelAll();}catch(e){}
+			DigiWebApp.BookingController.startBookingNotification();
 		}
 
 		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {

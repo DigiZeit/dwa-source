@@ -2296,10 +2296,16 @@ DigiWebApp.BookingController = M.Controller.extend({
 			pluginObj = window.plugins;
 		}
 
-		var startBooking = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking){
-			return booking.get('timeStampStart');
-		})[0]; 
-				
+		var alleBookings = DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find());
+		var feierabendBookings = [];
+		if (alleBookings.length > 0) feierabendBookings = _.filter(alleBookings, function(booking) { return booking.get('istFeierabend'); });
+		var lastFeierabend = null;
+		if (feierabendBookings.length > 0) lastFeierabend = _.sortBy(feierabendBookings, function(booking) { return booking.get('timeStampStart'); })[feierabendBookings.length - 1];
+		var bookingsAfterLastFeierabend = [];
+		if (lastFeierabend != null) bookingsAfterLastFeierabend = _.filter(alleBookings, function(booking) { return booking.get('timeStampStart') > lastFeierabend.get('timeStampStart'); });
+		var startBooking;
+		if (bookingsAfterLastFeierabend.length > 0) startBooking = _.sortBy(bookingsAfterLastFeierabend, function(booking) { return booking.get('timeStampStart'); })[0]; 
+
 		if (typeof(myDate) == "undefined") {
 			if (typeof(startBooking) != "undefined") {
 				myDate = D8.create(startBooking.get('timeStampStart'));
@@ -2328,7 +2334,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    id:         '2',
 			    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
 			    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
-			    repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+			    //repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
 			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    false, // Prevent clearing of notification (Android only)
 			}
@@ -2353,7 +2359,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		that.startBrowserBookingNotificationTimeout = null;
     	}
 		try{that.startBrowserBookingNotificationObject.close();}catch(e){}
-		try{pluginObj.notification.local.cancel('2');}catch(e){trackError(e);}
+		try{pluginObj.notification.local.cancel('2');}catch(e){}
 	}
 
 });
