@@ -772,7 +772,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) {}
 		try {
 			
-			if (!that.notificationInitiated) {
+			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
+			if (that.notificationMessage == null) {
+				that.notificationMessage = M.I18N.l('abwesend');
+			}
+			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
 				that.notificationInitiated = YES;
 				var currentBookingNotificationTimestampString = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
 				if (currentBookingNotificationTimestampString != null) {
@@ -803,10 +807,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				}
 			}
 			
-			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
-			if (that.notificationMessage == null) {
-				that.notificationMessage = M.I18N.l('abwesend');
-			}
 			try{window.plugin.notification.local.cancel('1');}catch(e){}
 			pluginObj.notification.local.add({
 			    id:         '1',
