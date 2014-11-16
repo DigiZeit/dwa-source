@@ -2247,17 +2247,19 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 			myDate = myDate.date;
 		}
-		
+		console.log(myDate);
 		var nowTimestamp = new Date().getTime();
 		
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
 		
 		var showNotificationFunc = function() {
+			console.log(showing notification);
 	    	Notification.requestPermission( function(status) {
 	    		if (Notification.permission !== status) {
 	    			Notification.permission = status;
 	    		}
 	    		if (status === "granted") {
+	    			console.log(status);
 					that.startBrowserBookingNotificationObject = new Notification(M.I18N.l('BookingReminderTitle'), {
 							  body: M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail')
 							, icon: "theme/images/Icon.png"
