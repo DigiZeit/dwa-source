@@ -743,6 +743,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
+		that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
+		if (that.notificationMessage == null) {
+			that.notificationMessage = M.I18N.l('abwesend');
+		}
+		if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
+			that.notificationInitiated = YES;
+			DigiWebApp.BookingController.startBookingNotification();
+		}
+
 		// notification.local is supposed to reside in "window.plugin"
 		var pluginObj = window.plugin;
 		if (typeof(pluginObj) == "undefined") {
@@ -772,43 +781,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	//		});
 		} catch(e) {}
 		try {
-			
-			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
-			if (that.notificationMessage == null) {
-				that.notificationMessage = M.I18N.l('abwesend');
-			}
-			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
-				that.notificationInitiated = YES;
-				DigiWebApp.BookingController.startBookingNotification();
-//				var currentBookingNotificationTimestampString = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
-//				if (currentBookingNotificationTimestampString != null) {
-//					var currentBookingNotificationTimestamp = parseIntRadixTen(currentBookingNotificationTimestampString);
-//					var nowTimestamp = new Date().getTime();
-//					if (   (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
-//					) {
-//						try{window.plugin.notification.local.cancel('2');}catch(e){}
-//						if (currentBookingNotificationTimestamp < nowTimestamp) {
-//							pluginObj.notification.local.add({
-//							    id:         '2',
-//							    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-//							    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
-//							    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
-//							    ongoing:    false, // Prevent clearing of notification (Android only)
-//							});
-//						} else {
-//							pluginObj.notification.local.add({
-//							    id:         '2',
-//								date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
-//							    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-//							    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
-//							    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
-//							    ongoing:    false, // Prevent clearing of notification (Android only)
-//							});
-//						}
-//					}
-//				}
-			}
-			
+						
 			try{window.plugin.notification.local.cancel('1');}catch(e){}
 			pluginObj.notification.local.add({
 			    id:         '1',

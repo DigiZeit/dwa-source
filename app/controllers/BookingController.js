@@ -2233,20 +2233,6 @@ DigiWebApp.BookingController = M.Controller.extend({
     	}
 
     	try{that.startBrowserBookingNotificationObject.close();}catch(e){}
-
-		var startBooking = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking){
-			return booking.get('timeStampStart');
-		})[0]; 
-				
-		if (typeof(myDate) == "undefined") {
-			if (typeof(startBooking) != "undefined") {
-				myDate = D8.create(startBooking.get('timeStampStart'));
-			} else {
-				return false;
-			}
-			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
-			myDate = myDate.date;
-		}
 		
 		var nowTimestamp = new Date().getTime();
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
