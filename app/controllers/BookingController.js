@@ -2243,7 +2243,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
 		if (typeof(myDate) == "undefined") {
 			myDate = D8.create();
-			myDate = myDate.AddHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
+			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 			myDate = myDate.date;
 		}
 		
@@ -2256,8 +2256,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
 		try {
 			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
-			var currentBookingNotificationTimestampString = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp');
-			alert(currentBookingNotificationTimestampString);
 			pluginObj.notification.local.add({
 			    id:         '2',
 				date:       myDate,    // This expects a date object
@@ -2266,7 +2264,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    false, // Prevent clearing of notification (Android only)
 			});
-		}catch(e){}
+		}catch(e){alert(error);}
 	}
     
 	, clearBookingNotification: function() {
