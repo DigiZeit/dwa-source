@@ -808,7 +808,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				that.notificationMessage = M.I18N.l('abwesend');
 			}
 			try{window.plugin.notification.local.cancel('1');}catch(e){}
-			alert("adding notification '" + that.notificationMessage + "'");
 			pluginObj.notification.local.add({
 			    id:         '1',
 			    message:    that.notificationMessage,  // The message that is displayed
@@ -817,6 +816,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    true, // Prevent clearing of notification (Android only)
 			});
+			//alert("added notification '" + that.notificationMessage + "'");
 		}catch(e){trackError(e);}
 	}
 
