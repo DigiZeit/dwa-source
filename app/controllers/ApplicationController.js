@@ -737,7 +737,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, fixToobarsIntervalVar: null
 	
-	, notificationID: null
 	, notificationMessage: ""
 	, startNotification: function() {
 		var that = this;
@@ -772,26 +771,23 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) {}
 		try {
 
-			var currentBookingNotificationID = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID'));
 			var currentBookingNotificationTimestamp = parseIntRadixTen(localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp'));
 			var nowTimestamp = new Date().getTime();
-			if (   (currentBookingNotificationID != null && typeof(currentBookingNotificationID) != "undefined")
-				&& (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
+			if (   (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
 			) {
-				try{window.plugin.notification.local.cancel(currentBookingNotificationID);}catch(e){}
+				try{window.plugin.notification.local.cancel('2');}catch(e){}
+				alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 				if (currentBookingNotificationTimestamp > nowTimestamp) {
-					alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 					pluginObj.notification.local.add({
-					    id:         currentBookingNotificationID,
+					    id:         '2',
 					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
 					    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
 					    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 					    ongoing:    false, // Prevent clearing of notification (Android only)
 					});
 				} else {
-					alert(currentBookingNotificationTimestamp + ", " + nowTimestamp + ", " + (nowTimestamp - currentBookingNotificationTimestamp));
 					pluginObj.notification.local.add({
-					    id:         currentBookingNotificationID,
+					    id:         '2',
 						date:       new Date(currentBookingNotificationTimestamp),    // This expects a date object
 					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
 					    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
@@ -801,18 +797,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				}
 			}
 
-			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
-			if (that.notificationID != null && typeof(that.notificationID) != "undefined") {
-				try{pluginObj.notification.local.cancel(that.notificationID);}catch(e){}
-				that.notificationID = "" + (parseIntRadixTen(that.notificationID) + 1);
-			} else {
-				that.notificationID = '1';
-			}
-			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID', that.notificationID);
 			
+			try{window.plugin.notification.local.cancel('1');}catch(e){}
 			pluginObj.notification.local.add({
-			    id:         that.notificationID,
+			    id:         '1',
 			    message:    that.notificationMessage,  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
 				sound:      null,  // A sound to be played
@@ -3059,9 +3048,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , exitApp: function() {
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
 		try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
-		if (DigiWebApp.ApplicationController.notificationID != null) {
-			try{window.plugin.notification.local.cancel(DigiWebApp.ApplicationController.notificationID);}catch(e){}
-		}
+		try{window.plugin.notification.local.cancel('1');}catch(e){}
+		try{window.plugin.notification.local.cancel('2');}catch(e){}
 		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 			navigator.app.exitApp();
 		}

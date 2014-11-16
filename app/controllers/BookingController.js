@@ -2221,7 +2221,6 @@ DigiWebApp.BookingController = M.Controller.extend({
     
     , uebernachtungOptionen: null
     
-	, currentBookingNotificationID: null
 	, startBookingNotification: function(myDate) {
     	
     	if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')) == 0) {
@@ -2256,18 +2255,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 		} catch(e) {}
 		
 		try {
-			that.currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
-			if (that.currentBookingNotificationID != null && typeof(that.currentBookingNotificationID) != "undefined") {
-				try{window.plugin.notification.local.cancel(that.currentBookingNotificationID);}catch(e){}
-				that.currentBookingNotificationID = "" + (parseIntRadixTen(that.currentBookingNotificationID) + 1);
-			} else {
-				that.currentBookingNotificationID = '1';
-			}
-			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID', that.currentBookingNotificationID);
 			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
 
 			pluginObj.notification.local.add({
-			    id:         that.currentBookingNotificationID,
+			    id:         '2',
 				date:       myDate,    // This expects a date object
 			    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
 			    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
@@ -2286,11 +2277,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			pluginObj = window.plugins;
 		}
 
-		that.currentBookingNotificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
-		if (that.currentBookingNotificationID != null) {
-			try{pluginObj.notification.local.cancel(that.currentBookingNotificationID);}catch(e){}
-		}
-        localStorage.removeItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationID');
+		try{pluginObj.notification.local.cancel('2');}catch(e){}
 	}
 
 });
