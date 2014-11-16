@@ -717,7 +717,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		
 		DigiWebApp.SettingsController.saveDone = NO;
 		
-    	var debug                       = DigiWebApp.SettingsController.globalDebugMode;
+        var numberRegex = /^[0-9]+$/;
+
+        var debug                       = DigiWebApp.SettingsController.globalDebugMode;
     	var treatAllAsTablet            = DigiWebApp.SettingsController.getSetting('treatAllAsTablet');
     	var treatAllAsPhone             = DigiWebApp.SettingsController.getSetting('treatAllAsPhone');
     	var settingsPassword            = DigiWebApp.SettingsController.getSetting('settingsPassword');
@@ -811,7 +813,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var festePauseStornieren_nurAktuellerTag = $('#' + M.ViewManager.getView('settingsPage', 'festePauseStornieren_nurAktuellerTag').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var startTimeout					= DigiWebApp.SettingsController.getSetting('startTimeout');
-        
+
         var GPSenableHighAccuracy = NO;
         if (M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy') !== null) {
         	GPSenableHighAccuracy = $('#' + M.ViewManager.getView('settingsPage', 'GPSenableHighAccuracy').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
@@ -823,6 +825,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
 
         var GPSmaximumAgeMinutes            = $('#' + M.ViewManager.getView('settingsPage', 'GPSmaximumAgeMinutesInput').id).val();
+        if (parseIntRadixTen(GPSmaximumAgeMinutes) < 0 || !numberRegex.test(GPSmaximumAgeMinutes)) GPSmaximumAgeMinutes = 0;
 
         var GPSBackgroundService = NO;
         if (M.ViewManager.getView('settingsPage', 'GPSBackgroundService') !== null) {
@@ -830,6 +833,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
 
         var BookingReminderHours            = $('#' + M.ViewManager.getView('settingsPage', 'BookingReminderHoursInput').id).val();
+        if (parseIntRadixTen(BookingReminderHours) < 0 || !numberRegex.test(BookingReminderHours)) BookingReminderHours = 0;
         
         var closeAppAfterCloseDay = NO;
         if (M.ViewManager.getView('settingsPage', 'closeAppAfterCloseDay') !== null) {
@@ -837,7 +841,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         
         
-        var numberRegex = /^[0-9]+$/;
         if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
