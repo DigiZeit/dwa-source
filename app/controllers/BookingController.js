@@ -2282,71 +2282,74 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 	, startBookingNotification: function(myDate) {
     	
-    	if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')) == 0) {
-    		return false;
-    	}
-    	
-		var that = this;
-		
-		that.clearBookingNotification();
-		
-		// notification.local is supposed to reside in "window.plugin"
-		var pluginObj = window.plugin;
-		if (typeof(pluginObj) == "undefined") {
-			pluginObj = window.plugins;
-		}
-
-		var alleBookings = DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find());
-		var feierabendBookings = [];
-		if (alleBookings.length > 0) feierabendBookings = _.filter(alleBookings, function(booking) { return booking.get('istFeierabend'); });
-		var lastFeierabend = null;
-		var startBooking;
-		if (feierabendBookings.length > 0) {
-			lastFeierabend = _.sortBy(feierabendBookings, function(booking) { return booking.get('timeStampStart'); })[feierabendBookings.length - 1];
-			var bookingsAfterLastFeierabend = [];
-			if (lastFeierabend != null) bookingsAfterLastFeierabend = _.filter(alleBookings, function(booking) { return booking.get('timeStampStart') > lastFeierabend.get('timeStampStart'); });
-			if (bookingsAfterLastFeierabend.length > 0) startBooking = _.sortBy(bookingsAfterLastFeierabend, function(booking) { return booking.get('timeStampStart'); })[0]; 
-		} else {
-			startBooking = _.sortBy(alleBookings, function(booking) { return booking.get('timeStampStart'); })[0]; 
-		}
-
-		if (typeof(myDate) == "undefined") {
-			if (typeof(startBooking) != "undefined") {
-				myDate = D8.create(startBooking.get('timeStampStart'));
+		try { // keinesfalls den regulären Betrieb stören
+			
+	    	if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')) == 0) {
+	    		return false;
+	    	}
+	    	
+			var that = this;
+			
+			that.clearBookingNotification();
+			
+			// notification.local is supposed to reside in "window.plugin"
+			var pluginObj = window.plugin;
+			if (typeof(pluginObj) == "undefined") {
+				pluginObj = window.plugins;
+			}
+	
+			var alleBookings = DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find());
+			var feierabendBookings = [];
+			if (alleBookings.length > 0) feierabendBookings = _.filter(alleBookings, function(booking) { return booking.get('istFeierabend'); });
+			var lastFeierabend = null;
+			var startBooking;
+			if (feierabendBookings.length > 0) {
+				lastFeierabend = _.sortBy(feierabendBookings, function(booking) { return booking.get('timeStampStart'); })[feierabendBookings.length - 1];
+				var bookingsAfterLastFeierabend = [];
+				if (lastFeierabend != null) bookingsAfterLastFeierabend = _.filter(alleBookings, function(booking) { return booking.get('timeStampStart') > lastFeierabend.get('timeStampStart'); });
+				if (bookingsAfterLastFeierabend.length > 0) startBooking = _.sortBy(bookingsAfterLastFeierabend, function(booking) { return booking.get('timeStampStart'); })[0]; 
 			} else {
-				return false;
+				startBooking = _.sortBy(alleBookings, function(booking) { return booking.get('timeStampStart'); })[0]; 
 			}
-			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
-			//myDate = myDate.addMinutes(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'))); // debug
-			myDate = myDate.date;
-		}
-		
-		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
-			return that.startBrowserBookingNotification(myDate);
-		}
-
-		try {
-			pluginObj.notification.local.hasPermission(function (granted) {
-			    // console.log('Permission has been granted: ' + granted);
-			});
-			pluginObj.notification.local.promptForPermission();
-		} catch(e) {}
-		
-		try {
-			localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
-			var notificationOptions = {
-			    id:         '2',
-			    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-			    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
-			    //repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
-			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
-			    ongoing:    false, // Prevent clearing of notification (Android only)
+	
+			if (typeof(myDate) == "undefined") {
+				if (typeof(startBooking) != "undefined") {
+					myDate = D8.create(startBooking.get('timeStampStart'));
+				} else {
+					return false;
+				}
+				myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
+				//myDate = myDate.addMinutes(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'))); // debug
+				myDate = myDate.date;
 			}
-			var nowTimestamp = new Date().getTime();
-			if (myDate.getTime() < nowTimestamp) {
-				notificationOptions.date = myDate
+			
+			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
+				return that.startBrowserBookingNotification(myDate);
 			}
-			pluginObj.notification.local.add(notificationOptions);
+	
+			try {
+				pluginObj.notification.local.hasPermission(function (granted) {
+				    // console.log('Permission has been granted: ' + granted);
+				});
+				pluginObj.notification.local.promptForPermission();
+			} catch(e) {}
+			
+			try {
+				localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
+				var notificationOptions = {
+				    id:         '2',
+				    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
+				    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
+				    //repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+				    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
+				    ongoing:    false, // Prevent clearing of notification (Android only)
+				}
+				var nowTimestamp = new Date().getTime();
+				if (myDate.getTime() < nowTimestamp) {
+					notificationOptions.date = myDate
+				}
+				pluginObj.notification.local.add(notificationOptions);
+			}catch(e){trackError(e);}
 		}catch(e){trackError(e);}
 	}
     
