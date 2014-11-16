@@ -2316,8 +2316,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 		}
 		
 		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
-			return false;
-		} else {
 			return that.startBrowserBookingNotification(myDate);
 		}
 
