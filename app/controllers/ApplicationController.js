@@ -738,6 +738,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, fixToobarsIntervalVar: null
 	
 	, notificationID: null
+	, notificationMessage: ""
 	, startNotification: function() {
 		var that = this;
 
@@ -800,6 +801,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 
 			that.notificationID = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationID');
+			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
 			if (that.notificationID != null && typeof(that.notificationID) != "undefined") {
 				try{pluginObj.notification.local.cancel(that.notificationID);}catch(e){}
 				that.notificationID = "" + (parseIntRadixTen(that.notificationID) + 1);
@@ -810,7 +812,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			
 			pluginObj.notification.local.add({
 			    id:         that.notificationID,
-			    message:    '',  // The message that is displayed
+			    message:    that.notificationMessage,  // The message that is displayed
 			    title:      'DIGI-WebApp',  // The title of the message
 				sound:      null,  // A sound to be played
 			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it

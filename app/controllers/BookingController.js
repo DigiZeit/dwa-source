@@ -1710,15 +1710,6 @@ DigiWebApp.BookingController = M.Controller.extend({
      *  6) If not, the employee selection is cleared
      */
     , closeDay: function() {
-    	var autoSyncAfterCD = DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay');
-    	var closeAppAfterCD = DigiWebApp.SettingsController.getSetting('closeAppAfterCloseDay');
-    	if (closeAppAfterCD) {
-	    	if (autoSyncAfterCD) {
-	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
-	    	} else {
-				DigiWebApp.ApplicationController.exitApp();
-	    	}
-    	}
     	var that = DigiWebApp.BookingController;
     	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
         if (that.currentBooking) {
@@ -1849,6 +1840,20 @@ DigiWebApp.BookingController = M.Controller.extend({
 		
         var finishBooking = function() {
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
+
+            var notificationMessage = " ";
+    		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
+    		DigiWebApp.ApplicationController.startNotification();
+        	var autoSyncAfterCD = DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay');
+        	var closeAppAfterCD = DigiWebApp.SettingsController.getSetting('closeAppAfterCloseDay');
+        	if (closeAppAfterCD) {
+    	    	if (autoSyncAfterCD) {
+    	        	DigiWebApp.ApplicationController.closeAppAfterCloseDay = YES;
+//    	    	} else {
+//    				DigiWebApp.ApplicationController.exitApp();
+    	    	}
+        	}
+        	
         	if (DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
     			DigiWebApp.DashboardController.dataTransfer(YES); // yes means: is closing day
 	        } else {
@@ -2204,6 +2209,11 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
         //bookingStr = M.Date.create(this.currentBooking.get('timeStampStart')).format('dd.mm.yy HH:MM');
         bookingStr = M.Date.create(myDisplayTimestamp).format('dd.mm.yy HH:MM');
+        
+        var notificationMessage = M.I18N.l('bookingSince') + " " + bookingStr;
+		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
+		DigiWebApp.ApplicationController.startNotification();
+        
         return bookingStr;
     }
     
