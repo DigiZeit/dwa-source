@@ -511,7 +511,7 @@ M.I18N.de_de = {
 	
 	, BookingReminderHours: 'Feierabenderinnerung nach (in Stunden)'
 	, BookingReminderTitle: 'Feierabend vergessen?'
-	, BookingReminderMessage: 'laufende Buchung > '
+	, BookingReminderMessage: 'Arbeitsbeginn vor über '
 	, BookingReminderMessageTail: ' Stunden!'
 	
 	, orders: 'Aufträge'

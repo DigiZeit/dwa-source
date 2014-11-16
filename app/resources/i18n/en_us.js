@@ -512,8 +512,8 @@ M.I18N.en_us = {
 	
 	, BookingReminderHours: 'Remind to close day after (in hours)'
 	, BookingReminderTitle: 'Forgot closing time?'
-	, BookingReminderMessage: 'current booking > '
-	, BookingReminderMessageTail: ' hours!'
+	, BookingReminderMessage: 'Start of work over '
+	, BookingReminderMessageTail: ' hours ago!'
 
 	, orders: 'Orders'
 	, positions: 'Positions'

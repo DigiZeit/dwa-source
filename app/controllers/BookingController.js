@@ -2241,9 +2241,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
 			return false;
 		}
-		
+
+		var startBooking = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking){
+			return booking.get('timeStampStart');
+		})[0]; 
+				
 		if (typeof(myDate) == "undefined") {
-			myDate = D8.create();
+			if (typeof(startBooking) != "undefined") {
+				myDate = D8.create(startBooking.get('timeStampStart'));
+			} else {
+				myDate = D8.create();
+			}
 			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 			myDate = myDate.date;
 		}

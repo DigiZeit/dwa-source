@@ -71,7 +71,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , GPSenableHighAccuracyFallback: YES
         , GPSmaximumAgeMinutes: 3
         , GPSBackgroundService: NO
-        , BookingReminderHours: 10
+        , BookingReminderHours: 11
         , closeAppAfterCloseDay: YES
     }
 
