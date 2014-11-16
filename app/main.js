@@ -623,3 +623,23 @@ var setTestLogin = function() {
 }
 
 var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+
+try {
+	window.addEventListener('load', function () {
+	  Notification.requestPermission(function (status) {
+	    // This allows to use Notification.permission with Chrome/Safari
+	    if (Notification.permission !== status) {
+	      Notification.permission = status;
+	    }
+	  });
+});
+} catch(e) {}
+try {
+	  Notification.requestPermission(function (status) {
+		    // This allows to use Notification.permission with Chrome/Safari
+		    if (Notification.permission !== status) {
+		      Notification.permission = status;
+		    }
+	  });
+} catch(e) {}
+}
