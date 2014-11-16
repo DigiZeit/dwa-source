@@ -2226,7 +2226,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , startBrowserBookingNotificationObject: null
     , startBrowserBookingNotification: function(myDate) {
     	var that = this;
-
+    		
     	if (that.startBrowserBookingNotificationTimeout != null) {
     		window.clearTimeout(that.startBrowserBookingNotificationTimeout);
     		that.startBrowserBookingNotificationTimeout = null;
@@ -2238,35 +2238,39 @@ DigiWebApp.BookingController = M.Controller.extend({
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
 		
 		var showNotificationFunc = function() {
-	    	Notification.requestPermission( function(status) {
-	    		if (Notification.permission !== status) {
-	    			Notification.permission = status;
-	    		}
-	    		if (status === "granted") {
-					that.startBrowserBookingNotificationObject = new Notification(M.I18N.l('BookingReminderTitle'), {
-							  body: M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail')
-							, icon: "theme/images/Icon.png"
-							, tag: '2'
+	    	try { // WebNotification-Spec is not stable
+		    	Notification.requestPermission( function(status) {
+		    		if (Notification.permission !== status) {
+		    			Notification.permission = status;
+		    		}
+		    		if (status === "granted") {
+						that.startBrowserBookingNotificationObject = new Notification(M.I18N.l('BookingReminderTitle'), {
+								  body: M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail')
+								, icon: "theme/images/Icon.png"
+								, tag: '2'
+							}
+						);
+						//n.onshow = function () { 
+						//	setTimeout(n.close.bind(n), 5000); 
+						//}
+						var myFuncClose = function() {
+							// show another notification in one hour
+							var myNewDate = D8.create(myDate.getTime()).addHours(1).date;
+							that.startBrowserBookingNotification(myNewDate);
 						}
-					);
-					//n.onshow = function () { 
-					//	setTimeout(n.close.bind(n), 5000); 
-					//}
-					var myFuncClose = function() {
-						// show another notification in one hour
-						var myNewDate = D8.create(myDate.getTime()).addHours(1).date;
-						that.startBrowserBookingNotification(myNewDate);
-					}
-					var myFuncClick = function() {
-						DigiWebApp.NavigationController.toBookTimePage();
-						myFuncClose();
-					}
-					that.startBrowserBookingNotificationObject.onclose = myFuncClose;
-					that.startBrowserBookingNotificationObject.onclick = myFuncClick;
-	    		} else {
-	    			alert(M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'));
-	    		}
-	    	});
+						var myFuncClick = function() {
+							DigiWebApp.NavigationController.toBookTimePage();
+							myFuncClose();
+						}
+						that.startBrowserBookingNotificationObject.onclose = myFuncClose;
+						that.startBrowserBookingNotificationObject.onclick = myFuncClick;
+		    		} else {
+		    			alert(M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'));
+		    		}
+		    	});
+	    	} catch(e){
+	    		alert(M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'));
+	    	}
 		}
 		
 		if (showInMilliseconds > 0) {
@@ -2274,7 +2278,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		} else {
 			showNotificationFunc();
 		}
-		
+
     }
 	, startBookingNotification: function(myDate) {
     	
