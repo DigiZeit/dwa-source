@@ -778,8 +778,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				if (   (currentBookingNotificationTimestamp != null && typeof(currentBookingNotificationTimestamp) != "undefined")
 				) {
 					try{window.plugin.notification.local.cancel('2');}catch(e){}
-					alert(currentBookingNotificationTimestamp + " " + nowTimestamp);
-					if (currentBookingNotificationTimestamp > nowTimestamp) {
+					if (currentBookingNotificationTimestamp < nowTimestamp) {
 						pluginObj.notification.local.add({
 						    id:         '2',
 						    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
