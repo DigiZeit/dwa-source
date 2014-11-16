@@ -2265,7 +2265,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 			    ongoing:    false, // Prevent clearing of notification (Android only)
 			});
-		}catch(e){alert(error);}
+		}catch(e){trackError(e);}
 	}
     
 	, clearBookingNotification: function() {
@@ -2277,7 +2277,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			pluginObj = window.plugins;
 		}
 
-		try{pluginObj.notification.local.cancel('2');}catch(e){}
+		try{pluginObj.notification.local.cancel('2');}catch(e){trackError(e);}
 	}
 
 });
