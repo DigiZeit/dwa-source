@@ -2335,9 +2335,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 				pluginObj.notification.local.promptForPermission();
 			} catch(e) {}
 			
-			var myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting + M.I18N.l('BookingReminderMessageTail');
+			var myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting;
 			if (hourSetting == 1) {
-				myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting + M.I18N.l('BookingReminderMessageTailSingle');
+				myReminderMessage += M.I18N.l('BookingReminderMessageTailSingle');
+			} else {
+				myReminderMessage += M.I18N.l('BookingReminderMessageTail');
 			}
 			try {
 				localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
