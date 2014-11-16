@@ -2226,14 +2226,17 @@ DigiWebApp.BookingController = M.Controller.extend({
     , startBrowserBookingNotificationObject: null
     , startBrowserBookingNotification: function(myDate) {
     	var that = this;
-    	
+		console.log('in startBrowserBookingNotification');
+
     	if (that.startBrowserBookingNotificationTimeout != null) {
     		window.clearTimeout(that.startBrowserBookingNotificationTimeout);
     		that.startBrowserBookingNotificationTimeout = null;
     	}
 
+		console.log('closing notification');
     	try{that.startBrowserBookingNotificationObject.close();}catch(e){}
 
+		console.log('loading startBooking');
 		var startBooking = _.sortBy(DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find()), function(booking){
 			return booking.get('timeStampStart');
 		})[0]; 
@@ -2247,10 +2250,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 			myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 			myDate = myDate.date;
 		}
-		console.log(myDate);
-		var nowTimestamp = new Date().getTime();
+		console.log('myDate: ' + myDate);
 		
+		var nowTimestamp = new Date().getTime();
 		var showInMilliseconds = myDate.getTime() - nowTimestamp;
+		console.log('showInMilliseconds: ' + showInMilliseconds);
 		
 		var showNotificationFunc = function() {
 			console.log("showing notification");
