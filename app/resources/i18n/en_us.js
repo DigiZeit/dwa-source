@@ -514,6 +514,7 @@ M.I18N.en_us = {
 	, BookingReminderTitle: 'Forgot closing time?'
 	, BookingReminderMessage: 'Start of work over '
 	, BookingReminderMessageTail: ' hours ago!'
+	, BookingReminderMessageTailSingle: ' hour ago!'
 
 	, orders: 'Orders'
 	, positions: 'Positions'

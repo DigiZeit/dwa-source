@@ -2284,7 +2284,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     	
 		try { // keinesfalls den regulären Betrieb stören
 			
-	    	if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')) == 0) {
+			var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
+	    	if (hourSetting == 0) {
 	    		return false;
 	    	}
 	    	
@@ -2334,12 +2335,16 @@ DigiWebApp.BookingController = M.Controller.extend({
 				pluginObj.notification.local.promptForPermission();
 			} catch(e) {}
 			
+			var myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting + M.I18N.l('BookingReminderMessageTail');
+			if (hourSetting == 1) {
+				myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting + M.I18N.l('BookingReminderMessageTailSingle');
+			}
 			try {
 				localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
 				var notificationOptions = {
 				    id:         '2',
 				    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-				    message:    M.I18N.l('BookingReminderMessage') + DigiWebApp.SettingsController.getSetting('BookingReminderHours') + M.I18N.l('BookingReminderMessageTail'),  // The message that is displayed
+				    message:    myReminderMessage,  // The message that is displayed
 				    //repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
 				    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
 				    ongoing:    false, // Prevent clearing of notification (Android only)
