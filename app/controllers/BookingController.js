@@ -2300,11 +2300,15 @@ DigiWebApp.BookingController = M.Controller.extend({
 		var feierabendBookings = [];
 		if (alleBookings.length > 0) feierabendBookings = _.filter(alleBookings, function(booking) { return booking.get('istFeierabend'); });
 		var lastFeierabend = null;
-		if (feierabendBookings.length > 0) lastFeierabend = _.sortBy(feierabendBookings, function(booking) { return booking.get('timeStampStart'); })[feierabendBookings.length - 1];
-		var bookingsAfterLastFeierabend = [];
-		if (lastFeierabend != null) bookingsAfterLastFeierabend = _.filter(alleBookings, function(booking) { return booking.get('timeStampStart') > lastFeierabend.get('timeStampStart'); });
 		var startBooking;
-		if (bookingsAfterLastFeierabend.length > 0) startBooking = _.sortBy(bookingsAfterLastFeierabend, function(booking) { return booking.get('timeStampStart'); })[0]; 
+		if (feierabendBookings.length > 0) {
+			lastFeierabend = _.sortBy(feierabendBookings, function(booking) { return booking.get('timeStampStart'); })[feierabendBookings.length - 1];
+			var bookingsAfterLastFeierabend = [];
+			if (lastFeierabend != null) bookingsAfterLastFeierabend = _.filter(alleBookings, function(booking) { return booking.get('timeStampStart') > lastFeierabend.get('timeStampStart'); });
+			if (bookingsAfterLastFeierabend.length > 0) startBooking = _.sortBy(bookingsAfterLastFeierabend, function(booking) { return booking.get('timeStampStart'); })[0]; 
+		} else {
+			startBooking = _.sortBy(alleBookings, function(booking) { return booking.get('timeStampStart'); })[0]; 
+		}
 
 		if (typeof(myDate) == "undefined") {
 			if (typeof(startBooking) != "undefined") {
