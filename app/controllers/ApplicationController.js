@@ -430,6 +430,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 		
 		, nativeProgressAvailable: function() {
+			if (DigiWebApp.SettingsController.getSetting('silentLoader') == YES) return false;
 			if (typeof(navigator) == "undefined" || typeof(navigator.notification) == "undefined" || typeof(navigator.notification.progressStart) == "undefined" || typeof(navigator.notification.progressStop) == "undefined") {
 				return false;
 			} else {
