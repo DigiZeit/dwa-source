@@ -1841,7 +1841,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         var finishBooking = function() {
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
-            var notificationMessage = " ";
+            var notificationMessage = M.I18N.l('abwesend');
     		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
     		DigiWebApp.ApplicationController.startNotification();
         	var autoSyncAfterCD = DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay');

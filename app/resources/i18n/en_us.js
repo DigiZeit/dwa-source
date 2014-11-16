@@ -528,5 +528,6 @@ M.I18N.en_us = {
 	, closeAppAfterCloseDay: 'Close App after closing day'
 
 	, exitApp: 'Closing app...'
+	, abwesend: "absent"
 
 };

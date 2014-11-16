@@ -527,5 +527,6 @@ M.I18N.de_de = {
 	, closeAppAfterCloseDay: 'App nach Feierabend schließen'
 	
 	, exitApp: 'App wird geschlossen...'
+	, abwesend: "abwesend"
 		
 };

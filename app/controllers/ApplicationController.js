@@ -737,7 +737,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, fixToobarsIntervalVar: null
 	
-	, notificationMessage: ""
+	, notificationMessage: M.I18N.l('abwesend')
 	, startNotification: function() {
 		var that = this;
 
@@ -3051,7 +3051,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
 		try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
 		try{window.plugin.notification.local.cancel('1');}catch(e){}
-		try{window.plugin.notification.local.cancel('2');}catch(e){}
+		//try{window.plugin.notification.local.cancel('2');}catch(e){}
 		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 			navigator.app.exitApp();
 		}
