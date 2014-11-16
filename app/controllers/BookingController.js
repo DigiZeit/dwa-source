@@ -2211,7 +2211,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         //bookingStr = M.Date.create(this.currentBooking.get('timeStampStart')).format('dd.mm.yy HH:MM');
         bookingStr = M.Date.create(myDisplayTimestamp).format('dd.mm.yy HH:MM');
         
-        var notificationMessage = M.I18N.l('bookingSince') + " " + bookingStr;
+        var notificationMessage = M.I18N.l('bookingNotificationSince') + " " + bookingStr;
 		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
 		DigiWebApp.ApplicationController.startNotification();
         

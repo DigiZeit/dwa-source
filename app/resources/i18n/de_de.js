@@ -528,5 +528,6 @@ M.I18N.de_de = {
 	
 	, exitApp: 'App wird geschlossen...'
 	, abwesend: "abwesend"
-		
+	, bookingNotificationSince: "akt. Buchung seit"
+	
 };

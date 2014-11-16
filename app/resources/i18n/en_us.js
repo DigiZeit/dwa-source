@@ -529,5 +529,6 @@ M.I18N.en_us = {
 
 	, exitApp: 'Closing app...'
 	, abwesend: "absent"
+	, bookingNotificationSince: "cur. booking since"
 
 };
