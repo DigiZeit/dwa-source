@@ -2263,6 +2263,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 							//}
 							var myFuncClose = function() {
 								// show another notification in one hour
+								try{pluginObj.notification.local.cancelAll();}catch(e){}
 								var myNewDate = D8.create(myDate.getTime()).addHours(1).date;
 								that.startBrowserBookingNotification(myNewDate);
 							}
