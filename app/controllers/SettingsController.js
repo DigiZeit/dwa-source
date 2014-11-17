@@ -284,8 +284,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
             
-            
-
+    		if (onIOS) {
+    			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+    			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+    			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+    		}
+    		
             var autoSaveGPSData = DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData");
             try {
 	            if (typeof(record.record.autoSaveGPSData) !== "undefined") {
