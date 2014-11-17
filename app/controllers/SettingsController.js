@@ -614,15 +614,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 
         that.set('settings', settings);
 
-		if (onIOS) {
-			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
-			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
-		}
-
 		var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
@@ -993,7 +984,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 																	if (DigiWebApp.SettingsController.featureAvailable('404')) {
 	                                                                    DigiWebApp.NavigationController.backToButtonDashboardPage();
 																	} else {
-	                                                                    DigiWebApp.NavigationController.backToDashboardPage();
+																		DigiWebApp.NavigationController.backToDashboardPage();
 																	}
                                                             		DigiWebApp.SettingsController.saveDone = YES;
                                                                 }

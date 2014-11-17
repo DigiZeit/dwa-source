@@ -901,8 +901,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 		DigiWebApp.SettingsController.init(YES,YES);
         
-		DigiWebApp.ApplicationController.startBgGeo();
-		DigiWebApp.ApplicationController.startNotification();
+		if (onIOS) {
+			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
+			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
+		} else {
+			DigiWebApp.ApplicationController.startBgGeo();
+			DigiWebApp.ApplicationController.startNotification();
+		}
 
 		if (DigiWebApp.SettingsController.getSetting('debug')) { 
         	DigiWebApp.SettingsController.globalDebugMode = YES; 
