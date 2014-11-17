@@ -743,131 +743,134 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
-		if (that.notificationMessage == null) {
-			that.notificationMessage = M.I18N.l('abwesend');
-		}
-		// notification.local is supposed to reside in "window.plugin"
-		var pluginObj = window.plugin;
-		if (typeof(pluginObj) == "undefined") {
-			pluginObj = window.plugins;
-		}
-		if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
-			that.notificationInitiated = YES;
-			try{pluginObj.notification.local.cancelAll();}catch(e){}
-			DigiWebApp.BookingController.startBookingNotification();
-		}
-
-		if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
-			return false;
-		}
-		
-		try {
-			pluginObj.notification.local.hasPermission(function (granted) {
-			    // console.log('Permission has been granted: ' + granted);
-			});
-			pluginObj.notification.local.promptForPermission();
-	//		window.plugin.notification.local.add({
-	//		    id:         String,  // A unique id of the notifiction
-	//		    date:       Date,    // This expects a date object
-	//		    message:    String,  // The message that is displayed
-	//		    title:      String,  // The title of the message
-	//		    repeat:     String,  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
-	//		    badge:      Number,  // Displays number badge to notification
-	//		    sound:      String,  // A sound to be played
-	//		    json:       String,  // Data to be passed through the notification
-	//		    autoCancel: Boolean, // Setting this flag and the notification is automatically canceled when the user clicks it
-	//		    ongoing:    Boolean, // Prevent clearing of notification (Android only)
-	//		});
-		} catch(e) {}
-		try {
-						
-			try{window.plugin.notification.local.cancel('1');}catch(e){}
-			pluginObj.notification.local.add({
-			    id:         '1',
-			    message:    that.notificationMessage,  // The message that is displayed
-			    title:      'DIGI-WebApp',  // The title of the message
-				sound:      null,  // A sound to be played
-			    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
-			    ongoing:    true, // Prevent clearing of notification (Android only)
-			});
-			//alert("added notification '" + that.notificationMessage + "'");
-		}catch(e){trackError(e);}
-	}
-
-	, startBgGeo: function() {
-		try {
-			
-			// backgroundGeoLocation is supposed to reside in "window.plugins"
-			var pluginObj = window.plugins;
-			if (typeof(pluginObj) == "undefined") {
-				pluginObj = window.plugin;
+		if (!onIOS) {
+			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
+			if (that.notificationMessage == null) {
+				that.notificationMessage = M.I18N.l('abwesend');
 			}
-			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.backgroundGeoLocation) == "undefined") {
+			// notification.local is supposed to reside in "window.plugin"
+			var pluginObj = window.plugin;
+			if (typeof(pluginObj) == "undefined") {
+				pluginObj = window.plugins;
+			}
+			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
+				that.notificationInitiated = YES;
+				try{pluginObj.notification.local.cancelAll();}catch(e){}
+				DigiWebApp.BookingController.startBookingNotification();
+			}
+	
+			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
 				return false;
 			}
 			
 			try {
-				if (DigiWebApp.ApplicationController.bgGeo != null) {
-					DigiWebApp.ApplicationController.bgGeo.stop();
-				}
+				pluginObj.notification.local.hasPermission(function (granted) {
+				    // console.log('Permission has been granted: ' + granted);
+				});
+				pluginObj.notification.local.promptForPermission();
+		//		window.plugin.notification.local.add({
+		//		    id:         String,  // A unique id of the notifiction
+		//		    date:       Date,    // This expects a date object
+		//		    message:    String,  // The message that is displayed
+		//		    title:      String,  // The title of the message
+		//		    repeat:     String,  // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+		//		    badge:      Number,  // Displays number badge to notification
+		//		    sound:      String,  // A sound to be played
+		//		    json:       String,  // Data to be passed through the notification
+		//		    autoCancel: Boolean, // Setting this flag and the notification is automatically canceled when the user clicks it
+		//		    ongoing:    Boolean, // Prevent clearing of notification (Android only)
+		//		});
 			} catch(e) {}
-			
-			DigiWebApp.ApplicationController.bgGeo = pluginObj.backgroundGeoLocation;
-
-		    //DigiWebApp.SettingsController.init(YES,YES);
-
-		    if (!DigiWebApp.SettingsController.getSetting('GPSBackgroundService')) {
-		    	return false;
-		    }
-		    
-			var yourAjaxCallback = function(response) {
-		        bgGeo.finish();
-		    };
-
-		    /**
-		    * This callback will be executed every time a geolocation is recorded in the background.
-		    */
-		    var callbackFn = function(location) {
-		        //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-		        //writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-		        yourAjaxCallback.call(this);
-		    };
-
-		    var failureFn = function(error) {
-		        //console.log('BackgroundGeoLocation error: ' + error);
-		        //writeToLog('BackgroundGeoLocation error: ' + error);
-		    }
-		    
-		    //var myLocationTimeout = 10;
-			var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
-		    if (myLocationTimeout == 0) {
-		    	myLocationTimeout = 10;
-//		    } else {
-//		    	myLocationTimeout = myLocationTimeout - 1;
-		    }
-		    	
-		    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
-		        desiredAccuracy: 100,
-		        stationaryRadius: 20,
-		        distanceFilter: 30,
-		        locationTimeout: myLocationTimeout,
-		        notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
-		        notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
-		        activityType: 'AutomotiveNavigation',
-		        debug: false // <-- enable this hear sounds for background-geolocation life-cycle.
-		    });
-
-		    // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
-		    DigiWebApp.ApplicationController.bgGeo.start();
-
-		    // If you wish to turn OFF background-tracking, call the #stop method.
-		    // DigiWebApp.ApplicationController.bgGeo.stop()
-
-		} catch(e) {
-			console.log("unable to enable backgroundGeoLocation");
+			try {
+							
+				try{window.plugin.notification.local.cancel('1');}catch(e){}
+				pluginObj.notification.local.add({
+				    id:         '1',
+				    message:    that.notificationMessage,  // The message that is displayed
+				    title:      'DIGI-WebApp',  // The title of the message
+					sound:      null,  // A sound to be played
+				    autoCancel: false, // Setting this flag and the notification is automatically canceled when the user clicks it
+				    ongoing:    true, // Prevent clearing of notification (Android only)
+				});
+				//alert("added notification '" + that.notificationMessage + "'");
+			}catch(e){trackError(e);}
 		}
+	}
 
+	, startBgGeo: function() {
+		if (!onIOS) {
+			try {
+				
+				// backgroundGeoLocation is supposed to reside in "window.plugins"
+				var pluginObj = window.plugins;
+				if (typeof(pluginObj) == "undefined") {
+					pluginObj = window.plugin;
+				}
+				if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.backgroundGeoLocation) == "undefined") {
+					return false;
+				}
+				
+				try {
+					if (DigiWebApp.ApplicationController.bgGeo != null) {
+						DigiWebApp.ApplicationController.bgGeo.stop();
+					}
+				} catch(e) {}
+				
+				DigiWebApp.ApplicationController.bgGeo = pluginObj.backgroundGeoLocation;
+	
+			    //DigiWebApp.SettingsController.init(YES,YES);
+	
+			    if (!DigiWebApp.SettingsController.getSetting('GPSBackgroundService')) {
+			    	return false;
+			    }
+			    
+				var yourAjaxCallback = function(response) {
+			        bgGeo.finish();
+			    };
+	
+			    /**
+			    * This callback will be executed every time a geolocation is recorded in the background.
+			    */
+			    var callbackFn = function(location) {
+			        //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+			        //writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+			        yourAjaxCallback.call(this);
+			    };
+	
+			    var failureFn = function(error) {
+			        //console.log('BackgroundGeoLocation error: ' + error);
+			        //writeToLog('BackgroundGeoLocation error: ' + error);
+			    }
+			    
+			    //var myLocationTimeout = 10;
+				var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
+			    if (myLocationTimeout == 0) {
+			    	myLocationTimeout = 10;
+	//		    } else {
+	//		    	myLocationTimeout = myLocationTimeout - 1;
+			    }
+			    	
+			    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
+			        desiredAccuracy: 100,
+			        stationaryRadius: 20,
+			        distanceFilter: 30,
+			        locationTimeout: myLocationTimeout,
+			        notificationTitle: M.I18N.l('GPSBackgroundServiceNotificationTitle'), // <-- android only, customize the title of the notification
+			        notificationText: M.I18N.l('GPSBackgroundServiceNotificationMessage'), // <-- android only, customize the text of the notification
+			        activityType: 'AutomotiveNavigation',
+			        debug: false // <-- enable this hear sounds for background-geolocation life-cycle.
+			    });
+	
+			    // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
+			    DigiWebApp.ApplicationController.bgGeo.start();
+	
+			    // If you wish to turn OFF background-tracking, call the #stop method.
+			    // DigiWebApp.ApplicationController.bgGeo.stop()
+	
+			} catch(e) {
+				console.log("unable to enable backgroundGeoLocation");
+			}
+		}
 	}
 	
 	, devicereadyhandler: function() {
