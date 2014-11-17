@@ -3033,13 +3033,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
     , exitApp: function() {
-		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
-		try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
-		try{window.plugin.notification.local.cancel('1');}catch(e){}
-		//try{window.plugin.notification.local.cancel('2');}catch(e){}
-		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
-			navigator.app.exitApp();
-		}
+    	if (!onIOS) {
+			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
+			try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
+			try{window.plugin.notification.local.cancel('1');}catch(e){}
+			//try{window.plugin.notification.local.cancel('2');}catch(e){}
+			if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
+				navigator.app.exitApp();
+			}
+    	}
 		DigiWebApp.ApplicationController.DigiLoaderView.hide(); // just in case
     }
 });
