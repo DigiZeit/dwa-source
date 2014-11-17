@@ -250,6 +250,12 @@ DigiWebApp.Booking = M.Model.create({
 	            if (found.get("longitude_bis") == null) {
 	            	found.set("longitude_bis", location.longitude);
 	            }
+	            if (found.get("genauigkeitBis") == null) {
+	            	found.set("genauigkeitBis", location.accuracy);
+	            }
+	            if (found.get("gps_zeitstempelBis") == null) {
+	            	found.set("gps_zeitstempelBis", location.date.date.getTime());
+	            }
 	
 	        	found.save();
 	        	
@@ -285,7 +291,13 @@ DigiWebApp.Booking = M.Model.create({
 		            if (newUnsent.get("longitude_bis") == null) {
 		            	newUnsent.set("longitude_bis", location.longitude);
 		            }
-	
+		            if (newUnsent.get("genauigkeitBis") == null) {
+		            	newUnsent.set("genauigkeitBis", location.accuracy);
+		            }
+		            if (newUnsent.get("gps_zeitstempelBis") == null) {
+		            	newUnsent.set("gps_zeitstempelBis", location.date.date.getTime());
+		            }
+
 		            newUnsent.save(); // neue Buchung speichern
 		            found.del(); // bereits gesendete Buchung löschen
 		            
@@ -310,6 +322,8 @@ DigiWebApp.Booking = M.Model.create({
 	        if (location) {
 	        	that.set('latitude_bis',  location.latitude);
 	        	that.set('longitude_bis', location.longitude);
+            	that.set("genauigkeitBis", location.accuracy);
+            	that.set("gps_zeitstempelBis", location.date.date.getTime());
 	        }
 	        that.set('timeStampEnd', myTimeStampEnd);
 	

@@ -854,12 +854,20 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    
 		    var lat = null;
 		    var lon = null;
+		    var genauigkeitVon = null;
+		    var gps_zeitstempelVon = null;
 		    if (location) {
 				if (location.latitude) {
 				    lat = location.latitude;
 				}
 				if (location.longitude) {
 				    lon = location.longitude;
+				}
+				if (location.accuracy) {
+					genauigkeitVon = location.accuracy;
+				}
+				if (location.date) {
+					gps_zeitstempelVon = location.date.date.getTime();
 				}
 		    }
 		    
@@ -878,6 +886,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 				, pId: posId
 				, aId: actId
 				, remark: remarkStr
+				, genauigkeitVon: genauigkeitVon
+				, gps_zeitstempelVon: gps_zeitstempelVon
 		    });
 		    
 		    var employeeIds = localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) || localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
@@ -1137,8 +1147,8 @@ DigiWebApp.BookingController = M.Controller.extend({
             , istFeierabend: false
             , istKolonnenbuchung: false
             , mitarbeiterId: DigiWebApp.SettingsController.getSetting("mitarbeiterId")
-            , genauigkeitVon: null
-            , gps_zeitstempelVon: null
+            , genauigkeitVon: obj.genauigkeitVon ? obj.genauigkeitVon : null
+            , gps_zeitstempelVon: obj.gps_zeitstempelVon ? obj.gps_zeitstempelVon : null
             , ermittlungsverfahrenVon: null
             , genauigkeitBis: null
             , gps_zeitstempelBis: null
