@@ -197,7 +197,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 
 			// höchstes letztesBis per Mitarbeiter suchen
 			var letztesBis = letztesBisArr["0"];
-			_.each(toIntArray(JSON.parse(m.get('mitarbeiterIds'))), function(mId){
+			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId){
 				if (typeof(letztesBisArr["" + mId]) != "undefined") {
 					if (letztesBisArr["" + mId].getTimestamp() > letztesBis.getTimestamp()) {
 						letztesBis = letztesBisArr["" + mId];
@@ -273,7 +273,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			zeitbuchungenList = that.berechneVonBis();
 		}
 		_.each(zeitbuchungenList, function(m) {
-			  var zeitbuchungMAIds = toIntArray(JSON.parse(m.get("mitarbeiterIds")));
+			  var zeitbuchungMAIds = JSON.parse(m.get("mitarbeiterIds"));
 			  _.each(zeitbuchungMAIds, function(el) {
 	        		var myMitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find({query:{identifier: 'id', operator: '=', value: el}})[0];
 	        		if (typeof myMitarbeiter !== "undefined") {
@@ -294,7 +294,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			var items = [];
 			var mySumme = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " 00:00");
 			_.each(zeitbuchungenList,function(zeitbuch) {
-				   var maIds = toIntArray(JSON.parse(zeitbuch.get("mitarbeiterIds")));
+				   var maIds = JSON.parse(zeitbuch.get("mitarbeiterIds"));
 				   _.each(maIds, function(maId) {
 					   	if (maId === el.get("id")) {
 				    	  // benutze diese Zeitbuchung
