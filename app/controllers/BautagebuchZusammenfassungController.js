@@ -67,7 +67,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		that.set("projektleiterId", myItem.get("projektleiterId"));
 		that.set("auftragsId", myItem.get("orderId"));
 		that.set("auftragsName", myItem.get("orderName"));
-		that.set("mitarbeiterIds", toIntArray(myItem.get("selektierteMitarbeiter")));
+		that.set("mitarbeiterIds", myItem.get("selektierteMitarbeiter"));
 		that.set("startUhrzeit", myItem.get("startUhrzeit"));
 
 		that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
