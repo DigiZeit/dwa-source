@@ -71,7 +71,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		that.set("positionName", myItem.get("positionName"));
 		that.set("activityId", myItem.get("activityId"));
 		that.set("activityName", myItem.get("activityName"));
-		that.set("mitarbeiterIds", JSON.parse(myItem.get("mitarbeiterIds")));
+		that.set("mitarbeiterIds", toIntArray(JSON.parse(myItem.get("mitarbeiterIds"))));
 		that.set("verbuchen", myItem.get("verbuchen"));
 		that.set("timeStampStart", myItem.get("timeStampStart"));
 		that.set("timeStampEnd", myItem.get("timeStampEnd"));
@@ -88,7 +88,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		
 		var positionSelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'positionComboBox').getSelection() !== "0" );
 		var activitySelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection() !== "0" );
-		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
+		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.getMitarbeiterIds() === null || DigiWebApp.BautagebuchZeitenDetailsController.getMitarbeiterIds().length === 0));
 		
 		if (!positionSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -120,7 +120,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 				, operator: '='
 				, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
 			}});
-			_.each(that.mitarbeiterIds, function(m) {
+			_.each(that.getMitarbeiterIds(), function(m) {
 				_.each(bautagesberichteAmGleichenDatum, function(b) {
 					var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
 							  identifier: 'bautagesberichtId'
@@ -128,7 +128,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 							, value: b.get("id")
 					}});
 					_.each(myZeitbuchungen, function(z) {
-						if (JSON.parse(z.get("mitarbeiterIds")).indexOf(m) != -1) {
+						if (JSON.parse(z.get("mitarbeiterIds")).indexOf(m) != -1 && z.m_id != that.item.m_id) {
 							var zVonD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
 							var zBisD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("bis")).getTimestamp();
 							var thatVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.von).getTimestamp();
@@ -186,7 +186,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	
 			that.item.set("activityId", that.activityId);
 			that.item.set("activityName", that.activityName);
-			that.item.set("mitarbeiterIds", JSON.stringify(that.mitarbeiterIds));
+			that.item.set("mitarbeiterIds", JSON.stringify(that.getMitarbeiterIds()));
 			that.item.set("verbuchen", that.verbuchen);
 			that.item.set("von", that.von);
 			that.item.set("timeStampStart", that.timeStampStart);
@@ -219,7 +219,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 			    					//that.set("activityId", myOldItem.record.activityId);
 			    					//that.set("activityName", myOldItem.record.activityName);
 			    					that.setTaetigkeiten(myOldItem.record.positionId);
-			    					that.set("mitarbeiterIds", JSON.parse(myOldItem.record.mitarbeiterIds));
+			    					that.set("mitarbeiterIds", toIntArray(JSON.parse(myOldItem.record.mitarbeiterIds)));
 			    					that.set("von", myOldItem.record.bis);
 			    					that.set("bis", myOldItem.record.bis);
 			    					that.setVonBis();
@@ -372,6 +372,11 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
 				that.setDauer();
   		}
+	}
+	
+	, getMitarbeiterIds: function() {
+		var that = this;
+		return toIntArray(that.mitarbeiterIds);
 	}
 
 });

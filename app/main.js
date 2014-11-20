@@ -646,3 +646,18 @@ if (!onIOS) {
 		  });
 	} catch(e) {}
 }
+
+function toIntArray(myArray) {
+	var result = [];
+	if (typeof(myArray) == "object" && myArray.length > 0) {
+		result = _.map(myArray, function(n) {
+			var r = parseIntRadixTen(n);
+			if (isNaN(r)) {
+				return;
+			} else {
+				return r;
+			}
+		});
+	}
+	return _.compact(result);
+}

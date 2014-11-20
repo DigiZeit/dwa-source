@@ -76,7 +76,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 
 				
 				// im Bautagesbericht verfügbare Mitarbeiter kopieren und ausgewählte selektieren
-                var mitarbeiterIds = DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds; 
+                var mitarbeiterIds = toIntArray(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds); 
                 var mitarbeiterList = [];
                 var mitarbeiterArray = mitarbeiterList;
 				mitarbeiterArray = _.map(JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterListSelected)), function(o) {

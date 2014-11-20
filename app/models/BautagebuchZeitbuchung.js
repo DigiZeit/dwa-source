@@ -23,7 +23,7 @@ DigiWebApp.BautagebuchZeitbuchung = M.Model.create({
         isRequired: NO
     })
 
-    , mitarbeiterId: M.Model.attr('String', {
+    , mitarbeiterId: M.Model.attr('Number', {
     	// runtime only (für das senden)
         isRequired: NO
     })
@@ -132,6 +132,9 @@ DigiWebApp.BautagebuchZeitbuchung = M.Model.create({
 	
 	, saveSorted: function() {
 	    var that = this;
+		if (that.get('von') == that.get('bis')) {
+			return true;
+		}
 	    if (!that.save()) return false;
 	
 	    // add m_id to Key-Stringlist

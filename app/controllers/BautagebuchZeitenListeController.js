@@ -44,8 +44,9 @@ DigiWebApp.BautagebuchZeitenListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchZeitenDetailsController.set("positionName", null);
 		DigiWebApp.BautagebuchZeitenDetailsController.set("activityId", null);
 		DigiWebApp.BautagebuchZeitenDetailsController.set("activityName", null);
+		
 		if (vorselektierterMitarbeiter) {
-			DigiWebApp.BautagebuchZeitenDetailsController.set("mitarbeiterIds", [vorselektierterMitarbeiter]);
+			DigiWebApp.BautagebuchZeitenDetailsController.set("mitarbeiterIds", toIntArray([vorselektierterMitarbeiter]));
 		} else {
 			DigiWebApp.BautagebuchZeitenDetailsController.set("mitarbeiterIds", null);
 		}

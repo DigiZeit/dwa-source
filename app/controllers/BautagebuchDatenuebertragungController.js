@@ -13,36 +13,6 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	, consoleLogOutput: NO
 	
-	, abgeschlosseneUebertragen: function() {
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
-		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
-		if (abgeschlosseneBautagesberichte.length > 0) {
-			var doSenden = function(item, callback) {
-				DigiWebApp.BautagebuchDatenuebertragungController.senden(
-						  item
-						, function(msg) {
-//							  DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneBautagesberichte, function(el){
-//								  return (item.get('id') != el.get('id'));
-//							  });
-							  DigiWebApp.BautagebuchBautagesberichteListeController.init(); // Liste aktualisieren
-							  callback();
-						}
-						, function(xhr,err) {
-							trackError(err);
-				            DigiWebApp.ApplicationController.nativeAlertDialogView({
-				                title: M.I18N.l('BautagebuchUebertragungsfehler')
-				              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
-				            });
-						}
-				);
-			};
-			var itemToSend = abgeschlosseneBautagesberichte[0];
-			doSenden(itemToSend, DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneUebertragen);
-		} else {
-			// nothing to do
-		}
-	}
-	
 	, empfangen: function(successReturnCallback, errorReturnCallback) {
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
@@ -69,6 +39,66 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		});
 	
 		
+	}
+
+	, senden: function(item, successReturnCallback, errorReturnCallback) {
+		// item ist ein Bautagesbericht
+
+		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		
+		that.successReturnCallback = successReturnCallback;
+		that.errorReturnCallback = function() {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+			errorReturnCallback();
+		}
+
+		//var successCallback = function(data, msg, request) {};
+		//var errorCallback = function(request, msg) {};
+		
+		// Verarbeitungskette definieren und starten
+		DigiWebApp.RequestController.getDatabaseServer(function() {
+			that.sendeBautagesbericht(item,function() {
+				that.sendeZeitbuchungen(item,function() {
+					that.sendeMaterialbuchungen(item,function() {
+						that.sendeNotizen(item,function() {
+							that.sendeMedien(item,function() {
+								that.sendeBautagesberichtFertig(
+										item
+									  , that.successReturnCallback
+									  , that.errorReturnCallback);
+							}, that.errorReturnCallback);
+						}, that.errorReturnCallback);
+					}, that.errorReturnCallback);
+				}, that.errorReturnCallback);
+			}, that.errorReturnCallback);
+		});
+	}
+
+	, abgeschlosseneUebertragen: function() {
+		var that = DigiWebApp.BautagebuchDatenuebertragungController;
+		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
+		if (abgeschlosseneBautagesberichte.length > 0) {
+			var doSenden = function(item, callback) {
+				DigiWebApp.BautagebuchDatenuebertragungController.senden(
+						  item
+						, function(msg) {
+							  DigiWebApp.BautagebuchBautagesberichteListeController.init(); // Liste aktualisieren
+							  callback();
+						}
+						, function(xhr,err) {
+							trackError(err);
+				            DigiWebApp.ApplicationController.nativeAlertDialogView({
+				                title: M.I18N.l('BautagebuchUebertragungsfehler')
+				              , message: M.I18N.l('BautagebuchUebertragungsfehlerMsg')
+				            });
+						}
+				);
+			};
+			var itemToSend = abgeschlosseneBautagesberichte[0];
+			doSenden(itemToSend, DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneUebertragen);
+		} else {
+			// nothing to do
+		}
 	}
 	
 	, empfangeMengeneinheiten: function(successCallback, errorCallback) {
@@ -455,40 +485,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
-	
-	, senden: function(item, successReturnCallback, errorReturnCallback) {
-		// item ist ein Bautagesbericht
-
-		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
-		that.successReturnCallback = successReturnCallback;
-		that.errorReturnCallback = function() {
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-			errorReturnCallback();
-		}
-
-		//var successCallback = function(data, msg, request) {};
-		//var errorCallback = function(request, msg) {};
-		
-		// Verarbeitungskette definieren und starten
-		DigiWebApp.RequestController.getDatabaseServer(function() {
-			that.sendeBautagesbericht(item,function() {
-				that.sendeZeitbuchungen(item,function() {
-					that.sendeMaterialbuchungen(item,function() {
-						that.sendeNotizen(item,function() {
-							that.sendeMedien(item,function() {
-								that.sendeBautagesberichtFertig(
-										item
-									  , that.successReturnCallback
-									  , that.errorReturnCallback);
-							}, that.errorReturnCallback);
-						}, that.errorReturnCallback);
-					}, that.errorReturnCallback);
-				}, that.errorReturnCallback);
-			}, that.errorReturnCallback);
-		});
-	}
-	
 	, sendeBautagesbericht: function(item, successCallback, errorCallback) {
 		// item ist ein Bautagesbericht
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
@@ -541,7 +538,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
             return parseIntRadixTen(z.get('_createdAt'));
         });
 		_.each(relevanteZeitbuchungenSorted, function(el) {
-			_.each(JSON.parse(el.get("mitarbeiterIds")), function(maId) {
+			_.each(toIntArray(JSON.parse(el.get("mitarbeiterIds"))), function(maId) {
 				var zeitbuch = DigiWebApp.BautagebuchZeitbuchung.createRecord({
 					  bautagesberichtId: item.get('id')
 				});
@@ -556,8 +553,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						zeitbuch.set(prop, el.get(prop));
 					}
 				}
-				zeitbuch.set("mitarbeiterId", maId);
-				items.push(zeitbuch.record);
+				zeitbuch.set("mitarbeiterId", parseIntRadixTen(maId));
+				if (zeitbuch.get('dauer') != "00:00") {
+					items.push(zeitbuch.record);
+				}
 			});
 		});
 		if (items.length !== 0) {
