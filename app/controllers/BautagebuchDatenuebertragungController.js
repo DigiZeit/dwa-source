@@ -538,7 +538,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
             return parseIntRadixTen(z.get('_createdAt'));
         });
 		_.each(relevanteZeitbuchungenSorted, function(el) {
-			_.each(toIntArray(JSON.parse(el.get("mitarbeiterIds"))), function(maId) {
+			_.each(JSON.parse(el.get("mitarbeiterIds")), function(maId) {
 				var zeitbuch = DigiWebApp.BautagebuchZeitbuchung.createRecord({
 					  bautagesberichtId: item.get('id')
 				});
