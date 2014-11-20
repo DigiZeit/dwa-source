@@ -88,7 +88,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		
 		var positionSelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'positionComboBox').getSelection() !== "0" );
 		var activitySelected = (M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection() !== "0" );
-		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.getMitarbeiterIds() === null || DigiWebApp.BautagebuchZeitenDetailsController.getMitarbeiterIds().length === 0));
+		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
 		
 		if (!positionSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -120,7 +120,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 				, operator: '='
 				, value: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
 			}});
-			_.each(that.getMitarbeiterIds(), function(m) {
+			_.each(that.mitarbeiterIds, function(m) {
 				_.each(bautagesberichteAmGleichenDatum, function(b) {
 					var myZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{
 							  identifier: 'bautagesberichtId'
@@ -186,7 +186,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	
 			that.item.set("activityId", that.activityId);
 			that.item.set("activityName", that.activityName);
-			that.item.set("mitarbeiterIds", JSON.stringify(that.getMitarbeiterIds()));
+			that.item.set("mitarbeiterIds", JSON.stringify(toIntArray(that.mitarbeiterIds)));
 			that.item.set("verbuchen", that.verbuchen);
 			that.item.set("von", that.von);
 			that.item.set("timeStampStart", that.timeStampStart);
@@ -374,9 +374,4 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
   		}
 	}
 	
-	, getMitarbeiterIds: function() {
-		var that = this;
-		return toIntArray(that.mitarbeiterIds);
-	}
-
 });
