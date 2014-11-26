@@ -28,7 +28,7 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		}
 	}
 
-	, neu: function(bautagesberichtTyp, skipRedirect) {
+	, neu: function(bautagesberichtTyp, skipRedirect, orderName) {
 		//var that = this;
 		
 		if (bautagesberichtTyp) {
@@ -45,7 +45,11 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datum", D8.now().format("dd.mm.yyyy"));
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("projektleiterId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsId", null);
-		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", null);
+		if (orderName) {
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", orderName);
+		} else {
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", null);
+		}
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderName", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionId", null);
