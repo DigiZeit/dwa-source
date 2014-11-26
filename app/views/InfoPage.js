@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 5861'
+              value: 'Build: 5862'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -231,7 +231,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , phoneLabel: M.LabelView.design({
-              value: '<a href="phone://0049711709600">+49-711-70960-0</a>'
+              value: '<a href="phone://+49711709600">+49-711-70960-0</a>'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
