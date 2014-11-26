@@ -51,7 +51,7 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionName", null);
 		if (DigiWebApp.BautagebuchEinstellungenController.settings.alleMitarbeiterVorselektiert) {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", toIntArray(_.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;})));
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return parseIntRadixTen(obj.value);}));
 		} else {
 			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", null);
 		}

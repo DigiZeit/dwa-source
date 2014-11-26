@@ -56,7 +56,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		if (isFirstLoad) {
 			// setting defaults for contentBinding
 			that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", toIntArray(_.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return obj.value;})));
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return parseIntRadixTen(obj.value);}));
 		}
 	}
 	

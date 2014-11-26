@@ -213,7 +213,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			letztesBis = naechstesBis;
 			
 			// letztesBis für alle MAs dieser Zeitbuchung setzen
-			_.each(toIntArray(JSON.parse(m.get('mitarbeiterIds'))), function(mId){
+			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId){
 				letztesBisArr["" + mId] = letztesBis;
 			});
 			
