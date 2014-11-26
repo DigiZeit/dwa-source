@@ -227,7 +227,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 
         , cityLabel: M.LabelView.design({
               value: 'D-70794 Filderstadt'
-            , cssClass: 'infoLabel marginBottom25 unselectable'
+            , cssClass: 'infoLabel unselectable'
         })
 
         , phoneLabel: M.LabelView.design({
