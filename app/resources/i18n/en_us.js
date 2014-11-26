@@ -116,6 +116,7 @@ M.I18N.en_us = {
 	, specialCharProblemMsg: "Unsupported special characters! Use only: a-Z, 0-9, ä-Ü as well as: .,!?;:/'()+-=_$§%@€"
 	, handOrderTooLong: "Name too long"
 	, handOrderTooLongMsg: "The name of the handorder can have at most 16 characters."
+	, handOrderTooLongDTC6Msg: "The name of the handorder can have at most 50 characters."
 	, handOrderExists: "Exists already"
 	, handOrderExistsMsg: "There already exists a handorder with that name."
 	, handOrderSaveSuccess: "Handorder saved"

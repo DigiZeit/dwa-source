@@ -117,5 +117,7 @@ DigiWebApp.Settings = M.Model.create({
     , BookingReminderHours: M.Model.attr('Integer')
     
     , closeAppAfterCloseDay: M.Model.attr('Boolean')
+    
+    , DTC6aktiv: M.Model.attr('Boolean')
 
 }, M.DataProviderLocalStorage);

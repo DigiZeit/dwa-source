@@ -116,6 +116,7 @@ M.I18N.de_de = {
 	, specialCharProblemMsg: "Sie haben unerlaubte Sonderzeichen eingegeben! Erlaubt sind: a-Z, 0-9, ä-Ü sowie: .,!?;:/'()+-=_$§%@€"
 	, handOrderTooLong: "Eingabe zu lang"
 	, handOrderTooLongMsg: "Der Name des Handauftrags darf max. 16 Zeichen lang sein."
+	, handOrderTooLongDTC6Msg: "Der Name des Handauftrags darf max. 50 Zeichen lang sein."
 	, handOrderExists: "Bereits vorhanden"
 	, handOrderExistsMsg: "Ein Handauftrag mit dem gleichen Namen existiert bereits."
 	, handOrderSaveSuccess: "Auftrag angelegt"

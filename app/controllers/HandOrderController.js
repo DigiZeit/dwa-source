@@ -35,13 +35,18 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                     , message: M.I18N.l('handOrderExistsMsg')
                 });
                 return;
-            } else if (orderName.length > 16) {
+            } else if (orderName.length > 16 && !DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
                 //M.DialogView.alert({
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                       title: M.I18N.l('handOrderTooLong')
                     , message: M.I18N.l('handOrderTooLongMsg')
                 });
                 return;
+            } else if (orderName.length > 50 && DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+                DigiWebApp.ApplicationController.nativeAlertDialogView({
+                    title: M.I18N.l('handOrderTooLong')
+                  , message: M.I18N.l('handOrderTooLongDTC6Msg')
+              });
             } else {
                 var op = DigiWebApp.HandOrder.createRecord({
                       name: orderName

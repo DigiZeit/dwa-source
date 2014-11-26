@@ -73,6 +73,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , GPSBackgroundService: NO
         , BookingReminderHours: 11
         , closeAppAfterCloseDay: YES
+        , DTC6aktiv: NO
     }
 
     , defaultsettings: null
@@ -284,6 +285,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
             
+            var DTC6aktiv = record.get('DTC6aktiv');
+            if (!DTC6aktiv) DTC6aktiv = DigiWebApp.SettingsController.defaultsettings.get("DTC6aktiv");
+
     		if (onIOS) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -471,6 +475,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('closeAppAfterCloseDay')
 	                 , isSelected: closeAppAfterCloseDay
 	           }]
+	           , DTC6aktiv: DTC6aktiv
                
             };
         /* default values */
@@ -609,7 +614,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                    value: DigiWebApp.SettingsController.defaultsettings.get('closeAppAfterCloseDay')
                  , label: M.I18N.l('closeAppAfterCloseDay')
                }]
-               
+               , DTC6aktiv: DigiWebApp.SettingsController.defaultsettings.get("DTC6aktiv")
                
             };
             
@@ -844,7 +849,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	closeAppAfterCloseDay = $('#' + M.ViewManager.getView('settingsPage', 'closeAppAfterCloseDay').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         }
         
-        
+    	var DTC6aktiv                       = DigiWebApp.SettingsController.getSetting('DTC6aktiv');
+
         if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -965,9 +971,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('GPSBackgroundService', GPSBackgroundService);
                                                     record.set('BookingReminderHours', BookingReminderHours);
                                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
-                                                    
-                                                    
-                                                    
+                                                    record.set('DTC6aktiv', DTC6aktiv);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1055,6 +1059,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('GPSBackgroundService', GPSBackgroundService);
                                     record.set('BookingReminderHours', BookingReminderHours);
                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
+                                    record.set('DTC6aktiv', DTC6aktiv);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1116,6 +1121,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSBackgroundService', GPSBackgroundService);
                                 record.set('BookingReminderHours', BookingReminderHours);
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
+                                record.set('DTC6aktiv', DTC6aktiv);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1177,6 +1183,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('GPSBackgroundService', GPSBackgroundService);
                                 record.set('BookingReminderHours', BookingReminderHours);
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
+                                record.set('DTC6aktiv', DTC6aktiv);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1240,6 +1247,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , GPSBackgroundService: GPSBackgroundService
                                 , BookingReminderHours: BookingReminderHours
                                 , closeAppAfterCloseDay: closeAppAfterCloseDay
+                                , DTC6aktiv: DTC6aktiv
 
                           });
 
