@@ -230,6 +230,11 @@ DigiWebApp.InfoPage = M.PageView.design({
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
+        , phoneLabel: M.LabelView.design({
+              value: '<a href:"phone://0049711709600">+49-711-70960-0</a>'
+            , cssClass: 'infoLabel marginBottom25 unselectable'
+        })
+
         , emailLabel1: M.LabelView.design({
               value: 'eMail: '
             , cssClass: 'infoLabel unselectable'
