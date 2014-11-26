@@ -384,8 +384,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		  maxValue: 100
 		, currentValue: 0
 		
+		, shown: NO
+		
+		, minMaxVal: 500
+		
 		, increase: function(by) {
 			if (!this.nativeProgressAvailable()) return false;
+			if (!this.shown) return false;
 			if (typeof(by) != "undefined") {
 				this.currentValue = this.currentValue + parseIntRadixTen(by);
 			} else {
@@ -398,6 +403,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		, decrease: function(by) {
 			if (!this.nativeProgressAvailable()) return false;
+			if (!this.shown) return false;
 			if (typeof(by) != "undefined") {
 				this.currentValue = this.currentValue - parseIntRadixTen(by);
 			} else {
@@ -412,6 +418,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (!this.nativeProgressAvailable()) return false;
 			if (typeof(maxV) != "undefined") this.maxValue = parseIntRadixTen(maxV);
 			if (this.maxValue < 1) this.maxValue = 1;
+			if (maxV < this.minMaxVal) return true;
+			this.shown = YES;
 			navigator.notification.progressStart(title, message);
 			if (typeof(currentV) != "undefined") {
 				this.currentValue = parseIntRadixTen(currentV);
@@ -426,6 +434,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (!this.nativeProgressAvailable()) return false;
 			this.maxV = 100;
 			this.currentV = 0;
+			this.shown = NO;
 			navigator.notification.progressStop();
 		}
 		

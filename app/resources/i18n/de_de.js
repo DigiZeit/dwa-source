@@ -532,4 +532,7 @@ M.I18N.de_de = {
 	, abwesend: "abwesend"
 	, bookingNotificationSince: "akt. Buchung seit"
 	
+	, starteMaterialerfassung: "Starte Modul 'Materialerfassung'"
+	, starteNotizen: "Starte Modul 'Notizen'"
+
 };

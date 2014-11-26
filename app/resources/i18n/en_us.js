@@ -533,4 +533,7 @@ M.I18N.en_us = {
 	, abwesend: "absent"
 	, bookingNotificationSince: "cur. booking since"
 
+	, starteMaterialerfassung: "Starting material pickup module"
+	, starteNotizen: "Starting notes module"
+
 };

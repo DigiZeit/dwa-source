@@ -143,11 +143,12 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.herstellerComboBox.id + "_container").hide();
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.lieferantComboBox.id + "_container").hide();
 
+    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+    				
 			}
         }
 		, pageshow: {
 			action: function() {
-				DigiWebApp.ApplicationController.DigiLoaderView.hide();			
 			}
 		}
         , pagehide: {

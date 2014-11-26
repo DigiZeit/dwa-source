@@ -130,14 +130,13 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 	            	} else {
 	            		$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.positionComboBox.id + "_container").show();
 	            	}
-
+					DigiWebApp.ApplicationController.DigiLoaderView.hide();			
 			}
         }
 		, pageshow: {
 		    action: function() {
 				$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].focus();
 				$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].blur();
-				DigiWebApp.ApplicationController.DigiLoaderView.hide();			
 			}
 		}
         , pagehide: {
