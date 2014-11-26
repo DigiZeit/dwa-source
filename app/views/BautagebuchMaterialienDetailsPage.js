@@ -507,6 +507,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 	        	  inputType: M.INPUT_NUMBER
 	            //, label: M.I18N.l('BautagebuchMenge')
 	        	, cssClass: 'mengeInput'
+	        	, inputStep: 'any'
+	        	, onlyPositiveValues: YES
 		        , events: {
 	        		keyup: {
 	                    /* executed in scope of DOMWindow because no target defined */

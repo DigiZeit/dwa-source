@@ -173,6 +173,30 @@ M.TextFieldView = M.View.extend(
     inputType: M.INPUT_TEXT,
 
     /**
+     * DIGI-Mod
+     * 
+     * This property specifies the input step of this input field if 
+     * input type is "number".
+     * 
+     * Possible values are:
+     * "1", "2", ...
+     * "0.1", "0.2", ...
+     * "any"
+     *
+     * @type String
+     */
+    inputStep: "1",
+    
+    /**
+     * DIGI-Mod
+     * 
+     * This property specifies whether only positive values shall be allowed if inputType is Number.
+     *
+     * @type Boolean
+     */
+    onlyPositiveValues: NO,
+
+    /**
      * This property is used internally to determine all the possible input types for a
      * date textfield.
      *
@@ -259,8 +283,16 @@ M.TextFieldView = M.View.extend(
             if(_.include(this.dateInputTypes, this.inputType) && !this.useNativeImplementationIfAvailable) {
                 type = 'text';
             }
+            var inputStepString = '';
+            if (type == M.INPUT_NUMBER) {
+            	inputStepString = ' step="' + this.inputStep + '"';
+            }
+            var minValueString = '';
+            if (type == M.INPUT_NUMBER && this.onlyPositiveValues) {
+            	minValueString = ' min="0"';
+            }
             
-            this.html += '<input ' + (this.numberOfChars ? 'maxlength="' + this.numberOfChars + '"' : '') + placeholder + 'type="' + type + '" name="' + (this.name ? this.name : this.id) + '" id="' + this.id + '"' + this.style() + ' value="' + (this.value ? this.value : '') + '" />';
+            this.html += '<input ' + (this.numberOfChars ? 'maxlength="' + this.numberOfChars + '"' : '') + placeholder + 'type="' + type + '"' + inputStepString + minValueString + ' name="' + (this.name ? this.name : this.id) + '" id="' + this.id + '"' + this.style() + ' value="' + (this.value ? this.value : '') + '" />';
         }
         
         return this.html;
