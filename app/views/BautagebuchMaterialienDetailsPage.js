@@ -145,6 +145,11 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
 			}
         }
+		, pageshow: {
+			action: function() {
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();			
+			}
+		}
         , pagehide: {
             action: function() {
 

@@ -517,6 +517,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	
 	, materialerfassung: function() {
 		
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('materialPickUp'));
+
 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
 				
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
@@ -539,6 +541,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 	
 	, notizen: function() {
+		
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('BautagebuchNotizen'));
 		
 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
 		

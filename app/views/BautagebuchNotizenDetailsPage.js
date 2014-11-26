@@ -137,6 +137,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 		    action: function() {
 				$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].focus();
 				$('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].blur();
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();			
 			}
 		}
         , pagehide: {
