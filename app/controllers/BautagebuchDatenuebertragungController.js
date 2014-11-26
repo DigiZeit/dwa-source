@@ -591,7 +591,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var items = [];
 		_.each(DigiWebApp.BautagebuchMaterialBuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}}), function(el) {
 			var tmp = el.record;
-			tmp.menge = parseIntRadixTen(tmp.menge);
+			tmp.menge = parseFloat(tmp.menge);
 			items.push(tmp);
 		});
 		
