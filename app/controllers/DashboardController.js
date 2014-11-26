@@ -520,7 +520,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		
 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
 		
-		console.log("DigiWebApp.BautagebuchBautagesberichteListeController.init(): " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("DigiWebApp.BautagebuchBautagesberichteListeController.init(): " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
 		
 		var bautagesberichte = DigiWebApp.BautagebuchBautagesbericht.find();
 		var matBautagesbericht = null;
@@ -541,7 +541,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		}
 		myBautagesbericht = DigiWebApp.BautagebuchBautagesberichtDetailsController.get("item");
 
-		console.log("Bautagesbericht laden/anlegen: " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("Bautagesbericht laden/anlegen: " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
 
 		myBautagesbericht.set("orderName", M.I18N.l('materialPickUp'));
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", myBautagesbericht.get("orderName"));
@@ -550,14 +550,14 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
 		myBautagesbericht.save();
 		
-		console.log("Bautagesbericht speichern: " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("Bautagesbericht speichern: " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
 
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.load(myBautagesbericht);
-		console.log("Bautagesbericht laden: " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("Bautagesbericht laden: " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
 		DigiWebApp.BautagebuchBautagesberichteListeController.init();
-		console.log("BautagebuchBautagesberichteListeController.init: " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("BautagebuchBautagesberichteListeController.init: " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
       	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
-		console.log("BautagebuchBautagesberichtDetailsController.save: " + D8.create().getTimestamp() - startTimestamp + " ms"); startTimestamp = D8.create().getTimestamp();
+		console.log("BautagebuchBautagesberichtDetailsController.save: " + (D8.create().getTimestamp() - startTimestamp) + " ms"); startTimestamp = D8.create().getTimestamp();
 	}
 	
 	, notizen: function() {
