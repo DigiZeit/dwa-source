@@ -67,11 +67,11 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
         var itemSelected = NO;
         
         // Projektleiter
-		if (DigiWebApp.BautagebuchProjektleiter.findSorted().length !== 0) {
+		var projektleiter = DigiWebApp.BautagebuchProjektleiter.find();
+		if (projektleiter.length !== 0) {
             itemSelected = NO;
-    		var projektleiter = DigiWebApp.BautagebuchProjektleiter.findSorted();
-    		projektleiter = _.sortBy(projektleiter, function(m){ 
-				return m.get('nachname') + ", " + m.get('vorname');
+    		projektleiter = _.sortBy(_.compact(projektleiter), function(m){
+    			return m.get('nachname') + ", " + m.get('vorname');
 			});
     		var myOrder = -1;
             var projektleiterArray = _.map(projektleiter, function(o) {
@@ -94,10 +94,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		}
 		
 		// Mitarbeiter
-		if (DigiWebApp.BautagebuchMitarbeiter.findSorted().length !== 0) {
+		var mitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find();
+		if (mitarbeiter.length !== 0) {
             itemSelected = NO;
-    		var mitarbeiter = DigiWebApp.BautagebuchMitarbeiter.findSorted();
-    		mitarbeiter = _.sortBy(mitarbeiter, function(m){ 
+    		mitarbeiter = _.sortBy(_.compact(mitarbeiter), function(m){ 
 				return m.get('nachname') + ", " + m.get('vorname');
 			});
     		var myOrder = -1;
@@ -121,7 +121,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		// Aufträge
         itemSelected = NO;
 		var auftraege = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
-        var auftraegeArray = _.map(auftraege, function(o) {
+        var auftraegeArray = _.map(_.compact(auftraege), function(o) {
         	if ( typeof(o) === "undefined" ) {
         		console.log("UNDEFINED ORDER");
         	} else {        	
@@ -141,7 +141,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		// Positionen
         itemSelected = NO;
 		var positionen = DigiWebApp.Position.findSorted();
-        var positionenArray = _.map(positionen, function(o) {
+        var positionenArray = _.map(_.compact(positionen), function(o) {
         	if ( typeof(o) === "undefined" ) {
         		console.log("UNDEFINED ORDER");
         	} else {        	
@@ -184,9 +184,9 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		var mengeneinheitenArray = [];
 		// TODO Materialerfassung: Jedes Material enthält die Mengeneinheiten
         // Mengeneinheiten
-		if (DigiWebApp.BautagebuchMengeneinheit.findSorted().length !== 0) {
+		var mengeneinheiten = DigiWebApp.BautagebuchMengeneinheit.findSorted();
+		if (mengeneinheiten.length !== 0) {
             itemSelected = NO;
-    		var mengeneinheiten = DigiWebApp.BautagebuchMengeneinheit.findSorted();
     		mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
             	if ( typeof(o) === "undefined" ) {
             		console.log("UNDEFINED MATERIAL");
@@ -203,7 +203,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		}
         // push "Manuelle Eingabe"
 		//mengeneinheitenArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
-        positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+		mengeneinheitenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
         that.set('mengeneinheiten', mengeneinheitenArray);
 
 	}
