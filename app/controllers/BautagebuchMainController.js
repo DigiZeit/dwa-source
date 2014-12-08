@@ -70,7 +70,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		var projektleiter = DigiWebApp.BautagebuchProjektleiter.find();
 		if (projektleiter.length !== 0) {
             itemSelected = NO;
-    		projektleiter = _.sortBy(_.compact(projektleiter), function(m){
+    		projektleiter = _.sortBy(projektleiter, function(m){
     			return m.get('nachname') + ", " + m.get('vorname');
 			});
     		var myOrder = -1;
@@ -97,7 +97,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		var mitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find();
 		if (mitarbeiter.length !== 0) {
             itemSelected = NO;
-    		mitarbeiter = _.sortBy(_.compact(mitarbeiter), function(m){ 
+    		mitarbeiter = _.sortBy(mitarbeiter, function(m){ 
 				return m.get('nachname') + ", " + m.get('vorname');
 			});
     		var myOrder = -1;
