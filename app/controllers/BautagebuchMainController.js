@@ -210,6 +210,9 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
         } catch (e) {
         	trackError(e);
         }
+        
+        console.log("BautagebuchMainController.init finished");
+        
 	}
 
 });
