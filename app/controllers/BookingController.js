@@ -2376,11 +2376,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 						notificationOptions.date = myDate
 					}
 					console.log("notificationOptions: ", notificationOptions);
+					return;
 					console.log("pluginObj: ", pluginObj);
 					console.log("pluginObj.notification: ", pluginObj.notification);
 					console.log("pluginObj.notification.local: ", pluginObj.notification.local);
 					console.log("pluginObj.notification.local.add: ", pluginObj.notification.local.add);
-					return;
 					pluginObj.notification.local.add(notificationOptions);
 				}catch(e){trackError(e);}
 			}catch(e){trackError(e);}
