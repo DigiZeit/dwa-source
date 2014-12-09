@@ -912,11 +912,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
 		if (onIOS) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
-			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
 			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
+			DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
 			DigiWebApp.ApplicationController.startNotification();
