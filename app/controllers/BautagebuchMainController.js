@@ -79,8 +79,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            	myOrder = myOrder + 1;
 	            	if ( typeof(o) === "undefined" ) {
 	            		console.log("UNDEFINED PROJEKTLEADER");
-	            	} else {        	
-	            		var obj = { label: o.vollername(), value: o.get('id'), order: myOrder };
+	            	} else {   
+	            		try {
+	            			var obj = { label: o.vollername(), value: o.get('id'), order: myOrder };
+	            		} catch(e) { console.log(o); throw e;}
 	//            		if(obj.value === that.selections.activity) {
 	//            			obj.isSelected = YES;
 	//            			itemSelected = YES;
@@ -106,8 +108,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            	myOrder = myOrder + 1;
 	            	if ( typeof(o) === "undefined" ) {
 	            		console.log("UNDEFINED WORKER");
-	            	} else {        	
-	            		var obj = { label: o.vollername(), value: o.get('id'), order: myOrder};
+	            	} else {  
+	            		try {
+	            			var obj = { label: o.vollername(), value: o.get('id'), order: myOrder};
+	            		} catch(e) { console.log(o); throw e;}
 	//            		if(obj.value === that.selections.activity) {
 	            			obj.isSelected = NO;
 	//            			itemSelected = YES;
@@ -125,8 +129,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	        var auftraegeArray = _.map(_.compact(auftraege), function(o) {
 	        	if ( typeof(o) === "undefined" ) {
 	        		console.log("UNDEFINED ORDER");
-	        	} else {        	
-	        		var obj = { label: o.get('name'), value: o.get('id') };
+	        	} else {   
+	        		try {
+	        			var obj = { label: o.get('name'), value: o.get('id') };
+            		} catch(e) { console.log(o); throw e;}
 	//        		if(obj.value === that.selections.activity) {
 	//        			obj.isSelected = YES;
 	//        			itemSelected = YES;
@@ -145,8 +151,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	        var positionenArray = _.map(_.compact(positionen), function(o) {
 	        	if ( typeof(o) === "undefined" ) {
 	        		console.log("UNDEFINED ORDER");
-	        	} else {        	
-	        		var obj = { label: o.get('name'), value: o.get('id') };
+	        	} else {
+	        		try {
+	        			var obj = { label: o.get('name'), value: o.get('id') };
+	        		} catch(e) { console.log(o); throw e;}
 	//        		if(obj.value === that.selections.activity) {
 	//        			obj.isSelected = YES;
 	//        			itemSelected = YES;
@@ -167,8 +175,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            materialienArray = _.map(materialien, function(o) {
 	            	if ( typeof(o) === "undefined" ) {
 	            		console.log("UNDEFINED MATERIAL");
-	            	} else {        	
-	            		var obj = { label: o.get("bezeichnung"), value: o.get('id') };
+	            	} else {
+	            		try {
+	            			var obj = { label: o.get("bezeichnung"), value: o.get('id') };
+	            		} catch(e) { console.log(o); throw e;}
 	//            		if(obj.value === that.selections.activity) {
 	//            			obj.isSelected = YES;
 	//            			itemSelected = YES;
@@ -191,8 +201,10 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	    		mengeneinheitenArray = _.map(mengeneinheiten, function(o) {
 	            	if ( typeof(o) === "undefined" ) {
 	            		console.log("UNDEFINED MATERIAL");
-	            	} else {       
-	            		var obj = { label: o.get("kuerzel"), value: o.get('id') };
+	            	} else {  
+	            		try {
+	            			var obj = { label: o.get("kuerzel"), value: o.get('id') };
+	            		} catch(e) { console.log(o); throw e;}
 	//            		if(obj.value === that.selections.activity) {
 	//            			obj.isSelected = YES;
 	//            			itemSelected = YES;
