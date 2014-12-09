@@ -915,11 +915,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
 			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
-			DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
-			DigiWebApp.ApplicationController.startNotification();
 		}
+		DigiWebApp.ApplicationController.startNotification();
 
 		if (DigiWebApp.SettingsController.getSetting('debug')) { 
         	DigiWebApp.SettingsController.globalDebugMode = YES; 
