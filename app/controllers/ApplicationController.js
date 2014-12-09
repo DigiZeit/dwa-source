@@ -912,13 +912,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
 		if (onIOS) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
+			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
+//			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+//			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+			DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
+			DigiWebApp.ApplicationController.startNotification();
 		}
-		DigiWebApp.ApplicationController.startNotification();
 
 		if (DigiWebApp.SettingsController.getSetting('debug')) { 
         	DigiWebApp.SettingsController.globalDebugMode = YES; 

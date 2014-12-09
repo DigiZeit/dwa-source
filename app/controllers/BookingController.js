@@ -2364,17 +2364,18 @@ DigiWebApp.BookingController = M.Controller.extend({
 				try {
 					localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
 					var notificationOptions = {
-					    id:         '2',
-					    title:      M.I18N.l('BookingReminderTitle'),  // The title of the message
-					    message:    myReminderMessage,  // The message that is displayed
-					    repeat:     'hourly', // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
-					    autoCancel: true, // Setting this flag and the notification is automatically canceled when the user clicks it
-					    ongoing:    false, // Prevent clearing of notification (Android only)
+					      id:         '2'
+					    , title:      M.I18N.l('BookingReminderTitle')  // The title of the message
+					    , message:    myReminderMessage  // The message that is displayed
+					    , repeat:     'hourly' // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
+					    , autoCancel: true // Setting this flag and the notification is automatically canceled when the user clicks it
+					    , ongoing:    false // Prevent clearing of notification (Android only)
 					}
 					var nowTimestamp = new Date().getTime();
 					if (myDate.getTime() > nowTimestamp) {
 						notificationOptions.date = myDate
 					}
+					return;
 					pluginObj.notification.local.add(notificationOptions);
 				}catch(e){trackError(e);}
 			}catch(e){trackError(e);}
@@ -2384,7 +2385,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	, clearBookingNotification: function() {
 		var that = this;
 
-		if (!onIOS) {
+		//if (!onIOS) {
 			// notification.local is supposed to reside in "window.plugin"
 			var pluginObj = window.plugin;
 			if (typeof(pluginObj) == "undefined") {
@@ -2396,7 +2397,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	}
 			try{that.startBrowserBookingNotificationObject.close();}catch(e){}
 			try{pluginObj.notification.local.cancel('2');}catch(e){}
-		}
+		//}
 	}
 
 });
