@@ -137,7 +137,7 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
 	    if (keys) {
 	        _.each(keys, function(k) {
 	        	var item = that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k});
-	        	if ( (idToFind && item.get("id") === idToFind) || (typeof(idToFind) === "undefined") ) {
+	        	if (item && ( (idToFind && item.get("id") === idToFind) || (typeof(idToFind) === "undefined") )) {
 	        		records.push(item);
 	        	}
 	        });

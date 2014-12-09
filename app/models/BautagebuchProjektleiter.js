@@ -122,7 +122,10 @@ DigiWebApp.BautagebuchProjektleiter = M.Model.create({
 	
 	    if (keys) {
 	        _.each(keys, function(k) {
-	            records.push(that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k}));
+	        	var record = that.find({key:DigiWebApp.ApplicationController.storagePrefix + that.name + '_' + k});
+	        	if (record) {
+	        		records.push(record);
+	        	}
 	        });
 	    }
 	    return records;
