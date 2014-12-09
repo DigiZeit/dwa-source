@@ -2301,7 +2301,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 	, startBookingNotification: function(myDate) {
     	
-		if (!onIOS) {
+		//if (!onIOS) {
 			try { // keinesfalls den regulären Betrieb stören
 				
 				var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
@@ -2378,7 +2378,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					pluginObj.notification.local.add(notificationOptions);
 				}catch(e){trackError(e);}
 			}catch(e){trackError(e);}
-		}
+		//}
 	}
 	
 	, clearBookingNotification: function() {
