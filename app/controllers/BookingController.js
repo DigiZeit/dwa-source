@@ -2301,7 +2301,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 	, startBookingNotification: function(myDate) {
     	
-		//if (!onIOS) {
+		if (!onIOS) {
 			try { // keinesfalls den regulären Betrieb stören
 				
 				var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
@@ -2376,7 +2376,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 						notificationOptions.date = myDate
 					}
 					console.log("notificationOptions: ", notificationOptions);
-					return;
 					console.log("pluginObj: ", pluginObj);
 					console.log("pluginObj.notification: ", pluginObj.notification);
 					console.log("pluginObj.notification.local: ", pluginObj.notification.local);
@@ -2384,13 +2383,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 					pluginObj.notification.local.add(notificationOptions);
 				}catch(e){trackError(e);}
 			}catch(e){trackError(e);}
-		//}
+		}
 	}
 	
 	, clearBookingNotification: function() {
 		var that = this;
 
-		//if (!onIOS) {
+		if (!onIOS) {
 			// notification.local is supposed to reside in "window.plugin"
 			var pluginObj = window.plugin;
 			if (typeof(pluginObj) == "undefined") {
@@ -2402,7 +2401,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	}
 			try{that.startBrowserBookingNotificationObject.close();}catch(e){}
 			try{pluginObj.notification.local.cancel('2');}catch(e){}
-		//}
+		}
 	}
 
 });

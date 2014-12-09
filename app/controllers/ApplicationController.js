@@ -752,7 +752,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		//if (!onIOS) {
+		if (!onIOS) {
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
 			if (that.notificationMessage == null) {
 				that.notificationMessage = M.I18N.l('abwesend');
@@ -803,7 +803,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				});
 				//alert("added notification '" + that.notificationMessage + "'");
 			}catch(e){trackError(e);}
-		//}
+		}
 	}
 
 	, startBgGeo: function() {
@@ -915,9 +915,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
-//			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-//			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-			DigiWebApp.ApplicationController.startNotification();
+			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+//			DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
 			DigiWebApp.ApplicationController.startNotification();
