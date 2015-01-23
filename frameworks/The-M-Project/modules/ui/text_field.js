@@ -215,6 +215,22 @@ M.TextFieldView = M.View.extend(
     numberOfChars: null,
 
     /**
+     * DIGI-Mod
+     * cols-variable in textarea
+     *
+     * @type Number
+     */
+    numberOfCols: 40,
+
+    /**
+     * DIGI-Mod
+     * rows-variable in textarea
+     *
+     * @type Number
+     */
+    numberOfRows: 8,
+
+    /**
      * This property can be used to specify whether to use the native implementation
      * of one of the HTML5 input types if it is available. If set to YES, e.g. iOS5
      * will render its own date/time picker controls to the corresponding input
@@ -276,7 +292,16 @@ M.TextFieldView = M.View.extend(
         }
 
         if(this.hasMultipleLines) {
-            this.html += '<textarea cols="40" rows="8" name="' + (this.name ? this.name : this.id) + '" id="' + this.id + '"' + this.style() + placeholder + '>' + (this.value ? this.value : '') + '</textarea>';
+            this.html += '<textarea' 
+            		+ ' id="' + this.id + '"' 
+            		+ ' name="' + (this.name ? this.name : this.id) + '"' 
+            		+ ' cols="' + this.numberOfCols + '"' 
+            		+ ' rows="' + this.numberOfRows + '"' 
+            		+ (this.numberOfChars ? ' maxlength="' + this.numberOfChars + '"' : '') + '' 
+            		+ placeholder 
+            		+ this.style() 
+            		+ '>' + (this.value ? this.value : '') 
+            		+ '</textarea>';
             
         } else {
             var type = this.inputType;
@@ -292,7 +317,15 @@ M.TextFieldView = M.View.extend(
             	minValueString = ' min="0"';
             }
             
-            this.html += '<input ' + (this.numberOfChars ? 'maxlength="' + this.numberOfChars + '"' : '') + placeholder + 'type="' + type + '"' + inputStepString + minValueString + ' name="' + (this.name ? this.name : this.id) + '" id="' + this.id + '"' + this.style() + ' value="' + (this.value ? this.value : '') + '" />';
+            this.html += '<input' 
+            		+ ' id="' + this.id + '"' 
+            		+ ' name="' + (this.name ? this.name : this.id) + '"' 
+            		+ ' type="' + type + '"' + inputStepString + minValueString 
+            		+ (this.numberOfChars ? ' maxlength="' + this.numberOfChars + '"' : '') 
+            		+ placeholder 
+            		+ this.style() 
+            		+ ' value="' + (this.value ? this.value : '') + '"' 
+            		+ ' />';
         }
         
         return this.html;

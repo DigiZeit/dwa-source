@@ -120,8 +120,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
 					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).val("");
 					M.ViewManager.getView('remarkPage', 'remarkInput').value = "";
 				}
-				$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].focus();
-				$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].blur();
+				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].focus();
+				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].blur();
 
 				// load gefahreneKilometer
 				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
