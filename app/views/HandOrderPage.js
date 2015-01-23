@@ -48,7 +48,37 @@ DigiWebApp.HandOrderPage = M.PageView.design({
     , content: M.ScrollView.design({
           childViews: 'orderName grid'
         , orderName: M.TextFieldView.design({
-            label: M.I18N.l('orderName')
+              label: M.I18N.l('orderName')
+            , numberOfChars: 50
+   	        , events: {
+        		keyup: {
+	                /* executed in scope of DOMWindow because no target defined */
+	            	action: function(selectedValue, selectedItem) {
+						var myValue = M.ViewManager.getView('handOrderPage', 'orderName').getValue();
+						if (myValue.length <= 16) {
+							DigiWebApp.HandOrderController.set("orderNameToSave", M.ViewManager.getView('handOrderPage', 'orderName').getValue());
+						} else {
+							if (!DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+								M.ViewManager.getView('handOrderPage', 'orderName').setValue(DigiWebApp.HandOrderController.orderNameToSave);
+					            DigiWebApp.ApplicationController.nativeAlertDialogView({
+					                title: M.I18N.l('handOrderTooLong')
+					              , message: M.I18N.l('handOrderTooLongMsg')
+					            });
+							} else {
+								if (myValue.length <= 50) {
+									DigiWebApp.HandOrderController.set("orderNameToSave", M.ViewManager.getView('handOrderPage', 'orderName').getValue());
+								} else {
+									M.ViewManager.getView('handOrderPage', 'orderName').setValue(DigiWebApp.HandOrderController.orderNameToSave);
+						            DigiWebApp.ApplicationController.nativeAlertDialogView({
+						                title: M.I18N.l('handOrderTooLong')
+						              , message: M.I18N.l('handOrderTooLongDTC6Msg')
+						            });
+								}
+							}
+						}
+	            	}
+	            }
+	    	}
         })
         , grid: M.GridView.design({
               childViews: 'button icon'

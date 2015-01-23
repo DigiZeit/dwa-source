@@ -9,9 +9,11 @@
 DigiWebApp.HandOrderController = M.Controller.extend({
 
       currentHandOrderName: ''
+    , orderNameToSave: ''
 
     , save: function() {
-        var orderName = M.ViewManager.getView('handOrderPage', 'orderName').value;
+		var that = this;
+        var orderName = that.orderNameToSave; //M.ViewManager.getView('handOrderPage', 'orderName').value;
         orderName = $.trim(orderName);
 
         if (orderName) {
