@@ -382,6 +382,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     		M.LocationManager.getLocation(that, successCallback, function(error) {
                 	if ( error === "POSITION_UNAVAILABLE" ) {
 	                	if (nextFunction) {
+	                		writeToLog("POSITION_UNAVAILABLE, trying again in 100ms")
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
@@ -393,6 +394,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === "TIMEOUT" ) {
 	                	if (nextFunction) {
+	                		writeToLog("TIMEOUT, trying again in 100ms")
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
@@ -404,6 +406,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === "PERMISSION_DENIED" ) {
 	                	if (nextFunction) {
+	                		writeToLog("PERMISSION_DENIED, trying again in 100ms")
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
@@ -416,6 +419,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                 	} else if ( error === "ALREADY_RECEIVING" ) {
 	                	if (nextFunction) {
 	                		// solange weiterversuchen bis GPS-Timeout abgelaufen
+	                		writeToLog("ALREADY_RECEIVING, trying again in 100ms")
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions, nextFunction); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
@@ -427,6 +431,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else {
 	                	if (nextFunction) {
+	                		writeToLog("unknown GPS-error, trying again in 100ms")
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
