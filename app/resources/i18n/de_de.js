@@ -528,7 +528,7 @@ M.I18N.de_de = {
 	, projektleiter: 'Projektleiter'
 	, closeAppAfterCloseDay: 'App nach Feierabend schließen'
 	
-	, exitApp: 'App wird geschlossen...'
+	, exitApp: 'Die DIGI-WebApp wird gemäß der Einstellung "App nach Feierabend schließen" geschlossen...'
 	, abwesend: "abwesend"
 	, bookingNotificationSince: "akt. Buchung seit"
 	

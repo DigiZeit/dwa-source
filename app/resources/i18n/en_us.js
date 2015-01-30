@@ -529,7 +529,7 @@ M.I18N.en_us = {
 	, projektleiter: 'Project leaders'
 	, closeAppAfterCloseDay: 'Close App after closing day'
 
-	, exitApp: 'Closing app...'
+	, exitApp: 'Closing DIGI-WebApp accordign to the setting "Close App after closing day" ...'
 	, abwesend: "absent"
 	, bookingNotificationSince: "cur. booking since"
 
