@@ -304,9 +304,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				mytitle = title;
 			}
 			
-			if (this.isVisible()) { 
+			//if (this.isVisible()) { 
 				this.hide(); 
-			}
+			//}
 		
 			if (DigiWebApp.SettingsController.getSetting('silentLoader') !== YES) {
 				this.loaderMessage = message;
