@@ -3063,6 +3063,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			//try{window.plugin.notification.local.cancel('2');}catch(e){}
 			if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 	    		if (autoExit) {
+	    			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('autoExitApp'));
 	    			window.setTimeout(navigator.app.exitApp, 2000);
 	    		} else {
 	    			navigator.app.exitApp();
