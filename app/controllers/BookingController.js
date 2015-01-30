@@ -389,8 +389,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSunavailable')
+	            	    		, callbacks: {
+			      	        		  confirm: {
+			      	            		  target: this
+			      	            		, action: function() {
+	                						successCallback();
+			      						}
+			      	        		}
+			      	        		, cancel: {
+			      	            		  target: this
+			      	            		, action: function() {
+			      	        				successCallback();
+			      	    				}
+			      	        		}
+			      	    		}
 	                		});
-	                		successCallback();
 	                	}
                 	} else if ( error === "TIMEOUT" ) {
 	                	if (nextFunction) {
@@ -401,8 +414,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPStimeout')
-	                		});
-		                	successCallback();
+	            	    		, callbacks: {
+				      	        		  confirm: {
+				      	            		  target: this
+				      	            		, action: function() {
+		              							successCallback();
+				      						}
+				      	        		}
+				      	        		, cancel: {
+				      	            		  target: this
+				      	            		, action: function() {
+				      	        				successCallback();
+				      	    				}
+				      	        		}
+				      	    		}
+		              		});
 	                	}
                 	} else if ( error === "PERMISSION_DENIED" ) {
 	                	if (nextFunction) {
@@ -413,8 +439,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSmissingPermission')
-	                		});
-	                		successCallback();
+	            	    		, callbacks: {
+				      	        		  confirm: {
+				      	            		  target: this
+				      	            		, action: function() {
+		              							successCallback();
+				      						}
+				      	        		}
+				      	        		, cancel: {
+				      	            		  target: this
+				      	            		, action: function() {
+				      	        				successCallback();
+				      	    				}
+				      	        		}
+				      	    		}
+		              		});
 	                	}
                 	} else if ( error === "ALREADY_RECEIVING" ) {
 	                	if (nextFunction) {
@@ -426,8 +465,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSmissingPermission')
-	                		});
-	                		successCallback();
+	            	    		, callbacks: {
+				      	        		  confirm: {
+				      	            		  target: this
+				      	            		, action: function() {
+		              							successCallback();
+				      						}
+				      	        		}
+				      	        		, cancel: {
+				      	            		  target: this
+				      	            		, action: function() {
+				      	        				successCallback();
+				      	    				}
+				      	        		}
+				      	    		}
+		              		});
 	                	}
                 	} else {
 	                	if (nextFunction) {
@@ -438,8 +490,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSunknownError') + error
-	                		});
-	                		successCallback();
+	            	    		, callbacks: {
+				      	        		  confirm: {
+				      	            		  target: this
+				      	            		, action: function() {
+		            							successCallback();
+				      						}
+				      	        		}
+				      	        		, cancel: {
+				      	            		  target: this
+				      	            		, action: function() {
+				      	        				successCallback();
+				      	    				}
+				      	        		}
+				      	    		}
+		            		});
 	                	}
                 	}
 	            }, getLocationOptions);
@@ -2228,7 +2293,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         
         var notificationMessage = M.I18N.l('bookingNotificationSince') + " " + bookingStr;
 		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
-		DigiWebApp.ApplicationController.startNotification();
+		//DigiWebApp.ApplicationController.startNotification();
         
         return bookingStr;
     }
