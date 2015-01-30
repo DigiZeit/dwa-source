@@ -626,7 +626,7 @@ var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Pho
 
 var onIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
 
-if (!onIOS) { 
+if (!onIOS && typeof(Notification) != "undefined") { 
 	try {
 		window.addEventListener('load', function () {
 		  Notification.requestPermission(function (status) {
