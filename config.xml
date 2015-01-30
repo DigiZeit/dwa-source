@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5891"
-	version 	= "1.8.3.5891">
+	versionCode = "5892"
+	version 	= "1.8.3.5892">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -97,7 +97,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5891</string> 
+	<string>5892</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -154,6 +154,7 @@ screen -->
 	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
 	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="hdpi" />
     <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="theme/images/1080x1920_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xxhdpi" />
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
