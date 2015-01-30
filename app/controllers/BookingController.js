@@ -999,12 +999,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    that.currentBooking.setAsCurrent();
 		    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving new ' + that.currentBooking.get('orderId'));
 		    that.currentBooking.save();
+
+		    that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
+
 		    DigiWebApp.ApplicationController.startNotification();
 
 			try{that.startBookingNotification();}catch(e){}
 
-		    that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
-    	}
+	    }
 	    
 	    // don't use selections anymore, use the current booking (till selection is changed again)
 	    DigiWebApp.SelectionController.useSelections = NO;
