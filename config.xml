@@ -2,8 +2,8 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		    = "com.digi.webappbeta"
-	versionCode = "5892"
-	version 	= "1.8.3.5892">
+	versionCode = "5893"
+	version 	= "1.8.3.5893">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -97,7 +97,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5892</string> 
+	<string>5893</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -136,6 +136,7 @@ which PhoneGap requires. -->
     <icon src="theme/images/ic_launcher_mdpi.png" gap:platform="android" gap:density="mdpi" /> 
     <icon src="theme/images/ic_launcher_hdpi.png" gap:platform="android" gap:density="hdpi" /> 
     <icon src="theme/images/ic_launcher_xhdpi.png" gap:platform="android" gap:density="xhdpi" /> 
+    <icon src="theme/images/ic_launcher_xxhdpi.png" gap:platform="android" gap:density="xxhdpi" /> 
 
 <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
 	<icon src="theme/images/icon-winphone.png" gap:platform="winphone" />
