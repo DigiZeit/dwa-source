@@ -3051,9 +3051,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	DigiWebApp.ApplicationController.DigiLoaderView.hide();
     }
 
-    , exitApp: function() {
+    , exitApp: function(autoExit) {
     	if (!onIOS) {
-			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
+    		if (autoExit) {
+    			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('autoExitApp'));
+    		} else {
+    			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
+    		}
 			try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
 			try{window.plugin.notification.local.cancel('1');}catch(e){}
 			//try{window.plugin.notification.local.cancel('2');}catch(e){}

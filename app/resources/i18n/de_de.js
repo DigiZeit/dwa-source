@@ -158,6 +158,7 @@ M.I18N.de_de = {
 	, GPSunavailable: "Der GPS-Sensor ist deaktiviert! Es kann keine Position ermittelt werden!"
 	, GPStimeout: "Es konnte keine GPS-Position ermittelt werden!"
 	, GPSmissingPermission: "Die DIGI-WebApp hat keine Berechtigung um GPS-Positionen zu ermitteln!"
+	, GPSalreadyRecieving: "Der GPS-Empfänger ist bereits beschäftigt! Erneut versuchen?"
 	, GPSunknownError: "Unbekannter GPS-Fehler: "
 	, ERROR: "Fehler"
 	, media: "Medien"
@@ -528,7 +529,8 @@ M.I18N.de_de = {
 	, projektleiter: 'Projektleiter'
 	, closeAppAfterCloseDay: 'App nach Feierabend schließen'
 	
-	, exitApp: 'Die DIGI-WebApp wird gemäß der Einstellung "App nach Feierabend schließen" geschlossen...'
+	, exitApp: 'Die DIGI-WebApp wird geschlossen...'
+	, autoExitApp: 'Die DIGI-WebApp wird gemäß der Einstellung "App nach Feierabend schließen" geschlossen...'
 	, abwesend: "abwesend"
 	, bookingNotificationSince: "akt. Buchung seit"
 	

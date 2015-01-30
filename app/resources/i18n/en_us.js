@@ -158,6 +158,7 @@ M.I18N.en_us = {
 	, GPSunavailable: "The GPS-Reciever is not enabled! No geolocation will be recorded!"
 	, GPStimeout: "The current geoposition could not be determined!"
 	, GPSmissingPermission: "DIGI-WebApp is missing the permission to determine a geoposition!"
+	, GPSalreadyRecieving: "The GPS-Reciever is busy! Try again?"
 	, GPSunknownError: "Unkown GPS-Error: "
 	, ERROR: "Error"
 	, media: "Media"
@@ -529,7 +530,8 @@ M.I18N.en_us = {
 	, projektleiter: 'Project leaders'
 	, closeAppAfterCloseDay: 'Close App after closing day'
 
-	, exitApp: 'Closing DIGI-WebApp accordign to the setting "Close App after closing day" ...'
+	, exitApp: 'Closing DIGI-WebApp ...'
+	, autoExitApp: 'Closing DIGI-WebApp accordign to the setting "Close App after closing day" ...'
 	, abwesend: "absent"
 	, bookingNotificationSince: "cur. booking since"
 

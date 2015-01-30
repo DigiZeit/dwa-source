@@ -463,31 +463,31 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === "ALREADY_RECEIVING" ) {
 	                	if (nextFunction) {
-	                		// solange weiterversuchen bis GPS-Timeout abgelaufen
-	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again in 100ms")
-	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions, nextFunction); }, 100);
+	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again in 1000ms")
+	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 1000);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up")
+	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user")
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
-	                			, message: M.I18N.l('GPSmissingPermission')
+	                			, message: M.I18N.l('GPSalreadyRecieving')
 	            	    		, callbacks: {
 				      	        		  confirm: {
 				      	            		  target: this
 				      	            		, action: function() {
-		              							//successCallback();
+		                						writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again")
+	                							nextFunction(successCallback, nextOptions, nextFunction);
 				      						}
 				      	        		}
 				      	        		, cancel: {
 				      	            		  target: this
 				      	            		, action: function() {
-				      	        				//successCallback();
+				      	        				writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up")
+				      	        				successCallback();
 				      	    				}
 				      	        		}
 				      	    		}
 		              		});
-	                		successCallback();
 	                	}
                 	} else {
 	                	if (nextFunction) {
@@ -2250,7 +2250,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                          if (DigiWebApp.SettingsController.getSetting('autoSyncAfterBookTime') || doSync === true) {
 	                        	  	if (DigiWebApp.ApplicationController.closeAppAfterCloseDay) {
 										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
-	        								DigiWebApp.ApplicationController.exitApp();
+	        								DigiWebApp.ApplicationController.exitApp(true);
 										} else {
 			                          		DigiWebApp.ApplicationController.startsync(YES);
 										}
