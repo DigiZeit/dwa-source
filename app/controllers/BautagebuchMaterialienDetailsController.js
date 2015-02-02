@@ -113,6 +113,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 
+		var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp");
     	if (myTyp == "<materialerfassung_only>") {
 			var orderSelected = (M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection() !== "0" );
 			if (!orderSelected) {

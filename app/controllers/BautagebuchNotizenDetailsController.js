@@ -61,6 +61,7 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 		
+		var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp");
     	if (myTyp == "<notizen_only>") {
 			var orderSelected = (M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection() !== "0" );
 			if (!orderSelected) {
