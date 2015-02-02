@@ -113,6 +113,17 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 
+    	if (myTyp == "<materialerfassung_only>") {
+			var orderSelected = (M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'auftragComboBox').getSelection() !== "0" );
+			if (!orderSelected) {
+	            DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                title: M.I18N.l('noOrderSelected')
+	              , message: M.I18N.l('noOrderSelectedMsg')
+	            });
+				return false;
+			}
+		}
+
 		var positionSelected = (M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'positionComboBox').getSelection() !== "0" );
 		if (!positionSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({

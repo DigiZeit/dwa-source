@@ -61,6 +61,17 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 	, save: function() {
 		var that = this;
 		
+    	if (myTyp == "<notizen_only>") {
+			var orderSelected = (M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection() !== "0" );
+			if (!orderSelected) {
+	            DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                title: M.I18N.l('noOrderSelected')
+	              , message: M.I18N.l('noOrderSelectedMsg')
+	            });
+				return false;
+			}
+		}
+
 		var positionSelected = (M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'positionComboBox').getSelection() !== "0" );
 		if (!positionSelected) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
