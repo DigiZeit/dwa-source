@@ -324,7 +324,8 @@ M.TextFieldView = M.View.extend(
             if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
             	var deviceOS = device.platform;
             	var deviceOSVersion = device.version;
-            	if (deviceOS == "Android" && parseInt(deviceOSVersion, 10) <= 4) {
+            	var onSamsung = /Samsung|GT\-/i.test(navigator.userAgent);
+            	if (deviceOS == "Android" && onSamsung && parseInt(deviceOSVersion, 10) <= 4) {
             		type = 'tel';
             	}
             }
