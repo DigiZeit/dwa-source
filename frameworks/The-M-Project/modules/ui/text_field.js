@@ -321,8 +321,12 @@ M.TextFieldView = M.View.extend(
             }
             
             // BugFix for broken number-inputType
-            if (type == M.INPUT_NUMBER && (/samsung/i.test(navigator.userAgent))) {
-            	type = 'tel';
+            if (type == M.INPUT_NUMBER && (/samsung/i.test(navigator.userAgent)) && typeof(device) != "undefined") {
+            	var deviceOS = device.platform;
+            	var deviceOSVersion = device.version;
+            	if (deviceOS == "Android" && parseInt(deviceOSVersion, 10) <= 4) {
+            		type = 'tel';
+            	}
             }
 
             this.html += '<input' 
