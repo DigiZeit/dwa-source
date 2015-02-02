@@ -304,19 +304,27 @@ M.TextFieldView = M.View.extend(
             		+ '</textarea>';
             
         } else {
-            var type = this.inputType;
+            
+        	var type = this.inputType;
             if(_.include(this.dateInputTypes, this.inputType) && !this.useNativeImplementationIfAvailable) {
                 type = 'text';
             }
+                        
             var inputStepString = '';
             if (type == M.INPUT_NUMBER) {
             	inputStepString = ' step="' + this.inputStep + '"';
             }
+            
             var minValueString = '';
             if (type == M.INPUT_NUMBER && this.onlyPositiveValues) {
             	minValueString = ' min="0"';
             }
             
+            // BugFix for broken number-inputType
+            if (type == M.INPUT_NUMBER && (/samsung/i.test(navigator.userAgent))) {
+            	type = 'tel';
+            }
+
             this.html += '<input' 
             		+ ' id="' + this.id + '"' 
             		+ ' name="' + (this.name ? this.name : this.id) + '"' 
