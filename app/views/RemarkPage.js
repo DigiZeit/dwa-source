@@ -17,6 +17,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
             //action: 'init'
 			action: function() {
 
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				
 				// load data
 				DigiWebApp.BookingController.setTimeDataForRemark();
 				//DigiWebApp.BookingController.setNotBookedBookings();
