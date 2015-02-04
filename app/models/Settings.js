@@ -119,5 +119,7 @@ DigiWebApp.Settings = M.Model.create({
     , closeAppAfterCloseDay: M.Model.attr('Boolean')
     
     , DTC6aktiv: M.Model.attr('Boolean')
+    
+    , useNativeLoader: M.Model.attr('Boolean')
 
 }, M.DataProviderLocalStorage);
