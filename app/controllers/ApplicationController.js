@@ -286,7 +286,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			this.loaderTitle = "";
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = null;
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStop) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStop) != "undefined") {
 				navigator.notification.activityStop();
 				return true;
 			} else {
@@ -310,7 +310,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				this.loaderMessage = message;
 				this.loaderTitle = mytitle;
 			} else {
-				if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+				if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 					if (this.loaderMessage == " ") {
 						this.loaderMessage = "";	
 					}
@@ -323,7 +323,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = window.setTimeout(myTimeout, this.hide);
 			
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
 			} else {
 				return M.LoaderView.show(this.loaderMessage);
@@ -331,7 +331,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 		
 		, getTitle: function() {
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.loaderTitle;
 			} else {
 				return this.loaderMessage;
@@ -339,7 +339,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, getMessage: function() {
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.loaderMessage;
 			} else {
 				return this.loaderMessage;
@@ -347,7 +347,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, setTitle: function(title) {
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.show(this.loaderMessage, title);
 			} else {
 				return this.show(title);
@@ -355,7 +355,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 		
 		, setMessage: function(message) {
-			if (DigiWebApp.SettingController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
+			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') && typeof(navigator) != "undefined" && typeof(navigator.notification) != "undefined" && typeof(navigator.notification.activityStart) != "undefined") {
 				return this.show(message, this.loaderTitle);
 			} else {
 				return this.show(message);
