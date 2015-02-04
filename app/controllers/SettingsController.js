@@ -74,6 +74,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , BookingReminderHours: 11
         , closeAppAfterCloseDay: YES
         , DTC6aktiv: NO
+        , useNativeLoader: YES
     }
 
     , defaultsettings: null
@@ -288,7 +289,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var DTC6aktiv = record.get('DTC6aktiv');
             if (!DTC6aktiv) DTC6aktiv = DigiWebApp.SettingsController.defaultsettings.get("DTC6aktiv");
 
-    		if (onIOS) {
+            var useNativeLoader = DigiWebApp.SettingsController.defaultsettings.get("useNativeLoader");
+            try {
+	            if (typeof(record.record.useNativeLoader) !== "undefined") {
+	            	useNativeLoader = record.get('useNativeLoader');
+	            }
+            } catch (e) {}
+
+            if (onIOS) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -476,6 +484,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , isSelected: closeAppAfterCloseDay
 	           }]
 	           , DTC6aktiv: DTC6aktiv
+	           , useNativeLoader: useNativeLoader
                
             };
         /* default values */
@@ -615,6 +624,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                  , label: M.I18N.l('closeAppAfterCloseDay')
                }]
                , DTC6aktiv: DigiWebApp.SettingsController.defaultsettings.get("DTC6aktiv")
+               , useNativeLoader: DigiWebApp.SettingsController.defaultsettings.get("useNativeLoader") 
                
             };
             
@@ -850,7 +860,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
         
     	var DTC6aktiv                       = DigiWebApp.SettingsController.getSetting('DTC6aktiv');
-
+    	var useNativeLoader					= DigiWebApp.SettingsController.getSetting('useNativeLoader');
+    	
         if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -972,6 +983,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('BookingReminderHours', BookingReminderHours);
                                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                                     record.set('DTC6aktiv', DTC6aktiv);
+                                                    record.set('useNativeLoader', useNativeLoader);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1060,6 +1072,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('BookingReminderHours', BookingReminderHours);
                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                     record.set('DTC6aktiv', DTC6aktiv);
+                                    record.set('useNativeLoader', useNativeLoader);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1122,6 +1135,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('BookingReminderHours', BookingReminderHours);
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                 record.set('DTC6aktiv', DTC6aktiv);
+                                record.set('useNativeLoader', useNativeLoader);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1184,6 +1198,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('BookingReminderHours', BookingReminderHours);
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                 record.set('DTC6aktiv', DTC6aktiv);
+                                record.set('useNativeLoader', useNativeLoader);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1248,6 +1263,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , BookingReminderHours: BookingReminderHours
                                 , closeAppAfterCloseDay: closeAppAfterCloseDay
                                 , DTC6aktiv: DTC6aktiv
+                                , useNativeLoader: useNativeLoader
 
                           });
 
