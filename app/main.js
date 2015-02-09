@@ -625,8 +625,19 @@ var setTestLogin = function() {
 var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
 
 var onIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+var onAndroid = /Android/i.test(navigator.userAgent)
 
-if (!onIOS && typeof(Notification) != "undefined") { 
+var onAndroid23 = false;
+var ua = navigator.userAgent;
+if( ua.indexOf("Android") >= 0 )
+{
+  var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+  if (androidversion < 4) {
+      onAndroid23 = true;
+  }
+}
+
+if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") { 
 	try {
 		window.addEventListener('load', function () {
 		  Notification.requestPermission(function (status) {

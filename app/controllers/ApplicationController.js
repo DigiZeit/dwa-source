@@ -760,7 +760,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		if (!onIOS) {
+		if (!onIOS && !onAndroid23) {
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
 			if (that.notificationMessage == null) {
 				that.notificationMessage = M.I18N.l('abwesend');
@@ -815,7 +815,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 
 	, startBgGeo: function() {
-		if (!onIOS) {
+		if (!onIOS && !onAndroid23) {
 			try {
 				
 				// backgroundGeoLocation is supposed to reside in "window.plugins"
@@ -918,7 +918,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 		DigiWebApp.SettingsController.init(YES,YES);
         
-		if (onIOS) {
+		if (onIOS || onAndroid23) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
