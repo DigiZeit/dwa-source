@@ -322,7 +322,7 @@ M.TextFieldView = M.View.extend(
             
             // BugFix for broken number-inputType
             if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
-            	if (onAndroid && onSamsung && (onAndroid23 || onAndroid4)) {
+            	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
             		type = 'tel';
             	}
             }

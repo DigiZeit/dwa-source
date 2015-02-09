@@ -631,12 +631,15 @@ var onAndroid = /Android/i.test(ua)
 var onSamsung = /Samsung|GT\-/i.test(ua);
 
 var onAndroid23 = false;
+var onAndroid3 = false;
 var onAndroid4 = false;
 var onAndroid5 = false;
 if ( onAndroid ) {
   var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
-  if (androidversion < 4) {
+    if (androidversion < 3) {
       onAndroid23 = true;
+  } else if (androidversion < 4) {
+	  onAndroid3 = true;
   } else if (androidversion < 5) {
 	  onAndroid4 = true;
   } else if (androidversion < 6) {
