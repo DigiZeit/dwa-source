@@ -2356,7 +2356,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 							//}
 							var myFuncClose = function() {
 								// show another notification in one hour
-								try{pluginObj.notification.local.cancelAll();}catch(e){}
+								//try{pluginObj.notification.local.cancelAll();}catch(e){}
+								try{pluginObj.notification.local.cancel('4711');}catch(e){}
+								try{pluginObj.notification.local.cancel('4712');}catch(e){}
 								var myNewDate = D8.create(myDate.getTime()).addHours(1).date;
 								that.startBrowserBookingNotification(myNewDate);
 							}
@@ -2447,7 +2449,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				try {
 					localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
 					var notificationOptions = {
-					      id:         '2'
+					      id:         '4712'
 					    , title:      M.I18N.l('BookingReminderTitle')  // The title of the message
 					    , message:    myReminderMessage  // The message that is displayed
 					    , repeat:     'hourly' // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
@@ -2478,7 +2480,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    		that.startBrowserBookingNotificationTimeout = null;
 	    	}
 			try{that.startBrowserBookingNotificationObject.close();}catch(e){}
-			try{pluginObj.notification.local.cancel('2');}catch(e){}
+			try{pluginObj.notification.local.cancel('4712');}catch(e){}
 		}
 	}
 

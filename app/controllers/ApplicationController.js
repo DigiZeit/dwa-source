@@ -772,7 +772,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
 				that.notificationInitiated = YES;
-				try{pluginObj.notification.local.cancelAll();}catch(e){}
+				try{pluginObj.notification.local.cancel('4711');}catch(e){}
+				try{pluginObj.notification.local.cancel('4712');}catch(e){}
+				//try{pluginObj.notification.local.cancelAll();}catch(e){}
 				DigiWebApp.BookingController.startBookingNotification();
 			}
 	
@@ -800,9 +802,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			} catch(e) {}
 			try {
 							
-				try{window.plugin.notification.local.cancel('1');}catch(e){}
+				try{window.plugin.notification.local.cancel('4711');}catch(e){}
 				pluginObj.notification.local.add({
-				      id:         '1'
+				      id:         '4711'
 				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
 				    , sound:      null  // A sound to be played
@@ -3068,8 +3070,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('exitApp'));
     		}
 			try{DigiWebApp.ApplicationController.bgGeo.stop()}catch(e){}
-			try{window.plugin.notification.local.cancel('1');}catch(e){}
-			//try{window.plugin.notification.local.cancel('2');}catch(e){}
+			try{window.plugin.notification.local.cancel('4711');}catch(e){}
+			//try{window.plugin.notification.local.cancel('4712');}catch(e){}
 			if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 	    		if (autoExit) {
 	    			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('autoExitApp'));

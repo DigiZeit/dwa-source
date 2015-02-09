@@ -32,7 +32,6 @@
 	<preference name="phonegap-version" value="3.6.3" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	<preference name="keepRunning" value="true" />
