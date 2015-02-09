@@ -622,18 +622,25 @@ var setTestLogin = function() {
 	DigiWebApp.SettingsController.save();
 }
 
-var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+var ua = navigator.userAgent;
 
-var onIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-var onAndroid = /Android/i.test(navigator.userAgent)
+var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua)
+
+var onIOS = /iPhone|iPad|iPod/i.test(ua)
+var onAndroid = /Android/i.test(ua)
+var onSamsung = /Samsung|GT\-/i.test(ua);
 
 var onAndroid23 = false;
-var ua = navigator.userAgent;
-if( ua.indexOf("Android") >= 0 )
-{
+var onAndroid4 = false;
+var onAndroid5 = false;
+if ( onAndroid ) {
   var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
   if (androidversion < 4) {
       onAndroid23 = true;
+  } else if (androidversion < 5) {
+	  onAndroid4 = true;
+  } else if (androidversion < 6) {
+	  onAndroid5 = true;
   }
 }
 

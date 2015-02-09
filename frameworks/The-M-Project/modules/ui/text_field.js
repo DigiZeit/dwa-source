@@ -321,15 +321,8 @@ M.TextFieldView = M.View.extend(
             }
             
             // BugFix for broken number-inputType
-        	console.log('type: ', type);
-        	console.log('inputStep: ', this.inputStep);
             if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
-            	var deviceOS = device.platform;
-            	var deviceOSVersion = device.version;
-            	console.log('deviceOS: ', deviceOS);
-            	console.log('deviceOSVersion: ', deviceOSVersion);
-            	var onSamsung = /Samsung|GT\-/i.test(navigator.userAgent);
-            	if (deviceOS == "Android" && onSamsung && parseInt(deviceOSVersion, 10) <= 4) {
+            	if (onAndroid && onSamsung && (onAndroid23 || onAndroid4)) {
             		type = 'tel';
             	}
             }
