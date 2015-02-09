@@ -28,7 +28,7 @@
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
-	<preference name="autorotate" value="false" readonly="false" />
+	<preference name="autorotate" value="true" readonly="true" />
 	<preference name="phonegap-version" value="3.6.3" />
 	<preference name="orientation" value="portrait" />
 	<preference name="load-url-timeout" value="60000" />
