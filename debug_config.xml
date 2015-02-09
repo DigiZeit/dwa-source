@@ -25,17 +25,19 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
+	<preference name="phonegap-version" value="3.6.3" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="true" />
-	<preference name="phonegap-version" value="3.6.3" />
-	<preference name="orientation" value="portrait" />
+<!--	<preference name="orientation" value="portrait" /> -->
+	<preference name="orientation" value="default" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	<preference name="keepRunning" value="true" />
+	<preference name="BackgroundColor" value="0xff003366"/>
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
