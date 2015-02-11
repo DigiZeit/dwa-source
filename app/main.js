@@ -628,7 +628,7 @@ var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Pho
 
 var onIOS = /iPhone|iPad|iPod/i.test(ua)
 var onAndroid = /Android/i.test(ua)
-var onSamsung = /Samsung|GT\-/i.test(ua);
+var onSamsung = /Samsung|GT\-|SM\-/i.test(ua);
 
 var onAndroid23 = false;
 var onAndroid3 = false;
