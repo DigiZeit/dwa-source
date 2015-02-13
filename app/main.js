@@ -118,6 +118,28 @@ if (!window.console) {
 	}
 }
 
+function toIntArray(myArray) {
+	var result = [];
+	if (typeof(myArray) == "object" && myArray.length > 0) {
+		result = _.map(myArray, function(n) {
+			var r = parseIntRadixTen(n);
+			if (isNaN(r)) {
+				return;
+			} else {
+				return r;
+			}
+		});
+	}
+	return _.compact(result);
+}
+
+function setTestLogin() {
+	$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val("312");
+	$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val("stuttgart11");
+	$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val("digi$");
+	$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val("1");
+	DigiWebApp.SettingsController.save();
+}
 
 var newAppVersionAvailable = NO;
 
@@ -607,29 +629,11 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	}
 }
 
-if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
-	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
-	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
-} else {
-	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
-}
-
-var setTestLogin = function() {
-	$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val("312");
-	$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val("stuttgart11");
-	$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val("digi$");
-	$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val("1");
-	DigiWebApp.SettingsController.save();
-}
-
 var ua = navigator.userAgent;
-
 var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua)
-
 var onIOS = /iPhone|iPad|iPod/i.test(ua)
 var onAndroid = /Android/i.test(ua)
 var onSamsung = /Samsung|GT\-|SM\-/i.test(ua);
-
 var onAndroid23 = false;
 var onAndroid3 = false;
 var onAndroid4 = false;
@@ -645,6 +649,13 @@ if ( onAndroid ) {
   } else if (androidversion < 6) {
 	  onAndroid5 = true;
   }
+}
+
+if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
+	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
+	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
+} else {
+	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 
 if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") { 
@@ -666,19 +677,4 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 			    }
 		  });
 	} catch(e) {}
-}
-
-function toIntArray(myArray) {
-	var result = [];
-	if (typeof(myArray) == "object" && myArray.length > 0) {
-		result = _.map(myArray, function(n) {
-			var r = parseIntRadixTen(n);
-			if (isNaN(r)) {
-				return;
-			} else {
-				return r;
-			}
-		});
-	}
-	return _.compact(result);
 }
