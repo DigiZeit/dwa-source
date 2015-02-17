@@ -26,7 +26,7 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
-	<preference name="phonegap-version" value="3.6.3" />
+	<preference name="phonegap-version" value="3.5.0" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
