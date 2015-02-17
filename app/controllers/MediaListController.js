@@ -191,17 +191,6 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        , callbacks: {
 				  other: {action: function(buttonTag) {
 
-    					var myEncodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
-			    		var myEncodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
-			    		if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
-			    			myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
-			    		}
-			    		var myEncodingType = navigator.camera.EncodingType.JPEG;
-			    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
-			    			myEncodingType = navigator.camera.EncodingType.PNG;
-			    		} 
-			    		var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
-
     					switch(buttonTag) {
 		    		        case 'library':
 		    		        	
@@ -210,7 +199,19 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		    	        		  && typeof navigator.camera.getPicture !== 'undefined') {
 		    		        		
 		    		        		// auf Geraet:
-		    		        		navigator.camera.getPicture(
+		        					
+		    		        		var myEncodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
+		    			    		var myEncodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+		    			    		if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
+		    			    			myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
+		    			    		}
+		    			    		var myEncodingType = navigator.camera.EncodingType.JPEG;
+		    			    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
+		    			    			myEncodingType = navigator.camera.EncodingType.PNG;
+		    			    		} 
+		    			    		var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
+
+		    			    		navigator.camera.getPicture(
 	    		        				  function(imgData) {
 	    		        				    	//alert("success");
 	    		        					  if (imgData.indexOf("data:") === 0) {
