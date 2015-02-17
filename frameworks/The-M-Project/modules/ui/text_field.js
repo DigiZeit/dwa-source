@@ -171,7 +171,6 @@ M.TextFieldView = M.View.extend(
      * @type String
      */
     inputType: M.INPUT_TEXT,
-    inputTypeOverride: null,
 
     /**
      * DIGI-Mod

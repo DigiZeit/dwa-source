@@ -145,8 +145,14 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 
                     // BugFix for broken number-inputType on Samsung (Android <= 4)
                     if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
-                    	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
-                    		try{$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeGrid.mengenInput.id)[0].type = 'tel';}catch(e){}
+                    	if (
+                    		   (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4))
+                    		|| (parseBool(DigiWebApp.SettingsController.getSetting('mengeneingabeMitTelKeyboard')))
+                    			
+                    	) {
+                    		try{
+                    			$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeGrid.mengenInput.id)[0].type = 'tel';
+                    		}catch(e){}
                     	}
                     }
 

@@ -78,6 +78,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , pictureEncodingType: "JPEG"
         , pictureEncodingQuality: 50
         , pictureAllowEdit: YES
+        , mengeneingabeMitTelKeyboard: false
     }
 
     , defaultsettings: null
@@ -302,21 +303,28 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var pictureEncodingType = DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingType");
             try {
 	            if (typeof(record.record.pictureEncodingType) !== "undefined") {
-	            	useNativeLoader = record.get('pictureEncodingType');
+	            	pictureEncodingType = record.get('pictureEncodingType');
 	            }
             } catch (e) {}
 
             var pictureEncodingQuality = DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality");
             try {
 	            if (typeof(record.record.pictureEncodingQuality) !== "undefined") {
-	            	useNativeLoader = record.get('pictureEncodingQuality');
+	            	pictureEncodingQuality = record.get('pictureEncodingQuality');
 	            }
             } catch (e) {}
-
+            
             var pictureAllowEdit = DigiWebApp.SettingsController.defaultsettings.get("pictureAllowEdit");
             try {
 	            if (typeof(record.record.pictureAllowEdit) !== "undefined") {
-	            	useNativeLoader = record.get('pictureAllowEdit');
+	            	pictureAllowEdit = record.get('pictureAllowEdit');
+	            }
+            } catch (e) {}
+
+            var mengeneingabeMitTelKeyboard = DigiWebApp.SettingsController.defaultsettings.get("mengeneingabeMitTelKeyboard");
+            try {
+	            if (typeof(record.record.mengeneingabeMitTelKeyboard) !== "undefined") {
+	            	mengeneingabeMitTelKeyboard = record.get('mengeneingabeMitTelKeyboard');
 	            }
             } catch (e) {}
 
@@ -516,6 +524,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , pictureEncodingType: pictureEncodingType
 	           , pictureEncodingQuality: pictureEncodingQuality
 	           , pictureAllowEdit: pictureAllowEdit
+	           , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
                
             };
         /* default values */
@@ -659,6 +668,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , pictureEncodingType: DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingType") 
                , pictureEncodingQuality: DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality")
                , pictureAllowEdit: DigiWebApp.SettingsController.defaultsettings.get("pictureAllowEdit")
+               , mengeneingabeMitTelKeyboard: DigiWebApp.SettingsController.defaultsettings.get("mengeneingabeMitTelKeyboard")
                
             };
             
@@ -898,6 +908,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var pictureEncodingType				= DigiWebApp.SettingsController.getSetting('pictureEncodingType');
     	var pictureEncodingQuality			= DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
     	var pictureAllowEdit			    = DigiWebApp.SettingsController.getSetting('pictureAllowEdit');
+    	var mengeneingabeMitTelKeyboard     = DigiWebApp.SettingsController.getSetting('mengeneingabeMitTelKeyboard');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1024,6 +1035,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('pictureEncodingType', pictureEncodingType);
                                                     record.set('pictureEncodingQuality', pictureEncodingQuality);
                                                     record.set('pictureAllowEdit', pictureAllowEdit);
+                                                    record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1116,6 +1128,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('pictureEncodingType', pictureEncodingType);
                                     record.set('pictureEncodingQuality', pictureEncodingQuality);
                                     record.set('pictureAllowEdit', pictureAllowEdit);
+                                    record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1182,6 +1195,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureEncodingType', pictureEncodingType);
                                 record.set('pictureEncodingQuality', pictureEncodingQuality);
                                 record.set('pictureAllowEdit', pictureAllowEdit);
+                                record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1248,6 +1262,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureEncodingType', pictureEncodingType);
                                 record.set('pictureEncodingQuality', pictureEncodingQuality);
                                 record.set('pictureAllowEdit', pictureAllowEdit);
+                                record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1316,6 +1331,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , pictureEncodingType: pictureEncodingType
                                 , pictureEncodingQuality: pictureEncodingQuality
                                 , pictureAllowEdit: pictureAllowEdit
+                                , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
 
                           });
 
