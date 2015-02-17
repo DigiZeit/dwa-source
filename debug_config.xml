@@ -160,14 +160,16 @@ screen -->
 
 	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
-	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
 	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
 	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" />
-	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="port-mdpi" />
+	<gap:splash src="theme/images/470x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="land-mdpi" />
 	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="port-hdpi" />
     <gap:splash src="theme/images/800x480_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="land-hdpi" />
-    <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
-    <gap:splash src="theme/images/1080x1920_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xxhdpi" />
+    <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="port-xhdpi" />
+    <gap:splash src="theme/images/960x720_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="land-xhdpi" />
+    <gap:splash src="theme/images/1080x1920_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
+    <gap:splash src="theme/images/1920x1080_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:qualifier="land-xxhdpi" />
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
