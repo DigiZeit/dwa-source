@@ -167,6 +167,7 @@ screen -->
 	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
 	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="theme/images/800x480_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="hdpi" />
     <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
     <gap:splash src="theme/images/1080x1920_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xxhdpi" />
     
