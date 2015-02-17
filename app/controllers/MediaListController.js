@@ -216,9 +216,9 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	    		        					  if (imgData.indexOf("data:") === 0) {
 					    		        		DigiWebApp.CameraController.set("loadedPicture", imgData);
 	    		        					  } else {
-					    		        		DigiWebApp.CameraController.set("loadedPicture", 'data:' + DigiWebApp.ApplicationController.CONSTImageFiletype + ',' + imgData);
+					    		        		DigiWebApp.CameraController.set("loadedPicture", 'data:' + DigiWebApp.ApplicationController.getImageFiletype() + ',' + imgData);
 	    		        					  }
-	    		        					  DigiWebApp.CameraController.set("fileType", DigiWebApp.ApplicationController.CONSTImageFiletype);
+	    		        					  DigiWebApp.CameraController.set("fileType", DigiWebApp.ApplicationController.getImageFiletype());
 	    		        					  DigiWebApp.NavigationController.toCameraPageTransition();
 	    		        				}
 	    		        				, function(err) {
@@ -248,7 +248,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 			    		        	DigiWebApp.FileChooserPage.set("successCallback", function(imgData, fileName) {
 				    		        	if (imgData !== null) {
 				    		        		  DigiWebApp.CameraController.set("loadedFileName", fileName);
-				    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.CONSTImageFiletype;
+				    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.getImageFiletype();
 				    		        		  var tmp = fileName;
 				    		        		  var i = 0;
 				    		        		  while (i !== -1) {

@@ -8,11 +8,15 @@
 // manuell var-checked
 DigiWebApp.ApplicationController = M.Controller.extend({
 	
-	  CONSTImageFiletype: "image/jpeg;base64"
-	, CONSTAudioFiletype: "audio/wav;base64"
+	  //CONSTImageFiletype: "image/jpeg;base64"
+	  CONSTAudioFiletype: "audio/wav;base64"
 	, CONSTVideoFiletype: "video/mp4;base64"
 	, CONSTTextFiletype: "text/plain"
 		
+	, getImageFiletype: function() {
+		var filetypeString = "image/" + DigiWebApp.SettingsController.getSetting('pictureEncodingType').toLowerCase() + ";base64"
+		return filetypeString;
+	}
 	, CONSTApplicationQuota: 20*1024*1024
 	
 	, CONSTVibrateDuration: 100

@@ -38,9 +38,10 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 //		    		            });
 //		    		            break;
 //		    		        case 'photo':
+								var filetypeString = "image/" + DigiWebApp.SettingsController.getSetting('pictureEncodingType').toLowerCase() + ";base64"
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("item", DigiWebApp.BautagebuchMediaFile.createRecord({
 			    		  			    bautagesberichtId: DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')
-			    		  			  , fileType: DigiWebApp.ApplicationController.CONSTImageFiletype
+			    		  			  , fileType: DigiWebApp.ApplicationController.getImageFiletype()
 			    		  		}));
 		    		    		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId')) {
 		    		    			DigiWebApp.BautagebuchMedienDetailsController.set("auftragId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId'));
@@ -65,7 +66,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("activityName", null);
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("data", null);
 		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("remark", null);
-		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("fileType", DigiWebApp.ApplicationController.CONSTImageFiletype);
+		    		    		DigiWebApp.BautagebuchMedienDetailsController.set("fileType", DigiWebApp.ApplicationController.getImageFiletype());
 		    		    		
 		    		    		var libraryFunc = function() {
 	  		    		        	// unterscheiden: auf Gerät oder im Browser?
@@ -80,10 +81,10 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	  	    		        					  if (imgData.indexOf("data:") === 0) {
 		  	    		        				        image.src = imgData;
 	  	    		        					  } else {
-		  	    		        				        image.src = 'data:' + DigiWebApp.ApplicationController.CONSTImageFiletype + ',' + imgData;
+		  	    		        				        image.src = 'data:' + DigiWebApp.ApplicationController.getImageFiletype() + ',' + imgData;
 	  	    		        					  }
 	  	    		        					  that.set("data", image.src);
-	  	    		        					  that.set("fileType", DigiWebApp.ApplicationController.CONSTImageFiletype);
+	  	    		        					  that.set("fileType", DigiWebApp.ApplicationController.getImageFiletype());
 	  	    		        					  DigiWebApp.NavigationController.toBautagebuchMedienDetailsPageTransition();
 	  	    		        				}
 	  	    		        				, function(err) {
@@ -114,7 +115,7 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	  				    		        	if (imgData !== null) {
   	    		        				          var image = document.getElementById(DigiWebApp.BautagebuchMedienDetailsPage.content.image.id);
   					    		        		  that.set("loadedFileName", fileName);
-  					    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.CONSTImageFiletype;
+  					    		        		  var myFileType = ""; //DigiWebApp.ApplicationController.getImageFiletype();
   					    		        		  var tmp = fileName;
   					    		        		  var i = 0;
   					    		        		  while (i !== -1) {

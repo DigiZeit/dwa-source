@@ -492,7 +492,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 	    
 	    var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
 
-	    myMediaFile.set('fileType', DigiWebApp.ApplicationController.CONSTImageFiletype);
+	    myMediaFile.set('fileType', DigiWebApp.ApplicationController.getImageFiletype());
 	    myMediaFile.save();
 	    myMediaFile.saveToFile(image.src, function() {
 		      DigiWebApp.ApplicationController.DigiLoaderView.hide();
