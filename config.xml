@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "5936"
-	version 	  = "1.8.3.5936">
+	versionCode   = "5937"
+	version 	  = "1.8.3.5937">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -26,7 +26,7 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
-	<preference name="phonegap-version" value="3.5.0" />
+	<preference name="phonegap-version" value="3.6.3" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
@@ -78,7 +78,8 @@ which PhoneGap requires. -->
 <!-- 	<gap:plugin name="org.apache.cordova.vibration" /> -->
  
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-<gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
+<!-- <gap:plugin name="org.apache.cordova.camera" version="0.3.2" /> -->
+<gap:plugin name="org.apache.cordova.camera" version="0.2.9" />
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
@@ -100,7 +101,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>5936</string> 
+	<string>5937</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
