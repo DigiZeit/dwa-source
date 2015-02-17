@@ -190,7 +190,18 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        , otherButtonTags: ["library", "camera"]
 	        , callbacks: {
 				  other: {action: function(buttonTag) {
-	  			    switch(buttonTag) {
+
+			    		var encodingQuality = 70;
+			    		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+			    		if (parseIntRadixTen(encodingQualitySetting) > 9) {
+			    			encodingQuality = parseIntRadixTen(encodingQualitySetting);
+			    		}
+			    		var encodingType = navigator.camera.EncodingType.PNG;
+			    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "JPEG") {
+			    			encodingType = navigator.camera.EncodingType.JPEG;
+			    		}
+
+    					switch(buttonTag) {
 		    		        case 'library':
 		    		        	
 		    		        	// unterscheiden: auf Gerät oder im Browser?
@@ -218,11 +229,12 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					    		            });	    		        					
 	    		        				}
 	    		        				, {
-	    		        					  quality: 40
+	    		        					  quality: encodingQuality
 	    		     	    				, allowEdit: true
 	    		     	    				, destinationType : navigator.camera.DestinationType.DATA_URL
 	    		     	    				//, destinationType: navigator.camera.DestinationType.FILE_URI
-	    		     	    				, encodingType: navigator.camera.EncodingType.JPEG
+	    		     	    				//, destinationType: navigator.camera.DestinationType.NATIVE_URI
+	    		     	    				, encodingType: encodingType
 	    		     	    				, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
 	    		     	    				, mediaType: navigator.camera.MediaType.PICTURE
 	    		     	    				, saveToPhotoAlbum: false

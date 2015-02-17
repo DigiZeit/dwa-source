@@ -122,4 +122,8 @@ DigiWebApp.Settings = M.Model.create({
     
     , useNativeLoader: M.Model.attr('Boolean')
 
+    , pictureEncodingType: M.Model.attr('String')
+
+    , pictureEncodingQuality: M.Model.attr('Integer')
+
 }, M.DataProviderLocalStorage);

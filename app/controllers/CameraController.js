@@ -439,17 +439,26 @@ DigiWebApp.CameraController = M.Controller.extend({
 //	   				, mediaType: navigator.camera.MediaType.PICTURE
 //	   				, saveToPhotoAlbum: false
 //	  			  }
-//				);    	
+//				);
+    		var encodingQuality = 70;
+    		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+    		if (parseIntRadixTen(encodingQualitySetting) > 9) {
+    			encodingQuality = parseIntRadixTen(encodingQualitySetting);
+    		}
+    		var encodingType = navigator.camera.EncodingType.PNG;
+    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "JPEG") {
+    			encodingType = navigator.camera.EncodingType.JPEG;
+    		}
 			navigator.camera.getPicture(
 	  			  DigiWebApp.CameraController.cameraSuccessURI
 	  			, DigiWebApp.CameraController.cameraError
 	  			, { 
-						  quality: 90
+					  quality: encodingQuality
 	   				, allowEdit: true
 	   				//, destinationType : navigator.camera.DestinationType.DATA_URL
 	   				//, destinationType: navigator.camera.DestinationType.FILE_URI
 	   				, destinationType: navigator.camera.DestinationType.NATIVE_URI
-	   				, encodingType: navigator.camera.EncodingType.PNG
+	   				, encodingType: encodingType
 	   				, sourceType: navigator.camera.PictureSourceType.CAMERA 
 	   				, mediaType: navigator.camera.MediaType.PICTURE
 	   				, saveToPhotoAlbum: false

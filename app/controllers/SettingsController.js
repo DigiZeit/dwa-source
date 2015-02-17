@@ -75,6 +75,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , closeAppAfterCloseDay: YES
         , DTC6aktiv: NO
         , useNativeLoader: YES
+        , pictureEncodingType: "PNG"
+        , pictureEncodingQuality: 70
     }
 
     , defaultsettings: null
@@ -296,6 +298,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            var pictureEncodingType = DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingType");
+            try {
+	            if (typeof(record.record.pictureEncodingType) !== "undefined") {
+	            	useNativeLoader = record.get('pictureEncodingType');
+	            }
+            } catch (e) {}
+
+            var pictureEncodingQuality = DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality");
+            try {
+	            if (typeof(record.record.pictureEncodingQuality) !== "undefined") {
+	            	useNativeLoader = record.get('pictureEncodingQuality');
+	            }
+            } catch (e) {}
+
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -489,6 +505,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           }]
 	           , DTC6aktiv: DTC6aktiv
 	           , useNativeLoader: useNativeLoader
+	           , pictureEncodingType: pictureEncodingType
+	           , pictureEncodingQuality: pictureEncodingQuality
                
             };
         /* default values */
@@ -629,6 +647,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                }]
                , DTC6aktiv: DigiWebApp.SettingsController.defaultsettings.get("DTC6aktiv")
                , useNativeLoader: DigiWebApp.SettingsController.defaultsettings.get("useNativeLoader") 
+               , pictureEncodingType: DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingType") 
+               , pictureEncodingQuality: DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality") 
                
             };
             
@@ -865,6 +885,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         
     	var DTC6aktiv                       = DigiWebApp.SettingsController.getSetting('DTC6aktiv');
     	var useNativeLoader					= DigiWebApp.SettingsController.getSetting('useNativeLoader');
+    	var pictureEncodingType				= DigiWebApp.SettingsController.getSetting('pictureEncodingType');
+    	var pictureEncodingQuality			= DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -988,6 +1010,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                                     record.set('DTC6aktiv', DTC6aktiv);
                                                     record.set('useNativeLoader', useNativeLoader);
+                                                    record.set('pictureEncodingType', pictureEncodingType);
+                                                    record.set('pictureEncodingQuality', pictureEncodingQuality);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1077,6 +1101,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                     record.set('DTC6aktiv', DTC6aktiv);
                                     record.set('useNativeLoader', useNativeLoader);
+                                    record.set('pictureEncodingType', pictureEncodingType);
+                                    record.set('pictureEncodingQuality', pictureEncodingQuality);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1140,6 +1166,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                 record.set('DTC6aktiv', DTC6aktiv);
                                 record.set('useNativeLoader', useNativeLoader);
+                                record.set('pictureEncodingType', pictureEncodingType);
+                                record.set('pictureEncodingQuality', pictureEncodingQuality);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1203,6 +1231,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('closeAppAfterCloseDay', closeAppAfterCloseDay);
                                 record.set('DTC6aktiv', DTC6aktiv);
                                 record.set('useNativeLoader', useNativeLoader);
+                                record.set('pictureEncodingType', pictureEncodingType);
+                                record.set('pictureEncodingQuality', pictureEncodingQuality);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1268,6 +1298,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , closeAppAfterCloseDay: closeAppAfterCloseDay
                                 , DTC6aktiv: DTC6aktiv
                                 , useNativeLoader: useNativeLoader
+                                , pictureEncodingType: pictureEncodingType
+                                , pictureEncodingQuality: pictureEncodingQuality
 
                           });
 
