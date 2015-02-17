@@ -430,11 +430,11 @@ DigiWebApp.CameraController = M.Controller.extend({
 	    			  DigiWebApp.CameraController.cameraSuccessBase64
 	    			, DigiWebApp.CameraController.cameraError
 	    			, { 
-    					  quality: 40
+    					  quality: 90
  	    				, allowEdit: true
  	    				, destinationType : navigator.camera.DestinationType.DATA_URL
  	    				//, destinationType: navigator.camera.DestinationType.FILE_URI
- 	    				, encodingType: navigator.camera.EncodingType.JPEG
+ 	    				, encodingType: navigator.camera.EncodingType.PNG
  	    				, sourceType: navigator.camera.PictureSourceType.CAMERA 
  	    				, mediaType: navigator.camera.MediaType.PICTURE
  	    				, saveToPhotoAlbum: false
