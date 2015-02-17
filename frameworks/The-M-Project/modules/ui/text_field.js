@@ -341,18 +341,18 @@ M.TextFieldView = M.View.extend(
               }
             }
             // BugFix for broken number-inputType
-            if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep)) {
+            if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
             	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
-//            		writeToLog("TEXT_FIELD: Samsung BugFix");
+            		writeToLog("TEXT_FIELD: Samsung BugFix");
             		type = 'tel';
             	} else {
-//            		writeToLog("TEXT_FIELD: normal NUMBER");
-//            		writeToLog("onAndroid: " + onAndroid);
-//            		writeToLog("androidversion: " + androidversion);
-//            		writeToLog("onSamsung: " + onSamsung);
-//            		writeToLog("onAndroid23: " + onAndroid23);
-//            		writeToLog("onAndroid3: " + onAndroid3);
-//            		writeToLog("onAndroid4: " + onAndroid4);
+            		writeToLog("TEXT_FIELD: normal NUMBER");
+            		writeToLog("onAndroid: " + onAndroid);
+            		writeToLog("androidversion: " + androidversion);
+            		writeToLog("onSamsung: " + onSamsung);
+            		writeToLog("onAndroid23: " + onAndroid23);
+            		writeToLog("onAndroid3: " + onAndroid3);
+            		writeToLog("onAndroid4: " + onAndroid4);
             	}
             }
 
