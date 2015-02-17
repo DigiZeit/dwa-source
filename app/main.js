@@ -23,6 +23,10 @@ function parseBool(val) {
 		return NO;
 	} else if (val === false) {
 		return NO;
+	} else if (val > 0) {
+		return YES;
+	} else {
+		return NO;
 	}
 }
 

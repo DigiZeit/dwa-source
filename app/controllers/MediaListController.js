@@ -191,15 +191,16 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        , callbacks: {
 				  other: {action: function(buttonTag) {
 
-    					var encodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
-			    		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
-			    		if (parseIntRadixTen(encodingQualitySetting) > 9) {
-			    			encodingQuality = parseIntRadixTen(encodingQualitySetting);
+    					var myEncodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
+			    		var myEncodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+			    		if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
+			    			myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
 			    		}
-			    		var encodingType = navigator.camera.EncodingType.PNG;
-			    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "JPEG") {
-			    			encodingType = navigator.camera.EncodingType.JPEG;
-			    		}
+			    		var myEncodingType = navigator.camera.EncodingType.JPEG;
+			    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
+			    			myEncodingType = navigator.camera.EncodingType.PNG;
+			    		} 
+			    		var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
 
     					switch(buttonTag) {
 		    		        case 'library':
@@ -229,12 +230,12 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					    		            });	    		        					
 	    		        				}
 	    		        				, {
-	    		        					  quality: encodingQuality
-	    		     	    				, allowEdit: false
+	    		        					  quality: myEncodingQuality
+	    		     	    				, allowEdit: myAllowEdit
 	    		     	    				, destinationType : navigator.camera.DestinationType.DATA_URL
 	    		     	    				//, destinationType: navigator.camera.DestinationType.FILE_URI
 	    		     	    				//, destinationType: navigator.camera.DestinationType.NATIVE_URI
-	    		     	    				, encodingType: encodingType
+	    		     	    				, encodingType: myEncodingType
 	    		     	    				, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
 	    		     	    				, mediaType: navigator.camera.MediaType.PICTURE
 	    		     	    				, saveToPhotoAlbum: false

@@ -440,15 +440,18 @@ DigiWebApp.CameraController = M.Controller.extend({
 //	   				, saveToPhotoAlbum: false
 //	  			  }
 //				);
-			var encodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
-    		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
-    		if (parseIntRadixTen(encodingQualitySetting) > 9) {
-    			encodingQuality = parseIntRadixTen(encodingQualitySetting);
+    	
+			var myEncodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
+    		var myEncodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+    		if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
+    			myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
     		}
-    		var encodingType = navigator.camera.EncodingType.PNG;
-    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "JPEG") {
-    			encodingType = navigator.camera.EncodingType.JPEG;
+    		
+    		var myEncodingType = navigator.camera.EncodingType.JPEG;
+    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
+    			myEncodingType = navigator.camera.EncodingType.PNG;
     		}
+    		
     		var mySuccessHandler = DigiWebApp.CameraController.cameraSuccessBase64;
     		var myDestinationType = navigator.camera.DestinationType.DATA_URL;
 //    		var myDestinationType = navigator.camera.DestinationType.FILE_URI;
@@ -458,14 +461,16 @@ DigiWebApp.CameraController = M.Controller.extend({
     		} else {
     			mySuccessHandler = DigiWebApp.CameraController.cameraSuccessURI;
     		}
+    		var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
+    		
 			navigator.camera.getPicture(
 				  mySuccessHandler
 	  			, DigiWebApp.CameraController.cameraError
 	  			, { 
 					  quality: encodingQuality
-	   				, allowEdit: false
+	   				, allowEdit: myAllowEdit
 	   				, destinationType : myDestinationType
-	   				, encodingType: encodingType
+	   				, encodingType: myEncodingType
 	   				, sourceType: navigator.camera.PictureSourceType.CAMERA 
 	   				, mediaType: navigator.camera.MediaType.PICTURE
 	   				, saveToPhotoAlbum: false
@@ -599,11 +604,7 @@ DigiWebApp.CameraController = M.Controller.extend({
     
     , myImageData: null
     , myImageObj: null
-    , cameraSuccessBase64: function(imageData,a,b,c) {
-    	writeToLog(imageData);
-    	writeToLog(a);
-    	writeToLog(b);
-    	writeToLog(c);
+    , cameraSuccessBase64: function(imageData) {
     	DigiWebApp.CameraController.myImageData = imageData;
         var image = document.getElementById(DigiWebApp.CameraPage.content.image.id);
         image.src = 'data:' + DigiWebApp.ApplicationController.CONSTImageFiletype + ',' + imageData;
@@ -615,21 +616,13 @@ DigiWebApp.CameraController = M.Controller.extend({
     }
 
     , myImageURI: null
-    , cameraSuccessURI: function(imageURI,a,b,c) {
-    	writeToLog(imageURI);
-    	writeToLog(a);
-    	writeToLog(b);
-    	writeToLog(c);
+    , cameraSuccessURI: function(imageURI) {
     	DigiWebApp.CameraController.myImageURI = imageURI;
         var image = document.getElementById(DigiWebApp.CameraPage.content.image.id);
         image.src = imageURI;
     }
     
-    , cameraError: function(mymessage,a,b,c) {
-    	writeToLog(mymessage);
-    	writeToLog(a);
-    	writeToLog(b);
-    	writeToLog(c);
+    , cameraError: function(mymessage) {
     	//DigiWebApp.NavigationController.backToMediaListPageTransition();
         DigiWebApp.ApplicationController.nativeAlertDialogView({
               title: 'ERROR'
@@ -638,7 +631,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 	            confirm: {
 	                  target: this
 	                , action: function () {
-	    				//DigiWebApp.NavigationController.backToMediaListPageTransition();
+	    				DigiWebApp.NavigationController.backToMediaListPageTransition();
 		              }
 		       }
 		    }

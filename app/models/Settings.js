@@ -126,4 +126,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , pictureEncodingQuality: M.Model.attr('Integer')
 
+    , pictureAllowEdit: M.Model.attr('Boolean')
+
 }, M.DataProviderLocalStorage);
