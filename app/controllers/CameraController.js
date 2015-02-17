@@ -467,7 +467,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 				  mySuccessHandler
 	  			, DigiWebApp.CameraController.cameraError
 	  			, { 
-					  quality: encodingQuality
+					  quality: myEncodingQuality
 	   				, allowEdit: myAllowEdit
 	   				, destinationType : myDestinationType
 	   				, encodingType: myEncodingType
