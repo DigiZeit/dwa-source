@@ -230,7 +230,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	    		        				}
 	    		        				, {
 	    		        					  quality: encodingQuality
-	    		     	    				, allowEdit: true
+	    		     	    				, allowEdit: false
 	    		     	    				, destinationType : navigator.camera.DestinationType.DATA_URL
 	    		     	    				//, destinationType: navigator.camera.DestinationType.FILE_URI
 	    		     	    				//, destinationType: navigator.camera.DestinationType.NATIVE_URI
