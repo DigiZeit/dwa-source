@@ -191,7 +191,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	        , callbacks: {
 				  other: {action: function(buttonTag) {
 
-			    		var encodingQuality = 70;
+    					var encodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
 			    		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
 			    		if (parseIntRadixTen(encodingQualitySetting) > 9) {
 			    			encodingQuality = parseIntRadixTen(encodingQualitySetting);

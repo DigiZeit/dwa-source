@@ -440,7 +440,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 //	   				, saveToPhotoAlbum: false
 //	  			  }
 //				);
-    		var encodingQuality = 70;
+			var encodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
     		var encodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
     		if (parseIntRadixTen(encodingQualitySetting) > 9) {
     			encodingQuality = parseIntRadixTen(encodingQualitySetting);

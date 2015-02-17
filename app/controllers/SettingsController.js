@@ -76,7 +76,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , DTC6aktiv: NO
         , useNativeLoader: YES
         , pictureEncodingType: "PNG"
-        , pictureEncodingQuality: 70
+        , pictureEncodingQuality: 50
     }
 
     , defaultsettings: null
