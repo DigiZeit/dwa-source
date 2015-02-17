@@ -320,6 +320,27 @@ M.TextFieldView = M.View.extend(
             	minValueString = ' min="0"';
             }
             
+            var ua = navigator.userAgent;
+            var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua)
+            var onIOS = /iPhone|iPad|iPod/i.test(ua)
+            var onAndroid = /Android/i.test(ua)
+            var onSamsung = /Samsung|GT\-|SM\-/i.test(ua);
+            var onAndroid23 = false;
+            var onAndroid3 = false;
+            var onAndroid4 = false;
+            var onAndroid5 = false;
+            if ( onAndroid ) {
+              var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+                if (androidversion < 3) {
+                  onAndroid23 = true;
+              } else if (androidversion < 4) {
+            	  onAndroid3 = true;
+              } else if (androidversion < 5) {
+            	  onAndroid4 = true;
+              } else if (androidversion < 6) {
+            	  onAndroid5 = true;
+              }
+            }
             // BugFix for broken number-inputType
             if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
             	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
