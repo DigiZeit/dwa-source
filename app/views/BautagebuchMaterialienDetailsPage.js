@@ -143,7 +143,14 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.herstellerComboBox.id + "_container").hide();
                 	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.lieferantComboBox.id + "_container").hide();
 
-    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                    // BugFix for broken number-inputType on Samsung (Android <= 4)
+                    if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
+                    	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
+                    		try{$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeGrid.mengenInput.id)[0].type = 'tel';}catch(e){}
+                    	}
+                    }
+
+                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
     				
 			}
         }

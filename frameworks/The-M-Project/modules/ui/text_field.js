@@ -321,41 +321,6 @@ M.TextFieldView = M.View.extend(
             	minValueString = ' min="0"';
             }
             
-            var ua = navigator.userAgent;
-            var onAndroid = /Android/i.test(ua)
-            var onSamsung = /Samsung|GT\-|SM\-/i.test(ua);
-            var onAndroid23 = false;
-            var onAndroid3 = false;
-            var onAndroid4 = false;
-            var onAndroid5 = false;
-            if ( onAndroid ) {
-              var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
-                if (androidversion < 3) {
-                  onAndroid23 = true;
-              } else if (androidversion < 4) {
-            	  onAndroid3 = true;
-              } else if (androidversion < 5) {
-            	  onAndroid4 = true;
-              } else if (androidversion < 6) {
-            	  onAndroid5 = true;
-              }
-            }
-            // BugFix for broken number-inputType
-            if (type == M.INPUT_NUMBER && typeof(device) != "undefined" && (this.inputStep == "any" || /\./i.test(this.inputStep))) {
-            	if (onAndroid && onSamsung && (onAndroid23 || onAndroid3 || onAndroid4)) {
-            		writeToLog("TEXT_FIELD: Samsung BugFix");
-            		type = 'tel';
-            	} else {
-            		writeToLog("TEXT_FIELD: normal NUMBER");
-            		writeToLog("onAndroid: " + onAndroid);
-            		writeToLog("androidversion: " + androidversion);
-            		writeToLog("onSamsung: " + onSamsung);
-            		writeToLog("onAndroid23: " + onAndroid23);
-            		writeToLog("onAndroid3: " + onAndroid3);
-            		writeToLog("onAndroid4: " + onAndroid4);
-            	}
-            }
-
             this.html += '<input' 
             		+ ' id="' + this.id + '"' 
             		+ ' name="' + (this.name ? this.name : this.id) + '"' 
