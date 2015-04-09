@@ -514,6 +514,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						}
 					}, function() {
 				        var myContFunc = function() {
+				    		mediaFilesIndex = mediaFilesIndex + 1;
 							if ( mediaFilesIndex === mediaFilesLength && done === false) {
 								// last mediaFile loaded
 								writeToLog('last mediaFile done (last file load failed)');
