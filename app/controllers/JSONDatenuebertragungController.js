@@ -230,7 +230,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					
 				};
 
-				// aktuelle Konfiguration protokollieren (damit 
+				// aktuelle Konfiguration protokollieren
 				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings));
 				// zeitdaten-array protokollieren
 				writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))));

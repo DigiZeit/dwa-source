@@ -184,7 +184,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
     }
 
 	try {
-		
+		alert(writeContent.toString());
 		console.log(writeContent.toString());
 		
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
