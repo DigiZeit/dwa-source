@@ -483,6 +483,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
     	};
 
 		var mediaFiles = DigiWebApp.MediaFile.find();
+		var medieFilesFuerProceed = [];
 		var mediaFilesLength = mediaFiles.length;
     	var mediaFilesIndex = 0;
     	var done = false;
@@ -501,6 +502,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					            if (mf.m_id == el.m_id) {
 					            	mf.set("data", fileContent);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
+						    		medieFilesFuerProceed.push(mf);
 						    		writeToLog('mediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
 					            }
 					        });
@@ -510,7 +512,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 							writeToLog('last mediaFile done (with file)');
 		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
-		    				proceed(mediaFiles);
+		    				proceed(medieFilesFuerProceed);
 						}
 					}, function() {
 				        var myContFunc = function() {
@@ -520,7 +522,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 								writeToLog('last mediaFile done (last file load failed)');
 			    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			    				done = true;
-			    				proceed(mediaFiles);
+			    				proceed(medieFilesFuerProceed);
 							}
 						}
 						trackError('loading mediaFile ' + el.get('fileName') + ' failed!');
@@ -551,14 +553,14 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						writeToLog('last mediaFile done (no file)');
 	    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    				done = true;
-	    				proceed(mediaFiles);
+	    				proceed(medieFilesFuerProceed);
 					}
 	    		}
 	        });
     	} else {
     		//console.log('no mediafiles');
 			//DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			proceed(mediaFiles);
+			proceed(medieFilesFuerProceed);
     	}
     }
 
