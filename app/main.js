@@ -547,16 +547,18 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
         var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"));
         writeToLog("removing logfiles older than " + minDateInt);
 		_.each(entries, function(entry) {
-			// is file too old?
-			var tooOld = false;
-			var year = entry.name.substr(0,4);
-			var month = entry.name.substr(5,2);
-			var day = entry.name.substr(8,2);
-            var myInt = parseIntRadixTen(year+month+day);
-            tooOld = (myInt < minDateInt);
-			if (tooOld) {
-				//entry.remove();
-				filesToDeleteArray.push(entry);
+			if (entry.name.substr(10) == "_DIGI-WebApp.log.txt") {
+				// is file too old?
+				var tooOld = false;
+				var year = entry.name.substr(0,4);
+				var month = entry.name.substr(5,2);
+				var day = entry.name.substr(8,2);
+	            var myInt = parseIntRadixTen(year+month+day);
+	            tooOld = (myInt < minDateInt);
+				if (tooOld) {
+					//entry.remove();
+					filesToDeleteArray.push(entry);
+				}
 			}
 		});
         var filesDeleted = 0;
