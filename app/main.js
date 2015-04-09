@@ -199,7 +199,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 			
 				    	// get fileEntry from filesystem (create if not exists)
-				    	dataDirectory.getFile(fileName, {create: true, exclusive: true}, function(fileEntry) {
+				    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
 			
 				    		fileEntry.createWriter(function(writer) {
 				    				
@@ -240,7 +240,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 		
 			    	// get fileEntry from filesystem (create if not exists)
-			    	dataDirectory.getFile(fileName, {create: true, exclusive: true}, function(fileEntry) {
+			    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
 		
 			    		fileEntry.createWriter(function(writer) {
 			    				
