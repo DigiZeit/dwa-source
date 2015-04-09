@@ -180,13 +180,13 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " 
 	+ writeContent + "\n";
 	
-	logQueue.push(writeContent);
+	logQueue.push({"content": writeContent, "timestamp": now});
 	//if (!queueIntervalId) queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 }
 
-function writeToLogFromQueue(writeContent, mySuccessCallback, myErrorCallback) {	
+function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback) {	
 		
 	var successCallback;
 	if (typeof(mySuccessCallback) !== "function") {
@@ -200,6 +200,9 @@ function writeToLogFromQueue(writeContent, mySuccessCallback, myErrorCallback) {
 	} else {
 		errorCallback = myErrorCallback;
 	}
+	
+	var writeContent = writeContentObj.writeContent;
+	var now = writeContent.timestamp;
 	
 	console.log(writeContent.toString());
 
