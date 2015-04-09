@@ -174,8 +174,6 @@ function autoCleanLogs(mySuccessCallback, myErrorCallback) {
 
 	try {
 		
-		console.log(writeContent.toString());
-		
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
 	    // open filesystem
 		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
