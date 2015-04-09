@@ -567,7 +567,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 }
 
 function cat(filename) {
-	var errorHandler = function(err){console.err(err);};
+	var errorHandler = function(err){console.error(err);};
 	var operation = function(fs) {
 		fs.root.getFile(filename, {}, function(fileEntry) {
 
@@ -586,13 +586,26 @@ function cat(filename) {
 	getFS(operation);
 }
 
+function rm(filename) {
+	var errorHandler = function(err){console.error(err);};
+	var operation = function(fs) {
+		fs.root.getFile(filename, {}, function(fileEntry) {
+
+		    fileEntry.remove(function(){ console.log(filename + " removed"); }, errorHandler);
+
+		  }, errorHandler);
+	}
+	getFS(operation);
+}
+
 function ls(dirName) {
+	var errorHandler = function(err){console.error(err);};
 	var operation = function(dir) {
 		dir.createReader().readEntries(function(entries){
 			_.each(entries, function(entry) {
 				console.log(entry.name);
 			});
-		});
+		}, errorHandler);
 	}
 	getDir(dirName, operation);
 }
