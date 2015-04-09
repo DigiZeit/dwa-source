@@ -588,7 +588,7 @@ function cat(filename) {
 
 function ls(dirName) {
 	var operation = function(dir) {
-		logDir.createReader().readEntries(function(entries){
+		dir.createReader().readEntries(function(entries){
 			_.each(entries, function(entry) {
 				console.log(entry.name);
 			});
