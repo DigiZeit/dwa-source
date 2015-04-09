@@ -128,6 +128,8 @@ DigiWebApp.Settings = M.Model.create({
 
     , pictureAllowEdit: M.Model.attr('Boolean')
     
-    , mengeneingabeMitTelKeyboard: M.Model.attr('Boolean') 
+    , mengeneingabeMitTelKeyboard: M.Model.attr('Boolean')
+    
+    , scrId: M.Model.attr('String')
 
 }, M.DataProviderLocalStorage);

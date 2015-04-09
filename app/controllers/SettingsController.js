@@ -79,6 +79,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , pictureEncodingQuality: 50
         , pictureAllowEdit: YES
         , mengeneingabeMitTelKeyboard: false
+        , scrId: 8367
     }
 
     , defaultsettings: null
@@ -328,6 +329,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            var scrId = DigiWebApp.SettingsController.defaultsettings.get("scrId");
+            try {
+	            if (typeof(record.record.scrId) !== "undefined") {
+	            	scrId = record.get('scrId');
+	            }
+            } catch (e) {}
+
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -525,6 +533,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , pictureEncodingQuality: pictureEncodingQuality
 	           , pictureAllowEdit: pictureAllowEdit
 	           , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
+	           , scrId: scrId
                
             };
         /* default values */
@@ -669,6 +678,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , pictureEncodingQuality: DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality")
                , pictureAllowEdit: DigiWebApp.SettingsController.defaultsettings.get("pictureAllowEdit")
                , mengeneingabeMitTelKeyboard: DigiWebApp.SettingsController.defaultsettings.get("mengeneingabeMitTelKeyboard")
+               , scrId: DigiWebApp.SettingsController.defaultsettings.get("scrId")
                
             };
             
@@ -909,6 +919,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var pictureEncodingQuality			= DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
     	var pictureAllowEdit			    = DigiWebApp.SettingsController.getSetting('pictureAllowEdit');
     	var mengeneingabeMitTelKeyboard     = DigiWebApp.SettingsController.getSetting('mengeneingabeMitTelKeyboard');
+    	var scrId                           = DigiWebApp.SettingsController.getSetting('scrId');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1036,6 +1047,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('pictureEncodingQuality', pictureEncodingQuality);
                                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
+                                                    record.set('scrId', scrId);
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1129,6 +1141,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('pictureEncodingQuality', pictureEncodingQuality);
                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
+                                    record.set('scrId', scrId);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1196,6 +1209,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureEncodingQuality', pictureEncodingQuality);
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
+                                record.set('scrId', scrId);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1263,6 +1277,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureEncodingQuality', pictureEncodingQuality);
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
+                                record.set('scrId', scrId);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1332,6 +1347,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , pictureEncodingQuality: pictureEncodingQuality
                                 , pictureAllowEdit: pictureAllowEdit
                                 , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
+                                , scrId: scrId
 
                           });
 

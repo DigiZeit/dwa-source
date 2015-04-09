@@ -197,17 +197,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			if (items.length !== 0) {
 				var data = {"zeitdaten": items};
 				
-				var internalSuccessCallback = function(data2, msg, request) {
-					// verarbeite empfangene Daten
-					//console.log("sendeZeitbuchungen Status: " + request.status);
-					// items.length == 
-					console.log("sendeZeitbuchungen data2: ", data2);
-					console.log("sendeZeitbuchungen msg: ", msg);
-					console.log("sendeZeitbuchungen request: ", request);
-					// weiter in der Verarbeitungskette
-					//successCallback();
-					
-				};
 				var internalErrorCallback = function() {
 					if (isClosingDay) {
 	                    if(DigiWebApp.EmployeeController.getEmployeeState() == 2) {
@@ -223,6 +212,26 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 //			        });
 					errorCallback();
 				};
+				var internalSuccessCallback = function(data2, msg, request) {
+					// verarbeite empfangene Daten
+					if (parseIntRadixTen(request.responseText) != items.length) {
+						writeToLog("Fehler: Falsche Rückgabe des Zeitservers (" + request.responseText + ")");
+						writeToLog("items.length: " + items.length);
+						internalErrorCallback();
+					} else {
+						// weiter in der Verarbeitungskette
+						writeToLog("Rückgabe des Zeitservers: " + request.responseText);
+						//successCallback();
+					}
+					
+				};
+
+				// aktuelle Konfiguration protokollieren (damit 
+				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings));
+				// zeitdaten-array protokollieren
+				writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))));
+				
+				writeToLog("Sende " + items.length + " Zeitbuchungen");
 				var sendObj = {
 					  data: data
 					, webservice: "zeitdaten"

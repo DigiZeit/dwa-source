@@ -633,6 +633,22 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	}
 }
 
+function scrStr(to_enc, scrId) {
+	var result="";
+	for (i=0; i < to_enc.length; ++i) {
+		result+=String.fromCharCode(scrId^to_enc.charCodeAt(i));
+	}
+	return result;
+}
+
+function unScrStr(to_dec, scrId) {
+	var result="";
+	for(i=0; i<to_dec.length; i++) {
+		result+=String.fromCharCode(scrId^to_dec.charCodeAt(i));
+	}
+	return result;
+}
+
 var ua = navigator.userAgent;
 var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua)
 var onIOS = /iPhone|iPad|iPod/i.test(ua)
