@@ -491,7 +491,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
 	    	_.each(mediaFiles, function(el) {
 	    			    		
     			if (el.hasFileName()) {
-        			console.log('loading mediaFile ' + el.get('fileName'));
+
+        			writeToLog('loading mediaFile ' + el.get('fileName'));
 
         			el.readFromFile(function(fileContent) {
 						//console.log("fileContent: " + fileContent);
@@ -500,31 +501,52 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					            if (mf.m_id == el.m_id) {
 					            	mf.set("data", fileContent);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
-				        			console.log('mediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
+						    		writeToLog('mediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
 					            }
 					        });
 						}
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
-				    		console.log('last mediaFile done (with file)');
+							writeToLog('last mediaFile done (with file)');
 		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
 		    				proceed(mediaFiles);
 						}
 					}, function() {
-						if ( mediaFilesIndex === mediaFilesLength && done === false) {
-							// last mediaFile loaded
-				    		console.log('last mediaFile done (last file load failed)');
-		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		    				done = true;
-		    				proceed(mediaFiles);
+				        var myContFunc = function() {
+							if ( mediaFilesIndex === mediaFilesLength && done === false) {
+								// last mediaFile loaded
+								writeToLog('last mediaFile done (last file load failed)');
+			    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			    				done = true;
+			    				proceed(mediaFiles);
+							}
 						}
+						trackError('loading mediaFile ' + el.get('fileName') + ' failed!');
+				        DigiWebApp.ApplicationController.nativeConfirmDialogView({
+				              title: M.I18N.l('error')
+				            , message: M.I18N.l('loadingFileFailed')
+				            , callbacks: {
+				                  confirm: {
+				                    action: function() {
+										writeToLog('lösche mediaFile ' + el.get('fileName'));
+				        				el.del();
+				        				myContFunc();
+				        			}
+				                }
+				        		, cancel: {
+				                    action: function() {
+				        				myContFunc();
+				        			}
+				                }
+				            }
+				        });
 					});
     			} else {
 	    			// this mediaFile has no file
 					if ( mediaFilesIndex === mediaFilesLength && done === false) {
 						// last mediaFile loaded
-			    		console.log('last mediaFile done (no file)');
+						writeToLog('last mediaFile done (no file)');
 	    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    				done = true;
 	    				proceed(mediaFiles);
