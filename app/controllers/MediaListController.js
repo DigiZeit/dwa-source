@@ -528,7 +528,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						trackError('loading mediaFile ' + el.get('fileName') + ' failed!');
 				        DigiWebApp.ApplicationController.nativeConfirmDialogView({
 				              title: M.I18N.l('error')
-				            , message: M.I18N.l('loadingFileFailed')
+				            , message: M.I18N.l('loadingFileFailed') + " (" + el.get('fileName') + ")" 
 				            , callbacks: {
 				                  confirm: {
 				                    action: function() {

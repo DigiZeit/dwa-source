@@ -538,4 +538,6 @@ M.I18N.en_us = {
 	, starteMaterialerfassung: "Starting material pickup module"
 	, starteNotizen: "Starting notes module"
 
+	, loadingFileFailed: "Some file could not be loaded and therefore not transmitted. Delete the defective record?"
+
 };
