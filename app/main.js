@@ -154,19 +154,17 @@ var DigiWebApp = DigiWebApp || {app: null};
 var logQueue = [];
 var queueIntervalId = null;
 function queuedLogWriter() {
-	queueIntervalId = window.clearInterval(queueIntervalId);
 	if (logQueue.length > 0) {
+		// intervall pausieren bis geschrieben wurde
+		queueIntervalId = window.clearInterval(queueIntervalId);
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
+			// intervall fortsetzen
 			queueIntervalId = window.setInterval(queuedLogWriter, 500);
 			//queuedLogWriter();
 		});
-	} else {
-		// queue is empty: check again in 500ms
-		//queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	}
 }
-queueIntervalId = window.setInterval(queuedLogWriter, 500);
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	
@@ -182,6 +180,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ writeContent + "\n";
 	
 	logQueue.push(writeContent);
+	if (!queueIntervalId) queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 }
