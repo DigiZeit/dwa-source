@@ -65,6 +65,7 @@ DigiWebApp.MediaListPage = M.PageView.design({
 	      , events: {
 	          tap: {
 	                action: function() {
+    					writeToLog("Medienliste: Datenübertragung");
     					DigiWebApp.MediaListController.uploadMediaFiles();
 	    			}
 	          }

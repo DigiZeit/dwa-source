@@ -65,6 +65,7 @@ DigiWebApp.BautagebuchBautagesberichteListePage = M.PageView.design({
 	      , events: {
 	          tap: {
 	                action: function() {
+						writeToLog("Bautagebuch: Datenübertragung");
     					DigiWebApp.BautagebuchDatenuebertragungController.abgeschlosseneUebertragen();
 	    			}
 	          }
