@@ -232,6 +232,37 @@ function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErro
 	}
 	
 	globalDataDir = dataDirectory;
+
+	var filesToDeleteArray = [];
+	globalDataDir.createReader().readEntries(function(entries){
+        var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"))
+		_.each(entries, function(entry) {
+			// is file too old?
+			var tooOld = false;
+			var year = entry.name.substr(0,4);
+			var month = entry.name.substr(5,2);
+			var day = entry.name.substr(8,2);
+            var myInt = parseIntRadixTen(year+month+day); console.log(myInt);
+            tooOld = (myInt < minDateInt);
+			if (tooOld) {
+				//entry.remove();
+				filesToDeleteArray.push(entry);
+			}
+		});
+        var filesDeleted = 0;
+        var filesToDelete = filesToDeleteArray.length;
+        if (filesToDelete > 0) {
+        	var checkIfDoneFunc = function() {
+        		if (++filesDeleted >= filesToDelete) {
+        			successCallback();
+        		}
+        	}
+    		_.each(entries, function(entry) {
+    			entry.remove(checkIfDoneFunc,checkIfDoneFunc);
+    		});
+        }
+	});
+
 }
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {		
