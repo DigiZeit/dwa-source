@@ -546,7 +546,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 		var filesToDeleteArray = [];
 		var daysToHoldBookingsOnDevice = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("daysToHoldBookingsOnDevice"))
         var minDateInt = parseIntRadixTen(D8.create().addDays(-daysToHoldBookingsOnDevice).format("yyyymmdd"));
-        writeToLog("removing logfiles older than " + minDateInt + "(olrder than " + daysToHoldBookingsOnDevice + " days)", function(){
+        writeToLog("removing logfiles older than " + minDateInt + " (older than " + daysToHoldBookingsOnDevice + " days)", function(){
 			_.each(entries, function(entry) {
 				if (entry.name.substr(10) == "_DIGI-WebApp.log.txt") {
 					// is file too old?
@@ -564,16 +564,20 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	        var filesDeleted = 0;
 	        var filesToDelete = filesToDeleteArray.length;
 	        if (filesToDelete > 0) {
-	            writeToLog("removing " + filesToDelete + " logfiles", function(){
+	        	var plural = "";
+	        	if (filesToDelete > 1) plural = "s";
+	            writeToLog("removing " + filesToDelete + " logfile" + plural + ":\n" + filesToDeleteArray.join("\n"), function(){
 		        	var checkIfDoneFunc = function() {
 		        		if (++filesDeleted >= filesToDelete) {
 		        			successCallback();
 		        		}
 		        	}
+		        	var errorWhileRemoveHandler = function(err) {
+		        		console.error("[autoCleanLogFilesFromDirectory error] ", err);
+		        		checkIfDoneFunc();
+		        	}
 		    		_.each(filesToDeleteArray, function(entry) {
-		                writeToLog("removing " + entry.name, function(){
-		                	entry.remove(checkIfDoneFunc,checkIfDoneFunc);
-			    		});
+		                entry.remove(errorWhileRemoveHandler, checkIfDoneFunc);
 		    		});
 	    		});
 	        } else {

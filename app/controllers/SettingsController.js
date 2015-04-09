@@ -333,6 +333,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
             try {
 	            if (typeof(record.record.scrId) !== "undefined") {
 	            	scrId = record.get('scrId');
+	            } else {
+	            	// scrId gab es in den gespeicherten Settings noch nicht ==> erster Start nach dem diesbezüglichen Update
+	            	// ==> auch daysToHoldBookingsOnDevice auf aktuelles default zurücksetzen
+	            	daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get("daysToHoldBookingsOnDevice");
 	            }
             } catch (e) {}
 
