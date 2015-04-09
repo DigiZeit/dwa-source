@@ -41,35 +41,38 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
-    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
-		M.Request.init({
-			  url: myURL
-			, method: 'POST'
-            , data: JSON.stringify(data)
-            , timeout: timeout
-            , contentType: 'text/plain'
-            , dataType: 'text' // oder 'json'
-            , beforeSend: function(xhr) {
-                DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
-                xhr.setRequestHeader(
-                    "Content-Type",
-                    "text/plain"
-                );
-            }
-            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
-				try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
-                successCallback(data, msg, xhr);
-            }
-            , onError: function(xhr, err) {// error callback of sendData
-                DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                DigiWebApp.RequestController.DatabaseServer = null;
-				try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
-                writeToLog(err);
-                errorCallback(xhr, err);
-            }
-        }).send();
-	}
+		var req = M.Request.init({
+					  url: myURL
+					, method: 'POST'
+		            , data: JSON.stringify(data)
+		            , timeout: timeout
+		            , contentType: 'text/plain'
+		            , dataType: 'text' // oder 'json'
+		            , beforeSend: function(xhr) {
+		                DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
+		                xhr.setRequestHeader(
+		                    "Content-Type",
+		                    "text/plain"
+		                );
+		            }
+		            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
+		                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
+						try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+		                successCallback(data, msg, xhr);
+		            }
+		            , onError: function(xhr, err) {// error callback of sendData
+		                DigiWebApp.ApplicationController.DigiLoaderView.hide();
+		                DigiWebApp.RequestController.DatabaseServer = null;
+						try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+		                writeToLog(err);
+		                errorCallback(xhr, err);
+		            }
+	    });
+		
+    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen", function(){
+    		req.send();
+    	});
+    }
 
 	, recieveData: function(recieveObj) {
 		if (!recieveObj) {

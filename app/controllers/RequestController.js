@@ -25,7 +25,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6022
+    , softwareVersion: 6023
 
 
     /**
@@ -85,8 +85,9 @@ DigiWebApp.RequestController = M.Controller.extend({
             }
         });
 
-    	writeToLog("XML-WebService '" + obj.url + "' wird aufgerufen");
-        req.send();
+    	writeToLog("XML-WebService '" + obj.url + "' wird aufgerufen", function() {
+    		req.send();
+    	});
     }
 
     , getUrl: function() {
