@@ -372,89 +372,6 @@ jQuery.fn.bind = function( type, myData, myFn ) {
     };
 })(jQuery);
 
-var globalDataDir = null;
-function getDataDir(mySuccessCallback, myErrorCallback) {
-	if (globalDataDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalDataDir);
-	var operation = function(dir) {
-		globalDataDir = dir;
-		mySuccessCallback(dir);
-	}
-	getDir("DIGIWebAppData", operation, myErrorCallback);
-}
-
-var globalLogDir = null;
-function getLogDir(mySuccessCallback, myErrorCallback) {
-	if (globalLogDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalLogDir);
-	var operation = function(dir) {
-		globalLogDir = dir;
-		mySuccessCallback(dir);
-	}
-	getDir("DIGIWebAppLogs", operation, myErrorCallback);
-}
-
-function getDir(dirName, mySuccessCallback, myErrorCallback) {
-		
-	var successCallback;
-	if (typeof(mySuccessCallback) !== "function") {
-		successCallback = function(){};
-	} else {
-		successCallback = mySuccessCallback;
-	}
-	var errorCallback;
-	if (typeof(myErrorCallback) !== "function") {
-		errorCallback = function(){};
-	} else {
-		errorCallback = myErrorCallback;
-	}
-
-	// check if LocalFileSystem is defined
-	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
-		errorCallback();
-        return false;
-    }
-
-	try {
-		
-		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
-	    // open filesystem
-		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
-			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
-			    	
-			    	// get directory from filesystem (create if not exists)
-			    	fileSystem.root.getDirectory(dirName, {create: true, exclusive: false}, function(dir) {
-			
-			    		successCallback(dir);
-			    		
-				   	}, errorCallback);         // fileSystem.root.getDirectory
-
-			    }, errorCallback);             // window.requestFileSystem
-			}, function(e) {
-				  console.error('Error while requesting Quota', e);
-  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                title: M.I18N.l('error')
-		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-		            });	    		        					
-			});
-
-		} else {
-	    
-		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-		    	
-		    	// get directory from filesystem (create if not exists)
-		    	fileSystem.root.getDirectory(dirName, {create: true, exclusive: false}, function(dir) {
-		    		
-		    		successCallback(dir);
-		
-			   	}, errorCallback);         // fileSystem.root.getDirectory
-
-		    }, errorCallback);             // window.requestFileSystem
-		}
-	} catch(e2) {
-		errorCallback(e2);
-	}
-
-}
 
 var globalFileSystem = null;
 function getFS(mySuccessCallback, myErrorCallback) {
@@ -512,6 +429,66 @@ function getFS(mySuccessCallback, myErrorCallback) {
 	}
 
 }
+
+function getDir(dirName, mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+
+	// check if LocalFileSystem is defined
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+		errorCallback();
+        return false;
+    }
+
+	try {
+		
+		var operation = function(fileSystem) {
+	    	// get directory from filesystem (create if not exists)
+	    	fileSystem.root.getDirectory(dirName, {create: true, exclusive: false}, function(dir) {
+	    		
+	    		successCallback(dir);
+	
+		   	}, errorCallback);         // fileSystem.root.getDirectory
+		}
+		getFS(operation);
+
+	} catch(e2) {
+		errorCallback(e2);
+	}
+
+}
+
+var globalDataDir = null;
+function getDataDir(mySuccessCallback, myErrorCallback) {
+	if (globalDataDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalDataDir);
+	var operation = function(dir) {
+		globalDataDir = dir;
+		mySuccessCallback(dir);
+	}
+	getDir("DIGIWebAppData", operation, myErrorCallback);
+}
+
+var globalLogDir = null;
+function getLogDir(mySuccessCallback, myErrorCallback) {
+	if (globalLogDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalLogDir);
+	var operation = function(dir) {
+		globalLogDir = dir;
+		mySuccessCallback(dir);
+	}
+	getDir("DIGIWebAppLogs", operation, myErrorCallback);
+}
+
 
 function autoCleanLogs(mySuccessCallback, myErrorCallback) {
 	
