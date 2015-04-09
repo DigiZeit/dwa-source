@@ -2252,10 +2252,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 										if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 	        								DigiWebApp.ApplicationController.exitApp(true);
 										} else {
-			                          		DigiWebApp.ApplicationController.startsync(YES);
+											autoCleanLogs(function(){
+												DigiWebApp.ApplicationController.startsync(YES);
+											});
 										}
 	                        	  	} else {
-		                          		DigiWebApp.ApplicationController.startsync(YES);
+										autoCleanLogs(function(){
+											DigiWebApp.ApplicationController.startsync(YES);
+										});
 	                        	  	}
 	                          }
                           }
