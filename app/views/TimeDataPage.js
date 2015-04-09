@@ -54,6 +54,9 @@ DigiWebApp.TimeDataPage = M.PageView.design({
     				$('#' + DigiWebApp.TimeDataPage.contentNotSent.list.id).removeClass("scholppNotSent");
     				$('#' + DigiWebApp.TimeDataPage.contentSent.list.id).removeClass("scholppSent");
     			}
+
+    			DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	
 			}
 		}
     }
