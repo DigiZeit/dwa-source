@@ -452,6 +452,7 @@ function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErro
 		errorCallback = myErrorCallback;
 	}
 	
+	globalDataDir = dataDirectory;
 	dataDirectory.createReader().readEntries(function(entries){
 		var filesToDeleteArray = [];
         var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"));
