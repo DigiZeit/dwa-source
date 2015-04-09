@@ -151,120 +151,6 @@ M.Application.useTransitions = NO;
 
 var DigiWebApp = DigiWebApp || {app: null};
 
-function autoCleanLogs(mySuccessCallback, myErrorCallback) {
-	
-	var successCallback;
-	if (typeof(mySuccessCallback) !== "function") {
-		successCallback = function(){};
-	} else {
-		successCallback = mySuccessCallback;
-	}
-	var errorCallback;
-	if (typeof(myErrorCallback) !== "function") {
-		errorCallback = function(){};
-	} else {
-		errorCallback = myErrorCallback;
-	}
-
-	// check if LocalFileSystem is defined
-	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
-		successCallback();
-        return true;
-    }
-
-	try {
-		
-		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
-	    // open filesystem
-		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
-			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
-			    	
-			    	// get dataDirectory from filesystem (create if not exists)
-			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
-			
-			    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
-			    		
-				   	}, errorCallback);         // fileSystem.root.getDirectory
-
-			    }, errorCallback);             // window.requestFileSystem
-			}, function(e) {
-				  console.error('Error while requesting Quota', e);
-  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                title: M.I18N.l('error')
-		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-		            });	    		        					
-			});
-
-		} else {
-	    
-		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-		    	
-		    	// get dataDirectory from filesystem (create if not exists)
-		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
-		    		
-		    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
-		
-			   	}, errorCallback);         // fileSystem.root.getDirectory
-
-		    }, errorCallback);             // window.requestFileSystem
-		}
-	} catch(e2) {
-		errorCallback(e2);
-	}
-
-}
-
-var globalDataDir = null;
-function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback) {
-	
-	var successCallback;
-	if (typeof(mySuccessCallback) !== "function") {
-		successCallback = function(){};
-	} else {
-		successCallback = mySuccessCallback;
-	}
-	var errorCallback;
-	if (typeof(myErrorCallback) !== "function") {
-		errorCallback = function(){};
-	} else {
-		errorCallback = myErrorCallback;
-	}
-	
-	globalDataDir = dataDirectory;
-
-	var filesToDeleteArray = [];
-	globalDataDir.createReader().readEntries(function(entries){
-        var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"))
-		_.each(entries, function(entry) {
-			// is file too old?
-			var tooOld = false;
-			var year = entry.name.substr(0,4);
-			var month = entry.name.substr(5,2);
-			var day = entry.name.substr(8,2);
-            var myInt = parseIntRadixTen(year+month+day); console.log(myInt);
-            tooOld = (myInt < minDateInt);
-			if (tooOld) {
-				//entry.remove();
-				filesToDeleteArray.push(entry);
-			}
-		});
-        var filesDeleted = 0;
-        var filesToDelete = filesToDeleteArray.length;
-        if (filesToDelete > 0) {
-        	var checkIfDoneFunc = function() {
-        		if (++filesDeleted >= filesToDelete) {
-        			successCallback();
-        		}
-        	}
-    		_.each(entries, function(entry) {
-    			entry.remove(checkIfDoneFunc,checkIfDoneFunc);
-    		});
-        }
-	});
-
-}
-
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {		
 	
 	var successCallback;
@@ -485,6 +371,121 @@ jQuery.fn.bind = function( type, myData, myFn ) {
         return classes;
     };
 })(jQuery);
+
+function autoCleanLogs(mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+
+	// check if LocalFileSystem is defined
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+		successCallback();
+        return true;
+    }
+
+	try {
+		
+		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
+	    // open filesystem
+		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
+			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
+			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    	
+			    	// get dataDirectory from filesystem (create if not exists)
+			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+			
+			    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
+			    		
+				   	}, errorCallback);         // fileSystem.root.getDirectory
+
+			    }, errorCallback);             // window.requestFileSystem
+			}, function(e) {
+				  console.error('Error while requesting Quota', e);
+  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('error')
+		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+		            });	    		        					
+			});
+
+		} else {
+	    
+		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    	
+		    	// get dataDirectory from filesystem (create if not exists)
+		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+		    		
+		    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
+		
+			   	}, errorCallback);         // fileSystem.root.getDirectory
+
+		    }, errorCallback);             // window.requestFileSystem
+		}
+	} catch(e2) {
+		errorCallback(e2);
+	}
+
+}
+
+var globalDataDir = null;
+function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+	
+	dataDirectory.createReader().readEntries(function(entries){
+		var filesToDeleteArray = [];
+        var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"));
+        writeToLog("removing logfiles older than " + minDateInt);
+		_.each(entries, function(entry) {
+			// is file too old?
+			var tooOld = false;
+			var year = entry.name.substr(0,4);
+			var month = entry.name.substr(5,2);
+			var day = entry.name.substr(8,2);
+            var myInt = parseIntRadixTen(year+month+day);
+            tooOld = (myInt < minDateInt);
+			if (tooOld) {
+				//entry.remove();
+				filesToDeleteArray.push(entry);
+			}
+		});
+        var filesDeleted = 0;
+        var filesToDelete = filesToDeleteArray.length;
+        if (filesToDelete > 0) {
+            writeToLog("removing " + filesToDelete + " logfiles");
+        	var checkIfDoneFunc = function() {
+        		if (++filesDeleted >= filesToDelete) {
+        			successCallback();
+        		}
+        	}
+    		_.each(filesToDeleteArray, function(entry) {
+                writeToLog("removing " + entry.name);
+    			entry.remove(checkIfDoneFunc,checkIfDoneFunc);
+    		});
+        }
+	});
+
+}
 
 // reloading app one more time
 if (typeof(localStorage) !== "undefined") {
