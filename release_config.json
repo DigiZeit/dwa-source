@@ -68,5 +68,6 @@
         , {"name": "jstz", "refs": ["*"]}
         , {"name": "digiUI", "refs": ["*"]}
         , {"name": "Math.uuid.js", "refs": ["*"]}
+        , {"name": "Blob.js", "refs": ["*"]}
     ]
 }
