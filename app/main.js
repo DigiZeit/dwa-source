@@ -152,18 +152,23 @@ M.Application.useTransitions = NO;
 var DigiWebApp = DigiWebApp || {app: null};
 
 var logQueue = [];
+var queueIntervalId = null;
 function queuedLogWriter() {
+	queueIntervalId = window.clearInterval(queueIntervalId);
 	if (logQueue.length > 0) {
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
 			queuedLogWriter();
 		});
+	} else {
+		// queue is empty: check again in 500ms
+		queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	}
 }
+queueIntervalId = window.setInterval(queuedLogWriter, 500);
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	logQueue.push(myWriteContent);
-	queuedLogWriter();
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 }
 
