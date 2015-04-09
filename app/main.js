@@ -213,10 +213,9 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    				successCallback(evt);
 				    	        };
 				    	        
-				    	        writer.seek(writer.length);
-
 				    	        // Create a new Blob and write it to log.txt.
 				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+				    	        writer.seek(writer.length);
 			    	        	writer.write(blob);
 			
 				    		}, errorCallback); // fileEntry.createWriter
@@ -254,7 +253,6 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    	        };
 			    	        
 			    	        writer.seek(writer.length);
-
 		    	        	writer.write(writeContent.toString());
 		
 			    		}, errorCallback); // fileEntry.createWriter
