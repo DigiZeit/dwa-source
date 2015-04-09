@@ -218,7 +218,8 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
 				    	        
 				    	        writer.seek(writer.length);
-			    	        	writer.write(blob);
+			    	        	var retVal = writer.write(blob);
+			    	        	console.log("write: " + retVal);
 			
 				    		}, errorCallback); // fileEntry.createWriter
 				   		}, errorCallback);     // dataDirectory.getFile
@@ -260,7 +261,8 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 //			    	        
 //			    	        writer.seek(writer.length);
 //		    	        	writer.write(blob);
-		    	        	writer.write(writeContent.toString());
+		    	        	var retVal = writer.write(writeContent.toString());
+		    	        	console.log("write: " + retVal);
 		
 			    		}, errorCallback); // fileEntry.createWriter
 			   		}, errorCallback);     // dataDirectory.getFile
