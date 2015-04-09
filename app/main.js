@@ -635,7 +635,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 
 function scrStr(to_enc, scrId) {
 	var result="";
-	for (i=0; i < to_enc.length; ++i) {
+	for (var i=0; i < to_enc.length; ++i) {
 		result+=String.fromCharCode(scrId^to_enc.charCodeAt(i));
 	}
 	return result;
@@ -643,7 +643,7 @@ function scrStr(to_enc, scrId) {
 
 function unScrStr(to_dec, scrId) {
 	var result="";
-	for(i=0; i<to_dec.length; i++) {
+	for(var i=0; i<to_dec.length; i++) {
 		result+=String.fromCharCode(scrId^to_dec.charCodeAt(i));
 	}
 	return result;
