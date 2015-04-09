@@ -165,6 +165,7 @@ function queuedLogWriter() {
 		});
 	}
 }
+queueIntervalId = window.setInterval(queuedLogWriter, 500);
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	
@@ -180,7 +181,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ writeContent + "\n";
 	
 	logQueue.push(writeContent);
-	if (!queueIntervalId) queueIntervalId = window.setInterval(queuedLogWriter, 500);
+	//if (!queueIntervalId) queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 }
