@@ -269,7 +269,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 }
 
 
- function trackError(ex) {
+ function trackError(ex, callback) {
 //	var exceptionAlert = "";
 //	//exceptionAlert = "Es trat leider eine unbehandelte Ausnahme auf:" + "\n\n";
 //	try {
@@ -300,19 +300,20 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 //	alert(exceptionAlert);
 	
 	try {
-		if (typeof(ex) === "string") {
-			var logText = "Exception " + ex;
-			writeToLog(logText);
-		} else {
-			var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
-			writeToLog(logText);
-		}
-	 
-		console.log(ex);
+		
+		console.error(ex);
 		if (typeof(ex.stack) !== "undefined") {
 			console.log(ex.stack);
 		}
 
+		if (typeof(ex) === "string") {
+			var logText = "Exception " + ex;
+			writeToLog(logText, callback);
+		} else {
+			var logText = "Exception " + ex.name + ": " + ex.message + "\nStack: " + ex.stack;
+			writeToLog(logText, callback);
+		}
+	 
 	} catch(ex2) {}
 	
 	return true;

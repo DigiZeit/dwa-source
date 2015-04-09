@@ -445,16 +445,14 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			
 			// wurden Positionen empfangen?
 			if (typeof(data.positionen) === "undefined" && data.positionen !== null && data.positionen.length > 0) {
-				trackError("missing positionen");
-				return errorCallback();
+				return trackError("missing positionen", errorCallback);
 			}
 
 			var myLength = null;
 			try {
 				myLength = data.positionen.length;
 			} catch(e2) {
-				trackError("data.positionen hat Länge " + myLength);
-				//return errorCallback();
+				return trackError("data.positionen hat Länge " + myLength, errorCallback);
 			}
 
 			if (data.positionen === null) {
@@ -466,8 +464,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				try {
 					myLength = data.positionen.length;
 				} catch(e2) {
-					trackError("data.positionen hat Länge " + myLength);
-					return errorCallback();
+					return trackError("data.positionen hat Länge " + myLength, errorCallback);
 				}
 			}
 			

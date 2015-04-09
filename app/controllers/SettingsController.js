@@ -1465,18 +1465,26 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
     }
 
-    , setSetting: function(prop, value) {
+    , setSetting: function(prop, value, callback) {
+    	var myCallback = function(){};
+    	if (typeof(callback) == "function") {
+    		myCallback = callback;
+    	}
         var setting = DigiWebApp.Settings.find()[0];
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-    		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }
+    		} catch(e5) {
+    			// TODO: damit das auch sicher im Logfile landet, alle Aufrufe von setSetting um callback erweitern
+    			return trackError("ERROR: setting.set for prop=" + prop, myCallback);
+    		}
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES, YES);
         	} else {
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES);
         	}
+        	myCallback();
         }
     }
       
