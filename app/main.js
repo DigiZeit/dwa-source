@@ -566,6 +566,20 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 
 }
 
+function createFile(dirname, filename) {
+	var errorHandler = function(err){console.error(err);};
+	var operation = function(fs) {
+    	// get dataDirectory from filesystem (create if not exists)
+		fs.root.getDirectory(dirname, {create: true, exclusive: false}, function(dir) {
+	    	// get fileEntry from filesystem (create if not exists)
+			dir.getFile(filename, {create: true, exclusive: false}, function(fileEntry) {
+	    		console.log("file " + dirname + "/" + filename + " created");
+		    }, errorHandler);
+		}, errorHandler);
+	}
+	getFS(operation);
+}
+
 function cat(filename) {
 	var errorHandler = function(err){console.error(err);};
 	var operation = function(fs) {
