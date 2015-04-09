@@ -168,11 +168,24 @@ function queuedLogWriter() {
 queueIntervalId = window.setInterval(queuedLogWriter, 500);
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
-	logQueue.push(myWriteContent);
+	
+	var now = new Date();
+	var writeContent = "";
+	if (typeof(myWriteContent) === "string") {
+		writeContent = myWriteContent;
+	} else {
+		writeContent = JSON.stringify(myWriteContent);
+	}
+	writeContent = "\n----------------------------------------------------------\n" 
+	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " 
+	+ writeContent + "\n";
+	
+	logQueue.push(writeContent);
+	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 }
 
-function writeToLogFromQueue(myWriteContent, mySuccessCallback, myErrorCallback) {	
+function writeToLogFromQueue(writeContent, mySuccessCallback, myErrorCallback) {	
 		
 	var successCallback;
 	if (typeof(mySuccessCallback) !== "function") {
@@ -186,17 +199,6 @@ function writeToLogFromQueue(myWriteContent, mySuccessCallback, myErrorCallback)
 	} else {
 		errorCallback = myErrorCallback;
 	}
-
-	var now = new Date();
-	var writeContent = "";
-	if (typeof(myWriteContent) === "string") {
-		writeContent = myWriteContent;
-	} else {
-		writeContent = JSON.stringify(myWriteContent);
-	}
-	writeContent = "\n----------------------------------------------------------\n" 
-	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " 
-	+ writeContent + "\n";
 	
 	console.log(writeContent.toString());
 
