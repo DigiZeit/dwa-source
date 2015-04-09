@@ -232,10 +232,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					
 				};
 				
-				// aktuelle Konfiguration protokollieren
-				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings), function(){
+				// aktuelle scrId protokollieren
+				var scrId = DigiWebApp.SettingsController.getSetting("scrId");
+				writeToLog(scrId, function(){
 					// zeitdaten-array protokollieren
-					writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))), function() {
+					writeToLog(escape(scrStr(JSON.stringify(data), scrId)), function() {
 						var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
 						if (items.length > 1) { itemsLengthLogStr += "en"; }
 						writeToLog(itemsLengthLogStr, function() {
