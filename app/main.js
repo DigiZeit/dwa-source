@@ -158,11 +158,12 @@ function queuedLogWriter() {
 	if (logQueue.length > 0) {
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
-			queuedLogWriter();
+			queueIntervalId = window.setInterval(queuedLogWriter, 500);
+			//queuedLogWriter();
 		});
 	} else {
 		// queue is empty: check again in 500ms
-		queueIntervalId = window.setInterval(queuedLogWriter, 500);
+		//queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	}
 }
 queueIntervalId = window.setInterval(queuedLogWriter, 500);
