@@ -177,6 +177,8 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " 
 	+ writeContent + "\n");
 	
+	console.log(writeContent.toString());
+
 	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 		
 	// check if LocalFileSystem is defined
@@ -186,8 +188,6 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
     }
 
 	try {
-
-		console.log(writeContent.toString());
 		
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
 	    // open filesystem
@@ -214,11 +214,12 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 					    			//};
 				    				//writer.truncate(writeContent.length);
 				    	        };
-				    	        // Create a new Blob and write it to log.txt.
-				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
-				    	        
-				    	        writer.seek(writer.length);
-			    	        	writer.write(blob);
+//				    	        // Create a new Blob and write it to log.txt.
+//				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+//				    	        
+//				    	        writer.seek(writer.length);
+//			    	        	writer.write(blob);
+			    	        	writer.write(writeContent.toString());
 			
 				    		}, errorCallback); // fileEntry.createWriter
 				   		}, errorCallback);     // dataDirectory.getFile
