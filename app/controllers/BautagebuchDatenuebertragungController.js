@@ -474,7 +474,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		// getAll=false KolonnenMAs
 		var recieveObj = {
 			  webservice: "mitarbeiter"
-			, loaderText: M.I18N.l('BautagebuchLadeProjektleiter')
+			, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
 			, successCallback: internalSuccessCallback
 			, errorCallback: errorCallback
 			, additionalQueryParameter: 'getAll=true&nurKolonne=true'
