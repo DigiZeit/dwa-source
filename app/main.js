@@ -204,12 +204,12 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    		fileEntry.createWriter(function(writer) {
 				    				
 				    			writer.onerror = function(evt) {
-				    				console.error("writeError", evt);
+				    				console.error("[writeToLog]: writeError", evt);
 				    				errorCallback(evt);
 				    			};
 				    			
 				    			writer.onwriteend = function(evt) {
-				    	        	console.log("successfully written to file");
+				    	        	console.log("[writeToLog]: successfully written to file");
 				    				successCallback(evt);
 				    	        };
 				    	        
@@ -224,7 +224,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				   	}, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
 			}, function(e) {
-				  console.error('Error while requesting Quota', e);
+				  console.error('[writeToLog]: Error while requesting Quota', e);
   		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                title: M.I18N.l('error')
 		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
