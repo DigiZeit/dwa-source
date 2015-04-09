@@ -372,6 +372,147 @@ jQuery.fn.bind = function( type, myData, myFn ) {
     };
 })(jQuery);
 
+var globalDataDir = null;
+function getDataDir(mySuccessCallback, myErrorCallback) {
+	if (globalDataDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalDataDir);
+	var operation = function(dir) {
+		globalDataDir = dir;
+		mySuccessCallback(dir);
+	}
+	getDir("DIGIWebAppData", operation, myErrorCallback);
+}
+
+var globalLogDir = null;
+function getLogDir(mySuccessCallback, myErrorCallback) {
+	if (globalLogDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalLogDir);
+	var operation = function(dir) {
+		globalLogDir = dir;
+		mySuccessCallback(dir);
+	}
+	getDir("DIGIWebAppLogs", operation, myErrorCallback);
+}
+
+function getDir(dirName, mySuccessCallback, myErrorCallback) {
+		
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+
+	// check if LocalFileSystem is defined
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+		errorCallback();
+        return false;
+    }
+
+	try {
+		
+		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
+	    // open filesystem
+		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
+			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
+			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    	
+			    	// get directory from filesystem (create if not exists)
+			    	fileSystem.root.getDirectory(dirName, {create: true, exclusive: false}, function(dir) {
+			
+			    		successCallback(dir);
+			    		
+				   	}, errorCallback);         // fileSystem.root.getDirectory
+
+			    }, errorCallback);             // window.requestFileSystem
+			}, function(e) {
+				  console.error('Error while requesting Quota', e);
+  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('error')
+		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+		            });	    		        					
+			});
+
+		} else {
+	    
+		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    	
+		    	// get directory from filesystem (create if not exists)
+		    	fileSystem.root.getDirectory(dirName, {create: true, exclusive: false}, function(dir) {
+		    		
+		    		successCallback(dir);
+		
+			   	}, errorCallback);         // fileSystem.root.getDirectory
+
+		    }, errorCallback);             // window.requestFileSystem
+		}
+	} catch(e2) {
+		errorCallback(e2);
+	}
+
+}
+
+var globalFileSystem = null;
+function getFS(mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+
+	if (globalFileSystem != null) mySuccessCallback(globalFileSystem);
+
+	// check if LocalFileSystem is defined
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+		errorCallback();
+        return false;
+    }
+
+	try {
+		
+		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
+	    // open filesystem
+		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
+			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
+			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    	
+		    		successCallback(fileSystem);
+
+			    }, errorCallback);             // window.requestFileSystem
+			}, function(e) {
+				  console.error('Error while requesting Quota', e);
+  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('error')
+		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+		            });	    		        					
+			});
+
+		} else {
+	    
+		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    	
+	    		successCallback(fileSystem);
+
+		    }, errorCallback);             // window.requestFileSystem
+		}
+	} catch(e2) {
+		errorCallback(e2);
+	}
+
+}
+
 function autoCleanLogs(mySuccessCallback, myErrorCallback) {
 	
 	var successCallback;
@@ -392,52 +533,13 @@ function autoCleanLogs(mySuccessCallback, myErrorCallback) {
 		successCallback();
         return true;
     }
-
-	try {
-		
-		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
-	    // open filesystem
-		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
-			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
-			    	
-			    	// get dataDirectory from filesystem (create if not exists)
-			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
-			
-			    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
-			    		
-				   	}, errorCallback);         // fileSystem.root.getDirectory
-
-			    }, errorCallback);             // window.requestFileSystem
-			}, function(e) {
-				  console.error('Error while requesting Quota', e);
-  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                title: M.I18N.l('error')
-		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-		            });	    		        					
-			});
-
-		} else {
-	    
-		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-		    	
-		    	// get dataDirectory from filesystem (create if not exists)
-		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
-		    		
-		    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
-		
-			   	}, errorCallback);         // fileSystem.root.getDirectory
-
-		    }, errorCallback);             // window.requestFileSystem
-		}
-	} catch(e2) {
-		errorCallback(e2);
+	var operationInLogDir = function(logDir) {
+		autoCleanLogFilesFromDirectory(logDir, mySuccessCallback, myErrorCallback);
 	}
-
+	getDataDir(operationInLogDir);
 }
 
-var globalDataDir = null;
-function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback) {
+function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myErrorCallback) {
 	
 	var successCallback;
 	if (typeof(mySuccessCallback) !== "function") {
@@ -452,8 +554,7 @@ function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErro
 		errorCallback = myErrorCallback;
 	}
 	
-	globalDataDir = dataDirectory;
-	dataDirectory.createReader().readEntries(function(entries){
+	logDirectory.createReader().readEntries(function(entries){
 		var filesToDeleteArray = [];
         var minDateInt = parseIntRadixTen(D8.create().addDays(-60).format("yyyymmdd"));
         writeToLog("removing logfiles older than " + minDateInt);
@@ -486,6 +587,37 @@ function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErro
         }
 	});
 
+}
+
+function cat(filename) {
+	var errorHandler = function(err){console.err(err);};
+	var operation = function(fs) {
+		fs.root.getFile(filename, {}, function(fileEntry) {
+
+		    fileEntry.file(function(file) {
+		       var reader = new FileReader();
+
+		       reader.onloadend = function(e) {
+		         console.log(this.result);
+		       };
+
+		       reader.readAsText(file);
+		    }, errorHandler);
+
+		  }, errorHandler);
+	}
+	getFS(operation);
+}
+
+function ls(dirName) {
+	var operation = function(dir) {
+		logDir.createReader().readEntries(function(entries){
+			_.each(entries, function(entry) {
+				console.log(entry.name);
+			});
+		});
+	}
+	getDir(dirName, operation);
 }
 
 // reloading app one more time
