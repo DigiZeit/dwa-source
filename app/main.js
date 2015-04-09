@@ -389,7 +389,10 @@ function getFS(mySuccessCallback, myErrorCallback) {
 		errorCallback = myErrorCallback;
 	}
 
-	if (globalFileSystem != null) mySuccessCallback(globalFileSystem);
+	if (globalFileSystem != null)  {
+		mySuccessCallback(globalFileSystem);
+		return true;
+	}
 
 	// check if LocalFileSystem is defined
 	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
@@ -471,7 +474,10 @@ function getDir(dirName, mySuccessCallback, myErrorCallback) {
 
 var globalDataDir = null;
 function getDataDir(mySuccessCallback, myErrorCallback) {
-	if (globalDataDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalDataDir);
+	if (globalDataDir != null && typeof(mySuccessCallback) == "function") {
+		mySuccessCallback(globalDataDir);
+		return true;
+	}
 	var operation = function(dir) {
 		globalDataDir = dir;
 		mySuccessCallback(dir);
@@ -481,7 +487,10 @@ function getDataDir(mySuccessCallback, myErrorCallback) {
 
 var globalLogDir = null;
 function getLogDir(mySuccessCallback, myErrorCallback) {
-	if (globalLogDir != null && typeof(mySuccessCallback) == "function") mySuccessCallback(globalLogDir);
+	if (globalLogDir != null && typeof(mySuccessCallback) == "function") {
+		mySuccessCallback(globalLogDir);
+		return true;
+	}
 	var operation = function(dir) {
 		globalLogDir = dir;
 		mySuccessCallback(dir);
