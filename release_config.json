@@ -69,5 +69,6 @@
         , {"name": "digiUI", "refs": ["*"]}
         , {"name": "Math.uuid.js", "refs": ["*"]}
         , {"name": "Blob.js", "refs": ["*"]}
+        , {"name": "Uint8Array.js", "refs": ["*"]}
     ]
 }
