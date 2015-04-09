@@ -199,7 +199,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 			
 				    	// get fileEntry from filesystem (create if not exists)
-				    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
+				    	dataDirectory.getFile(fileName, {create: true, exclusive: true}, function(fileEntry) {
 			
 				    		fileEntry.createWriter(function(writer) {
 				    				
@@ -214,12 +214,11 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 					    			//};
 				    				//writer.truncate(writeContent.length);
 				    	        };
-//				    	        // Create a new Blob and write it to log.txt.
-//				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
-//				    	        
-//				    	        writer.seek(writer.length);
-//			    	        	writer.write(blob);
-			    	        	writer.write(writeContent.toString());
+				    	        // Create a new Blob and write it to log.txt.
+				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+				    	        
+				    	        writer.seek(writer.length);
+			    	        	writer.write(blob);
 			
 				    		}, errorCallback); // fileEntry.createWriter
 				   		}, errorCallback);     // dataDirectory.getFile
@@ -241,7 +240,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
 		
 			    	// get fileEntry from filesystem (create if not exists)
-			    	dataDirectory.getFile(fileName, {create: true, exclusive: false}, function(fileEntry) {
+			    	dataDirectory.getFile(fileName, {create: true, exclusive: true}, function(fileEntry) {
 		
 			    		fileEntry.createWriter(function(writer) {
 			    				
@@ -256,11 +255,12 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    			//};
 			    				//writer.truncate(writeContent.length);
 			    	        };
-			    	        // Create a new Blob and write it to log.txt.
-			    	        var blob = new Blob([writeContent], {type: 'text/plain'});
-			    	        
-			    	        writer.seek(writer.length);
-		    	        	writer.write(blob);
+//			    	        // Create a new Blob and write it to log.txt.
+//			    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+//			    	        
+//			    	        writer.seek(writer.length);
+//		    	        	writer.write(blob);
+		    	        	writer.write(writeContent.toString());
 		
 			    		}, errorCallback); // fileEntry.createWriter
 			   		}, errorCallback);     // dataDirectory.getFile
