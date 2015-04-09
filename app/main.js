@@ -184,8 +184,8 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
     }
 
 	try {
-		alert(writeContent.toString());
-		console.log(writeContent.toString());
+
+		console.log(writeContent);
 		
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
 	    // open filesystem
@@ -253,9 +253,11 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    			//};
 			    				//writer.truncate(writeContent.length);
 			    	        };
+			    	        // Create a new Blob and write it to log.txt.
+			    	        var blob = new Blob([writeContent], {type: 'text/plain'});
 			    	        
 			    	        writer.seek(writer.length);
-		    	        	writer.write(writeContent.toString());
+		    	        	writer.write(blob);
 		
 			    		}, errorCallback); // fileEntry.createWriter
 			   		}, errorCallback);     // dataDirectory.getFile
