@@ -151,8 +151,24 @@ M.Application.useTransitions = NO;
 
 var DigiWebApp = DigiWebApp || {app: null};
 
-function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {		
-	
+var logQueue = [];
+function queuedLogWriter() {
+	if (logQueue.length > 0) {
+		var myWriteContent = logQueue.shift();
+		writeToLogFromQueue(myWriteContent,  function() {
+			queuedLogWriter());
+		});
+	}
+}
+
+function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
+	logQueue.push(myWriteContent);
+	queuedLogWriter();
+	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
+}
+
+function writeToLogFromQueue(myWriteContent, mySuccessCallback, myErrorCallback) {	
+		
 	var successCallback;
 	if (typeof(mySuccessCallback) !== "function") {
 		successCallback = function(){};
