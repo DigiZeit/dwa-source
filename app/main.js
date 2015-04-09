@@ -244,12 +244,12 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    		fileEntry.createWriter(function(writer) {
 			    				
 			    			writer.onerror = function(evt) {
-			    				console.error("writeError", evt);
+			    				console.error("[writeToLog]: writeError", evt);
 			    				errorCallback(evt);
 			    			};
 			    			
 			    			writer.onwriteend = function(evt) {
-			    	        	console.log("successfully written to file");
+			    	        	console.log("[writeToLog]: successfully written to file");
 			    					successCallback(evt);
 			    	        };
 			    	        
@@ -544,6 +544,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	
 	logDirectory.createReader().readEntries(function(entries){
 		var filesToDeleteArray = [];
+		var fileNamesToDeleteArray = [];
 		var daysToHoldBookingsOnDevice = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("daysToHoldBookingsOnDevice"))
         var minDateInt = parseIntRadixTen(D8.create().addDays(-daysToHoldBookingsOnDevice).format("yyyymmdd"));
         writeToLog("removing logfiles older than " + minDateInt + " (older than " + daysToHoldBookingsOnDevice + " days)", function(){
@@ -558,6 +559,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 		            tooOld = (myInt < minDateInt);
 					if (tooOld) {
 						filesToDeleteArray.push(entry);
+						fileNamesToDeleteArray.push(entry.name);
 					}
 				}
 			});
@@ -566,7 +568,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	        if (filesToDelete > 0) {
 	        	var plural = "";
 	        	if (filesToDelete > 1) plural = "s";
-	            writeToLog("removing " + filesToDelete + " logfile" + plural + ":\n" + filesToDeleteArray.join("\n"), function(){
+	            writeToLog("removing " + filesToDelete + " logfile" + plural + ":\n" + fileNamesToDeleteArray.join("\n"), function(){
 		        	var checkIfDoneFunc = function() {
 		        		if (++filesDeleted >= filesToDelete) {
 		        			successCallback();
@@ -577,7 +579,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 		        		checkIfDoneFunc();
 		        	}
 		    		_.each(filesToDeleteArray, function(entry) {
-		                entry.remove(errorWhileRemoveHandler, checkIfDoneFunc);
+		                entry.remove(checkIfDoneFunc, errorWhileRemoveHandler);
 		    		});
 	    		});
 	        } else {
