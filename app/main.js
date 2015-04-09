@@ -151,6 +151,91 @@ M.Application.useTransitions = NO;
 
 var DigiWebApp = DigiWebApp || {app: null};
 
+function autoCleanLogs(mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+
+	// check if LocalFileSystem is defined
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+		successCallback();
+        return true;
+    }
+
+	try {
+		
+		console.log(writeContent.toString());
+		
+		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
+	    // open filesystem
+		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
+			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
+			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    	
+			    	// get dataDirectory from filesystem (create if not exists)
+			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+			
+			    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
+			    		
+				   	}, errorCallback);         // fileSystem.root.getDirectory
+
+			    }, errorCallback);             // window.requestFileSystem
+			}, function(e) {
+				  console.error('Error while requesting Quota', e);
+  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                title: M.I18N.l('error')
+		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+		            });	    		        					
+			});
+
+		} else {
+	    
+		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    	
+		    	// get dataDirectory from filesystem (create if not exists)
+		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
+		    		
+		    		autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback);
+		
+			   	}, errorCallback);         // fileSystem.root.getDirectory
+
+		    }, errorCallback);             // window.requestFileSystem
+		}
+	} catch(e2) {
+		errorCallback(e2);
+	}
+
+}
+
+var globalDataDir = null;
+function autoCleanLogFilesFromDirectory(dataDirectory, mySuccessCallback, myErrorCallback) {
+	
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = function(){};
+	} else {
+		errorCallback = myErrorCallback;
+	}
+	
+	globalDataDir = dataDirectory;
+}
+
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {		
 	
 	var successCallback;
@@ -178,9 +263,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 		
 	// check if LocalFileSystem is defined
-	if (typeof window.requestFileSystem === "undefined") {
-		//console.error("writeToLog: no LocalFileSystem available");
-		//alert("writeToLog: no LocalFileSystem available");
+	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
 		successCallback("");
         return true;
     }
