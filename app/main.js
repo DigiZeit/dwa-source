@@ -574,6 +574,8 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
                 writeToLog("removing " + entry.name);
     			entry.remove(checkIfDoneFunc,checkIfDoneFunc);
     		});
+        } else {
+			successCallback();
         }
 	});
 
