@@ -58,11 +58,13 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             }
             , onSuccess: function(data2, msg, xhr) { // success callback of sendData
                 if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
+				try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
                 successCallback(data, msg, xhr);
             }
             , onError: function(xhr, err) {// error callback of sendData
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
+				try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
                 writeToLog(err);
                 errorCallback(xhr, err);
             }
@@ -123,10 +125,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				successCallback(data, msg, request);
 			}
-			, onError: function(request, msg) {
+            , onError: function(xhr, err) {// error callback
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
-				errorCallback(request, msg);
+				try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+				errorCallback(xhr, err);
 			}
 		}).send();
 	}
@@ -222,7 +225,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						internalErrorCallback();
 					} else {
 						// weiter in der Verarbeitungskette
-						writeToLog("Rückgabe des Zeitservers: " + request.responseText);
 						successCallback();
 					}
 					
