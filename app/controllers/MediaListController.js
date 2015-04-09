@@ -409,13 +409,13 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					    	_.each(mediaFiles, function(mf) {
 					            if (mf.m_id == el.m_id) {
 					            	var delFunc = function() {
-										writeToLog('lösche mediaFile ' + mf.record.fileName);
 					            		mf.del();
 						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
 						                    return parseIntRadixTen(mediafile.get('timeStamp'));
 						                });
 						                that.init();
 					            	}
+									writeToLog('lösche mediaFile ' + mf.record.fileName);
 					            	mf.deleteFile(delFunc, delFunc);
 						    		mediaFilesIndex = mediaFilesIndex + 1;
 					            }
