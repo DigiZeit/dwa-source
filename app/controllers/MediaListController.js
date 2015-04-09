@@ -393,7 +393,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					
 					var myMediaListToSend = {"medien": items};
 					
-	    			console.log('sending mediaFile ' + rec.record.fileName);
+					writeToLog('sending mediaFile ' + rec.record.fileName);
 	    			
     				var mindestMedienTimeout = 60000;
     				var myTimeout = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
@@ -409,6 +409,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					    	_.each(mediaFiles, function(mf) {
 					            if (mf.m_id == el.m_id) {
 					            	var delFunc = function() {
+										writeToLog('lösche mediaFile ' + mf.record.fileName);
 					            		mf.del();
 						                var items = _.sortBy(DigiWebApp.MediaFile.find(), function(mediafile) {
 						                    return parseIntRadixTen(mediafile.get('timeStamp'));
@@ -421,7 +422,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					        });
 							if ( mediaFilesIndex === mediaFilesLength && done === false) {
 								// last mediaFile sent
-					    		console.log('sending last mediaFile done (with file)');
+					    		writeToLog('sending last mediaFile done (with file)');
 			    				done = true;
 			    				successCallback();
 							}
@@ -429,7 +430,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 						, errorCallback: function(xhr, err) {
 							if ( mediaFilesIndex === mediaFilesLength && done === false) {
 								// last mediaFile sent (failed)
-					    		console.log('last mediaFile done (sending last file failed)');
+								writeToLog('last mediaFile done (sending last file failed)');
 			    				done = true;
 			    				successCallback();
 							}
