@@ -513,7 +513,7 @@ function autoCleanLogs(mySuccessCallback, myErrorCallback) {
 	var operationInLogDir = function(logDir) {
 		autoCleanLogFilesFromDirectory(logDir, mySuccessCallback, myErrorCallback);
 	}
-	getDataDir(operationInLogDir);
+	getLogDir(operationInLogDir);
 }
 
 function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myErrorCallback) {
