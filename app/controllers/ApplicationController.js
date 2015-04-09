@@ -1470,6 +1470,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , startsync: function(isFirstLoad) {
     	//alert("in startsync");
+
+    	writeToLog("startsync");
+
     	DigiWebApp.ApplicationController.syncStartTimestamp = D8.now().getTimestamp();
 
         // authentication data

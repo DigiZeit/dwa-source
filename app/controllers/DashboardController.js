@@ -375,7 +375,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     , dataTransfer: function(isClosingDay) {
     	if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
 
-		writeToLog("Hauptmenü: Datenübertragung");
+		writeToLog("Hauptmenü: '" + M.I18N.l('dataTransfer') + "' gedrückt");
 
     	var startTransfer = NO;
     	if (DigiWebApp.DashboardController.lastTimestampDatatransfer !== null) {

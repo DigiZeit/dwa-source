@@ -85,6 +85,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             }
         });
 
+    	writeToLog("XML-WebService '" + obj.url + "' wird aufgerufen");
         req.send();
     }
 

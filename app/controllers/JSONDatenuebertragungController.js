@@ -41,6 +41,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
+    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
 		M.Request.init({
 			  url: myURL
 			, method: 'POST'
@@ -107,6 +108,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
+    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
 		M.Request.init({
 			  url: myURL
 			, beforeSend: function(xhr) {
