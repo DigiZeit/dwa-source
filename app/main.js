@@ -545,7 +545,7 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	logDirectory.createReader().readEntries(function(entries){
 		var filesToDeleteArray = [];
 		var fileNamesToDeleteArray = [];
-		var daysToHoldBookingsOnDevice = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("daysToHoldBookingsOnDevice"))
+		var daysToHoldBookingsOnDevice = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("daysToHoldBookingsOnDevice"));
         var minDateInt = parseIntRadixTen(D8.create().addDays(-daysToHoldBookingsOnDevice).format("yyyymmdd"));
         writeToLog("removing logfiles older than " + minDateInt + " (older than " + daysToHoldBookingsOnDevice + " days)", function(){
 			_.each(entries, function(entry) {
