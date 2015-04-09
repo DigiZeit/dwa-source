@@ -201,8 +201,8 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 		errorCallback = myErrorCallback;
 	}
 	
-	var writeContent = writeContentObj.writeContent;
-	var now = writeContent.timestamp;
+	var writeContent = writeContentObj.content;
+	var now = writeContentObj.timestamp;
 	
 	console.log(writeContent.toString());
 
