@@ -161,7 +161,7 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	}
 	var errorCallback;
 	if (typeof(myErrorCallback) !== "function") {
-		errorCallback = function(){};
+		errorCallback = successCallback; // falls kein errorHandler übergeben wurde mit successHandler fortfahren
 	} else {
 		errorCallback = myErrorCallback;
 	}

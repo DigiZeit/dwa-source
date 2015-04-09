@@ -220,34 +220,39 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				var internalSuccessCallback = function(data2, msg, request) {
 					// verarbeite empfangene Daten
 					if (parseIntRadixTen(request.responseText) != items.length) {
-						writeToLog("Fehler: Falsche Rückgabe des Zeitservers (" + request.responseText + ")");
-						writeToLog("items.length: " + items.length);
-						internalErrorCallback();
+						writeToLog("Fehler: Falsche Rückgabe des Zeitservers (" + request.responseText + ")", function(){
+							writeToLog("items.length: " + items.length, function(){
+								internalErrorCallback();
+							});
+						});
 					} else {
 						// weiter in der Verarbeitungskette
 						successCallback();
 					}
 					
 				};
-
-				// aktuelle Konfiguration protokollieren
-				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings));
-				// zeitdaten-array protokollieren
-				writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))));
 				
-				var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
-				if (items.length > 1) { itemsLengthLogStr += "en"; }
-				writeToLog(itemsLengthLogStr);
-				var sendObj = {
-					  data: data
-					, webservice: "zeitdaten"
-					, loaderText: M.I18N.l('sendDataMsg')
-					, successCallback: internalSuccessCallback
-					, errorCallback: internalErrorCallback
-					//, additionalQueryParameter:
-					//, timeout: 60000
-				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+				// aktuelle Konfiguration protokollieren
+				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings),function(){
+					// zeitdaten-array protokollieren
+					writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))), function() {
+						var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
+						if (items.length > 1) { itemsLengthLogStr += "en"; }
+						writeToLog(itemsLengthLogStr, function() {
+							var sendObj = {
+								  data: data
+								, webservice: "zeitdaten"
+								, loaderText: M.I18N.l('sendDataMsg')
+								, successCallback: internalSuccessCallback
+								, errorCallback: internalErrorCallback
+								//, additionalQueryParameter:
+								//, timeout: 60000
+							};
+							DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+						});
+					}
+				});
+
 			} else {
 				successCallback();
 			}
