@@ -233,7 +233,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				};
 				
 				// aktuelle Konfiguration protokollieren
-				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings),function(){
+				writeToLog(JSON.stringify(DigiWebApp.SettingsController.settings), function(){
 					// zeitdaten-array protokollieren
 					writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))), function() {
 						var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
@@ -250,7 +250,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 							};
 							DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 						});
-					}
+					});
 				});
 
 			} else {
