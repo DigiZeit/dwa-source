@@ -156,7 +156,7 @@ function queuedLogWriter() {
 	if (logQueue.length > 0) {
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
-			queuedLogWriter());
+			queuedLogWriter();
 		});
 	}
 }
