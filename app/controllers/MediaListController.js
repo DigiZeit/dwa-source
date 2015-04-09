@@ -544,6 +544,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 				        });
 					});
     			} else {
+		    		mediaFilesIndex = mediaFilesIndex + 1;
 	    			// this mediaFile has no file
 					if ( mediaFilesIndex === mediaFilesLength && done === false) {
 						// last mediaFile loaded
