@@ -1672,33 +1672,34 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		var timestampNow = D8.now().getTimestamp();
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
         		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
-            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate");
-            		var recieveObj = {
-          				  webservice: "mitarbeiter"
-          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-          				, successCallback: function(data){
-	        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-	        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-	        	    		}
-	        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-	        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-	        	    	}
-          				, errorCallback: function(error) {
-            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                			// Fehlermeldung
-                			DigiWebApp.ApplicationController.nativeAlertDialogView({
-                                title: M.I18N.l('offlineWorkNotPossible')
-                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
-                			});
-            	    	}
-          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-          				//, timeout: 
-          				, geraeteIdOverride: true
-          				//, modus: 
-            		};
-            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate", function(){
+	            		var recieveObj = {
+	          				  webservice: "mitarbeiter"
+	          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+	          				, successCallback: function(data){
+		        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+		        	    		}
+		        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
+		        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+		        	    	}
+	          				, errorCallback: function(error) {
+	            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	                			// Fehlermeldung
+	                			DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                                title: M.I18N.l('offlineWorkNotPossible')
+	                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
+	                			});
+	            	    	}
+	          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+	          				//, timeout: 
+	          				, geraeteIdOverride: true
+	          				//, modus: 
+	            		};
+	            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+            		});
         		} else {
     	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
         		}
