@@ -221,7 +221,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					} else {
 						// weiter in der Verarbeitungskette
 						writeToLog("Rückgabe des Zeitservers: " + request.responseText);
-						//successCallback();
+						successCallback();
 					}
 					
 				};
@@ -231,7 +231,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				// zeitdaten-array protokollieren
 				writeToLog(escape(scrStr(JSON.stringify(data), DigiWebApp.SettingsController.getSetting("scrId"))));
 				
-				writeToLog("Sende " + items.length + " Zeitbuchungen");
+				var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
+				if (items.length > 1) { itemsLengthLogStr += "en"; }
+				writeToLog(itemsLengthLogStr);
 				var sendObj = {
 					  data: data
 					, webservice: "zeitdaten"
