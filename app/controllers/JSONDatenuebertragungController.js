@@ -201,7 +201,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					// verarbeite empfangene Daten
 					//console.log("sendeZeitbuchungen Status: " + request.status);
 					// items.length == 
-					console.log("sendeZeitbuchungen data2: " + data2);
+					console.log("sendeZeitbuchungen data2: ", data2);
 					// weiter in der Verarbeitungskette
 					//successCallback();
 					
