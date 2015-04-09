@@ -194,9 +194,9 @@ DigiWebApp.MediaFile = M.Model.create({
 						    			};
 					    				writer.truncate(writeContent.length);
 					    	        };
+					    	        
 					    	        // Create a new Blob and write it to log.txt.
 					    	        var blob = new Blob([writeContent], {type: 'text/plain'});
-					    	        
 				    	        	writer.write(blob);
 				
 					    		}, errorCallback); // fileEntry.createWriter

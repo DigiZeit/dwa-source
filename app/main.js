@@ -204,22 +204,20 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 				    		fileEntry.createWriter(function(writer) {
 				    				
 				    			writer.onerror = function(evt) {
-				    				//console.error("writeError", evt);
+				    				console.error("writeError", evt);
 				    				errorCallback(evt);
 				    			};
 				    			
 				    			writer.onwriteend = function(evt) {
-					    			//writer.onwriteend = function(ev) {
-				    					successCallback(evt);
-					    			//};
-				    				//writer.truncate(writeContent.length);
+				    	        	console.log("successfully written to file");
+				    				successCallback(evt);
 				    	        };
-				    	        // Create a new Blob and write it to log.txt.
-				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
 				    	        
 				    	        writer.seek(writer.length);
-			    	        	var retVal = writer.write(blob);
-			    	        	console.log("write: " + retVal);
+
+				    	        // Create a new Blob and write it to log.txt.
+				    	        var blob = new Blob([writeContent], {type: 'text/plain'});
+			    	        	writer.write(blob);
 			
 				    		}, errorCallback); // fileEntry.createWriter
 				   		}, errorCallback);     // dataDirectory.getFile
@@ -246,23 +244,18 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 			    		fileEntry.createWriter(function(writer) {
 			    				
 			    			writer.onerror = function(evt) {
-			    				//console.error("writeError", evt);
+			    				console.error("writeError", evt);
 			    				errorCallback(evt);
 			    			};
 			    			
 			    			writer.onwriteend = function(evt) {
-				    			//writer.onwriteend = function(ev) {
+			    	        	console.log("successfully written to file");
 			    					successCallback(evt);
-				    			//};
-			    				//writer.truncate(writeContent.length);
 			    	        };
-//			    	        // Create a new Blob and write it to log.txt.
-//			    	        var blob = new Blob([writeContent], {type: 'text/plain'});
-//			    	        
-//			    	        writer.seek(writer.length);
-//		    	        	writer.write(blob);
-		    	        	var retVal = writer.write(writeContent.toString());
-		    	        	console.log("write: " + retVal);
+			    	        
+			    	        writer.seek(writer.length);
+
+		    	        	writer.write(writeContent.toString());
 		
 			    		}, errorCallback); // fileEntry.createWriter
 			   		}, errorCallback);     // dataDirectory.getFile
@@ -622,6 +615,32 @@ function cat(filename) {
 	getFS(operation);
 }
 
+function appendFile(filename, content) {
+	var errorHandler = function(err){console.error(err);};
+	var operation = function(fs) {
+		fs.root.getFile(filename, {}, function(fileEntry) {
+
+    		fileEntry.createWriter(function(writer) {
+				
+    			writer.onerror = function(evt) {
+    				console.error(evt);
+    			};
+    			
+    			writer.onwriteend = function(evt) {
+    	        	console.log("successfully written to file");
+    				successCallback(evt);
+    	        };
+    	        
+    	        writer.seek(writer.length);
+
+	        	writer.write(writeContent.toString());
+
+    		}, errorCallback); // fileEntry.createWriter
+
+		  }, errorHandler);
+	}
+	getFS(operation);
+}
 function rm(filename) {
 	var errorHandler = function(err){console.error(err);};
 	var operation = function(fs) {
