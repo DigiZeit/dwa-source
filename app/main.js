@@ -156,25 +156,39 @@ var logQueueIntervalId = null;
 var logQueueInterval = 500;
 var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
-    logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+	if (logQueueInterval > 0) {
+		// interval == 0 bedeutet nicht loggen
+		logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+	}
+}
+function deactivateLogQueueInterval() {
+	// Intervall deaktivieren
+	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 }
 function refreshLogQueueInterval() {
+	var newlogQueueInterval = logQueueInterval;
+	if (DigiWebApp && DigiWebApp.SettingsController) {
+		var s = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("logWriterInterval"));
+		if (s) {
+			newlogQueueInterval = s;
+		}
+	}
     for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
         var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
         if (regexResult) {
             var record = JSON.parse(localStorage.getItem(k));
-            if (record && record.logWriterInterval) logQueueInterval = parseIntRadixTen(record.logWriterInterval);
+            if (record && record.logWriterInterval) newlogQueueInterval = parseIntRadixTen(record.logWriterInterval);
         }
     }
-    initLogQueueInterval();
+    if (newlogQueueInterval != logQueueInterval) {
+    	logQueueInterval = newlogQueueInterval;
+    	deactivateLogQueueInterval();
+        initLogQueueInterval();
+    }
 }
 var logQueueIntervalRefreshIntervalId = window.setInterval(refreshLogQueueInterval, logQueueIntervalRefreshInterval);
 
-function deactivateLogQueueInterval() {
-	// Intervall deaktivieren
-	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
-}
 function flushLogQueueAndExit() {
 	deactivateLogQueueInterval();
 	if (logQueue.length > 0) {
@@ -217,7 +231,11 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":" + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "." + ("0" + now.getMilliseconds()).slice(-2) + " " 
 	+ writeContent + "\n";
 	
-	logQueue.push({"content": writeContent, "timestamp": now});
+	console.log(writeContent.toString());
+
+	if (logQueueInterval > 0) {
+		logQueue.push({"content": writeContent, "timestamp": now});
+	}
 	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
 
@@ -242,9 +260,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 
 		var writeContent = writeContentObj.content;
 		var now = writeContentObj.timestamp;
-		
-		console.log(writeContent.toString());
-	
+			
 		var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 			
 		// check if LocalFileSystem is defined
