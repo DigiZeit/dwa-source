@@ -163,11 +163,14 @@ function initLogQueueInterval() {
             if (record && record.logWriterInterval) logQueueInterval = parseIntRadixTen(record.logWriterInterval);
         }
     }
-    queueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+    logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+}
+function deactivateLogQueueInterval() {
+	// Intervall deaktivieren
+	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 }
 function flushLogQueueAndExit() {
-	// Intervall deaktivieren
-	try{queueIntervalId = window.clearInterval(queueIntervalId);}catch(e){}
+	deactivateLogQueueInterval();
 	if (logQueue.length > 0) {
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
@@ -183,7 +186,7 @@ function flushLogQueueAndExit() {
 function queuedLogWriter() {
 	if (logQueue.length > 0) {
 		// Intervall aussetzen bis alles geschrieben wurde
-		queueIntervalId = window.clearInterval(queueIntervalId);
+		deactivateLogQueueInterval();
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
 			queuedLogWriter();
