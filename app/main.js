@@ -1121,6 +1121,7 @@ function toggleWeinre() {
 	} else {
 		startWeinre();
 	}
+	return true;
 }
 function startWeinre() {
 	if (typeof(localStorage) !== "undefined") {
