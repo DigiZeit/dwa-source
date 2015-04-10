@@ -158,14 +158,14 @@ var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
 	if (logQueueInterval > 0 && !logQueueIntervalId) {
 		// interval == 0 bedeutet nicht loggen
-		console.debug("initLogQueueInterval");
+		//console.debug("initLogQueueInterval");
 		logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
 	}
 }
 function deactivateLogQueueInterval() {
 	if (logQueueIntervalId) {
 		// Intervall deaktivieren
-		console.debug("deactivateLogQueueInterval");
+		//console.debug("deactivateLogQueueInterval");
 		try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 	}
 }
@@ -176,14 +176,15 @@ function refreshLogQueueInterval() {
 		if (s) {
 			newlogQueueInterval = s;
 		}
-	}
-    for (var i = 0; i < localStorage.length; i++) {
-        var k = localStorage.key(i);
-        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
-        if (regexResult) {
-            var record = JSON.parse(localStorage.getItem(k));
-            if (record && record.logWriterInterval) newlogQueueInterval = parseIntRadixTen(record.logWriterInterval);
-        }
+	} else {
+	    for (var i = 0; i < localStorage.length; i++) {
+	        var k = localStorage.key(i);
+	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
+	        if (regexResult) {
+	            var record = JSON.parse(localStorage.getItem(k));
+	            if (record && record.logWriterInterval) newlogQueueInterval = parseIntRadixTen(record.logWriterInterval);
+	        }
+	    }
     }
     if (newlogQueueInterval != logQueueInterval) {
     	logQueueInterval = newlogQueueInterval;
@@ -209,7 +210,7 @@ function flushLogQueueAndExit() {
 }
 function queuedLogWriter() {
 	if (logQueue.length > 0) {
-		console.debug("queuedLogWriter has something to do");
+		//console.debug("queuedLogWriter has something to do");
 		var myWriteContent = logQueue.shift();
 		// Intervall aussetzen bis alles geschrieben wurde
 		deactivateLogQueueInterval();
@@ -296,7 +297,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 				    			};
 				    			
 				    			writer.onwriteend = function(evt) {
-				    	        	console.log("[writeToLog]: successfully written to file");
+				    	        	//console.debug("[writeToLog]: successfully written to file");
 				    				successCallback(evt);
 				    	        };
 				    	        
@@ -335,8 +336,8 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 			    			};
 			    			
 			    			writer.onwriteend = function(evt) {
-			    	        	console.log("[writeToLog]: successfully written to file");
-			    					successCallback(evt);
+			    	        	//console.debug("[writeToLog]: successfully written to file");
+			    				successCallback(evt);
 			    	        };
 			    	        
 			    	        writer.seek(writer.length);
