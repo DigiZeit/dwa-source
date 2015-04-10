@@ -158,11 +158,13 @@ var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
 	if (logQueueInterval > 0) {
 		// interval == 0 bedeutet nicht loggen
+		console.debug("initLogQueueInterval");
 		logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
 	}
 }
 function deactivateLogQueueInterval() {
 	// Intervall deaktivieren
+	console.debug("deactivateLogQueueInterval");
 	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 }
 function refreshLogQueueInterval() {
@@ -205,11 +207,13 @@ function flushLogQueueAndExit() {
 }
 function queuedLogWriter() {
 	if (logQueue.length > 0) {
+		console.debug("queuedLogWriter has something to do");
 		// Intervall aussetzen bis alles geschrieben wurde
 		deactivateLogQueueInterval();
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
-			queuedLogWriter();
+	        initLogQueueInterval();
+			//queuedLogWriter();
 		});
 	} else {
 		// Intervall fortsetzen
