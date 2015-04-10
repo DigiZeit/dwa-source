@@ -390,8 +390,8 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                action: function() {
 	                	toggleWeinre();
 	            	}
-	          }
-	        })
+	            }
+	        }
         })
     })
 
