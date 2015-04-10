@@ -1104,8 +1104,7 @@ function runWeinre() {
 }
 function getWeinreState() {
 	if (typeof(localStorage) !== "undefined") {
-		weinreIsActive = parseBool(localStorage.getItem("startWeinre"));
-		if (weinreIsActive) {
+		if (parseBool(localStorage.getItem("startWeinre"))) {
 			return 1;
 		} else {
 			return 0;
