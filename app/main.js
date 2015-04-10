@@ -1094,6 +1094,7 @@ function injectWeinre() {
 	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>");
 	$('head').append(weinreScriptElement);
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
+	alert("Die Fernwartung wurde für diese Sitzung bis zum nächsten App-Start aktiviert!")
 }
 function runWeinre() {
 	var doIt = false;
