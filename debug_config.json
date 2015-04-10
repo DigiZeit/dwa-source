@@ -19,13 +19,13 @@
     ],
     "defaultLanguage": "de_de",
     "htmlHeader": [
-        "<meta charset=\"utf-8\">",
-        "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">",
-        "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">",
-        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />",
-        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />",
-        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />",
-        "<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>"
+          "<meta charset=\"utf-8\">"
+        , "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">"
+        , "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">"
+        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />"
+        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />"
+        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
+        //, "<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>"
     ],
     "application": {
         "version": "@version@.@versionCode@ beta",

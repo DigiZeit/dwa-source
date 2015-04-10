@@ -351,7 +351,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     			outerSuccessCallback();
     		} else {
     			var logStr = "[getBookingLocation] successHandler wäre ein zusätzliches mal gefeuert worden";
-    			alert(logStr);
+    			//alert(logStr);
     			writeToLog(logStr);
     		}
     	}

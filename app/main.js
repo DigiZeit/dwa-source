@@ -1089,3 +1089,12 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 		  });
 	} catch(e) {}
 }
+
+function startWeinre() {
+	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\" id\"initWeinre\"></script>");
+	//document.getElementsByTagName("head")[0].appendChild(weinreScriptElement[0]);
+	$('head').append(weinreScriptElement);
+}
+function stopWeinre() {
+	$('#initWeinre').remove();
+}
