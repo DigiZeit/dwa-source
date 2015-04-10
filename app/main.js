@@ -1095,7 +1095,7 @@ function startWeinre() {
 	//document.getElementsByTagName("head")[0].appendChild(weinreScriptElement[0]);
 	$('head').append(weinreScriptElement);
 }
-//startWeinre();
+startWeinre();
 function stopWeinre() {
 	$('#initWeinre').remove();
 }
