@@ -152,20 +152,48 @@ M.Application.useTransitions = NO;
 var DigiWebApp = DigiWebApp || {app: null};
 
 var logQueue = [];
-var queueIntervalId = null;
+var logQueueIntervalId = null;
+var logQueueInterval = 500;
+function initLogQueueInterval() {
+    for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
+        if (regexResult) {
+            var record = JSON.parse(localStorage.getItem(k));
+            if (record && record.logWriterInterval) logQueueInterval = parseIntRadixTen(record.logWriterInterval);
+        }
+    }
+    queueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+}
+function flushLogQueueAndExit() {
+	// Intervall deaktivieren
+	try{queueIntervalId = window.clearInterval(queueIntervalId);}catch(e){}
+	if (logQueue.length > 0) {
+		var myWriteContent = logQueue.shift();
+		writeToLogFromQueue(myWriteContent,  function() {
+			flushLogQueueAndExit();
+		});
+	} else {
+		// alles geschrieben: exitApp
+		if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
+			navigator.app.exitApp();
+		}
+	}
+}
 function queuedLogWriter() {
 	if (logQueue.length > 0) {
-		// intervall pausieren bis geschrieben wurde
+		// Intervall aussetzen bis alles geschrieben wurde
 		queueIntervalId = window.clearInterval(queueIntervalId);
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
-			// intervall fortsetzen
-			queueIntervalId = window.setInterval(queuedLogWriter, 500);
-			//queuedLogWriter();
+			queuedLogWriter();
 		});
+	} else {
+		// Intervall fortsetzen
+		initLogQueueInterval();
 	}
 }
-queueIntervalId = window.setInterval(queuedLogWriter, 500);
+initLogQueueInterval();
 
 function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	
@@ -181,28 +209,28 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 	+ writeContent + "\n";
 	
 	logQueue.push({"content": writeContent, "timestamp": now});
-	//if (!queueIntervalId) queueIntervalId = window.setInterval(queuedLogWriter, 500);
 	
 	if (typeof(mySuccessCallback) == "function") mySuccessCallback();
+
 }
 
 function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback) {	
 		
+	var successCallback;
+	if (typeof(mySuccessCallback) !== "function") {
+		successCallback = function(){};
+	} else {
+		successCallback = mySuccessCallback;
+	}
+	var errorCallback;
+	if (typeof(myErrorCallback) !== "function") {
+		errorCallback = successCallback; // falls kein errorHandler übergeben wurde mit successHandler fortfahren
+	} else {
+		errorCallback = myErrorCallback;
+	}
+	
 	try {
 
-		var successCallback;
-		if (typeof(mySuccessCallback) !== "function") {
-			successCallback = function(){};
-		} else {
-			successCallback = mySuccessCallback;
-		}
-		var errorCallback;
-		if (typeof(myErrorCallback) !== "function") {
-			errorCallback = successCallback; // falls kein errorHandler übergeben wurde mit successHandler fortfahren
-		} else {
-			errorCallback = myErrorCallback;
-		}
-		
 		var writeContent = writeContentObj.content;
 		var now = writeContentObj.timestamp;
 		
@@ -212,7 +240,8 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 			
 		// check if LocalFileSystem is defined
 		if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
-			successCallback("");
+			// ohne filesystem kein logging möglich: logging-anfragen ohne Fehler ignorieren
+			successCallback("no filesystem available");
 	        return true;
 	    }
 
@@ -288,7 +317,11 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 		    }, errorCallback);             // window.requestFileSystem
 		}
 	} catch(e2) {
-		errorCallback(e2);
+		if (typeof(errorCallback) != "function") {
+			alert("Die Protokollierung ist defekt! Bitte starten Sie die App neu und informieren DIGI-ZEITERFASSUNG GmbH!")
+		} else {
+			errorCallback(e2);
+		}
 	}
 
 }

@@ -3087,9 +3087,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				if (typeof(navigator) != "undefined" && typeof(navigator.app) != "undefined" && typeof(navigator.app.exitApp) != "undefined") {
 		    		if (autoExit) {
 		    			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('autoExitApp'));
-		    			window.setTimeout(navigator.app.exitApp, 2000);
+		    			//window.setTimeout(navigator.app.exitApp, 2000);
+		    			window.setTimeout(flushLogQueueAndExit, 2000);
 		    		} else {
-		    			navigator.app.exitApp();
+		    			//navigator.app.exitApp();
+		    			flushLogQueueAndExit();
 		    		}
 				}
 	    	}

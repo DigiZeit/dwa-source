@@ -81,6 +81,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , mengeneingabeMitTelKeyboard: false
         , scrId: 8367
         , overrideApplicationQuota: '-1'
+        , logWriterInterval: 500
     }
 
     , defaultsettings: null
@@ -348,6 +349,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            var logWriterInterval = DigiWebApp.SettingsController.defaultsettings.get("logWriterInterval");
+            try {
+	            if (typeof(record.record.logWriterInterval) !== "undefined") {
+	            	logWriterInterval = record.get('logWriterInterval');
+	            }
+            } catch (e) {}
+
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -547,6 +555,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
 	           , scrId: scrId
 	           , overrideApplicationQuota: overrideApplicationQuota
+	           , logWriterInterval: logWriterInterval
                
             };
         /* default values */
@@ -693,6 +702,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , mengeneingabeMitTelKeyboard: DigiWebApp.SettingsController.defaultsettings.get("mengeneingabeMitTelKeyboard")
                , scrId: DigiWebApp.SettingsController.defaultsettings.get("scrId")
                , overrideApplicationQuota: DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota")
+               , logWriterInterval: DigiWebApp.SettingsController.defaultsettings.get("logWriterInterval")
                
             };
             
@@ -935,6 +945,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var mengeneingabeMitTelKeyboard     = DigiWebApp.SettingsController.getSetting('mengeneingabeMitTelKeyboard');
     	var scrId                           = DigiWebApp.SettingsController.getSetting('scrId');
     	var overrideApplicationQuota        = DigiWebApp.SettingsController.getSetting('overrideApplicationQuota');
+    	var logWriterInterval               = DigiWebApp.SettingsController.getSetting('logWriterInterval');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1064,6 +1075,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                                     record.set('scrId', scrId);
                                                     record.set('overrideApplicationQuota');
+                                                    record.set('logWriterInterval');
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1159,6 +1171,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                     record.set('scrId', scrId);
                                     record.set('overrideApplicationQuota');
+                                    record.set('logWriterInterval');
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1228,6 +1241,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
                                 record.set('overrideApplicationQuota');
+                                record.set('logWriterInterval');
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1297,6 +1311,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
                                 record.set('overrideApplicationQuota');
+                                record.set('logWriterInterval');
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1368,6 +1383,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
                                 , scrId: scrId
                                 , overrideApplicationQuota: overrideApplicationQuota
+                                , logWriterInterval: logWriterInterval
 
                           });
 

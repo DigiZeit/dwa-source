@@ -134,4 +134,6 @@ DigiWebApp.Settings = M.Model.create({
     
     , overrideApplicationQuota: M.Model.attr('String') 
 
+    , logWriterInterval: M.Model.attr('Integer') 
+
 }, M.DataProviderLocalStorage);
