@@ -27,7 +27,7 @@
         , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.8.3.6052 beta",
+        "version": "1.8.3.6053 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
@@ -70,4 +70,3 @@
         , {"name": "Math.uuid.js", "refs": ["*"]}
     ]
 }
-        //, "<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>"

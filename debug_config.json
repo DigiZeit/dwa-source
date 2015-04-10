@@ -70,4 +70,3 @@
         , {"name": "Math.uuid.js", "refs": ["*"]}
     ]
 }
-        //, "<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>"
