@@ -206,10 +206,10 @@ function flushLogQueueAndExit() {
 	}
 }
 function queuedLogWriter() {
+	// Intervall aussetzen bis alles geschrieben wurde
+	deactivateLogQueueInterval();
 	if (logQueue.length > 0) {
 		console.debug("queuedLogWriter has something to do");
-		// Intervall aussetzen bis alles geschrieben wurde
-		deactivateLogQueueInterval();
 		var myWriteContent = logQueue.shift();
 		writeToLogFromQueue(myWriteContent,  function() {
 	        initLogQueueInterval();
