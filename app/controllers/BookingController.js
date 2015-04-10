@@ -342,7 +342,18 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , startGetLocationTimestamp: null
-    , getBookingLocation: function(mysuccessCallback) {
+    , getBookingLocation: function(outerSuccessCallback) {
+    	
+    	var successHandlerCalled = false;
+    	var mysuccessCallback = function() {
+    		if (!successHandlerCalled) {
+    			successHandlerCalled = true;
+    			outerSuccessCallback();
+    		} else {
+    			writeToLog("[getBookingLocation] successHandler wäre ein zusätzliches mal gefeuert worden;")
+    		}
+    	}
+    	
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
 
     	var that = DigiWebApp.BookingController;
