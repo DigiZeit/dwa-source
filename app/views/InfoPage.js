@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6062'
+              value: 'Build: 6063'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -388,7 +388,9 @@ DigiWebApp.InfoPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
-	                	toggleWeinre();
+	                	if (!toggleWeinre()) {
+	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
+	                	}
 	            	}
 	            }
 	        }

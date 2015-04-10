@@ -1090,9 +1090,11 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 	} catch(e) {}
 }
 
+var weinreState = 0;
 function injectWeinre() {
 	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>");
 	$('head').append(weinreScriptElement);
+	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
 	alert("Die Fernwartung wurde für diese Sitzung bis zum nächsten App-Start aktiviert!")
 }
@@ -1105,17 +1107,14 @@ function runWeinre() {
 }
 function getWeinreState() {
 	if (typeof(localStorage) !== "undefined") {
-		if (parseBool(localStorage.getItem("startWeinre"))) {
-			return 1;
-		} else {
-			return 0;
-		}
+		return weinreState;
 	} else {
-		return -1;
+		weinreState = -1;
 	}
+	return weinreState;
 }
 function toggleWeinre() {
-	var weinreState = getWeinreState();
+	getWeinreState();
 	if (weinreState == -1) { return false; }
 	if (weinreState == 1) {
 		stopWeinre();

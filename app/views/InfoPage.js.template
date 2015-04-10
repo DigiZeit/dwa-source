@@ -388,7 +388,9 @@ DigiWebApp.InfoPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
-	                	toggleWeinre();
+	                	if (!toggleWeinre()) {
+	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
+	                	}
 	            	}
 	            }
 	        }
