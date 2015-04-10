@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6058'
+              value: 'Build: 6059'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -391,8 +391,8 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                	toggleWeinre();
 	            	}
 	          }
-	    })
-
+	        })
+        })
     })
 
     , tabBar: DigiWebApp.TabBar

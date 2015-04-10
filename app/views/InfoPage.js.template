@@ -391,8 +391,8 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                	toggleWeinre();
 	            	}
 	          }
-	    })
-
+	        })
+        })
     })
 
     , tabBar: DigiWebApp.TabBar
