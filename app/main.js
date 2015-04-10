@@ -1090,12 +1090,43 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 	} catch(e) {}
 }
 
-function startWeinre() {
-	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\" id\"initWeinre\"></script>");
-	//document.getElementsByTagName("head")[0].appendChild(weinreScriptElement[0]);
+function injectWeinre() {
+	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>");
 	$('head').append(weinreScriptElement);
 }
-startWeinre();
-function stopWeinre() {
-	$('#initWeinre').remove();
+function runWeinre() {
+	var doIt = false;
+	if (typeof(localStorage) !== "undefined") {
+		doIt = parseBool(localStorage.getItem("startWeinre"));
+	}
+	if (doIt) injectWeinre();
 }
+function startWeinre() {
+	if (typeof(localStorage) !== "undefined") {
+		localStorage.setItem("startWeinre", "true");
+	}
+	if (typeof(navigator.app) !== "undefined") {
+		if (typeof(location.origin) !== "undefined") {
+			navigator.app.loadUrl(location.origin + location.pathname);					
+		} else {
+			navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+		}
+	} else {
+		window.location.reload();
+	}
+}
+function stopWeinre() {
+	if (typeof(localStorage) !== "undefined") {
+		localStorage.setItem("startWeinre", "false");
+	}
+	if (typeof(navigator.app) !== "undefined") {
+		if (typeof(location.origin) !== "undefined") {
+			navigator.app.loadUrl(location.origin + location.pathname);					
+		} else {
+			navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+		}
+	} else {
+		window.location.reload();
+	}
+}
+runWeinre();
