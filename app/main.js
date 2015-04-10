@@ -154,7 +154,11 @@ var DigiWebApp = DigiWebApp || {app: null};
 var logQueue = [];
 var logQueueIntervalId = null;
 var logQueueInterval = 500;
+var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
+    logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+}
+function refreshLogQueueInterval() {
     for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
         var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
@@ -163,8 +167,10 @@ function initLogQueueInterval() {
             if (record && record.logWriterInterval) logQueueInterval = parseIntRadixTen(record.logWriterInterval);
         }
     }
-    logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
+    initLogQueueInterval();
 }
+var logQueueIntervalRefreshIntervalId = window.setInterval(refreshLogQueueInterval, logQueueIntervalRefreshInterval);
+
 function deactivateLogQueueInterval() {
 	// Intervall deaktivieren
 	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
