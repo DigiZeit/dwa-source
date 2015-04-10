@@ -355,6 +355,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     			writeToLog(logStr);
     		}
     	}
+    	mysuccessCallback = outerSuccessCallback;
     	
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
 
