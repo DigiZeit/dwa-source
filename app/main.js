@@ -163,9 +163,11 @@ function initLogQueueInterval() {
 	}
 }
 function deactivateLogQueueInterval() {
-	// Intervall deaktivieren
-	console.debug("deactivateLogQueueInterval");
-	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
+	if (logQueueIntervalId) {
+		// Intervall deaktivieren
+		console.debug("deactivateLogQueueInterval");
+		try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
+	}
 }
 function refreshLogQueueInterval() {
 	var newlogQueueInterval = logQueueInterval;
