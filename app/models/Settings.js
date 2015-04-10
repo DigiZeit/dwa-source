@@ -131,5 +131,7 @@ DigiWebApp.Settings = M.Model.create({
     , mengeneingabeMitTelKeyboard: M.Model.attr('Boolean')
     
     , scrId: M.Model.attr('String')
+    
+    , overrideApplicationQuota: M.Model.attr('String') 
 
 }, M.DataProviderLocalStorage);

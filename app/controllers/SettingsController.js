@@ -80,6 +80,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , pictureAllowEdit: YES
         , mengeneingabeMitTelKeyboard: false
         , scrId: 8367
+        , overrideApplicationQuota: '-1'
     }
 
     , defaultsettings: null
@@ -339,6 +340,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            	daysToHoldBookingsOnDevice = DigiWebApp.SettingsController.defaultsettings.get("daysToHoldBookingsOnDevice");
 	            }
             } catch (e) {}
+            
+            var overrideApplicationQuota = DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota");
+            try {
+	            if (typeof(record.record.overrideApplicationQuota) !== "undefined") {
+	            	overrideApplicationQuota = record.get('overrideApplicationQuota');
+	            }
+            } catch (e) {}
 
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -538,6 +546,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , pictureAllowEdit: pictureAllowEdit
 	           , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
 	           , scrId: scrId
+	           , overrideApplicationQuota: overrideApplicationQuota
                
             };
         /* default values */
@@ -683,6 +692,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , pictureAllowEdit: DigiWebApp.SettingsController.defaultsettings.get("pictureAllowEdit")
                , mengeneingabeMitTelKeyboard: DigiWebApp.SettingsController.defaultsettings.get("mengeneingabeMitTelKeyboard")
                , scrId: DigiWebApp.SettingsController.defaultsettings.get("scrId")
+               , overrideApplicationQuota: DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota")
                
             };
             
@@ -924,6 +934,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var pictureAllowEdit			    = DigiWebApp.SettingsController.getSetting('pictureAllowEdit');
     	var mengeneingabeMitTelKeyboard     = DigiWebApp.SettingsController.getSetting('mengeneingabeMitTelKeyboard');
     	var scrId                           = DigiWebApp.SettingsController.getSetting('scrId');
+    	var overrideApplicationQuota        = DigiWebApp.SettingsController.getSetting('overrideApplicationQuota');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1052,6 +1063,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                                     record.set('scrId', scrId);
+                                                    record.set('overrideApplicationQuota');
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1146,6 +1158,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                     record.set('scrId', scrId);
+                                    record.set('overrideApplicationQuota');
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1214,6 +1227,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
+                                record.set('overrideApplicationQuota');
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1282,6 +1296,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
+                                record.set('overrideApplicationQuota');
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1352,6 +1367,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , pictureAllowEdit: pictureAllowEdit
                                 , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
                                 , scrId: scrId
+                                , overrideApplicationQuota: overrideApplicationQuota
 
                           });
 
@@ -1465,26 +1481,18 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
     }
 
-    , setSetting: function(prop, value, callback) {
-    	var myCallback = function(){};
-    	if (typeof(callback) == "function") {
-    		myCallback = callback;
-    	}
+    , setSetting: function(prop, value) {
         var setting = DigiWebApp.Settings.find()[0];
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-    		} catch(e5) {
-    			// TODO: damit das auch sicher im Logfile landet, alle Aufrufe von setSetting um callback erweitern
-    			return trackError("ERROR: setting.set for prop=" + prop, myCallback);
-    		}
+    		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES, YES);
         	} else {
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES);
         	}
-        	myCallback();
         }
     }
       

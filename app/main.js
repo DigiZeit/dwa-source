@@ -188,34 +188,34 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 
 function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback) {	
 		
-	var successCallback;
-	if (typeof(mySuccessCallback) !== "function") {
-		successCallback = function(){};
-	} else {
-		successCallback = mySuccessCallback;
-	}
-	var errorCallback;
-	if (typeof(myErrorCallback) !== "function") {
-		errorCallback = successCallback; // falls kein errorHandler übergeben wurde mit successHandler fortfahren
-	} else {
-		errorCallback = myErrorCallback;
-	}
-	
-	var writeContent = writeContentObj.content;
-	var now = writeContentObj.timestamp;
-	
-	console.log(writeContent.toString());
-
-	var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
-		
-	// check if LocalFileSystem is defined
-	if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
-		successCallback("");
-        return true;
-    }
-
 	try {
+
+		var successCallback;
+		if (typeof(mySuccessCallback) !== "function") {
+			successCallback = function(){};
+		} else {
+			successCallback = mySuccessCallback;
+		}
+		var errorCallback;
+		if (typeof(myErrorCallback) !== "function") {
+			errorCallback = successCallback; // falls kein errorHandler übergeben wurde mit successHandler fortfahren
+		} else {
+			errorCallback = myErrorCallback;
+		}
 		
+		var writeContent = writeContentObj.content;
+		var now = writeContentObj.timestamp;
+		
+		console.log(writeContent.toString());
+	
+		var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
+			
+		// check if LocalFileSystem is defined
+		if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
+			successCallback("");
+	        return true;
+	    }
+
 		var myQuota = DigiWebApp.ApplicationController.CONSTApplicationQuota;
 	    // open filesystem
 		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
