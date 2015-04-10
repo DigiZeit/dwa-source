@@ -158,13 +158,13 @@ var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
 	if (logQueueInterval > 0) {
 		// interval == 0 bedeutet nicht loggen
-		console.debug("initLogQueueInterval");
+		//console.debug("initLogQueueInterval");
 		logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
 	}
 }
 function deactivateLogQueueInterval() {
 	// Intervall deaktivieren
-	console.debug("deactivateLogQueueInterval");
+	//console.debug("deactivateLogQueueInterval");
 	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 }
 function refreshLogQueueInterval() {
