@@ -538,5 +538,7 @@ M.I18N.de_de = {
 	, starteNotizen: "Starte Modul 'Notizen'"
 		
 	, loadingFileFailed: "Eine Datei konnte nicht geladen und kann daher nicht übertragen werden! Diesen beschädigten Datensatz in der WebApp löschen?"
+		
+	, fernwartung: "Fernwartung"
 
 };

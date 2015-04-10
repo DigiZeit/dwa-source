@@ -1093,6 +1093,7 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 function injectWeinre() {
 	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>");
 	$('head').append(weinreScriptElement);
+	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
 }
 function runWeinre() {
 	var doIt = false;
@@ -1101,32 +1102,53 @@ function runWeinre() {
 	}
 	if (doIt) injectWeinre();
 }
+function getWeinreState() {
+	if (typeof(localStorage) !== "undefined") {
+		weinreIsActive = parseBool(localStorage.getItem("startWeinre"));
+		if (weinreIsActive) {
+			return 1;
+		} else {
+			return 0;
+		}
+	} else {
+		return -1;
+	}
+}
+function toggleWeinre() {
+	var weinreState = getWeinreState();
+	if (weinreState == -1) { return false; }
+	if (weinreState == 1) {
+		stopWeinre();
+	} else {
+		startWeinre();
+	}
+}
 function startWeinre() {
 	if (typeof(localStorage) !== "undefined") {
 		localStorage.setItem("startWeinre", "true");
-	}
-	if (typeof(navigator.app) !== "undefined") {
-		if (typeof(location.origin) !== "undefined") {
-			navigator.app.loadUrl(location.origin + location.pathname);					
+		if (typeof(navigator.app) !== "undefined") {
+			if (typeof(location.origin) !== "undefined") {
+				navigator.app.loadUrl(location.origin + location.pathname);					
+			} else {
+				navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+			}
 		} else {
-			navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+			window.location.reload();
 		}
-	} else {
-		window.location.reload();
 	}
 }
 function stopWeinre() {
 	if (typeof(localStorage) !== "undefined") {
 		localStorage.setItem("startWeinre", "false");
-	}
-	if (typeof(navigator.app) !== "undefined") {
-		if (typeof(location.origin) !== "undefined") {
-			navigator.app.loadUrl(location.origin + location.pathname);					
+		if (typeof(navigator.app) !== "undefined") {
+			if (typeof(location.origin) !== "undefined") {
+				navigator.app.loadUrl(location.origin + location.pathname);					
+			} else {
+				navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+			}
 		} else {
-			navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+			window.location.reload();
 		}
-	} else {
-		window.location.reload();
 	}
 }
 runWeinre();

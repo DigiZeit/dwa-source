@@ -89,7 +89,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-          childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel spacer9 versionLabel cordovaVersionLabel companyLabel streetLabel cityLabel phoneLabel emailLabel1 spacer1 emailLabel2 spacer2 spacer3 TMPVersionLabel spacer4 deviceinfo spacer5 connectioninfo spacer6 environmentinfo spacer7 localStorageUsage'
+          childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel spacer9 versionLabel cordovaVersionLabel companyLabel streetLabel cityLabel phoneLabel emailLabel1 spacer1 emailLabel2 spacer2 spacer3 TMPVersionLabel spacer4 deviceinfo spacer5 connectioninfo spacer6 environmentinfo spacer7 localStorageUsage spacer10 toggleWeinreButton'
 
         , logo: M.ImageView.design({
               value: 'theme/images/NeuesLogo2013.png'
@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6057'
+              value: 'Build: 6058'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -283,6 +283,11 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , spacer9: M.LabelView.design({
+              value: '<br />'
+            , cssClass: 'infoLabel unselectable'
+        })
+
+        , spacer10: M.LabelView.design({
               value: '<br />'
             , cssClass: 'infoLabel unselectable'
         })
@@ -377,6 +382,16 @@ DigiWebApp.InfoPage = M.PageView.design({
             }
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
+        
+        , toggleWeinreButton: M.ButtonView.design({
+	          value: M.I18N.l('fernwartung')
+	        , events: {
+	            tap: {
+	                action: function() {
+	                	toggleWeinre();
+	            	}
+	          }
+	    })
 
     })
 
