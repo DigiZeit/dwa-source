@@ -156,15 +156,15 @@ var logQueueIntervalId = null;
 var logQueueInterval = 500;
 var logQueueIntervalRefreshInterval = 60000; // einmal pro Minute
 function initLogQueueInterval() {
-	if (logQueueInterval > 0) {
+	if (logQueueInterval > 0 && !logQueueIntervalId) {
 		// interval == 0 bedeutet nicht loggen
-		//console.debug("initLogQueueInterval");
+		console.debug("initLogQueueInterval");
 		logQueueIntervalId = window.setInterval(queuedLogWriter, logQueueInterval);
 	}
 }
 function deactivateLogQueueInterval() {
 	// Intervall deaktivieren
-	//console.debug("deactivateLogQueueInterval");
+	console.debug("deactivateLogQueueInterval");
 	try{logQueueIntervalId = window.clearInterval(logQueueIntervalId);}catch(e){}
 }
 function refreshLogQueueInterval() {
@@ -206,14 +206,14 @@ function flushLogQueueAndExit() {
 	}
 }
 function queuedLogWriter() {
-	// Intervall aussetzen bis alles geschrieben wurde
-	deactivateLogQueueInterval();
 	if (logQueue.length > 0) {
 		console.debug("queuedLogWriter has something to do");
 		var myWriteContent = logQueue.shift();
+		// Intervall aussetzen bis alles geschrieben wurde
+		deactivateLogQueueInterval();
 		writeToLogFromQueue(myWriteContent,  function() {
-	        initLogQueueInterval();
-			//queuedLogWriter();
+	        //initLogQueueInterval();
+			queuedLogWriter();
 		});
 	} else {
 		// Intervall fortsetzen
