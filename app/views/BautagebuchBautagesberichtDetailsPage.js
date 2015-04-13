@@ -131,7 +131,9 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.medien_notizen_ButtonGrid.notizenButton.id).addClass("bigButton");
 			  		
 			  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
-			  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
+			  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
+			  		|| DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp") != "<standard>"
+			  		) {
 			  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().show();
 			  		} else {
 			  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().hide();
