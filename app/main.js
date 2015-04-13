@@ -1098,6 +1098,7 @@ function injectWeinre(weinreUserIP) {
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
+	console.log("IP: " + weinreUserIP);
 	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte IP-Adresse mit: " + weinreUserIP);
 }
 function runWeinre() {
