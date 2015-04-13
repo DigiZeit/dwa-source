@@ -1130,7 +1130,7 @@ function toggleWeinre(weinreUserIP) {
 function startWeinre(weinreUserIP) {
 	if (typeof(localStorage) !== "undefined") {
 		localStorage.setItem("startWeinre", "true");
-		localStorage.setItem("weinreUserId", weinreUserId);
+		localStorage.setItem("weinreUserIP", weinreUserIP);
 		if (typeof(navigator.app) !== "undefined") {
 			if (typeof(location.origin) !== "undefined") {
 				navigator.app.loadUrl(location.origin + location.pathname);					
