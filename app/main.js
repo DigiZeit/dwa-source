@@ -1097,7 +1097,7 @@ function injectWeinre(weinreUserId) {
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
-	alert("Die Fernwartung wurde für diese Sitzung bis zum nächsten App-Start aktiviert!\n\nUserId=" + weinreUserId);
+	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte die folgende UserId mit: " + weinreUserId);
 }
 function runWeinre() {
 	var doIt = false;
