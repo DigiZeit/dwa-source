@@ -90,7 +90,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 							relevantDetailsController.set('positionId', DigiWebApp.BookingController.currentBooking.get('positionId'));
 							relevantDetailsController.set('positionName', DigiWebApp.BookingController.currentBooking.get('positionName'));
 							_.each(relevantDetailsController.positionenList, function(p) {
-								if (a.value == relevantDetailsController.get('positionId')) {
+								if (p.value == relevantDetailsController.get('positionId')) {
 									p.isSelected = YES;
 								} else {
 									p.isSelected = NO;
