@@ -1093,7 +1093,7 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 var weinreState = 0;
 function injectWeinre(weinreUserId) {
 	if (!weinreUserId) weinreUserId = "unbekannt";
-	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#" + weinreUserId + "\"></script>");
+	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#userid" + weinreUserId + "\"></script>");
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
