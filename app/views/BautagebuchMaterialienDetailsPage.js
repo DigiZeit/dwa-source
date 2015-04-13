@@ -106,8 +106,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 							relevantDetailsController.set('positionName', a.label);
 						}
 					});
+					relevantDetailsController.set('positionenList', relevantDetailsController.positionenList);
 
-				    relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
+					relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
 
 				    try {
 						_.each(relevantDetailsController.activityList, function(a) {
