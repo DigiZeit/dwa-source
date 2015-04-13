@@ -1119,13 +1119,13 @@ function getWeinreState() {
 	return weinreState;
 }
 function toggleWeinre(weinreUserIP) {
-	getWeinreState();
-	if (weinreState == -1) { return false; }
-	if (weinreState == 1) {
-		stopWeinre();
-	} else {
+//	getWeinreState();
+//	if (weinreState == -1) { return false; }
+//	if (weinreState == 1) {
+//		stopWeinre();
+//	} else {
 		startWeinre(weinreUserIP);
-	}
+//	}
 	return true;
 }
 function startWeinre(weinreUserIP) {
