@@ -1091,19 +1091,22 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 }
 
 var weinreState = 0;
-function injectWeinre() {
-	var weinreScriptElement = $("<script src=\"http://81.169.231.31:8081/target/target-script-min.js\"></script>");
+function injectWeinre(weinreUserId) {
+	if (!weinreUserId) weinreUserId = "unbekannt";
+	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#" + weinreUserId + "\"></script>");
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
-	alert("Die Fernwartung wurde für diese Sitzung bis zum nächsten App-Start aktiviert!")
+	alert("Die Fernwartung wurde für diese Sitzung bis zum nächsten App-Start aktiviert! UserId=" + userId);
 }
 function runWeinre() {
 	var doIt = false;
+	var weinreUserId = "";
 	if (typeof(localStorage) !== "undefined") {
 		doIt = parseBool(localStorage.getItem("startWeinre"));
+		weinreUserId = localStorage.getItem("weinreUserId");
 	}
-	if (doIt) injectWeinre();
+	if (doIt) injectWeinre(weinreUserId);
 }
 function getWeinreState() {
 	if (typeof(localStorage) !== "undefined") {
@@ -1113,19 +1116,20 @@ function getWeinreState() {
 	}
 	return weinreState;
 }
-function toggleWeinre() {
+function toggleWeinre(weinreUserId) {
 	getWeinreState();
 	if (weinreState == -1) { return false; }
 	if (weinreState == 1) {
 		stopWeinre();
 	} else {
-		startWeinre();
+		startWeinre(weinreUserId);
 	}
 	return true;
 }
-function startWeinre() {
+function startWeinre(weinreUserId) {
 	if (typeof(localStorage) !== "undefined") {
 		localStorage.setItem("startWeinre", "true");
+		localStorage.setItem("weinreUserId", weinreUserId);
 		if (typeof(navigator.app) !== "undefined") {
 			if (typeof(location.origin) !== "undefined") {
 				navigator.app.loadUrl(location.origin + location.pathname);					
