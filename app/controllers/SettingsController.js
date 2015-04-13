@@ -82,7 +82,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , scrId: 8367
         , overrideApplicationQuota: '-1'
         , logWriterInterval: 500
-        , progressViewVerwendenAb: 500
+        , progressViewVerwendenAb: 300
     }
 
     , defaultsettings: null

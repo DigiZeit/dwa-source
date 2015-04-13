@@ -397,7 +397,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 		, shown: NO
 		
-		, minMaxVal: 500
+		, minMaxVal: DigiWebApp.SettingsController.getSetting('progressViewVerwendenAb');
 		
 		, increase: function(by) {
 			if (!this.nativeProgressAvailable()) return false;
