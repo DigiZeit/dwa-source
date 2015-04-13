@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6069'
+              value: 'Build: 6070'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -393,7 +393,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                	//var mitarbeiterVorname = DigiWebApp.SettingsController.getSetting("mitarbeiterVorname");
 	                	//var mitarbeiterNachname = DigiWebApp.SettingsController.getSetting("mitarbeiterNachname");
 	                	//var weinreUserId = company + "_" + mitarbeiterId + "_" + escape(mitarbeiterVorname) + "_" + escape(mitarbeiterNachname);
-	                	//var weinreUserId = company + mitarbeiterId;
+	                	var weinreUserId = company + mitarbeiterId;
 	                	if (!toggleWeinre(weinreUserId)) {
 	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
 	                	}
