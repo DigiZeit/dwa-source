@@ -165,7 +165,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			return false;
 		} else {
 			// verfügbare Positionen kopieren und ausgewähltes selektieren
-		    var positionenArray = _.map(DigiWebApp.Position.find(), function(pos) {
+		    var positionenArray = _.map(DigiWebApp.Position.findSorted(), function(pos) {
 		    	if ( typeof(pos) === "undefined" ) {
 		    		console.log("UNDEFINED Position");
 		    	} else {
