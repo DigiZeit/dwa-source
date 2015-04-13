@@ -85,6 +85,19 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
 						
 						relevantDetailsController.setPositionen(relevantDetailsController.auftragId);
 						
+						// Position gemäß laufende Buchung
+						if (DigiWebApp.BookingController.currentBooking) {
+							relevantDetailsController.set('positionId', DigiWebApp.BookingController.currentBooking.get('positionId'));
+							relevantDetailsController.set('positionName', DigiWebApp.BookingController.currentBooking.get('positionName'));
+							_.each(relevantDetailsController.positionenList, function(p) {
+								if (a.value == relevantDetailsController.get('positionId')) {
+									p.isSelected = YES;
+								} else {
+									p.isSelected = NO;
+								}
+							});
+						}
+
 					}
 					
 					_.each(relevantDetailsController.positionenList, function(a) {
