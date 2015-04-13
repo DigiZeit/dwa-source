@@ -1093,11 +1093,13 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 var weinreState = 0;
 function injectWeinre(weinreUserId) {
 	if (!weinreUserId) weinreUserId = "unbekannt";
-	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#userid" + weinreUserId + "\"></script>");
+	//var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#userid" + weinreUserId + "\"></script>");
+	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js/#test\"></script>");
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
-	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte die folgende UserId mit: " + weinreUserId);
+	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.");
+	//\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte die folgende UserId mit: " + weinreUserId);
 }
 function runWeinre() {
 	var doIt = false;
