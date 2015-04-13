@@ -626,7 +626,17 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsId", mySelection.value);
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", mySelection.label);
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.setPositionen(M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection(YES).value);
-		              }
+
+					  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
+					  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
+					  		|| DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp") != "<standard>")
+					  		{
+					  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().show();
+					  		} else {
+					  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().hide();
+					  		}
+
+	        			}
 		          }
 		    }
         })
