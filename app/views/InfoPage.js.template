@@ -388,15 +388,41 @@ DigiWebApp.InfoPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
-	                	var company = DigiWebApp.SettingsController.getSetting("company");
-	                	var mitarbeiterId = DigiWebApp.SettingsController.getSetting("mitarbeiterId");
-	                	//var mitarbeiterVorname = DigiWebApp.SettingsController.getSetting("mitarbeiterVorname");
-	                	//var mitarbeiterNachname = DigiWebApp.SettingsController.getSetting("mitarbeiterNachname");
-	                	//var weinreUserId = company + "_" + mitarbeiterId + "_" + escape(mitarbeiterVorname) + "_" + escape(mitarbeiterNachname);
-	                	var weinreUserId = company + mitarbeiterId;
-	                	if (!toggleWeinre(weinreUserId)) {
-	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
-	                	}
+	                	$.ajax({
+	                        url: '//freegeoip.net/json/',
+	                        type: 'POST',
+	                        dataType: 'jsonp',
+	                        success: function(location) {
+	    	                	//var company = DigiWebApp.SettingsController.getSetting("company");
+	    	                	//var mitarbeiterId = DigiWebApp.SettingsController.getSetting("mitarbeiterId");
+	    	                	//var mitarbeiterVorname = DigiWebApp.SettingsController.getSetting("mitarbeiterVorname");
+	    	                	//var mitarbeiterNachname = DigiWebApp.SettingsController.getSetting("mitarbeiterNachname");
+	    	                	//var weinreUserId = company + "_" + mitarbeiterId + "_" + escape(mitarbeiterVorname) + "_" + escape(mitarbeiterNachname);
+	    	                	//var weinreUserId = company + mitarbeiterId;
+	                            var weinreUserIP = location.ip;
+	    	                	if (!toggleWeinre(weinreUserIP)) {
+	    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
+	    	                	}
+	                        }
+	                		, error: function() {
+	        	        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
+	      		            	  title: M.I18N.l("fernwartungKonnteNichtGestartetWerden")
+	      	    		        , message: "Möchten Sie trotzdem fortfahren?"
+	      			            , confirmButtonValue: M.I18N.l('yes')
+	      	            		, cancelButtonValue: M.I18N.l('no')
+	      	            		, callbacks: {
+	      	                		  confirm: {
+	      	                    		  target: this
+	      	                    		, action: function() {
+			      		    	                	if (!toggleWeinre("nichtErmittelbar")) {
+			      		    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
+			      		    	                	}
+	      	                    				}
+	      	                			}
+	      	            		}
+	      	        		});
+	                		} 
+	                    });
 	            	}
 	            }
 	        }

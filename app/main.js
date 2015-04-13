@@ -1091,24 +1091,23 @@ if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") {
 }
 
 var weinreState = 0;
-function injectWeinre(weinreUserId) {
-	if (!weinreUserId) weinreUserId = "unbekannt";
+function injectWeinre(weinreUserIP) {
+	if (!weinreUserIP) weinreUserIP = "unbekannt";
 	//var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#userid" + weinreUserId + "\"></script>");
-	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#test\"></script>");
+	var weinreScriptElement = $("<script src=\"http://weinre.digi-zeiterfassung.de:8081/target/target-script-min.js#anonymous\"></script>");
 	$('head').append(weinreScriptElement);
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
-	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.");
-	//\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte die folgende UserId mit: " + weinreUserId);
+	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte IP-Adresse mit: " + weinreUserIP);
 }
 function runWeinre() {
 	var doIt = false;
-	var weinreUserId = "";
+	var weinreUserIP = "";
 	if (typeof(localStorage) !== "undefined") {
 		doIt = parseBool(localStorage.getItem("startWeinre"));
-		weinreUserId = localStorage.getItem("weinreUserId");
+		weinreUserIP = localStorage.getItem("weinreUserIP");
 	}
-	if (doIt) injectWeinre(weinreUserId);
+	if (doIt) injectWeinre(weinreUserIP);
 }
 function getWeinreState() {
 	if (typeof(localStorage) !== "undefined") {
@@ -1118,17 +1117,17 @@ function getWeinreState() {
 	}
 	return weinreState;
 }
-function toggleWeinre(weinreUserId) {
+function toggleWeinre(weinreUserIP) {
 	getWeinreState();
 	if (weinreState == -1) { return false; }
 	if (weinreState == 1) {
 		stopWeinre();
 	} else {
-		startWeinre(weinreUserId);
+		startWeinre(weinreUserIP);
 	}
 	return true;
 }
-function startWeinre(weinreUserId) {
+function startWeinre(weinreUserIP) {
 	if (typeof(localStorage) !== "undefined") {
 		localStorage.setItem("startWeinre", "true");
 		localStorage.setItem("weinreUserId", weinreUserId);
