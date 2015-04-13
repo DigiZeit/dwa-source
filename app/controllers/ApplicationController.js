@@ -429,6 +429,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (!this.nativeProgressAvailable()) return false;
 			if (typeof(maxV) != "undefined") this.maxValue = parseIntRadixTen(maxV);
 			if (this.maxValue < 1) this.maxValue = 1;
+			this.minMaxVal = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('progressViewVerwendenAb'));
 			if (maxV < this.minMaxVal) return true;
 			this.shown = YES;
 			navigator.notification.progressStart(title, message);

@@ -136,4 +136,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , logWriterInterval: M.Model.attr('Integer') 
 
+    , progressViewVerwendenAb: M.Model.attr('Integer') 
+
 }, M.DataProviderLocalStorage);

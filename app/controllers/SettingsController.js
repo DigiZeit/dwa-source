@@ -82,6 +82,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , scrId: 8367
         , overrideApplicationQuota: '-1'
         , logWriterInterval: 500
+        , progressViewVerwendenAb: 500
     }
 
     , defaultsettings: null
@@ -355,6 +356,13 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            	logWriterInterval = record.get('logWriterInterval');
 	            }
             } catch (e) {}
+            
+            var progressViewVerwendenAb = DigiWebApp.SettingsController.defaultsettings.get("progressViewVerwendenAb");
+            try {
+	            if (typeof(record.record.progressViewVerwendenAb) !== "undefined") {
+	            	progressViewVerwendenAb = record.get('progressViewVerwendenAb');
+	            }
+            } catch (e) {}
 
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -556,6 +564,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , scrId: scrId
 	           , overrideApplicationQuota: overrideApplicationQuota
 	           , logWriterInterval: logWriterInterval
+	           , progressViewVerwendenAb: progressViewVerwendenAb
                
             };
         /* default values */
@@ -703,6 +712,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , scrId: DigiWebApp.SettingsController.defaultsettings.get("scrId")
                , overrideApplicationQuota: DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota")
                , logWriterInterval: DigiWebApp.SettingsController.defaultsettings.get("logWriterInterval")
+               , progressViewVerwendenAb: DigiWebApp.SettingsController.defaultsettings.get("progressViewVerwendenAb")
                
             };
             
@@ -946,6 +956,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var scrId                           = DigiWebApp.SettingsController.getSetting('scrId');
     	var overrideApplicationQuota        = DigiWebApp.SettingsController.getSetting('overrideApplicationQuota');
     	var logWriterInterval               = DigiWebApp.SettingsController.getSetting('logWriterInterval');
+    	var progressViewVerwendenAb         = DigiWebApp.SettingsController.getSetting('progressViewVerwendenAb');
     	
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1076,6 +1087,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('scrId', scrId);
                                                     record.set('overrideApplicationQuota');
                                                     record.set('logWriterInterval');
+                                                    record.set('progressViewVerwendenAb');
                                                     
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1172,6 +1184,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('scrId', scrId);
                                     record.set('overrideApplicationQuota');
                                     record.set('logWriterInterval');
+                                    record.set('progressViewVerwendenAb');
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1242,6 +1255,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('scrId', scrId);
                                 record.set('overrideApplicationQuota');
                                 record.set('logWriterInterval');
+                                record.set('progressViewVerwendenAb');
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1312,6 +1326,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('scrId', scrId);
                                 record.set('overrideApplicationQuota');
                                 record.set('logWriterInterval');
+                                record.set('progressViewVerwendenAb');
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1384,6 +1399,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , scrId: scrId
                                 , overrideApplicationQuota: overrideApplicationQuota
                                 , logWriterInterval: logWriterInterval
+                                , progressViewVerwendenAb: progressViewVerwendenAb
 
                           });
 
