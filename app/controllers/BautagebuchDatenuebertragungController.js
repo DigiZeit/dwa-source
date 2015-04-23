@@ -639,16 +639,29 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				successCallback();
 				
 			};
-			var sendObj = {
-					  data: data
-					, webservice: "bautagesbericht/notiz"
-					, loaderText: M.I18N.l('BautagebuchSendeNotizen')
-					, successCallback: internalSuccessCallback
-					, errorCallback: errorCallback
-					//, additionalQueryParameter:
-					//, timeout: 
-			};
-			DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+
+			// aktuelle scrId protokollieren
+			var scrId = DigiWebApp.SettingsController.getSetting("scrId");
+			writeToLog(scrId, function(){
+				// zeitdaten-array protokollieren
+				writeToLog(escape(scrStr(JSON.stringify(data), scrId)), function() {
+					var itemsLengthLogStr = "Sende " + items.length + " Notiz";
+					if (items.length > 1) { itemsLengthLogStr += "en"; }
+					writeToLog(itemsLengthLogStr, function() {
+						var sendObj = {
+								  data: data
+								, webservice: "bautagesbericht/notiz"
+								, loaderText: M.I18N.l('BautagebuchSendeNotizen')
+								, successCallback: internalSuccessCallback
+								, errorCallback: errorCallback
+								//, additionalQueryParameter:
+								//, timeout: 
+						};
+						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+					});
+				});
+			});
+			
 		} else {
 			successCallback();
 		}
