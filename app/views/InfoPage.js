@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6105'
+              value: 'Build: 6106'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -395,6 +395,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                        type: 'POST',
 	                        dataType: 'jsonp',
 	                        success: function(location) {
+    		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	                	//var company = DigiWebApp.SettingsController.getSetting("company");
 	    	                	//var mitarbeiterId = DigiWebApp.SettingsController.getSetting("mitarbeiterId");
 	    	                	//var mitarbeiterVorname = DigiWebApp.SettingsController.getSetting("mitarbeiterVorname");
@@ -405,11 +406,11 @@ DigiWebApp.InfoPage = M.PageView.design({
 	    	                	if (!toggleWeinre(weinreUserIP)) {
 	    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
 	    	                	} else {
-	    		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	                    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 	    	                	}
 	                        }
 	                		, error: function() {
+		                    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	        	        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
 	      		            	  title: M.I18N.l("fernwartungKonnteNichtGestartetWerden")
 	      	    		        , message: "Möchten Sie trotzdem fortfahren?"
@@ -422,7 +423,6 @@ DigiWebApp.InfoPage = M.PageView.design({
 			      		    	                	if (!toggleWeinre("nichtErmittelbar")) {
 			      		    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
 			      		    	                	} else {
-			      		    		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			      		    	                    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 			      		    	                	}
 	      	                    				}
