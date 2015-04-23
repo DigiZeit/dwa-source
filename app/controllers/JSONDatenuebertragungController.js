@@ -131,8 +131,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             , onError: function(xhr, err) {// error callback
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
-				try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
-				errorCallback(xhr, err);
+				try{trackError(err,function(){
+					try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+					errorCallback(xhr, err);
+				});}catch(e){};
 			}
 		}).send();
 	}
