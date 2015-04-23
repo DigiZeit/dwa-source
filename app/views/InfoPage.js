@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6099'
+              value: 'Build: 6100'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -405,6 +405,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 	    	                	if (!toggleWeinre(weinreUserIP)) {
 	    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
 	    	                	} else {
+	    		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	                    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 	    	                	}
 	                        }
@@ -421,6 +422,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 			      		    	                	if (!toggleWeinre("nichtErmittelbar")) {
 			      		    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
 			      		    	                	} else {
+			      		    		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			      		    	                    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 			      		    	                	}
 	      	                    				}
