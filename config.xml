@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6100"
-	version 	  = "1.8.3.6100">
+	versionCode   = "6101"
+	version 	  = "1.8.3.6101">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -100,12 +100,15 @@ which PhoneGap requires. -->
 <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
 <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
 
+<!-- prevent screen-sleep --> 
+<gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
+
 <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6100</string> 
+	<string>6101</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>

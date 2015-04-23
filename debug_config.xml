@@ -100,6 +100,9 @@ which PhoneGap requires. -->
 <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
 <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
 
+<!-- prevent screen-sleep --> 
+<gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
+
 <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->

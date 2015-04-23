@@ -1099,6 +1099,7 @@ function injectWeinre(weinreUserIP) {
 	weinreState = 1;
 	localStorage.setItem("startWeinre", "false"); // beim nächsten reload automatisch wieder ohne weinre
 	console.log("IP: " + weinreUserIP);
+	try { window.plugins.insomnia.keepAwake(); } catch(e) { };
 	alert("Die Fernwartung wird nun für diese Sitzung bis zum nächsten App-Start aktiviert.\n\nTeilen Sie vor dem Fortsetzen dem DIGI-Mitarbeiter bitte IP-Adresse mit: " + weinreUserIP);
 }
 function runWeinre() {
@@ -1108,7 +1109,11 @@ function runWeinre() {
 		doIt = parseBool(localStorage.getItem("startWeinre"));
 		weinreUserIP = localStorage.getItem("weinreUserIP");
 	}
-	if (doIt) injectWeinre(weinreUserIP);
+	if (doIt) {
+		injectWeinre(weinreUserIP);
+	} else {
+		try { window.plugins.insomnia.allowSleepAgain(); } catch(e) { };
+	}
 }
 function getWeinreState() {
 	if (typeof(localStorage) !== "undefined") {
