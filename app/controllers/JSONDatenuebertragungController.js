@@ -56,7 +56,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		                );
 		            }
 		            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-		                console.error(xhr);
+		                //console.error(xhr);
 		                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
 						try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
 		                successCallback(data, msg, xhr);
