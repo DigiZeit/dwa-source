@@ -124,6 +124,7 @@ which PhoneGap requires. -->
 
 <!-- single activity instance task on Android -->
 	<!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleInstance" /></gap:config-file> -->
+	<gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTask" /></gap:config-file>
 
 <!-- if a single icon is specified then Build will use it for all platforms -->
     <icon src="icon.png" />
