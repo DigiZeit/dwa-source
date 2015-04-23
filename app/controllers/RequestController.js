@@ -25,7 +25,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6098
+    , softwareVersion: 6099
 
 
     /**
@@ -80,7 +80,6 @@ DigiWebApp.RequestController = M.Controller.extend({
             , onError: function(xhr, err) {
             	trackError(err);
                 DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                alert(err);
                 DigiWebApp.RequestController.DatabaseServer = null;
                 this.bindToCaller(that, that.handleErrorCallback, [xhr, err, obj.source])();
             }

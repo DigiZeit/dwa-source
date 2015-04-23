@@ -211,7 +211,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 6098'
+              value: 'Build: 6099'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -388,6 +388,8 @@ DigiWebApp.InfoPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
+	                    DigiWebApp.ApplicationController.DigiLoaderView.show('Ermittle IP-Adresse - Bitte Warten...');
+                    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 	                	$.ajax({
 	                        url: 'http://freegeoip.net/json/',
 	                        type: 'POST',
