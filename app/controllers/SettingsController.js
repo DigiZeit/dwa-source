@@ -83,6 +83,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , overrideApplicationQuota: '-1'
         , logWriterInterval: 500
         , progressViewVerwendenAb: 300
+        , logDelete: false
+        , logSave: false
     }
 
     , defaultsettings: null
@@ -364,6 +366,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
+            //, logDelete: false
+            var logDelete = DigiWebApp.SettingsController.defaultsettings.get("logDelete");
+            try {
+	            if (typeof(record.record.logDelete) !== "undefined") {
+	            	logDelete = record.get('logDelete');
+	            }
+            } catch (e) {}
+            
+            //, logSave: false
+            var logSave = DigiWebApp.SettingsController.defaultsettings.get("logSave");
+            try {
+	            if (typeof(record.record.logSave) !== "undefined") {
+	            	logSave = record.get('logSave');
+	            }
+            } catch (e) {}
+
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
     			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -565,6 +583,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , overrideApplicationQuota: overrideApplicationQuota
 	           , logWriterInterval: logWriterInterval
 	           , progressViewVerwendenAb: progressViewVerwendenAb
+	           , logDelete: logDelete
+	           , logSave: logSave
                
             };
         /* default values */
@@ -713,6 +733,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , overrideApplicationQuota: DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota")
                , logWriterInterval: DigiWebApp.SettingsController.defaultsettings.get("logWriterInterval")
                , progressViewVerwendenAb: DigiWebApp.SettingsController.defaultsettings.get("progressViewVerwendenAb")
+	           , logDelete: DigiWebApp.SettingsController.defaultsettings.get("logDelete")
+	           , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
                
             };
             
@@ -720,6 +742,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
                 
         that.set('settings', settings);
+		if (typeof window.logDelete != "undefined") { window.logDelete = parseBool(settings.logDelete); }
+		if (typeof window.logSave != "undefined") { window.logSave = parseBool(settings.logSave); }
 
 		var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
@@ -957,7 +981,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var overrideApplicationQuota        = DigiWebApp.SettingsController.getSetting('overrideApplicationQuota');
     	var logWriterInterval               = DigiWebApp.SettingsController.getSetting('logWriterInterval');
     	var progressViewVerwendenAb         = DigiWebApp.SettingsController.getSetting('progressViewVerwendenAb');
-    	
+        var logDelete						= DigiWebApp.SettingsController.getSetting("logDelete");
+        var logSave							= DigiWebApp.SettingsController.getSetting("logSave");
+
         if (company) {
             if(!numberRegex.test(company)) {
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -1085,10 +1111,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                                     record.set('scrId', scrId);
-                                                    record.set('overrideApplicationQuota');
-                                                    record.set('logWriterInterval');
-                                                    record.set('progressViewVerwendenAb');
-                                                    
+                                                    record.set('overrideApplicationQuota', overrideApplicationQuota);
+                                                    record.set('logWriterInterval', logWriterInterval);
+                                                    record.set('progressViewVerwendenAb', progressViewVerwendenAb);
+                                                    record.set('logDelete', logDelete);
+                                                    record.set('logSave', logSave);
+
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
                                                     DigiWebApp.SettingsController.saveSettings(record, YES);
@@ -1182,9 +1210,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('pictureAllowEdit', pictureAllowEdit);
                                     record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                     record.set('scrId', scrId);
-                                    record.set('overrideApplicationQuota');
-                                    record.set('logWriterInterval');
-                                    record.set('progressViewVerwendenAb');
+                                    record.set('overrideApplicationQuota', overrideApplicationQuota);
+                                    record.set('logWriterInterval', logWriterInterval);
+                                    record.set('progressViewVerwendenAb', progressViewVerwendenAb);
+                                    record.set('logDelete', logDelete);
+                                    record.set('logSave', logSave);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1253,9 +1283,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
-                                record.set('overrideApplicationQuota');
-                                record.set('logWriterInterval');
-                                record.set('progressViewVerwendenAb');
+                                record.set('overrideApplicationQuota', overrideApplicationQuota);
+                                record.set('logWriterInterval', logWriterInterval);
+                                record.set('progressViewVerwendenAb', progressViewVerwendenAb);
+                                record.set('logDelete', logDelete);
+                                record.set('logSave', logSave);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1324,9 +1356,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('pictureAllowEdit', pictureAllowEdit);
                                 record.set('mengeneingabeMitTelKeyboard', mengeneingabeMitTelKeyboard);
                                 record.set('scrId', scrId);
-                                record.set('overrideApplicationQuota');
-                                record.set('logWriterInterval');
-                                record.set('progressViewVerwendenAb');
+                                record.set('overrideApplicationQuota', overrideApplicationQuota);
+                                record.set('logWriterInterval', logWriterInterval);
+                                record.set('progressViewVerwendenAb', progressViewVerwendenAb);
+                                record.set('logDelete', logDelete);
+                                record.set('logSave', logSave);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1400,6 +1434,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , overrideApplicationQuota: overrideApplicationQuota
                                 , logWriterInterval: logWriterInterval
                                 , progressViewVerwendenAb: progressViewVerwendenAb
+                                , logDelete: logDelete
+                                , logSave: logSave
 
                           });
 
@@ -1518,6 +1554,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
+        		if (prop == "logDelete" && (typeof window.logDelete != "undefined")) { window.logDelete = parseBool(value); }
+        		if (prop == "logSave" && (typeof window.logSave != "undefined")) { window.logSave = parseBool(value); }
     		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent

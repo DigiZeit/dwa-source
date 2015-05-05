@@ -6,6 +6,9 @@
 // Project: DigiWebApp 
 // ==========================================================================
 
+var logDelete = false;
+var logSave = false;
+
 function parseBool(val) {
 	       if (val === "YES") {
 		return YES;
