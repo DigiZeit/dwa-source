@@ -6,8 +6,9 @@
 // Project: DigiWebApp 
 // ==========================================================================
 
-var logDelete = false;
-var logSave = false;
+// always log while SettingsControler has not been initialized
+var logDelete = true;
+var logSave = true;
 
 function parseBool(val) {
 	       if (val === "YES") {
