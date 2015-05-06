@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6121"
-	version 	  = "1.8.3.6121">
+	versionCode   = "6122"
+	version 	  = "1.8.3.6122">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -79,7 +79,9 @@ which PhoneGap requires. -->
 <!-- 	<gap:plugin name="org.apache.cordova.splashscreen" /> -->
 <!-- 	<gap:plugin name="org.apache.cordova.vibration" /> -->
  
-<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+<!-- <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" /> -->
+<gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
+
 <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
 <!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.9" /> -->
 <!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.4" /> -->
@@ -110,7 +112,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6121</string> 
+	<string>6122</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
