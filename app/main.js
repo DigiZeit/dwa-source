@@ -1070,7 +1070,13 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
 } else {
-	//writeToLog(JSON.stringify(DigiWebAppOrdinaryDesign));
+	var designStr = "";
+	for (var property in DigiWebAppOrdinaryDesign) {
+	    if (DigiWebAppOrdinaryDesign.hasOwnProperty(property)) {
+	        designStr += property;
+	    }
+	}
+	writeToLog(designStr);
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 
