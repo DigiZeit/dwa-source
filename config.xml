@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6114"
-	version 	  = "1.8.3.6114">
+	versionCode   = "6115"
+	version 	  = "1.8.3.6115">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -31,8 +31,8 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="true" />
-<!--	<preference name="orientation" value="portrait" /> -->
-	<preference name="orientation" value="default" />
+	<preference name="orientation" value="portrait" />
+<!--	<preference name="orientation" value="default" /> -->
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
@@ -108,7 +108,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6114</string> 
+	<string>6115</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>

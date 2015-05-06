@@ -31,8 +31,8 @@
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="true" />
-<!--	<preference name="orientation" value="portrait" /> -->
-	<preference name="orientation" value="default" />
+	<preference name="orientation" value="portrait" />
+<!--	<preference name="orientation" value="default" /> -->
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
