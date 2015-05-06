@@ -9,7 +9,7 @@
 // always log while SettingsControler has not been initialized
 var logDelete = true;
 var logSave = true;
-var logSave = false;
+var logDesign = false;
 
 function parseBool(val) {
 	       if (val === "YES") {
