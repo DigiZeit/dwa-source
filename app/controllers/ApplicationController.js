@@ -183,6 +183,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 					case '1':
 						mycallback();
 						break;
+					case 2:
+						mycallback();
+						break;
+					case '2':
+						mycallback();
+						break;
 					case obj.confirmButtonValue:
 						mycallback();
 						break;
