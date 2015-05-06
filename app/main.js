@@ -9,6 +9,7 @@
 // always log while SettingsControler has not been initialized
 var logDelete = true;
 var logSave = true;
+var logSave = false;
 
 function parseBool(val) {
 	       if (val === "YES") {
@@ -1070,13 +1071,15 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
 } else {
-	var designStr = "";
-	for (var property in DigiWebAppOrdinaryDesign) {
-	    if (DigiWebAppOrdinaryDesign.hasOwnProperty(property)) {
-	        designStr += property + "\n";
-	    }
+	if (logDesign) {
+		var designStr = "";
+		for (var property in DigiWebAppOrdinaryDesign) {
+		    if (DigiWebAppOrdinaryDesign.hasOwnProperty(property)) {
+		        designStr += property + "\n";
+		    }
+		}
+		writeToLog("Design:\n" + designStr);
 	}
-	writeToLog("Design:\n" + designStr);
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 

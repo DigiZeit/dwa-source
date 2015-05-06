@@ -139,7 +139,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 		//alert('http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf());
 		
     	var successFunc = function(xmldata, msg, xhr) {
-        	alert("xmldata: " + xmldata);
+        	//alert("xmldata: " + xmldata);
         	//alert("msg: " + msg);
         	//alert("xhr.status: " + xhr.status);
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -226,7 +226,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 	                  }
 	                  , onSuccess: successFunc
 	                  , onError: function(xhr, err) {
-	                	  alert("error")
+	                	    //alert("error")
 	                      	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	      					DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
 	      			  }

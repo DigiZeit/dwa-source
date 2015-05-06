@@ -48,6 +48,8 @@
 
 <!-- controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
 	<preference name="webviewbounce" value="false" />
+	<preference name="disallowOverscroll" value="true" />
+	<preference name="DisallowOverscroll" value="true" />
 	
 <!-- If you do not want any permissions to be added to your app, add the following tag to 
 your config.xml instead; you will still have the INTERNET permission on your app,

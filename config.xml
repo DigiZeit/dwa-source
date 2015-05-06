@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6120"
-	version 	  = "1.8.3.6120">
+	versionCode   = "6121"
+	version 	  = "1.8.3.6121">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -48,6 +48,8 @@
 
 <!-- controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
 	<preference name="webviewbounce" value="false" />
+	<preference name="disallowOverscroll" value="true" />
+	<preference name="DisallowOverscroll" value="true" />
 	
 <!-- If you do not want any permissions to be added to your app, add the following tag to 
 your config.xml instead; you will still have the INTERNET permission on your app,
@@ -108,7 +110,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6120</string> 
+	<string>6121</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
