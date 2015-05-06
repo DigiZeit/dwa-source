@@ -1073,10 +1073,10 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	var designStr = "";
 	for (var property in DigiWebAppOrdinaryDesign) {
 	    if (DigiWebAppOrdinaryDesign.hasOwnProperty(property)) {
-	        designStr += property;
+	        designStr += property + "\n";
 	    }
 	}
-	writeToLog(designStr);
+	writeToLog("Design:\n" + designStr);
 	DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);	
 }
 
