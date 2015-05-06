@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6125"
-	version 	  = "1.8.3.6125">
+	versionCode   = "6126"
+	version 	  = "1.8.3.6126">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -112,7 +112,7 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6125</string> 
+	<string>6126</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <false/>
@@ -189,7 +189,7 @@ Screens, and iPad screen respectively -->
 	<gap:splash src="theme/images/640x1136_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="640" height="1136" />
 
 <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
-	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.jpg" gap:platform="winphone" />
+	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="winphone" />
 	
 	<access origin="*" subdomains="true" />
 	<access origin="http://127.0.0.1*" subdomains="true" />
