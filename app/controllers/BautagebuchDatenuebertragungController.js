@@ -676,31 +676,104 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		var proceed = function(mediaFiles) {
 			
 			if (mediaFiles.length !== 0) {
-				var items = [];
 				
-				_.each(mediaFiles, function(mf){
-					items.push(mf.record);
-				});
+				var mediaFilesLength = mediaFiles.length;
+		    	var mediaFilesIndex = 0;
+		    	var done = false;
+		    	
+		    	var items = [];
 				
-				var data = {"medien": items};
-				
-				var internalSuccessCallback = function(data2, msg, request) {
-					// verarbeite empfangene Daten
-					if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeMedien Status: " + request.status);
-					// weiter in der Verarbeitungskette
-					successCallback();
-								
-				};
-				var sendObj = {
-						  data: data
+		    	if (mediaFiles.length > 0) { 
+		    		var el = mediaFiles[0];
+		    	
+		    		var items = [];
+					var rec = JSON.parse(JSON.stringify(el)); // clone to new Object
+					if (rec.record.handOrderId !== null && rec.record.handOrderId !== "0") {
+						rec.record.orderId = null;
+					}
+					items.push(rec.record);
+					
+					var myMediaListToSend = {"medien": items};
+					
+					writeToLog('sending BautagebuchMediaFile ' + rec.record.fileName);
+	    			
+					var mindestMedienTimeout = 60000;
+					var myTimeout = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
+					if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) < mindestMedienTimeout) {
+						myTimeout = mindestMedienTimeout;
+					}
+					
+					var sendObj = {
+						  data: myMediaListToSend
 						, webservice: "medien"
 						, loaderText: M.I18N.l('BautagebuchSendeMedien')
-						, successCallback: internalSuccessCallback
-						, errorCallback: errorCallback
-						//, additionalQueryParameter:
-						//, timeout: 
-				};
-				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+						, successCallback: function(data2, msg, request) {
+							var newMediaFiles = [];
+					    	_.each(mediaFiles, function(mf) {
+					            if (mf.m_id == el.m_id) {
+									writeToLog('lösche BautagebuchMediaFile ' + mf.record.fileName, function(){
+						            	var delFunc = function() {
+						            		mf.del();
+							                var items = _.sortBy(DigiWebApp.BautagebuchMediaFile.find(), function(mediafile) {
+							                    return parseIntRadixTen(mediafile.get('timeStamp'));
+							                });
+							                that.init();
+						            	}
+						            	mf.deleteFile(delFunc, delFunc);
+							    		mediaFilesIndex = mediaFilesIndex + 1;
+									});
+					            } else {
+					            	newMediaFiles.push(mf);
+					            }
+					        });
+					    	if (newMediaFiles.length > 0) {
+								proceed(newMediaFiles);
+					    	} else {
+					    		writeToLog('sending last mediaFile done (with file)');
+			    				done = true;
+			    				successCallback();
+					    	}
+						}
+						, errorCallback: function(xhr, err) {
+							var newMediaFiles = [];
+					    	_.each(mediaFiles, function(mf) {
+					            if (mf.m_id != el.m_id) {
+					            	newMediaFiles.push(mf);
+					            }
+					        });
+					    	if (newMediaFiles.length > 0) {
+								proceed(newMediaFiles);
+					    	} else {
+								writeToLog('sending mediaFile failed: ' + err);
+			    				done = true;
+			    				successCallback();
+					    	}
+						}
+						, timeout: myTimeout
+						, omitLoaderHide: true
+					};
+					DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+		    	}
+						
+//				var data = {"medien": items};
+//				
+//				var internalSuccessCallback = function(data2, msg, request) {
+//					// verarbeite empfangene Daten
+//					if (DigiWebApp.BautagebuchDatenuebertragungController.consoleLogOutput) console.log("sendeMedien Status: " + request.status);
+//					// weiter in der Verarbeitungskette
+//					successCallback();
+//								
+//				};
+//				var sendObj = {
+//						  data: data
+//						, webservice: "medien"
+//						, loaderText: M.I18N.l('BautagebuchSendeMedien')
+//						, successCallback: internalSuccessCallback
+//						, errorCallback: errorCallback
+//						//, additionalQueryParameter:
+//						//, timeout: 
+//				};
+//				DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 			} else {
 				// no files to send
 
@@ -710,6 +783,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
     	};
 
 		var mediaFiles = DigiWebApp.BautagebuchMediaFile.find({query:{identifier: 'bautagesberichtId', operator: '=', value: item.get('id')}});
+		var medieFilesFuerProceed = [];
 		var mediaFilesLength = mediaFiles.length;
     	var mediaFilesIndex = 0;
     	var done = false;
@@ -717,10 +791,11 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
     	if (mediaFilesLength !== 0) { 
 	    	_.each(mediaFiles, function(el) {
 	    		
-    			console.log('loading mediaFile for mediaFilesIndex ' + mediaFilesIndex);
     			if (el.hasFileName()) {
-	    			console.log("fileName: " + el.get('fileName'));
-					// load signature into el
+
+        			writeToLog('loading BautagebuchMediaFile ' + el.get('fileName'));
+
+        			// load signature into el
 					el.readFromFile(function(fileContent){
 						//console.log("fileContent: " + fileContent);
 						if (fileContent && (fileContent !== "")) {
@@ -728,40 +803,63 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					            if (mf.m_id === el.m_id) {
 					            	mf.set("data", fileContent);
 					            	mediaFilesIndex = mediaFilesIndex + 1;
+						    		medieFilesFuerProceed.push(mf);
+						    		writeToLog('BautagebuchMediaFile ' + mf.get('fileName') + ' loaded (' + mediaFilesIndex + ')');
 					            }
 					        });
 						}
 						if ( mediaFilesIndex === mediaFilesLength && done === false) {
 							// last mediaFile loaded
-				    		console.log('last mediaFile done (with file)');
-		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				    		console.log('last BautagebuchMediaFile done (with file)');
+		    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		    				done = true;
-		    				proceed(mediaFiles);
+		    				proceed(medieFilesFuerProceed);
 						}
 					}, function() {
-						if ( mediaFilesIndex === mediaFilesLength && done === false) {
-							// last mediaFile loaded
-				    		console.log('last mediaFile done (last file load failed)');
-		    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		    				done = true;
-		    				proceed(mediaFiles);
+				        var myContFunc = function() {
+							if ( mediaFilesIndex === mediaFilesLength && done === false) {
+								// last mediaFile loaded
+					    		console.log('last BautagebuchMediaFile done (last file load failed)');
+			    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			    				done = true;
+			    				proceed(medieFilesFuerProceed);
+							}
 						}
+						trackError('loading BautagebuchMediaFile ' + el.get('fileName') + ' failed!');
+				        DigiWebApp.ApplicationController.nativeConfirmDialogView({
+				              title: M.I18N.l('error')
+				            , message: M.I18N.l('loadingFileFailed') + " (DIGIWebAppData/" + el.get('fileName') + ")" 
+				            , callbacks: {
+				                  confirm: {
+				                    action: function() {
+										writeToLog('lösche BautagebuchMediaFile ' + el.get('fileName'));
+				        				el.del();
+				        				myContFunc();
+				        			}
+				                }
+				        		, cancel: {
+				                    action: function() {
+				        				myContFunc();
+				        			}
+				                }
+				            }
+				        });
 					});
     			} else {
 	    			// this mediaFile has no file
 					if ( mediaFilesIndex === mediaFilesLength && done === false) {
 						// last mediaFile loaded
 			    		console.log('last mediaFile done (no file)');
-	    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    				//DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    				done = true;
-	    				proceed(mediaFiles);
+	    				proceed(medieFilesFuerProceed);
 					}
 	    		}
 	        });
     	} else {
     		//console.log('no mediafiles');
-			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			proceed(mediaFiles);
+			//DigiWebApp.ApplicationController.DigiLoaderView.hide();
+			proceed(medieFilesFuerProceed);
     	}
 
 	}

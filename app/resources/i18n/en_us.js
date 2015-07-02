@@ -540,4 +540,7 @@ M.I18N.en_us = {
 
 	, loadingFileFailed: "Some file could not be loaded and therefore not transmitted. Delete the defective record?"
 
+	, fernwartung: "Fernwartung"
+	, fernwartungKonnteNichtGestartetWerden: "Der Fernwartungsmodus konnte nicht aktiviert werden!"
+
 };

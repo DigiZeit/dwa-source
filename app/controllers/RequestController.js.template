@@ -226,7 +226,6 @@ DigiWebApp.RequestController = M.Controller.extend({
 	                  }
 	                  , onSuccess: successFunc
 	                  , onError: function(xhr, err) {
-	                	    //alert("error")
 	                      	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	      					DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
 	      			  }
