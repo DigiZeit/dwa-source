@@ -717,7 +717,6 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 							                var items = _.sortBy(DigiWebApp.BautagebuchMediaFile.find(), function(mediafile) {
 							                    return parseIntRadixTen(mediafile.get('timeStamp'));
 							                });
-							                that.init();
 						            	}
 						            	mf.deleteFile(delFunc, delFunc);
 							    		mediaFilesIndex = mediaFilesIndex + 1;
