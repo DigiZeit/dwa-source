@@ -26,9 +26,10 @@ DigiWebApp.BookingPage = M.PageView.design({
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.order.id, M.I18N.l('dtc6Ordner'));
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.position.id, M.I18N.l('dtc6Auftrag'));
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.activity.id, M.I18N.l('dtc6Leistung'));
-				}
+					}
 				}	
-        	}
+			}
+		}
         , pageshow: {
         	action: function() {
         		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
