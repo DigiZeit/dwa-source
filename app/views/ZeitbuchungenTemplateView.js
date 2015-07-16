@@ -50,7 +50,9 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
             valuePattern: '<%= auftragsBezeichnung %>'
           , operation: function(v) {
 				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
-					return M.I18N.l('order') + ': ' + v;
+					// Bugfix 2108: Rename in order to be consistent with DSO
+					return ((DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Ordner') : M.I18N.l('order')) 
+							+ ': ' + v;
 				} else {
 					return '';
 				}
@@ -247,7 +249,9 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
             valuePattern: '<%= positionsBezeichnung %>'
           , operation: function(v) {
 				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
-					return M.I18N.l('position') + ': ' + v;
+					// Bugfix 2108: Rename in order to be consistent with DSO
+					return ((DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position')) 
+							+ ': ' + v;
 				} else {
 					return '';
 				}
@@ -271,7 +275,9 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
             valuePattern: '<%= taetigkeit %>'
           , operation: function(v) {
 				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
-					return M.I18N.l('activity') + ': ' + v;
+					// Bugfix 2108: Rename in order to be consistent with DSO
+					return ((DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Leistung') : M.I18N.l('activity'))
+							+ ': ' + v;
 				} else {
 					return '';
 				}

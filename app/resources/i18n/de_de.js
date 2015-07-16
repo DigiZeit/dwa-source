@@ -541,6 +541,10 @@ M.I18N.de_de = {
 		
 	, fernwartung: "Fernwartung"
 	, fernwartungKonnteNichtGestartetWerden: "Der Fernwartungsmodus konnte nicht aktiviert werden!"
+		
+	, dtc6Ordner: 'Ordner'
+	, dtc6Auftrag: 'Auftrag'
+	, dtc6Leistung: 'Leistung'
 	
 
 };

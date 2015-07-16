@@ -158,7 +158,11 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 	            		$("label[for='"+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id+"']").hide();
 	            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id).hide();
 	            	}
-
+	            	// Bugfix 2108: Rename in order to be consistent with DSO
+	            	if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+	    	          	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.auftragComboBox.id, M.I18N.l('dtc6Ordner'));
+	    	        	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id, M.I18N.l('dtc6Auftrag'));
+	    	        }
 			}
         }
         , pagehide: {

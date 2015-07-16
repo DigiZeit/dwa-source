@@ -171,13 +171,14 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
             		}catch(e){}
 
                     DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    				
+                    // Bugfix 2108: Rename in order to be consistent with DSO
+    				if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+    					DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id, M.I18N.l('dtc6Ordner'));
+    					DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchMaterialienDetailsPage.content.positionComboBox.id, M.I18N.l('dtc6Auftrag'));
+    					DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchMaterialienDetailsPage.content.activityComboBox.id, M.I18N.l('dtc6Leistung'));
+    	             }	
 			}
         }
-		, pageshow: {
-			action: function() {
-			}
-		}
         , pagehide: {
             action: function() {
 

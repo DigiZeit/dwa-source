@@ -16,6 +16,10 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
             target: DigiWebApp.OrderInfoController,
             action: 'init'
         }
+      , pageshow: {
+    	  action: function() {
+      	  }
+      }
     }
 
     , childViews: 'header selectionContent list'

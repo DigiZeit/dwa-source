@@ -2590,7 +2590,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
     , getKolonneFromRemote: function() {
-        
+        /*
         DigiWebApp.RequestController.getKolonne({
               success: {
                   target: this
@@ -2606,6 +2606,39 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 }
             }
         });
+        */
+    	// Bugfix 2631: Sorting Mitarbeiter by Nachname first
+    	// In case of same Nachname then Firstname
+    	DigiWebApp.JSONDatenuebertragungController.empfangeKolonne(
+    		function() {
+    			var that = DigiWebApp.ApplicationController;
+    	        // end session on server
+    	        that.endSession();
+    			
+    			var empfangeBautagebuch = function() {
+    	            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
+    	    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
+    	        	} else {
+    	        		that.afterTransfer();
+    	        	}
+    	        }
+
+    	        var empfangeFestepausendefinitionen = function() {
+    	            if (DigiWebApp.SettingsController.featureAvailable('425')) {
+    	            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
+    	        	} else {
+    	        		empfangeBautagebuch();
+    	        	}
+    	        }
+    	    	
+    	        empfangeFestepausendefinitionen();
+    	        
+    		}
+    	   , function() {
+    		   this.setCallbackStatus('kolonne', 'remote', NO);
+    		   this.proceedWithLocalData("getKolonneFromRemote");
+    	   }
+    	);
     }
 
 
@@ -3105,5 +3138,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		DigiWebApp.ApplicationController.DigiLoaderView.hide(); // just in case
     	}
     	autoCleanLogs(contFunc); // in main.js
+    }
+    
+    // Bugfix 2108: Rename in order to be consistent with DSO
+    , dtc6AktivRenameHelper: function(id, textValue) {
+    	if (typeof(id) !== 'undefined') {
+    		$('#' + id).parent().parent().parent()[0].firstChild.textContent = textValue;
+    	}
     }
 });

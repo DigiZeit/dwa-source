@@ -17,6 +17,11 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 	          target: DigiWebApp.EditPicturePageController
 	        , action: 'init'
 	    }
+		, pageshow: {
+			action: function() {
+				
+			}
+		}
  	}
 
     , savePicture: function() {

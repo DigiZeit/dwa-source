@@ -96,10 +96,12 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= orderName %>'
             , operation: function(v) {
+    			// Bugfix 2108: Rename in order to be consistent with DSO
+    			var dtc6Ordner = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Ordner') : M.I18N.l('order');
     			if (v !== "") {
-                	return M.I18N.l('order') + ': ' + v;
+                	return dtc6Ordner + ': ' + v;
                 } else {
-                    return M.I18N.l('order') + ': ' + M.I18N.l('notDefined');
+                    return dtc6Ordner + ': ' + M.I18N.l('notDefined');
                 }
             }
         }
@@ -110,10 +112,11 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= positionName %>'
             , operation: function(v) {
+    			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
 				if (v !== "") {
-		        	return M.I18N.l('position') + ': ' + v;
+		        	return dtc6Auftrag + ': ' + v;
 		        } else {
-		            return M.I18N.l('position') + ': ' + M.I18N.l('notDefined');
+		            return dtc6Auftrag + ': ' + M.I18N.l('notDefined');
 		        }
             }
         }
@@ -124,10 +127,11 @@ DigiWebApp.TimeDataSentTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= activityName %>'
             , operation: function(v) {
+    			var dtc6Leistung = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Leistung') : M.I18N.l('activity');
 				if (v !== "") {
-		        	return M.I18N.l('activity') + ': ' + v;
+		        	return dtc6Leistung + ': ' + v;
 		        } else {
-		            return M.I18N.l('activity') + ': ' + M.I18N.l('notDefined');
+		            return dtc6Leistung + ': ' + M.I18N.l('notDefined');
 		        }
             }
         }

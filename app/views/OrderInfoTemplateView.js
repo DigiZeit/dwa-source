@@ -33,10 +33,12 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , computedValue: {
 	              valuePattern: '<%= positionName %>'
 	            , operation: function(v) {
+	    			// Bugfix 2108: Rename in order to be consistent with DSO
+	    			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
 					if (v === '' || v === null) {
-						return M.I18N.l('position') + ": " + M.I18N.l('noData');
+						return dtc6Auftrag + ": " + M.I18N.l('noData');
 					} else {
-						return M.I18N.l('position') + ": " + v;
+						return dtc6Auftrag + ": " + v;
 					}
 				  }
 	          }

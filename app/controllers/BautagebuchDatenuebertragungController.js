@@ -102,6 +102,11 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 	
 	, empfangeMengeneinheiten: function(successCallback, errorCallback) {
+		// Bugfix Ticket 2781: Freischaltungen prüfen
+		if (!(DigiWebApp.SettingsController.featureAvailable('412') 
+		   || DigiWebApp.SettingsController.featureAvailable('402'))) {
+			return successCallback();
+		}
 		// wird noch nicht via WebService befüllt
 		
 		// direkt weiter in der Verarbeitungskette
@@ -178,6 +183,11 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 	
 	, empfangeMaterialien: function(successCallback, errorCallback) {
+		// Bugfix Ticket 2781: Freischaltungen prüfen
+		if (!(DigiWebApp.SettingsController.featureAvailable('412') 
+		   || DigiWebApp.SettingsController.featureAvailable('402'))) {
+			return successCallback();
+		}
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
@@ -325,6 +335,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 
 	, empfangeProjektleiter: function(successCallback, errorCallback) {
+		// Bugfix Ticket 2781: Freischaltungen prüfen
+		if (!DigiWebApp.SettingsController.featureAvailable('412')) {
+			return successCallback();
+		}
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
@@ -407,6 +421,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	}
 
 	, empfangeMitarbeiter: function(successCallback, errorCallback) {
+		// Bugfix Ticket 2781: Freischaltungen prüfen
+		if (!DigiWebApp.SettingsController.featureAvailable('412')) {
+			return successCallback();
+		}
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten

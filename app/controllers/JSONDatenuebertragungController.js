@@ -443,6 +443,76 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
+	
+	// Bugfix 2631: Sorting Mitarbeiter by Nachname first
+	// In case of same Nachname then Firstname
+	, empfangeKolonne: function(successCallback, errorCallback) {
+			var internalSuccessCallback = function(data, msg, request) {
+				// wurden mitarbeiter emfangen?
+				if (typeof(data.mitarbeiter) === "undefined" || data.mitarbeiter === null || data.mitarbeiter.length === 0) {
+					// keine Mitarbeiter empfangen
+					return successCallback();
+				}
+				DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'remote', YES);
+				// data.mitarbeiter enthält also myLength Elemente
+				DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), data.mitarbeiter.length, 0);
+				// Sort first by nachname then by firstname
+				var sortedKolonne = _.sortBy(data.mitarbeiter, function(m) { 
+					return [m.nachname, m.vorname]; });
+				// alle "alten" mitarbeiter löschen
+				DigiWebApp.Employee.deleteAll();
+				DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'local', NO);
+				// die empfangenen Mitarbeiter mit Model ablegen
+				_.each(sortedKolonne, function(el) {
+					DigiWebApp.ApplicationController.DigiProgressView.increase();
+					DigiWebApp.Employee.createRecord({
+						  id: el.mitarbeiterId
+						, name: el.vorname + ' ' + el.nachname
+						, kolonnenId: ''
+						, isSelected: NO
+					}).saveSorted();	
+				});
+				DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'local', YES);
+				// clear local storage when switch from no kolonne
+				if(localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) == 0) {
+					localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
+				}
+				if(DigiWebApp.EmployeeController.getEmployeeState() != 2) {
+					DigiWebApp.EmployeeController.setEmployeeState(1); // set it to "kolonne loaded but no selection yet"
+				}
+				/*
+				else {
+					// no kolonne => (mitarbeiterId = 0)
+					DigiWebApp.ApplicationController.DigiProgressView.hide();
+					DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'remote', YES);
+					// Clear employees from storage
+					DigiWebApp.Employee.deleteAll();
+					DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'local', NO);
+					DigiWebApp.Employee.createRecord({
+						  id: '0'
+						, name: 'Standardmitarbeiter'
+						, kolonnenId: ''
+						, isSelected: YES
+					}).saveSorted();
+					DigiWebApp.ApplicationController.setCallbackStatus('kolonne', 'local', YES);
+					DigiWebApp.EmployeeController.setEmployeeState(0);
+				}
+				*/
+				// weiter in der Verarbeitungskette
+				DigiWebApp.ApplicationController.DigiProgressView.hide();
+				successCallback();
+			};
+			var recieveObj = {
+				webservice: 'mitarbeiter'
+			  , loaderText: M.I18N.l('getKolonne')
+			  , successCallback: internalSuccessCallback
+			  , errorCallback: errorCallback
+			  , additionalQueryParameter: 'getAll=false&nurKolonne=true'
+			  , geraeteIdOverride: false
+			  , modus: '0'
+			};
+			DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+	}
 
 	, empfangePositionen: function(successCallback, errorCallback) {
 
@@ -628,7 +698,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
 		
 	}
-
+	
 	, empfangeFestepausendefinitionen: function(successCallback, errorCallback) {
 
 		var internalSuccessCallback = function(data, msg, request) {

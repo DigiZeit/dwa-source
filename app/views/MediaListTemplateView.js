@@ -71,15 +71,17 @@ DigiWebApp.MediaListTemplateView = M.ListItemView.design({
                 var order = _.select(DigiWebApp.Order.findSorted().concat(DigiWebApp.HandOrder.findSorted()), function(o) {
                 	if (o) return v == o.get('id') || v == o.get('name'); // || get('name') is for checking handOrders also
                 });
+                // Bugfix 2108: Rename in order to be consistent with DSO
+                var dtc6Ordner = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Ordner') : M.I18N.l('order');
                 if(order && order.length > 0) {
                     order = order[0];
                     if (DigiWebApp.SettingsController.globalDebugMode) {
-                    	return M.I18N.l('order') + ': ' + order.get('name') + ' (' + order.get('id') + ')';
+                    	return dtc6Ordner + ': ' + order.get('name') + ' (' + order.get('id') + ')';
                     } else {
-                    	return M.I18N.l('order') + ': ' + order.get('name');
+                    	return dtc6Ordner + ': ' + order.get('name');
                     }
                 } else {
-                    return M.I18N.l('order') + ': ' + M.I18N.l('notDefined');
+                    return dtc6Ordner + ': ' + M.I18N.l('notDefined');
                 }
             }
         }
@@ -90,18 +92,20 @@ DigiWebApp.MediaListTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= positionId %>'
             , operation: function(v) {
+    			// Bugfix 2108: Rename in order to be consistent with DSO
+    			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
                 if(v) {
                     var position = _.select(DigiWebApp.Position.findSorted(), function(p) {
                     	if (p) return v == p.get('id');
                     });
                     if(position && position.length > 0) {
                         position = position[0];
-                        return M.I18N.l('position') + ': ' + position.get('name');
+                        return dtc6Auftrag + ': ' + position.get('name');
                     } else {
-                        return M.I18N.l('position') + ': ' + M.I18N.l('notDefined');
+                        return dtc6Auftrag + ': ' + M.I18N.l('notDefined');
                     }
                 } else {
-                    return M.I18N.l('position') + ': ' + M.I18N.l('unknown');
+                    return dtc6Auftrag + ': ' + M.I18N.l('unknown');
                 }
 
             }
@@ -113,6 +117,7 @@ DigiWebApp.MediaListTemplateView = M.ListItemView.design({
         , computedValue: {
               valuePattern: '<%= activityId %>'
             , operation: function(v) {
+    			var dtc6Leistung = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Leistung') : M.I18N.l('activity');
                 if(v) {
                 	var activity = null;
                 	if (parseIntRadixTen(v) !== 0) {
@@ -122,13 +127,13 @@ DigiWebApp.MediaListTemplateView = M.ListItemView.design({
                 	}
                     if(activity && activity.length > 0) {
                         activity = activity[0];
-                        return M.I18N.l('activity') + ': ' + activity.get('name');
+                        return dtc6Leistung + ': ' + activity.get('name');
                     } else {
-                        return M.I18N.l('activity') + ': ' + M.I18N.l('notDefined');
+                        return dtc6Leistung + ': ' + M.I18N.l('notDefined');
                     }
 
                 } else {
-                    return M.I18N.l('activity') + ': ' + M.I18N.l('unknown');
+                    return dtc6Leistung + ': ' + M.I18N.l('unknown');
                 }
             }
         }

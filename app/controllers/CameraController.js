@@ -56,6 +56,12 @@ DigiWebApp.CameraController = M.Controller.extend({
         }
         
         this.saveSelection();
+        // Bugfix 2108: Rename in order to be consistent with DSO
+		if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+			DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.CameraPage.content.order.id, M.I18N.l('dtc6Ordner'));
+			DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.CameraPage.content.position.id, M.I18N.l('dtc6Auftrag'));
+			DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.CameraPage.content.activity.id, M.I18N.l('dtc6Leistung'));
+		} 
     }
 
     , setSelectionByCurrentBooking: function() {
@@ -597,7 +603,7 @@ DigiWebApp.CameraController = M.Controller.extend({
             , positionId: obj.pId ? obj.pId : '0'
             , activityId: obj.aId ? obj.aId : '0'
             , mitarbeiterId: obj.mId ? obj.mId : '0'
-            , icon: 'icon_takePicture.png'
+            , icon: '48x48_plain_camera2.png'
             , timeStamp: +new Date()
         });
     }
