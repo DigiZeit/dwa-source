@@ -2385,6 +2385,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	
             this.setCallbackStatus('features', 'remote', YES);
 
+            DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer = [];
             _.each(DigiWebApp.Features.find(), function(feature) {
             	if (feature.get('isAvailable')) {
             		var keyId = feature.get('keyId');
