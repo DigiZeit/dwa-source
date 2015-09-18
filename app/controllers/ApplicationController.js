@@ -80,8 +80,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	, restartApp: NO
 	
-	, activeFeaturesBeforeTransfer: []
-	
 	, syncStartTimestamp: null
 	
 	, syncStopTimestamp: null
@@ -2385,11 +2383,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	
             this.setCallbackStatus('features', 'remote', YES);
 
-            DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer = [];
+            var activeFeaturesBeforeTransfer = [];
             _.each(DigiWebApp.Features.find(), function(feature) {
             	if (parseBool(feature.get('isAvailable')) == YES) {
             		var keyId = feature.get('id');
-            		DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer.push(keyId);
+            		activeFeaturesBeforeTransfer.push(keyId);
             	}
             });
 
@@ -2451,7 +2449,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                
 	                // muss die App wegen des neu empfangenen Features neu gestartet werden?
 	                var activeFeatureFound = NO;
-	                _.each(DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer, function(activeFeature) {
+	                _.each(activeFeaturesBeforeTransfer, function(activeFeature) {
 	                	// ist die empfangene Feature-ID schon vor dem Abgelich aktiv gewesen?
 	                	if (el[prefix + 'keyId'] === activeFeature) activeFeatureFound = YES;
 	                });
