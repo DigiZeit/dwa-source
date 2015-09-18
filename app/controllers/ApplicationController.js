@@ -1662,19 +1662,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
     	switch(data['return']) {
             case '1':
-                // Clear features from storage
-	            	DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer = []; 
-	            	_.each(DigiWebApp.Features.find(), function(el) { 
-	            		if (el.get("isAvailable") === "true") {
-	            			DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer.push(el.get("id"));
-	            		}
-	            	});
-	            	DigiWebApp.Features.deleteAll();
-
-	            this.setCallbackStatus('features', 'local', NO);
-                DigiWebApp.ApplicationController.triggerUpdate = YES;
-                DigiWebApp.DashboardController.init(YES);
-            	DigiWebApp.MediaListController.init(YES);
                 	
         		var timestampNow = D8.now().getTimestamp();
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
@@ -2339,6 +2326,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      */
     , getFeaturesFromRemote: function() {
         
+        this.setCallbackStatus('features', 'remote', NO);
+        
         DigiWebApp.RequestController.getFeatures({
               success: {
                   target: this
@@ -2359,9 +2348,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                   target: this
                 , action: function() {
         			trackError("getFeaturesFromRemote-error");
-                    //this.getOrdersFromRemote();
             		this.getPositionsFromRemote();
-        			//this.proceedWithLocalData("getFeaturesFromRemote");
                 }
             }
         });
@@ -2397,6 +2384,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
         	
             this.setCallbackStatus('features', 'remote', YES);
+
+            // Clear Features from storage
+            DigiWebApp.Features.deleteAll();
+
+            this.setCallbackStatus('features', 'local', NO);
 
             var k = null;
 
@@ -2500,10 +2492,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             if (DigiWebApp.ApplicationController.triggerUpdate) {
             	DigiWebApp.DashboardPage.needsUpdate = true;
                 DigiWebApp.MediaListPage.needsUpdate = true;
-                DigiWebApp.DashboardController.init(YES);
-                DigiWebApp.MediaListController.init(YES);
             }
-            DigiWebApp.ApplicationController.triggerUpdate = NO;
+            DigiWebApp.DashboardController.init(YES);
+        	DigiWebApp.MediaListController.init(YES);
+
+        	DigiWebApp.ApplicationController.triggerUpdate = NO;
+    		
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('features', 'local', YES);
             
@@ -2513,17 +2507,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
         	// keine Features empfangen
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('features', 'remote', YES);
-
-            // Clear Features from storage
-            DigiWebApp.Features.deleteAll();
-            this.setCallbackStatus('features', 'local', NO);
-            /*DigiWebApp.Employee.createRecord({
-                  id: '0'
-                , name: 'Standardmitarbeiter'
-                , kolonnenId: ''
-                , isSelected: YES
-            }).save();*/
             this.setCallbackStatus('features', 'local', YES);
         }
 
