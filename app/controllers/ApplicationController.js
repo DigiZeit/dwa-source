@@ -2385,6 +2385,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	
             this.setCallbackStatus('features', 'remote', YES);
 
+            _.each(DigiWebApp.Features.find(), function(feature) {
+            	if (feature.get('isAvailable')) {
+            		var keyId = feature.get('keyId');
+            		DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer.push(keyId);
+            	}
+            });
+
             // Clear Features from storage
             DigiWebApp.Features.deleteAll();
 
