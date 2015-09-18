@@ -2387,7 +2387,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
             DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer = [];
             _.each(DigiWebApp.Features.find(), function(feature) {
-            	if (feature.get('isAvailable')) {
+            	if (parseBool(feature.get('isAvailable')) == YES) {
             		var keyId = feature.get('id');
             		DigiWebApp.ApplicationController.activeFeaturesBeforeTransfer.push(keyId);
             	}
