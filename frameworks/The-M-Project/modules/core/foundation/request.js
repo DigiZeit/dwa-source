@@ -301,7 +301,8 @@ M.Request = M.Object.extend(
             beforeSend: this.internalBeforeSend,
             success: this.internalOnSuccess,
             error: this.internalOnError,
-            cache: !this.sendTimestamp
+            cache: !this.sendTimestamp,
+            xhrFields: { withCredentials: true }
         });
     },
 
