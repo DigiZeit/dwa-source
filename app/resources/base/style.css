@@ -181,6 +181,257 @@ fieldset legend {
 .DIGI-WEBAPP-WHITE_w1536 { background: url('images/1536x2048_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .DIGI-WEBAPP-WHITE_w5000 { background: url('images/5000x5000_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
+.splashViewPage.DIGI-WEBAPP-DSO_w320 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w480 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w640 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w800 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1024 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1080 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1536 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w5000 { background-color: #ffffff !important }
+.DIGI-WEBAPP-DSO_w320 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w480 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w640 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w800 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1024 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1080 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1536 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w5000 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+
+.DIGI-WEBAPP-DSObranding .ui-focus {
+	-webkit-box-shadow: 0 0 12px #D4242D !important;
+	-moz-box-shadow: 0 0 12px #D4242D !important;
+	box-shadow: 0 0 12px #D4242D !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-active {
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .dashboardPage .ui-content li {
+	color: #000 !important;
+	background: url('images/arrow_grey.png') 100% 50% no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .fileChooserPage .inputfile {
+	background-color: #ffffff !important; 
+	background-image: url('images/roter_balken.png') !important; 
+	background-position: right bottom !important; 
+	background-repeat:repeat-y !important; 
+	background-attachment:fixed !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-content label, 
+.DIGI-WEBAPP-DSObranding .settingsPasswordPage .ui-content .ui-block-a {
+	color: #000 !important;
+	text-weight: bold;
+}
+
+.DIGI-WEBAPP-DSObranding .header {
+	background: #D4242D !important;
+}
+
+.DIGI-WEBAPP-DSObranding .infoLabel {
+	color: #000 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .whiteLabel {
+	color: #000 !important;
+    font-size: 0.9em !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage .ui-listview {
+	background: #dadada !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage,
+.DIGI-WEBAPP-DSObranding .mediaListPage,
+.DIGI-WEBAPP-DSObranding .zeitbuchungenPage,
+.DIGI-WEBAPP-DSObranding .remarkPage {
+	background-image: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .signaturecanvaslabel {
+	background-color: #BCBCBC !important;
+	width: 300px;
+}
+
+.DIGI-WEBAPP-DSObranding .infoLabel .ui-link {
+	color: #000 !important;
+	text-decoration: underline;
+    font-weight: normal !important;	
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog {
+	background: #fff; 
+	zoom: reset !important;
+	border: 2px solid #444;
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog-header {
+	background: #D4242D; 
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-up-b,
+.DIGI-WEBAPP-DSObranding .ui-btn-hover-b {
+	background: #D4242D !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-down-b {
+	background: #A10301 !important;
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-up-d,
+.DIGI-WEBAPP-DSObranding .ui-btn-hover-d {
+	background: #BCBCBC !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-down-d {
+	background: #9c9c9c !important;
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog-content,
+.DIGI-WEBAPP-DSObranding .settingsPage .ui-block-a {
+	color: #000 !important; 
+}
+
+.DIGI-WEBAPP-DSObranding .red_background {
+	background: #D4242D;
+	color: #ffffff !important;
+    text-shadow: none;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-select .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-select .ui-btn,
+.DIGI-WEBAPP-DSObranding .digiButton .ui-btn {
+	background: #BCBCBC !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-listview .ui-btn {
+	background: #ffffff !important;
+}
+
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .content .ui-btn,
+.DIGI-WEBAPP-DSObranding .infoPage .ui-content .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-content .bautagebuchButton .ui-btn,
+.DIGI-WEBAPP-DSObranding .mediaListPage .uploadMediaFiles .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage .uploadMaterial .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .ui-content .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .settingsPage .ui-content .ui-btn-inner {
+	background: #BCBCBC !important;
+}
+
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchNotizenDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchMedienDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchMaterialienDetailsPage .whiteText 
+{
+    color: #000 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage .sentBookings .ui-listview {
+	background: #D4242D !important;
+	font-style: italic !important;
+    padding-left: 0.7em;
+}
+
+.DIGI-WEBAPP-DSObranding .green_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .green_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .content .green_background .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .green_background .ui-btn-inner{
+	background: green !important;
+	color: #fff !important;
+}
+
+.DIGI-WEBAPP-DSObranding .red_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .red_background .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .red_background .ui-btn-inner{
+	background: #D4242D !important;
+	color: #fff !important;
+}
+
+.DIGI-WEBAPP-DSObranding .activityListPage .ui-content li {
+	color: #000 !important;
+	background: url('images/arrow_grey.png') 100% 50% no-repeat;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-checkbox-on .ui-icon-checkbox-on {
+	background-color: #DD2D2D !important;
+}
+
+.DIGI-WEBAPP-DSObranding [data-role="list-divider"] {
+	background: #D4242D !important;
+	text-shadow: none !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-slider-track {
+	background: #f9f9f9 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-slider-bg {
+	background: #BCBCBC !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-book:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-book,
+.DIGI-WEBAPP-DSObranding [data-icon=book] .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') 0 0 no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-book:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-book,
+.DIGI-WEBAPP-DSObranding [data-icon=book].ui-btn-active .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') -32px 0 no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-menu:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-menu,
+.DIGI-WEBAPP-DSObranding [data-icon=menu] .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') 0 -32px no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-menu:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-menu,
+.DIGI-WEBAPP-DSObranding [data-icon=menu].ui-btn-active .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') -32px -32px no-repeat !important;
+}
+
 .infoLabel a, 
 .infoLabel a:hover, 
 .infoLabel a:active, 

@@ -1177,3 +1177,21 @@ function stopWeinre() {
 	}
 }
 runWeinre();
+
+function removeClassFromElementByClassending(elementId, classNameTail) {
+	if ( typeof(elementId) == "undefined" ) { return; }
+	if ( typeof(classNameTail) == "undefined" ) { return; }
+	try {
+		$(elementId).classes(function(n) {
+			if (n.substring(n.length - classNameTail.length) === classNameTail) {
+				$(elementId).removeClass(n);
+			}
+		});
+	} catch(e) {
+		writeToLog("Error while removing class from Element " + elementId + ":\n" + e);
+	}
+}
+	
+function removeClassFromPageByClassending(pageId, classNameTail) {
+	return removeClassFromElementByClassending('#' + pageId, classNameTail);
+}

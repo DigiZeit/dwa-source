@@ -14,7 +14,8 @@ DigiWebApp.RequestController = M.Controller.extend({
 	, DatabaseServer: null
 	, DatabaseServerTimestamp: null
 	, handy2WebServicesUrl: '/Handy2WebServices/services/DatenTransfer'
-	
+	// Bugfix: 3265 XML-WebService -> RESTful	
+	, ResponseStatusCode: ''
     /**
      * Object containing the success callback for the several calls
      */
@@ -25,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6374
+    , softwareVersion: 6375
 
 
     /**
@@ -103,7 +104,6 @@ DigiWebApp.RequestController = M.Controller.extend({
     }
 
     , getDatabaseServer: function(myFunc, obj) {
-    	
     	// debug-ausnahme
     	if (location.host === "localhost:8080" || DigiWebApp.SettingsController.getSetting("debugDatabaseServer")) {
     		if (location.host === "localhost:8080") {
@@ -121,11 +121,11 @@ DigiWebApp.RequestController = M.Controller.extend({
 			// use previously fetched DatabaseServer
 			return myFunc(obj);
 		}
-    
+		
+		// for debugging:
+    	//DigiWebApp.RequestController.DatabaseServer = "vespasian.digi-zeitserver.de";
     	DigiWebApp.RequestController.DatabaseServer = "";
     	
-        var firmenId = DigiWebApp.SettingsController.getSetting('company');
-
     	var myGatewayServer = DigiWebApp.RequestController.GatewayServer;
     	    	
     	if (typeof(device) === "undefined") {
@@ -134,19 +134,13 @@ DigiWebApp.RequestController = M.Controller.extend({
 
         //if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
 		//	console.log('using: http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf());
-		//}
-
-		//alert('http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf());
-		
-    	var successFunc = function(xmldata, msg, xhr) {
-        	//alert("xmldata: " + xmldata);
-        	//alert("msg: " + msg);
-        	//alert("xhr.status: " + xhr.status);
+		//}		
+    	var successFunc = function(data, msg, xhr) {
+    		//console.log(data);
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-        	var data = DigiWebApp.RequestController.transformResultToJson(xmldata);
-	    	if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
-	    	if (data['return'] !== "") {
-	    		DigiWebApp.RequestController.DatabaseServer = data['return'];
+	    	if (data !== null) {
+	    		var objEmpfangeUrl = data.empfangeUrl;
+	    		DigiWebApp.RequestController.DatabaseServer = objEmpfangeUrl.url;
 	    	} else {
 	    		console.log("FALLBACK: empty DatabaseServer --> falling back to GatewayServer"); 
 	    		DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayServer;
@@ -154,20 +148,6 @@ DigiWebApp.RequestController = M.Controller.extend({
 	    	DigiWebApp.RequestController.DatabaseServerTimestamp = new Date().getTime();
 	    	if (typeof(device) === "undefined") {
 	    		if ((location.host !== DigiWebApp.RequestController.DatabaseServer)) {
-        		        /*DigiWebApp.ApplicationController.nativeAlertDialogView({
-        		            title: M.I18N.l('wrongServer'),
-        		            message: M.I18N.l('wrongServerMessage'),
-        		            callbacks: {
-        		                confirm: {
-        		                      target: this
-        		                    , action: function () {
-        		                    	//alert(location.host);
-        		                    	//alert('http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname);
-						    			location.href = 'http://' + DigiWebApp.RequestController.DatabaseServer + location.pathname;
-        		                    }
-        		                }
-        		            }
-        		        });*/
 		        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
 			            	  title: M.I18N.l('wrongServer')
 		    		        , message: M.I18N.l('wrongServerMessage')
@@ -206,38 +186,43 @@ DigiWebApp.RequestController = M.Controller.extend({
     			//console.log(myFunc);
 				myFunc(obj);
 			}
-        }
-    	
-        var req = M.Request.init({
-              url: 'http://' + myGatewayServer + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf()
-            , method: 'GET'
-            , beforeSend: function(xhr) {
-                DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('empfangeUrlLoader'));
-                xhr.setRequestHeader('Cache-Control', 'no-cache');
-            }
-            , onSuccess: successFunc
-            , onError: function(xhr, err) {
-                var req = M.Request.init({
-	                    url: 'http://' + DigiWebApp.RequestController.GatewayPool + DigiWebApp.RequestController.handy2WebServicesUrl + '/empfangeUrl?firmenId=' + firmenId + '&modus=0&requestTimestamp=' + M.Date.now().date.valueOf()
-	                  , method: 'GET'
-	                  , beforeSend: function(xhr) {
-	                      	DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('empfangeUrlLoader'));
-	                      	xhr.setRequestHeader('Cache-Control', 'no-cache');
-	                  }
-	                  , onSuccess: successFunc
-	                  , onError: function(xhr, err) {
-	                      	DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	      					DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
-	      			  }
-                });
-                req.send(); // with gateway-pool
-			}
-        });
-        req.send(); // with primary-gateway (or localhost)
-		
+        };
+        
+        var errorFunc = function(xhr, err) {
+        	var secondErrorFunc = function(xhr, err) {
+        		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+        		writeToLog('## getDatabaseServer ' + err);
+        		DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
+            };
+        	var secondReceiveObj = {
+        		  webservice: 'allgemein/empfangeUrl'
+        		, loaderText: M.I18N.l('empfangeUrlLoader')
+        		, successCallback: successFunc
+        		, errorCallback: secondErrorFunc
+        		, additionalQueryParameter : ''
+        		, geraeteIdOverride: false
+        		, modus: '0' 
+        	};
+        	// disable following line for debugging in Test-Server
+            DigiWebApp.RequestController.DatabaseServer = myGatewayServer;
+        	DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(secondReceiveObj);
+        };
+        
+        var receiveObj = {
+        		  webservice: 'allgemein/empfangeUrl'
+        		, loaderText: M.I18N.l('empfangeUrlLoader')
+        		, successCallback: successFunc
+        		, errorCallback: errorFunc
+        		, additionalQueryParameter : ''
+        		, geraeteIdOverride: false
+        };
+        // disable following line for debugging in Test-Server
+        DigiWebApp.RequestController.DatabaseServer = myGatewayServer;
+        DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(receiveObj);
     }
-    , myRequest: null
     
+    , myRequest: null
+
     /**
      * Prepares the authenticate call and calls makeRequest with the corresponding params.
      *
@@ -279,10 +264,11 @@ DigiWebApp.RequestController = M.Controller.extend({
 //
 //    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
 //    	//myFunc(obj);
-    	DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
-
+    	DigiWebApp.RequestController.getDatabaseServer(
+    			DigiWebApp.RequestController.authenticateWithDatabaseServerRestful, 
+    			obj);
     }
-
+/*
     , authenticateWithDatabaseServer: function(obj) {
 		//writeToLog("in authenticateWithDatabaseServer");
 
@@ -305,6 +291,43 @@ DigiWebApp.RequestController = M.Controller.extend({
         };
 
         DigiWebApp.RequestController.makeRequest(_.extend(obj, params));
+    }
+ */
+    // Bugfix: 3265 XML-WebService -> RESTful
+    // authentifizieren -> allgemein/authentifizieren
+    ,authenticateWithDatabaseServerRestful: function(obj) {
+        DigiWebApp.RequestController.saveCallbacks(obj.success, obj.error, 'authenticate');
+		var successFunc = function(data, msg, xhr) {
+			var that = DigiWebApp.RequestController;
+			if(data !== null || data !== '')
+			{
+				if(typeof(data) === 'object')
+					DigiWebApp.RequestController.ResponseStatusCode = data['authentifizieren'].code.toString();
+				else {
+					var authenticateObject = JSON.parse(data);
+					DigiWebApp.RequestController.ResponseStatusCode = 
+						authenticateObject['authentifizieren'].code.toString();
+				}
+			}
+			that.bindToCaller(
+					that, 
+					that.handleSuccessCallback, 
+					[data, msg, xhr, null, null, 'authenticate'])();
+		};
+		var errorFunc = function(xhr, err) {
+			var that = DigiWebApp.RequestController;
+			that.bindToCaller(that, that.handleErrorCallback, [xhr, err, 'authenticate'])();
+		};
+		var receiveObj = {
+    		  webservice: 'allgemein/authentifizieren'
+    		, loaderText: M.I18N.l('authenticateLoader')
+    		, successCallback: successFunc
+    		, errorCallback: errorFunc
+    		, additionalQueryParameter : ''
+    		, geraeteIdOverride: false
+    		, modus: '0'
+        };
+		DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
     }
 
     /**
@@ -532,115 +555,152 @@ DigiWebApp.RequestController = M.Controller.extend({
         ////if (DigiWebApp.SettingsController.globalDebugMode) console.log('soapDataBooking: ' + dataStr);
         return dataStr;
     }
-
+    
+    // Bugfix: 3265 XML-WebService -> RESTful
+    // empfangeUrl -> allgemein/empfangeUrl
     , sendConfiguration: function(obj) {
-    	// all callbacks lead to DigiWebApp.ApplicationController.authenticate()
-    	//alert("in RequestController.sendConfiguration");
+    	// all callbacks lead to DigiWebApp.ApplicationController.authenticateSuccess()
         // call authenticate
         this.authenticate({
               success: {  // send configuration in success callback
                   target: this
                 , action: function() {
                     var that = this;
-                    this.saveCallbacks(obj.success, obj.error, 'sendConfiguration');
-
-                    var soapHeader= '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" ' +
-                        'xmlns:tran="http://transfer.webservice.handy2.digi.de" xmlns:xsd="http://transferClasses.data.handy2.digi.de/xsd">' +
-                        '<soapenv:Header/>' +
-                        '<soapenv:Body>' +
-                        '<tran:sendeKonfiguration>';
-                    var soapFooter = '   <tran:modus>0</tran:modus>' +
-                        '</tran:sendeKonfiguration>' +
-                        '</soapenv:Body>' +
-                        '</soapenv:Envelope>';
-
-                    var data = soapHeader;
-                    data += this.buildDataBodyConfiguration(obj.settings);
-                    data += soapFooter;
-
-                    // send configuration has its own request functionality, not by calling makeRequest()
-                    M.Request.init({
-                          url: 'http://' + DigiWebApp.RequestController.DatabaseServer + DigiWebApp.RequestController.handy2WebServicesUrl + '.DatenTransferHttpSoap11Endpoint/'
-                        , method: 'POST'
-                        , data: data
-                        , timeout: 15000
-                        , contentType: 'text/xml; charset=UTF-8'
-                        , dataType: 'xml'
-                        , beforeSend: function(xhr) {
-                            if (obj.loaderText) {
-                                DigiWebApp.ApplicationController.DigiLoaderView.show(obj.loaderText);
-                            } else {
-                                DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('sendConfigurationMsg'));
-                            }
-                            xhr.setRequestHeader(
-                                "SOAPAction",
-                                "urn:sendeKonfiguration"
-                            );
-                            xhr.setRequestHeader(
-                                "Content-Type",
-                                "text/xml;charset=UTF-8"
-                            );
-                        }
-                        , onSuccess: function(data2, msg, xhr) { // success callback of sendConfiguration
-                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of sendConfiguration");
-                            that.endSession({
-                                  success: {// success callback of endSession
-                                      target: that
-                                    , action: function() {
-			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
-                                        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
-                                        DigiWebApp.ApplicationController.authenticate();
-                                    }
-                                }
-                                , error: { // error callback of endSession
-                                      target: that
-                                    , action: function() {
-			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
-                                        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        this.bindToCaller(this, this.handleSuccessCallback, [data2, msg, xhr, null, null, 'sendConfiguration'])();
-                                        DigiWebApp.ApplicationController.authenticate();
-                                    }
-                                }
-                            });
-                        }
-                        , onError: function(xhr, err) {// error callback of sendConfiguration
-                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of sendConfiguration " + err);
-                            that.endSession({
-                                  success: {// success callback of endSession
-                                      target: that
-                                    , action: function() { // call errorcallback of sendConfiguration
-			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onSuccess of endSession");
-                                        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        that.bindToCaller(that, that.handleErrorCallback, [xhr, err, 'sendConfiguration'])();
-                                        DigiWebApp.ApplicationController.authenticate();
-                                    }
-                                }
-                                , error: { // error callback of endSession
-                                      target: that
-                                    , action: function() {
-			                        	////if (DigiWebApp.SettingsController.globalDebugMode) console.log("@@@ onError of endSession " + err);
-                                        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                                        that.bindToCaller(that, that.handleErrorCallback, [xhr, err, 'sendConfiguration'])();
-                                        DigiWebApp.ApplicationController.authenticate();
-                                    }
-                                }
-                            });
-
-                        }
-                    }).send();
+                    that.saveCallbacks(obj.success, obj.error, 'sendConfiguration');
+                    var jsonSettings = that.buildConfigurationJson(obj.settings);
+					var firmenId = DigiWebApp.SettingsController.getSetting('company');
+					var password = DigiWebApp.SettingsController.getSetting('password');
+					var geraeteId = DigiWebApp.SettingsController.getSetting('workerId');
+					var softwareVersion = DigiWebApp.RequestController.softwareVersion;
+					var databaseServer = DigiWebApp.RequestController.DatabaseServer;
+					var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+					var myURL = 'http://' + databaseServer + 
+								"/WebAppServices/konfigurationen?modus=0&geraeteTyp=2&firmenId=" + 
+								firmenId + '&kennwort=' + password + '&geraeteId=' + geraeteId + 
+								'&softwareVersion=' + softwareVersion;
+					var req = M.Request.init({
+								  url: myURL
+								, method: 'POST'
+								, data: jsonSettings
+								, timeout: 15000
+								, contentType: 'text/plain'
+								, dataType: 'text' 
+								, beforeSend: function(xhr) {
+									DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('sendConfigurationMsg'));
+									xhr.setRequestHeader(
+										"Content-Type",
+										"text/plain"
+									);
+								}
+								, onSuccess: function(data2, msg, xhr) { 
+									DigiWebApp.ApplicationController.DigiLoaderView.hide();
+									that.bindToCaller(
+										that, 
+										that.handleSuccessCallback, 
+										[data2, msg, xhr, null, null, 'sendConfiguration'])();
+									DigiWebApp.ApplicationController.authenticateSuccess(
+										statusCode);
+								}
+								, onError: function(xhr, err) {
+									DigiWebApp.ApplicationController.DigiLoaderView.hide();
+									that.bindToCaller(
+										that, 
+										that.handleSuccessCallback, 
+										[xhr, err, 'sendConfiguration'])();
+									DigiWebApp.ApplicationController.authenticateSuccess(
+										statusCode);
+								}
+					}).send();
                 }
             }
             , error: {
                   target: this
                 , action: function() {
-                    //this.connectionError();
-                    DigiWebApp.ApplicationController.authenticate();
+					var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+                    DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
                     trackError("ConnectionError while sendConfiguration");
                 }
             }
         });
     }
+    
+    , buildConfigurationJson: function(mysettings) {
+    	var mitarbeiterId = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
+    	var configArray = [];    
+    	var settings;
+    	if (typeof(mysettings) === 'object' && !_.isArray(mysettings)) {
+    		// if an object was passed, push it into an array, to have one behaviour
+    		settings = [mysettings];  
+    	} else {
+    		settings = mysettings;
+    	}
+    	if (_.isArray(settings)) {
+    		for (var i in settings) {
+    			var setting = settings[i];
+    			for (var prop in setting.record) {
+    				if(prop === '_createdAt' || prop === '_updatedAt') { continue; }
+    				configArray.push({
+    					keyId: prop,
+    					value: setting.get(prop),
+    					valueType: 'SettingRemote_WebApp',
+    					mitarbeiterId: mitarbeiterId,
+    				});
+    			}
+    		}
+    	}
+    	var configurations = {konfigurationen: configArray};
+    	return JSON.stringify(configurations);
+    }
+    /*
+    , sendConfigurationRestful: function(obj) {
+    	var that = DigiWebApp.RequestController;
+    	that.saveCallbacks(obj.success, obj.error, 'sendConfiguration');
+    	var jsonSettings = that.buildConfigurationJson(obj.settings);
+    	var firmenId = DigiWebApp.SettingsController.getSetting('company');
+    	var password = DigiWebApp.SettingsController.getSetting('password');
+    	var geraeteId = DigiWebApp.SettingsController.getSetting('workerId');
+    	var softwareVersion = DigiWebApp.RequestController.softwareVersion;
+    	var databaseServer = DigiWebApp.RequestController.DatabaseServer;
+    	var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+    	var myURL = 'http://' + databaseServer + 
+                    "/WebAppServices/konfigurationen?modus=0&geraeteTyp=2&firmenId=" + 
+    				firmenId + '&kennwort=' + password + '&geraeteId=' + geraeteId + 
+                    '&softwareVersion=' + softwareVersion;
+    	var req = M.Request.init({
+					  url: myURL
+					, method: 'POST'
+		            , data: jsonSettings
+		            , timeout: 15000
+		            , contentType: 'text/plain'
+		            , dataType: 'text' 
+		            , beforeSend: function(xhr) {
+		                DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('sendConfigurationMsg'));
+		                xhr.setRequestHeader(
+		                    "Content-Type",
+		                    "text/plain"
+		                );
+		            }
+		            , onSuccess: function(data2, msg, xhr) { 
+		                DigiWebApp.ApplicationController.DigiLoaderView.hide();
+		                that.bindToCaller(
+                            that, 
+                            that.handleSuccessCallback, 
+                            [data2, msg, xhr, null, null, 'sendConfiguration'])();
+		                DigiWebApp.ApplicationController.authenticateSuccess(
+                            statusCode, msg, xhr);
+		            }
+		            , onError: function(xhr, err) {
+						DigiWebApp.ApplicationController.DigiLoaderView.hide();
+						that.bindToCaller(
+                            that, 
+                            that.handleSuccessCallback, 
+                            [xhr, err, 'sendConfiguration'])();
+						DigiWebApp.ApplicationController.authenticateSuccess(
+							statusCode, msg, xhr);
+		            }
+	    }).send();
+    }
+    */
 
 //    /**
 //     * Sends the data.

@@ -103,7 +103,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : timeoutSetting;
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
-
+		var databaseServer = DigiWebApp.RequestController.DatabaseServer;
 		// hack um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
 		var myGeraeteTyp = 2;
@@ -112,12 +112,18 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myGeraeteTyp = 3;
 		}
 		
-		var myURL = 'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=' + myModus + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
+		if(webservice === 'allgemein/empfangeUrl') {
+			if(databaseServer === null || databaseServer === '')
+				databaseServer = 'vespasian.digi-zeitserver.de';
+		}
+			
+		var myURL = 'http://' + databaseServer + '/WebAppServices/' + webservice + '?modus=' + myModus + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		//console.log(myURL);
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
     	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
+    	writeToLog("myURL '" + myURL + "'");
 		M.Request.init({
 			  url: myURL
 			, beforeSend: function(xhr) {
@@ -135,8 +141,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             , onError: function(xhr, err) {// error callback
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
-                console.error(err);
-                console.error(xhr);
+                //console.error(err);
+                //console.error(xhr);
+                writeToLog('## recieveDataWithServer ' + err);
+                writeToLog('## recieveDataWithServer ' + xhr.status + ' ' + xhr.responseType
+                		+ ' ' + xhr.response + ' ' + xhr.getAllResponseHeaders());
 				try{trackError(err,function(){
 					try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
 					errorCallback(xhr, err);

@@ -79,7 +79,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , bgGeo: null
 
 	, restartApp: NO
-	
+		
 	, syncStartTimestamp: null
 	
 	, syncStopTimestamp: null
@@ -1654,13 +1654,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * @param msg 
      * @param xhr The XMLHTTPRequest object.
      */
-    , authenticateSuccess: function(data, msg, xhr) {
+    // Bugfix: 3265 msg and xhr are not used
+    , authenticateSuccess: function(data) {
 
-    	if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
+    	//if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
         
-    	switch(data['return']) {
+    	switch(data) {
             case '1':
-                	
         		var timestampNow = D8.now().getTimestamp();
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
         		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
