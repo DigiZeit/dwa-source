@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6406"
-	version 	  = "1.8.3.6406">
+	versionCode   = "6407"
+	version 	  = "1.8.3.6407">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -65,7 +65,7 @@ which PhoneGap requires. -->
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
 <!-- include PhonegapPlugIns -->
-<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+<!-- <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" /> -->
 <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
 <!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.9" /> -->
 <!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.4" /> -->
@@ -89,12 +89,12 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
 <!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
-<gap:plugin name="cordova-plugin-background-geolocation" version="1.0.6" source="npm" />
+<!-- <gap:plugin name="cordova-plugin-background-geolocation" version="1.0.6" source="npm" /> -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
-<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" />
+<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" /> -->
 
 <!-- prevent screen-sleep --> 
-<gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
+<!-- <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" /> -->
 
 <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
@@ -105,7 +105,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6406</string> 
+	<string>6407</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
