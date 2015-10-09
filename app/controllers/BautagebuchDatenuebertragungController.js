@@ -9,15 +9,18 @@
 DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 	  successReturnCallback: function() {}
-	, errorReturnCallback: function() {}
+	, errorReturnCallback: function() {DigiWebApp.ApplicationController.DigiProgressView.hide();}
 
 	, consoleLogOutput: NO
 	
 	, empfangen: function(successReturnCallback, errorReturnCallback) {
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
-		that.successReturnCallback = successReturnCallback;
-		that.errorReturnCallback = function() {
+		var internalSuccessReturnCallback = function() {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		successReturnCallback();
+		}
+		var internalErrorReturnCallback = function() {
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			errorReturnCallback();
 		}
@@ -32,12 +35,12 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 						// Materialstamm nur abgleichen wenn die Freischaltung 428 (extra dafür da) nicht aktiv ist
 						if (!DigiWebApp.SettingsController.featureAvailable('428')) {
 							that.materialstammEmpfangen(
-								  that.successReturnCallback
-								, that.successReturnCallback
+								  internalSuccessReturnCallback
+								, internalErrorReturnCallback
 							);
 						}
-				}, that.errorReturnCallback);
-			}, that.errorReturnCallback);
+				}, internalErrorReturnCallback);
+			}, internalErrorReturnCallback);
 		});
 	
 		
@@ -46,7 +49,10 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, materialstammEmpfangen: function(successReturnCallback, errorReturnCallback) {
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
-		var internalSuccessReturnCallback = successReturnCallback;
+		var internalSuccessReturnCallback = function() {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		successReturnCallback();
+		}
 		var internalErrorReturnCallback = function() {
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			errorReturnCallback();
@@ -130,10 +136,6 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		   || DigiWebApp.SettingsController.featureAvailable('402'))) {
 			return successCallback();
 		}
-		// wird noch nicht via WebService befüllt
-		
-		// direkt weiter in der Verarbeitungskette
-		successCallback();
 
 		var internalSuccessCallback = function(data, msg, request) {
 			// verarbeite empfangene Daten
