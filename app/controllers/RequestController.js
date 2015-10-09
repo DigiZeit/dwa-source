@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6390
+    , softwareVersion: 6391
 
 
     /**
@@ -579,7 +579,6 @@ DigiWebApp.RequestController = M.Controller.extend({
 					if (parseIntRadixTen(DigiWebApp.RequestController.AuthentifizierenCode) != 1) {
 						// Fehlerhafte Benutzeranmeldung behandeln
 						return DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
-
 					}
 					var myURL = 'http://' + databaseServer + 
 								"/WebAppServices/konfigurationen?modus=0&geraeteTyp=2&firmenId=" + 
