@@ -62,8 +62,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.RequestController.getDatabaseServer(function() {
 			that.empfangeMengeneinheiten(function() {
 				that.empfangeMaterialien(
-					internalSuccessReturnCallback
-				  , internalErrorReturnCallback);
+				    internalSuccessReturnCallback
+				  , internalErrorReturnCallback
+				);
 			}, internalErrorReturnCallback);
 		});
 	
