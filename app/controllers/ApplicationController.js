@@ -1397,7 +1397,21 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.NavigationController.toSettingsPage(YES);
             return;
         } else {
-            DigiWebApp.ApplicationController.updateModels(fortfahren);        	
+        	var obj = {};
+        	obj.success = function() {
+        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
+        		if (authCode != '1') {
+					return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
+        		}
+                DigiWebApp.ApplicationController.updateModels(fortfahren);        	
+        	}
+        	obj.error = function() {
+                DigiWebApp.NavigationController.toBookTimePage(YES);
+                DigiWebApp.SettingsController.showCredentialsAlert = YES;
+                DigiWebApp.NavigationController.toSettingsPage(YES);
+                return;
+        	}
+        	DigiWebApp.RequestController.authenticate(obj);
         }
         
         //alert("startsync");
