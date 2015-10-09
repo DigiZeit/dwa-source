@@ -29,7 +29,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.RequestController.getDatabaseServer(function() {
 			that.empfangeProjektleiter(function() {
 				that.empfangeMitarbeiter(function() {
-						if (DigiWebApp.SettingsController.featureAvailable('428')) {
+						// Materialstamm nur abgleichen wenn die Freischaltung 428 (extra dafür da) nicht aktiv ist
+						if (!DigiWebApp.SettingsController.featureAvailable('428')) {
 							materialstammEmpfangen(
 								  that.successReturnCallback
 								, that.successReturnCallback
