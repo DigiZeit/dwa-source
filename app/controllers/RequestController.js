@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6392
+    , softwareVersion: 6393
 
 
     /**
@@ -562,11 +562,11 @@ DigiWebApp.RequestController = M.Controller.extend({
     , sendConfiguration: function(obj) {
     	// all callbacks lead to DigiWebApp.ApplicationController.authenticateSuccess()
         // call authenticate
-    	// TODO: authenticate nicht hier aufrufen sondern vorziehen (war noch in Session-Logik notwendig)
-        this.authenticate({
-              success: {  // send configuration in success callback
-                  target: this
-                , action: function() {
+//    	// TODO: authenticate nicht hier aufrufen sondern vorziehen (war noch in Session-Logik notwendig)
+//        this.authenticate({
+//              success: {  // send configuration in success callback
+//                  target: this
+//                , action: function() {
                     var that = this;
                     that.saveCallbacks(obj.success, obj.error, 'sendConfiguration');
                     var jsonSettings = that.buildConfigurationJson(obj.settings);
@@ -617,17 +617,17 @@ DigiWebApp.RequestController = M.Controller.extend({
 										statusCode);
 								}
 					}).send();
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-					var statusCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
-                    DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
-                    trackError("ConnectionError while sendConfiguration");
-                }
-            }
-        });
+//                }
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//					var statusCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
+//                    DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
+//                    trackError("ConnectionError while sendConfiguration");
+//                }
+//            }
+//        });
     }
     
     , buildConfigurationJson: function(mysettings) {
