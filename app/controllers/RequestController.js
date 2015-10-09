@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6395
+    , softwareVersion: 6394
 
 
     /**
@@ -646,10 +646,10 @@ DigiWebApp.RequestController = M.Controller.extend({
     			for (var prop in setting.record) {
     				if(prop === '_createdAt' || prop === '_updatedAt') { continue; }
     				configArray.push({
-    					keyId: prop,
-    					value: setting.get(prop),
-    					valueType: 'SettingRemote_WebApp',
-    					mitarbeiterId: mitarbeiterId,
+    					  keyId: prop
+    					, value: setting.get(prop)
+    					, valueType: 'SettingRemote_WebApp'
+    					, mitarbeiterId: mitarbeiterId
     				});
     			}
     		}
