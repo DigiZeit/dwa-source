@@ -29,10 +29,12 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.RequestController.getDatabaseServer(function() {
 			that.empfangeProjektleiter(function() {
 				that.empfangeMitarbeiter(function() {
-					materialstammEmpfangen(
-						  that.successReturnCallback
-						, that.successReturnCallback);
-					);
+						if (DigiWebApp.SettingsController.featureAvailable('428')) {
+							materialstammEmpfangen(
+								  that.successReturnCallback
+								, that.successReturnCallback
+							);
+						}
 				}, that.errorReturnCallback);
 			}, that.errorReturnCallback);
 		});
