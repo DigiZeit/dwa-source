@@ -1731,7 +1731,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 break;
         }
     }
-
+    
     /**
      * Calls getOrders on DigiWebApp.RequestController.
      * Success callback calls proceeds received orders and afterwards starts retrieving positions.
@@ -2114,27 +2114,73 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Success callback proceeds received work plans and afterwards starts retrieving hand orders.
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
+    // Bugfix: 3265 XML-WebService -> RESTful
+    // empfangeArbeitplanNeu -> arbeitplaene
     , getWorkPlansFromRemote: function() {
-    	var that = DigiWebApp.ApplicationController;
-        DigiWebApp.RequestController.getWorkPlans({
-              success: {
-                  target: that
-                , action: function(data, msg, xhr, getWorkplan) {
-        			that.getWorkPlansFromRemoteSuccess(data, msg, xhr);
-        			that.getHandOrdersFromRemote();
-                }
-            }
-            , error: {
-                  target: that
-                , action: function() {
-            		trackError("getWorkPlansFromRemote-error");
-            		that.proceedWithLocalData("getWorkPlansFromRemote");
-                }
-            }
-        });
+    	var successFunc = function(data, msg, xhr) {
+    		DigiWebApp.ApplicationController.getWorkPlansFromRemoteSuccessRestful(data, msg, xhr);
+    		DigiWebApp.ApplicationController.getHandOrdersFromRemote();
+    	 };
+    	var errorFunc = function() {
+    		trackError("getWorkPlansFromRemote-error");
+    		DigiWebApp.ApplicationController.proceedWithLocalData("getWorkPlansFromRemote");
+    	};
+    	var receiveObj = {
+    		  webservice: 'arbeitsplaene'
+    		, loaderText: M.I18N.l('getWorkPlansLoader')
+    		, successCallback: successFunc
+    		, errorCallback: errorFunc
+    		, additionalQueryParameter : ''
+    		, geraeteIdOverride: false
+    		, modus: '0'
+        };
+    	DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
     }
 
-
+    , getWorkPlansFromRemoteSuccessRestful: function(data, msg, xhr) {
+    	var that = DigiWebApp.ApplicationController;
+    	// data is object
+    	if (data !== null || data !== '') {
+    		var receivedWorkPlans;
+    		if(typeof(data) === 'object')
+    		  receivedWorkPlans = data['arbeitsplaene'];
+    		else {
+    			var workPlansObject = JSON.parse(data);
+    			receivedWorkPlans = workPlansObject['arbeitsplaene']
+    		}	
+    		that.setCallbackStatus('workPlan', 'remote', YES);
+    		// Clear activities from storage
+    		DigiWebApp.WorkPlan.deleteAll();
+    		that.setCallbackStatus('workPlan', 'local', NO);
+    		// create a record for each order returned from the server and save it
+    		DigiWebApp.ApplicationController.DigiProgressView.show(
+    			M.I18N.l('Save'), 
+    			M.I18N.l('workplans'), 
+    			receivedWorkPlans.length, 
+    			0);
+    		_.each(receivedWorkPlans, function(el) {
+    			var myPositions = '';
+    			if(el.leistungsIds !== '') {
+    				var myArray = [];
+    				var length = el.leistungsIds.split(',').length;
+    				for(var i = 1; i <= length; i++)
+    					myArray.push(i.toString());
+    				if(myArray.length > 0)
+    					myPositions = myArray.join(',');
+    			}
+    			DigiWebApp.WorkPlan.createRecord({
+    				  id: el.positionsId.toString()
+    				, workplanType: el.nurZugeordneteLeistungen ? '1' : '0'
+    				, activityPositions: myPositions
+    				, activityIds: el.leistungsIds
+    			}).save();
+    			DigiWebApp.ApplicationController.DigiProgressView.increase();
+    		});
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		that.setCallbackStatus('workPlan', 'local', YES);
+    	}
+    }
+    
     /**
      * The success callback for getWorkPlansFromRemote.
      * If correct data is in response the following is done:
@@ -2146,6 +2192,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * @param msg
      * @param xhr The XMLHTTPRequest object.
      */
+    /*
     , getWorkPlansFromRemoteSuccess: function(data, msg, xhr) {
 
    		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
@@ -2186,31 +2233,125 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             this.setCallbackStatus('workPlan', 'local', YES);
         }
     }
-
-
+    */
     /**
      * Calls getHandOrders on DigiWebApp.RequestController.
      * Success callback proceeds received hand orders and afterwards starts retrieving features.
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
+    // Bugfix: 3265 XML-WebService -> RESTful
+    // empfangeHandauftraege -> handauftraege
     , getHandOrdersFromRemote: function() {
-        
-        DigiWebApp.RequestController.getHandOrders({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-                    this.getHandOrdersFromRemoteSuccess(data, msg, xhr);
-                    this.getKolonneFromRemote();
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-            		trackError("getHandOrdersFromRemote-error");
-                    this.proceedWithLocalData("getHandOrdersFromRemote");
-                }
-            }
-        });
+    	var successFunc = function(data, msg, xhr) {
+    		DigiWebApp.ApplicationController.getHandOrdersFromRemoteSuccessRestful(
+    			data, 
+    			msg, 
+    			xhr);
+    		DigiWebApp.ApplicationController.getKolonneFromRemote();
+    	};
+    	var errorFunc =  function() {
+    		trackError("getHandOrdersFromRemote-error");
+    		DigiWebApp.ApplicationController.proceedWithLocalData("getHandOrdersFromRemote");
+    	};
+    	var receiveObj = {
+    		  webservice: 'handauftraege'
+    		, loaderText: M.I18N.l('getHandOrdersLoader')
+    		, successCallback: successFunc
+    		, errorCallback: errorFunc
+    		, additionalQueryParameter : ''
+    		, geraeteIdOverride: false
+    		, modus: '0'
+    	};
+    	DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
+    }
+    
+    , getHandOrdersFromRemoteSuccessRestful: function(data, msg, xhr) {
+    	var that = DigiWebApp.ApplicationController;
+    	if (data !== null || data !== '') {
+    		var receivedHandOrders;
+    		if(typeof(data) === 'object')
+    			receivedHandOrders = data['handauftraege'];
+    		else {
+    			var handOrdersObject = JSON.parse(data);
+    			receivedHandOrders = handOrdersObject['handauftraege'];
+    		}
+    		
+    		that.setCallbackStatus('handOrder', 'remote', YES);
+    		// Clear handorders from storage
+    		DigiWebApp.HandOrder.deleteAll();
+    		that.setCallbackStatus('handOrder', 'local', NO);
+    		
+    		var mIdArray = [];
+    		var rec = null;
+    		// create a record for each order returned from the server and save it
+    		DigiWebApp.ApplicationController.DigiProgressView.show(
+    			M.I18N.l('Save'), 
+    			M.I18N.l('handorders'), 
+    			receivedHandOrders.length, 
+    			0);
+    		_.each(receivedHandOrders, function(el) {
+    			if (
+    				(DigiWebApp.HandOrder.find(
+    					{query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0)
+    				&& (DigiWebApp.HandOrder.find(
+    					{query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length === 0)
+    			) {
+    				rec = DigiWebApp.HandOrder.createRecord({
+    					  id: el.handauftragsId
+    					, name: el.handauftragsBezeichnung
+    					, isLocalOnly: NO
+    				});
+    			} else if (
+    					DigiWebApp.HandOrder.find(
+    						{query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length !== 0) {
+    				rec = DigiWebApp.HandOrder.find(
+    					{query:{identifier: 'id', operator: '=', value: el.handauftragsId}})[0];
+    				rec.set("id", el.handauftragsId);
+    				rec.set("name", el.handauftragsBezeichnung);
+    				rec.set("isLocalOnly", NO);
+    			} else if (
+    				DigiWebApp.HandOrder.find(
+    					{query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length !== 0) {
+    				rec = DigiWebApp.HandOrder.find(
+    					{query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}})[0];
+    				rec.set("id", el.handauftragsId);
+    				rec.set("name", el.handauftragsBezeichnung);
+    				rec.set("isLocalOnly", NO);
+    			}
+    			try {
+    				rec.save();
+    				mIdArray.push(rec.m_id);
+    				_.each(DigiWebApp.Booking.find(), function(booking) {
+    					if (booking.get('handOrderId') !== null && 
+    						booking.get('handOrderId') === el.handauftragsBezeichnung) {
+    						booking.set("handOrderId", el.handauftragsId);
+    						booking.save();
+    					}
+    				});
+    			} catch(e) {
+    				trackError(e);
+    			}
+    			DigiWebApp.ApplicationController.DigiProgressView.increase();
+    		});
+
+    		// get locally saved hand orders and push them into mId array
+    		var locals = _.select(DigiWebApp.HandOrder.findSorted(), function(ho) {
+    			if (ho) return ho.get('isLocalOnly') === YES;
+    		});
+    		
+    		_.each(locals, function(el) {
+    			mIdArray.push(el.m_id);
+    		});
+    		localStorage.setItem(that.storagePrefix + '_handorderKeys', JSON.stringify(mIdArray));
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		that.setCallbackStatus('handOrder', 'local', YES);
+    	} else {
+    		that.setCallbackStatus('handOrder', 'remote', NO);
+    		// Clear handorders from storage
+    		DigiWebApp.HandOrder.deleteAll();
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		that.setCallbackStatus('handOrder', 'local', NO);
+    	}
     }
 
     /**
@@ -2224,6 +2365,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * @param msg
      * @param xhr The XMLHTTPRequest object.
      */
+    /*
     , getHandOrdersFromRemoteSuccess: function(data, msg, xhr) {
         
    		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
@@ -2320,43 +2462,228 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             
         }
     }
-
+    */
     /**
      * Calls getFeatures on DigiWebApp.RequestController.
      * Success callback proceeds received features data.
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
+    // Bugfix: 3265 XML-WebService -> RESTful
+    // DatenTransferHttpSoap11Endpoint -> konfigurationen
     , getFeaturesFromRemote: function() {
-        
-        this.setCallbackStatus('features', 'remote', NO);
-        
-        DigiWebApp.RequestController.getFeatures({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-                    this.getFeaturesFromRemoteSuccess(data, msg, xhr);
-                	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-                	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
-                	if (ChefToolOnly && !Bautagebuch) {
-                		//TODO: Stammdaten für Bautagebuch laden
-                		this.endSession();
-                	} else {
-                		//this.getOrdersFromRemote();
-                		this.getPositionsFromRemote();
-                	}
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-        			trackError("getFeaturesFromRemote-error");
-            		this.getPositionsFromRemote();
-                }
-            }
-        });
+    	this.setCallbackStatus('features', 'remote', NO);
+    	var successFunc = function(data, msg, xhr) {
+    		DigiWebApp.ApplicationController.getFeaturesFromRemoteSuccessRestful(data, msg, xhr);
+			var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+			var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+			if (ChefToolOnly && !Bautagebuch) {
+				//TODO: Stammdaten für Bautagebuch laden
+				//DigiWebApp.ApplicationController.endSession();
+			} else {
+				//DigiWebApp.ApplicationController.getOrdersFromRemote();
+				DigiWebApp.ApplicationController.getPositionsFromRemote();
+			}
+    	};
+		var errorFunc =  function() {
+			trackError("getFeaturesFromRemote-error");
+			DigiWebApp.ApplicationController.getPositionsFromRemote();
+		};
+		var receiveObj = {
+    		  webservice: 'konfigurationen'
+    		, loaderText: M.I18N.l('getFeaturesLoader')
+    		, successCallback: successFunc
+    		, errorCallback: errorFunc
+    		, additionalQueryParameter : ''
+    		, geraeteIdOverride: false
+    		, modus: '0'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
     }
+    
+    , getFeaturesFromRemoteSuccessRestful: function(data, msg, xhr) {
+    	var that = this;
+    	if (data !== null || data !== '') {
+    		var configurations;
+    		if (typeof(data) === 'object')
+    			configurations = data['konfigurationen'];
+    		else {
+    			var configurationsObject = JSON.parse(data);
+    			configurations = configurationsObject['konfigurationen'];
+    		}
+    		that.setCallbackStatus('features', 'remote', YES);
+    		var activeFeaturesBeforeTransfer = [];
+    		_.each(DigiWebApp.Features.find(), function(feature) {
+    			if (parseBool(feature.get('isAvailable')) == YES) {
+    				var keyId = feature.get('id');
+    				activeFeaturesBeforeTransfer.push(keyId);
+    			}
+    		});
+    		// Clear Features from storage
+    		DigiWebApp.Features.deleteAll();
+    		
+    		that.setCallbackStatus('features', 'local', NO);
+    		DigiWebApp.ApplicationController.DigiProgressView.show(
+    			M.I18N.l('Save'), 
+    			M.I18N.l('features'), 
+    			configurations.length, 
+    			0);
+    		// reset settings without gui-elements
+    		DigiWebApp.SettingsController.setSetting(
+    			'treatAllAsTablet', 
+    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'treatAllAsPhone', 
+    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'settingsPassword', 
+    			DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
+    		var oldBranding = DigiWebApp.SettingsController.getSetting('branding');
+    		DigiWebApp.SettingsController.setSetting(
+    			'branding', 
+    			DigiWebApp.SettingsController.defaultsettings.get('branding'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'silentLoader', 
+    			DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'mapType', 
+    			DigiWebApp.SettingsController.defaultsettings.get('mapType'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'datatransfer_min_delay', 
+    			DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'GPSTimeOut', 
+    			DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'WebserviceTimeOut', 
+    			DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'LoaderTimeOut', 
+    			DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
+    		DigiWebApp.SettingsController.setSetting(
+    			'debugDatabaseServer', 
+    			DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
+    		DigiWebApp.ApplicationController.triggerUpdate = NO;
 
+    		// create a record for each feature returned from the server and save it
+    		_.each(configurations, function(el) {
+    			DigiWebApp.ApplicationController.DigiProgressView.increase();
+    			if (el.valueType === "Setting_WebApp") {
+    				var prop_setting = el.value;
+    				if (prop_setting === "false" || prop_setting === "true" ) { 
+    					prop_setting = ( prop_setting === "true" ); 
+    				}
+    				DigiWebApp.SettingsController.setSetting(el.keyId, prop_setting);
+    				// auch bei geändertem branding neu starten
+    				if ((el.keyId === "branding") && (el.value !== oldBranding)) 
+    					DigiWebApp.ApplicationController.restartApp = YES;
+    			} else if (el.valueType === "Feature") {
+    				DigiWebApp.Features.createRecord({
+    					  id: el.keyId
+    					, name: el.keyId
+    					, isAvailable: el.value
+    				}).save();
+    				// muss die App wegen des neu empfangenen Features neu gestartet werden?
+    				var activeFeatureFound = NO;
+    				_.each(activeFeaturesBeforeTransfer, function(activeFeature) {
+    					// ist die empfangene Feature-ID schon vor dem Abgelich aktiv gewesen?
+    					if (el.keyId === activeFeature) activeFeatureFound = YES;
+    				});
+    				// die App neu starten, wenn:
+    				// - das Feature vorher aktiv war und jetzt inaktiv gesetzt wird
+    				// - das Feature vorher inaktiv war und jetzt aktiv gesetzt wird
+    				if ((el.value === "true" && !activeFeatureFound) || 
+    					(el.value === "false" && activeFeatureFound)) {
+    					if (el.keyId === "400") DigiWebApp.ApplicationController.restartApp = YES;		// Foto
+    					if (el.keyId === "401") DigiWebApp.ApplicationController.restartApp = YES;		// Sprachaufzeichnung
+    					if (el.keyId === "402") DigiWebApp.ApplicationController.restartApp = YES;	    // Materialerfassung only
+    					if (el.keyId === "403") DigiWebApp.ApplicationController.restartApp = YES;		// Bemerkungsfeld
+    					if (el.keyId === "404") DigiWebApp.ApplicationController.restartApp = YES;		// Button-Menü
+    					if (el.keyId === "405") DigiWebApp.ApplicationController.restartApp = YES;		// Unterschrift
+    					if (el.keyId === "406") DigiWebApp.ApplicationController.restartApp = YES;		// Auftragsinfo
+    					//if (el.keyId === "407") DigiWebApp.ApplicationController.restartApp = YES;	// Tagescheckliste
+    					if (el.keyId === "408") DigiWebApp.ApplicationController.restartApp = YES;		// Anwesenheitsliste
+    					if (el.keyId === "409") DigiWebApp.ApplicationController.restartApp = YES;		// ChefTool-Only
+    					if (el.keyId === "410") DigiWebApp.ApplicationController.restartApp = YES;		// "Handauftrag" ausblenden
+    					if (el.keyId === "411") DigiWebApp.ApplicationController.restartApp = YES;		// Zeitbuchungen X Tage auf Gerät behalten
+    					if (el.keyId === "412") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch
+    					if (el.keyId === "413") DigiWebApp.ApplicationController.restartApp = YES;		// GPS-Funktion ausblenden
+    					if (el.keyId === "414") DigiWebApp.ApplicationController.restartApp = YES;		// Kommen/Gehen-Only
+    					//if (el.keyId === "415") DigiWebApp.ApplicationController.restartApp = YES;	// Feierabend-Icon oben rechts
+    					if (el.keyId === "416") DigiWebApp.ApplicationController.restartApp = YES;		// Tätigkeitsicons auf Buchungs-Screen
+    					if (el.keyId === "417") DigiWebApp.ApplicationController.restartApp = YES;		// DIGI-ServiceApp
+    					if (el.keyId === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
+    					if (el.keyId === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
+    					if (el.keyId === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
+    					if (el.keyId === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
+    					if (el.keyId === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
+    					if (el.keyId === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
+    					if (el.keyId === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
+    					if (el.keyId === "427") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
+    				}
+    			}
+    			DigiWebApp.ApplicationController.triggerUpdate = YES;
+    		}); // configurations
+    		// zueinander inkompatible Einstellungen korrigieren
+    		if (DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
+    			DigiWebApp.SettingsController.setSetting('remarkIsMandatory', false);
+    		}
+    		if (DigiWebApp.ApplicationController.triggerUpdate) {
+    			DigiWebApp.DashboardPage.needsUpdate = true;
+    			DigiWebApp.MediaListPage.needsUpdate = true;
+    		}
+    		DigiWebApp.DashboardController.init(YES);
+    		DigiWebApp.MediaListController.init(YES);
+    		DigiWebApp.ApplicationController.triggerUpdate = NO;
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		that.setCallbackStatus('features', 'local', YES);
+    	} else {
+    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+    		that.setCallbackStatus('features', 'local', YES);
+    	}
 
+    	if (DigiWebApp.SettingsController.getSetting('debug')) { 
+    		DigiWebApp.SettingsController.globalDebugMode = YES; 
+    	} else {
+    		DigiWebApp.SettingsController.globalDebugMode = NO; 
+    	}
+
+    	if ((DigiWebApp.SettingsController.featureAvailable('409')) 
+    		&& (DigiWebApp.ApplicationController.profilingIntervalVar === null)) {
+    		if (DigiWebApp.SettingsController.featureAvailable('412')) {
+    			//DigiWebApp.NavigationController.toBautagebuchBautagesberichteListePageTransition(YES);
+    			DigiWebApp.NavigationController.startBautagebuch();
+    		} else {
+    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
+    				DigiWebApp.NavigationController.toButtonDashboardPage(YES);
+    			} else {
+    				DigiWebApp.NavigationController.toDashboardPage(YES);
+    			}
+    		}
+    		// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
+    		if (DigiWebApp.ApplicationController.restartApp === YES) {
+    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+    				title: M.I18N.l('newFeatureActive')
+    			  , message: M.I18N.l('newFeatureActiveMsg')
+    			  , callbacks: {
+    					confirm: {
+    						action: function() {
+    							if (typeof(navigator.app) !== "undefined") {
+    								if (typeof(location.origin) !== "undefined") {
+    									navigator.app.loadUrl(location.origin + location.pathname);					
+    								} else {
+    									navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+    								}
+    							} else {
+    								window.location.reload();
+    							}
+    						}
+    					}
+    			  }
+    			});
+    		}
+    	}
+    }
+    
     /**
      * The success callback for getFeaturesFromRemote.
      *
@@ -2364,6 +2691,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * @param msg
      * @param xhr The XMLHTTPRequest object.
      */
+    
     , getFeaturesFromRemoteSuccess: function(data, msg, xhr) {
     	        
         if (data) {
@@ -2386,7 +2714,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("Features empfangen");
         	
             this.setCallbackStatus('features', 'remote', YES);
-
+            
             var activeFeaturesBeforeTransfer = [];
             _.each(DigiWebApp.Features.find(), function(feature) {
             	if (parseBool(feature.get('isAvailable')) == YES) {
@@ -2504,10 +2832,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.MediaListPage.needsUpdate = true;
             }
             DigiWebApp.DashboardController.init(YES);
-        	DigiWebApp.MediaListController.init(YES);
-
-        	DigiWebApp.ApplicationController.triggerUpdate = NO;
-    		
+            DigiWebApp.MediaListController.init(YES);
+            DigiWebApp.ApplicationController.triggerUpdate = NO;
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('features', 'local', YES);
             
@@ -2606,8 +2932,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		function() {
     			var that = DigiWebApp.ApplicationController;
     	        // end session on server
-    	        that.endSession();
-    			
+    			// Bugfix: 3265 remove old XML-WebService
+    	        // that.endSession();
     			var empfangeBautagebuch = function() {
     	            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
     	    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
