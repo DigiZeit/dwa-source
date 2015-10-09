@@ -2252,8 +2252,6 @@ DigiWebApp.BookingController = M.Controller.extend({
                    	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
                    		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
                    	        ){
-                               
-
 	              	        	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteSenden(function(){
 	              	        		startSyncFunc();
 	                			});
@@ -2274,6 +2272,9 @@ DigiWebApp.BookingController = M.Controller.extend({
         		  , doSync
         	);
 
+        } else {
+        	// Keine Buchungen zum Verarbeiten vorhanden --> Es gibt nichts weiter zu tun
+        	DigiWebApp.ApplicationController.DigiLoaderView.hide();
         }
     }
 

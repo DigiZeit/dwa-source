@@ -46,8 +46,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 	, materialstammEmpfangen: function(successReturnCallback, errorReturnCallback) {
 		var that = DigiWebApp.BautagebuchDatenuebertragungController;
 		
-		that.successReturnCallback = successReturnCallback;
-		that.errorReturnCallback = function() {
+		var internalSuccessReturnCallback = successReturnCallback;
+		var internalErrorReturnCallback = function() {
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
 			errorReturnCallback();
 		}
@@ -56,9 +56,9 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.RequestController.getDatabaseServer(function() {
 			that.empfangeMengeneinheiten(function() {
 				that.empfangeMaterialien(
-					that.successReturnCallback
-				  , that.successReturnCallback);
-			}, that.errorReturnCallback);
+					internalSuccessReturnCallback
+				  , internalErrorReturnCallback);
+			}, internalErrorReturnCallback);
 		});
 	
 		
