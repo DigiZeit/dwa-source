@@ -112,9 +112,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myGeraeteTyp = 3;
 		}
 		
-		if(webservice === 'allgemein/empfangeUrl') {
-			if(databaseServer === null || databaseServer === '')
-				databaseServer = 'vespasian.digi-zeitserver.de';
+		if (webservice == 'allgemein/empfangeUrl') {
+			if(databaseServer == null || databaseServer == '')
+				databaseServer = 'primary.digi-gateway.de';
 		}
 			
 		var myURL = 'http://' + databaseServer + '/WebAppServices/' + webservice + '?modus=' + myModus + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
@@ -123,7 +123,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
     	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
-    	writeToLog("myURL '" + myURL + "'");
+    	if (DigiWebApp.SettingsController.getSetting('debug')) {
+    		writeToLog("myURL '" + myURL + "'");
+    	}
 		M.Request.init({
 			  url: myURL
 			, beforeSend: function(xhr) {

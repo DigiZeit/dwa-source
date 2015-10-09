@@ -15,7 +15,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 	, DatabaseServerTimestamp: null
 	, handy2WebServicesUrl: '/Handy2WebServices/services/DatenTransfer'
 	// Bugfix: 3265 XML-WebService -> RESTful	
-	, ResponseStatusCode: ''
+	, AuthentifizierenCode: ''
     /**
      * Object containing the success callback for the several calls
      */
@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6388
+    , softwareVersion: 6389
 
 
     /**
@@ -189,7 +189,10 @@ DigiWebApp.RequestController = M.Controller.extend({
         };
         
         var errorFunc = function(xhr, err) {
+        	// asking primary-gateway failed --> ask gateway-pool
+            DigiWebApp.RequestController.DatabaseServer = DigiWebApp.RequestController.GatewayPool;
         	var secondErrorFunc = function(xhr, err) {
+            	// asking the gateway-pool also failed!
         		DigiWebApp.ApplicationController.DigiLoaderView.hide();
         		writeToLog('## getDatabaseServer ' + err);
         		DigiWebApp.ApplicationController.proceedWithLocalData("getDatabaseServer");
@@ -203,11 +206,11 @@ DigiWebApp.RequestController = M.Controller.extend({
         		, geraeteIdOverride: false
         		, modus: '0' 
         	};
-        	// disable following line for debugging in Test-Server
-            DigiWebApp.RequestController.DatabaseServer = myGatewayServer;
         	DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(secondReceiveObj);
         };
         
+    	// ask primary-gateway (or localhost if not on device)
+        DigiWebApp.RequestController.DatabaseServer = myGatewayServer;
         var receiveObj = {
         		  webservice: 'allgemein/empfangeUrl'
         		, loaderText: M.I18N.l('empfangeUrlLoader')
@@ -216,8 +219,6 @@ DigiWebApp.RequestController = M.Controller.extend({
         		, additionalQueryParameter : ''
         		, geraeteIdOverride: false
         };
-        // disable following line for debugging in Test-Server
-        DigiWebApp.RequestController.DatabaseServer = myGatewayServer;
         DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(receiveObj);
     }
     
@@ -295,17 +296,17 @@ DigiWebApp.RequestController = M.Controller.extend({
  */
     // Bugfix: 3265 XML-WebService -> RESTful
     // authentifizieren -> allgemein/authentifizieren
-    ,authenticateWithDatabaseServerRestful: function(obj) {
+    , authenticateWithDatabaseServerRestful: function(obj) {
         DigiWebApp.RequestController.saveCallbacks(obj.success, obj.error, 'authenticate');
 		var successFunc = function(data, msg, xhr) {
 			var that = DigiWebApp.RequestController;
 			if(data !== null || data !== '')
 			{
 				if(typeof(data) === 'object')
-					DigiWebApp.RequestController.ResponseStatusCode = data['authentifizieren'].code.toString();
+					DigiWebApp.RequestController.AuthentifizierenCode = data['authentifizieren'].code.toString();
 				else {
 					var authenticateObject = JSON.parse(data);
-					DigiWebApp.RequestController.ResponseStatusCode = 
+					DigiWebApp.RequestController.AuthentifizierenCode = 
 						authenticateObject['authentifizieren'].code.toString();
 				}
 			}
@@ -561,6 +562,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     , sendConfiguration: function(obj) {
     	// all callbacks lead to DigiWebApp.ApplicationController.authenticateSuccess()
         // call authenticate
+    	// TODO: authenticate nicht hier aufrufen sondern vorziehen (war noch in Session-Logik notwendig)
         this.authenticate({
               success: {  // send configuration in success callback
                   target: this
@@ -573,7 +575,12 @@ DigiWebApp.RequestController = M.Controller.extend({
 					var geraeteId = DigiWebApp.SettingsController.getSetting('workerId');
 					var softwareVersion = DigiWebApp.RequestController.softwareVersion;
 					var databaseServer = DigiWebApp.RequestController.DatabaseServer;
-					var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+					var statusCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
+					if (parseIntRadixTen(DigiWebApp.RequestController.AuthentifizierenCode) != 1) {
+						// Fehlerhafte Benutzeranmeldung behandeln
+						return DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
+
+					}
 					var myURL = 'http://' + databaseServer + 
 								"/WebAppServices/konfigurationen?modus=0&geraeteTyp=2&firmenId=" + 
 								firmenId + '&kennwort=' + password + '&geraeteId=' + geraeteId + 
@@ -616,7 +623,7 @@ DigiWebApp.RequestController = M.Controller.extend({
             , error: {
                   target: this
                 , action: function() {
-					var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+					var statusCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
                     DigiWebApp.ApplicationController.authenticateSuccess(statusCode);
                     trackError("ConnectionError while sendConfiguration");
                 }
@@ -661,7 +668,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     	var geraeteId = DigiWebApp.SettingsController.getSetting('workerId');
     	var softwareVersion = DigiWebApp.RequestController.softwareVersion;
     	var databaseServer = DigiWebApp.RequestController.DatabaseServer;
-    	var statusCode = DigiWebApp.RequestController.ResponseStatusCode.toString();
+    	var statusCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
     	var myURL = 'http://' + databaseServer + 
                     "/WebAppServices/konfigurationen?modus=0&geraeteTyp=2&firmenId=" + 
     				firmenId + '&kennwort=' + password + '&geraeteId=' + geraeteId + 
