@@ -1397,25 +1397,26 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.NavigationController.toSettingsPage(YES);
             return;
         } else {
-        	var obj = {};
-            obj.success: {
-                target: this
-              , action: function() {
-	        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
-	        		if (authCode != '1') {
-						return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
+        	var obj = {
+            	  success: {
+	                target: this
+	              , action: function() {
+		        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
+		        		if (authCode != '1') {
+							return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
+		        		}
+		                DigiWebApp.ApplicationController.updateModels(fortfahren);        	
 	        		}
-	                DigiWebApp.ApplicationController.updateModels(fortfahren);        	
-        		}
-        	}
-            obj.error: {
-                target: this
-              , action: function() {
-	                DigiWebApp.NavigationController.toBookTimePage(YES);
-	                DigiWebApp.SettingsController.showCredentialsAlert = YES;
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
-	                return;
-        		}
+	        	}
+            	, error: {
+	                target: this
+	              , action: function() {
+		                DigiWebApp.NavigationController.toBookTimePage(YES);
+		                DigiWebApp.SettingsController.showCredentialsAlert = YES;
+		                DigiWebApp.NavigationController.toSettingsPage(YES);
+		                return;
+	        		}
+	        	}
         	}
         	DigiWebApp.RequestController.authenticate(obj);
         }
