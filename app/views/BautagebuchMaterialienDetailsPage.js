@@ -141,10 +141,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
 					
                 	if (myTyp == "<materialerfassung_only>") {
                 		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id + "_container").show();
-                    	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialgruppeComboBox.id + "_container").show();
                 	} else {
                 		$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.auftragComboBox.id + "_container").hide();
-                    	$('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialgruppeComboBox.id + "_container").hide();
                 	}
 
                 	if (relevantDetailsController.get('handOrderId')) {
