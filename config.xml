@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6412"
-	version 	  = "1.8.3.6412">
+	versionCode   = "6413"
+	version 	  = "1.8.3.6413">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -22,7 +22,7 @@
 	<gap:platform name="winphone" />
 	<!-- <gap:platform name="webos" /> -->
 	<!-- <gap:platform name="symbian" /> -->
-	<gap:platform name="blackberry" />
+	<!-- <gap:platform name="blackberry" project="widgets" /> -->
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
@@ -64,11 +64,10 @@ which PhoneGap requires. -->
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
-<gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
-
+<gap:plugin name="org.apache.cordova.geolocation" source="npm" /> <!--version="0.3.10" />-->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6412</string> 
+	<string>6413</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
@@ -81,9 +80,9 @@ which PhoneGap requires. -->
 </feature>
 
 <!-- geolocation on ios8 -->   
-	<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file> 
-	<gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>
-	<gap:config-file platform="ios" parent="NSLocationUsageDescription" overwrite="false"></gap:config-file>
+	<!--<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>--> 
+	<!--<gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>-->
+	<!--<gap:config-file platform="ios" parent="NSLocationUsageDescription" overwrite="false"></gap:config-file>-->
 
 <!-- single activity instance task on Android -->
 	<!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTask" /></gap:config-file> -->
