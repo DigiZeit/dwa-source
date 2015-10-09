@@ -24,8 +24,13 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 			}
 		}
 
-		that.set("items", myItems);
+		if (DigiWebApp.SettingsController.featureAvailable('428')) {
+			$('#' + DigiWebApp.BautagebuchMaterialienListePage.stammdatenUebertragenButton.id).show();
+		} else {
+			$('#' + DigiWebApp.BautagebuchMaterialienListePage.stammdatenUebertragenButton.id).hide();
+		}
 		
+		that.set("items", myItems);
 	}
 
 	, neu: function() {

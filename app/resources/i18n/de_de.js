@@ -546,5 +546,6 @@ M.I18N.de_de = {
 	, dtc6Auftrag: 'Auftrag'
 	, dtc6Leistung: 'Leistung'
 	
+	, materialstammEmpfangen: 'Materialstammdaten abgleichen'
 
 };
