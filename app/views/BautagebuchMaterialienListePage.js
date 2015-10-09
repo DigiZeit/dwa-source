@@ -68,6 +68,8 @@ DigiWebApp.BautagebuchMaterialienListePage = M.PageView.design({
 
     , uebertragenButton: M.ButtonView.design({
 	        value: M.I18N.l('BautagebuchUebertragen')
+	      // Bugfix 2142
+	      ,  cssClass: 'uploadMaterial'
 	      , events: {
 	          tap: {
 	                action: function() {

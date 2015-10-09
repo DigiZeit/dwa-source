@@ -62,6 +62,8 @@ DigiWebApp.MediaListPage = M.PageView.design({
 
     , uebertragenButton: M.ButtonView.design({
 	        value: M.I18N.l('uploadMediaFiles')
+	        // Bugfix 2142
+	      , cssClass: 'uploadMediaFiles'
 	      , events: {
 	          tap: {
 	                action: function() {

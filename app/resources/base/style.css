@@ -1,7 +1,6 @@
-
 body {
-    background: #003366 !important;
-    background-color: #003366 !important;
+    background-color: #ffffff !important;
+    background-image: url('images/roter_balken.png') !important;
     background-position:right bottom !important;
     background-repeat:repeat-y !important;
     background-attachment:fixed !important; 
@@ -120,23 +119,6 @@ fieldset legend {
 
 }
 
-.splashViewPage.w320 { background: #003366 !important }
-.splashViewPage.w480 { background: #003366 !important }
-.splashViewPage.w640 { background: #003366 !important }
-.splashViewPage.w800 { background: #003366 !important }
-.splashViewPage.w1024 { background: #003366 !important }
-.splashViewPage.w1080 { background: #003366 !important }
-.splashViewPage.w1536 { background: #003366 !important }
-.splashViewPage.w5000 { background: #003366 !important }
-.w320 { background: url('images/320x480_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w480 { background: url('images/480x800_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w640 { background: url('images/640x960_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w800 { background: url('images/800x1280_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w1024 { background: url('images/1024x1024_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w1080 { background: url('images/1080x1920_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w1536 { background: url('images/1536x2048_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.w5000 { background: url('images/5000x5000_90_DIGI-WebApp.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-
 /* SCHOLPP-Branding */
 .SCHOLPPbranding .ui-body-c {
 /*	color: #fff !important; */
@@ -159,27 +141,13 @@ fieldset legend {
 .SCHOLPP_w1536 { background: url('images/1536x2048_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 .SCHOLPP_w5000 { background: url('images/5000x5000_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
-/* DIGI-WEBAPP-WHITE-Branding */
-.DIGI-WEBAPP-WHITEbranding .ui-body-c {
+/* 
+* DIGI-WEBAPP-DSO-Branding 
+*/
+.DIGI-WEBAPP-DSObranding .ui-body-c {
 	color: #000 !important; 
 	text-weight: bold;
 }
-.splashViewPage.DIGI-WEBAPP-WHITE_w320 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w480 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w640 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w800 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w1024 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w1080 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w1536 { background: #ffffff !important }
-.splashViewPage.DIGI-WEBAPP-WHITE_w5000 { background: #ffffff !important }
-.DIGI-WEBAPP-WHITE_w320 { background: url('images/320x480_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w480 { background: url('images/480x800_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w640 { background: url('images/640x960_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w800 { background: url('images/800x1280_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w1024 { background: url('images/1024x1024_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w1080 { background: url('images/1080x1920_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w1536 { background: url('images/1536x2048_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
-.DIGI-WEBAPP-WHITE_w5000 { background: url('images/5000x5000_90_DIGI-WEBAPP-WHITE.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
 
 .splashViewPage.DIGI-WEBAPP-DSO_w320 { background-color: #ffffff !important }
 .splashViewPage.DIGI-WEBAPP-DSO_w480 { background-color: #ffffff !important }

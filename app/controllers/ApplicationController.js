@@ -12,6 +12,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	  CONSTAudioFiletype: "audio/wav;base64"
 	, CONSTVideoFiletype: "video/mp4;base64"
 	, CONSTTextFiletype: "text/plain"
+	, CONSTDefaultBranding: "DIGI-WEBAPP-DSO"
 		
 	, getImageFiletype: function() {
 		var filetypeString = "image/" + DigiWebApp.SettingsController.getSetting('pictureEncodingType').toLowerCase() + ";base64"
@@ -680,38 +681,42 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		console.log("We are on BlackBerry, so we skip dynamic Background!");
     	} else {
     		if (this.checkSizeModeChange()) {
+    			
+    			// get (new) branding
+    			var myBranding = DigiWebApp.ApplicationController.CONSTDefaultBranding;
+				if ( typeof(DigiWebApp.SettingsController) != "undefined" ) {
+					var myBranding = DigiWebApp.SettingsController.getSetting("branding");
+					if ( typeof(myBranding) == "undefined" || myBranding == "" ) {
+						myBranding = DigiWebApp.ApplicationController.CONSTDefaultBranding;
+					} else {
+						myBranding = myBranding.toUpperCase();
+					}
+				}
+				
+				// remove old global branding from body
+				removeClassFromElementByClassending('body', 'branding');
+				
+				// apply branding to body
+				$('body').addClass(myBranding + "branding");
+				
+				// apply branding to each page
 		        _.each(DigiWebApp.app.pages, function(myPage) {
-		        	if (
-		        			($('#' + myPage.id).get("0").classList && (!$('#' + myPage.id).get("0").classList.contains(DigiWebApp.ApplicationController.sizeMode)))
-		        	     || ($('#' + myPage.id).get("0").className.split(" ").indexOf(DigiWebApp.ApplicationController.sizeMode) === -1)
+		        	var firstTag = $('#' + myPage.id)[0];
+		        	var mySizeMode = DigiWebApp.ApplicationController.sizeMode;
+		        	if (    (firstTag.classList 
+		        			 && (!firstTag.classList.contains(mySizeMode)))
+		        	     || (firstTag.className.split(" ").indexOf(mySizeMode) === -1)
 		        	) {
-    					if ( typeof(DigiWebApp) != "undefined" ) {
-    						if ( typeof(DigiWebApp.SettingsController) != "undefined" ) {
-	    						if ( typeof(DigiWebApp.SettingsController.getSetting("branding")) != "undefined" && DigiWebApp.SettingsController.getSetting("branding") != "" ) {
-	    							var myBranding = DigiWebApp.SettingsController.getSetting("branding").toUpperCase();
-	    							// remove old gloobal branding from body
-	    							$('body').classes(function(n) {
-	    								if (n.substring(n.length - "branding".length) === "branding") {
-	    									$('body').removeClass(n);
-	    								}
-	    							});
-	    							// apply branding
-	    							$('body').addClass(myBranding + "branding");
-	    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-	    	    					$('#' + myPage.id).removeClass(myBranding + "_w320").removeClass(myBranding + "_w480").removeClass(myBranding + "_w640").removeClass(myBranding + "_w800").removeClass(myBranding + "_w1024").removeClass(myBranding + "_w1080").removeClass(myBranding + "_w1536").removeClass(myBranding + "_w5000");
-	    	        				$('#' + myPage.id).addClass(myBranding + "_" + DigiWebApp.ApplicationController.sizeMode);	        					
-	    						} else {
-	    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-	    	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
-	    						}
-    						} else {
-    	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-    	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
-    						}
-    					} else {
-	    					$('#' + myPage.id).removeClass("w320").removeClass("w480").removeClass("w640").removeClass("w800").removeClass("w1024").removeClass("w1080").removeClass("w1536").removeClass("w5000");
-	        				$('#' + myPage.id).addClass(DigiWebApp.ApplicationController.sizeMode);	        					
-    					}
+		        		// Bugfix 2142: Restyling in order to be consistent with DSO
+		        		removeClassFromPageByClassending(myPage.Id, "_w320");
+		        		removeClassFromPageByClassending(myPage.Id, "_w480");
+		        		removeClassFromPageByClassending(myPage.Id, "_w640");
+		        		removeClassFromPageByClassending(myPage.Id, "_w800");
+		        		removeClassFromPageByClassending(myPage.Id, "_w1024");
+		        		removeClassFromPageByClassending(myPage.Id, "_w1080");
+		        		removeClassFromPageByClassending(myPage.Id, "_w1536");
+		        		removeClassFromPageByClassending(myPage.Id, "_w5000");
+		    	        $('#' + myPage.id).addClass(myBranding + "_" + mySizeMode);	
 		        	}
 		        });
     		}
@@ -985,7 +990,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			
 			try {
-				//alert("hiding splash");
 				navigator.splashscreen.hide();
 			} catch(e) {
 				console.log("unable to hide splashscreen");

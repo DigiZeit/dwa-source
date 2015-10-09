@@ -43,7 +43,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , daysToHoldBookingsOnDevice: '40'
         , bautagebuchLimit_autoStartUhrzeit: false
         , datatransfer_min_delay: 10000
-        , branding: ''
+        , branding: DigiWebApp.ApplicationController.CONSTDefaultBranding // Bugfix 2142
         , GPSTimeOut: 60000
         , WebserviceTimeOut: 30000
         , LoaderTimeOut: 30000
@@ -381,6 +381,15 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            	logSave = record.get('logSave');
 	            }
             } catch (e) {}
+            
+            // Bugfix 2142: get branding from local storage
+            var branding = DigiWebApp.SettingsController.defaultsettings.get("branding");
+            try {
+            	// gespeichertes branding nur übernehmen, wenn konkreter Wert und kein Whitespace (altes default)
+	            if (typeof(record.record.branding) !== "undefined" && record.record.branding != "") {
+	            	branding = record.get('branding');
+	            }
+            } catch (e) {}
 
             if (onIOS || onAndroid23) {
     			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -497,7 +506,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                     , isSelected: record.get('useTransitionsSetting')
                 }]
                 , datatransfer_min_delay: record.get('datatransfer_min_delay')
-                , branding: record.get('branding')
+                , branding: branding // Bugfix 2142
                 , GPSTimeOut: record.get('GPSTimeOut')
                 , WebserviceTimeOut: record.get('WebserviceTimeOut')
                 , LoaderTimeOut: record.get('LoaderTimeOut')
