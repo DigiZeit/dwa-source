@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6413"
-	version 	  = "1.8.3.6413">
+	versionCode   = "6414"
+	version 	  = "1.8.3.6414">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -64,10 +64,10 @@ which PhoneGap requires. -->
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
-<gap:plugin name="org.apache.cordova.geolocation" source="npm" /> <!--version="0.3.10" />-->
+<!--<gap:plugin name="org.apache.cordova.geolocation" source="npm" />--> <!--version="0.3.10" />-->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6413</string> 
+	<string>6414</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
