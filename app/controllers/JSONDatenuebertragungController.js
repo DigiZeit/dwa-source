@@ -114,7 +114,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 		if (webservice == 'allgemein/empfangeUrl') {
 			if(databaseServer == null || databaseServer == '')
-				databaseServer = 'primary.digi-gateway.de';
+				databaseServer = DigiWebApp.RequestController.GatewayServer;
 		}
 			
 		var myURL = 'http://' + databaseServer + '/WebAppServices/' + webservice + '?modus=' + myModus + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();

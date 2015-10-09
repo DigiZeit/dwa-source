@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns	  = "http://www.w3.org/ns/widgets"
-	xmlns:gap	  = "http://phonegap.com/ns/1.0"
+<widget xmlns	= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		      = "com.digi.webappbeta"
-	versionCode   = "6393"
-	version 	  = "1.8.3.6393">
+	id		    = "com.digi.webapp"
+	versionCode = "6394"
+	version 	= "1.8.3.6394">
 
-	<name>DIGI-WebApp Beta</name>
+	<name>DIGI-WebApp</name>
 
 	<description>
 		Die mobile Zeiterfassung für das Handwerk!
@@ -30,11 +30,9 @@
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
-	<preference name="autorotate" value="true" readonly="false" />
+	<preference name="autorotate" value="false" readonly="false" />
 	<preference name="orientation" value="portrait" />
-<!--	<preference name="orientation" value="default" /> -->
 	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	<preference name="keepRunning" value="true" />
@@ -59,19 +57,13 @@ which PhoneGap requires. -->
 <!-- to enable single features use the following examples -->
 	<feature name="http://api.phonegap.com/1.0/geolocation" />
 	<feature name="http://api.phonegap.com/1.0/network" />
-	<feature name="http://api.phonegap.com/1.0/camera" />
+	<!-- <feature name="http://api.phonegap.com/1.0/camera" /> Kamera nur in Pro-Version -->
 	<feature name="http://api.phonegap.com/1.0/file" />
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
-
-<!-- include PhonegapPlugIns -->
+ 
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.9" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.4" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.3" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.1" /> -->
-
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
@@ -96,12 +88,11 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
-
 <!-- iOS9 -->   
 	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6393</string> 
+	<string>6394</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
