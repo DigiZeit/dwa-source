@@ -908,25 +908,23 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
-		//if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:911");
+		//if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
 		try {
 			if (typeof(window) != "undefined" && typeof(window.navigator) != "undefined" && typeof(window.navigator.geolocation) != "undefined" && typeof(window.navigator.geolocation.getCurrentPosition) != "undefined") {
-				if (!(inDebug() && staticDebugging)) {
-				    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "getCurrentPosition()");
-					window.navigator.geolocation.getCurrentPosition(function(location) {
-				        //console.log('Location from Phonegap');
-					    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "location=" + JSON.stringify(location));
-				    }, function(error) {
-					    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "error=" + JSON.stringify(error));
-				    });
-				}
+			    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "getCurrentPosition()");
+				window.navigator.geolocation.getCurrentPosition(function(location) {
+			        //console.log('Location from Phonegap');
+				    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "location=" + JSON.stringify(location));
+			    }, function(error) {
+				    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "error=" + JSON.stringify(error));
+			    });
 			}
 		} catch(e) {
 			
 		}
-	    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "after getCurrentPosition");
+	    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "after getCurrentPosition");
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
@@ -993,7 +991,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, realDeviceReadyHandler: function() {
 		
-		if (inDebug() && staticDebugging) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:991");
+		if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
 //		try {
@@ -1034,7 +1032,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
 	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-	    	if (inDebug() && staticDebugging) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
+	    	if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
@@ -1340,18 +1338,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
-		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "vor SettingsController.init");
+		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor SettingsController.init");
         //alert("vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
-		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "nach SettingsController.init");
+		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "nach SettingsController.init");
         
 		inDebug();
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
         var fortfahren = function() {
-    		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "in fortfahren");
+    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "in fortfahren");
         	//alert("suche nach offener Buchung");
 	        // gibt es eine offene Buchung?
 	        var bookings = DigiWebApp.Booking.find();
@@ -1409,9 +1407,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             return;
         } else {
         	var obj = {
-            	  success: {
+            	success: {
 	                target: this
 	              , action: function() {
+        				if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
 		        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
 		        		if (authCode != '1') {
 							return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
@@ -1422,6 +1421,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	, error: {
 	                target: this
 	              , action: function() {
+    					if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
 		                DigiWebApp.NavigationController.toBookTimePage(YES);
 		                DigiWebApp.SettingsController.showCredentialsAlert = YES;
 		                DigiWebApp.NavigationController.toSettingsPage(YES);
@@ -1429,6 +1429,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        		}
 	        	}
         	}
+    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor authenticate");
         	DigiWebApp.RequestController.authenticate(obj);
         }
         
