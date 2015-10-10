@@ -219,6 +219,7 @@ DigiWebApp.RequestController = M.Controller.extend({
         		, additionalQueryParameter : ''
         		, geraeteIdOverride: false
         };
+		if (inDebug() && staticDebugging) alert(navigator.platform + ", RequestController.getDatabaseServer " + "vor recieveDataWithServer (primary)");
         DigiWebApp.JSONDatenuebertragungController.recieveDataWithServer(receiveObj);
     }
     

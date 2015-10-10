@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6439"
-	version 	  = "1.8.3.6439">
+	versionCode   = "6440"
+	version 	  = "1.8.3.6440">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -105,7 +105,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="cordova-plugin-wkwebview" source='npm'/> <!-- version='0.6.0' /> --><!-- erst ab 0.6.2 wird der LocalStorage vom UiWebView wieder übernommen, aber in npm ist noch immer nur 0.6.0 -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6439</string> 
+	<string>6440</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
