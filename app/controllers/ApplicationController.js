@@ -908,6 +908,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
+		if (isDebug()) alert(onIOS + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
 	    window.navigator.geolocation.getCurrentPosition(function(location) {
@@ -983,6 +984,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, realDeviceReadyHandler: function() {
 		
+		if (isDebug()) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:987");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
 //		try {

@@ -831,6 +831,20 @@ $(window).bind('load', function(e) {
 	}
 });
 
+function isDebug() {
+	try {
+	    for (var i = 0; i < localStorage.length; i++) {
+	        var k = localStorage.key(i);
+	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
+	        if (regexResult) {
+	            var record = JSON.parse(localStorage.getItem(k));
+	            return parseBool(record.debug);
+	        }
+	    }
+	} catch(e) {}
+    return false;    
+}
+
 var gefundeneFreischaltungen = [];
 function searchForFeature(featureId) {
 	if (gefundeneFreischaltungen.length === 0) {
@@ -1066,7 +1080,6 @@ if ( onAndroid ) {
 	  onAndroid5 = true;
   }
 }
-alert(onIOS + ", " + "main.js:1069");
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);
@@ -1084,6 +1097,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 }
 
 if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") { 
+	if (isDebug()) alert(onIOS + ", " + "main.js:1086");
 	try {
 		window.addEventListener('load', function () {
 		  Notification.requestPermission(function (status) {
