@@ -1340,15 +1340,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
+		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "vor SettingsController.init");
         //alert("vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
+		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "nach SettingsController.init");
         
 		inDebug();
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
         var fortfahren = function() {
+    		if (inDebug() && staticDebugging) alert(onIOS + ", ApplicationController.init " + "in fortfahren");
         	//alert("suche nach offener Buchung");
 	        // gibt es eine offene Buchung?
 	        var bookings = DigiWebApp.Booking.find();
