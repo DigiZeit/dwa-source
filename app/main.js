@@ -1066,7 +1066,7 @@ if ( onAndroid ) {
 	  onAndroid5 = true;
   }
 }
-
+alert(onIOS + ", " + "main.js:1069");
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);

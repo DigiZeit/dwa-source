@@ -98,7 +98,7 @@ which PhoneGap requires. -->
 
 
 <!-- iOS9 -->   
-	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.3' />
+	<gap:plugin name="cordova-plugin-wkwebview" source='npm'/> <!-- version='0.6.0' /> --><!-- erst ab 0.6.2 wird der LocalStorage vom UiWebView wieder übernommen, aber in npm ist noch immer nur 0.6.0 -->
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
 	<string>@versionCode@</string> 
