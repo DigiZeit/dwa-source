@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6440
+    , softwareVersion: 6441
 
 
     /**
@@ -111,6 +111,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     		} else {
     			DigiWebApp.RequestController.DatabaseServer = DigiWebApp.SettingsController.getSetting("debugDatabaseServer");
     		}
+    		if (inDebug() && staticDebugging) alert(navigator.platform + ", using debugDatabaseServer " + DigiWebApp.RequestController.DatabaseServer);
     		return myFunc(obj);
     	}
     	
