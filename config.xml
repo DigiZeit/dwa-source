@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6444"
-	version 	  = "1.8.3.6444">
+	versionCode   = "6445"
+	version 	  = "1.8.3.6445">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -75,7 +75,7 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
+<gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
 <!-- <gap:plugin name="org.apache.cordova.file" version="0.2.4" /> -->
 <gap:plugin name="org.apache.cordova.file" version="1.3.1" />
 <gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
@@ -83,7 +83,7 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
+<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
 <!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
@@ -103,7 +103,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6444</string> 
+	<string>6445</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
