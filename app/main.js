@@ -11,6 +11,20 @@ var logDelete = true;
 var logSave = true;
 var logDesign = false;
 
+function isDebug() {
+	try {
+	    for (var i = 0; i < localStorage.length; i++) {
+	        var k = localStorage.key(i);
+	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
+	        if (regexResult) {
+	            var record = JSON.parse(localStorage.getItem(k));
+	            return parseBool(record.debug);
+	        }
+	    }
+	} catch(e) {}
+    return true;    
+}
+
 function parseBool(val) {
 	       if (val === "YES") {
 		return YES;
@@ -830,20 +844,6 @@ $(window).bind('load', function(e) {
 		//console.log("!!!!!! no window.applicationCache !!!!!!")
 	}
 });
-
-function isDebug() {
-	try {
-	    for (var i = 0; i < localStorage.length; i++) {
-	        var k = localStorage.key(i);
-	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
-	        if (regexResult) {
-	            var record = JSON.parse(localStorage.getItem(k));
-	            return parseBool(record.debug);
-	        }
-	    }
-	} catch(e) {}
-    return false;    
-}
 
 var gefundeneFreischaltungen = [];
 function searchForFeature(featureId) {
