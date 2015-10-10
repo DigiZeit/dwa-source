@@ -10,8 +10,17 @@
 var logDelete = true;
 var logSave = true;
 var logDesign = false;
+var staticDebugging = true; // for hotfix debugging without credentials etc.
 
+var staticDebuggingAlertShown = false;
 function isDebug() {
+	if (staticDebugging) {
+		if (!staticDebuggingAlertShown) {
+			staticDebuggingAlertShown = true;
+			alert("!!! staticDebugging activated !!! Do not release this Package!");
+		}
+		return true;
+	}
 	try {
 	    for (var i = 0; i < localStorage.length; i++) {
 	        var k = localStorage.key(i);
@@ -22,7 +31,7 @@ function isDebug() {
 	        }
 	    }
 	} catch(e) {}
-    return true;    
+    return false;    
 }
 
 function parseBool(val) {
