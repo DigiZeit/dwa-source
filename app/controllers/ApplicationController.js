@@ -913,15 +913,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    //  in order to prompt the user for Location permission.
 		try {
 			if (typeof(window) != "undefined" && typeof(window.navigator) != "undefined" && typeof(window.navigator.geolocation) != "undefined" && typeof(window.navigator.geolocation.getCurrentPosition) != "undefined") {
-			    window.navigator.geolocation.getCurrentPosition(function(location) {
-			        //console.log('Location from Phonegap');
-				    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:918 location=" + JSON.stringify(location));
-			    });
+				if (!(inDebug() && staticDebugging)) {
+				    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "getCurrentPosition()");
+					window.navigator.geolocation.getCurrentPosition(function(location) {
+				        //console.log('Location from Phonegap');
+					    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "location=" + JSON.stringify(location));
+				    }, function(error) {
+					    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "error=" + JSON.stringify(error));
+				    });
+				}
 			}
 		} catch(e) {
 			
 		}
-	    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:924");
+	    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "after getCurrentPosition");
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
