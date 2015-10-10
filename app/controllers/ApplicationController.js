@@ -911,9 +911,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		//if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
-	    window.navigator.geolocation.getCurrentPosition(function(location) {
-	        //console.log('Location from Phonegap');
-	    });
+		try {
+			if (typeof(window) != "undefined" && typeof(window.navigator) != "undefined" && typeof(window.navigator.geolocation) != "undefined" && typeof(window.navigator.geolocation.getCurrentPosition) != "undefined") {
+			    window.navigator.geolocation.getCurrentPosition(function(location) {
+			        //console.log('Location from Phonegap');
+				    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:918 location=" + JSON.stringify(location));
+			    });
+			}
+		} catch(e) {
+			
+		}
+	    if (inDebug() && staticDebugging) alert(onIOS + ", devicereadyhandler " + "ApplicationController:924");
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
@@ -1021,7 +1029,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
 	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-	    	if (inDebug() && staticDebugging) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:1024");
+	    	if (inDebug() && staticDebugging) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
