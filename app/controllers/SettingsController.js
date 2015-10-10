@@ -1667,5 +1667,23 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	  	  "label": M.I18N.l('FestePauseStornieren')
 	  	, "items": []
     }]
+    		
+    , HasCredentials: function() {
+		var that = this;
+    	try {
+    		var company = that.getSetting("company");   		
+    		var password = that.getSetting("password");
+    		var connectionCode = that.getSetting("connectionCode");
+    		var workerId = that.getSetting("workerId");
+    		if (company && password && workerId) {
+    			return true;
+    		}
+		} catch(e7) { 
+			trackError(e7);
+		}
+        that.showCredentialsAlert = YES;
+        that.credentialsAlertShown = false;
+		return false;
+    }
 
 });
