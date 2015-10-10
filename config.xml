@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6443"
-	version 	  = "1.8.3.6443">
+	versionCode   = "6444"
+	version 	  = "1.8.3.6444">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -86,8 +86,11 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
-<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
-<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
+<!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
+<gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" />
+
+<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
+<gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" />
 
 <!-- prevent screen-sleep --> 
 <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
@@ -100,7 +103,7 @@ which PhoneGap requires. -->
 	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6443</string> 
+	<string>6444</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
