@@ -1534,6 +1534,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     }
 
     , getSetting: function(prop) {
+    	if (typeof(prop) != "undefined" && prop == 'debug') return inDebug();
         var setting = DigiWebApp.Settings.find()[0];
         if ( typeof(setting) !== "undefined" ) {
         	var propvalue = setting.get(prop); 
@@ -1562,6 +1563,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES);
         	}
         }
+    	if (typeof(prop) != "undefined" && prop == 'debug') return inDebug();
     }
       
 	, featureAvailable: function(featureId) {

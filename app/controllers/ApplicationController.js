@@ -908,7 +908,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, devicereadyhandler: function() {
 		
-		if (isDebug()) alert(onIOS + ", devicereadyhandler " + "ApplicationController:911");
+		if (inDebug()) alert(onIOS + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
 	    window.navigator.geolocation.getCurrentPosition(function(location) {
@@ -951,11 +951,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.ApplicationController.startNotification();
 		}
 
-		if (DigiWebApp.SettingsController.getSetting('debug')) { 
-        	DigiWebApp.SettingsController.globalDebugMode = YES; 
-        } else {
-        	DigiWebApp.SettingsController.globalDebugMode = NO; 
-        }
+		inDebug();
 		
 		try {
 			if (DigiWebApp.SettingsController.featureAvailable('417')) {
@@ -984,7 +980,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, realDeviceReadyHandler: function() {
 		
-		if (isDebug()) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:987");
+		if (inDebug()) alert(onIOS + ", realDeviceReadyHandler " + "ApplicationController:987");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
 //		try {
@@ -1334,11 +1330,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
         
-        if (DigiWebApp.SettingsController.getSetting('debug')) { 
-        	DigiWebApp.SettingsController.globalDebugMode = YES; 
-        } else {
-        	DigiWebApp.SettingsController.globalDebugMode = NO; 
-        }
+		inDebug();
         
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
@@ -2664,11 +2656,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		that.setCallbackStatus('features', 'local', YES);
     	}
 
-    	if (DigiWebApp.SettingsController.getSetting('debug')) { 
-    		DigiWebApp.SettingsController.globalDebugMode = YES; 
-    	} else {
-    		DigiWebApp.SettingsController.globalDebugMode = NO; 
-    	}
+		inDebug();
 
     	if ((DigiWebApp.SettingsController.featureAvailable('409')) 
     		&& (DigiWebApp.ApplicationController.profilingIntervalVar === null)) {
@@ -2869,11 +2857,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             this.setCallbackStatus('features', 'local', YES);
         }
 
-        if (DigiWebApp.SettingsController.getSetting('debug')) { 
-        	DigiWebApp.SettingsController.globalDebugMode = YES; 
-        } else {
-        	DigiWebApp.SettingsController.globalDebugMode = NO; 
-        }
+		inDebug();
 
     	if ((DigiWebApp.SettingsController.featureAvailable('409')) && (DigiWebApp.ApplicationController.profilingIntervalVar === null)) {
 			if (DigiWebApp.SettingsController.featureAvailable('412')) {

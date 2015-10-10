@@ -13,21 +13,25 @@ var logDesign = false;
 var staticDebugging = true; // for hotfix debugging without credentials etc.
 
 var staticDebuggingAlertShown = false;
-function isDebug() {
-	if (staticDebugging) {
-		if (!staticDebuggingAlertShown) {
-			staticDebuggingAlertShown = true;
-			alert("!!! staticDebugging activated !!! Do not release this Package!");
-		}
-		return true;
-	}
+function inDebug() {
 	try {
+		if (staticDebugging) {
+			if (!staticDebuggingAlertShown) {
+				staticDebuggingAlertShown = true;
+				alert("!!! staticDebugging activated !!! Do not release this Package!");
+			}
+			return true;
+		}
 	    for (var i = 0; i < localStorage.length; i++) {
 	        var k = localStorage.key(i);
 	        var regexResult = new RegExp('^' + M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'Settings_').exec(k);
 	        if (regexResult) {
 	            var record = JSON.parse(localStorage.getItem(k));
-	            return parseBool(record.debug);
+	            var myDebug = parseBool(record.debug);
+	            if (typeof(DigiWebApp) != "undefined" && typeof(DigiWebApp.SettingsController) != "undefined") {
+	            	DigiWebApp.SettingsController.globalDebugMode = myDebug;
+	            }
+	            return myDebug;
 	        }
 	    }
 	} catch(e) {}
