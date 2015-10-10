@@ -100,32 +100,21 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	
         if (that.showCredentialsAlert && !that.credentialsAlertShown) {
-            if (
-            	  (    ( M.Environment.getPlatform().substr(0,4) === "iPad"   )
-            	    || ( M.Environment.getPlatform().substr(0,6) === "iPhone" )
-                  )
-                  && ( typeof(device) !== "undefined" ) 
-            ) {
-            	// we are on iOS inside a native container
-//            	if ((device.version >= "5.1" && DigiWebApp.SettingsController.showIOSMessage) && (false)) {
-//            		DigiWebApp.NavigationController.toNoSettingsiOSPage();
-//            	} else {
-            		DigiWebApp.ApplicationController.enforceChefToolOnly();
-            		console.log("device.version: " + device.version);
-    	        	DigiWebApp.ApplicationController.nativeAlertDialogView({
-    	                  title: M.I18N.l('noCredentials')
-    	                , message: M.I18N.l('noCredentialsMsg')
-    	            });
-//            	}
-            } else {
-	            // any other platform
-        		DigiWebApp.ApplicationController.enforceChefToolOnly();
-	        	DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                  title: M.I18N.l('noCredentials')
-	                , message: M.I18N.l('noCredentialsMsg')
-	            });
-            }
-            that.credentialsAlertShown = true;
+    		DigiWebApp.ApplicationController.enforceChefToolOnly();
+    		//console.log("device.version: " + device.version);
+        	DigiWebApp.ApplicationController.nativeAlertDialogView({
+                  title: M.I18N.l('noCredentials')
+                , message: M.I18N.l('noCredentialsMsg')
+                , callbacks: {
+                    confirm: {
+                        action: function() {
+	    					var that = this;
+	    					this.credentialsAlertShown = true;
+	    					DigiWebApp.NavigationController.toSettingsPage();
+                        }
+                    }
+                }
+            });
         }
     	
         that.defaultsettings = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object);
