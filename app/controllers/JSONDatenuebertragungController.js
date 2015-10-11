@@ -682,7 +682,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		};
 
 		var sendObj = {
-			  data: data
+			  data: JSON.parse(data)
 			, webservice: "konfigurationen"
 			, loaderText: M.I18N.l('sendDataMsg')
 			, successCallback: internalSuccessCallback
