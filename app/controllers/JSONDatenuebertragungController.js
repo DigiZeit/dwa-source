@@ -674,36 +674,28 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 		var internalSuccessCallback = function(data2, msg, request) {
 			// weiter in der Verarbeitungskette
-			mysuccessCallback();
+			if (typeof(mysuccessCallback) == "function") mysuccessCallback();
 		};
 
 		var internalErrorCallback = function() {
-			myerrorCallback();
+			if (typeof(myerrorCallback) == "function") myerrorCallback();
 		};
 
 		var sendObj = {
-			  data: JSON.parse(data)
+			  data: data
 			, webservice: "konfigurationen"
 			, loaderText: M.I18N.l('sendDataMsg')
 			, successCallback: internalSuccessCallback
 			, errorCallback: internalErrorCallback
-			//, additionalQueryParameter:
-			//, timeout: 60000
 		};
-		DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+		that.sendData(sendObj);
 		
 	}
 
-    , buildConfigurationJson: function(mysettings) {
-    	var mitarbeiterId = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
+    , buildConfigurationJson: function() {
+    	var settings = DigiWebApp.Settings.find();
+    	var mitarbeiterId = settings[0].get('mitarbeiterId');
     	var configArray = [];    
-    	var settings;
-    	if (typeof(mysettings) === 'object' && !_.isArray(mysettings)) {
-    		// if an object was passed, push it into an array, to have one behaviour
-    		settings = [mysettings];  
-    	} else {
-    		settings = mysettings;
-    	}
     	if (_.isArray(settings)) {
     		for (var i in settings) {
     			var setting = settings[i];
@@ -718,8 +710,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
     			}
     		}
     	}
-    	var configurations = {konfigurationen: configArray};
-    	return JSON.stringify(configurations);
+    	return {konfigurationen: configArray};
     }
 
 	, empfangeTaetigkeiten: function(successCallback, errorCallback) {

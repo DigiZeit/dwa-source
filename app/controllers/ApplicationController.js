@@ -1483,7 +1483,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , startsyncAuthenticated: function(isFirstLoad) {
-    	//alert("in startsync");
+    	var that = this;
 
     	writeToLog("startsync");
 
@@ -1495,7 +1495,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
         // nach Upload der Sonderbuchungen mit regulärem Stammdatenabgleich weitermachen
         var contSync = function() {
-            DigiWebApp.SettingsController.sendConfiguration();
+        	DigiWebApp.JSONDatenuebertragungController.sendeKonfiguration(
+        		  that.getFeaturesFromRemote        		
+        		, that.getFeaturesFromRemote
+        	);
         }
         
         // lade Sonderbuchungen
