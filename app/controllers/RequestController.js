@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6475
+    , softwareVersion: 6476
 
 
     /**
@@ -507,6 +507,7 @@ DigiWebApp.RequestController = M.Controller.extend({
     // Bugfix: 3265 XML-WebService -> RESTful
     // empfangeUrl -> allgemein/empfangeUrl
     , sendConfiguration: function(obj) {
+    	writeToLog("RequestController.sendConfiguration");
     	// all callbacks lead to DigiWebApp.ApplicationController.authenticateSuccess()
         // call authenticate
 //    	// TODO: authenticate nicht hier aufrufen sondern vorziehen (war noch in Session-Logik notwendig)
