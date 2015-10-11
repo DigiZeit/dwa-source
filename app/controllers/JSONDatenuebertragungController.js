@@ -18,26 +18,37 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, AuthentifizierenCode: null
 	
 	, sendData: function(sendObj) {
+		var that = this;
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
 		}
-		if (!DigiWebApp.RequestController.DatabaseServer || (DigiWebApp.RequestController.DatabaseServerTimestamp && (DigiWebApp.RequestController.DatabaseServerTimestamp - new Date().getTime() > 60000))) {
-		  	DigiWebApp.RequestController.getDatabaseServer(function(obj) {
-		  		DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
-		  	}, null);
+		if (!that.DatabaseServer 
+		|| (that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		{
+		  	that.empfangeUrl(function(obj) {
+		  		that.sendDataWithServer(sendObj);
+		  	});
 		} else {
-			DigiWebApp.JSONDatenuebertragungController.sendDataWithServer(sendObj);
+			that.sendDataWithServer(sendObj);
 		}
 	}
 
 	
 	, sendDataWithServer: function(sendObj) {
 		var that = this;
-		// ToDo: call authenticate
-		return that.sendDataWithServerAuthenticated(sendObj);
-		if (!that.AuthentifizierenCode || that.AuthentifizierenCode == "") {
-			
+		if (!sendObj) {
+			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
+			return;
+		}
+		if (!that.AuthentifizierenCode 
+		|| parseIntRadixTen(that.AuthentifizierenCode) != 1) 
+		{
+		  	that.empfangeUrl(function() {
+		  		that.sendDataWithServerAuthenticated(sendObj);
+		  	});
+		} else {
+			that.sendDataWithServerAuthenticated(sendObj);
 		}
 	}
 	, sendDataWithServerAuthenticated: function(sendObj) {
@@ -103,7 +114,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (!that.DatabaseServer 
 		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
 		{
-			that.empfangeUrl(function(obj) {
+			that.empfangeUrl(function() {
 		  		that.recieveDataWithServer(recieveObj);
 		  	});
 		} else {
@@ -120,7 +131,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (!that.AuthentifizierenCode 
 		|| parseIntRadixTen(that.AuthentifizierenCode) != 1) 
 		{
-			that.authentifizieren(function(obj) {
+			that.authentifizieren(function() {
 				that.recieveDataWithServerAuthenticated(recieveObj);
 		  	});
 		} else {
@@ -215,7 +226,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		DigiWebApp.RequestController.DatabaseServerTimestamp = that.DatabaseServerTimestamp;
 	}
 
-	, empfangeUrl: function(callback, sendObj) {
+	, empfangeUrl: function(callback) {
 		var that = this;
     	
 		if (typeof(callback) != "function") callback = function(){};
@@ -245,42 +256,38 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	    	that.setDatabaseServerTimestamp(new Date().getTime());
 	    	if (typeof(device) === "undefined") {
 	    		if ((location.host !== that.DatabaseServer)) {
-		        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
-			            	  title: M.I18N.l('wrongServer')
-		    		        , message: M.I18N.l('wrongServerMessage')
-				            , confirmButtonValue: M.I18N.l('yes')
-		            		, cancelButtonValue: M.I18N.l('appZuruecksetzen')
-		            		, callbacks: {
-		                		  confirm: {
-		                    		  target: this
-		                    		, action: function() {
-							    			location.href = 'http://' + that.DatabaseServer + location.pathname;
-	                    				}
-		                			}
-		                		, cancel: {
-		                    		  target: this
-		                    		, action: function() {
-                    					DigiWebApp.ApplicationController.deleteAllData(); 
-		    							if (typeof(navigator.app) !== "undefined") {
-											if (typeof(location.origin) !== "undefined") {
-												navigator.app.loadUrl(location.origin + location.pathname);					
-											} else {
-												navigator.app.loadUrl(location.protocol + '//' + location.pathname);
-											}
-		    							} else {
-		    								window.location.reload();
-		    							}
-		                    		}
-		                		}
-		            		}
-		        		});
-        		        
-	    		} else {
-					callback(sendObj);
+	        		DigiWebApp.ApplicationController.nativeConfirmDialogView({
+		            	  title: M.I18N.l('wrongServer')
+	    		        , message: M.I18N.l('wrongServerMessage')
+			            , confirmButtonValue: M.I18N.l('yes')
+	            		, cancelButtonValue: M.I18N.l('appZuruecksetzen')
+	            		, callbacks: {
+	                		  confirm: {
+	                    		  target: this
+	                    		, action: function() {
+						    			location.href = 'http://' + that.DatabaseServer + location.pathname;
+                    				}
+	                			}
+	                		, cancel: {
+	                    		  target: this
+	                    		, action: function() {
+                					DigiWebApp.ApplicationController.deleteAllData(); 
+	    							if (typeof(navigator.app) !== "undefined") {
+										if (typeof(location.origin) !== "undefined") {
+											navigator.app.loadUrl(location.origin + location.pathname);					
+										} else {
+											navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+										}
+	    							} else {
+	    								window.location.reload();
+	    							}
+	                    		}
+	                		}
+	            		}
+	        		});
 	    		}
-	    	} else {
-	    		callback(sendObj);
 			}
+	    	callback();
         };
     	var errorFunc = function(xhr, err) {
         	// asking primary-gateway failed --> ask gateway-pool
@@ -317,7 +324,20 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		that.recieveDataWithServerAuthenticated(receiveObj);
 	}
 	
-	, authentifizieren: function(callback, sendObj) {
+	, authentifizieren: function(callback) {
+		var that = this;
+		if (!that.DatabaseServer 
+		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		{
+			that.empfangeUrl(function() {
+		  		that.authentifizierenWithServer(callback);
+		  	});
+		} else {
+			that.authentifizierenWithServer(callback);
+		}
+	}
+	
+	, authentifizierenWithServer: function(callback) {
 		var that = this;
 		if (typeof(callback) != "function") callback = function(){};
 		var evalCode = function(code) {
