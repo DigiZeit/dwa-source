@@ -559,7 +559,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	// i guess we are not on a mobile device --> no deviceready-event
         	this.devicereadyhandler();
         } else {
-        	if (typeof(device) === "undefined") { 
+        	if (typeof(device) == "undefined" || navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) { 
+			    if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device undefined --> setTimeout and register deviceready");
 	        	// register deviceready-event and wait for it to fire
         		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", DigiWebApp.SettingsController.getSetting('startTimeout'));
@@ -567,6 +568,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
         		
         	} else {
+			    if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device defined --> devicereadyhandler");
         		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
@@ -1001,6 +1003,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, realDeviceReadyHandler: function() {
 		var that = this;
 		
+		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 		if (!that.realdevicereadyhandlerDone) that.realdevicereadyhandlerDone = true;
 
 		//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
