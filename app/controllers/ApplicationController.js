@@ -3366,7 +3366,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
 				    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
 				    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-					    		doUpdate();
+				    			DigiWebApp.ApplicationController.syncRunning = NO;
+				    			doUpdate();
 				    		} else {
 				    			// Fehlermeldung
 				    			DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -3388,6 +3389,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    				, geraeteIdOverride: true
 	    				//, modus: 
 	      		};
+	    		DigiWebApp.ApplicationController.syncRunning = YES;
 	    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
     		}
         	var obj = {

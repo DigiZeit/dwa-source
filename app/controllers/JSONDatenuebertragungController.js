@@ -19,7 +19,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendData: function(sendObj) {
 		var that = this;
-    	writeToLog("sendData");
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
@@ -40,7 +39,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendDataWithServer: function(sendObj) {
 		var that = this;
-    	writeToLog("sendDataWithServer");
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
@@ -59,7 +57,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 	, sendDataWithServerAuthenticated: function(sendObj) {
 		var that = this;
-    	writeToLog("sendDataWithServerAuthenticated");
 		var data = sendObj['data'];
 		var webservice = sendObj['webservice'];
 		var loaderText = sendObj['loaderText'];
@@ -113,7 +110,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, recieveData: function(recieveObj) {
 		var that = this;
-    	writeToLog("recieveData");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -133,7 +129,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, recieveDataWithServer: function(recieveObj) {
 		var that = this;
-    	writeToLog("recieveDataWithServer");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -153,7 +148,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, recieveDataWithServerAuthenticated: function(recieveObj) {
 		var that = this;
-    	writeToLog("recieveDataWithServerAuthenticated");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -187,7 +181,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
     	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
-    	if (DigiWebApp.SettingsController.getSetting('debug')) {
+    	if (inDebug()) {
     		writeToLog("myURL '" + myURL + "'");
     	}
 		M.Request.init({
