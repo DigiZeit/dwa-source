@@ -727,11 +727,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, timeouthappened: false
 	
 	, timeoutdevicereadyhandler: function() {
+		var that = this;
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+		if (that.devicereadyhandlerDone || that.realdevicereadyhandlerDone) return;
 		DigiWebApp.ApplicationController.timeouthappened = true;
 		var myStartInfo = "DIGI-WebApp hat Plattform \"" + M.Environment.getPlatform() + "\" (" + navigator.userAgent + ") erkannt. Es werden keine Eventhandler registriert! (Version " + M.Application.getConfig('version') + ")";
-        console.log(myStartInfo);
-        //writeToLog(myStartInfo);
+        //console.log(myStartInfo);
+        writeToLog(myStartInfo);
         // if in Chrome: enable FileSystem
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
@@ -906,7 +908,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 	}
 	
+	, devicereadyhandlerDone: false
 	, devicereadyhandler: function() {
+		var that = this;
+		
+		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+
+		if (!that.devicereadyhandlerDone) that.devicereadyhandlerDone = true;
 		
 		//if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
@@ -989,8 +997,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 	}
 	
+	, realdevicereadyhandlerDone: false
 	, realDeviceReadyHandler: function() {
+		var that = this;
 		
+		if (!that.realdevicereadyhandlerDone) that.realdevicereadyhandlerDone = true;
+
 		//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
