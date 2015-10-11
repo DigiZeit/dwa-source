@@ -176,6 +176,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, empfangeUrl: function(callback, sendObj) {
 		var that = this;
     	
+		if (typeof(callback) != "function") callback = function(){};
+		
 		DigiWebApp.RequestController.DatabaseServer = "";
     	var myGatewayServer = DigiWebApp.RequestController.GatewayServer;
 
