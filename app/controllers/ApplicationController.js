@@ -486,6 +486,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , skipEvents: false
     
     , regSecEv: function(isFirstLoad) {
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
     	console.log(DigiWebApp.app.config.version);
     	var that = this;
     	setTimeout(function() {

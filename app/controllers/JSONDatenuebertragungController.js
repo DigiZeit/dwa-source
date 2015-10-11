@@ -341,8 +341,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var that = this;
 		if (typeof(callback) != "function") callback = function(){};
 		var evalCode = function(code) {
-				switch(code) {
-	            case '1':
+				switch(parseIntRadixTen(code)) {
+	            case 1:
 	        		var timestampNow = D8.now().getTimestamp();
 	        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
 	        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
@@ -381,7 +381,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                DigiWebApp.ApplicationController.enforceChefToolOnly();
 	        		break;
 	            
-	            case '2':
+	            case 2:
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError2')
@@ -390,7 +390,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
-	            case '3':
+	            case 3:
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError3')
