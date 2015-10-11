@@ -332,6 +332,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, authentifizieren: function(callback) {
 		var that = this;
+		if (!DigiWebApp.SettingsController.EnforceCredentials()) {
+			return;
+		}
 		if (!that.DatabaseServer 
 		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
 		{

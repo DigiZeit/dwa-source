@@ -1487,17 +1487,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	DigiWebApp.ApplicationController.syncStartTimestamp = D8.now().getTimestamp();
 
-        // authentication data
-        var company = DigiWebApp.SettingsController.getSetting('company');
-        var password = DigiWebApp.SettingsController.getSetting('password');
-
-		if(!company || !password) {
-            DigiWebApp.NavigationController.toBookTimePage(YES);
-            DigiWebApp.SettingsController.showCredentialsAlert = YES;
-            DigiWebApp.NavigationController.toSettingsPage(YES);
-            return;
-        }
-
         M.Application.config.useTransitions = NO;
 
     	DigiWebApp.ApplicationController.syncRunning = YES;
@@ -3346,7 +3335,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //        	}
 
         	// mit dem übergebenen callback weitermachen
-    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "done --> calling callback");
+    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "done --> calling callback");
 	    	callback();
 	    	
     	}
@@ -3399,7 +3388,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	success: {
 	                target: this
 	              , action: function() {
-        				if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "authenticate.success");
+        				//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "authenticate.success");
 		        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
 		        		if (authCode != '1') {
 							return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
@@ -3410,7 +3399,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	, error: {
 	                target: this
 	              , action: function(error) {
-    					if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "authenticate.error " + JSON.stringify(error));
+    					//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "authenticate.error " + JSON.stringify(error));
 		                DigiWebApp.NavigationController.toBookTimePage(YES);
 		                DigiWebApp.SettingsController.showCredentialsAlert = YES;
 		                DigiWebApp.NavigationController.toSettingsPage(YES);
@@ -3418,11 +3407,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        		}
 	        	}
         	}
-    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "vor authenticate");
+    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "vor authenticate");
         	DigiWebApp.RequestController.authenticate(obj);
 
     	} else {
-    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "mitarbeiterId vorhanden --> doUpdate");
+    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "mitarbeiterId vorhanden --> doUpdate");
     		doUpdate();
     	}
     	
