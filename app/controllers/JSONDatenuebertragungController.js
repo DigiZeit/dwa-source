@@ -597,6 +597,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendeSonderbuchungen: function(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay) {
 		
+    	writeToLog("sendeSonderbuchungen");
 		if (!myisClosingDay || !mybuchungen || mybuchungen.length == 0) {
 		
 			mysuccessCallback();

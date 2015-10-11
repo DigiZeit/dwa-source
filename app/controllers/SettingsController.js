@@ -1604,6 +1604,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	}
 
     , sendConfiguration: function() {
+    	writeToLog("sendConfiguration");
     	//alert("in sendConfiguration");
         var settings = DigiWebApp.Settings.find();    		
     	//alert("typeof(settings)=" + typeof(settings));
