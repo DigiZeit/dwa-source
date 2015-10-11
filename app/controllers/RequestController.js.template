@@ -235,67 +235,12 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , authenticate: function(obj) {
     	
-//        // empfange den konfigurierten Mitarbeiternamen
-//    	var myFunc = function(obj) {
-//    		writeToLog("aktualisiere Mitarbeiter des Benutzers in authenticate");
-//    		var recieveObj = {
-//				  webservice: "mitarbeiter"
-//				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-//				, successCallback: function(data){
-//					if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-//						DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-//						DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-//						DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-//					}
-//					DigiWebApp.RequestController.getDatabaseServer(DigiWebApp.RequestController.authenticateWithDatabaseServer, obj);
-//				}
-//				, errorCallback: function(error) {
-//					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-//					// Fehlermeldung
-//					DigiWebApp.ApplicationController.nativeAlertDialogView({
-//				        title: M.I18N.l('offlineWorkNotPossible')
-//				      , message: M.I18N.l('offlineWorkNotPossibleMsg')
-//					});
-//				}
-//				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-//				//, timeout: 
-//				, geraeteIdOverride: true
-//				//, modus: 
-//			};
-//    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
-//    	};
-//
-//    	//DigiWebApp.RequestController.getDatabaseServer(myFunc, obj);
-//    	//myFunc(obj);
     	DigiWebApp.RequestController.getDatabaseServer(
     			DigiWebApp.RequestController.authenticateWithDatabaseServerRestful, 
     			obj);
+    	
     }
-/*
-    , authenticateWithDatabaseServer: function(obj) {
-		//writeToLog("in authenticateWithDatabaseServer");
 
-        DigiWebApp.RequestController.saveCallbacks(obj.success, obj.error, 'authenticate');
-
-        var firmenId = DigiWebApp.SettingsController.getSetting('company');
-        var kennwort = DigiWebApp.SettingsController.getSetting('password');
-        var geraeteId = DigiWebApp.SettingsController.getSetting('workerId'); //1; // 1: ein einzelner mitarbeiter, 2: kolonne
-        var geraeteTyp = 2; // fixed => 2 stands for app
-        //var softwareVersion = M.Application.getConfig('version');
-        
-		//alert('firmenId=' + firmenId + '&kennwort=' + kennwort + '&geraeteId=' + geraeteId + '' + '&geraeteTyp=' + geraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf());
-		
-        var params = {
-              url: 'authentifizieren'
-            , urlParams: 'firmenId=' + firmenId + '&kennwort=' + kennwort + '&geraeteId=' + geraeteId + '' +
-                '&geraeteTyp=' + geraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf()
-            , loaderText: M.I18N.l('authenticateLoader')
-            , source: 'authenticate'
-        };
-
-        DigiWebApp.RequestController.makeRequest(_.extend(obj, params));
-    }
- */
     // Bugfix: 3265 XML-WebService -> RESTful
     // authentifizieren -> allgemein/authentifizieren
     , authenticateWithDatabaseServerRestful: function(obj) {

@@ -913,7 +913,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    //  in order to prompt the user for Location permission.
 		try {
 			if (typeof(window) != "undefined" && typeof(window.navigator) != "undefined" && typeof(window.navigator.geolocation) != "undefined" && typeof(window.navigator.geolocation.getCurrentPosition) != "undefined") {
-			    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "getCurrentPosition()");
+			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "getCurrentPosition()");
 				window.navigator.geolocation.getCurrentPosition(function(location) {
 			        //console.log('Location from Phonegap');
 				    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "location=" + JSON.stringify(location));
@@ -924,7 +924,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} catch(e) {
 			
 		}
-	    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "after getCurrentPosition");
+	    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "after getCurrentPosition");
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
@@ -991,7 +991,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, realDeviceReadyHandler: function() {
 		
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
+		//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
 //		try {
@@ -1032,7 +1032,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
 	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
 	    	DigiWebApp.ApplicationController.init(true);
-	    	if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
+	    	//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
 	    	//alert("nach ApplicationController.init");
 	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
 	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
@@ -1338,11 +1338,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor SettingsController.init");
-        //alert("vor SettingsController.init");
+		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "nach SettingsController.init");
+		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "nach SettingsController.init");
         
 		if (inDebug() && onIOS) {
 			DigiWebApp.SettingsController.setSetting("debugDatabaseServer", "vespasian.digi-zeiterver.de");
@@ -1408,37 +1407,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             DigiWebApp.NavigationController.toSettingsPage(YES);
             return;
         } else {
-        	var obj = {
-            	success: {
-	                target: this
-	              , action: function() {
-        				if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
-		        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
-		        		if (authCode != '1') {
-							return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
-		        		}
-		                DigiWebApp.ApplicationController.updateModels(fortfahren);        	
-	        		}
-	        	}
-            	, error: {
-	                target: this
-	              , action: function() {
-    					if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
-		                DigiWebApp.NavigationController.toBookTimePage(YES);
-		                DigiWebApp.SettingsController.showCredentialsAlert = YES;
-		                DigiWebApp.NavigationController.toSettingsPage(YES);
-		                return;
-	        		}
-	        	}
-        	}
-    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor authenticate");
-        	DigiWebApp.RequestController.authenticate(obj);
+        	DigiWebApp.ApplicationController.updateModels(fortfahren);
         }
-        
-        //alert("startsync");
-		//this.startsync();
-        //DigiWebApp.BookingController.sendBookings(NO, YES);
-        
+                
     }
     
     , enforceChefToolOnly: function() {
@@ -3387,41 +3358,68 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	|| (DigiWebApp.SettingsController.getSetting("mitarbeiterId") === "")
     	|| (parseIntRadixTen(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) === 0)
     	) {
-    		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
-    		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
-    		var recieveObj = {
-    				  webservice: "mitarbeiter"
-    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-    				, successCallback: function(data){
-			    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-			    			//alert(data.mitarbeiter.length);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-			    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-				    		doUpdate();
-			    		} else {
-			    			// Fehlermeldung
-			    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-			                    title: M.I18N.l('offlineWorkNotPossible')
-			                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-			              });
-			    		}
-			    	}
-    				, errorCallback: function(error) {
-    		    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    	    			// Fehlermeldung
-    	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-    	                    title: M.I18N.l('offlineWorkNotPossible')
-    	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
-    	    			});
-    		    	}
-    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-    				//, timeout: 
-    				, geraeteIdOverride: true
-    				//, modus: 
-      		};
-    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+    		var getMitarbeiterId = function() {
+	    		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
+	    		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
+	    		var recieveObj = {
+	    				  webservice: "mitarbeiter"
+	    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+	    				, successCallback: function(data){
+				    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+				    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+				    			//alert(data.mitarbeiter.length);
+				    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+				    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+				    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+					    		doUpdate();
+				    		} else {
+				    			// Fehlermeldung
+				    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+				                    title: M.I18N.l('offlineWorkNotPossible')
+				                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+				              });
+				    		}
+				    	}
+	    				, errorCallback: function(error) {
+	    		    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+	    	    			// Fehlermeldung
+	    	    			DigiWebApp.ApplicationController.nativeAlertDialogView({
+	    	                    title: M.I18N.l('offlineWorkNotPossible')
+	    	                  , message: M.I18N.l('offlineWorkNotPossibleMsg')
+	    	    			});
+	    		    	}
+	    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+	    				//, timeout: 
+	    				, geraeteIdOverride: true
+	    				//, modus: 
+	      		};
+	    		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+    		}
+        	var obj = {
+            	success: {
+	                target: this
+	              , action: function() {
+        				if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
+		        		var authCode = DigiWebApp.RequestController.AuthentifizierenCode.toString();
+		        		if (authCode != '1') {
+							return DigiWebApp.ApplicationController.authenticateSuccess(authCode);
+		        		}
+		        		getMitarbeiterId();        	
+	        		}
+	        	}
+            	, error: {
+	                target: this
+	              , action: function() {
+    					if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "authenticate.success");
+		                DigiWebApp.NavigationController.toBookTimePage(YES);
+		                DigiWebApp.SettingsController.showCredentialsAlert = YES;
+		                DigiWebApp.NavigationController.toSettingsPage(YES);
+		                return;
+	        		}
+	        	}
+        	}
+    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor authenticate");
+        	DigiWebApp.RequestController.authenticate(obj);
 
     	} else {
     		doUpdate();
