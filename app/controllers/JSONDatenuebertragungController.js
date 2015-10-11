@@ -19,6 +19,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendData: function(sendObj) {
 		var that = this;
+    	writeToLog("sendData");
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
@@ -37,6 +38,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendDataWithServer: function(sendObj) {
 		var that = this;
+    	writeToLog("sendDataWithServer");
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
@@ -52,8 +54,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 	}
 	, sendDataWithServerAuthenticated: function(sendObj) {
-		//var that = this;
-
+		var that = this;
+    	writeToLog("sendDataWithServerAuthenticated");
 		var data = sendObj['data'];
 		var webservice = sendObj['webservice'];
 		var loaderText = sendObj['loaderText'];
@@ -107,6 +109,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, recieveData: function(recieveObj) {
 		var that = this;
+    	writeToLog("recieveData");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -124,6 +127,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, recieveDataWithServer: function(recieveObj) {
 		var that = this;
+    	writeToLog("recieveDataWithServer");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -141,6 +145,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, recieveDataWithServerAuthenticated: function(recieveObj) {
 		var that = this;
+    	writeToLog("recieveDataWithServerAuthenticated");
 		if (!recieveObj) {
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
@@ -234,7 +239,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, empfangeUrl: function(callback) {
 		var that = this;
-    	
+    	writeToLog("empfangeUrl");
 		if (typeof(callback) != "function") callback = function(){};
 		
     	var myGatewayServer = that.GatewayServer;
@@ -332,6 +337,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, authentifizieren: function(callback) {
 		var that = this;
+    	writeToLog("authentifizieren");
 		if (!DigiWebApp.SettingsController.EnforceCredentials()) {
 			return;
 		}
@@ -348,6 +354,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, authentifizierenWithServer: function(callback) {
 		var that = this;
+    	writeToLog("authentifizierenWithServer");
 		if (typeof(callback) != "function") callback = function(){};
 		var evalCode = function(code) {
 				switch(parseIntRadixTen(code)) {
