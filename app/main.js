@@ -1110,7 +1110,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 }
 
 if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") { 
-	if (inDebug()) alert(onIOS + ", " + "main.js:1086");
+	if (inDebug() && staticDebugging) alert(navigator.platform + ", Start Notification ");
 	try {
 		window.addEventListener('load', function () {
 		  Notification.requestPermission(function (status) {
