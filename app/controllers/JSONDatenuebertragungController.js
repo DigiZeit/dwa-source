@@ -28,9 +28,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		|| (that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
 		{
 		  	that.empfangeUrl(function(obj) {
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		  		that.sendDataWithServer(sendObj);
 		  	});
 		} else {
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			that.sendDataWithServer(sendObj);
 		}
 	}
@@ -47,9 +49,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		|| parseIntRadixTen(that.AuthentifizierenCode) != 1) 
 		{
 		  	that.empfangeUrl(function() {
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		  		that.sendDataWithServerAuthenticated(sendObj);
 		  	});
 		} else {
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			that.sendDataWithServerAuthenticated(sendObj);
 		}
 	}
@@ -85,7 +89,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		                );
 		            }
 		            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
-		                console.log(xhr);
+		                //console.log(xhr);
 		                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
 						try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
 		                successCallback(data, msg, xhr);
@@ -118,9 +122,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
 		{
 			that.empfangeUrl(function() {
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		  		that.recieveDataWithServer(recieveObj);
 		  	});
 		} else {
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			that.recieveDataWithServer(recieveObj);
 		}
 	}
@@ -136,9 +142,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		|| parseIntRadixTen(that.AuthentifizierenCode) != 1) 
 		{
 			that.authentifizieren(function() {
+				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				that.recieveDataWithServerAuthenticated(recieveObj);
 		  	});
 		} else {
+			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			that.recieveDataWithServerAuthenticated(recieveObj);
 		}
 	}
@@ -668,8 +676,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, sendeKonfiguration: function(mysuccessCallback, myerrorCallback) {
 		var that = this;
 		
-    	writeToLog("sendeKonfiguration");
-
 		var data = that.buildConfigurationJson(DigiWebApp.Settings.find());
 		
 		var internalSuccessCallback = function(data2, msg, request) {
