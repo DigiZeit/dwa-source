@@ -1614,224 +1614,224 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
 
-    /**
-     * Routes to authenticate function of the DigiWebApp.RequestController.
-     * Success callback calls authenticateSuccess of this controller.
-     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-     */
-    , authenticate: function() {
-		
-    	DigiWebApp.RequestController.authenticate({
-              success: {
-                  target: this
-                , action: 'authenticateSuccess'
-            }
-            , error: {
-                  target: this
-                , action: function() {
-            		trackError("authenticate-error");
-        			this.proceedWithLocalData("authenticate");
-                }
-            }
-        });
-
-    }
+//    /**
+//     * Routes to authenticate function of the DigiWebApp.RequestController.
+//     * Success callback calls authenticateSuccess of this controller.
+//     * Error callback calls proceedWithLocalData to check whether offline work is possible.
+//     */
+//    , authenticate: function() {
+//		
+//    	DigiWebApp.RequestController.authenticate({
+//              success: {
+//                  target: this
+//                , action: 'authenticateSuccess'
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//            		trackError("authenticate-error");
+//        			this.proceedWithLocalData("authenticate");
+//                }
+//            }
+//        });
+//
+//    }
     
     , timestampMitarbeiterZuletztGeladen: null
     
-    /**
-     *
-     * The success callback for authenticate.
-     * Dispatches between different return codes inside the server response.
-     * 1: successful login
-     * 2: invalid device id
-     * 3: company id or password invalid
-     *
-     * when 1 is returned by the server, the order request is started
-     * otherwise alert according to the kind of authentication error are shown and the view is switched
-     * to the settings page to let the user adjust the credentials.
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg 
-     * @param xhr The XMLHTTPRequest object.
-     */
-    // Bugfix: 3265 msg and xhr are not used
-    , authenticateSuccess: function(data) {
-
-    	//if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
-        
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", authenticateSuccess " + JSON.stringify(data));
-
-		switch(data) {
-            case '1':
-        		var timestampNow = D8.now().getTimestamp();
-        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
-        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
-            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate", function(){
-	            		var recieveObj = {
-	          				  webservice: "mitarbeiter"
-	          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-	          				, successCallback: function(data){
-		        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-		        	    		}
-		        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-		        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-		        	    	}
-	          				, errorCallback: function(error) {
-	            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	                			// Fehlermeldung
-	                			DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                                title: M.I18N.l('offlineWorkNotPossible')
-	                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
-	                			});
-	            	    	}
-	          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-	          				//, timeout: 
-	          				, geraeteIdOverride: true
-	          				//, modus: 
-	            		};
-	            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
-            		});
-        		} else {
-    	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-        		}
-
-                DigiWebApp.ApplicationController.enforceChefToolOnly();
-        		break;
-            
-            case '2':
-                //M.DialogView.alert({
-                DigiWebApp.ApplicationController.nativeAlertDialogView({
-                      title: M.I18N.l('authenticationError2')
-                    , message: M.I18N.l('authenticationErrorMsg2')
-                });
-                DigiWebApp.NavigationController.toSettingsPage(YES);
-                break;
-
-            case '3':
-                //M.DialogView.alert({
-                DigiWebApp.ApplicationController.nativeAlertDialogView({
-                      title: M.I18N.l('authenticationError3')
-                    , message: M.I18N.l('authenticationErrorMsg3')
-                });
-                DigiWebApp.NavigationController.toSettingsPage(YES);
-                break;
-
-            default:
-                //M.DialogView.alert({
-                DigiWebApp.ApplicationController.nativeAlertDialogView({
-                      title: M.I18N.l('authenticationError')
-                    , message: M.I18N.l('authenticationErrorMsg')
-                });
-                DigiWebApp.NavigationController.toSettingsPage(YES);
-                break;
-        }
-    }
+//    /**
+//     *
+//     * The success callback for authenticate.
+//     * Dispatches between different return codes inside the server response.
+//     * 1: successful login
+//     * 2: invalid device id
+//     * 3: company id or password invalid
+//     *
+//     * when 1 is returned by the server, the order request is started
+//     * otherwise alert according to the kind of authentication error are shown and the view is switched
+//     * to the settings page to let the user adjust the credentials.
+//     *
+//     * @param data The returned data of the server in JSON, means JS object.
+//     * @param msg 
+//     * @param xhr The XMLHTTPRequest object.
+//     */
+//    // Bugfix: 3265 msg and xhr are not used
+//    , authenticateSuccess: function(data) {
+//
+//    	//if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
+//        
+//		if (inDebug() && staticDebugging) alert(navigator.platform + ", authenticateSuccess " + JSON.stringify(data));
+//
+//		switch(data) {
+//            case '1':
+//        		var timestampNow = D8.now().getTimestamp();
+//        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
+//        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
+//            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate", function(){
+//	            		var recieveObj = {
+//	          				  webservice: "mitarbeiter"
+//	          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
+//	          				, successCallback: function(data){
+//		        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
+//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
+//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+//		        	    		}
+//		        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
+//		        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+//		        	    	}
+//	          				, errorCallback: function(error) {
+//	            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+//	                			// Fehlermeldung
+//	                			DigiWebApp.ApplicationController.nativeAlertDialogView({
+//	                                title: M.I18N.l('offlineWorkNotPossible')
+//	                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
+//	                			});
+//	            	    	}
+//	          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
+//	          				//, timeout: 
+//	          				, geraeteIdOverride: true
+//	          				//, modus: 
+//	            		};
+//	            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+//            		});
+//        		} else {
+//    	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
+//        		}
+//
+//                DigiWebApp.ApplicationController.enforceChefToolOnly();
+//        		break;
+//            
+//            case '2':
+//                //M.DialogView.alert({
+//                DigiWebApp.ApplicationController.nativeAlertDialogView({
+//                      title: M.I18N.l('authenticationError2')
+//                    , message: M.I18N.l('authenticationErrorMsg2')
+//                });
+//                DigiWebApp.NavigationController.toSettingsPage(YES);
+//                break;
+//
+//            case '3':
+//                //M.DialogView.alert({
+//                DigiWebApp.ApplicationController.nativeAlertDialogView({
+//                      title: M.I18N.l('authenticationError3')
+//                    , message: M.I18N.l('authenticationErrorMsg3')
+//                });
+//                DigiWebApp.NavigationController.toSettingsPage(YES);
+//                break;
+//
+//            default:
+//                //M.DialogView.alert({
+//                DigiWebApp.ApplicationController.nativeAlertDialogView({
+//                      title: M.I18N.l('authenticationError')
+//                    , message: M.I18N.l('authenticationErrorMsg')
+//                });
+//                DigiWebApp.NavigationController.toSettingsPage(YES);
+//                break;
+//        }
+//    }
     
-    /**
-     * Calls getOrders on DigiWebApp.RequestController.
-     * Success callback calls proceeds received orders and afterwards starts retrieving positions.
-     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-     */
-    , getOrdersFromRemote: function() {
-
-        DigiWebApp.RequestController.getOrders({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-                    if (this.getOrdersFromRemoteSuccess(data, msg, xhr) === true) {
-                    	// get data sequentially
-                    	this.getPositionsFromRemote();
-                    } else {
-                		//M.DialogView.alert({
-                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-                			  title: M.I18N.l('noOrdersAvailable')
-                			, message: M.I18N.l('noOrdersAvailableMsg')
-                		});
-                		//DigiWebApp.NavigationController.toSettingsPage(YES);
-                    }
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-        			trackError("getOrdersFromRemote-error");
-                    this.proceedWithLocalData("getOrdersFromRemote");
-                }
-            }
-        });
-    }
-
-    /**
-     * The success callback for getOrdersFromRemote.
-     * If correct data is in response the following is done:
-     * 1) the callback status for 'order' and 'remote' is set (means orders are correctly returned by server)
-     * 2) the local available orders are deleted, the corresponding callback status is set
-     * 3) orders, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
-    , getOrdersFromRemoteSuccess: function(data, msg, xhr) {
-            	
-   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-    		data['return'] = data['ns:return'];
-    		try {
-    			this.myns = data['return'][0]['xsi:type'].split(":")[0];
-    			var myns = this.myns;
-    			 _.each(data['return'], function(el) {
-    				 el.auftragsId = el[myns + ':auftragsId'];
-    				 el.auftragsBezeichnung = el[myns + ':auftragsBezeichnung'];
-    			 });
-    		} catch(e) {
-    		}
-    	}
-
-    	if(data['return']) {
-            this.setCallbackStatus('order', 'remote', YES);
-
-            // Clear orders from storages
-            DigiWebApp.Order.deleteAll();
-            this.setCallbackStatus('order', 'local', NO);
-            var mIdArray = [];
-            var rec = null;
-
-            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-                data['return'] = [data['return']];
-            }
-
-            // create a record for each order returned from the server and save it
-            _.each(data['return'], function(el) {
-                rec = DigiWebApp.Order.createRecord({
-                      id: el.auftragsId
-                    , name: el.auftragsBezeichnung
-                });
-                try {
-                    rec.save();
-                    mIdArray.push(rec.m_id);
-                } catch(e) {
-                    // maybe do something here
-                	trackError(e);
-                }
-            });
-
-            localStorage.setItem(this.storagePrefix + '_orderKeys', JSON.stringify(mIdArray));
-
-            this.setCallbackStatus('order', 'local', YES);
-
-            return true;
-
-        } else {
-
-    		return false;
-        }
-
-
-    }
+//    /**
+//     * Calls getOrders on DigiWebApp.RequestController.
+//     * Success callback calls proceeds received orders and afterwards starts retrieving positions.
+//     * Error callback calls proceedWithLocalData to check whether offline work is possible.
+//     */
+//    , getOrdersFromRemote: function() {
+//
+//        DigiWebApp.RequestController.getOrders({
+//              success: {
+//                  target: this
+//                , action: function(data, msg, xhr) {
+//                    if (this.getOrdersFromRemoteSuccess(data, msg, xhr) === true) {
+//                    	// get data sequentially
+//                    	this.getPositionsFromRemote();
+//                    } else {
+//                		//M.DialogView.alert({
+//                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+//                			  title: M.I18N.l('noOrdersAvailable')
+//                			, message: M.I18N.l('noOrdersAvailableMsg')
+//                		});
+//                		//DigiWebApp.NavigationController.toSettingsPage(YES);
+//                    }
+//                }
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//        			trackError("getOrdersFromRemote-error");
+//                    this.proceedWithLocalData("getOrdersFromRemote");
+//                }
+//            }
+//        });
+//    }
+//
+//    /**
+//     * The success callback for getOrdersFromRemote.
+//     * If correct data is in response the following is done:
+//     * 1) the callback status for 'order' and 'remote' is set (means orders are correctly returned by server)
+//     * 2) the local available orders are deleted, the corresponding callback status is set
+//     * 3) orders, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+//     *
+//     * @param data The returned data of the server in JSON, means JS object.
+//     * @param msg
+//     * @param xhr The XMLHTTPRequest object.
+//     */
+//    , getOrdersFromRemoteSuccess: function(data, msg, xhr) {
+//            	
+//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
+//    		data['return'] = data['ns:return'];
+//    		try {
+//    			this.myns = data['return'][0]['xsi:type'].split(":")[0];
+//    			var myns = this.myns;
+//    			 _.each(data['return'], function(el) {
+//    				 el.auftragsId = el[myns + ':auftragsId'];
+//    				 el.auftragsBezeichnung = el[myns + ':auftragsBezeichnung'];
+//    			 });
+//    		} catch(e) {
+//    		}
+//    	}
+//
+//    	if(data['return']) {
+//            this.setCallbackStatus('order', 'remote', YES);
+//
+//            // Clear orders from storages
+//            DigiWebApp.Order.deleteAll();
+//            this.setCallbackStatus('order', 'local', NO);
+//            var mIdArray = [];
+//            var rec = null;
+//
+//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
+//                data['return'] = [data['return']];
+//            }
+//
+//            // create a record for each order returned from the server and save it
+//            _.each(data['return'], function(el) {
+//                rec = DigiWebApp.Order.createRecord({
+//                      id: el.auftragsId
+//                    , name: el.auftragsBezeichnung
+//                });
+//                try {
+//                    rec.save();
+//                    mIdArray.push(rec.m_id);
+//                } catch(e) {
+//                    // maybe do something here
+//                	trackError(e);
+//                }
+//            });
+//
+//            localStorage.setItem(this.storagePrefix + '_orderKeys', JSON.stringify(mIdArray));
+//
+//            this.setCallbackStatus('order', 'local', YES);
+//
+//            return true;
+//
+//        } else {
+//
+//    		return false;
+//        }
+//
+//
+//    }
 
     /**
      * Calls getPositions on DigiWebApp.RequestController.
@@ -2136,6 +2136,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
     }
 
+    /**
+     * The success callback for getWorkPlansFromRemote.
+     * If correct data is in response the following is done:
+     * 1) the callback status for 'workplan' and 'remote' is set (means work plans are correctly returned by server)
+     * 2) the local available work plans are deleted, the corresponding callback status is set
+     * 3) work plans, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+     *
+     * @param data The returned data of the server in JSON, means JS object.
+     * @param msg
+     * @param xhr The XMLHTTPRequest object.
+     */
     , getWorkPlansFromRemoteSuccessRestful: function(data, msg, xhr) {
     	var that = DigiWebApp.ApplicationController;
     	// data is object
@@ -2180,17 +2191,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	}
     }
     
-    /**
-     * The success callback for getWorkPlansFromRemote.
-     * If correct data is in response the following is done:
-     * 1) the callback status for 'workplan' and 'remote' is set (means work plans are correctly returned by server)
-     * 2) the local available work plans are deleted, the corresponding callback status is set
-     * 3) work plans, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
     /*
     , getWorkPlansFromRemoteSuccess: function(data, msg, xhr) {
 
@@ -2264,6 +2264,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	DigiWebApp.JSONDatenuebertragungController.recieveData(receiveObj);
     }
     
+    /**
+     * The success callback for getHandOrdersFromRemote.
+     * If correct data is in response the following is done:
+     * 1) the callback status for 'handOrder' and 'remote' is set (means hand orders are correctly returned by server)
+     * 2) the local available hand orders are deleted, the corresponding callback status is set
+     * 3) hand orders, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+     *
+     * @param data The returned data of the server in JSON, means JS object.
+     * @param msg
+     * @param xhr The XMLHTTPRequest object.
+     */
     , getHandOrdersFromRemoteSuccessRestful: function(data, msg, xhr) {
     	var that = DigiWebApp.ApplicationController;
     	if (data !== null || data !== '') {
@@ -2353,17 +2364,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	}
     }
 
-    /**
-     * The success callback for getHandOrdersFromRemote.
-     * If correct data is in response the following is done:
-     * 1) the callback status for 'handOrder' and 'remote' is set (means hand orders are correctly returned by server)
-     * 2) the local available hand orders are deleted, the corresponding callback status is set
-     * 3) hand orders, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
     /*
     , getHandOrdersFromRemoteSuccess: function(data, msg, xhr) {
         
@@ -2953,138 +2953,138 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
 
-    /**
-     * The success callback for getKolonneFromRemote.
-     *
-     * Distinguishes between two scenarios:
-     * 1) A Kolonne is returned
-     * 2) No Kolonne is returned
-     *
-     * Case 1:
-     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server)
-     * 2) the local available employees are deleted, the corresponding callback status is set
-     * 3) employees, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-     *
-     * 4) If a switch from a "No Kolonne" state of the app occured, the employee selection LS is cleared
-     * 5) If the employee state of the app is different from "Emp Selection done" set to 1 (kolonne loaded but no selection yet)
-     *
-     *
-     * Case 2:
-     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server, even though it's not a kolonnes)
-     * 2) the local available employees are deleted, the corresponding callback status is set
-     * 3) a standard employee with id=0 and name=Standardmitarbeiter is created and preselected and the corresponding local state set
-     *
-     *
-     * In both cases:
-     * 
-     * 1) By calling isReadyToProceed() it is checked, whether the app is available to move to the next screen. otherwise an alert is shown.
-     *    If the app is ready to proceed toBookTimePage() is called on DigiWebApp.NavigationController
-     *
-     * 2) endSession is called to close the session on the remote server
-     *
-     * 
-     *
-     * @param data The returned data of the server in JSON, means JS object.
-     * @param msg
-     * @param xhr The XMLHTTPRequest object.
-     */
-    , getKolonneFromRemoteSuccess: function(data, msg, xhr) {
-    	
-    	if (data) {
-    		if ( typeof(data['return']) === "undefined" ) data['return'] = data['ns:return'];
-    	}
-
-        var mIdArray = [];
-        var k = null;
-
-        if (data && data['return']) {
-            this.setCallbackStatus('kolonne', 'remote', YES);
-
-            // Clear employees from storage
-            DigiWebApp.Employee.deleteAll();
-            this.setCallbackStatus('kolonne', 'local', NO);
-
-            if ( _.isObject(data['return']) && !_.isArray(data['return']) ) {
-                data['return'] = [data['return']];
-            }
-
-            // create a record for each order returned from the server and save it
-    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), data['return'].length, 0);
-            _.each(data['return'], function(el) {
-        		DigiWebApp.ApplicationController.DigiProgressView.increase();
-                k = DigiWebApp.Employee.createRecord({
-                      id: el.id
-                    , name: el.name
-                    , kolonnenId: el.kolonnenId
-                    , isSelected: NO
-                });
-
-                try {
-                	k.save();
-                    mIdArray.push(k.m_id);
-                } catch(e) {
-                	trackError(e);
-                }
-
-            });
-            
-            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
-            
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('kolonne', 'local', YES);
-
-            // clear local storage when switch from no kolonne
-            if(localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) == 0) {
-                localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
-            }
-            if(DigiWebApp.EmployeeController.getEmployeeState() != 2) {
-                DigiWebApp.EmployeeController.setEmployeeState(1); // set it to "kolonne loaded but no selection yet"
-            }
-            
-        } else {
-            // no kolonne => mitarbeiterId = 0
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('kolonne', 'remote', YES);
-
-            // Clear employees from storage
-            DigiWebApp.Employee.deleteAll();
-            this.setCallbackStatus('kolonne', 'local', NO);
-
-            k = DigiWebApp.Employee.createRecord({
-                  id: '0'
-                , name: 'Standardmitarbeiter'
-                , kolonnenId: ''
-                , isSelected: YES
-            }).save();
-            mIdArray.push(k.m_id);
-            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
-            this.setCallbackStatus('kolonne', 'local', YES);
-            DigiWebApp.EmployeeController.setEmployeeState(0);
-        }
-
-        // end session on server
-        this.endSession();
-
-        var empfangeBautagebuch = function() {
-        	var that = DigiWebApp.ApplicationController;
-            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
-    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
-        	} else {
-        		that.afterTransfer();
-        	}
-        }
-
-        var empfangeFestepausendefinitionen = function() {
-        	var that = DigiWebApp.ApplicationController;
-            if (DigiWebApp.SettingsController.featureAvailable('425')) {
-            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
-        	} else {
-        		empfangeBautagebuch();
-        	}
-        }
-    	
-        empfangeFestepausendefinitionen();
-    }
+//    /**
+//     * The success callback for getKolonneFromRemote.
+//     *
+//     * Distinguishes between two scenarios:
+//     * 1) A Kolonne is returned
+//     * 2) No Kolonne is returned
+//     *
+//     * Case 1:
+//     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server)
+//     * 2) the local available employees are deleted, the corresponding callback status is set
+//     * 3) employees, received from remote service, are saved in localstorage again and the corresponding status is set to YES
+//     *
+//     * 4) If a switch from a "No Kolonne" state of the app occured, the employee selection LS is cleared
+//     * 5) If the employee state of the app is different from "Emp Selection done" set to 1 (kolonne loaded but no selection yet)
+//     *
+//     *
+//     * Case 2:
+//     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server, even though it's not a kolonnes)
+//     * 2) the local available employees are deleted, the corresponding callback status is set
+//     * 3) a standard employee with id=0 and name=Standardmitarbeiter is created and preselected and the corresponding local state set
+//     *
+//     *
+//     * In both cases:
+//     * 
+//     * 1) By calling isReadyToProceed() it is checked, whether the app is available to move to the next screen. otherwise an alert is shown.
+//     *    If the app is ready to proceed toBookTimePage() is called on DigiWebApp.NavigationController
+//     *
+//     * 2) endSession is called to close the session on the remote server
+//     *
+//     * 
+//     *
+//     * @param data The returned data of the server in JSON, means JS object.
+//     * @param msg
+//     * @param xhr The XMLHTTPRequest object.
+//     */
+//    , getKolonneFromRemoteSuccess: function(data, msg, xhr) {
+//    	
+//    	if (data) {
+//    		if ( typeof(data['return']) === "undefined" ) data['return'] = data['ns:return'];
+//    	}
+//
+//        var mIdArray = [];
+//        var k = null;
+//
+//        if (data && data['return']) {
+//            this.setCallbackStatus('kolonne', 'remote', YES);
+//
+//            // Clear employees from storage
+//            DigiWebApp.Employee.deleteAll();
+//            this.setCallbackStatus('kolonne', 'local', NO);
+//
+//            if ( _.isObject(data['return']) && !_.isArray(data['return']) ) {
+//                data['return'] = [data['return']];
+//            }
+//
+//            // create a record for each order returned from the server and save it
+//    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), data['return'].length, 0);
+//            _.each(data['return'], function(el) {
+//        		DigiWebApp.ApplicationController.DigiProgressView.increase();
+//                k = DigiWebApp.Employee.createRecord({
+//                      id: el.id
+//                    , name: el.name
+//                    , kolonnenId: el.kolonnenId
+//                    , isSelected: NO
+//                });
+//
+//                try {
+//                	k.save();
+//                    mIdArray.push(k.m_id);
+//                } catch(e) {
+//                	trackError(e);
+//                }
+//
+//            });
+//            
+//            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
+//            
+//    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+//            this.setCallbackStatus('kolonne', 'local', YES);
+//
+//            // clear local storage when switch from no kolonne
+//            if(localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) == 0) {
+//                localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
+//            }
+//            if(DigiWebApp.EmployeeController.getEmployeeState() != 2) {
+//                DigiWebApp.EmployeeController.setEmployeeState(1); // set it to "kolonne loaded but no selection yet"
+//            }
+//            
+//        } else {
+//            // no kolonne => mitarbeiterId = 0
+//    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+//            this.setCallbackStatus('kolonne', 'remote', YES);
+//
+//            // Clear employees from storage
+//            DigiWebApp.Employee.deleteAll();
+//            this.setCallbackStatus('kolonne', 'local', NO);
+//
+//            k = DigiWebApp.Employee.createRecord({
+//                  id: '0'
+//                , name: 'Standardmitarbeiter'
+//                , kolonnenId: ''
+//                , isSelected: YES
+//            }).save();
+//            mIdArray.push(k.m_id);
+//            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
+//            this.setCallbackStatus('kolonne', 'local', YES);
+//            DigiWebApp.EmployeeController.setEmployeeState(0);
+//        }
+//
+//        // end session on server
+//        //this.endSession();
+//
+//        var empfangeBautagebuch = function() {
+//        	var that = DigiWebApp.ApplicationController;
+//            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
+//    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
+//        	} else {
+//        		that.afterTransfer();
+//        	}
+//        }
+//
+//        var empfangeFestepausendefinitionen = function() {
+//        	var that = DigiWebApp.ApplicationController;
+//            if (DigiWebApp.SettingsController.featureAvailable('425')) {
+//            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
+//        	} else {
+//        		empfangeBautagebuch();
+//        	}
+//        }
+//    	
+//        empfangeFestepausendefinitionen();
+//    }
     
     , afterTransfer: function() {
 		DigiWebApp.ApplicationController.DigiProgressView.hide(); // just in case
@@ -3160,26 +3160,26 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     }
 
-    /**
-     * Calls endSession on DigiWebApp.RequestController.
-     * Both callbacks do nothing.
-     */
-    , endSession: function() {
-		DigiWebApp.ApplicationController.enforceChefToolOnly();
-        DigiWebApp.RequestController.endSession({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-        		}
-            }
-            , error: {
-                  target: this
-                , action: function() {
-    				trackError("endSession-error");
-            	}
-            }
-        });
-    }
+//    /**
+//     * Calls endSession on DigiWebApp.RequestController.
+//     * Both callbacks do nothing.
+//     */
+//    , endSession: function() {
+//		DigiWebApp.ApplicationController.enforceChefToolOnly();
+//        DigiWebApp.RequestController.endSession({
+//              success: {
+//                  target: this
+//                , action: function(data, msg, xhr) {
+//        		}
+//            }
+//            , error: {
+//                  target: this
+//                , action: function() {
+//    				trackError("endSession-error");
+//            	}
+//            }
+//        });
+//    }
 
     /**
      * Sets the callback status of the callback status object (that is a controller property),,,,,,,,,,,,,,,,,,,,,,
