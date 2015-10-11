@@ -357,7 +357,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
 			        	    		}
 			        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-			        	    		callback(sendObj);        		
+			        	    		callback();        		
 			        	    	}
 		          				, errorCallback: function(error) {
 		            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -372,7 +372,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		          				, geraeteIdOverride: true
 		          				//, modus: 
 		            		};
-		            		DigiWebApp.JSONDatenuebertragungController.recieveData(maRecieveObj);
+		            		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServerAuthenticated(maRecieveObj);
 	            		});
 	        		} else {
 	    	    		callback(sendObj);        		
