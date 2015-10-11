@@ -228,7 +228,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, setAuthentifizierenCode: function(code) {
 		var that = this;		
-		that.AuthentifizierenCode = timestamp;
+		that.AuthentifizierenCode = code;
 		DigiWebApp.RequestController.AuthentifizierenCode = that.AuthentifizierenCode;
 	}
 
