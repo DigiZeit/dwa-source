@@ -356,7 +356,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, authentifizierenWithServer: function(callback) {
 		var that = this;
-    	writeToLog("authentifizierenWithServer");
 		if (typeof(callback) != "function") callback = function(){};
 		var evalCode = function(code) {
 				switch(parseIntRadixTen(code)) {
@@ -370,9 +369,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
 		          				, successCallback: function(data){
 			        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
+			        	    			var syncWasRunning = DigiWebApp.ApplicationController.syncRunning;
+			        	    			DigiWebApp.ApplicationController.syncRunning = YES;
 			        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
 			        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
 			        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
+			        	    			DigiWebApp.ApplicationController.syncRunning = syncWasRunning;
 			        	    		}
 			        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
 			        	    		callback();        		
