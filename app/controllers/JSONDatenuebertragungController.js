@@ -375,7 +375,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		            		DigiWebApp.JSONDatenuebertragungController.recieveDataWithServerAuthenticated(maRecieveObj);
 	            		});
 	        		} else {
-	    	    		callback(sendObj);        		
+	    	    		callback();        		
 	        		}
 	
 	                DigiWebApp.ApplicationController.enforceChefToolOnly();

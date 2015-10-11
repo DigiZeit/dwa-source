@@ -1472,8 +1472,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 
     }
-    
+
     , startsync: function(isFirstLoad) {
+    	var that = this;
+    	DigiWebApp.JSONDatenuebertragungController.authentifizieren(function() {
+    		that.startsyncAuthenticated(isFirstLoad);
+    	})
+    }
+    
+    , startsyncAuthenticated: function(isFirstLoad) {
     	//alert("in startsync");
 
     	writeToLog("startsync");
