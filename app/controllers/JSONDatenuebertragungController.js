@@ -29,10 +29,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	
 	, sendDataWithServer: function(sendObj) {
 		var that = this;
-		if (!that.AuthentifizierenCode || that.AuthentifizierenCode = "") {
+		// ToDo: call authenticate
+		return that.sendDataWithServerAuthenticated(sendObj);
+		if (!that.AuthentifizierenCode || that.AuthentifizierenCode == "") {
 			
 		}
-		
 	}
 	, sendDataWithServerAuthenticated: function(sendObj) {
 		//var that = this;
