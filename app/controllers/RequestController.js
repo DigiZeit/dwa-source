@@ -26,7 +26,7 @@ DigiWebApp.RequestController = M.Controller.extend({
      */
     , errorCallback: {}
     
-    , softwareVersion: 6476
+    , softwareVersion: 6477
 
 
     /**
@@ -548,6 +548,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 								}
 								, onSuccess: function(data2, msg, xhr) { 
 									DigiWebApp.ApplicationController.DigiLoaderView.hide();
+									writeToLog("RequestController.sendConfiguration.onSuccess");
 									that.bindToCaller(
 										that, 
 										that.handleSuccessCallback, 
@@ -557,6 +558,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 								}
 								, onError: function(xhr, err) {
 									DigiWebApp.ApplicationController.DigiLoaderView.hide();
+									writeToLog("RequestController.sendConfiguration.onError");
 									that.bindToCaller(
 										that, 
 										that.handleSuccessCallback, 

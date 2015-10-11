@@ -665,6 +665,62 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 	}
 
+	, sendeKonfiguration: function(mysuccessCallback, myerrorCallback) {
+		
+    	writeToLog("sendeKonfiguration");
+
+		var data = that.buildConfigurationJson(DigiWebApp.Settings.find());
+		
+		var internalSuccessCallback = function(data2, msg, request) {
+			// weiter in der Verarbeitungskette
+			mysuccessCallback();
+		};
+
+		var internalErrorCallback = function() {
+			myerrorCallback();
+		};
+
+		var sendObj = {
+			  data: data
+			, webservice: "konfigurationen"
+			, loaderText: M.I18N.l('sendDataMsg')
+			, successCallback: internalSuccessCallback
+			, errorCallback: internalErrorCallback
+			//, additionalQueryParameter:
+			//, timeout: 60000
+		};
+		DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+		
+	}
+
+    , buildConfigurationJson: function(mysettings) {
+    	var mitarbeiterId = DigiWebApp.SettingsController.getSetting('mitarbeiterId');
+    	var configArray = [];    
+    	var settings;
+    	if (typeof(mysettings) === 'object' && !_.isArray(mysettings)) {
+    		// if an object was passed, push it into an array, to have one behaviour
+    		settings = [mysettings];  
+    	} else {
+    		settings = mysettings;
+    	}
+    	if (_.isArray(settings)) {
+    		for (var i in settings) {
+    			var setting = settings[i];
+    			for (var prop in setting.record) {
+    				if(prop === '_createdAt' || prop === '_updatedAt') { continue; }
+    				configArray.push({
+    					  keyId: prop
+    					, value: setting.get(prop)
+    					, valueType: 'SettingRemote_WebApp'
+    					, mitarbeiterId: mitarbeiterId
+    				});
+    			}
+    		}
+    	}
+    	var configurations = {konfigurationen: configArray};
+    	return JSON.stringify(configurations);
+    }
+
 	, empfangeTaetigkeiten: function(successCallback, errorCallback) {
 
 		var internalSuccessCallback = function(data, msg, request) {
