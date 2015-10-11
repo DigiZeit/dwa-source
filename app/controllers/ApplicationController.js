@@ -1658,7 +1658,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	//if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
         
-    	switch(data) {
+		if (inDebug() && staticDebugging) alert(navigator.platform + ", authenticateSuccess " + JSON.stringify(data));
+
+		switch(data) {
             case '1':
         		var timestampNow = D8.now().getTimestamp();
         		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
