@@ -666,6 +666,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 
 	, sendeKonfiguration: function(mysuccessCallback, myerrorCallback) {
+		var that = this;
 		
     	writeToLog("sendeKonfiguration");
 
