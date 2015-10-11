@@ -561,7 +561,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	this.devicereadyhandler();
         } else {
         	if (typeof(device) == "undefined" || navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) { 
-			    if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device undefined --> setTimeout and register deviceready");
+			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device undefined --> setTimeout and register deviceready");
 	        	// register deviceready-event and wait for it to fire
         		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
 			    var startTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('startTimeout'));
@@ -571,7 +571,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
         		
         	} else {
-			    if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device defined --> devicereadyhandler");
+			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device defined --> devicereadyhandler");
         		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
@@ -929,9 +929,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "getCurrentPosition()");
 				window.navigator.geolocation.getCurrentPosition(function(location) {
 			        //console.log('Location from Phonegap');
-				    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "location=" + JSON.stringify(location));
+				    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "location=" + JSON.stringify(location));
 			    }, function(error) {
-				    if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "error=" + JSON.stringify(error));
+				    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "error=" + JSON.stringify(error));
 			    });
 			}
 		} catch(e) {
@@ -1342,7 +1342,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
         var fortfahren = function() {
-    		if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "in fortfahren");
+    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "in fortfahren");
         	//alert("suche nach offener Buchung");
 	        // gibt es eine offene Buchung?
 	        var bookings = DigiWebApp.Booking.find();
