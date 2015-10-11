@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6447"
-	version 	  = "1.8.3.6447">
+	versionCode   = "6448"
+	version 	  = "1.8.3.6448">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -65,18 +65,22 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
+<gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
 <!-- <gap:plugin name="org.apache.cordova.file" version="0.2.4" /> -->
 <gap:plugin name="org.apache.cordova.file" version="1.3.1" />
 <gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
+<!--<gap:plugin name="cordova-plugin-inappbrowser" version="1.0.1" source='npm' /> --> <!-- for newer phonegap -->
 <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
+<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
-<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
-<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
+<!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
+<gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" />
+
+<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
+<gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" />
 
 <!-- prevent screen-sleep --> 
 <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
@@ -85,14 +89,19 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
+<!-- iOS9 -->   
+	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
+
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6361</string> 
+	<string>6448</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
-    <false/>
+<!-- 2015-10: true since new styling -->
+    <true/>
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-    <true/>
+<!-- 2015-10: false since new styling -->
+    <false/>
 </gap:config-file>
 <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true" />
