@@ -565,8 +565,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        	// register deviceready-event and wait for it to fire
         		// or start deviceready-handler after a timeout of 10 seconds (we are not on a mobile device)
 			    var startTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('startTimeout'));
-			    if (onMobile) startTimeout = DigiWebApp.SettingsController.defaultsettings_object.startTimeout;
-        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", DigiWebApp.SettingsController.getSetting('startTimeout'));
+			    if (onMobile && typeof(device) == "undefined") startTimeout = DigiWebApp.SettingsController.defaultsettings_object.startTimeout;
+        		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", startTimeout);
         		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
         		
