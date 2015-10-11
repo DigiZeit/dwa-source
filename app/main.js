@@ -10,7 +10,7 @@
 var logDelete = true;
 var logSave = true;
 var logDesign = false;
-var staticDebugging = false; // for hotfix debugging without credentials etc.
+var staticDebugging = true; // for hotfix debugging without credentials etc.
 
 var staticDebuggingAlertShown = false;
 function inDebug() {
