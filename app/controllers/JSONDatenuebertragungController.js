@@ -118,7 +118,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			return;
 		}
 		if (!that.AuthentifizierenCode 
-		|| parseIntRadixTen(that.AuthentifizierenCode) <> 1) 
+		|| parseIntRadixTen(that.AuthentifizierenCode) != 1) 
 		{
 			that.authentifizieren(function(obj) {
 				that.recieveDataWithServerAuthenticated(recieveObj);
