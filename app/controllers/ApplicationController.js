@@ -2470,7 +2470,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     // Bugfix: 3265 XML-WebService -> RESTful
     // DatenTransferHttpSoap11Endpoint -> konfigurationen
     , getFeaturesFromRemote: function() {
-    	var that = this;
+		var that = DigiWebApp.ApplicationController;
     	that.setCallbackStatus('features', 'remote', NO);
     	var successFunc = function(data, msg, xhr) {
     		DigiWebApp.ApplicationController.getFeaturesFromRemoteSuccessRestful(data, msg, xhr);
