@@ -734,12 +734,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (that.devicereadyhandlerDone || that.realdevicereadyhandlerDone) return;
 		DigiWebApp.ApplicationController.timeouthappened = true;
 		var myStartInfo = "DIGI-WebApp hat Plattform \"" + M.Environment.getPlatform() + "\" (" + navigator.userAgent + ") erkannt. Es werden keine Eventhandler registriert! (Version " + M.Application.getConfig('version') + ")";
-        //console.log(myStartInfo);
-        writeToLog(myStartInfo);
+        console.log(myStartInfo);
         // if in Chrome: enable FileSystem
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
         	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         }
+        writeToLog(myStartInfo);
         //this.skipEvents = true;
 		this.devicereadyhandler();
 	}
