@@ -225,6 +225,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		that.DatabaseServerTimestamp = timestamp;
 		DigiWebApp.RequestController.DatabaseServerTimestamp = that.DatabaseServerTimestamp;
 	}
+	
+	, setAuthentifizierenCode: function(code) {
+		var that = this;		
+		that.AuthentifizierenCode = timestamp;
+		DigiWebApp.RequestController.AuthentifizierenCode = that.AuthentifizierenCode;
+	}
 
 	, empfangeUrl: function(callback) {
 		var that = this;
@@ -414,11 +420,13 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	if (data !== null) {
 	    		var objAuthentifizieren = data.authentifizieren;
+	    		that.setAuthentifizierenCode(objAuthentifizieren.code);
 	    		evalCode(objAuthentifizieren.code);
 	    	}
 	    };
         var errorFunc = function(xhr, err) {
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
+    		that.setAuthentifizierenCode(null);
     		evalCode(err);
         };
         
