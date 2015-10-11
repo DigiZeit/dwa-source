@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6446"
-	version 	  = "1.8.3.6446">
+	versionCode   = "6447"
+	version 	  = "1.8.3.6447">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -26,19 +26,17 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
-	<preference name="phonegap-version" value="3.7.1" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
-	<preference name="autorotate" value="true" readonly="false" />
+	<preference name="autorotate" value="false" readonly="false" />
+	<preference name="phonegap-version" value="3.7.0" />
 	<preference name="orientation" value="portrait" />
-<!--	<preference name="orientation" value="default" /> -->
 	<preference name="load-url-timeout" value="60000" />
-	<preference name="splash-screen-duration" value="60000" /> <!-- deprecated -->
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
 	<preference name="keepRunning" value="true" />
-	<preference name="BackgroundColor" value="0xffffffff"/>
+	<preference name="BackgroundColor" value="0xff003366"/>
 	
 <!-- smartphone and tablet -->
 	<preference name="target-device" value="universal" />
@@ -48,8 +46,6 @@
 
 <!-- controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
 	<preference name="webviewbounce" value="false" />
-	<preference name="disallowOverscroll" value="true" />
-	<preference name="DisallowOverscroll" value="true" />
 	
 <!-- If you do not want any permissions to be added to your app, add the following tag to 
 your config.xml instead; you will still have the INTERNET permission on your app,
@@ -64,33 +60,23 @@ which PhoneGap requires. -->
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 
-<!-- include PhonegapPlugIns -->
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.9" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.4" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.3" /> -->
-<!-- <gap:plugin name="org.apache.cordova.camera" version="0.2.1" /> -->
-
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
+<gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
 <!-- <gap:plugin name="org.apache.cordova.file" version="0.2.4" /> -->
 <gap:plugin name="org.apache.cordova.file" version="1.3.1" />
 <gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
-<!--<gap:plugin name="cordova-plugin-inappbrowser" version="1.0.1" source='npm' />-->
 <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
-<!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
-<gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" />
-
-<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
-<gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" />
+<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
+<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
 
 <!-- prevent screen-sleep --> 
 <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
@@ -99,17 +85,14 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
-<!-- iOS9 -->   
-	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.0' />
-
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6446</string> 
+	<string>6361</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
-    <true/>
+    <false/>
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-    <false/>
+    <true/>
 </gap:config-file>
 <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true" />
@@ -151,36 +134,33 @@ which PhoneGap requires. -->
 
 <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
 	<icon src="theme/images/icon-winphone.png" gap:platform="winphone" />
-	<icon src="theme/images/winphone_small_tile_110x110_DSO.png" gap:platform="winphone" gap:role="background" />
+	<icon src="theme/images/tile-icon-winphone.png" gap:platform="winphone" gap:role="background" />
 
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
 screen -->
-	<gap:splash src="theme/images/splash_default_320x426_DSO.png" />
+    <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" />
 
-	<gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="blackberry" />
 	
-	<!-- <gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="android" gap:density="ldpi" /> -->
-	<gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" gap:platform="android" gap:density="ldpi" />
-	<gap:splash src="theme/images/splash_mdpi_320x470_DSO.9.png" gap:platform="android" gap:qualifier="port-mdpi" />
-	<!-- <gap:splash src="theme/images/splash_mdpi_320x470_DSO.9.png" gap:platform="android" gap:qualifier="land-mdpi" /> -->
-	<gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="port-hdpi" />
-    <!-- <gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="land-hdpi" /> -->
-    <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="port-xhdpi" />
-    <!-- <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="land-xhdpi" /> -->
-    <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
-    <!-- <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.png" gap:platform="android" gap:qualifier="land-xxhdpi" /> -->
+	<!-- <gap:splash src="theme/images/200x320_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
+	<!-- <gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" /> -->
+	<gap:splash src="theme/images/320x426_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="theme/images/320x470_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="theme/images/720x960_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="theme/images/1080x1920_90_DIGI-WebApp_mitLogo.png" gap:platform="android" gap:density="xxhdpi" />
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
-	<gap:splash src="theme/images/splash_ios_320x480_DSO.png" gap:platform="ios" width="320" height="480" />
-	<gap:splash src="theme/images/splash_ios_640x960_DSO.png" gap:platform="ios" width="640" height="960" />
-	<gap:splash src="theme/images/splash_ios_768x1024_DSO.png" gap:platform="ios" width="768" height="1024" />
-	<gap:splash src="theme/images/splash_ios_1024x768_DSO.png" gap:platform="ios" width="1024" height="768" />
-	<gap:splash src="theme/images/splash_ios_640x1136_DSO.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="theme/images/320x480_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="theme/images/640x960_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="theme/images/768x1024_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="768" height="1024" />
+	<gap:splash src="theme/images/1024x768_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="1024" height="768" />
+	<gap:splash src="theme/images/640x1136_90_DIGI-WebApp_mitLogo.png" gap:platform="ios" width="640" height="1136" />
 
 <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
-	<gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
+	<gap:splash src="theme/images/480x800_90_DIGI-WebApp_mitLogo.png" gap:platform="winphone" />
 	
 	<access origin="*" subdomains="true" />
 	<access origin="http://127.0.0.1*" subdomains="true" />
