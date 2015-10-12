@@ -1110,7 +1110,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 								DigiWebApp.SettingsController.setSetting("password", mypassword, YES);
 								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode, YES);
 								DigiWebApp.SettingsController.setSetting("workerId", myworkerId, YES);
-								try{$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() { $(this).show(); });}catch(e){}
+								DigiWebApp.ApplicationController.doRestartApp();
 	                    	}
 	                        DigiWebApp.ApplicationController.init(true);
         				};
