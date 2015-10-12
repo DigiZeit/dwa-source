@@ -1288,14 +1288,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        }
         };
         
-        var company = DigiWebApp.SettingsController.getSetting('company');
-        var password = DigiWebApp.SettingsController.getSetting('password');
-		if(!company || !password) {
-            DigiWebApp.NavigationController.toBookTimePage(YES);
-            DigiWebApp.SettingsController.showCredentialsAlert = YES;
-            DigiWebApp.NavigationController.toSettingsPage(YES);
-            return;
-        } else {
+        if (DigiWebApp.SettingsController.EnforceCredentials()) {
         	DigiWebApp.ApplicationController.updateModels(fortfahren);
         }
                 

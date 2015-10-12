@@ -1691,10 +1691,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
     , EnforceCredentials: function() {
     	var that = this;
-    	var result = that.HasCredentials; 
+    	var result = that.HasCredentials(); 
     	if (!result) {
-            DigiWebApp.NavigationController.toBookTimePage(YES);
-            DigiWebApp.SettingsController.showCredentialsAlert = YES;
             DigiWebApp.NavigationController.toSettingsPage(YES);
     	}
     	return result;
