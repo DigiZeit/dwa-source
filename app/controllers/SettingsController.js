@@ -1034,7 +1034,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                             				)
                             	) {
 
-                            	DigiWebApp.RequestController.DatabaseServer = null;
+                            	DigiWebApp.JSONDatenuebertragungController.setDatabaseServer(null);
                             	
                                 /* check for open bookings */
                                 var bookings = DigiWebApp.Booking.find();

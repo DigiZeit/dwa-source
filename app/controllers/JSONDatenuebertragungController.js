@@ -66,7 +66,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
-		var myURL =  'http://' + DigiWebApp.RequestController.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
+		var myURL =  'http://' + that.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
@@ -92,7 +92,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		            }
 		            , onError: function(xhr, err) {// error callback of sendData
 		                DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		                DigiWebApp.RequestController.DatabaseServer = null;
+		                that.setDatabaseServer(null);
 		                console.error(err);
 		                console.error(xhr);
 						try{trackError(err,function(){
@@ -160,7 +160,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : timeoutSetting;
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
-		var databaseServer = DigiWebApp.RequestController.DatabaseServer;
+		var databaseServer = that.DatabaseServer;
 		// hack um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
 		var myGeraeteTyp = 2;
@@ -217,25 +217,25 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, setDatabaseServer: function(server) {
 		var that = this;
 		that.DatabaseServer = server;
-		DigiWebApp.RequestController.DatabaseServer = that.DatabaseServer;
+		//DigiWebApp.RequestController.DatabaseServer = that.DatabaseServer;
 	}
 	
 	, setGatewayServer: function(server) {
 		var that = this;
 		that.GatewayServer = server;
-		DigiWebApp.RequestController.GatewayServer = that.GatewayServer;
+		//DigiWebApp.RequestController.GatewayServer = that.GatewayServer;
 	}
 	
 	, setDatabaseServerTimestamp: function(timestamp) {
 		var that = this;
 		that.DatabaseServerTimestamp = timestamp;
-		DigiWebApp.RequestController.DatabaseServerTimestamp = that.DatabaseServerTimestamp;
+		//DigiWebApp.RequestController.DatabaseServerTimestamp = that.DatabaseServerTimestamp;
 	}
 	
 	, setAuthentifizierenCode: function(code) {
 		var that = this;		
 		that.AuthentifizierenCode = code;
-		DigiWebApp.RequestController.AuthentifizierenCode = that.AuthentifizierenCode;
+		//DigiWebApp.RequestController.AuthentifizierenCode = that.AuthentifizierenCode;
 	}
 
 	, empfangeUrl: function(callback) {
