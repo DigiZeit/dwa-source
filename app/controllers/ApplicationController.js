@@ -2564,15 +2564,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //			window.location.reload();
 //		}
 
-		if (typeof(navigator.app) !== "undefined") {
-			var newUrl = location.protocol + '//' + location.pathname;
-			if (typeof(location.origin) !== "undefined") {
-				newUrl = location.origin + location.pathname;					
+    	try{
+	    	if (typeof(navigator.app) !== "undefined") {
+				var newUrl = location.protocol + '//' + location.pathname;
+				if (typeof(location.origin) !== "undefined") {
+					newUrl = location.origin + location.pathname;					
+				}
+				writeToLog("restarting app with url " + newUrl);
+				navigator.app.loadUrl(newUrl);
+			} else {
+				window.location.reload();
 			}
-			writeToLog("restarting app with url " + newUrl);
-			navigator.app.loadUrl(newUrl);
-		} else {
-			try{window.location.reload();}catch(e){}
+	    }catch(e){
 			alert(M.I18N.l('bitteManuellNeuStarten'));
 			flushLogQueueAndExit();
 		}
