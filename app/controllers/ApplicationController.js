@@ -999,7 +999,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , backbuttonhandler: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-		if ((!DigiWebApp.SettingsController.showCredentialsAlert)) {
+		if (DigiWebApp.SettingsController.HasCredentials()) {
 	    	if (
 	    	   (DigiWebApp.TabBar.tabItem1.isActive) 
 	    	|| (ChefToolOnly && (M.ViewManager.getCurrentPage().get("id") === DigiWebApp.DashboardPage.get("id")))
@@ -1034,6 +1034,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
 	    		//DigiWebApp.NavigationController.toBookTimePage();
 			}
+		} else {
+			DigiWebApp.SettingsController.EnforceCredentials();
 		}
     }
     
@@ -1063,12 +1065,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
     , menubuttonhandler: function() {
-		if (!DigiWebApp.SettingsController.showCredentialsAlert) {
+		if (DigiWebApp.SettingsController.HasCredentials()) {
 			if (DigiWebApp.SettingsController.featureAvailable('404')) {
 				DigiWebApp.NavigationController.backToButtonDashboardPageFlipTransition();
 			} else {
 				DigiWebApp.NavigationController.backToDashboardPageFlipTransition();
 			}
+		} else {
+			DigiWebApp.SettingsController.EnforceCredentials();
 		}
     }
     

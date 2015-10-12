@@ -99,22 +99,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	
-        if (that.showCredentialsAlert && !that.credentialsAlertShown) {
+        if (!that.HasCredentials()) {
     		DigiWebApp.ApplicationController.enforceChefToolOnly();
-    		//console.log("device.version: " + device.version);
-        	DigiWebApp.ApplicationController.nativeAlertDialogView({
-                  title: M.I18N.l('noCredentials')
-                , message: M.I18N.l('noCredentialsMsg')
-                , callbacks: {
-                    confirm: {
-                        action: function() {
-	    					var that = this;
-	    					this.credentialsAlertShown = true;
-	    					DigiWebApp.NavigationController.toSettingsPage();
-                        }
-                    }
-                }
-            });
+    		that.EnforceCredentials();
         }
     	
         that.defaultsettings = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object);
@@ -1692,8 +1679,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
     , EnforceCredentials: function() {
     	var that = this;
     	var result = that.HasCredentials(); 
-    	if (!result) {
-            DigiWebApp.NavigationController.toSettingsPage(YES);
+    	if ((!result || that.showCredentialsAlert) && !that.credentialsAlertShown) {
+            that.showCredentialsAlert = NO;
+        	DigiWebApp.ApplicationController.nativeAlertDialogView({
+                title: M.I18N.l('noCredentials')
+              , message: M.I18N.l('noCredentialsMsg')
+              , callbacks: {
+                  confirm: {
+                      action: function() {
+	    					that.credentialsAlertShown = true;
+	    					DigiWebApp.NavigationController.toSettingsPage(YES);
+                      }
+                  }
+              }
+          });
     	}
     	return result;
     }
