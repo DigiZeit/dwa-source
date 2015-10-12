@@ -240,9 +240,19 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	, empfangeUrl: function(callback) {
 		var that = this;
-    	writeToLog("empfangeUrl");
+		
 		if (typeof(callback) != "function") callback = function(){};
 		
+		if (!that.DatabaseServer 
+		|| (that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		{
+			// do it
+		} else {
+			return callback();
+		}
+		
+    	writeToLog("empfangeUrl");
+
     	// debug-ausnahme
     	if (location.host === "localhost:8080" || DigiWebApp.SettingsController.getSetting("debugDatabaseServer")) {
     		if (location.host === "localhost:8080") {
@@ -342,7 +352,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         		, additionalQueryParameter : ''
         		, geraeteIdOverride: false
         };
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl " + "vor recieveDataWithServer (primary)" + myGatewayServer);
+		//if (inDebug() && staticDebugging) alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl " + "vor recieveDataWithServer (primary)" + myGatewayServer);
 		that.recieveDataWithServerAuthenticated(receiveObj);
 	}
 	
