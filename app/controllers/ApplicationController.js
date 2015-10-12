@@ -97,31 +97,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	
 	, makeUnselectable: function(node) {
 		return null;
-//	    if (node.nodeType == 1) {
-//	        node.unselectable = true;
-//	    }
-//	    var child = node.firstChild;
-//	    while (child) {
-//	    	DigiWebApp.ApplicationController.makeUnselectable(child);
-//	        child = child.nextSibling;
-//	    }
 	}
 
 	, blackBerryRestart_var: null
 	
 	, blackBerryRestart: function() {
-		//console.log("blackBerryRestart");
-		//alert("blackBerryRestart");
 		if (DigiWebApp.ApplicationController.blackBerryRestart_var !== null) {clearTimeout(DigiWebApp.ApplicationController.blackBerryRestart_var);}
 		DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);
-		/* now lets render all other pages 
-        _.each(M.ViewManager.pageList, function(page) {
-        	console.log(page);
-        	if (page.html === '') {
-        		//page.render();
-        	}
-        });*/
-        
 		DigiWebApp.app.main();
 		DigiWebApp.ApplicationController.regSecEv(YES);
 	}
@@ -131,11 +113,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// etwaigen Loader ausblenden
 		DigiWebApp.ApplicationController.DigiLoaderView.hide()
 		
-		if (M.Environment.getPlatform().substr(0,10) === "BlackBerry") {
-			//console.log("falling back to non-native-dialog");
-			//return M.DialogView.alert(obj);
-		}
-		//console.log("using a native-dialog");
 		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok";
 		if (typeof(obj.title) === "undefined") obj.title = "Alert";
 		if (typeof(obj.message) === "undefined") obj.message = "";
@@ -198,7 +175,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						alert("ERROR: yet unknown button \"" + button + "\" pressed.");
 						return;
 					}
-					//try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); }; // this line is for pre TMP 1.1
 				} // callback
 				, obj.title						// title
 				, obj.confirmButtonValue			// buttonLabel
@@ -211,11 +187,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// etwaigen Loader ausblenden
 		DigiWebApp.ApplicationController.DigiLoaderView.hide()
 		
-		if (M.Environment.getPlatform().substr(0,10) === "BlackBerry") {
-			//console.log("falling back to non-native-dialog");
-			//return M.DialogView.confirm(obj);
-		}
-		//console.log("using a native-dialog");
 		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok";
 		if (typeof(obj.cancelButtonValue) === "undefined") obj.cancelButtonValue = "Cancel";
 		if (typeof(obj.title) === "undefined") obj.title = "Confirm";
@@ -261,7 +232,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 							alert("ERROR: yet unknown button \"" + button + "\" pressed.");
 							return;
 					}
-					//try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); }; // this line is for pre TMP 1.1
 				}  // callback to invoke with index of button pressed
 				, obj.title // title
 				, [obj.confirmButtonValue, obj.cancelButtonValue]          // buttonLabels
@@ -311,9 +281,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				mytitle = title;
 			}
 			
-			//if (this.isVisible()) { 
-				this.hide(); 
-			//}
+			this.hide(); 
 		
 			if (DigiWebApp.SettingsController.getSetting('silentLoader') !== YES) {
 				this.loaderMessage = message;
@@ -528,14 +496,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             	}
             });
 
-//            // hide footer while softkeyboard is showing
-//            $('input').focus(function() {
-//            	$('[data-role=footer]').hide();
-//            });
-//            $('input').blur(function() {
-//            	$('[data-role=footer]').show();
-//            });
-                        
         	if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
         		console.log("registering emergencyhandler");
         		$(document).bind('keydown', DigiWebApp.ApplicationController.keydownHandler);
@@ -588,18 +548,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
          * 		"Linux armv7l" (Samsung Galaxy S2)
          * 		"Linux armv7l" (HTC Desire)
          */
-		//alert("Platform: \"" + M.Environment.getPlatform() + "\"");
-//    	var myPlattform = M.Environment.getPlatform();
-//        if (       ( myPlatform.substr(-2)  === "86" )
-//        		|| ( myPlatform.substr(-3)  === "_64" )
-//        		|| ( myPlatform.substr(-5)  === "Win32" )
-//        		|| ( myPlatform.substr(-5)  === "Win64" )
-//        		|| ( myPlatform.substr(0,3) === "Mac" )
-//        ) {
-//        	this.skipEvents = true;
-//        } else {
-//        	this.skipEvents = false;
-//        }
 
         // using timeout-detection
         this.skipEvents = false;
@@ -857,9 +805,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				} catch(e) {}
 				
 				DigiWebApp.ApplicationController.bgGeo = pluginObj.backgroundGeoLocation;
-	
-			    //DigiWebApp.SettingsController.init(YES,YES);
-	
+		
 			    if (!DigiWebApp.SettingsController.getSetting('GPSBackgroundService')) {
 			    	return false;
 			    }
@@ -872,22 +818,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    * This callback will be executed every time a geolocation is recorded in the background.
 			    */
 			    var callbackFn = function(location) {
-			        //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-			        //writeToLog('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
 			        yourAjaxCallback.call(this);
 			    };
 	
 			    var failureFn = function(error) {
-			        //console.log('BackgroundGeoLocation error: ' + error);
-			        //writeToLog('BackgroundGeoLocation error: ' + error);
 			    }
 			    
-			    //var myLocationTimeout = 10;
 				var myLocationTimeout = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes') * 60);
 			    if (myLocationTimeout == 0) {
 			    	myLocationTimeout = 10;
-	//		    } else {
-	//		    	myLocationTimeout = myLocationTimeout - 1;
 			    }
 			    	
 			    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
@@ -921,23 +860,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		if (!that.devicereadyhandlerDone) that.devicereadyhandlerDone = true;
 		
-		//if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "ApplicationController:911");
 		// Your app must execute AT LEAST ONE call for the current position via standard Cordova geolocation,
 	    //  in order to prompt the user for Location permission.
 		try {
 			if (typeof(window) != "undefined" && typeof(window.navigator) != "undefined" && typeof(window.navigator.geolocation) != "undefined" && typeof(window.navigator.geolocation.getCurrentPosition) != "undefined") {
-			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "getCurrentPosition()");
 				window.navigator.geolocation.getCurrentPosition(function(location) {
-			        //console.log('Location from Phonegap');
-				    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "location=" + JSON.stringify(location));
 			    }, function(error) {
-				    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "error=" + JSON.stringify(error));
 			    });
 			}
 		} catch(e) {
 			
 		}
-	    //if (inDebug() && staticDebugging) alert(navigator.platform + ", devicereadyhandler " + "after getCurrentPosition");
 
 	    $(window).bind('resize', function() {
             DigiWebApp.ApplicationController.setImageClass();
@@ -969,7 +902,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
 			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-//			DigiWebApp.ApplicationController.startNotification();
+			//DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
 			DigiWebApp.ApplicationController.startNotification();
@@ -1009,72 +942,49 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 		if (!that.realdevicereadyhandlerDone) that.realdevicereadyhandlerDone = true;
 
-		//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:991");
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
-//		try {
-		    	
-			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-			
-			try {
-				navigator.splashscreen.hide();
-			} catch(e) {
-				console.log("unable to hide splashscreen");
-			}
-			
-			if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
-	    		// unfix header
-				_.each(DigiWebApp.app.pages, function(myPage) {
-					if ( typeof(myPage.header) !== "undefined" ) {
-						$('#' + myPage.header.id ).removeClass("ui-header-fixed");
-					}
-				});
-	    		// unfix footer
-	    		$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() {
-					$(this).removeClass("ui-footer-fixed");
-				});
-	    		//$(document).keydown(DigiWebApp.ApplicationController.keypressedHandler);
-			} else {
-				// refresh fixed toolbars every second
-				//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); };}, 1000);
-			}
-	    	
-	    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
-			
-	    	DigiWebApp.ApplicationController.setImageClass();
+		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+		
+		try {
+			navigator.splashscreen.hide();
+		} catch(e) {
+			console.log("unable to hide splashscreen");
+		}
+		
+		if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
+    		// unfix header
+			_.each(DigiWebApp.app.pages, function(myPage) {
+				if ( typeof(myPage.header) !== "undefined" ) {
+					$('#' + myPage.header.id ).removeClass("ui-header-fixed");
+				}
+			});
+    		// unfix footer
+    		$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() {
+				$(this).removeClass("ui-footer-fixed");
+			});
+    		//$(document).keydown(DigiWebApp.ApplicationController.keypressedHandler);
+		} else {
+			// refresh fixed toolbars every second
+			//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); };}, 1000);
+		}
+    	
+    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+		
+    	DigiWebApp.ApplicationController.setImageClass();
 	
-//	    	$(window).resize(function() {
-//	    		DigiWebApp.ApplicationController.setImageClass();
-//	    	});
-	
-	    	//console.log("DIGI-WebApp running on platform: " + M.Environment.getPlatform());
-	    	//alert("typeof(DigiWebApp.ApplicationController.init)=" + typeof(DigiWebApp.ApplicationController.init));
-	    	DigiWebApp.ApplicationController.init(true);
-	    	//if (inDebug() && staticDebugging) alert(navigator.platform + ", realDeviceReadyHandler " + "ApplicationController:1032 after init()");
-	    	//alert("nach ApplicationController.init");
-	        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-	        	//document.addEventListener("backbutton", DigiWebApp.ApplicationController.backbuttonhandler, false);
-	        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
-	        	//document.addEventListener("menubutton", DigiWebApp.ApplicationController.menubuttonhandler, false);
-	        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
-	        	// just in case again in 10 seconds via timeout (just for BlackBerry)
-	        	//DigiWebApp.ApplicationController.registerButtonHandlerByTimeoutVar = setTimeout("DigiWebApp.ApplicationController.registerButtonHandlerByTimeout()",10000);
-	        } else {
-	        	//console.log("skipping eventhandlerregistration for back- and menubutton (" + this.skipEvents + ")");
-	        }
-	        
-			//document.addEventListener("pause", DigiWebApp.ApplicationController.closeChildbrowser, false);
+    	DigiWebApp.ApplicationController.init(true);
 
-//		} catch(e) {
-//			//trackError(e);
-//			trackError(e);
-//		}
+        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+        	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
+        }
+	        
 	}
 	
 	, inAppBrowser_var: null
 	
 	, closeChildbrowser: function() {
-		//alert("pause");
 		try {
 			plugins.childBrowser.close();
 		} catch(e) {
@@ -1164,7 +1074,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , showConfirmDialog: function() {
     	var that = this;
-        //M.DialogView.confirm({
         DigiWebApp.ApplicationController.nativeConfirmDialogView({
               title: M.I18N.l('secretQuestion')
             , message: M.I18N.l('secretQuestionMsg')
@@ -1330,42 +1239,30 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             }
         };
         
-		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "vor SettingsController.init");
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
-		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "nach SettingsController.init");
         
-		if (inDebug() && onIOS) {
-			DigiWebApp.SettingsController.setSetting("debugDatabaseServer", "vespasian.digi-zeiterver.de");
-		}
+//		if (inDebug() && onIOS) {
+//			DigiWebApp.SettingsController.setSetting("debugDatabaseServer", "vespasian.digi-zeiterver.de");
+//		}
 		
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
         var fortfahren = function() {
-    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.init " + "in fortfahren");
-        	//alert("suche nach offener Buchung");
 	        // gibt es eine offene Buchung?
 	        var bookings = DigiWebApp.Booking.find();
-	        //alert("typeof(bookings)=" + typeof(bookings));
-	        //alert("bookings.length=" + bookings.length);
+
 	        if (bookings.length > 0) {
 	            var isCurrentBookingAvailable = NO;
 	            for (var i = 0; i < bookings.length; i++) {
-	            	//alert("in for i=" + i);
-	            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('booking[' + i + '].isCurrent = ' + bookings[i].get('isCurrent'));
 	                if (bookings[i].get('isCurrent') === YES) {
-	                	//alert("currentBooking found");
-	                	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable --> YES');
 	                	isCurrentBookingAvailable = YES;
 	                    break;
 	                }
 	            }
-	            //if (DigiWebApp.SettingsController.globalDebugMode) console.log('isCurrentBookingAvailable = ' + isCurrentBookingAvailable);
 	            if (isCurrentBookingAvailable === YES) {
-	            	//alert("go to BookTimePage");
 	            	DigiWebApp.NavigationController.toBookTimePage();
 	            	if (parseBool(DigiWebApp.SettingsController.getSetting('stammdatenabgleichBeimAppStart'))) {
-	    	        	//DigiWebApp.ApplicationController.startsync();
 		                DigiWebApp.BookingController.sendBookings(NO, YES);
 	            	}
 	                return;
@@ -1405,9 +1302,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     , enforceChefToolOnly: function() {
-    	//var debug = DigiWebApp.SettingsController.globalDebugMode;
     	var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert);
-    	//if (debug) console.log("enforcing ChefToolOnly, hideOverride=" + hideOverride);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (DigiWebApp.SettingsController.featureAvailable('417')) { 
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id  + ']').each(function() { $(this).show(); });}catch(e){}
@@ -1423,7 +1318,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		}
 		if (ChefToolOnly || hideOverride) {
-			//if (debug) console.log("enforcing ChefToolOnly, HIDE");
 	    	// hide tabbar
 			try{$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			// hide checkboxes in settings
@@ -1444,7 +1338,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		} else {
-			//if (debug) console.log("enforcing ChefToolOnly, SHOW");
 	    	// show tabbar
 			try{$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.detailierteZeitdaten.id  + ']').each(function() { $(this).show(); });}catch(e){}
@@ -1612,227 +1505,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		}
     	}
     }
-
-
-//    /**
-//     * Routes to authenticate function of the DigiWebApp.RequestController.
-//     * Success callback calls authenticateSuccess of this controller.
-//     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-//     */
-//    , authenticate: function() {
-//		
-//    	DigiWebApp.RequestController.authenticate({
-//              success: {
-//                  target: this
-//                , action: 'authenticateSuccess'
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//            		trackError("authenticate-error");
-//        			this.proceedWithLocalData("authenticate");
-//                }
-//            }
-//        });
-//
-//    }
     
     , timestampMitarbeiterZuletztGeladen: null
     
-//    /**
-//     *
-//     * The success callback for authenticate.
-//     * Dispatches between different return codes inside the server response.
-//     * 1: successful login
-//     * 2: invalid device id
-//     * 3: company id or password invalid
-//     *
-//     * when 1 is returned by the server, the order request is started
-//     * otherwise alert according to the kind of authentication error are shown and the view is switched
-//     * to the settings page to let the user adjust the credentials.
-//     *
-//     * @param data The returned data of the server in JSON, means JS object.
-//     * @param msg 
-//     * @param xhr The XMLHTTPRequest object.
-//     */
-//    // Bugfix: 3265 msg and xhr are not used
-//    , authenticateSuccess: function(data) {
-//
-//    	//if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) data['return'] = data['ns:return'];
-//        
-//		if (inDebug() && staticDebugging) alert(navigator.platform + ", authenticateSuccess " + JSON.stringify(data));
-//
-//		switch(data) {
-//            case '1':
-//        		var timestampNow = D8.now().getTimestamp();
-//        		if (DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen === null 
-//        		|| (timestampNow - DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen > 60000)) {
-//            		writeToLog("aktualisiere Mitarbeiter des Benutzers nach authenticate", function(){
-//	            		var recieveObj = {
-//	          				  webservice: "mitarbeiter"
-//	          				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-//	          				, successCallback: function(data){
-//		        	    		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-//		        	    			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-//		        	    		}
-//		        	    		DigiWebApp.ApplicationController.timestampMitarbeiterZuletztGeladen = D8.now().getTimestamp();
-//		        	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-//		        	    	}
-//	          				, errorCallback: function(error) {
-//	            	    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-//	                			// Fehlermeldung
-//	                			DigiWebApp.ApplicationController.nativeAlertDialogView({
-//	                                title: M.I18N.l('offlineWorkNotPossible')
-//	                              , message: M.I18N.l('offlineWorkNotPossibleMsg')
-//	                			});
-//	            	    	}
-//	          				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-//	          				//, timeout: 
-//	          				, geraeteIdOverride: true
-//	          				//, modus: 
-//	            		};
-//	            		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
-//            		});
-//        		} else {
-//    	    		DigiWebApp.ApplicationController.getFeaturesFromRemote();        		
-//        		}
-//
-//                DigiWebApp.ApplicationController.enforceChefToolOnly();
-//        		break;
-//            
-//            case '2':
-//                //M.DialogView.alert({
-//                DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                      title: M.I18N.l('authenticationError2')
-//                    , message: M.I18N.l('authenticationErrorMsg2')
-//                });
-//                DigiWebApp.NavigationController.toSettingsPage(YES);
-//                break;
-//
-//            case '3':
-//                //M.DialogView.alert({
-//                DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                      title: M.I18N.l('authenticationError3')
-//                    , message: M.I18N.l('authenticationErrorMsg3')
-//                });
-//                DigiWebApp.NavigationController.toSettingsPage(YES);
-//                break;
-//
-//            default:
-//                //M.DialogView.alert({
-//                DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                      title: M.I18N.l('authenticationError')
-//                    , message: M.I18N.l('authenticationErrorMsg')
-//                });
-//                DigiWebApp.NavigationController.toSettingsPage(YES);
-//                break;
-//        }
-//    }
-    
-//    /**
-//     * Calls getOrders on DigiWebApp.RequestController.
-//     * Success callback calls proceeds received orders and afterwards starts retrieving positions.
-//     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-//     */
-//    , getOrdersFromRemote: function() {
-//
-//        DigiWebApp.RequestController.getOrders({
-//              success: {
-//                  target: this
-//                , action: function(data, msg, xhr) {
-//                    if (this.getOrdersFromRemoteSuccess(data, msg, xhr) === true) {
-//                    	// get data sequentially
-//                    	this.getPositionsFromRemote();
-//                    } else {
-//                		//M.DialogView.alert({
-//                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                			  title: M.I18N.l('noOrdersAvailable')
-//                			, message: M.I18N.l('noOrdersAvailableMsg')
-//                		});
-//                		//DigiWebApp.NavigationController.toSettingsPage(YES);
-//                    }
-//                }
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//        			trackError("getOrdersFromRemote-error");
-//                    this.proceedWithLocalData("getOrdersFromRemote");
-//                }
-//            }
-//        });
-//    }
-//
-//    /**
-//     * The success callback for getOrdersFromRemote.
-//     * If correct data is in response the following is done:
-//     * 1) the callback status for 'order' and 'remote' is set (means orders are correctly returned by server)
-//     * 2) the local available orders are deleted, the corresponding callback status is set
-//     * 3) orders, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-//     *
-//     * @param data The returned data of the server in JSON, means JS object.
-//     * @param msg
-//     * @param xhr The XMLHTTPRequest object.
-//     */
-//    , getOrdersFromRemoteSuccess: function(data, msg, xhr) {
-//            	
-//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-//    		data['return'] = data['ns:return'];
-//    		try {
-//    			this.myns = data['return'][0]['xsi:type'].split(":")[0];
-//    			var myns = this.myns;
-//    			 _.each(data['return'], function(el) {
-//    				 el.auftragsId = el[myns + ':auftragsId'];
-//    				 el.auftragsBezeichnung = el[myns + ':auftragsBezeichnung'];
-//    			 });
-//    		} catch(e) {
-//    		}
-//    	}
-//
-//    	if(data['return']) {
-//            this.setCallbackStatus('order', 'remote', YES);
-//
-//            // Clear orders from storages
-//            DigiWebApp.Order.deleteAll();
-//            this.setCallbackStatus('order', 'local', NO);
-//            var mIdArray = [];
-//            var rec = null;
-//
-//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-//                data['return'] = [data['return']];
-//            }
-//
-//            // create a record for each order returned from the server and save it
-//            _.each(data['return'], function(el) {
-//                rec = DigiWebApp.Order.createRecord({
-//                      id: el.auftragsId
-//                    , name: el.auftragsBezeichnung
-//                });
-//                try {
-//                    rec.save();
-//                    mIdArray.push(rec.m_id);
-//                } catch(e) {
-//                    // maybe do something here
-//                	trackError(e);
-//                }
-//            });
-//
-//            localStorage.setItem(this.storagePrefix + '_orderKeys', JSON.stringify(mIdArray));
-//
-//            this.setCallbackStatus('order', 'local', YES);
-//
-//            return true;
-//
-//        } else {
-//
-//    		return false;
-//        }
-//
-//
-//    }
-
     /**
      * Calls getPositions on DigiWebApp.RequestController.
      * Success callback calls proceeds received positions and afterwards starts retrieving activities.
@@ -1856,152 +1531,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				that.proceedWithLocalData("getPositionsFromRemote");
     			}
     	);
-
-//    	DigiWebApp.RequestController.getPositions({
-//              success: {
-//                  target: this
-//                , action: function(data, msg, xhr) {
-//                    this.getPositionsFromRemoteSuccess(data, msg, xhr);
-//                    this.getActivitiesFromRemote();
-//                }
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//            		trackError("getPositionsFromRemote-error");
-//            		this.proceedWithLocalData("getPositionsFromRemote");
-//                }
-//            }
-//        });
     }
-
-//    /**
-//     * The success callback for getPositionsFromRemote.
-//     * If correct data is in response the following is done:
-//     * 1) the callback status for 'position' and 'remote' is set (means positions are correctly returned by server)
-//     * 2) the local available positions are deleted, the corresponding callback status is set
-//     * 3) positions, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-//     *
-//     * @param data The returned data of the server in JSON, means JS object.
-//     * @param msg
-//     * @param xhr The XMLHTTPRequest object.
-//     */
-//    , getPositionsFromRemoteSuccess: function(data, msg, xhr) {
-//
-//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-//    		data['return'] = data['ns:return'];
-//    		try {
-//    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-//    			var myns = this.myns;
-//    			 _.each(data['return'], function(el) {
-//
-//    				 el.positionsId = el[myns + ':positionsId'];
-//    				 el.positionsBezeichnung = el[myns + ':positionsBezeichnung'];
-//    				 el.auftragsId = el[myns + ':auftragsId'];
-//
-//    				 el.positionHausnummer = el[myns + ':positionHausnummer'];
-//    				 el.positionPlz = el[myns + ':positionPlz'];
-//    				 el.positionOrt = el[myns + ':positionOrt'];
-//    				 el.positionLand = el[myns + ':positionZusatz'];
-//    				 el.positionLongitude = el[myns + ':positionLongitude'];
-//    				 el.positionLatitude = el[myns + ':positionLatitude'];
-//    				 el.positionBeschreibung = el[myns + ':positionBeschreibung'];
-//    				 el.positionTelefon = el[myns + ':positionTelefon'];
-//
-//    			 });
-//    		} catch(e) {
-//    		}
-//    	}
-//   		 
-//    	if(data['return']) {
-//            this.setCallbackStatus('position', 'remote', YES);
-//
-//            // Clear positions from storage
-//            DigiWebApp.Position.deleteAll();
-//            this.setCallbackStatus('position', 'local', NO);
-//
-//            var mIdArray = [];
-//            var rec = null;
-//
-//
-//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-//                data['return'] = [data['return']];
-//            }
-//
-//            // create a record for each position returned from the server and save it
-//            _.each(data['return'], function(el) {
-//            	            	
-//            	var posid = el.positionsId;
-//                var posname = el.positionsBezeichnung;
-//                var posstrasse = el.positionStrasse;
-//                var poshausnummer = el.positionHausnummer;
-//                var posplz = el.positionPlz;
-//                var posort = el.positionOrt;
-//                var posland = el.positionZusatz;
-//                var poscountrycode = el.positionLand;
-//                var posphone = el.positionTelefon;
-//                var posfax = el.positionFax;
-//                var posemail = el.positionEmail;
-//                var posansprechpartner = el.positionAnsprechpartner;
-//                var poskundenname = el.positionKundenname;
-//                var poslongitude = el.positionLongitude;
-//                var poslatitude = el.positionLatitude;
-//                var posdescription = el.positionBeschreibung;
-//                var posorderId = el.auftragsId;
-//                
-//            	if (typeof(posid) === "object") { posid = ""; } 
-//            	if (typeof(posname) === "object") { posname = ""; } 
-//            	if (typeof(posstrasse) === "object") { posstrasse = ""; } 
-//            	if (typeof(poshausnummer) === "object") { poshausnummer = ""; } 
-//            	if (typeof(posplz) === "object") { posplz = ""; } 
-//            	if (typeof(posort) === "object") { posort = ""; } 
-//            	if (typeof(posland) === "object") { posland = ""; } 
-//            	if (typeof(poscountrycode) === "object") { poscountrycode = ""; } 
-//            	if (typeof(posphone) === "object") { posphone = ""; } 
-//            	if (typeof(posfax) === "object") { posfax = ""; } 
-//            	if (typeof(posemail) === "object") { posemail = ""; } 
-//            	if (typeof(posansprechpartner) === "object") { posansprechpartner = ""; } 
-//            	if (typeof(poskundenname) === "object") { poskundenname = ""; } 
-//            	if (typeof(poslongitude) === "object") { poslongitude = ""; } 
-//            	if (typeof(poslatitude) === "object") { poslatitude = ""; } 
-//            	if (typeof(posdescription) === "object") { posdescription = ""; } 
-//            	if (typeof(posorderId) === "object") { posorderId = ""; } 
-//
-//        		rec = DigiWebApp.Position.createRecord({
-//                      id: posid
-//                    , name: posname
-//                    , strasse: posstrasse
-//                    , hausnummer: poshausnummer
-//                    , plz: posplz
-//                    , ort: posort
-//                    , land: posland
-//                    , countrycode: poscountrycode
-//                    , telefon: posphone
-//                    , fax: posfax
-//                    , email: posemail
-//                    , ansprechpartner: posansprechpartner
-//                    , kundenname: poskundenname
-//                    , longitude: poslongitude
-//                    , latitude: poslatitude
-//                    , description: posdescription
-//                    , orderId: posorderId
-//                });
-//        		
-//                try {
-//                    rec.save();
-//                    mIdArray.push(rec.m_id);
-//                } catch(e) {
-//                	trackError(e);
-//                }
-//                
-//            });
-//
-//            localStorage.setItem(this.storagePrefix + '_positionKeys', JSON.stringify(mIdArray));
-//
-//            this.setCallbackStatus('position', 'local', YES);
-//        }
-//    }
-
 
     /**
      * Calls getActivities on DigiWebApp.RequestController.
@@ -2024,89 +1554,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			}
     	);
     	
-//        DigiWebApp.RequestController.getActivities({
-//              success: {
-//                  target: this
-//                , action: function(data, msg, xhr, getActivities) {
-//                    this.getActivitiesFromRemoteSuccess(data, msg, xhr);
-//                    this.getWorkPlansFromRemote();
-//                }
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//        			trackError("getActivitiesFromRemote-error");
-//                    this.proceedWithLocalData("getActivitiesFromRemote");
-//                }
-//            }
-//        });
     }
 
-//    /**
-//     * The success callback for getActivitiesFromRemote.
-//     * If correct data is in response the following is done:
-//     * 1) the callback status for 'activity' and 'remote' is set (means activities are correctly returned by server)
-//     * 2) the local available activities are deleted, the corresponding callback status is set
-//     * 3) activities, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-//     *
-//     * @param data The returned data of the server in JSON, means JS object.
-//     * @param msg
-//     * @param xhr The XMLHTTPRequest object.
-//     */
-//    , getActivitiesFromRemoteSuccess: function(data, msg, xhr) {
-//    	
-//   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-//    		data['return'] = data['ns:return'];
-//    		try {
-//    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-//    			var myns = this.myns;
-//    			 _.each(data['return'], function(el) {
-//    				 el.taetigkeitsId = el[myns + ':taetigkeitsId'];
-//    				 el.taetigkeitsBezeichnung = el[myns + ':taetigkeitsBezeichnung'];
-//    				 el.positionsId = el[myns + ':positionsId'];
-//    			 });
-//    		} catch(e) {
-//    		}
-//    	}
-//   		
-//    	if(data['return']) {
-//    		
-//            this.setCallbackStatus('activity', 'remote', YES);
-//
-//            // Clear activities from storage
-//            DigiWebApp.Activity.deleteAll();
-//            this.setCallbackStatus('activity', 'local', NO);
-//
-//            var mIdArray = [];
-//            var rec = null;
-//
-//            if(_.isObject(data['return']) && !_.isArray(data['return'])) {
-//                data['return'] = [data['return']];
-//            }
-//
-//            // create a record for each order returned from the server and save it
-//            _.each(data['return'], function(el) {
-//            	if (DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: "" + el.taetigkeitsId}}).length === 0) {
-//	                rec = DigiWebApp.Activity.createRecord({
-//	                    id: el.taetigkeitsId,
-//	                    name: el.taetigkeitsBezeichnung,
-//	                    positionId: el.positionsId
-//	                });
-//	
-//	                try {
-//	                    rec.save();
-//	                    mIdArray.push(rec.m_id);
-//	                } catch(e) {
-//	                	trackError(e);
-//	                }
-//            	}
-//            });
-//
-//            localStorage.setItem(this.storagePrefix + '_activityKeys', JSON.stringify(mIdArray));
-//
-//            this.setCallbackStatus('activity', 'local', YES);
-//        }
-//    }
 
     /**
      * Calls getWorkPlans on DigiWebApp.RequestController.
@@ -2191,48 +1640,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	}
     }
     
-    /*
-    , getWorkPlansFromRemoteSuccess: function(data, msg, xhr) {
-
-   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-    		data['return'] = data['ns:return'];
-    		try {
-    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-    			var myns = this.myns;
-    			 _.each(data['return'], function(el) {
-    				 el.arbeitsplanId = el[myns + ':arbeitsplanId'];
-    				 el.positionen = el[myns + ':positionen'];
-    				 el.taetigkeitsIds = el[myns + ':taetigkeitsIds'];
-    				 el.arbeitsplanTyp = el[myns + ':arbeitsplanTyp'];
-    			 });
-    		} catch(e) {
-    		}
-    	}
-
-    	if (data['return']) {
-            
-            this.setCallbackStatus('workPlan', 'remote', YES);
-            
-            // Clear activities from storage
-            DigiWebApp.WorkPlan.deleteAll();
-            this.setCallbackStatus('workPlan', 'local', NO);
-            // create a record for each order returned from the server and save it
-    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('workplans'), data['return'].length, 0);
-            _.each(data['return'], function(el) {
-                DigiWebApp.WorkPlan.createRecord({
-                      id: el.arbeitsplanId
-                    , workplanType: el.arbeitsplanTyp
-                    , activityPositions: el.positionen.join(',') // join collects references to positionen in a string
-                    , activityIds: el.taetigkeitsIds.join(',')    // join collects references to taetigkeitsIds in a string
-                }).save();
-        		DigiWebApp.ApplicationController.DigiProgressView.increase();
-            });
-
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('workPlan', 'local', YES);
-        }
-    }
-    */
     /**
      * Calls getHandOrders on DigiWebApp.RequestController.
      * Success callback proceeds received hand orders and afterwards starts retrieving features.
@@ -2364,104 +1771,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	}
     }
 
-    /*
-    , getHandOrdersFromRemoteSuccess: function(data, msg, xhr) {
-        
-   		if ( typeof(data['return']) === "undefined" && typeof(data['ns:return']) !== "undefined" ) {
-    		data['return'] = data['ns:return'];
-    		try {
-    			//myns = data['return'][0]['xsi:type'].split(":")[0];
-    			var myns = this.myns;
-    			 _.each(data['return'], function(el) {
-    				 el.handauftragsId = el[myns + ':handauftragsId'];
-    				 el.handauftragsBezeichnung = el[myns + ':handauftragsBezeichnung'];
-    			 });
-    		} catch(e) {
-    		}
-    	}
-
-    	if (data['return']) {
-            this.setCallbackStatus('handOrder', 'remote', YES);
-
-            // Clear handorders from storage
-            DigiWebApp.HandOrder.deleteAll();
-            this.setCallbackStatus('handOrder', 'local', NO);
-            
-            if(typeof(data['return']) === 'object' && !_.isArray(data['return'])) {
-                data['return'] = [data['return']];
-            }
-
-            var mIdArray = [];
-            var rec = null;
-
-            if (_.isObject(data['return']) && !_.isArray(data['return'])) {
-                data['return'] = [data['return']];
-            }
-
-            // create a record for each order returned from the server and save it
-    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('handorders'), data['return'].length, 0);
-            _.each(data['return'], function(el) {
-            	if (
-            			(DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length === 0)
-            		&&	(DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length === 0)
-            	) {
-	                rec = DigiWebApp.HandOrder.createRecord({
-	                      id: el.handauftragsId
-	                    , name: el.handauftragsBezeichnung
-	                    , isLocalOnly: NO
-	                });
-            	} else if (DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}}).length !== 0) {
-            		rec = DigiWebApp.HandOrder.find({query:{identifier: 'id', operator: '=', value: el.handauftragsId}})[0];
-            		rec.set("id", el.handauftragsId);
-            		rec.set("name", el.handauftragsBezeichnung);
-            		rec.set("isLocalOnly", NO);
-            	} else if (DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}}).length !== 0) {
-            		rec = DigiWebApp.HandOrder.find({query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}})[0];
-            		rec.set("id", el.handauftragsId);
-            		rec.set("name", el.handauftragsBezeichnung);
-            		rec.set("isLocalOnly", NO);
-            	}
-                try {
-                    rec.save();
-                    mIdArray.push(rec.m_id);
-                    //_.each(DigiWebApp.Booking.find({query:{identifier: 'handOrderId', operator: '=', value: el.handauftragsBezeichnung}}), function(booking) {
-                    _.each(DigiWebApp.Booking.find(), function(booking) {
-                    	if (booking.get('handOrderId') !== null && booking.get('handOrderId') === el.handauftragsBezeichnung) {
-                    		booking.set("handOrderId", el.handauftragsId);
-                    		booking.save();
-                    	}
-                    });
-                } catch(e) {
-                	trackError(e);
-                }
-        		DigiWebApp.ApplicationController.DigiProgressView.increase();
-            });
-
-            // get locally saved hand orders and push them into mId array
-            var locals = _.select(DigiWebApp.HandOrder.findSorted(), function(ho) {
-                if (ho) return ho.get('isLocalOnly') === YES;
-            });
-            
-            _.each(locals, function(el) {
-                mIdArray.push(el.m_id);
-            });
-            
-            localStorage.setItem(this.storagePrefix + '_handorderKeys', JSON.stringify(mIdArray));
-
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('handOrder', 'local', YES);
-        } else {
-        	
-            this.setCallbackStatus('handOrder', 'remote', NO);
-
-            // Clear handorders from storage
-            DigiWebApp.HandOrder.deleteAll();
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-            this.setCallbackStatus('handOrder', 'local', NO);
-            
-        }
-    }
-    */
     /**
      * Calls getFeatures on DigiWebApp.RequestController.
      * Success callback proceeds received features data.
@@ -2881,18 +2190,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	}
     	}
 
-    	// go to next page
-    	/*
-        if(this.isReadyToProceed()) {
-            DigiWebApp.NavigationController.toBookTimePage(YES);
-        } else {
-            //M.DialogView.alert({
-            DigiWebApp.ApplicationController.nativeAlertDialogView({
-                  title: M.I18N.l('offlineWorkNotPossible')
-                , message: M.I18N.l('offlineWorkNotPossibleMsg')
-            });
-        }
-		*/
     }
 
     /**
@@ -2901,31 +2198,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * Error callback calls proceedWithLocalData to check whether offline work is possible.
      */
     , getKolonneFromRemote: function() {
-        /*
-        DigiWebApp.RequestController.getKolonne({
-              success: {
-                  target: this
-                , action: function(data, msg, xhr) {
-                    this.getKolonneFromRemoteSuccess(data, msg, xhr);
-                }
-            }
-            , error: {
-                  target: this
-                , action: function() {
-        			trackError("getKolonneFromRemote-error");
-        			this.proceedWithLocalData("getKolonneFromRemote");
-                }
-            }
-        });
-        */
     	// Bugfix 2631: Sorting Mitarbeiter by Nachname first
     	// In case of same Nachname then Firstname
     	DigiWebApp.JSONDatenuebertragungController.empfangeKolonne(
     		function() {
     			var that = DigiWebApp.ApplicationController;
-    	        // end session on server
-    			// Bugfix: 3265 remove old XML-WebService
-    	        // that.endSession();
     			var empfangeBautagebuch = function() {
     	            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
     	    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
@@ -2951,140 +2228,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	   }
     	);
     }
-
-
-//    /**
-//     * The success callback for getKolonneFromRemote.
-//     *
-//     * Distinguishes between two scenarios:
-//     * 1) A Kolonne is returned
-//     * 2) No Kolonne is returned
-//     *
-//     * Case 1:
-//     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server)
-//     * 2) the local available employees are deleted, the corresponding callback status is set
-//     * 3) employees, received from remote service, are saved in localstorage again and the corresponding status is set to YES
-//     *
-//     * 4) If a switch from a "No Kolonne" state of the app occured, the employee selection LS is cleared
-//     * 5) If the employee state of the app is different from "Emp Selection done" set to 1 (kolonne loaded but no selection yet)
-//     *
-//     *
-//     * Case 2:
-//     * 1) the callback status for 'kolonne' and 'remote' is set (means a kolonne is correctly returned by server, even though it's not a kolonnes)
-//     * 2) the local available employees are deleted, the corresponding callback status is set
-//     * 3) a standard employee with id=0 and name=Standardmitarbeiter is created and preselected and the corresponding local state set
-//     *
-//     *
-//     * In both cases:
-//     * 
-//     * 1) By calling isReadyToProceed() it is checked, whether the app is available to move to the next screen. otherwise an alert is shown.
-//     *    If the app is ready to proceed toBookTimePage() is called on DigiWebApp.NavigationController
-//     *
-//     * 2) endSession is called to close the session on the remote server
-//     *
-//     * 
-//     *
-//     * @param data The returned data of the server in JSON, means JS object.
-//     * @param msg
-//     * @param xhr The XMLHTTPRequest object.
-//     */
-//    , getKolonneFromRemoteSuccess: function(data, msg, xhr) {
-//    	
-//    	if (data) {
-//    		if ( typeof(data['return']) === "undefined" ) data['return'] = data['ns:return'];
-//    	}
-//
-//        var mIdArray = [];
-//        var k = null;
-//
-//        if (data && data['return']) {
-//            this.setCallbackStatus('kolonne', 'remote', YES);
-//
-//            // Clear employees from storage
-//            DigiWebApp.Employee.deleteAll();
-//            this.setCallbackStatus('kolonne', 'local', NO);
-//
-//            if ( _.isObject(data['return']) && !_.isArray(data['return']) ) {
-//                data['return'] = [data['return']];
-//            }
-//
-//            // create a record for each order returned from the server and save it
-//    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('employees'), data['return'].length, 0);
-//            _.each(data['return'], function(el) {
-//        		DigiWebApp.ApplicationController.DigiProgressView.increase();
-//                k = DigiWebApp.Employee.createRecord({
-//                      id: el.id
-//                    , name: el.name
-//                    , kolonnenId: el.kolonnenId
-//                    , isSelected: NO
-//                });
-//
-//                try {
-//                	k.save();
-//                    mIdArray.push(k.m_id);
-//                } catch(e) {
-//                	trackError(e);
-//                }
-//
-//            });
-//            
-//            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
-//            
-//    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-//            this.setCallbackStatus('kolonne', 'local', YES);
-//
-//            // clear local storage when switch from no kolonne
-//            if(localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) == 0) {
-//                localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
-//            }
-//            if(DigiWebApp.EmployeeController.getEmployeeState() != 2) {
-//                DigiWebApp.EmployeeController.setEmployeeState(1); // set it to "kolonne loaded but no selection yet"
-//            }
-//            
-//        } else {
-//            // no kolonne => mitarbeiterId = 0
-//    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-//            this.setCallbackStatus('kolonne', 'remote', YES);
-//
-//            // Clear employees from storage
-//            DigiWebApp.Employee.deleteAll();
-//            this.setCallbackStatus('kolonne', 'local', NO);
-//
-//            k = DigiWebApp.Employee.createRecord({
-//                  id: '0'
-//                , name: 'Standardmitarbeiter'
-//                , kolonnenId: ''
-//                , isSelected: YES
-//            }).save();
-//            mIdArray.push(k.m_id);
-//            localStorage.setItem(this.storagePrefix + '_employeeKeys', JSON.stringify(mIdArray));
-//            this.setCallbackStatus('kolonne', 'local', YES);
-//            DigiWebApp.EmployeeController.setEmployeeState(0);
-//        }
-//
-//        // end session on server
-//        //this.endSession();
-//
-//        var empfangeBautagebuch = function() {
-//        	var that = DigiWebApp.ApplicationController;
-//            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
-//    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
-//        	} else {
-//        		that.afterTransfer();
-//        	}
-//        }
-//
-//        var empfangeFestepausendefinitionen = function() {
-//        	var that = DigiWebApp.ApplicationController;
-//            if (DigiWebApp.SettingsController.featureAvailable('425')) {
-//            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
-//        	} else {
-//        		empfangeBautagebuch();
-//        	}
-//        }
-//    	
-//        empfangeFestepausendefinitionen();
-//    }
     
     , afterTransfer: function() {
 		DigiWebApp.ApplicationController.DigiProgressView.hide(); // just in case
@@ -3159,27 +2302,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	}
 
     }
-
-//    /**
-//     * Calls endSession on DigiWebApp.RequestController.
-//     * Both callbacks do nothing.
-//     */
-//    , endSession: function() {
-//		DigiWebApp.ApplicationController.enforceChefToolOnly();
-//        DigiWebApp.RequestController.endSession({
-//              success: {
-//                  target: this
-//                , action: function(data, msg, xhr) {
-//        		}
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//    				trackError("endSession-error");
-//            	}
-//            }
-//        });
-//    }
 
     /**
      * Sets the callback status of the callback status object (that is a controller property),,,,,,,,,,,,,,,,,,,,,,
@@ -3341,19 +2463,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 //        	}
 
         	// mit dem übergebenen callback weitermachen
-    		//if (inDebug() && staticDebugging) alert(navigator.platform + ", ApplicationController.updateModels " + "done --> calling callback");
 	    	callback();
 	    	
     	}
 
-    	//alert(DigiWebApp.SettingsController.getSetting("mitarbeiterId"));
     	// zunächst muss die mitarbeiterId des Benutzers bekannt sein (ab modelVersion 1)
     	if (
     	   (typeof(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) == "undefined") 
     	|| (DigiWebApp.SettingsController.getSetting("mitarbeiterId") == "")
     	|| (parseIntRadixTen(DigiWebApp.SettingsController.getSetting("mitarbeiterId")) == 0)
     	) {
-    		//alert("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		writeToLog("aktualisiere Mitarbeiter des Benutzers in updateModels (" + DigiWebApp.SettingsController.getSetting("mitarbeiterId") + ")");
     		var recieveObj = {
     				  webservice: "mitarbeiter"

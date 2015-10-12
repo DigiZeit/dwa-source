@@ -35,7 +35,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			that.sendDataWithServer(sendObj);
 		}
 	}
-
 	
 	, sendDataWithServer: function(sendObj) {
 		var that = this;
@@ -244,6 +243,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
     	writeToLog("empfangeUrl");
 		if (typeof(callback) != "function") callback = function(){};
 		
+    	// debug-ausnahme
+    	if (location.host === "localhost:8080" || DigiWebApp.SettingsController.getSetting("debugDatabaseServer")) {
+    		if (location.host === "localhost:8080") {
+    			that.DatabaseServer = "localhost:8080";
+    		} else {
+    			that.DatabaseServer = DigiWebApp.SettingsController.getSetting("debugDatabaseServer");
+    		}
+    		return callback();
+    	}
+
     	var myGatewayServer = that.GatewayServer;
 
     	if (inDebug()) {
