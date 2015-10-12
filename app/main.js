@@ -897,7 +897,7 @@ if(localStorage) {
 	language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
 	if (language === null) {
 		localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
-		//M.I18N.setLanguage('de_de');
+		try{location.reload()}catch(e){}
 	}
 }
 
