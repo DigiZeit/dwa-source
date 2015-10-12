@@ -1969,17 +1969,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			  , callbacks: {
     					confirm: {
     						action: function() {
-    							try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
-								if (typeof(navigator.app) !== "undefined") {
-									var newUrl = location.protocol + '//' + location.pathname;
-									if (typeof(location.origin) !== "undefined") {
-										newUrl = location.origin + location.pathname;					
-									}
-									writeToLog("restarting app with url " + newUrl);
-									navigator.app.loadUrl(newUrl);
-								} else {
-									alert(M.I18N.l('bitteManuellNeuStarten'));
-								}
+    							DigiWebApp.ApplicationController.doRestartApp();
     						}
     					}
     			  }
@@ -2173,17 +2163,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                         	//  target: this
                         	//, action: 'proceedWithLocalData'
     						action: function() {
-								try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
-								if (typeof(navigator.app) !== "undefined") {
-									var newUrl = location.protocol + '//' + location.pathname;
-									if (typeof(location.origin) !== "undefined") {
-										newUrl = location.origin + location.pathname;					
-									}
-									writeToLog("restarting app with url " + newUrl);
-									navigator.app.loadUrl(newUrl);
-								} else {
-									alert(M.I18N.l('bitteManuellNeuStarten'));
-								}
+    							DigiWebApp.ApplicationController.doRestartApp();
     						}
                     	}
                   }
@@ -2273,17 +2253,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                             	//  target: this
                             	//, action: 'proceedWithLocalData'
         						action: function() {
-									try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
-									if (typeof(navigator.app) !== "undefined") {
-										var newUrl = location.protocol + '//' + location.pathname;
-										if (typeof(location.origin) !== "undefined") {
-											newUrl = location.origin + location.pathname;					
-										}
-										writeToLog("restarting app with url " + newUrl);
-										navigator.app.loadUrl(newUrl);
-									} else {
-										alert(M.I18N.l('bitteManuellNeuStarten'));
-									}
+									DigiWebApp.ApplicationController.doRestartApp();
         						}
                         	}
                       }
@@ -2582,4 +2552,29 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		$('#' + id).parent().parent().parent()[0].firstChild.textContent = textValue;
     	}
     }
+    
+    , doRestartApp: function() {
+//		if (typeof(navigator.app) !== "undefined") {
+//			if (typeof(location.origin) !== "undefined") {
+//				navigator.app.loadUrl(location.origin + location.pathname);					
+//			} else {
+//				navigator.app.loadUrl(location.protocol + '//' + location.pathname);
+//			}
+//		} else {
+//			window.location.reload();
+//		}
+
+		if (typeof(navigator.app) !== "undefined") {
+			var newUrl = location.protocol + '//' + location.pathname;
+			if (typeof(location.origin) !== "undefined") {
+				newUrl = location.origin + location.pathname;					
+			}
+			writeToLog("restarting app with url " + newUrl);
+			navigator.app.loadUrl(newUrl);
+		} else {
+			alert(M.I18N.l('bitteManuellNeuStarten'));
+			flushLogQueueAndExit();
+		}
+    }
+    
 });

@@ -303,16 +303,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                		, cancel: {
 	                    		  target: this
 	                    		, action: function() {
-                					DigiWebApp.ApplicationController.deleteAllData(); 
-	    							if (typeof(navigator.app) !== "undefined") {
-										if (typeof(location.origin) !== "undefined") {
-											navigator.app.loadUrl(location.origin + location.pathname);					
-										} else {
-											navigator.app.loadUrl(location.protocol + '//' + location.pathname);
-										}
-	    							} else {
-	    								window.location.reload();
-	    							}
+                					DigiWebApp.ApplicationController.deleteAllData();
+                					return DigiWebApp.ApplicationController.doRestartApp();
 	                    		}
 	                		}
 	            		}
