@@ -1535,11 +1535,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
     }
 
-    , setSetting: function(prop, value) {
+    , setSetting: function(prop, value, immediateSave) {
         var setting = DigiWebApp.Settings.find()[0];
         if ( typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
+        		if (immediateSave) return setting.save();
         		if (prop == "logDelete" && (typeof window.logDelete != "undefined")) { window.logDelete = parseBool(value); }
         		if (prop == "logSave" && (typeof window.logSave != "undefined")) { window.logSave = parseBool(value); }
     		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }

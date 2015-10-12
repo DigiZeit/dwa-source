@@ -1106,10 +1106,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
 	        					writeToLog("Zugangsdaten blieben erhalten");
 	                    		DigiWebApp.SettingsController.init(YES,YES,YES);
-								DigiWebApp.SettingsController.setSetting("company", mycompany);
-								DigiWebApp.SettingsController.setSetting("password", mypassword);
-								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode);
-								DigiWebApp.SettingsController.setSetting("workerId", myworkerId);
+								DigiWebApp.SettingsController.setSetting("company", mycompany, YES);
+								DigiWebApp.SettingsController.setSetting("password", mypassword, YES);
+								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode, YES);
+								DigiWebApp.SettingsController.setSetting("workerId", myworkerId, YES);
 	                    	}
 	                        DigiWebApp.ApplicationController.init(true);
         				};
