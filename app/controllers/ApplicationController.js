@@ -2572,6 +2572,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			writeToLog("restarting app with url " + newUrl);
 			navigator.app.loadUrl(newUrl);
 		} else {
+			try{window.location.reload();}catch(e){}
 			alert(M.I18N.l('bitteManuellNeuStarten'));
 			flushLogQueueAndExit();
 		}
