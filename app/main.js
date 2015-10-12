@@ -894,6 +894,7 @@ function searchForFeature(featureId) {
 
 if(localStorage) {
 	var language = null;
+	M.I18N.defaultLanguage = "de_de";
 	language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');
 	if (language === null) {
 		localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');

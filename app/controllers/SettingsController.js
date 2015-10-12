@@ -1683,6 +1683,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var result = that.HasCredentials(); 
     	if (!result) {
     		if (that.showCredentialsAlert) {
+				DigiWebApp.ApplicationController.enforceChefToolOnly();
 	            that.showCredentialsAlert = NO;
 	        	DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                title: M.I18N.l('noCredentials')
