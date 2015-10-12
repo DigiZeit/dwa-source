@@ -1671,28 +1671,33 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		} catch(e7) { 
 			trackError(e7);
 		}
-        that.showCredentialsAlert = YES;
-        that.credentialsAlertShown = false;
+    	if (!that.credentialsAlertShown) {
+    		that.showCredentialsAlert = YES;
+    		that.credentialsAlertShown = true;
+    	}
 		return false;
     }
 
     , EnforceCredentials: function() {
     	var that = this;
     	var result = that.HasCredentials(); 
-    	if ((!result || that.showCredentialsAlert) && !that.credentialsAlertShown) {
-            that.showCredentialsAlert = NO;
-        	DigiWebApp.ApplicationController.nativeAlertDialogView({
-                title: M.I18N.l('noCredentials')
-              , message: M.I18N.l('noCredentialsMsg')
-              , callbacks: {
-                  confirm: {
-                      action: function() {
-	    					that.credentialsAlertShown = true;
-	    					DigiWebApp.NavigationController.toSettingsPage(YES);
-                      }
-                  }
-              }
-          });
+    	if (!result) {
+    		if (that.showCredentialsAlert) {
+	            that.showCredentialsAlert = NO;
+	        	DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                title: M.I18N.l('noCredentials')
+	              , message: M.I18N.l('noCredentialsMsg')
+	              , callbacks: {
+	                  confirm: {
+	                      action: function() {
+		    					DigiWebApp.NavigationController.toSettingsPage(YES);
+	                      }
+	                  }
+	              }
+	          });
+    		} else {
+				DigiWebApp.NavigationController.toSettingsPage(YES);
+    		}
     	}
     	return result;
     }
