@@ -1591,64 +1591,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         } catch(e8) { trackError(e8); }
 	}
 
-//    , sendConfiguration: function() {
-//    	writeToLog("sendConfiguration");
-//    	//alert("in sendConfiguration");
-//        var settings = DigiWebApp.Settings.find();    		
-//    	//alert("typeof(settings)=" + typeof(settings));
-//    	//var MitarbeiterWebAppID = "0";
-//    	//try { MitarbeiterWebAppID = settings[0].get("workerId"); } catch(e) { trackError(e); }
-//    	//alert("typeof(DigiWebApp.RequestController.sendConfiguration)=" + typeof(DigiWebApp.RequestController.sendConfiguration));
-//        DigiWebApp.RequestController.sendConfiguration({
-//              settings: settings
-//            , success: {
-//                  target: this
-//                , action: function() {
-//        			// Konfiguration erfolgreich übertragen
-//		        	if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
-//		            	DigiWebApp.NavigationController.toBookTimePageTransition();
-//		            	//DigiWebApp.NavigationController.toDashboardPageFlipTransition(YES);
-//		        	}
-////	                // empfange den konfigurierten Mitarbeiternamen
-////		    		var recieveObj = {
-////		    				  webservice: "mitarbeiter"
-////		    				, loaderText: M.I18N.l('BautagebuchLadeMitarbeiter')
-////		    				, successCallback: function(data){
-////					        		if (data && data.mitarbeiter && data.mitarbeiter.length > 0) {
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", data.mitarbeiter[0].vorname);
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", data.mitarbeiter[0].nachname);
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", data.mitarbeiter[0].mitarbeiterId);
-////				        		} else {
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterVorname", "");
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterNachname", "");
-////				        			DigiWebApp.SettingsController.setSetting("mitarbeiterId", "0");
-////				        		}
-////				        	}
-////		    				, errorCallback: function(error) {
-////		    					trackError(error);
-////	    		        	}
-////		    				, additionalQueryParameter: "getAll=true&webAppId=" + DigiWebApp.SettingsController.getSetting("workerId")
-////		    				//, timeout: 
-////		    				, geraeteIdOverride: true
-////		    				, modus: '1'
-////		    			};
-////		        	DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
-//        		}
-//            }
-//            , error: {
-//                  target: this
-//                , action: function() {
-//            		// Konfiguration nicht übertragen
-//            		//console.log("sendConfiguration failed");
-//                    //DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                    //      title: M.I18N.l('sendConfigurationFail')
-//                    //    , message: M.I18N.l('sendConfigurationFailMsg')
-//                    //});
-//                }
-//            }
-//        });
-//    }
-
     , terminlisteEinstellungen_titel: [{
     	  "label": M.I18N.l('Terminliste')
     	, "items": []
