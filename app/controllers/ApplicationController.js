@@ -1972,6 +1972,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			  , callbacks: {
     					confirm: {
     						action: function() {
+    							try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
 								if (typeof(navigator.app) !== "undefined") {
 									var newUrl = location.protocol + '//' + location.pathname;
 									if (typeof(location.origin) !== "undefined") {
@@ -1980,8 +1981,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 									writeToLog("restarting app with url " + newUrl);
 									navigator.app.loadUrl(newUrl);
 								} else {
-									writeToLog("restarting app");
-									window.location.reload();
+									alert(M.I18N.l('bitteManuellNeuStarten'));
 								}
     						}
     					}
@@ -2176,6 +2176,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                         	//  target: this
                         	//, action: 'proceedWithLocalData'
     						action: function() {
+								try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
 								if (typeof(navigator.app) !== "undefined") {
 									var newUrl = location.protocol + '//' + location.pathname;
 									if (typeof(location.origin) !== "undefined") {
@@ -2184,8 +2185,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 									writeToLog("restarting app with url " + newUrl);
 									navigator.app.loadUrl(newUrl);
 								} else {
-									writeToLog("restarting app");
-									window.location.reload();
+									alert(M.I18N.l('bitteManuellNeuStarten'));
 								}
     						}
                     	}
@@ -2276,6 +2276,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                             	//  target: this
                             	//, action: 'proceedWithLocalData'
         						action: function() {
+									try{window.location.reload();}catch(e){writeToLog("window.location.reload did not work");}
 									if (typeof(navigator.app) !== "undefined") {
 										var newUrl = location.protocol + '//' + location.pathname;
 										if (typeof(location.origin) !== "undefined") {
@@ -2284,8 +2285,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 										writeToLog("restarting app with url " + newUrl);
 										navigator.app.loadUrl(newUrl);
 									} else {
-										writeToLog("restarting app");
-										window.location.reload();
+										alert(M.I18N.l('bitteManuellNeuStarten'));
 									}
         						}
                         	}

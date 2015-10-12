@@ -547,5 +547,7 @@ M.I18N.de_de = {
 	, dtc6Leistung: 'Leistung'
 	
 	, materialstammEmpfangen: 'Materialstammdaten abgleichen'
+		
+	, bitteManuellNeuStarten: 'DIGI-WebApp konnte nicht neu gestartet werden! Bitte manuell neu starten!'
 
 };

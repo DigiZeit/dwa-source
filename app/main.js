@@ -10,7 +10,7 @@
 var logDelete = true;
 var logSave = true;
 var logDesign = false;
-var staticDebugging = false; // for hotfix debugging without credentials etc.
+var staticDebugging = true; // for hotfix debugging without credentials etc.
 
 var staticDebuggingAlertShown = false;
 function inDebug() {
@@ -1110,7 +1110,7 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 }
 
 if (!onIOS && !onAndroid23 && typeof(Notification) != "undefined") { 
-	if (inDebug() && staticDebugging) alert(navigator.platform + ", Start Notification ");
+	//if (inDebug() && staticDebugging) alert(navigator.platform + ", Start Notification ");
 	try {
 		window.addEventListener('load', function () {
 		  Notification.requestPermission(function (status) {

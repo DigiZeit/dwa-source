@@ -549,4 +549,6 @@ M.I18N.en_us = {
 		
 	, materialstammEmpfangen: 'Recieve material master data'
 
+	, bitteManuellNeuStarten: 'DIGI-WebApp could not get restarted! Please restart manually!'
+
 };
