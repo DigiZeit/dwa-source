@@ -1105,7 +1105,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    	//console.log(mycompany, mypassword, myconnectionCode, myworkerId);
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
 	        					writeToLog("Zugangsdaten blieben erhalten");
-	                    		DigiWebApp.SettingsController.init(YES);
+	                    		DigiWebApp.SettingsController.init(YES,YES,YES);
 								DigiWebApp.SettingsController.setSetting("company", mycompany);
 								DigiWebApp.SettingsController.setSetting("password", mypassword);
 								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode);

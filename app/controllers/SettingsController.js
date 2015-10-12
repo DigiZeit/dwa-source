@@ -89,7 +89,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
     , defaultsettings: null
     
-    , init: function(isFirstLoad, myinteractWithServiceApp) {
+    , init: function(isFirstLoad, myinteractWithServiceApp, afterReset) {
     	
     	var that = DigiWebApp.SettingsController;
     	
@@ -99,7 +99,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	
-        if (!that.HasCredentials()) {
+        if (!that.HasCredentials() && !afterReset) {
     		DigiWebApp.ApplicationController.enforceChefToolOnly();
     		that.EnforceCredentials();
         }
