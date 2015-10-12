@@ -81,6 +81,8 @@ DigiWebApp.AnwesenheitslisteController = M.Controller.extend({
 	                }
 	            }
 	        });    	
+        } else {
+        	DigiWebApp.ApplicationController.DigiLoaderView.hide();
         }
 		
     }
