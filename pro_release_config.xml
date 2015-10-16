@@ -2,7 +2,7 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		    = "com.digi.webapppro"
+	id		    = "com.digi.webapp"
 	versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
@@ -48,6 +48,9 @@
 	<preference name="webviewbounce" value="false" />
 	<preference name="disallowOverscroll" value="true" />
 	<preference name="DisallowOverscroll" value="true" />
+
+	<!-- iOS 9 WKWebView -->
+    <preference name="WKWebViewPluginEmbeddedServerPort" value="12344" />
 	
 <!-- If you do not want any permissions to be added to your app, add the following tag to 
 your config.xml instead; you will still have the INTERNET permission on your app,
@@ -57,7 +60,7 @@ which PhoneGap requires. -->
 <!-- to enable single features use the following examples -->
 	<feature name="http://api.phonegap.com/1.0/geolocation" />
 	<feature name="http://api.phonegap.com/1.0/network" />
-	<!-- <feature name="http://api.phonegap.com/1.0/camera" /> Kamera nur in Pro-Version -->
+	<feature name="http://api.phonegap.com/1.0/camera" />
 	<feature name="http://api.phonegap.com/1.0/file" />
 	<feature name="http://api.phonegap.com/1.0/contacts" />
 	<feature name="http://api.phonegap.com/1.0/notification"/>
@@ -67,19 +70,19 @@ which PhoneGap requires. -->
 <gap:plugin name="org.apache.cordova.console" version="0.2.11" />
 <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
 <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
+<gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
 <!-- <gap:plugin name="org.apache.cordova.file" version="0.2.4" /> -->
 <gap:plugin name="org.apache.cordova.file" version="1.3.1" />
 <gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
-<!--<gap:plugin name="cordova-plugin-inappbrowser" version="1.0.1" source='npm' /> --> <!-- for newer phonegap -->
+<!--<gap:plugin name="cordova-plugin-inappbrowser" version="1.0.1" source='npm' />-->
 <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
 <gap:plugin name="org.apache.cordova.media-capture" version="0.3.3" />
 <gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 <gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
 
-<!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
-<gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" />
+<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
+<!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
 <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
 <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" />
@@ -92,18 +95,15 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
 <!-- iOS9 -->   
-	<!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
-	<gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.0' /> 
+	<gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.3' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
 	<string>@versionCode@</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
-<!-- 2015-10: true since new styling -->
     <true/>
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-<!-- 2015-10: false since new styling -->
     <false/>
 </gap:config-file>
 <feature name="StatusBar">

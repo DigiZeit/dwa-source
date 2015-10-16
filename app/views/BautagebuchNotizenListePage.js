@@ -72,6 +72,8 @@ DigiWebApp.BautagebuchNotizenListePage = M.PageView.design({
 
     , uebertragenButton: M.ButtonView.design({
 	        value: M.I18N.l('BautagebuchUebertragen')
+	      // Bugfix 2142
+	      ,  cssClass: 'uploadNotizen'  
 	      , events: {
 	          tap: {
 	                action: function() {

@@ -278,10 +278,16 @@ fieldset legend {
 .DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-select .ui-btn,
 .DIGI-WEBAPP-DSObranding .digiButton .ui-btn {
 	background: #BCBCBC !important;
+	text-shadow: none !important;
 }
 
 .DIGI-WEBAPP-DSObranding .ui-listview .ui-btn {
 	background: #ffffff !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-title {
+	text-shadow: none !important;
 }
 
 .DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .content .ui-btn,
@@ -289,9 +295,15 @@ fieldset legend {
 .DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-content .bautagebuchButton .ui-btn,
 .DIGI-WEBAPP-DSObranding .mediaListPage .uploadMediaFiles .ui-btn-inner,
 .DIGI-WEBAPP-DSObranding .bautagebuchListePage .uploadMaterial .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage .uploadNotizen .ui-btn-inner,
 .DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .ui-content .ui-btn-inner,
 .DIGI-WEBAPP-DSObranding .settingsPage .ui-content .ui-btn-inner {
 	background: #BCBCBC !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-listview a {
+	color: #000 !important;
 }
 
 .DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .whiteText 
@@ -316,6 +328,7 @@ fieldset legend {
 .DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .green_background .ui-btn-inner{
 	background: green !important;
 	color: #fff !important;
+	text-shadow: none !important;
 }
 
 .DIGI-WEBAPP-DSObranding .red_background .ui-btn-inner,
@@ -323,6 +336,7 @@ fieldset legend {
 .DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .red_background .ui-btn-inner{
 	background: #D4242D !important;
 	color: #fff !important;
+	text-shadow: none !important;
 }
 
 .DIGI-WEBAPP-DSObranding .activityListPage .ui-content li {
