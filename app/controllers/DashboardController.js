@@ -500,15 +500,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			if (typeof(localStorage) !== "undefined") {
 				localStorage.setItem("reloadAppOneMoreTime", "true");
 			}
-			if (typeof(navigator.app) !== "undefined") {
-				if (typeof(location.origin) !== "undefined") {
-					navigator.app.loadUrl(location.origin + location.pathname);					
-				} else {
-					navigator.app.loadUrl(location.protocol + '//' + location.pathname);
-				}
-			} else {
-				window.location.reload();
-			}
+			DigiWebApp.ApplicationController.doRestartApp();
 		} else {
 			DigiWebApp.ApplicationController.nativeAlertDialogView({
     			  title: M.I18N.l('noApplicationUpdateAvailable')

@@ -2567,12 +2567,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     	try{
 	    	if (typeof(navigator.app) !== "undefined") {
-				var newUrl = location.protocol + '//' + location.pathname;
-				if (typeof(location.origin) !== "undefined") {
-					newUrl = location.origin + location.pathname;					
-				}
-				writeToLog("restarting app with url " + newUrl);
-				navigator.app.loadUrl(newUrl);
+//				var newUrl = location.protocol + '//' + location.pathname;
+//				if (typeof(location.origin) !== "undefined") {
+//					newUrl = location.origin + location.pathname;					
+//				}
+//				writeToLog("restarting app with url " + newUrl);
+//				navigator.app.loadUrl(newUrl);
+				window.location.reload();
 			} else {
 				window.location.reload();
 			}
