@@ -368,7 +368,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, authentifizierenWithServer: function(callback) {
 		var that = this;
 		if (typeof(callback) != "function") callback = function(){};
-		var evalCode = function(code) {
+		var evalCode = function(code, meaning) {
 				switch(parseIntRadixTen(code)) {
 	            case 1:
 	        		var timestampNow = D8.now().getTimestamp();
@@ -416,7 +416,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError2')
-	                    , message: M.I18N.l('authenticationErrorMsg2')
+	                    , message: meaning
 	                });
 	                DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
@@ -425,11 +425,38 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError3')
-	                    , message: M.I18N.l('authenticationErrorMsg3')
+	                    , message: meaning
 	                });
 	                DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
+	            case 3:
+	                //M.DialogView.alert({
+	                DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                      title: M.I18N.l('authenticationError3')
+	                    , message: meaning
+	                });
+	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                break;
+
+	            case 4:
+	                //M.DialogView.alert({
+	                DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                      title: M.I18N.l('authenticationError')
+	                    , message: meaning
+	                });
+	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                break;
+
+	            case -1:
+	                //M.DialogView.alert({
+	                DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                      title: M.I18N.l('authenticationError')
+	                    , message: meaning
+	                });
+	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                break;
+
 	            default:
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -446,7 +473,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	    	if (data !== null) {
 	    		var objAuthentifizieren = data.authentifizieren;
 	    		that.setAuthentifizierenCode(objAuthentifizieren.code);
-	    		evalCode(objAuthentifizieren.code);
+	    		evalCode(objAuthentifizieren.code, objAuthentifizieren.meaning);
 	    	}
 	    };
         var errorFunc = function(xhr, err) {

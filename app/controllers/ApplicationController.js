@@ -1811,11 +1811,23 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	var that = this;
     	if (data !== null || data !== '') {
     		var configurations;
-    		if (typeof(data) === 'object')
-    			configurations = data['konfigurationen'];
-    		else {
-    			var configurationsObject = JSON.parse(data);
-    			configurations = configurationsObject['konfigurationen'];
+    		try {
+	    		if (typeof(data) === 'object')
+	    			configurations = data['konfigurationen'];
+	    		else {
+	    			var configurationsObject = JSON.parse(data);
+	    			if (typeof(configurationsObject) === 'object') {
+	    				configurations = configurationsObject['konfigurationen'];
+	    			} else {
+	    				return;
+	    			}
+	    		}
+	    		if (typeof(configurations) != 'object' && configurations.length > 0) {
+	    			// mindestens das Setting DTC6_aktiv kommt immer mit --> Array mit mindestens einem Eintrag
+					return;
+	    		}
+    		} catch(e) {
+				return;
     		}
     		that.setCallbackStatus('features', 'remote', YES);
     		var activeFeaturesBeforeTransfer = [];
@@ -1825,6 +1837,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				activeFeaturesBeforeTransfer.push(keyId);
     			}
     		});
+    		
     		// Clear Features from storage
     		DigiWebApp.Features.deleteAll();
     		
