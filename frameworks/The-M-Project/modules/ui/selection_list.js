@@ -381,8 +381,9 @@ M.SelectionListView = M.View.extend(
                 //obj.theme();
             }
             this.addItem(renderedItems.join(""));
-            for(var i in renderedObjects) {
-                i.theme();
+            for(var robj in renderedObjects) {
+                var item  = renderedObjects[i];
+                item.theme();
             }
             this.themeUpdate();
         }
