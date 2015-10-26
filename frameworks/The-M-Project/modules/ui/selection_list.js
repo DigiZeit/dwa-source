@@ -360,6 +360,8 @@ M.SelectionListView = M.View.extend(
         if(this.contentBinding) {
             /* assign the value property to 'items' since this was automatically set by contentDidChange of M.View */
             var items = this.value;
+            var renderedItems = [];
+            var renderedObjects = [];
             for(var i in items) {
                 var item  = items[i];
                 var obj = null;
@@ -373,8 +375,14 @@ M.SelectionListView = M.View.extend(
                     obj.name = item.name ? item.name : (item.label ? item.label : (item.value ? item.value : ''));
                 }
 
-                this.addItem(obj.render());
-                obj.theme();
+                renderedObjects.push(obj);
+                renderedItems.push(obj.render());
+                //this.addItem(obj.render());                
+                //obj.theme();
+            }
+            this.addItem(renderedItems.join(""));
+            for(var i in renderedObjects) {
+                i.theme();
             }
             this.themeUpdate();
         }
