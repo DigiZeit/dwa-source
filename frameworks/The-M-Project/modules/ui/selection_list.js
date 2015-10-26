@@ -381,10 +381,10 @@ M.SelectionListView = M.View.extend(
                 //obj.theme();
             }
             this.addItem(renderedItems.join(""));
-//            for(var robj in renderedObjects) {
-//                var item  = renderedObjects[i];
-//                item.theme();
-//            }
+            for(var robj in renderedObjects) {
+                var item  = renderedObjects[i];
+                item.theme();
+            }
             this.themeUpdate();
         }
     },
