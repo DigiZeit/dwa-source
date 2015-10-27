@@ -361,8 +361,8 @@ M.SelectionListView = M.View.extend(
             /* assign the value property to 'items' since this was automatically set by contentDidChange of M.View */
             var items = this.value;
             var withSpeedup = false;
-        	// TODO: Weyer: folgende Zeile auskommentieren
-            //withSpeedup = true;
+        	// TODO: Weyer: folgende Zeile entkommentieren
+            withSpeedup = true;
             if (!withSpeedup) {
 	            for(var i in items) {
 	                var item  = items[i];
