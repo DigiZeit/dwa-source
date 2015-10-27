@@ -430,15 +430,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
-	            case 3:
-	                //M.DialogView.alert({
-	                DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                      title: M.I18N.l('authenticationError3')
-	                    , message: meaning
-	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
-	                break;
-
 	            case 4:
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({

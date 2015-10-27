@@ -360,30 +360,51 @@ M.SelectionListView = M.View.extend(
         if(this.contentBinding) {
             /* assign the value property to 'items' since this was automatically set by contentDidChange of M.View */
             var items = this.value;
-            var renderedItems = [];
-            var renderedObjects = [];
-            for(var i in items) {
-                var item  = items[i];
-                var obj = null;
-                obj = M.SelectionListItemView.design({
-                    value: (item.value !== undefined && item.value !== null) ? item.value : '',
-                    label: item.label ? item.label : ((item.value !== undefined && item.value !== null) ? item.value : ''),
-                    parentView: this,
-                    isSelected: item.isSelected
-                });
-                if(this.selectionMode !== M.SINGLE_SELECTION_DIALOG && this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
-                    obj.name = item.name ? item.name : (item.label ? item.label : (item.value ? item.value : ''));
-                }
-
-                renderedObjects.push(obj);
-                renderedItems.push(obj.render());
-                //this.addItem(obj.render());                
-                //obj.theme();
-            }
-            this.addItem(renderedItems.join(""));
-            for(var robj in renderedObjects) {
-                var item  = renderedObjects[i];
-                item.theme();
+            var withSpeedup = false;
+        	// TODO: Weyer: folgende Zeile auskommentieren
+            //withSpeedup = true;
+            if (!withSpeedup) {
+	            for(var i in items) {
+	                var item  = items[i];
+	                var obj = null;
+	                obj = M.SelectionListItemView.design({
+	                    value: (item.value !== undefined && item.value !== null) ? item.value : '',
+	                    label: item.label ? item.label : ((item.value !== undefined && item.value !== null) ? item.value : ''),
+	                    parentView: this,
+	                    isSelected: item.isSelected
+	                });
+	                if(this.selectionMode !== M.SINGLE_SELECTION_DIALOG && this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
+	                    obj.name = item.name ? item.name : (item.label ? item.label : (item.value ? item.value : ''));
+	                }
+	
+	                this.addItem(obj.render());                
+	                obj.theme();
+	            }
+            } else {
+	            var renderedItems = [];
+	            var renderedObjects = [];
+	            for(var i in items) {
+	                var item  = items[i];
+	                var obj = null;
+	                obj = M.SelectionListItemView.design({
+	                    value: (item.value !== undefined && item.value !== null) ? item.value : '',
+	                    label: item.label ? item.label : ((item.value !== undefined && item.value !== null) ? item.value : ''),
+	                    parentView: this,
+	                    isSelected: item.isSelected
+	                });
+	                if(this.selectionMode !== M.SINGLE_SELECTION_DIALOG && this.selectionMode !== M.MULTIPLE_SELECTION_DIALOG) {
+	                    obj.name = item.name ? item.name : (item.label ? item.label : (item.value ? item.value : ''));
+	                }
+	
+	                // Speedup: Füge alle Optionen gesammelt in den DOM ein
+	                renderedObjects.push(obj);
+	                renderedItems.push(obj.render());
+	            }
+	            this.addItem(renderedItems.join(""));
+	            for(var robj in renderedObjects) {
+	                var item  = renderedObjects[i];
+	                item.theme();
+	            }
             }
             this.themeUpdate();
         }

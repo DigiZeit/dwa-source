@@ -167,7 +167,8 @@ DigiWebApp.BookingController = M.Controller.extend({
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
             if (setSelection) {
-            	//DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+            	// TODO: Weyer: folgende Zeile auskommentieren
+            	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
             }
         }
     }

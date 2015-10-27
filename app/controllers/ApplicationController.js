@@ -1811,6 +1811,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	var that = this;
     	if (data !== null || data !== '') {
     		var configurations;
+    		var doReturn = false;
     		try {
 	    		if (typeof(data) === 'object')
 	    			configurations = data['konfigurationen'];
@@ -1819,144 +1820,154 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    			if (typeof(configurationsObject) === 'object') {
 	    				configurations = configurationsObject['konfigurationen'];
 	    			} else {
-	    				return;
+		    			// die Rückgabe entspricht nicht dem erwarteten JSON --> Antwort kommt nicht von unserem Zeitserver
+	        			doReturn = true;
 	    			}
 	    		}
 	    		if (typeof(configurations) != 'object' && configurations.length > 0) {
 	    			// mindestens das Setting DTC6_aktiv kommt immer mit --> Array mit mindestens einem Eintrag
-					return;
+	    			// dies ist hier nicht der Fall --> Antwort kommt nicht von unserem Zeitserver
+	    			doReturn = true;
 	    		}
     		} catch(e) {
-				return;
+    			// --> Antwort kommt nicht von unserem Zeitserver
+    			doReturn = true;
     		}
-    		that.setCallbackStatus('features', 'remote', YES);
-    		var activeFeaturesBeforeTransfer = [];
-    		_.each(DigiWebApp.Features.find(), function(feature) {
-    			if (parseBool(feature.get('isAvailable')) == YES) {
-    				var keyId = feature.get('id');
-    				activeFeaturesBeforeTransfer.push(keyId);
-    			}
-    		});
     		
-    		// Clear Features from storage
-    		DigiWebApp.Features.deleteAll();
-    		
-    		that.setCallbackStatus('features', 'local', NO);
-    		DigiWebApp.ApplicationController.DigiProgressView.show(
-    			M.I18N.l('Save'), 
-    			M.I18N.l('features'), 
-    			configurations.length, 
-    			0);
-    		// reset settings without gui-elements
-    		DigiWebApp.SettingsController.setSetting(
-    			'treatAllAsTablet', 
-    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'treatAllAsPhone', 
-    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'settingsPassword', 
-    			DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
-    		var oldBranding = DigiWebApp.SettingsController.getSetting('branding');
-    		DigiWebApp.SettingsController.setSetting(
-    			'branding', 
-    			DigiWebApp.SettingsController.defaultsettings.get('branding'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'silentLoader', 
-    			DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'mapType', 
-    			DigiWebApp.SettingsController.defaultsettings.get('mapType'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'datatransfer_min_delay', 
-    			DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'GPSTimeOut', 
-    			DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'WebserviceTimeOut', 
-    			DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'LoaderTimeOut', 
-    			DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
-    		DigiWebApp.SettingsController.setSetting(
-    			'debugDatabaseServer', 
-    			DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
-    		DigiWebApp.ApplicationController.triggerUpdate = NO;
-
-    		// create a record for each feature returned from the server and save it
-    		_.each(configurations, function(el) {
-    			DigiWebApp.ApplicationController.DigiProgressView.increase();
-    			if (el.valueType === "Setting_WebApp") {
-    				var prop_setting = el.value;
-    				if (prop_setting === "false" || prop_setting === "true" ) { 
-    					prop_setting = ( prop_setting === "true" ); 
-    				}
-    				DigiWebApp.SettingsController.setSetting(el.keyId, prop_setting);
-    				// auch bei geändertem branding neu starten
-    				if ((el.keyId === "branding") && (el.value !== oldBranding)) 
-    					DigiWebApp.ApplicationController.restartApp = YES;
-    			} else if (el.valueType === "Feature") {
-    				DigiWebApp.Features.createRecord({
-    					  id: el.keyId
-    					, name: el.keyId
-    					, isAvailable: el.value
-    				}).save();
-    				// muss die App wegen des neu empfangenen Features neu gestartet werden?
-    				var activeFeatureFound = NO;
-    				_.each(activeFeaturesBeforeTransfer, function(activeFeature) {
-    					// ist die empfangene Feature-ID schon vor dem Abgelich aktiv gewesen?
-    					if (el.keyId === activeFeature) activeFeatureFound = YES;
-    				});
-    				// die App neu starten, wenn:
-    				// - das Feature vorher aktiv war und jetzt inaktiv gesetzt wird
-    				// - das Feature vorher inaktiv war und jetzt aktiv gesetzt wird
-    				if ((el.value === "true" && !activeFeatureFound) || 
-    					(el.value === "false" && activeFeatureFound)) {
-    					if (el.keyId === "400") DigiWebApp.ApplicationController.restartApp = YES;		// Foto
-    					if (el.keyId === "401") DigiWebApp.ApplicationController.restartApp = YES;		// Sprachaufzeichnung
-    					if (el.keyId === "402") DigiWebApp.ApplicationController.restartApp = YES;	    // Materialerfassung only
-    					if (el.keyId === "403") DigiWebApp.ApplicationController.restartApp = YES;		// Bemerkungsfeld
-    					if (el.keyId === "404") DigiWebApp.ApplicationController.restartApp = YES;		// Button-Menü
-    					if (el.keyId === "405") DigiWebApp.ApplicationController.restartApp = YES;		// Unterschrift
-    					if (el.keyId === "406") DigiWebApp.ApplicationController.restartApp = YES;		// Auftragsinfo
-    					//if (el.keyId === "407") DigiWebApp.ApplicationController.restartApp = YES;	// Tagescheckliste
-    					if (el.keyId === "408") DigiWebApp.ApplicationController.restartApp = YES;		// Anwesenheitsliste
-    					if (el.keyId === "409") DigiWebApp.ApplicationController.restartApp = YES;		// ChefTool-Only
-    					if (el.keyId === "410") DigiWebApp.ApplicationController.restartApp = YES;		// "Handauftrag" ausblenden
-    					if (el.keyId === "411") DigiWebApp.ApplicationController.restartApp = YES;		// Zeitbuchungen X Tage auf Gerät behalten
-    					if (el.keyId === "412") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch
-    					if (el.keyId === "413") DigiWebApp.ApplicationController.restartApp = YES;		// GPS-Funktion ausblenden
-    					if (el.keyId === "414") DigiWebApp.ApplicationController.restartApp = YES;		// Kommen/Gehen-Only
-    					//if (el.keyId === "415") DigiWebApp.ApplicationController.restartApp = YES;	// Feierabend-Icon oben rechts
-    					if (el.keyId === "416") DigiWebApp.ApplicationController.restartApp = YES;		// Tätigkeitsicons auf Buchungs-Screen
-    					if (el.keyId === "417") DigiWebApp.ApplicationController.restartApp = YES;		// DIGI-ServiceApp
-    					if (el.keyId === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
-    					if (el.keyId === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
-    					if (el.keyId === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
-    					if (el.keyId === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
-    					if (el.keyId === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
-    					if (el.keyId === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
-    					if (el.keyId === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
-    					if (el.keyId === "427") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
-    				}
-    			}
-    			DigiWebApp.ApplicationController.triggerUpdate = YES;
-    		}); // configurations
-    		// zueinander inkompatible Einstellungen korrigieren
-    		if (DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
-    			DigiWebApp.SettingsController.setSetting('remarkIsMandatory', false);
+    		if (!doReturn) {
+	    		that.setCallbackStatus('features', 'remote', YES);
+	    		var activeFeaturesBeforeTransfer = [];
+	    		_.each(DigiWebApp.Features.find(), function(feature) {
+	    			if (parseBool(feature.get('isAvailable')) == YES) {
+	    				var keyId = feature.get('id');
+	    				activeFeaturesBeforeTransfer.push(keyId);
+	    			}
+	    		});
+	    		
+	    		// Clear Features from storage
+	    		DigiWebApp.Features.deleteAll();
+	    		
+	    		that.setCallbackStatus('features', 'local', NO);
+	    		DigiWebApp.ApplicationController.DigiProgressView.show(
+	    			M.I18N.l('Save'), 
+	    			M.I18N.l('features'), 
+	    			configurations.length, 
+	    			0);
+	    		// reset settings without gui-elements
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'treatAllAsTablet', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'treatAllAsPhone', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'settingsPassword', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
+	    		var oldBranding = DigiWebApp.SettingsController.getSetting('branding');
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'branding', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('branding'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'silentLoader', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'mapType', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('mapType'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'datatransfer_min_delay', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'GPSTimeOut', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'WebserviceTimeOut', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'LoaderTimeOut', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
+	    		DigiWebApp.SettingsController.setSetting(
+	    			'debugDatabaseServer', 
+	    			DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
+	    		DigiWebApp.ApplicationController.triggerUpdate = NO;
+	
+	    		// create a record for each feature returned from the server and save it
+	    		_.each(configurations, function(el) {
+	    			DigiWebApp.ApplicationController.DigiProgressView.increase();
+	    			if (el.valueType === "Setting_WebApp") {
+	    				var prop_setting = el.value;
+	    				if (prop_setting === "false" || prop_setting === "true" ) { 
+	    					prop_setting = ( prop_setting === "true" ); 
+	    				}
+	    				DigiWebApp.SettingsController.setSetting(el.keyId, prop_setting);
+	    				// auch bei geändertem branding neu starten
+	    				if ((el.keyId === "branding") && (el.value !== oldBranding)) 
+	    					DigiWebApp.ApplicationController.restartApp = YES;
+	    			} else if (el.valueType === "Feature") {
+	    				DigiWebApp.Features.createRecord({
+	    					  id: el.keyId
+	    					, name: el.keyId
+	    					, isAvailable: el.value
+	    				}).save();
+	    				// muss die App wegen des neu empfangenen Features neu gestartet werden?
+	    				var activeFeatureFound = NO;
+	    				_.each(activeFeaturesBeforeTransfer, function(activeFeature) {
+	    					// ist die empfangene Feature-ID schon vor dem Abgelich aktiv gewesen?
+	    					if (el.keyId === activeFeature) activeFeatureFound = YES;
+	    				});
+	    				// die App neu starten, wenn:
+	    				// - das Feature vorher aktiv war und jetzt inaktiv gesetzt wird
+	    				// - das Feature vorher inaktiv war und jetzt aktiv gesetzt wird
+	    				if ((el.value === "true" && !activeFeatureFound) || 
+	    					(el.value === "false" && activeFeatureFound)) {
+	    					if (el.keyId === "400") DigiWebApp.ApplicationController.restartApp = YES;		// Foto
+	    					if (el.keyId === "401") DigiWebApp.ApplicationController.restartApp = YES;		// Sprachaufzeichnung
+	    					if (el.keyId === "402") DigiWebApp.ApplicationController.restartApp = YES;	    // Materialerfassung only
+	    					if (el.keyId === "403") DigiWebApp.ApplicationController.restartApp = YES;		// Bemerkungsfeld
+	    					if (el.keyId === "404") DigiWebApp.ApplicationController.restartApp = YES;		// Button-Menü
+	    					if (el.keyId === "405") DigiWebApp.ApplicationController.restartApp = YES;		// Unterschrift
+	    					if (el.keyId === "406") DigiWebApp.ApplicationController.restartApp = YES;		// Auftragsinfo
+	    					//if (el.keyId === "407") DigiWebApp.ApplicationController.restartApp = YES;	// Tagescheckliste
+	    					if (el.keyId === "408") DigiWebApp.ApplicationController.restartApp = YES;		// Anwesenheitsliste
+	    					if (el.keyId === "409") DigiWebApp.ApplicationController.restartApp = YES;		// ChefTool-Only
+	    					if (el.keyId === "410") DigiWebApp.ApplicationController.restartApp = YES;		// "Handauftrag" ausblenden
+	    					if (el.keyId === "411") DigiWebApp.ApplicationController.restartApp = YES;		// Zeitbuchungen X Tage auf Gerät behalten
+	    					if (el.keyId === "412") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch
+	    					if (el.keyId === "413") DigiWebApp.ApplicationController.restartApp = YES;		// GPS-Funktion ausblenden
+	    					if (el.keyId === "414") DigiWebApp.ApplicationController.restartApp = YES;		// Kommen/Gehen-Only
+	    					//if (el.keyId === "415") DigiWebApp.ApplicationController.restartApp = YES;	// Feierabend-Icon oben rechts
+	    					if (el.keyId === "416") DigiWebApp.ApplicationController.restartApp = YES;		// Tätigkeitsicons auf Buchungs-Screen
+	    					if (el.keyId === "417") DigiWebApp.ApplicationController.restartApp = YES;		// DIGI-ServiceApp
+	    					if (el.keyId === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
+	    					if (el.keyId === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
+	    					if (el.keyId === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
+	    					if (el.keyId === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
+	    					if (el.keyId === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
+	    					if (el.keyId === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
+	    					if (el.keyId === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
+	    					if (el.keyId === "427") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
+	    				}
+	    			}
+	    			DigiWebApp.ApplicationController.triggerUpdate = YES;
+	    		}); // configurations
+	    		// zueinander inkompatible Einstellungen korrigieren
+	    		if (DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
+	    			DigiWebApp.SettingsController.setSetting('remarkIsMandatory', false);
+	    		}
+	    		if (DigiWebApp.ApplicationController.triggerUpdate) {
+	    			DigiWebApp.DashboardPage.needsUpdate = true;
+	    			DigiWebApp.MediaListPage.needsUpdate = true;
+	    		}
+	    		DigiWebApp.DashboardController.init(YES);
+	    		DigiWebApp.MediaListController.init(YES);
+	    		DigiWebApp.ApplicationController.triggerUpdate = NO;
+	    		DigiWebApp.ApplicationController.DigiProgressView.hide();
+	    		that.setCallbackStatus('features', 'local', YES);
     		}
-    		if (DigiWebApp.ApplicationController.triggerUpdate) {
-    			DigiWebApp.DashboardPage.needsUpdate = true;
-    			DigiWebApp.MediaListPage.needsUpdate = true;
-    		}
-    		DigiWebApp.DashboardController.init(YES);
-    		DigiWebApp.MediaListController.init(YES);
-    		DigiWebApp.ApplicationController.triggerUpdate = NO;
-    		DigiWebApp.ApplicationController.DigiProgressView.hide();
-    		that.setCallbackStatus('features', 'local', YES);
     	} else {
+			doReturn = true;
+    	}
+
+    	if (doReturn) {
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
     		that.setCallbackStatus('features', 'local', YES);
     	}
