@@ -362,7 +362,7 @@ M.SelectionListView = M.View.extend(
             var items = this.value;
             var withSpeedup = false;
         	// TODO: Weyer: folgende Zeile entkommentieren
-            withSpeedup = true;
+            //withSpeedup = true;
             if (!withSpeedup) {
 	            for(var i in items) {
 	                var item  = items[i];
