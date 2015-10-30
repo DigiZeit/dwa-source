@@ -191,7 +191,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
               value: M.I18N.l('BautagebuchDelete')
             , icon: 'delete'
             , anchorLocation: M.RIGHT
-            , cssClass: 'red_background delButton'
+            , cssClass: 'red_background'
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchZeitenDetailsController
@@ -857,7 +857,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
         
         , loeschenButton: M.ButtonView.design({
             value: M.I18N.l('BautagebuchDelete')
-          , cssClass: 'red_background'
+          , cssClass: 'red_background delButton'
           , events: {
               tap: {
 	                target: DigiWebApp.BautagebuchZeitenDetailsController,
