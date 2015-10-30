@@ -133,7 +133,7 @@ DigiWebApp.BautagebuchZeitbuchung = M.Model.create({
 	, saveSorted: function() {
 	    var that = this;
 		if (that.get('von') == that.get('bis') && that.get('dauer') == "00:00" ) {
-			return true;
+			return false;
 		}
 	    if (!that.save()) return false;
 	
