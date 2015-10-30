@@ -434,7 +434,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError2')
-	                    , message: meaning
+	                    , message: htmlDecode(meaning)
 	                });
 	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
@@ -444,7 +444,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError3')
-	                    , message: meaning
+	                    , message: htmlDecode(meaning)
 	                });
 	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
@@ -454,7 +454,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError')
-	                    , message: meaning
+	                    , message: htmlDecode(meaning)
 	                });
 	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
@@ -464,7 +464,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError')
-	                    , message: meaning
+	                    , message: htmlDecode(meaning)
 	                });
 	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
@@ -474,7 +474,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                //M.DialogView.alert({
 	                DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                      title: M.I18N.l('authenticationError')
-	                    , message: code
+	                    , message: htmlDecode(code)
 	                });
 	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);

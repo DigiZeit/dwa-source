@@ -1247,3 +1247,6 @@ var QueryString = function () {
 	return query_string;
 }();
 	
+function htmlDecode(value){ 
+	return $('<div/>').html(value).text(); 
+}
