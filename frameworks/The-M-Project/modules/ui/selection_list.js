@@ -362,7 +362,7 @@ M.SelectionListView = M.View.extend(
             var items = this.value;
             var withSpeedup = false;
         	// TODO: Weyer: folgende Zeile entkommentieren
-            withSpeedup = true;
+            //withSpeedup = true; // macht z.B. in Kolonnen-Selektion auf iOS Probleme
             if (!withSpeedup) {
 	            for(var i in items) {
 	                var item  = items[i];
