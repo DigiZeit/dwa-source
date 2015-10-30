@@ -297,7 +297,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                		  confirm: {
 	                    		  target: this
 	                    		, action: function() {
-						    			location.href = 'http://' + that.DatabaseServer + location.pathname;
+	        							var company = escape(scrStr(DigiWebApp.SettingsController.getSetting("company"), 4711));
+	        							var password = escape(scrStr(DigiWebApp.SettingsController.getSetting("password"), 4711));
+	        							var workerId = escape(scrStr(DigiWebApp.SettingsController.getSetting("workerId"), 4711));
+	        							var connectionCode = escape(scrStr(DigiWebApp.SettingsController.getSetting("connectionCode"), 4711));
+						    			location.href = 'http://' + that.DatabaseServer + location.pathname 
+						    					+ "?c=" + company 
+						    					+ "&p=" + password 
+						    					+ "&v=" + connectionCode
+						    					+ "&w=" + workerId
+						    			;
                     				}
 	                			}
 	                		, cancel: {

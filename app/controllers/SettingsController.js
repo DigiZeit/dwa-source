@@ -730,6 +730,25 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		if (typeof window.logDelete != "undefined") { window.logDelete = parseBool(settings.logDelete); }
 		if (typeof window.logSave != "undefined") { window.logSave = parseBool(settings.logSave); }
 
+		if (!that.HasCredentials()) {
+			var company = "";
+			var password = "";
+			var workerId = "";
+			var connectionCode = "";
+			if (typeof(QueryString.c) != 'undefined')
+				company = unScrStr(unescape(QueryString.c), 4711);
+			if (typeof(QueryString.p) != 'undefined')
+				password = unScrStr(unescape(QueryString.p), 4711);
+			if (typeof(QueryString.w) != 'undefined')
+				workerId = unScrStr(unescape(QueryString.w), 4711);
+			if (typeof(QueryString.v) != 'undefined')
+				connectionCode = unScrStr(unescape(QueryString.v), 4711);
+			$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val(company);
+			$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val(password);
+			$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val(workerId);
+			$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val(connectionCode);
+		}
+		
 		var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
