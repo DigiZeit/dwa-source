@@ -1759,6 +1759,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		});
     		localStorage.setItem(that.storagePrefix + '_handorderKeys', JSON.stringify(mIdArray));
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
+			if (DigiWebApp.BookingController.currentBooking == null) {
+				DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
+			} else {
+				DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+			}
     		that.setCallbackStatus('handOrder', 'local', YES);
     	} else {
     		that.setCallbackStatus('handOrder', 'remote', NO);
