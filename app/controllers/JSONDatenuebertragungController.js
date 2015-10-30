@@ -349,7 +349,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         		, geraeteIdOverride: false
         		, modus: '0' 
         	};
-        	that.recieveDataWithServerAuthenticated(secondReceiveObj);
+        	that.recieveDataWithServer(secondReceiveObj);
         };
         
     	// ask primary-gateway (or localhost if not on device)
@@ -363,7 +363,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         		, geraeteIdOverride: false
         };
 		if (inDebug() && staticDebugging) alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl " + "vor recieveDataWithServer (primary)" + myGatewayServer);
-		that.recieveDataWithServerAuthenticated(receiveObj);
+		that.recieveDataWithServer(receiveObj);
 	}
 	
 	, authentifizieren: function(callback) {
