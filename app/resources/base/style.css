@@ -80,6 +80,10 @@ textarea.ui-input-text {
     text-shadow: none;
 }
 
+.delButton {
+    margin-top: 30px;	
+}
+
 .red span {
     color: #FFFFFF;	
     background-color: #990000;	

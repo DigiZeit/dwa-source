@@ -197,7 +197,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
               value: M.I18N.l('BautagebuchDelete')
             , icon: 'delete'
             , anchorLocation: M.RIGHT
-            , cssClass: 'red_background'
+            , cssClass: 'red_background delButton'
             , events: {
                 tap: {
                       target: DigiWebApp.BautagebuchNotizenDetailsController
