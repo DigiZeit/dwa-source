@@ -21,6 +21,10 @@ DigiWebApp.BautagebuchMengeneinheit = M.Model.create({
         isRequired: NO
     })
 
+    , bezeichnung: M.Model.attr('String', {
+        isRequired: NO
+    })
+
 	, getMaterialien: function() {
 		var that = this;
 		return _.filter(DigiWebApp.BautagebuchMaterial.findSorted(), function(mat) {
