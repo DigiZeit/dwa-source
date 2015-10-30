@@ -436,7 +436,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError2')
 	                    , message: meaning
 	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
 	            case 3:
@@ -445,7 +445,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError3')
 	                    , message: meaning
 	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
 	            case 4:
@@ -454,7 +454,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: meaning
 	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
 	            case -1:
@@ -463,7 +463,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: meaning
 	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
 	            default:
@@ -472,7 +472,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: code
 	                });
-	                DigiWebApp.NavigationController.toSettingsPage(YES);
+	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	        }
 		}
