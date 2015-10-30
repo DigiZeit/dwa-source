@@ -1089,6 +1089,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				return errorCallback();
 			} else {
 				// weiter in der Verarbeitungskette
+				if (DigiWebApp.BookingController.currentBooking == null) {
+					DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
+				} else {
+					DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+				}
 				return successCallback();
 			}
 			
