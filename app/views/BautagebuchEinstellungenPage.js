@@ -51,7 +51,7 @@ DigiWebApp.BautagebuchEinstellungenPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('BautagebuchBautagesbericht')
+              value: M.I18N.l('Bautagebuch') + " " + M.I18N.l('settings')
             , anchorLocation: M.CENTER
         })
         , anchorLocation: M.TOP
