@@ -1299,8 +1299,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 
     }
     
-    , enforceChefToolOnly: function() {
-    	var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert || !DigiWebApp.SettingsController.HasCredentials());
+    , enforceChefToolOnly: function(hideOverrideOverride) {
+    	var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert || !DigiWebApp.SettingsController.HasCredentials() || hideOverrideOverride);
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (DigiWebApp.SettingsController.featureAvailable('417')) { 
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id  + ']').each(function() { $(this).show(); });}catch(e){}

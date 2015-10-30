@@ -436,6 +436,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError2')
 	                    , message: meaning
 	                });
+	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
 	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
@@ -445,6 +446,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError3')
 	                    , message: meaning
 	                });
+	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
 	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
@@ -454,6 +456,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: meaning
 	                });
+	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
 	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
@@ -463,6 +466,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: meaning
 	                });
+	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
 	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
@@ -472,6 +476,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                      title: M.I18N.l('authenticationError')
 	                    , message: code
 	                });
+	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
 	                //DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	        }
