@@ -736,13 +736,21 @@ DigiWebApp.SettingsController = M.Controller.extend({
 			var workerId = "";
 			var connectionCode = "";
 			if (typeof(QueryString.c) != 'undefined')
-				company = unScrStr(unescape(QueryString.c), 4711);
+				company = QueryString.c;
 			if (typeof(QueryString.p) != 'undefined')
-				password = unScrStr(unescape(QueryString.p), 4711);
+				password = QueryString.p;
 			if (typeof(QueryString.w) != 'undefined')
-				workerId = unScrStr(unescape(QueryString.w), 4711);
+				workerId = QueryString.w;
 			if (typeof(QueryString.v) != 'undefined')
-				connectionCode = unScrStr(unescape(QueryString.v), 4711);
+				connectionCode = QueryString.v;
+			
+			if (false) {
+				company = unScrStr(unescape(company), 4711);
+				password = unScrStr(unescape(password), 4711);
+				workerId = unScrStr(unescape(workerId), 4711);
+				connectionCode = unScrStr(unescape(connectionCode), 4711);
+			}
+			
 			$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val(company);
 			$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val(password);
 			$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val(workerId);
