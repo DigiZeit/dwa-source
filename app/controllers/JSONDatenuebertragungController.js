@@ -309,9 +309,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                		}
 	            		}
 	        		});
+	    		} else {
+	    	    	callback();
 	    		}
+			} else {
+    	    	callback();
 			}
-	    	callback();
         };
     	var errorFunc = function(xhr, err) {
         	// asking primary-gateway failed --> ask gateway-pool
