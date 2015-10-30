@@ -437,7 +437,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , message: meaning
 	                });
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
-	                //DigiWebApp.NavigationController.toSettingsPage(YES);
+	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
 	            case 3:
@@ -447,7 +447,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , message: meaning
 	                });
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
-	                //DigiWebApp.NavigationController.toSettingsPage(YES);
+	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	
 	            case 4:
@@ -457,7 +457,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , message: meaning
 	                });
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
-	                //DigiWebApp.NavigationController.toSettingsPage(YES);
+	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
 	            case -1:
@@ -467,7 +467,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , message: meaning
 	                });
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
-	                //DigiWebApp.NavigationController.toSettingsPage(YES);
+	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 
 	            default:
@@ -477,7 +477,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    , message: code
 	                });
 	                DigiWebApp.ApplicationController.enforceChefToolOnly(true);
-	                //DigiWebApp.NavigationController.toSettingsPage(YES);
+	                if (DigiWebApp.Order.find().length == 0) DigiWebApp.NavigationController.toSettingsPage(YES);
 	                break;
 	        }
 		}
