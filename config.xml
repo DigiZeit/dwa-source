@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	versionCode = "6560"
-	version 	= "1.8.3.6560">
+	versionCode = "6561"
+	version 	= "1.8.3.6561">
 
 	<name>DIGI-WebApp</name>
 
@@ -98,7 +98,7 @@ which PhoneGap requires. -->
 <gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.3' />
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6560</string> 
+	<string>6561</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <true/>
@@ -108,7 +108,6 @@ which PhoneGap requires. -->
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
     <array>
-        <string></string>
     </array>
 </gap:config-file>
 <feature name="StatusBar">
