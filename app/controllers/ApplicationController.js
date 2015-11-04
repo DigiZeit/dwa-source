@@ -830,6 +830,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    }
 			    	
 			    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
+			    	url: '',
 			        desiredAccuracy: 100,
 			        stationaryRadius: 20,
 			        distanceFilter: 30,
@@ -1991,21 +1992,21 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				DigiWebApp.NavigationController.toDashboardPage(YES);
     			}
     		}
-    		// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
-    		if (DigiWebApp.ApplicationController.restartApp === YES) {
-    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-    				title: M.I18N.l('newFeatureActive')
-    			  , message: M.I18N.l('newFeatureActiveMsg')
-    			  , callbacks: {
-    					confirm: {
-    						action: function() {
-    							DigiWebApp.ApplicationController.doRestartApp();
-    						}
-    					}
-    			  }
-    			});
-    		}
     	}
+		// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
+		if (DigiWebApp.ApplicationController.restartApp === YES) {
+			DigiWebApp.ApplicationController.nativeAlertDialogView({
+				title: M.I18N.l('newFeatureActive')
+			  , message: M.I18N.l('newFeatureActiveMsg')
+			  , callbacks: {
+					confirm: {
+						action: function() {
+							DigiWebApp.ApplicationController.doRestartApp();
+						}
+					}
+			  }
+			});
+		}
     }
     
     /**
