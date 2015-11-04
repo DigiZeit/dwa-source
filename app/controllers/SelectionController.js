@@ -654,8 +654,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
             this.set('activities', activities);
             DigiWebApp.ScholppBookingController.resetButtons();
     	} else {
-            M.ViewManager.getView('bookingPage', 'activity').resetSelection();
+            //M.ViewManager.getView('bookingPage', 'activity').resetSelection();
             this.set('activities', activities);
+            M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
     	}
 
         this.saveSelection();

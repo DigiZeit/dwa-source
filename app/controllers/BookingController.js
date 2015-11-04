@@ -168,7 +168,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             if (setSelection) {
             	// TODO: Weyer: folgende Zeile auskommentieren
-            	//DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+            	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
             }
         }
     }
