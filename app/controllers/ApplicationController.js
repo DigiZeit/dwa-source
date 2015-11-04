@@ -2184,24 +2184,24 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		            DigiWebApp.NavigationController.toDashboardPage(YES);
 				}
 			}
-        	// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
-        	if (DigiWebApp.ApplicationController.restartApp === YES) {
-    			DigiWebApp.ApplicationController.nativeAlertDialogView({
-      			  	title: M.I18N.l('newFeatureActive')
-      			  , message: M.I18N.l('newFeatureActiveMsg')
-                  , callbacks: {
-                    	confirm: {
-                        	//  target: this
-                        	//, action: 'proceedWithLocalData'
-    						action: function() {
-    							DigiWebApp.ApplicationController.doRestartApp();
-    						}
-                    	}
-                  }
-    			});
-        	}
     	}
 
+    	// Falls neue Features aktiviert wurden, muss sich die WebApp ggfs. neu starten
+    	if (DigiWebApp.ApplicationController.restartApp === YES) {
+			DigiWebApp.ApplicationController.nativeAlertDialogView({
+  			  	title: M.I18N.l('newFeatureActive')
+  			  , message: M.I18N.l('newFeatureActiveMsg')
+              , callbacks: {
+                	confirm: {
+                    	//  target: this
+                    	//, action: 'proceedWithLocalData'
+						action: function() {
+							DigiWebApp.ApplicationController.doRestartApp();
+						}
+                	}
+              }
+			});
+    	}
     }
 
     /**
