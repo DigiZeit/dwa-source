@@ -665,7 +665,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             //M.ViewManager.getView('bookingPage', 'activity').resetSelection();
             this.set('activities', activities);
-            M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
+            if (!DigiWebApp.BookingController.currentBooking) M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
     	}
 
         this.saveSelection();
