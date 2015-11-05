@@ -131,7 +131,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             }
         }
-        // TODO: Ticket 2108
+        // Ticket 2108
         if (DigiWebApp.SettingsController.featureAvailable('416')) {
 			if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
 				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.order.id, M.I18N.l('dtc6Ordner'));
@@ -166,10 +166,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
-            if (setSelection) {
-            	// TODO: Weyer: folgende Zeile auskommentieren
-            	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-            }
+        	// Performance Weyer: folgendes setSelection führt zu einem unnötigen neu-rendern
+            //if (setSelection) {
+            //	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+            //}
         }
     }
 
