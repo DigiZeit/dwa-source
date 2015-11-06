@@ -167,9 +167,9 @@ DigiWebApp.BookingController = M.Controller.extend({
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
         	// Performance Weyer: folgendes setSelection führt zu einem unnötigen neu-rendern
-            //if (setSelection) {
-            //	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-            //}
+            if (setSelection) {
+            	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+            }
         }
     }
 
