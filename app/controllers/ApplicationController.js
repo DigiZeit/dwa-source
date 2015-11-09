@@ -830,7 +830,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			    }
 			    	
 			    DigiWebApp.ApplicationController.bgGeo.configure(callbackFn, failureFn, {
-			    	url: '',
+			    	url: 'http://localhost/',
 			        desiredAccuracy: 100,
 			        stationaryRadius: 20,
 			        distanceFilter: 30,
