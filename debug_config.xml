@@ -158,8 +158,9 @@ which PhoneGap requires. -->
 
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
-screen -->
-	<gap:splash src="theme/images/splash_default_320x426_DSO.png" />
+screen 
+	<gap:splash src="theme/images/splash_default_320x426_DSO.png" /> --> 
+	<!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> --> 
 
 	<gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
 	

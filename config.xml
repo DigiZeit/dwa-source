@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6580"
-	version 	  = "1.8.3.6580">
+	versionCode   = "6581"
+	version 	  = "1.8.3.6581">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -100,7 +100,7 @@ which PhoneGap requires. -->
 	<gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.3' /> 
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6580</string> 
+	<string>6581</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
 <!-- 2015-10: true since new styling -->
@@ -158,8 +158,9 @@ which PhoneGap requires. -->
 
 <!-- if a single splash screen is specified the build will use it for 
 all builds. Currently, all platforms except ios use a single splash 
-screen -->
-	<gap:splash src="theme/images/splash_default_320x426_DSO.png" />
+screen 
+	<gap:splash src="theme/images/splash_default_320x426_DSO.png" /> --> 
+	<!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> --> 
 
 	<gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
 	
