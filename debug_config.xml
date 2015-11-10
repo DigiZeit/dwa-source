@@ -26,11 +26,11 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
+	<preference name="phonegap-version" value="3.7.0" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="false" />
-	<preference name="phonegap-version" value="3.7.0" />
 <!--	<preference name="orientation" value="portrait" /> -->
 	<preference name="orientation" value="default" />
 	<preference name="load-url-timeout" value="60000" />
@@ -164,16 +164,11 @@ screen
 
 	<gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
 	
-	<!-- <gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="android" gap:density="ldpi" /> -->
 	<gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" gap:platform="android" gap:density="ldpi" />
 	<gap:splash src="theme/images/splash_mdpi_320x470_DSO.9.png" gap:platform="android" gap:qualifier="port-mdpi" />
-	<!-- <gap:splash src="theme/images/splash_mdpi_320x470_DSO.9.png" gap:platform="android" gap:qualifier="land-mdpi" /> -->
 	<gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="port-hdpi" />
-    <!-- <gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="land-hdpi" /> -->
     <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="port-xhdpi" />
-    <!-- <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="land-xhdpi" /> -->
     <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
-    <!-- <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="land-xxhdpi" /> -->
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
