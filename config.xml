@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6579"
-	version 	  = "1.8.3.6579">
+	versionCode   = "6580"
+	version 	  = "1.8.3.6580">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -100,7 +100,7 @@ which PhoneGap requires. -->
 	<gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.3' /> 
 
 <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>6579</string> 
+	<string>6580</string> 
 </gap:config-file>
 <gap:config-file platform="ios" parent="UIStatusBarHidden">
 <!-- 2015-10: true since new styling -->
@@ -171,8 +171,8 @@ screen -->
     <!-- <gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="land-hdpi" /> -->
     <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="port-xhdpi" />
     <!-- <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="land-xhdpi" /> -->
-    <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
-    <!-- <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.png" gap:platform="android" gap:qualifier="land-xxhdpi" /> -->
+    <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
+    <!-- <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="land-xxhdpi" /> -->
     
 <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
 Screens, and iPad screen respectively --> 
