@@ -31,7 +31,8 @@
 	<preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="false" />
 	<preference name="phonegap-version" value="3.7.0" />
-	<preference name="orientation" value="portrait" />
+<!--	<preference name="orientation" value="portrait" /> -->
+	<preference name="orientation" value="default" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="SplashScreenDelay" value="60000"/>
 	<preference name="show-splash-screen-spinner" value="true" />
