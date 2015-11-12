@@ -565,19 +565,26 @@ DigiWebApp.SelectionController = M.Controller.extend({
     /* only set those activities that are related to the chosen position */
     , setActivities: function(checkForWorkPlan) {
         var posId = null;
+        var orderId = null;
 
         var activities = [];
         var i = 0;
 
         var posObj;
+        var orderObj;
 		if (checkForWorkPlan) {
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
                 posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
+                orderObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection(YES);
         	} else {
                 posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
+                orderObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
         	}
             if (posObj) {
                 posId = posObj.value;
+            }
+            if (orderObj) {
+            	orderId = orderObj.value;
             }
         }
 		if (posId) {
@@ -665,7 +672,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             //M.ViewManager.getView('bookingPage', 'activity').resetSelection();
             this.set('activities', activities);
-            if (!posId || parseIntRadixTen(posId) == 0) M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
+            if (!orderId || parseIntRadixTen(orderId) == 0) M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
     	}
 
         this.saveSelection();
