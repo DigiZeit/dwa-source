@@ -128,7 +128,7 @@ DigiWebApp.BookingPage = M.PageView.design({
             		  target: DigiWebApp.OrderListController
             		, action: function() {
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-						this.init(YES);
+						this.init(NO);
 	    				this.buttonToUpdate = DigiWebApp.BookingPage.content.orderButton;
 						DigiWebApp.NavigationController.toOrderListPage();
 					}

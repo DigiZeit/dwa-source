@@ -10,7 +10,7 @@ DigiWebApp.OrderListTemplateView = M.ListItemView.design({
 
       isSelectable: NO
 
-    , childViews: 'label'
+    , childViews: 'icon label'
     	
     , cssClass: 'orderListEntry'
 

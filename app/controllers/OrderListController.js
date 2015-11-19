@@ -16,28 +16,30 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, backToPage: null
 	
-	, init: function(withPositions) {
+	, init: function(onlyFolders) {
 		var that = this;
 		that.backToPage = null;
 		var items = [];
-		_.each(DigiWebApp.HandOrder.getByVaterId(that.latestId), function(o) {
-			items.push({
-				  icon: '48x48_plain_folder_closed.png'
-				, label: o.name
-			});
-		});
 		_.each(DigiWebApp.Order.getByVaterId(that.latestId), function(o) {
 			items.push({
-				  icon: '48x48_plain_handauftrag.png'
-				, label: o.name
+				  icon: '48x48_plain_folder_closed.png'
+				, label: o.get('name')
 			});
 		});
-		_.each(DigiWebApp.Position.getByVaterId(that.latestId), function(o) {
-			items.push({
-				  icon: '48x48_plain_document.png'
-				, label: o.name
+		if (!onlyFolders) {
+			_.each(DigiWebApp.HandOrder.getByVaterId(that.latestId), function(o) {
+				items.push({
+					  icon: '48x48_plain_handauftrag.png'
+					, label: o.get('name')
+				});
 			});
-		});
+			_.each(DigiWebApp.Position.getByVaterId(that.latestId), function(o) {
+				items.push({
+					  icon: '48x48_plain_document.png'
+					, label: o.get('name')
+				});
+			});
+		}
 		that.set('items', items);
 	}
 

@@ -1986,4 +1986,6 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 
 .orderListEntry {
 	margin-right: 10px;
+	color: #000000 !important;
+	text-shadow: none !important;
 }
