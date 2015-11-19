@@ -15,6 +15,10 @@ DigiWebApp.Order = M.Model.create({
         isRequired: NO
     })
 
+    , vaterId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , name: M.Model.attr('String', {
         isRequired: NO
     })

@@ -125,8 +125,13 @@ DigiWebApp.BookingPage = M.PageView.design({
             , cssClass: 'orderButton'
 			, events: {
 				tap: {
-            		  target: this
-            		, action: function() {}
+            		  target: DigiWebApp.OrderListController
+            		, action: function() {
+						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+						this.init();
+	    				this.buttonToUpdate = DigiWebApp.BookingPage.content.orderButton;
+						DigiWebApp.NavigationController.toOrderListPage();
+					}
 	      		}
 			}
 		})
