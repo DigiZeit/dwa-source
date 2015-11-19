@@ -552,6 +552,6 @@ M.I18N.de_de = {
 
 	, ordnerAuswaehlen: 'Ordner auswählen'
 	, auftragAuswaehlen: 'Auftrag auswählen'
-	, diesenOrdnerVerwenden: 'Diesen Ordner verwenden'
+	, diesenOrdnerVerwenden: '> Diesen Ordner verwenden <'
 
 };

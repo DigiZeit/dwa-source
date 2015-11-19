@@ -22,6 +22,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, parentStack: null
 	
+	, useFolderIcon: '48x48_plain_folder_ok.png'
 	, openFolderIcon: '48x48_plain_folder.png'
 	, closedFolderIcon: '48x48_plain_folder_closed.png'
 	, orderIcon: '48x48_plain_document.png'
@@ -52,11 +53,14 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 		}
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
-			items.push({
-				  icon: that.closedFolderIcon
-				, label: o.get('name')
-				, obj: o
-			});
+			var hasElements = (DigiWebApp.Order.getByVaterId(o.get('id')).length > 0);
+			if (that.onlyFolders || hasElements) {
+				items.push({
+					  icon: that.closedFolderIcon
+					, label: o.get('name')
+					, obj: o
+				});
+			}
 		});
 		if (!that.onlyFolders) {
 			_.each(DigiWebApp.HandOrder.getByVaterId(that.selectedObjId), function(o) {
@@ -77,7 +81,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			var o = null;
 			if (that.parentStack.length > 0) that.parentStack[that.parentStack.length - 1];
 			items.push({
-				  icon: ''
+				  icon: that.useFolderIcon
 				, label: M.I18N.l('diesenOrdnerVerwenden')
 				, obj: o
 			});

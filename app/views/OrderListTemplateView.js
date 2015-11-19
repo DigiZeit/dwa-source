@@ -22,7 +22,7 @@ DigiWebApp.OrderListTemplateView = M.ListItemView.design({
     }
 
     , icon: M.ImageView.design({
-    	cssClass: 'unselectable'
+    	  cssClass: 'unselectable'
         , computedValue: {
             valuePattern: '<%= icon %>'
             , operation: function(v) {
@@ -32,8 +32,16 @@ DigiWebApp.OrderListTemplateView = M.ListItemView.design({
     })
 
     , label: M.LabelView.design({
-    	cssClass: 'unselectable'
-        , valuePattern: '<%= label %>'
+    	  cssClass: 'unselectable'
+        , computedValue: {
+	          valuePattern: '<%= label %>'
+	        , operation: function(v) {
+    			if (v == M.I18N.l('diesenOrdnerVerwenden')) {
+    				cosnole.log(this);
+    			}
+	            return v;
+	        }
+	    }
     })
 
 });

@@ -553,6 +553,6 @@ M.I18N.en_us = {
 
 	, ordnerAuswaehlen: 'Select folder'
 	, auftragAuswaehlen: 'Select order'
-	, diesenOrdnerVerwenden: 'Use this folder'
+	, diesenOrdnerVerwenden: '> Use this folder <'
 
 };
