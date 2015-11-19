@@ -1132,6 +1132,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					myLength = data.auftraege.length;
 				} catch(e2) {}
 			}
+			
 			if (myLength == 0) {
 				// nichts empfangen: weiter in Verarbeitungskette
 				return successCallback();

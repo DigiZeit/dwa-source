@@ -1047,6 +1047,11 @@ if (searchForFeature(427)) { // Bautagebuch: TätigkeitslistenPage in Zeitbuchun
 	DigiWebAppOrdinaryDesign.activityListPage = DigiWebApp.ActivityListPage;
 }
 
+if (searchForFeature(429) // mehrstufige Auftragsauswahl
+ || searchForFeature(430) // Handpositionen
+) { 
+	DigiWebAppOrdinaryDesign.orderListPage = DigiWebApp.OrderListPage;
+}
 
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {

@@ -1530,7 +1530,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , getOrdersFromRemote: function() {
     	var that = this;
     	// Freischaltung 429 "mehrstufige Auftragsauswahl"
-		if (!DigiWebApp.SettingsController.featureAvailable("429")) {
+    	// Freischaltung 430 "Handpositionen"
+		if (
+			   !DigiWebApp.SettingsController.featureAvailable("429")
+			&& !DigiWebApp.SettingsController.featureAvailable("430")
+		) {
 			return that.getActivitiesFromRemote();
 		}
     	that.setCallbackStatus('order', 'local', NO);
@@ -1960,12 +1964,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    					if (el.keyId === "417") DigiWebApp.ApplicationController.restartApp = YES;		// DIGI-ServiceApp
 	    					if (el.keyId === "418") DigiWebApp.ApplicationController.restartApp = YES;		// Spesen/Auslöse
 	    					if (el.keyId === "419") DigiWebApp.ApplicationController.restartApp = YES;		// Scholpp-Spesen
+	    					//if (el.keyId === "420") DigiWebApp.ApplicationController.restartApp = YES;	// Menüpunkt Feierabend ausblenden
+	    					if (el.keyId === "421") DigiWebApp.ApplicationController.restartApp = YES;		// WebApp mit PIN-Anmeldung
 	    					if (el.keyId === "422") DigiWebApp.ApplicationController.restartApp = YES;		// gefahreneKilometer
 	    					if (el.keyId === "423") DigiWebApp.ApplicationController.restartApp = YES;		// Terminliste
 	    					if (el.keyId === "424") DigiWebApp.ApplicationController.restartApp = YES;		// Buchen mit Tätigkeitsbuttons für Kunde Stooss
 	    					if (el.keyId === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
 	    					if (el.keyId === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
 	    					if (el.keyId === "427") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
+	    					//if (el.keyId === "428") DigiWebApp.ApplicationController.restartApp = YES;	// manuelle Materialstammdatenübertragung
+	    					if (el.keyId === "429") DigiWebApp.ApplicationController.restartApp = YES;		// mehrstufige Auftragsauswahl
+	    					if (el.keyId === "430") DigiWebApp.ApplicationController.restartApp = YES;		// Handpositionen
 	    				}
 	    			}
 	    			DigiWebApp.ApplicationController.triggerUpdate = YES;
