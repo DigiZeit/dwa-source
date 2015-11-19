@@ -14,33 +14,52 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, latestId: null
 	
+	, selectedObjId: null
+	
 	, backToPage: null
 	
-	, init: function(onlyFolders) {
+	, onlyFolders: NO
+	
+	, parentStack: null
+	
+	, reloadItems: function() {
 		var that = this;
-		that.backToPage = null;
+		if (that.parentStack == null) that.init(NO);
 		var items = [];
-		_.each(DigiWebApp.Order.getByVaterId(that.latestId), function(o) {
+		// parent-folders from stack
+		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
 			items.push({
 				  icon: '48x48_plain_folder_closed.png'
 				, label: o.get('name')
+				, obj: o
 			});
 		});
-		if (!onlyFolders) {
-			_.each(DigiWebApp.HandOrder.getByVaterId(that.latestId), function(o) {
+		if (!that.onlyFolders) {
+			_.each(DigiWebApp.HandOrder.getByVaterId(that.selectedObjId), function(o) {
 				items.push({
 					  icon: '48x48_plain_handauftrag.png'
 					, label: o.get('name')
+					, obj: o
 				});
 			});
-			_.each(DigiWebApp.Position.getByVaterId(that.latestId), function(o) {
+			_.each(DigiWebApp.Position.getByVaterId(that.selectedObjId), function(o) {
 				items.push({
 					  icon: '48x48_plain_document.png'
 					, label: o.get('name')
+					, obj: o
 				});
 			});
 		}
 		that.set('items', items);
+	}
+	
+	, init: function(onlyFolders) {
+		var that = this;
+		that.backToPage = null;
+		that.selectedObjId = null;
+		that.parentStack = [];
+		that.onlyFolders = onlyFolders;
+		that.reloadItems();
 	}
 
 	, itemSelected: function(id, m_id) {
@@ -55,9 +74,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
+	    that.selectedObjId = selecteditem.obj.get("id");
 	    that.buttonToUpdate.setValue(selectedItem.value);
 	    
-	    // TODO: reload OrderListPage with new folder
+	    // put this folder on the stack
+	    
+	    // reload items from next folder
+		that.reloadItems();
 	}
 	
 	, back: function() {
