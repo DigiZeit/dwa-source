@@ -28,6 +28,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, handOrderIcon: '48x48_plain_handauftrag.png'
 
 	, getTitle: function() {
+		var that = this;
 		if (that.parentStack.length > 0) {
 			return that.parentStack[that.parentStack.length - 1].label;
 		}

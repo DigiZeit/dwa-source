@@ -551,4 +551,8 @@ M.I18N.en_us = {
 
 	, bitteManuellNeuStarten: 'DIGI-WebApp could not get restarted! Please restart manually!'
 
+	, ordnerAuswaehlen: 'Select folder'
+	, auftragAuswaehlen: 'Select order'
+	, diesenOrdnerVerwenden: 'Use this folder'
+
 };
