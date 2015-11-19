@@ -46,12 +46,12 @@ DigiWebApp.BookingPage = M.PageView.design({
 					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
 					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
         			$('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); 			
-        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id '"]').show(); 			
+        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); 			
 				} else {
 					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
 					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
         			$('#' + DigiWebApp.BookingPage.content.orderButton.id).parent().parent().hide(); 			
-        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id '"]').hide(); 			
+        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); 			
 				}
 			}
 		}
@@ -120,6 +120,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 		, orderButton: M.ButtonView.design({
 			  value: M.I18N.l('selectSomething')
             , label: M.I18N.l('order')
+            , cssClass: 'digiButton'
 			, events: {
 				tap: {
             		  target: this

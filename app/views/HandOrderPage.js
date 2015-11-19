@@ -93,7 +93,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 
         , targetFolderButton: M.ButtonView.design({
               value: M.I18N.l('assume')
-            , anchorLocation: M.RIGHT
+            , cssClass: 'digiButton'
             , events: {
                 tap: {
                       target: DigiWebApp.HandOrderController
