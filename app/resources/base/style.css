@@ -280,6 +280,7 @@ fieldset legend {
 
 .DIGI-WEBAPP-DSObranding .ui-select .ui-btn,
 .DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-select .ui-btn,
+.DIGI-WEBAPP-DSObranding .orderButton.ui-btn,
 .DIGI-WEBAPP-DSObranding .digiButton .ui-btn {
 	background: #BCBCBC !important;
 	text-shadow: none !important;

@@ -120,7 +120,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 		, orderButton: M.ButtonView.design({
 			  value: M.I18N.l('selectSomething')
             , label: M.I18N.l('order')
-            , cssClass: 'digiButton'
+            , cssClass: 'orderButton'
 			, events: {
 				tap: {
             		  target: this
