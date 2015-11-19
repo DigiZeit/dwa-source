@@ -22,21 +22,26 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, parentStack: null
 	
+	, openFolderIcon: '48x48_plain_folder.png'
+	, closedFolderIcon: '48x48_plain_folder_closed.png'
+	, orderIcon: '48x48_plain_document.png'
+	, handOrderIcon: '48x48_plain_handauftrag.png'
+
 	, reloadItems: function() {
 		var that = this;
 		if (that.parentStack == null) that.init(NO);
 		var items = [];
 		// parent-folders from stack
-		_.each(that.parentStack, function(o) {
+		if (that.parentStack.length > 0) {
 			items.push({
-				  icon: '48x48_plain_folder_opened.png'
-				, label: o.label
+				  icon: that.openFolderIcon
+				, label: '..'
 				, obj: o.obj
 			});
-		});
+		};
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
 			items.push({
-				  icon: '48x48_plain_folder_closed.png'
+				  icon: that.closedFolderIcon
 				, label: o.get('name')
 				, obj: o
 			});
@@ -44,14 +49,14 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		if (!that.onlyFolders) {
 			_.each(DigiWebApp.HandOrder.getByVaterId(that.selectedObjId), function(o) {
 				items.push({
-					  icon: '48x48_plain_handauftrag.png'
+					  icon: that.handOrderIcon
 					, label: o.get('name')
 					, obj: o
 				});
 			});
 			_.each(DigiWebApp.Position.getByVaterId(that.selectedObjId), function(o) {
 				items.push({
-					  icon: '48x48_plain_document.png'
+					  icon: that.orderIcon
 					, label: o.get('name')
 					, obj: o
 				});
@@ -60,12 +65,15 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		that.set('items', items);
 	}
 	
-	, init: function(onlyFolders) {
+	, init: function(onlyFolders, buttonToUpdate, backToPage) {
 		var that = this;
+		that.onlyFolders = onlyFolders;
+		that.buttonToUpdate = null;
+		if (buttonToUpdate) that.buttonToUpdate = buttonToUpdate;
 		that.backToPage = null;
+		if (backToPage) that.backToPage = backToPage;
 		that.selectedObjId = null;
 		that.parentStack = [];
-		that.onlyFolders = onlyFolders;
 		that.reloadItems();
 	}
 
@@ -82,8 +90,18 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
-	    // put this folder on the stack
-	    that.parentStack.push(selectedItem);
+	    if (selectedItem.icon == that.openFolderIcon) {
+	    	// remove this folder from stack
+	    	that.parentStack.pop();
+	    	if (that.parentStack.length > 0) {
+	    		selectedItem = that.parentStack[that.parentStack.length - 1];
+	    	} else {
+	    	    return that.init(that.onlyFolders, that.buttonToUpdate, that.backToPage);
+	    	}
+	    } else {
+		    // put this folder on the stack
+		    that.parentStack.push(selectedItem);	    	
+	    }
 	    that.selectedObjId = selectedItem.obj.get("id");
 	    that.buttonToUpdate.setValue(selectedItem.label);
 	    	    

@@ -98,9 +98,8 @@ DigiWebApp.HandOrderPage = M.PageView.design({
                 tap: {
                       target: DigiWebApp.OrderListController
                     , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-						this.init(YES);
-						this.backToPage = 'handOrderPage';
-	    				this.buttonToUpdate = DigiWebApp.HandOrderPage.content.orderButton;
+						this.init(YES, DigiWebApp.HandOrderPage.content.orderButton, 'handOrderPage');
+	    				this.buttonToUpdate = ;
 						DigiWebApp.NavigationController.toOrderListPage();
                     }
                 }
