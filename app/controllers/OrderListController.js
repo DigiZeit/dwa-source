@@ -53,7 +53,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 		}
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
-			if (that.onlyFolders || o.hasElements()) {
+			if (that.onlyFolders || o.hasPositions()) {
 				items.push({
 					  icon: that.closedFolderIcon
 					, label: o.get('name')

@@ -254,7 +254,7 @@ DigiWebApp.Order = M.Model.create({
 		var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
 		var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
     	var hasPositions = (childHandOrders.concat(childPositions).length > 0);
-    	if (!hasPositions) return false;
+    	if (hasPositions) return true;
     	_.each(childOrders, function(child){
     		if (child.hasPositions()) hasPositions = true;
     	});
