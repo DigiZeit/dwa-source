@@ -134,7 +134,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    	done = true;
 	    }
 	    that.selectedObjId = selectedItem.obj.get("id");
-	    that.buttonToUpdate.setValue(selectedItem.label);
+	    
+	    if (selectedItem.icon == that.orderIcon
+	     || selectedItem.icon == that.handOrderIcon
+	     || (that.onlyFolders && selectedItem.icon == that.useFolderIcon)
+	    ) {
+	    	that.buttonToUpdate.setValue(selectedItem.label);
+	    }
 	    	    
 	    if (done) {
 	    	that.back();
