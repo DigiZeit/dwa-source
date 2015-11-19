@@ -50,7 +50,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				} else {
 					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
 					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
-        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).parent().parent().hide(); 			
+        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); 			
         			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); 			
 				}
 			}
