@@ -27,6 +27,16 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, orderIcon: '48x48_plain_document.png'
 	, handOrderIcon: '48x48_plain_handauftrag.png'
 
+	, getTitle: function() {
+		if (that.parentStack.length > 0) {
+			return that.parentStack[that.parentStack.length - 1].label;
+		}
+		if (that.onlyFolders) {
+			return M.I18N.l('ordnerAuswaehlen');
+		}
+		return M.I18N.l('auftragAuswaehlen');
+	}
+
 	, reloadItems: function() {
 		var that = this;
 		if (that.parentStack == null) that.init(NO);
@@ -34,14 +44,11 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
 			var o = that.parentStack[that.parentStack.length - 1];
-			DigiWebApp.OrderListPage.header.title.setValue(o.label);
 			items.push({
 				  icon: that.openFolderIcon
 				, label: '..'
 				, obj: o.obj
 			});
-		} else {
-			DigiWebApp.OrderListPage.header.title.setValue(M.I18N.l('order'));
 		}
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
 			items.push({
@@ -65,7 +72,16 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					, obj: o
 				});
 			});
+		} else {
+			var o = null;
+			if (that.parentStack.length > 0) that.parentStack[that.parentStack.length - 1];
+			items.push({
+				  icon: ''
+				, label: M.I18N.l('diesenOrdnerVerwenden')
+				, obj: o
+			});
 		}
+		DigiWebApp.OrderListPage.header.title.setValue(that.getTitle());
 		that.set('items', items);
 	}
 	
@@ -94,6 +110,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
+	    var done = false;
 	    if (selectedItem.icon == that.openFolderIcon) {
 	    	// remove this folder from stack
 	    	that.parentStack.pop();
@@ -102,15 +119,21 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    	} else {
 	    	    return that.init(that.onlyFolders, that.buttonToUpdate, that.backToPage);
 	    	}
-	    } else {
+	    } else if (selectedItem.icon == that.closedFolderIcon) {
 		    // put this folder on the stack
 		    that.parentStack.push(selectedItem);	    	
+	    } else {
+	    	done = true;
 	    }
 	    that.selectedObjId = selectedItem.obj.get("id");
 	    that.buttonToUpdate.setValue(selectedItem.label);
 	    	    
-	    // reload items from next folder
-		that.reloadItems();
+	    if (done) {
+	    	that.back();
+	    } else {
+		    // reload items from next folder
+			that.reloadItems();
+	    }
 	}
 	
 	, back: function() {

@@ -550,4 +550,7 @@ M.I18N.de_de = {
 		
 	, bitteManuellNeuStarten: 'DIGI-WebApp konnte nicht neu gestartet werden! Bitte manuell neu starten!'
 
+	, ordnerAuswaehlen: 'Ordner auswählen'
+	, auftragAuswaehlen: 'Auftrag auswählen'
+	, diesenOrdnerVerwenden: 'Diesen Ordner verwenden'
 };
