@@ -14,6 +14,10 @@ DigiWebApp.HandOrder = M.Model.create({
     , id: M.Model.attr('String', {
         isRequired: NO
     })
+    
+    , vaterId: M.Model.attr('String', {
+    	isRequired: NO
+    })
 
     , name: M.Model.attr('String', {
         isRequired: NO
@@ -66,5 +70,29 @@ DigiWebApp.HandOrder = M.Model.create({
         }
         return records;
     }
+    
+	, getByVaterId: function(vaterId) {
+		var that = this;
+		var result = [];
+		if (typeof(vaterId) == "undefined" || vaterId == null) {
+			_.each(that.find(), function(el){
+				if (typeof(el.get("vaterId")) == "undefined" || el.get("vaterId") == null ) {
+					result.push(el);
+				}
+			});
+		} else {
+			//return that.find({query:{identifier: 'vaterId', operator: '=', value: vaterId}}); // funktioniert nicht, wenn vaterId im localStorage undefined...
+			_.each(that.find(), function(el){
+				if (typeof(el.get("vaterId")) != "undefined" 
+						&& el.get("vaterId")  != null 
+						&& parseIntRadixTen(el.get("vaterId")) == parseIntRadixTen(vaterId)
+				) {
+					result.push(el);
+				}
+			});
+		}
+		return _.sortBy(result, function(el) { return el.get('name'); });
+	}
+
 
 }, M.DataProviderLocalStorage);

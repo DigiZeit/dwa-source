@@ -16,14 +16,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, latestId: null
 	
+	, backToPage: null
+	
 	, init: function(isFirstLoad) {
 		var that = this;
+		that.backToPage = null;
 		var itemsToUse = [];
-		if (isFirstLoad) {
-			that.set('itemsToUse', DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.getByVaterId(null)));
-		} else {
-			
-		}
+		that.set('itemsToUse', DigiWebApp.HandOrder.getByVaterId(that.latestId).concat(DigiWebApp.Order.getByVaterId(that.latestId)));
 		that.items = [];
 		_.each(that.itemsToUse, function(el){
 			if (el.label != M.I18N.l('selectSomething')) {
@@ -44,10 +43,19 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    
 	    this.latestId = id;
 	
-	    that.selectedItem = that.items[m_id];
-	    this.buttonToUpdate.setValue(selectedItem.value);
-	    //DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.events.change.action();
-	    history.back();
+	    var selectedItem = that.items[m_id];
+	    that.buttonToUpdate.setValue(selectedItem.value);
+	    
+	    // TODO: reload OrderListPage with new folder
+	}
+	
+	, back: function() {
+		var that = this;
+		if (that.backToPage == null) {
+			DigiWebApp.NavigationController.backToBookTimePagePOP();
+		} else {
+			DigiWebApp.NavigationController.switchToPage(that.backToPage, M.TRANSITION.POP, YES);
+		}
 	}
 
 });

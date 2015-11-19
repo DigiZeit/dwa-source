@@ -32,7 +32,7 @@ DigiWebApp.OrderListPage = M.PageView.design({
         , cssClass: 'header unselectable'
         , isFixed: YES
         , title: M.LabelView.design({
-              value: M.I18N.l('activity')
+              value: M.I18N.l('order')
             , anchorLocation: M.CENTER
         })
         , backButton: M.ButtonView.design({
@@ -44,7 +44,7 @@ DigiWebApp.OrderListPage = M.PageView.design({
                   //  target: DigiWebApp.NavigationController
                   //, action: 'backToBautagebuchZeitenListePageTransition'
       			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
-      				history.back();
+      				DigiWebApp.OrderListController.back();
       			}
               }
           }
