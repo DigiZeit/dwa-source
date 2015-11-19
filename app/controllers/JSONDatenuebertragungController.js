@@ -1126,27 +1126,18 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				return trackError("missing auftraege", errorCallback);
 			}
 
-			var myLength = null;
-			try {
-				myLength = data.auftraege.length;
-			} catch(e2) {
-				return trackError("data.auftraege hat Länge " + myLength, errorCallback);
-			}
-
-			if (data.auftraege === null) {
-				// hier könnte man - wenn gewünscht - verhindern, dass es gar keine Positionen gibt
-				return errorCallback();
-			} else {
-				// ist data.positionen auch wirklich ein Array?
-				var myLength = null;
+			var myLength = 0;
+			if (data.auftraege != null) {
 				try {
 					myLength = data.auftraege.length;
-				} catch(e2) {
-					return trackError("data.auftraege hat Länge " + myLength, errorCallback);
-				}
+				} catch(e2) {}
 			}
+			if (myLength == 0) {
+				// nichts empfangen: weiter in Verarbeitungskette
+				return successCallback();
+			}			
 			
-			// data.positionen enthält also myLength Elemente
+			// data.auftraege enthält also myLength Elemente
 			DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('orders'), myLength, 0);
 			
 			// die empfangenen Positionen mit Model ablegen
