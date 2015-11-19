@@ -27,6 +27,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		if (that.parentStack == null) that.init(NO);
 		var items = [];
 		// parent-folders from stack
+		_.each(that.parentStack, function(o) {
+			items.push({
+				  icon: '48x48_plain_folder_opened.png'
+				, label: o.get('name')
+				, obj: o
+			});
+		});
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
 			items.push({
 				  icon: '48x48_plain_folder_closed.png'
@@ -65,8 +72,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, itemSelected: function(id, m_id) {
 
 		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		var that = this;
-	    if (this.latestId) {
+		var that = this;		
+
+		if (this.latestId) {
 	        $('#' + this.latestId).removeClass('selected');
 	    }
 	    $('#' + id).addClass('selected');
@@ -74,11 +82,11 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
-	    that.selectedObjId = selectedItem.obj.get("id");
-	    that.buttonToUpdate.setValue(selectedItem.value);
-	    
 	    // put this folder on the stack
-	    
+	    that.parentStack.push(selectedItem);
+	    that.selectedObjId = selectedItem.obj.get("id");
+	    that.buttonToUpdate.setValue(selectedItem.label);
+	    	    
 	    // reload items from next folder
 		that.reloadItems();
 	}
