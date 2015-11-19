@@ -17,7 +17,6 @@ DigiWebApp.BookingPage = M.PageView.design({
             //  target: DigiWebApp.BookingController
             //, action: 'init'
 			action: function() {
-				var that = this;
 				// Freischaltung 416 "Tätigkeits-Icons"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
@@ -25,26 +24,26 @@ DigiWebApp.BookingPage = M.PageView.design({
 					DigiWebApp.BookingController.init();
 					// Bugfix 2108: Rename in order to be consistent with DSO
 					if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(that.content.order.id, M.I18N.l('dtc6Ordner'));
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(that.content.position.id, M.I18N.l('dtc6Auftrag'));
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(that.content.activity.id, M.I18N.l('dtc6Leistung'));
+						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.order.id, M.I18N.l('dtc6Ordner'));
+						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.position.id, M.I18N.l('dtc6Auftrag'));
+						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.activity.id, M.I18N.l('dtc6Leistung'));
 					}
 				}	
 				// Freischaltung 415 "Feierabend-Icon"
         		if (DigiWebApp.SettingsController.featureAvailable('415')) {
-        			$('#' + that.header.feierabendButton.id).show(); 			
+        			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).show(); 			
         		} else {
-        			$('#' + that.header.feierabendButton.id).hide();
+        			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide();
         		}
 				// Freischaltung 402 "Materialerfasung Only"
         		if (DigiWebApp.SettingsController.featureAvailable('402')) {
-        			$('#' + that.header.materialButton.id).show(); 			
+        			$('#' + DigiWebApp.BookingPage.header.materialButton.id).show(); 			
         		} else {
-        			$('#' + that.header.materialButton.id).hide();
+        			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
-        		that.doHideShowOrderCombobox(true);
-        		that.doHideShowPositionCombobox(true);
+        		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
+        		DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 //				if (DigiWebApp.SettingsController.featureAvailable("429")) {
 //					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
 //					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
@@ -266,30 +265,28 @@ DigiWebApp.BookingPage = M.PageView.design({
     , tabBar: DigiWebApp.TabBar
     
     , doHideShowOrderCombobox: function(show) {
-    	var that = this;
-		try { $('#' + that.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
-		try { $('#' + that.content.orderButton.id).hide(); } catch (e) {trackError(e);}
-		try { $('label[for="' + that.content.orderButton.id + '"]').hide(); } catch (e) {trackError(e);}
+		try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
+		try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); } catch (e) {trackError(e);}
+		try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); } catch (e) {trackError(e);}
     	if (show) {
     		// Freischaltung 429 "mehrstufige Auftragsauswahl"
     		if (DigiWebApp.SettingsController.featureAvailable("429")) {
-    			try { $('#' + that.content.orderButton.id).show(); } catch (e) {trackError(e);}	
-    			try { $('label[for="' + that.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
+    			try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); } catch (e) {trackError(e);}	
+    			try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
     		} else {
-    			try { $('#' + that.content.order.id + "_container").show(); } catch (e) {trackError(e);}
+    			try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
     		}
     	}
     }
 
     , doHideShowPositionCombobox: function(show) {
-    	var that = this;
-		try { $('#' + that.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+		try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
     	if (show) {
     		// Freischaltung 429 "mehrstufige Auftragsauswahl"
     		if (DigiWebApp.SettingsController.featureAvailable("429")) {
     			// nothing to do
     		} else {
-    			try { $('#' + that.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+    			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
     		}
     	}
     }
