@@ -21,6 +21,16 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 				$('#' + DigiWebApp.HandOrderPage.content.orderName.id)[0].focus();
 			}
 	    }
+		, pagebeforeshow: {
+	    	action: function() {
+				// Freischaltung "Handpositionen"
+				if (DigiWebApp.SettingsController.featureAvailable('430')) {
+					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().show();
+				} else {
+					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().hide();
+				}
+			}
+	    }
  	}
 
 	, header: M.ToolbarView.design({
@@ -46,7 +56,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'orderName grid'
+          childViews: 'orderName targetFolderButton grid'
         , orderName: M.TextFieldView.design({
               label: M.I18N.l('orderName')
             , numberOfChars: 50
@@ -80,6 +90,20 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 	            }
 	    	}
         })
+
+        , targetFolderButton: M.ButtonView.design({
+              value: M.I18N.l('assume')
+            , anchorLocation: M.RIGHT
+            , events: {
+                tap: {
+                      target: DigiWebApp.HandOrderController
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
+                    	// TODO: Zielordner auswählen
+                    }
+                }
+            }
+        })
+
         , grid: M.GridView.design({
               childViews: 'button icon'
             , layout: {

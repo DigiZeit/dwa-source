@@ -17,6 +17,7 @@ DigiWebApp.BookingPage = M.PageView.design({
             //  target: DigiWebApp.BookingController
             //, action: 'init'
 			action: function() {
+				// Freischaltung 416 "Tätigkeits-Icons"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
 				} else {
@@ -28,21 +29,33 @@ DigiWebApp.BookingPage = M.PageView.design({
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.activity.id, M.I18N.l('dtc6Leistung'));
 					}
 				}	
-			}
-		}
-        , pageshow: {
-        	action: function() {
-        		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
+				// Freischaltung 415 "Feierabend-Icon"
         		if (DigiWebApp.SettingsController.featureAvailable('415')) {
         			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).show(); 			
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide();
         		}
+				// Freischaltung 402 "Materialerfasung Only"
         		if (DigiWebApp.SettingsController.featureAvailable('402')) {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).show(); 			
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
+				// Freischaltung 429 "mehrstufige Auftragsauswahl"
+				if (DigiWebApp.SettingsController.featureAvailable("429")) {
+        			$('#' + DigiWebApp.BookingPage.content.order.id).parent().parent().parent().hide(); 			
+        			$('#' + DigiWebApp.BookingPage.content.position.id).parent().parent().parent().hide(); 			
+        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).parent().parent().show(); 			
+				} else {
+        			$('#' + DigiWebApp.BookingPage.content.order.id).parent().parent().parent().show(); 			
+        			$('#' + DigiWebApp.BookingPage.content.position.id).parent().parent().parent().show(); 			
+        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).parent().parent().hide(); 			
+				}
+			}
+		}
+        , pageshow: {
+        	action: function() {
+        		DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem1);
         	}
         }
     }
@@ -99,9 +112,20 @@ DigiWebApp.BookingPage = M.PageView.design({
     })
 
 	, content: M.ScrollView.design({
-          childViews: 'order position activity grid currentBookingLabel' //'gridOrder gridPosition gridActivity grid',
+          childViews: 'orderButton order position activity grid currentBookingLabel' //'gridOrder gridPosition gridActivity grid',
         , cssClass: 'unselectable'
 
+		, orderButton: M.ButtonView.design({
+			  value: M.I18N.l('selectSomething')
+            , label: M.I18N.l('order')
+			, events: {
+				tap: {
+            		  target: this
+            		, action: function() {}
+	      		}
+			}
+		})
+		
         , order: M.SelectionListView.design({
                   selectionMode: M.SINGLE_SELECTION_DIALOG
                 , initialText: M.I18N.l('noData')
