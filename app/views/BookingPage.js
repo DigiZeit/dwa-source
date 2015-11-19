@@ -42,17 +42,19 @@ DigiWebApp.BookingPage = M.PageView.design({
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
-				if (DigiWebApp.SettingsController.featureAvailable("429")) {
-					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
-					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
-        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); 			
-        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); 			
-				} else {
-					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
-					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
-        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); 			
-        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); 			
-				}
+        		this.doHideShowOrderCombobox(true);
+        		this.doHideShowPositionCombobox(true);
+//				if (DigiWebApp.SettingsController.featureAvailable("429")) {
+//					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
+//					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+//        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); 			
+//        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); 			
+//				} else {
+//					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
+//					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+//        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); 			
+//        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); 			
+//				}
 			}
 		}
         , pageshow: {
@@ -145,9 +147,9 @@ DigiWebApp.BookingPage = M.PageView.design({
                         , action: function() {
 		    				var mySelection = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
 		    				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-		    					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+		    					DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		    				} else {
-		    					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+		    					DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 		    				}
                             this.setPositions();
                         }
@@ -261,6 +263,33 @@ DigiWebApp.BookingPage = M.PageView.design({
     })
 
     , tabBar: DigiWebApp.TabBar
+    
+    , doHideShowOrderCombobox: function(show) {
+		try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
+		try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); } catch (e) {trackError(e);}
+		try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); } catch (e) {trackError(e);}
+    	if (show) {
+    		// Freischaltung 429 "mehrstufige Auftragsauswahl"
+    		if (DigiWebApp.SettingsController.featureAvailable("429")) {
+    			try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); } catch (e) {trackError(e);}	
+    			try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
+    		} else {
+    			try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
+    		}
+    	}
+    }
+
+    , doHideShowPositionCombobox: function(show) {
+		try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+    	if (show) {
+    		// Freischaltung 429 "mehrstufige Auftragsauswahl"
+    		if (DigiWebApp.SettingsController.featureAvailable("429")) {
+    			// nothing to do
+    		} else {
+    			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+    		}
+    	}
+    }
 
 });
 

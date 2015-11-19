@@ -73,9 +73,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         this.set('orders', orderArray);
 		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 		}
         this.setPositions();
 
@@ -279,9 +279,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         this.set('orders', orderArray);
 		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 		}
         this.set('positions', positionArray);
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
@@ -372,9 +372,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         this.set('orders', orderArray);
 		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+			DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 		}
         this.setPositions();
         

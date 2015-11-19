@@ -88,7 +88,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                     this.currentHandOrderName = orderName;
 
                     // PositionsComboBox ausblenden
-                    try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
+                    DigiWeBApp.BookingPage.doHideShowPositionCombobox(false);
 
                     DigiWebApp.NavigationController.toBookTimePage(YES);
                 } else {
