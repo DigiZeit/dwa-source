@@ -1114,6 +1114,197 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 	}
 	
+	, empfangeAuftraege: function(successCallback, errorCallback) {
+
+		var internalSuccessCallback = function(data, msg, request) {
+			// verarbeite empfangene Daten
+			
+			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("empfangePositionen Status: " + request.status);
+			
+			// wurden Positionen empfangen?
+			if (typeof(data.auftraege) === "undefined" && data.auftraege !== null && data.auftraege.length > 0) {
+				return trackError("missing auftraege", errorCallback);
+			}
+
+			var myLength = null;
+			try {
+				myLength = data.auftraege.length;
+			} catch(e2) {
+				return trackError("data.auftraege hat Länge " + myLength, errorCallback);
+			}
+
+			if (data.auftraege === null) {
+				// hier könnte man - wenn gewünscht - verhindern, dass es gar keine Positionen gibt
+				return errorCallback();
+			} else {
+				// ist data.positionen auch wirklich ein Array?
+				var myLength = null;
+				try {
+					myLength = data.auftraege.length;
+				} catch(e2) {
+					return trackError("data.auftraege hat Länge " + myLength, errorCallback);
+				}
+			}
+			
+			// data.positionen enthält also myLength Elemente
+			DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('orders'), myLength, 0);
+			
+			// die empfangenen Positionen mit Model ablegen
+			var errorHappened = false;
+			var existingOrders = DigiWebApp.Order.find();
+			_.each(data.auftraege, function(el) {
+				//console.log(el);
+				if (typeof(el.id) === "undefined" || el.id == null) {
+					trackError("missing id");
+					errorHappened = true;
+					return;
+				} else if (typeof(el.bezeichnungGeraet) === "undefined" || el.bezeichnungGeraet == null) {
+					trackError("missing bezeichnungGeraet");
+					errorHappened = true;
+					return;
+				} else {
+					
+					// mandatory
+	            	var id = el.id;
+	                var name = el.bezeichnungGeraet;
+
+	                // in App nullable
+	                var vaterId = el.vaterId;
+	                var nummer = el.nummer;
+	                var beschreibung = el.beschreibung;
+	                var sollzeit = el.sollzeit;
+	                var istzeit = el.istzeit;
+	                var zeitpunktIstzeit = el.zeitpunktIstzeit;
+	                var zeitpunktLetzteBuchung = el.zeitpunktLetzteBuchung;
+	                var auftragswert = el.auftragswert;
+	                var materialgesamtkosten = el.materialgesamtkosten;
+	                var auftragsstatus = el.auftragsstatus;
+	                var lieferdatum = el.lieferdatum;
+	                var farbe = el.farbe;
+	                var auftragsordner = el.auftragsordner;
+	                var strasse = el.strasse;
+	                var hausnummer = el.hausnummer;
+	                var plz = el.plz;
+	                var ort = el.ort;
+	                var land = el.land;
+	                var countrycode = el.countrycode;
+	                var longitude = el.longitude;
+	                var latitude = el.latitude;
+	                var telefon = el.telefon;
+	                var fax = el.fax;
+	                var email = el.email;
+	                var kundenname = el.kundenname;
+	                var ansprechpartner = el.ansprechpartner;
+	                
+	                var beginn = "";
+					if (el.beginn) { beginn = el.beginn; }
+					var ende = "";
+					if (el.ende && el.ende !== "01.01.1900") { ende = el.ende; }
+
+	            	if (typeof(vaterId) === "object") { vaterId = null; } 
+	            	if (typeof(nummer) === "object") { nummer = ""; } 
+	            	if (typeof(beschreibung) === "object") { beschreibung = ""; } 
+	            	if (typeof(sollzeit) === "object") { sollzeit = ""; } 
+	            	if (typeof(istzeit) === "object") { istzeit = ""; } 
+	            	if (typeof(zeitpunktIstzeit) === "object") { zeitpunktIstzeit = ""; } 
+	            	if (typeof(zeitpunktLetzteBuchung) === "object") { zeitpunktLetzteBuchung = ""; } 
+	            	if (typeof(auftragswert) === "object") { auftragswert = ""; } 
+	            	if (typeof(materialgesamtkosten) === "object") { materialgesamtkosten = ""; } 
+	            	if (typeof(auftragsstatus) === "object") { auftragsstatus = ""; } 
+	            	if (typeof(lieferdatum) === "object") { lieferdatum = ""; } 
+	            	if (typeof(farbe) === "object") { farbe = ""; } 
+	            	if (typeof(auftragsordner) === "object") { auftragsordner = false; }
+	            	if (typeof(strasse) === "object") { strasse = ""; } 
+	            	if (typeof(hausnummer) === "object") { hausnummer = ""; } 
+	            	if (typeof(plz) === "object") { plz = ""; } 
+	            	if (typeof(ort) === "object") { ort = ""; } 
+	            	if (typeof(land) === "object") { land = ""; } 
+	            	if (typeof(countrycode) === "object") { countrycode = ""; } 
+	            	if (typeof(longitude) === "object") { longitude = ""; } 
+	            	if (typeof(latitude) === "object") { latitude = ""; } 
+	            	if (typeof(telefon) === "object") { telefon = ""; } 
+	            	if (typeof(fax) === "object") { fax = ""; } 
+	            	if (typeof(email) === "object") { email = ""; } 
+	            	if (typeof(kundenname) === "object") { kundenname = ""; } 
+	            	if (typeof(ansprechpartner) === "object") { ansprechpartner = ""; } 
+
+	            	auftragsordner = parseBool(auftragsordner);
+	            	
+	            	if (auftragsordner) {
+	            		var myItem = null;
+	            		
+	            		// wurde dieser Auftrag bereits angelegt?
+	            		var filterResult = _.filter(existingOrders, function(el){ return (el.get("id") == id); });
+	            		if (filterResult.length > 0) myItem = filterResult[0];
+	            		
+	            		if (myItem == null) {
+	            			// neu anlegen
+		            		myItem = DigiWebApp.Order.createRecord({
+			                      id: id
+			                });
+	            		}
+	            		
+	            		// aktualisieren
+		                myItem.set("vaterId", vaterId);
+	                    myItem.set("name", name);
+	                    myItem.set("nummer", nummer);
+	                    myItem.set("beschreibung", beschreibung);
+	                    myItem.set("sollzeit", sollzeit);
+	                    myItem.set("istzeit", istzeit);
+	                    myItem.set("zeitpunktIstzeit", zeitpunktIstzeit);
+	                    myItem.set("zeitpunktLetzteBuchung", zeitpunktLetzteBuchung);
+	                    myItem.set("auftragswert", auftragswert);
+	                    myItem.set("materialgesamtkosten", materialgesamtkosten);
+	                    myItem.set("auftragsstatus", auftragsstatus);
+	                    myItem.set("lieferdatum", lieferdatum);
+	                    myItem.set("farbe", farbe);
+	                    myItem.set("strasse", strasse);
+	                    myItem.set("hausnummer", hausnummer);
+	                    myItem.set("plz", plz);
+	                    myItem.set("ort", ort);
+	                    myItem.set("land", land);
+	                    myItem.set("countrycode", countrycode);
+	                    myItem.set("telefon", telefon);
+	                    myItem.set("fax", fax);
+	                    myItem.set("email", email);
+	                    myItem.set("ansprechpartner", ansprechpartner);
+	                    myItem.set("kundenname", kundenname);
+	                    myItem.set("longitude", longitude);
+	                    myItem.set("latitude", latitude);
+						myItem.set("beginn", beginn);
+						
+						myItem.saveSorted()
+	            	}
+					DigiWebApp.ApplicationController.DigiProgressView.increase();
+				}
+			});
+			
+			DigiWebApp.ApplicationController.DigiProgressView.hide();
+
+			if (errorHappened) {
+				return errorCallback();
+			} else {
+				// weiter in der Verarbeitungskette
+				return successCallback();
+			}
+			
+		};
+
+		//webservice, loaderText, successCallback, errorCallback, additionalQueryParameter, geraeteIdOverride, modus
+		var recieveObj = {
+			  webservice: "auftraege"
+			, loaderText: M.I18N.l('getOrdersLoader')
+			, successCallback: internalSuccessCallback
+			, errorCallback: errorCallback
+			, additionalQueryParameter: ''
+			//, timeout: 
+			, geraeteIdOverride: false
+			, modus: '0'
+		};
+		DigiWebApp.JSONDatenuebertragungController.recieveData(recieveObj);
+		
+	}
+
 	, empfangeFestepausendefinitionen: function(successCallback, errorCallback) {
 
 		var internalSuccessCallback = function(data, msg, request) {

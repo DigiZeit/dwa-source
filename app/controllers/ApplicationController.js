@@ -1507,11 +1507,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , timestampMitarbeiterZuletztGeladen: null
     
-    /**
-     * Calls getPositions on DigiWebApp.RequestController.
-     * Success callback calls proceeds received positions and afterwards starts retrieving activities.
-     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-     */
     , getPositionsFromRemote: function() {
     	var that = this;
 
@@ -1522,12 +1517,32 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		    	that.setCallbackStatus('position', 'local', (DigiWebApp.Position.find().length > 0));
     				that.setCallbackStatus('order', 'remote', YES);
     		    	that.setCallbackStatus('order', 'local', (DigiWebApp.Order.find().length > 0));
-    				that.getActivitiesFromRemote();
+    				that.getOrdersFromRemote();
     			  }
     			, function() {
   				  	that.setCallbackStatus('position', 'remote', NO);
   				  	that.setCallbackStatus('order', 'remote', NO);
     				that.proceedWithLocalData("getPositionsFromRemote");
+    			}
+    	);
+    }
+
+    , getOrdersFromRemote: function() {
+    	var that = this;
+    	// Freischaltung 429 "mehrstufige Auftragsauswahl"
+		if (!DigiWebApp.SettingsController.featureAvailable("429")) {
+			return that.getActivitiesFromRemote();
+		}
+    	that.setCallbackStatus('order', 'local', NO);
+    	DigiWebApp.JSONDatenuebertragungController.empfangeAuftraege(
+    			  function() {
+    				that.setCallbackStatus('order', 'remote', YES);
+    		    	that.setCallbackStatus('order', 'local', (DigiWebApp.Order.find().length > 0));
+    				that.getActivitiesFromRemote();
+    			  }
+    			, function() {
+  				  	that.setCallbackStatus('order', 'remote', NO);
+    				that.proceedWithLocalData("getOrdersFromRemote");
     			}
     	);
     }

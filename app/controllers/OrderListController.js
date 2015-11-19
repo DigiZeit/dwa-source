@@ -20,7 +20,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var that = this;
 		var itemsToUse = [];
 		if (isFirstLoad) {
-			that.set('itemsToUse', DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()));
+			that.set('itemsToUse', DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.getByVaterId(null)));
 		} else {
 			
 		}
@@ -44,7 +44,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    
 	    this.latestId = id;
 	
-	    var selectedItem = that.items[m_id];
+	    that.selectedItem = that.items[m_id];
 	    this.buttonToUpdate.setValue(selectedItem.value);
 	    //DigiWebApp.BautagebuchZeitenDetailsPage.content.activityComboBox.events.change.action();
 	    history.back();

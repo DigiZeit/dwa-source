@@ -20,6 +20,115 @@ DigiWebApp.Order = M.Model.create({
     })
 
     , name: M.Model.attr('String', {
+    	// bezeichnungGeraet
+        isRequired: NO
+    })
+
+    , nummer: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , beschreibung: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , beginn: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , ende: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , sollzeit: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , istzeit: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , zeitpunktIstzeit: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , zeitpunktLetzteBuchung: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , auftragswert: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , materialgesamtkosten: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , auftragsstatus: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , lieferdatum: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , farbe: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , farbe: M.Model.attr('String', {
+        isRequired: NO
+    })
+    
+    , strasse: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , hausnummer: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , plz: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , ort: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , land: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , countrycode: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , longitude: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , latitude: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , telefon: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , fax: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , email: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , kundenname: M.Model.attr('String', {
+        isRequired: NO
+    })
+
+    , ansprechpartner: M.Model.attr('String', {
         isRequired: NO
     })
 
@@ -50,7 +159,7 @@ DigiWebApp.Order = M.Model.create({
 				}
 			});
 		}
-		return result;
+		return _.sortBy(result, function(el) { return el.get('name'); });
 	}
 
     , getList: function(paramObj) {
