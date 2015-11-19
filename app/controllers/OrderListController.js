@@ -33,12 +33,16 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var items = [];
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
+			var o = that.parentStack[that.parentStack.length - 1];
+			DigiWebApp.OrderListPage.header.title.setValue(o.label);
 			items.push({
 				  icon: that.openFolderIcon
 				, label: '..'
 				, obj: o.obj
 			});
-		};
+		} else {
+			DigiWebApp.OrderListPage.header.title.setValue(M.I18N.l('order'));
+		}
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
 			items.push({
 				  icon: that.closedFolderIcon
