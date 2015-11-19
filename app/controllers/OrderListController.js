@@ -10,8 +10,6 @@ DigiWebApp.OrderListController = M.Controller.extend({
 
 	  items: null
 	
-	, itemsToUse: null
-	  
 	, buttonToUpdate: null
 	
 	, latestId: null
@@ -21,33 +19,26 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, init: function(withPositions) {
 		var that = this;
 		that.backToPage = null;
-		var itemsToUse = [];
+		var items = [];
 		_.each(DigiWebApp.HandOrder.getByVaterId(that.latestId), function(o) {
-			itemsToUse.push({
+			items.push({
 				  icon: '48x48_plain_folder_closed.png'
 				, label: o.name
 			});
 		});
 		_.each(DigiWebApp.Order.getByVaterId(that.latestId), function(o) {
-			itemsToUse.push({
+			items.push({
 				  icon: '48x48_plain_handauftrag.png'
 				, label: o.name
 			});
 		});
 		_.each(DigiWebApp.Position.getByVaterId(that.latestId), function(o) {
-			itemsToUse.push({
+			items.push({
 				  icon: '48x48_plain_document.png'
 				, label: o.name
 			});
 		});
-		that.set('itemsToUse', );
-		that.items = [];
-		_.each(that.itemsToUse, function(el){
-			if (el.label != M.I18N.l('selectSomething')) {
-				that.items.push(el);
-			}
-		});
-		that.set('items', that.items);
+		that.set('items', items);
 	}
 
 	, itemSelected: function(id, m_id) {
