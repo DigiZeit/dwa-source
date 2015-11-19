@@ -30,8 +30,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		_.each(that.parentStack, function(o) {
 			items.push({
 				  icon: '48x48_plain_folder_opened.png'
-				, label: o.get('name')
-				, obj: o
+				, label: o.label
+				, obj: o.obj
 			});
 		});
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
