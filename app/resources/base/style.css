@@ -1988,4 +1988,9 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 	margin-right: 10px;
 	color: #000000 !important;
 	text-shadow: none !important;
+	min-height: inherit;
+}
+
+.orderListEntry .ui-li-thumb {
+	height: 35px;
 }

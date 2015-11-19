@@ -74,7 +74,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
-	    that.selectedObjId = selecteditem.obj.get("id");
+	    that.selectedObjId = selectedItem.obj.get("id");
 	    that.buttonToUpdate.setValue(selectedItem.value);
 	    
 	    // put this folder on the stack
