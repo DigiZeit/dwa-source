@@ -53,11 +53,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 		}
 		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
-			var childOrders = DigiWebApp.Order.getByVaterId(o.get('id'));
-			var childHandOrders = DigiWebApp.HandOrder.getByVaterId(o.get('id'));
-			var childPositions = DigiWebApp.Position.getByVaterId(o.get('id'));
-			var hasElements = (childOrders.concat(childHandOrders.concat(childPositions)).length > 0);
-			if (that.onlyFolders || hasElements) {
+			if (that.onlyFolders || o.hasElements()) {
 				items.push({
 					  icon: that.closedFolderIcon
 					, label: o.get('name')

@@ -248,5 +248,17 @@ DigiWebApp.Order = M.Model.create({
 	    localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + that.name.toLowerCase() + 'Keys', JSON.stringify(keys));
 	    return true;
 	}
+    
+    , hasElements: function() {
+		var childOrders = DigiWebApp.Order.getByVaterId(this.get('id'));
+		var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
+		var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
+    	var hasElements = (childOrders.concat(childHandOrders.concat(childPositions)).length > 0);
+    	if (!hasElements) return false;
+    	_.each(childOrders, function(child){
+    		if (child.hasElements()) hasElements = true;
+    	});
+    	return hasElements;
+    }
 
 }, M.DataProviderLocalStorage);
