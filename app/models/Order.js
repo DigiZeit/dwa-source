@@ -249,16 +249,16 @@ DigiWebApp.Order = M.Model.create({
 	    return true;
 	}
     
-    , hasElements: function() {
+    , hasPositions: function() {
 		var childOrders = DigiWebApp.Order.getByVaterId(this.get('id'));
 		var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
 		var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
-    	var hasElements = (childOrders.concat(childHandOrders.concat(childPositions)).length > 0);
-    	if (!hasElements) return false;
+    	var hasPositions = (childHandOrders.concat(childPositions).length > 0);
+    	if (!hasPositions) return false;
     	_.each(childOrders, function(child){
-    		if (child.hasElements()) hasElements = true;
+    		if (child.hasPositions()) hasPositions = true;
     	});
-    	return hasElements;
+    	return hasPositions;
     }
 
 }, M.DataProviderLocalStorage);
