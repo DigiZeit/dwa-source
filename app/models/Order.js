@@ -32,17 +32,25 @@ DigiWebApp.Order = M.Model.create({
 
 	, getByVaterId: function(vaterId) {
 		var that = this;
+		var result = [];
 		if (typeof(vaterId) == "undefined" || vaterId == null) {
-			var result = [];
 			_.each(that.find(), function(el){
 				if (typeof(el.get("vaterId")) == "undefined" || el.get("vaterId") == null ) {
 					result.push(el);
 				}
 			});
-			return result;
 		} else {
-			return that.find({query:{identifier: 'vaterId', operator: '=', value: vaterId}});
+			//return that.find({query:{identifier: 'vaterId', operator: '=', value: vaterId}}); // funktioniert nicht, wenn vaterId im localStorage undefined...
+			_.each(that.find(), function(el){
+				if (typeof(el.get("vaterId")) != "undefined" 
+						&& el.get("vaterId")  != null 
+						&& parseIntRadixTen(el.get("vaterId")) == parseIntRadixTen(vaterId)
+				) {
+					result.push(el);
+				}
+			});
 		}
+		return result;
 	}
 
     , getList: function(paramObj) {
