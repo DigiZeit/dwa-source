@@ -34,7 +34,7 @@ DigiWebApp.Order = M.Model.create({
 		var that = this;
 		if (typeof(vaterId) == "undefined" || vaterId == null) {
 			var result = [];
-			_.each(that.findAll(), function(el){
+			_.each(that.find(), function(el){
 				if (typeof(el.get("vaterId")) == "undefined" || el.get("vaterId") == null ) {
 					result.push(el);
 				}
