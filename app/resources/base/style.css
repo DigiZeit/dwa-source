@@ -1984,3 +1984,6 @@ div.dateTitleGrid .dateTitleGridColumn2 {
 	background: green !important;
 }
 
+.orderListEntry {
+	margin-right: 10px;
+}
