@@ -30,6 +30,21 @@ DigiWebApp.Order = M.Model.create({
 		});
 	}
 
+	, getByVaterId: function(vaterId) {
+		var that = this;
+		if (typeof(vaterId) == "undefined" || vaterId == null) {
+			var result = [];
+			_.each(that.findAll(), function(el){
+				if (typeof(el.get("vaterId")) == "undefined" || el.get("vaterId") == null ) {
+					result.push(el);
+				}
+			});
+			return result;
+		} else {
+			return that.find({query:{identifier: 'vaterId', operator: '=', value: vaterId}});
+		}
+	}
+
     , getList: function(paramObj) {
 		if (!paramObj) paramObj = {};
 		var that = this;

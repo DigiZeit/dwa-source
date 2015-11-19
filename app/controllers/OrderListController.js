@@ -18,7 +18,12 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	
 	, init: function(isFirstLoad) {
 		var that = this;
-		that.set('items', DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()));
+		var itemsToUse = [];
+		if (isFirstLoad) {
+			that.set('itemsToUse', DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()));
+		} else {
+			
+		}
 		that.items = [];
 		_.each(that.itemsToUse, function(el){
 			if (el.label != M.I18N.l('selectSomething')) {
