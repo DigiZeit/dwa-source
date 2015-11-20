@@ -497,7 +497,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	//if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
     }
     
-    , setOrders: function(orderId, positionId) {
+    , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
     	
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
@@ -528,11 +528,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
-		that.setPositions(positionId);
+		that.setPositions(positionId, activityId);
 		
     }
 
-    , setPositions: function(positionId) {
+    , setPositions: function(positionId, activityId) {
     	var that = this;
 
     	var orderId = that.getSelectedOrderItem().value;
@@ -586,7 +586,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
 
         this.set('positions', positions);
-        this.setActivities(YES);
+        this.setActivities(YES, activityId);
 
         this.saveSelection();
     }
@@ -958,9 +958,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setSelectedPosition: function(pos) {
     	var that = this;
     	if (typeof(pos) != "object") return;
-    	var orderId = pos.get("orderId");
-    	that.setOrders(orderId);
-    	that.setPositions(pos.get("id"));
+    	that.setOrders(pos.get("orderId"), pos.get("id"));
     }
     
     , getSelectedActivity: function() {
