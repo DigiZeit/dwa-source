@@ -934,12 +934,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setSelectedOrder: function(order) {
     	var that = this;
     	var orderId = 0;
-    	if (typeof(order) != "object") {
-    		return;
-    	} else {
+    	if (pos && typeof(order) == "object") {
     		orderId = order.get("id");
-    		if (that.getSelectedOrderItem() == orderId) return;
     	}
+		if (that.getSelectedOrderItem() == orderId) return;
     	that.setOrders(orderId);
     }
     
@@ -964,7 +962,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
     	var posId = 0;
     	var orderId = 0;
-    	if (typeof(pos) == "object") {
+    	if (pos && typeof(pos) == "object") {
     		posId = pos.get("id");
     		orderId = pos.get("orderId");
     	}
