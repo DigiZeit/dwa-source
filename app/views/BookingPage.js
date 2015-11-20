@@ -131,7 +131,9 @@ DigiWebApp.BookingPage = M.PageView.design({
 						this.init(
 								  NO 
 								, function(obj){
-									  DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
+									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
+									  DigiWebApp.SelectionController.setSelectedPosition(obj);
+									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
 								, function(){
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
@@ -289,6 +291,11 @@ DigiWebApp.BookingPage = M.PageView.design({
     			try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
     		}
     	}
+    	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
+			try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); } catch (e) {trackError(e);}	
+			try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
+			try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
+    	}
     }
 
     , doHideShowPositionCombobox: function(show) {
@@ -300,6 +307,9 @@ DigiWebApp.BookingPage = M.PageView.design({
     		} else {
     			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
     		}
+    	}
+    	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
+			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
     	}
     }
 

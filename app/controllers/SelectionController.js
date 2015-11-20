@@ -71,7 +71,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         // set selection arrays to start content binding process
         this.set('orders', orderArray);
-		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
+		var mySelectionObj = that.getSelectedOrderItem(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
 			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
@@ -156,7 +156,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
+    		var activitySelection = that.getSelectedActivityItem(YES);
     		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
     		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
 	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === activitySelection.value);});
@@ -277,25 +277,18 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         // set selection arrays to start content binding process
         this.set('orders', orderArray);
-		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
+		var mySelectionObj = that.getSelectedOrderItem(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
 			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
 			DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 		}
-        this.set('positions', positionArray);
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').setSelection('0');
-    	} else {
-            M.ViewManager.getView('bookingPage', 'position').setSelection('0');
-    	}
+
+		this.set('positions', positionArray);
+        that.setSelectedPosition(0);
     	
         this.set('activities', activityArray);
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').setSelection('0');
-    	} else {
-            M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
-    	}
+        that.setSelectedActivity(0);
     	
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
         	DigiWebApp.ScholppBookingController.resetButtons();    		
@@ -331,6 +324,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
 
     , setSelectionByCurrentBooking: function() {
+        var that = this;
 
         this.resetSelection();
 
@@ -370,7 +364,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         // set selection arrays to start content binding process
         this.set('orders', orderArray);
-		var mySelectionObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
+		var mySelectionObj = that.getSelectedOrderItem(YES);
 		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
 			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 		} else {
@@ -502,18 +496,49 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
     	//if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
     }
+    
+    , setOrders: function(orderId, positionId) {
+    	var that = this;
+    	
+        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
-    , setPositions: function() {
-    	//alert("in setPositions");
-    	var orderId;
+        var itemSelected = NO;
+        var orderArray = _.map(orders, function(order) {
+        	if (order) {
+	            var obj =  { label: order.get('name'), value: order.get('id') };
+	            if (obj.value == orderId) {
+	                obj.isSelected = YES;
+	                itemSelected = YES;
+	            }
+	            return obj;
+        	}
+        });
+        orderArray = _.compact(orderArray);
+        
+        // push "Bitte wählen Option"
+        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:!itemSelected});
+        } else {
+        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+        }
+
+        // set selection arrays to start content binding process
+        that.set('orders', orderArray);
+		var mySelectionObj = that.getSelectedOrderItem();
+		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
+		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
+		
+		that.setPositions(positionId);
+		
+    }
+
+    , setPositions: function(positionId) {
+    	var that = this;
+
+    	var orderId = that.getSelectedOrderItem().value;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-        	//alert("bookingPageWithIconsScholpp");
-    		orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection(YES).value;
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
-    		//alert(M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').getSelection(YES).value);
-    	} else {
-    		orderId = M.ViewManager.getView('bookingPage', 'order').getSelection(YES).value;
     	}
         if (!orderId) {
             return;
@@ -528,7 +553,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 			DigiWebApp.OrderInfoController.setItem();
 		}
 
-//        M.ViewManager.getView('bookingPage', 'position').removeSelection(); /* to avoid bug of not setting selected... */
         var positions = DigiWebApp.Position.findSorted();
 
         var i = 0;
@@ -551,11 +575,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
             positions.push({label: M.I18N.l('noData'), value: '0'});
         }
 
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').resetSelection();
-    	} else {
-    		M.ViewManager.getView('bookingPage', 'position').resetSelection();
-    	}
+		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
+
         this.set('positions', positions);
         this.setActivities(YES);
 
@@ -564,6 +585,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     /* only set those activities that are related to the chosen position */
     , setActivities: function(checkForWorkPlan) {
+    	var that = this;
+    	
         var posId = null;
         var orderId = null;
 
@@ -573,18 +596,13 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var posObj;
         var orderObj;
 		if (checkForWorkPlan) {
-        	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-                posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
-                orderObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection(YES);
-        	} else {
-                posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
-                orderObj = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
-        	}
-            if (posObj) {
-                posId = posObj.value;
-            }
+            orderObj = that.getSelectedOrderItem();
             if (orderObj) {
             	orderId = orderObj.value;
+            }
+            posObj = that.getSelectedPositionItem();
+            if (posObj) {
+                posId = posObj.value;
             }
         }
 		if (posId) {
@@ -596,13 +614,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 				DigiWebApp.OrderInfoController.setItem();
 			}
 	
-	        //var workPlans = DigiWebApp.WorkPlan.find({query: 'id=' + posId}); // pre TMP-1.0
-			//console.log("posId " + posId);
-//	        var workPlans = DigiWebApp.WorkPlan.find({ query: { 
-//	              identifier: 'id' 
-//	            , operator: '=' 
-//	            , value: posId 
-//	        }});
 	        var workPlans = []; 
 	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
 	        	if (parseIntRadixTen(wp.get("id")) === parseIntRadixTen(posId)) workPlans.push(wp);
@@ -610,7 +621,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        i = 0;
 	
 	        /* if a workplan exists, only use those activities that are in the workplan */
-			//console.log("posId " + posId + ", workPlans.length " + workPlans.length);
 	        if (workPlans.length === 1) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
@@ -679,6 +689,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
 
     , initSelection: function() {
+       var that = this;
        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
        var positions = DigiWebApp.Position.findSorted();
        var activities = DigiWebApp.SelectionController.getActivities();
@@ -751,46 +762,35 @@ DigiWebApp.SelectionController = M.Controller.extend({
         try {
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
             	M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
-            	M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').setSelection('0');
-            	M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').setSelection('0');
-            	M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').setSelection('0');
             	DigiWebApp.ScholppBookingController.resetButtons();
-        	} else {
-            	M.ViewManager.getView('bookingPage', 'order').setSelection('0');
-            	M.ViewManager.getView('bookingPage', 'position').setSelection('0');
-            	M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
         	}
+    		M.ViewManager.getView(that.getPageToUse(), 'order').setSelection('0');
+    		M.ViewManager.getView(that.getPageToUse(), 'position').setSelection('0');
+    		M.ViewManager.getView(that.getPageToUse(), 'activity').setSelection('0');
     	} catch(e3) { 
     		//trackError(e3);
     	}
     }
 
     , resetSelection: function() {
+    	var that = this;
     	try {
         	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
         		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
         		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
-        		M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').resetSelection();
-        		M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').resetSelection();
-        		M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').resetSelection();
-        	} else {
-        		M.ViewManager.getView('bookingPage', 'order').resetSelection();
-        		M.ViewManager.getView('bookingPage', 'position').resetSelection();
-        		M.ViewManager.getView('bookingPage', 'activity').resetSelection();
         	}
+    		M.ViewManager.getView(that.getPageToUse(), 'order').resetSelection();
+    		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
+    		M.ViewManager.getView(that.getPageToUse(), 'activity').resetSelection();
     	} catch(e4) { 
     		//trackError(e4);
     	}
     }
 
     , isPositionSelected: function() {
+    	var that = this;
         // implemented adjustment to M.SeletionListView to return null if no item is available
-    	var posObj;
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            posObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection(YES);
-    	} else {
-            posObj = M.ViewManager.getView('bookingPage', 'position').getSelection(YES);
-    	}
+    	var posObj = that.getSelectedPositionItem(YES);
         if (posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
         } else {
@@ -799,12 +799,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
 
     , isActivitySelected: function() {
-    	var actObj;
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            actObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    	} else {
-            actObj = M.ViewManager.getView('bookingPage', 'activity').getSelection(YES);
-    	}
+    	var that = this;
+    	var actObj = that.getSelectedActivityItem(YES);
         if (actObj && actObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
         } else {
@@ -813,22 +809,19 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
 
     , saveSelection: function() {
+    	var that = this;
     	var orderValue = null;
     	var positionValue = null;
     	var activityValue = null;
     	var uebernachtungskennzeichenScholppValue = null;
     	var spesenkennzeichenScholppValue = null;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            orderValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
-            positionValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'position').getSelection();
-            activityValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection();
             uebernachtungskennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').getSelection();
             spesenkennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'spesenkennzeichen').getSelection();
-    	} else {
-            orderValue = M.ViewManager.getView('bookingPage', 'order').getSelection();
-            positionValue = M.ViewManager.getView('bookingPage', 'position').getSelection();
-            activityValue = M.ViewManager.getView('bookingPage', 'activity').getSelection();
     	}
+        orderValue = that.getSelectedOrderItem();
+        positionValue = that.getSelectedPositionItem();
+        activityValue = that.getSelectedActivityItem();
 
         this.selections.order = orderValue;
         this.selections.position = positionValue;
@@ -905,13 +898,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     
     , getSelectedOrder: function() {
+    	var that = this;
     	var orderObj, orderId;
     	var results = [];
-    	var pageToUse = 'bookingPage';
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		pageToUse = 'bookingPageWithIconsScholpp';
-    	}
-        orderObj = M.ViewManager.getView(pageToUse, 'order').getSelection(YES);
+        orderObj = that.getSelectedOrderItem(YES);
         if (orderObj) {
         	orderId = orderObj.value;
         	var results = _.filter(DigiWebApp.Order.find(), function(o) {
@@ -920,18 +910,22 @@ DigiWebApp.SelectionController = M.Controller.extend({
         }
     	return results.length > 0 ? results[0] : null; 
     }
-    , setSelectedOrder: function(orderId) {
-    	
+    , getSelectedOrderItem: function(returnObject) {
+    	var that = this;
+        return M.ViewManager.getView(that.pageToUse(), 'order').getSelection(returnObject);
+    }
+    , setSelectedOrder: function(order) {
+    	var that = this;
+    	var orderId = 0;
+    	if (order) orderId = order.get("id");
+    	that.setOrders(orderId);
     }
     
     , getSelectedPosition: function() {
+    	var that = this;
     	var posObj, posId;
     	var results = [];
-    	var pageToUse = 'bookingPage';
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		pageToUse = 'bookingPageWithIconsScholpp';
-    	}
-        posObj = M.ViewManager.getView(pageToUse, 'position').getSelection(YES);
+        posObj = that.getSelectedPositionItem(YES);
         if (posObj) {
         	posId = posObj.value;
         	var results = _.filter(DigiWebApp.Position.find(), function(o) {
@@ -940,8 +934,41 @@ DigiWebApp.SelectionController = M.Controller.extend({
         }
     	return results.length > 0 ? results[0] : null; 
     }
-    , setSelectedPosition: function() {
+    , getSelectedPositionItem: function(returnObject) {
+    	var that = this;
+        return M.ViewManager.getView(that.pageToUse(), 'position').getSelection(returnObject);
+    }
+    , setSelectedPosition: function(pos) {
+    	var that = this;
+    }
+    
+    , getSelectedActivity: function() {
+    	var that = this;
+    	var actObj, actId;
+    	var results = [];
+    	actObj = that.getSelectedActivityItem(YES);
+        if (actObj) {
+        	actId = actObj.value;
+        	var results = _.filter(DigiWebApp.Activity.find(), function(o) {
+        		return (o.get("id") == actId);
+        	});
+        }
+    	return results.length > 0 ? results[0] : null; 
+    }
+    , getSelectedActivityItem: function(returnObject) {
+    	var that = this;
+        return M.ViewManager.getView(that.pageToUse(), 'activity').getSelection(returnObject);
+    }
+    , setSelectedActivity: function(pos) {
     	
     }
     
+    , getPageToUse: function() {
+    	var pageToUse = 'bookingPage';
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    		pageToUse = 'bookingPageWithIconsScholpp';
+    	}
+    	return pageToUse;
+    }
+
 });
