@@ -44,17 +44,6 @@ DigiWebApp.BookingPage = M.PageView.design({
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
         		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
         		DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
-//				if (DigiWebApp.SettingsController.featureAvailable("429")) {
-//					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").hide(); } catch (e) {trackError(e);}
-//					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
-//        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); 			
-//        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); 			
-//				} else {
-//					try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
-//					try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
-//        			$('#' + DigiWebApp.BookingPage.content.orderButton.id).hide(); 			
-//        			$('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').hide(); 			
-//				}
 			}
 		}
         , pageshow: {
@@ -132,7 +121,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 								  NO 
 								, function(obj){
 									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
-									  DigiWebApp.SelectionController.setSelectedPosition(obj);
+									DigiWebApp.SelectionController.setSelectedPosition(obj);
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
 								, function(){

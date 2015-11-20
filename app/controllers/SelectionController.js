@@ -556,12 +556,20 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var positions = DigiWebApp.Position.findSorted();
 
         var i = 0;
+        var selectedId = i;
+        if (typeof(positionId) != "undefined") selectedId = positionId;
         positions = _.map(positions, function(pos) {
         	if (pos) {
-	            if(parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(orderId)) {
+	            if(parseIntRadixTen(pos.get('orderId')) == parseIntRadixTen(orderId)) {
 	                var obj = { label: pos.get('name'), value: pos.get('id') };
-	                if(i === 0) {
-	                    obj.isSelected = YES;
+	                if (typeof(positionId) != "undefined") {
+		                if (parseIntRadixTen(pos.get("id")) == parseIntRadixTen(selectedId)) {
+		                    obj.isSelected = YES;
+		                }
+	                } else {
+		                if (i === 0) {
+		                    obj.isSelected = YES;
+		                }
 	                }
 	                i += 1;
 	                return obj;
@@ -787,9 +795,18 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
     }
 
+    , isOrderSelected: function() {
+    	var that = this;
+    	var orderObj = that.getSelectedOrderItem(YES);
+        if (orderObj && orderObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+
     , isPositionSelected: function() {
     	var that = this;
-        // implemented adjustment to M.SeletionListView to return null if no item is available
     	var posObj = that.getSelectedPositionItem(YES);
         if (posObj && posObj.value != "0") { // 'Bitte wählen' is not allowed to be chosen
             return YES;
@@ -940,6 +957,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     , setSelectedPosition: function(pos) {
     	var that = this;
+    	if (typeof(pos) != "object") return;
+    	var orderId = pos.get("orderId");
+    	that.setOrders(orderId);
+    	that.setPositions(pos.get("id"));
     }
     
     , getSelectedActivity: function() {
