@@ -179,7 +179,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 change: {
                       target: DigiWebApp.SelectionController
                     , action: function() {
-                		M.ViewManager.getView('bookingPage', 'orderButton').setValue(this.getSelectedPositionItem(YES).label);
+            			this.setSelectedPosition(this.getSelectedPosition());
                         this.setActivities(YES);
                     }
                 }
