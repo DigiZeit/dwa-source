@@ -968,10 +968,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		orderId = pos.get("orderId");
     	}
 		
+    	var buttonLabel = pos.get("name");
 		if (that.getSelectedPositionItem() != posId) {
 			that.setOrders(orderId, posId);
 		}
-    	var buttonLabel = pos.get("name");
     	if (posId == 0) buttonLabel = M.I18N.l('selectSomething');
 		M.ViewManager.getView('bookingPage', 'orderButton').setValue(buttonLabel);
     }
