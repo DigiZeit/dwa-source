@@ -2263,11 +2263,14 @@ DigiWebApp.BookingController = M.Controller.extend({
         		  }
         		  , function() {
                       DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	              		// die Buchung(en) konnte(n) nicht gesendet werden
-	                    DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                        title: M.I18N.l('sendDataFail'),
-	                        message: M.I18N.l('sendDataFailMsg')
-	                    });
+                        // Bugfix: Fehlermeldung nicht zeigen, wenn danach kein Stammdatenabgleich gemacht werden soll
+                      	if (doSync) {
+		              		// die Buchung(en) konnte(n) nicht gesendet werden
+		                    DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                        title: M.I18N.l('sendDataFail'),
+		                        message: M.I18N.l('sendDataFailMsg')
+		                    });
+                      	}
 	              }
         		  , isClosingDay
         		  , doSync

@@ -1429,9 +1429,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      *
      * Otherwise it displays an alert dialog showing that offline work is not possible
      */
-    , proceedWithLocalData: function(fromwhere) {
+    , proceedWithLocalData: function(fromwhere, exceptionMessage) {
 
 		var that = DigiWebApp.ApplicationController;
+		
+		// TODO: Exception vom Zeitserver auswerten
+		var reason = "";
+		if (typeof(exceptionMessage) == "string" && exceptionMessage.length > 0) {
+			reason = ": " + exceptionMessage;
+		}
 
 		that.enforceChefToolOnly();
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));    	
@@ -1460,7 +1466,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        if (DigiWebApp.SettingsController.globalDebugMode) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                  title: M.I18N.l('offlineWork')
-	                , message: fromwhere
+	                , message: fromwhere + reason
 	            });
 	        }
 	        

@@ -912,7 +912,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     , getSelectedOrderItem: function(returnObject) {
     	var that = this;
-        return M.ViewManager.getView(that.pageToUse(), 'order').getSelection(returnObject);
+        return M.ViewManager.getView(that.getPageToUse(), 'order').getSelection(returnObject);
     }
     , setSelectedOrder: function(order) {
     	var that = this;
@@ -936,7 +936,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     , getSelectedPositionItem: function(returnObject) {
     	var that = this;
-        return M.ViewManager.getView(that.pageToUse(), 'position').getSelection(returnObject);
+        return M.ViewManager.getView(that.getPageToUse(), 'position').getSelection(returnObject);
     }
     , setSelectedPosition: function(pos) {
     	var that = this;
@@ -957,7 +957,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     , getSelectedActivityItem: function(returnObject) {
     	var that = this;
-        return M.ViewManager.getView(that.pageToUse(), 'activity').getSelection(returnObject);
+        return M.ViewManager.getView(that.getPageToUse(), 'activity').getSelection(returnObject);
     }
     , setSelectedActivity: function(pos) {
     	
