@@ -524,7 +524,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
-		var mySelectionObj = that.getSelectedOrderItem();
+		var mySelectionObj = that.getSelectedOrderItem(YES);
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
@@ -535,7 +535,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
-    	var orderId = that.getSelectedOrderItem().value;
+    	var orderId = that.getSelectedOrderItem(YES).value;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
@@ -604,11 +604,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var posObj;
         var orderObj;
 		if (checkForWorkPlan) {
-            orderObj = that.getSelectedOrderItem();
+            orderObj = that.getSelectedOrderItem(YES);
             if (orderObj) {
             	orderId = orderObj.value;
             }
-            posObj = that.getSelectedPositionItem();
+            posObj = that.getSelectedPositionItem(YES);
             if (posObj) {
                 posId = posObj.value;
             }
