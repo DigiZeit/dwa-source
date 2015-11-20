@@ -790,6 +790,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		M.ViewManager.getView(that.getPageToUse(), 'order').resetSelection();
     		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
     		M.ViewManager.getView(that.getPageToUse(), 'activity').resetSelection();
+    		M.ViewManager.getView('bookingPage', 'orderButton').setValue(M.I18N.l('selectSomething'));
     	} catch(e4) { 
     		//trackError(e4);
     	}
