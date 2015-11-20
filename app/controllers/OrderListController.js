@@ -6,6 +6,8 @@
 // Controller: OrderListController
 // ==========================================================================
 
+// ToDo: successHandler einbauen statt buttonToUpdate
+
 DigiWebApp.OrderListController = M.Controller.extend({
 
 	  items: null
@@ -23,6 +25,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, parentStack: null
 	
 	, useFolderIcon: '48x48_plain_folder_ok.png'
+	, folderUpIcon: '48x48_plain_folder_up.png'
 	, openFolderIcon: '48x48_plain_folder.png'
 	, closedFolderIcon: '48x48_plain_folder_closed.png'
 	, orderIcon: '48x48_plain_document.png'
@@ -47,8 +50,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		if (that.parentStack.length > 0) {
 			var o = that.parentStack[that.parentStack.length - 1];
 			items.push({
-				  icon: that.openFolderIcon
-				, label: '..'
+				  icon: that.folderUpIcon
+				, label: M.I18N.l('eineEbeneHoeher')
 				, obj: o.obj
 			});
 		}
