@@ -827,26 +827,21 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , saveSelection: function() {
     	var that = this;
-    	var orderValue = null;
-    	var positionValue = null;
-    	var activityValue = null;
+    	
     	var uebernachtungskennzeichenScholppValue = null;
     	var spesenkennzeichenScholppValue = null;
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
             uebernachtungskennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').getSelection();
             spesenkennzeichenScholppValue = M.ViewManager.getView('bookingPageWithIconsScholpp', 'spesenkennzeichen').getSelection();
     	}
-        orderValue = that.getSelectedOrderItem();
-        positionValue = that.getSelectedPositionItem();
-        activityValue = that.getSelectedActivityItem();
+    	that.selections.uebernachtungskennzeichenScholpp = uebernachtungskennzeichenScholppValue;
+    	that.selections.spesenkennzeichenScholpp = spesenkennzeichenScholppValue;
 
-        this.selections.order = orderValue;
-        this.selections.position = positionValue;
-        this.selections.activity = activityValue;
-        this.selections.uebernachtungskennzeichenScholpp = uebernachtungskennzeichenScholppValue;
-        this.selections.spesenkennzeichenScholpp = spesenkennzeichenScholppValue;
+    	that.selections.order = that.getSelectedOrderItem();
+    	that.selections.position = that.getSelectedPositionItem();
+    	that.selections.activity = that.getSelectedActivityItem();
 
-        if (!DigiWebApp.SelectionController.showHandOrderFirst) this.useSelections = YES;
+        if (!DigiWebApp.SelectionController.showHandOrderFirst) that.useSelections = YES;
     }
     
     , getActivities: function(queryobj) {
@@ -959,6 +954,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
     	if (typeof(pos) != "object") return;
     	that.setOrders(pos.get("orderId"), pos.get("id"));
+    	M.ViewManager.getView('bookingPage', 'orderButton').setValue(pos.get("name"));
     }
     
     , getSelectedActivity: function() {
