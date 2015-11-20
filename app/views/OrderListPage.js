@@ -44,7 +44,7 @@ DigiWebApp.OrderListPage = M.PageView.design({
                   //  target: DigiWebApp.NavigationController
                   //, action: 'backToBautagebuchZeitenListePageTransition'
       			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
-      				DigiWebApp.OrderListController.back();
+      				DigiWebApp.OrderListController.errorHandler();
       			}
               }
           }

@@ -6,20 +6,24 @@
 // Controller: OrderListController
 // ==========================================================================
 
-// ToDo: successHandler einbauen statt buttonToUpdate
-
 DigiWebApp.OrderListController = M.Controller.extend({
 
 	  items: null
 	
-	, buttonToUpdate: null
+	, successHandler: function() {
+		var that = this;
+		// falls kein successHandler übergeben wurde im Zweifel errorHandler aufrufen 
+		that.errorHandler();
+	}
+
+	, errorHandler: function() {
+		var that = this;
+		// falls kein errorHandler übergeben wurde im Zweifel zurück zur BookingPage 
+		DigiWebApp.NavigationController.backToBookTimePagePOP();
+	}
 	
 	, latestId: null
-	
-	, selectedObjId: null
-	
-	, backToPage: null
-	
+		
 	, onlyFolders: NO
 	
 	, parentStack: null
@@ -42,9 +46,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		return M.I18N.l('auftragAuswaehlen');
 	}
 
-	, reloadItems: function() {
+	, reloadItems: function(selectedObjId) {
 		var that = this;
-		if (that.parentStack == null) that.init(NO);
+		if (that.parentStack == null) that.init(that.onlyFolders, that.successHandler, that.errorHandler);
 		var items = [];
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
@@ -55,7 +59,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				, obj: o.obj
 			});
 		}
-		_.each(DigiWebApp.Order.getByVaterId(that.selectedObjId), function(o) {
+		_.each(DigiWebApp.Order.getByVaterId(selectedObjId), function(o) {
 			if (that.onlyFolders || o.hasPositions()) {
 				items.push({
 					  icon: that.closedFolderIcon
@@ -65,14 +69,14 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			}
 		});
 		if (!that.onlyFolders) {
-			_.each(DigiWebApp.HandOrder.getByVaterId(that.selectedObjId), function(o) {
+			_.each(DigiWebApp.HandOrder.getByVaterId(selectedObjId), function(o) {
 				items.push({
 					  icon: that.handOrderIcon
 					, label: o.get('name')
 					, obj: o
 				});
 			});
-			_.each(DigiWebApp.Position.getByVaterId(that.selectedObjId), function(o) {
+			_.each(DigiWebApp.Position.getByVaterId(selectedObjId), function(o) {
 				items.push({
 					  icon: that.orderIcon
 					, label: o.get('name')
@@ -92,70 +96,50 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		that.set('items', items);
 	}
 	
-	, init: function(onlyFolders, buttonToUpdate, backToPage) {
+	, init: function(onlyFolders, successHandler, errorHandler) {
 		var that = this;
-		that.onlyFolders = onlyFolders;
-		that.buttonToUpdate = null;
-		if (buttonToUpdate) that.buttonToUpdate = buttonToUpdate;
-		that.backToPage = null;
-		if (backToPage) that.backToPage = backToPage;
-		that.selectedObjId = null;
 		that.parentStack = [];
-		that.reloadItems();
+		if (onlyFolders) that.onlyFolders = onlyFolders;
+		if (successHandler) that.successHandler = successHandler;
+		if (errorHandler) that.errorHandler = errorHandler;
+		that.reloadItems(null);
 	}
 
 	, itemSelected: function(id, m_id) {
-
-		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 		var that = this;		
 
-		if (this.latestId) {
-	        $('#' + this.latestId).removeClass('selected');
-	    }
+		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}		
+
+		if (this.latestId) $('#' + this.latestId).removeClass('selected');
 	    $('#' + id).addClass('selected');
-	    
 	    this.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
-	    var done = false;
-	    if (selectedItem.icon == that.openFolderIcon) {
+	    if (selectedItem.icon == that.folderUpIcon) {
 	    	// remove this folder from stack
 	    	that.parentStack.pop();
 	    	if (that.parentStack.length > 0) {
 	    		selectedItem = that.parentStack[that.parentStack.length - 1];
 	    	} else {
-	    	    return that.init(that.onlyFolders, that.buttonToUpdate, that.backToPage);
+	    		// restart with root-folder
+	    	    return that.init(that.onlyFolders, that.successHandler, that.errorHandler);
 	    	}
 	    } else if (selectedItem.icon == that.closedFolderIcon) {
 		    // put this folder on the stack
 		    that.parentStack.push(selectedItem);	    	
-	    } else {
-	    	done = true;
 	    }
-	    that.selectedObjId = selectedItem.obj.get("id");
 	    
 	    if (selectedItem.icon == that.orderIcon
 	     || selectedItem.icon == that.handOrderIcon
 	     || (that.onlyFolders && selectedItem.icon == that.useFolderIcon)
 	    ) {
-	    	that.buttonToUpdate.setValue(selectedItem.label);
+	    	//that.buttonToUpdate.setValue(selectedItem.label);
+	    	return that.successHandler(selectedItem.obj);
 	    }
 	    	    
-	    if (done) {
-	    	that.back();
-	    } else {
-		    // reload items from next folder
-			that.reloadItems();
-	    }
+	    // reload items from next folder
+		that.reloadItems(selectedItem.obj.get("id"));
+		
 	}
 	
-	, back: function() {
-		var that = this;
-		if (that.backToPage == null) {
-			DigiWebApp.NavigationController.backToBookTimePagePOP();
-		} else {
-			DigiWebApp.NavigationController.switchToPage(that.backToPage, M.TRANSITION.POP, YES);
-		}
-	}
-
 });

@@ -128,7 +128,15 @@ DigiWebApp.BookingPage = M.PageView.design({
             		  target: DigiWebApp.OrderListController
             		, action: function() {
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-						this.init(NO, DigiWebApp.BookingPage.content.orderButton);
+						this.init(
+								  NO 
+								, function(obj){
+									  DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
+								}
+								, function(){
+									DigiWebApp.NavigationController.backToBookTimePagePOP();
+								}
+						)
 						DigiWebApp.NavigationController.toOrderListPage();
 					}
 	      		}
