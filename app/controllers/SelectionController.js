@@ -938,7 +938,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		return;
     	} else {
     		orderId = order.get("id");
-    		if (that.getSelectedOrderItem == orderId) return;
+    		if (that.getSelectedOrderItem() == orderId) return;
     	}
     	that.setOrders(orderId);
     }
@@ -969,7 +969,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		orderId = pos.get("orderId");
     	}
 		
-		if (that.getSelectedPositionItem == posId) return;
+		if (that.getSelectedPositionItem() == posId) return;
 		
     	that.setOrders(orderId, posId);
     	var buttonLabel = pos.get("name");
