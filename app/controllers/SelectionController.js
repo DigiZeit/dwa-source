@@ -957,7 +957,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
     , setSelectedPosition: function(pos) {
     	var that = this;
-    	if (typeof(pos) != "object") {
+    	if (typeof(pos) != "object" || that.getSelectedPositionItem == pos.get("id")) {
     		M.ViewManager.getView('bookingPage', 'orderButton').setValue(M.I18N.l('selectSomething'));
     		return;
     	}
