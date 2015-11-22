@@ -106,6 +106,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			// rebuild parentStack
 			var done = false;
 			var parentStack = [];
+			var folderId = startInFolderId;
 			var arr = _.filter(DigiWebApp.Order.find(), function(o){ 
 				return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
 			});
@@ -116,7 +117,6 @@ DigiWebApp.OrderListController = M.Controller.extend({
 							, obj: arr[0]
 						});
 			}
-			var folderId = startInFolderId;
 			while (!done) {
 				var arr = _.filter(DigiWebApp.Order.find(), function(o){ 
 					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
