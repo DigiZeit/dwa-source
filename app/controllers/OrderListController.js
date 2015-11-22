@@ -118,8 +118,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					if (parentArr && parentArr.length > 0) {
 						parentStack.push(parentArr[0]);
 						folderId = parentArr[0].get("id");
-						var vaterId = parentArr[0].get("vaterId");
-						if (!vaterId || vaterId <= 0) done = true;
+						//var vaterId = parentArr[0].get("vaterId");
+						//if (!vaterId || vaterId <= 0) done = true;
 					} else {
 						done = true;
 					}
@@ -167,7 +167,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    }
 	    	    
 	    // reload items from next folder
-		that.reloadItems(selectedItem.obj.get("id"));
+		that.reloadItems(selectedItem.get("id"));
 		
 	}
 	
