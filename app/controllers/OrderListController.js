@@ -112,7 +112,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 			if (arr && arr.length > 0) {
 				parentStack.push({
-					  	  icon: that.orderIcon
+					  	  icon: that.closedFolderIcon
 							, label: arr[0].get('name')
 							, obj: arr[0]
 						});
@@ -127,7 +127,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					});
 					if (parentArr && parentArr.length > 0) {
 						var parentItem = {
-								  	  icon: that.orderIcon
+								  	  icon: that.closedFolderIcon
 									, label: parentArr[0].get('name')
 									, obj: parentArr[0]
 								};
