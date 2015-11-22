@@ -352,6 +352,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
+        // filter orders: only orders with selectable elements
+        orders = _.filter(orders, function(o) { return o.hasPositions(); });
+        
         var itemSelected = NO;
         var orderArray = _.map(orders, function(order) {
         	if (order) {
