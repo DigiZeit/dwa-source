@@ -938,7 +938,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		orderId = order.get("id");
     	}
 		if (that.getSelectedOrderItem() != orderId) {
-			that.setOrders(orderId);
+			return that.setOrders(orderId);
 		}
     }
     
@@ -973,11 +973,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
 		
     	var buttonLabel = pos.get("name");
-		if (that.getSelectedPositionItem() != posId) {
-			that.setOrders(orderId, posId);
-		}
     	if (posId == 0) buttonLabel = M.I18N.l('selectSomething');
 		M.ViewManager.getView('bookingPage', 'orderButton').setValue(buttonLabel);
+
+		if (that.getSelectedOrderItem() != orderId) {
+			return that.setOrders(orderId, posId);
+		}
+		if (that.getSelectedPositionItem() != posId) {
+			return that.setPositions(posId);
+		}
     }
     
     , getSelectedActivity: function() {
