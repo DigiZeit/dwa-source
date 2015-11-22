@@ -12,6 +12,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
       orders: null
     , positions: null
     , activities: null
+    
+	, skipSetSelectionBy: false
 
     , selections: {
           order: null
@@ -39,7 +41,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , setSelectionByPreviousSelection: function() {
         var that = this;
-        var mySelection = JSON.parse(JSON.stringify(that.selections));
+		
+        if (that.skipSetSelectionBy) return;
+
+		var mySelection = JSON.parse(JSON.stringify(that.selections));
         
         this.resetSelection();
 
@@ -188,6 +193,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setSelectionWithCurrentHandOrderFirst: function() {
         var that = this;
 
+        if (that.skipSetSelectionBy) return;
+
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
         //var positions = DigiWebApp.Position.findSorted();
         var activities = DigiWebApp.SelectionController.getActivities();
@@ -326,6 +333,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , setSelectionByCurrentBooking: function() {
         var that = this;
+
+        if (that.skipSetSelectionBy) return;
 
         this.resetSelection();
 
@@ -937,6 +946,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (order && typeof(order) == "object") {
     		orderId = order.get("id");
     	}
+		that.skipSetSelectionBy = true;
 		if (that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId);
 		}
@@ -974,6 +984,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		
 		M.ViewManager.getView('bookingPage', 'orderButton').setValue(buttonLabel);
 
+		that.skipSetSelectionBy = true;
+
 		if (that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId, posId);
 		}
@@ -1000,7 +1012,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         return M.ViewManager.getView(that.getPageToUse(), 'activity').getSelection(returnObject);
     }
     , setSelectedActivity: function(pos) {
-    	
+    	// TODO
     }
     
     , getPageToUse: function() {

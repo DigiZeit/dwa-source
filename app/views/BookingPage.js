@@ -44,6 +44,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
         		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
         		DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
+        		DigiWebApp.SelectionController.skipSetSelectionBy = false;
 			}
 		}
         , pageshow: {

@@ -63,6 +63,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     // Bugfix 2515: Objekt, um die Selektion beim Tippen
     // des Buchen-Buttons zu speichern
     , checkedCurrentBooking: null
+    
 
     /**
      *
