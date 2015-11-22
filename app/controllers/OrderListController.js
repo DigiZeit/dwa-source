@@ -103,11 +103,12 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		if (successHandler) that.successHandler = successHandler;
 		if (errorHandler) that.errorHandler = errorHandler;
 		if (startInFolderId) {
+			var allOrders = DigiWebApp.Order.find();
 			// rebuild parentStack
 			var done = false;
 			var parentStack = [];
 			var folderId = startInFolderId;
-			var arr = _.filter(DigiWebApp.Order.find(), function(o){ 
+			var arr = _.filter(allOrders, function(o){ 
 				return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
 			});
 			if (arr && arr.length > 0) {
@@ -118,11 +119,11 @@ DigiWebApp.OrderListController = M.Controller.extend({
 						});
 			}
 			while (!done) {
-				var arr = _.filter(DigiWebApp.Order.find(), function(o){ 
+				var arr = _.filter(allOrders, function(o){ 
 					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
 				});
 				if (arr && arr.length > 0) {
-					var parentArr = _.filter(DigiWebApp.Order.find(), function(o){ 
+					var parentArr = _.filter(allOrders, function(o){ 
 						return parseIntRadixTen(o.get("id")) == parseIntRadixTen(arr[0].get("vaterId"));
 					});
 					if (parentArr && parentArr.length > 0) {
