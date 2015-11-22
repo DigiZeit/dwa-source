@@ -122,7 +122,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 									, obj: parentArr[0]
 								};
 						parentStack.push(parentItem);
-						//folderId = parentArr[0].get("id");
+						folderId = parentArr[0].get("id");
 						//var vaterId = parentArr[0].get("vaterId");
 						//if (!vaterId || vaterId <= 0) done = true;
 					} else {
