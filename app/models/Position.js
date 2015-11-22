@@ -245,15 +245,22 @@ DigiWebApp.Position = M.Model.create({
 	, getByVaterId: function(vaterId) {
 		var that = this;
 		var result = [];
+		var sortInApp = false;
+		var all = [];
+		if (sortInApp) {
+			all = that.find();
+		} else {
+			all = that.findSorted();
+		}
 		if (typeof(vaterId) == "undefined" || vaterId == null) {
-			_.each(that.find(), function(el){
+			_.each(all, function(el){
 				if (typeof(el.get("orderId")) == "undefined" || el.get("orderId") == null ) {
 					result.push(el);
 				}
 			});
 		} else {
 			//return that.find({query:{identifier: 'vaterId', operator: '=', value: vaterId}}); // funktioniert nicht, wenn vaterId im localStorage undefined...
-			_.each(that.find(), function(el){
+			_.each(all, function(el){
 				if (typeof(el.get("orderId")) != "undefined" 
 						&& el.get("orderId")  != null 
 						&& parseIntRadixTen(el.get("orderId")) == parseIntRadixTen(vaterId)
@@ -262,7 +269,11 @@ DigiWebApp.Position = M.Model.create({
 				}
 			});
 		}
-		return _.sortBy(result, function(el) { return el.get('name'); });
+		if (sortInApp) {
+			return _.sortBy(result, function(el) { return el.get('name'); });
+		} else {
+			return result;
+		}
 	}
 
 }, M.DataProviderLocalStorage);
