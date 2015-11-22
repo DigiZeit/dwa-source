@@ -256,12 +256,13 @@ DigiWebApp.Order = M.Model.create({
 	    return true;
 	}
     
-    , hasPositions: function() {
+    , hasPositions: function(direct) {
 		var childOrders = DigiWebApp.Order.getByVaterId(this.get('id'));
 		var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
 		var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
     	var hasPositions = (childHandOrders.concat(childPositions).length > 0);
     	if (hasPositions) return true;
+    	if (!direct) return false;
     	_.each(childOrders, function(child){
     		if (!hasPositions) {
     			if (child.hasPositions()) hasPositions = true;
