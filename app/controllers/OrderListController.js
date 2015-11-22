@@ -96,12 +96,28 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		that.set('items', items);
 	}
 	
-	, init: function(onlyFolders, successHandler, errorHandler) {
+	, init: function(onlyFolders, successHandler, errorHandler, startInFolderId) {
 		var that = this;
 		that.parentStack = [];
 		if (onlyFolders) that.onlyFolders = onlyFolders;
 		if (successHandler) that.successHandler = successHandler;
 		if (errorHandler) that.errorHandler = errorHandler;
+		if (startInFolderId) {
+			// rebuild parentStack
+			var done = false;
+			while (!done) {
+				var arr = _.filter(DigiWebApp.Order.find(), function(o){ return o.get("id") == startInFolderId;});
+				if (arr && arr.length> 0) {
+					var parentArr = _.filter(DigiWebApp.Order.find(), function(o){ return o.get("id") == arr[0].get("vaterId");});
+					if (parentArr && parentArr.length > 0) {
+						that.parentStack.push(parentArr[0]);
+						startInFolderId = parentArr[0].get("id");
+					}
+				} else {
+					done = true;
+				}
+			}
+		}
 		that.reloadItems(null);
 	}
 
