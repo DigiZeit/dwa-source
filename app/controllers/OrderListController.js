@@ -116,8 +116,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 						return parseIntRadixTen(o.get("id")) == parseIntRadixTen(arr[0].get("vaterId"));
 					});
 					if (parentArr && parentArr.length > 0) {
-						parentStack.push(parentArr[0]);
-						folderId = parentArr[0].get("id");
+						var parentItem = {
+								  	  icon: that.orderIcon
+									, label: parentArr[0].get('name')
+									, obj: parentArr[0]
+								};
+						parentStack.push(parentItem);
+						//folderId = parentArr[0].get("id");
 						//var vaterId = parentArr[0].get("vaterId");
 						//if (!vaterId || vaterId <= 0) done = true;
 					} else {
@@ -167,7 +172,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    }
 	    	    
 	    // reload items from next folder
-		that.reloadItems(selectedItem.get("id"));
+		that.reloadItems(selectedItem.obj.get("id"));
 		
 	}
 	
