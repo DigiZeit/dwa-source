@@ -106,9 +106,10 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			// rebuild parentStack
 			var done = false;
 			var parentStack = [];
+			var folderId = startInFolderId;
 			while (!done) {
 				var arr = _.filter(DigiWebApp.Order.find(), function(o){ 
-					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(startInFolderId);
+					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
 				});
 				if (arr && arr.length > 0) {
 					var parentArr = _.filter(DigiWebApp.Order.find(), function(o){ 
@@ -116,7 +117,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					});
 					if (parentArr && parentArr.length > 0) {
 						parentStack.push(parentArr[0]);
-						startInFolderId = parentArr[0].get("id");
+						folderId = parentArr[0].get("id");
+						var vaterId = parentArr[0].get("vaterId");
+						if (!vaterId || vaterId <= 0) done = true;
 					} else {
 						done = true;
 					}
@@ -125,8 +128,10 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				}
 				if (done) that.set('parentStack', parentStack.reverse());
 			}
+			that.reloadItems(startInFolderId);
+		} else {
+			that.reloadItems(null);
 		}
-		that.reloadItems(null);
 	}
 
 	, itemSelected: function(id, m_id) {
