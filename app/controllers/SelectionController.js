@@ -959,8 +959,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
         return M.ViewManager.getView(that.getPageToUse(), 'position').getSelection(returnObject);
     }
+    , selectedPosition: null
     , setSelectedPosition: function(pos) {
     	var that = this;
+    	// TODO: selectedPosition setzen und im View nur darstellen
+    	// TODO: unnötige Aufrufe wieder entfernen
+    	that.selectedPosition = pos;
     	var posId = 0;
     	var orderId = 0;
     	if (pos && typeof(pos) == "object") {

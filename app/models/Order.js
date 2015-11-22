@@ -75,10 +75,6 @@ DigiWebApp.Order = M.Model.create({
     , farbe: M.Model.attr('String', {
         isRequired: NO
     })
-
-    , farbe: M.Model.attr('String', {
-        isRequired: NO
-    })
     
     , strasse: M.Model.attr('String', {
         isRequired: NO
