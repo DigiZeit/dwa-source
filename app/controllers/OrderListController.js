@@ -112,7 +112,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				});
 				if (arr && arr.length > 0) {
 					var parentArr = _.filter(DigiWebApp.Order.find(), function(o){ 
-						return parseIntRadixTen(o.get("id")) == parseInRadixTen(arr[0].get("vaterId"));
+						return parseIntRadixTen(o.get("id")) == parseIntRadixTen(arr[0].get("vaterId"));
 					});
 					if (parentArr && parentArr.length > 0) {
 						parentStack.push(parentArr[0]);
