@@ -127,7 +127,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 								, function(){
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
-								, this.getSelectedOrderItem()
+								, DigiWebApp.SelectionController.getSelectedOrderItem()
 						)
 						DigiWebApp.NavigationController.toOrderListPage();
 					}
