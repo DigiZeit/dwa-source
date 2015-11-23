@@ -569,6 +569,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , initSelection: function() {
        var that = this;
+       
+       return that.setOrders(0,0,0);
+       
        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
        var positions = DigiWebApp.Position.findSorted();
        var activities = DigiWebApp.SelectionController.getActivities();
