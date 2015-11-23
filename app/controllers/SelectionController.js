@@ -440,7 +440,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	var positionsArray = [];
         if (positions.length < 1) {
-        	positionsArray.push({label: M.I18N.l('noData'), value: '0'});
+        	//positionsArray.push({label: M.I18N.l('noData'), value: '0'});
+        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0'});
         } else {
 
 	        var positionsArray = _.map(positions, function(obj) {
@@ -505,8 +506,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
 	        }
-        } else {
-            activities = DigiWebApp.SelectionController.getActivities();
+//        } else {
+//            activities = DigiWebApp.SelectionController.getActivities();
         }
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
@@ -526,7 +527,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var activitiesArray = [];
         if (activities.length < 1) {
-        	activitiesArray.push({label: M.I18N.l('noData'), value: '0'});
+        	//activitiesArray.push({label: M.I18N.l('noData'), value: '0'});
+        	activitiesArray.push({label: M.I18N.l('selectSomething'), value: '0'});
         } else {
 	        var itemSelected = NO;
 	        var activitiesArray = _.map(activities, function(obj) {
@@ -535,8 +537,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        if (activityId == 0) {
+	        if (activityId == 0 && orderId != 0) {
 	        	activityId = activitiesArray[0].value;
+	        } else {
+	        	activities.push({label: M.I18N.l('selectSomething'), value: '0'});
 	        }
 	        activitiesArray = _.map(activitiesArray, function(item) {
 	        	if (item) {
