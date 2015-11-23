@@ -350,54 +350,64 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
     	
+        if (!orderId) orderId = 0;
+
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // filter orders: only orders with selectable elements
         orders = _.filter(orders, function(o) { return o.hasPositions(); });
         
-        var itemSelected = NO;
-        var orderArray = _.map(orders, function(order) {
-        	if (order) {
-	            var obj =  { label: order.get('name'), value: order.get('id') };
-	            if (obj.value == orderId) {
-	                obj.isSelected = YES;
-	                itemSelected = YES;
-	            }
-	            return obj;
-        	}
-        });
-        orderArray = _.compact(orderArray);
-        
-        // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('416')) {
-        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:!itemSelected});
+        var orderArray = [];
+        if (orders.length < 1) {
+        	orderArray.push({label: M.I18N.l('noData'), value: '0'});
         } else {
-        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+	        var itemSelected = NO;
+	        var orderArray = _.map(orders, function(obj) {
+	        	if (obj) {
+		            return { label: obj.get('name'), value: obj.get('id') };
+	        	}
+	        });
+	        orderArray = _.compact(orderArray);
+	        // push "Bitte wählen Option"
+	        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+	        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected: NO});
+	        } else {
+	        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+	        }
+	        orderArray = _.map(orderArray, function(item) {
+	        	if (item) {
+		            item.isSelected = (item.value == orderId);
+		            return obj;
+	        	}
+	        });
         }
-
+        
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
 		var mySelectionObj = that.getSelectedOrderItem(YES);
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
-		that.setPositions(positionId, activityId);
+		that.saveSelection();
+
+        that.setPositions(positionId, activityId);
 		
     }
 
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
-    	var orderId = that.getSelectedOrderItem(YES).value;
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    	var orderId = that.getSelectedOrderItem();
+        if (!orderId) return;
+    	
+        if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
     	}
-        if (!orderId) {
-            return;
-        }
         
-		if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+        if (!positionId) positionId = 0;
+
+        if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 			if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
 				DigiWebApp.OrderInfoController.init();
 			}
@@ -411,38 +421,38 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var i = 0;
         var selectedId = i;
         if (typeof(positionId) != "undefined") selectedId = positionId;
-        positions = _.map(positions, function(pos) {
-        	if (pos) {
-	            if(parseIntRadixTen(pos.get('orderId')) == parseIntRadixTen(orderId)) {
-	                var obj = { label: pos.get('name'), value: pos.get('id') };
-	                if (typeof(positionId) != "undefined") {
-		                if (parseIntRadixTen(pos.get("id")) == parseIntRadixTen(selectedId)) {
-		                    obj.isSelected = YES;
-		                }
-	                } else {
-		                if (i === 0) {
-		                    obj.isSelected = YES;
-		                }
-	                }
-	                i += 1;
-	                return obj;
-	            }
-	            return null;
-        	}
-        });
-        positions = _.compact(positions);/* remove falsy values from positions with _.compact() */
-
+        var positionsArray = [];
         if (positions.length < 1) {
-            positions.push({label: M.I18N.l('noData'), value: '0'});
+        	positionsArray.push({label: M.I18N.l('noData'), value: '0'});
+        } else {
+	        var itemSelected = NO;
+	        var positionsArray = _.map(positions, function(obj) {
+	        	if (obj) {
+		            return { label: obj.get('name'), value: obj.get('id') };
+	        	}
+	        });
+	        positionsArray = _.compact(positionsArray);
+	        // push "Bitte wählen Option"
+	        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+	        	positionsArray.push({label: M.I18N.l('position'), value: '0', isSelected: NO});
+	        } else {
+	        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+	        }
+	        positionsArray = _.map(positionsArray, function(item) {
+	        	if (item) {
+		            item.isSelected = (item.value == orderId);
+		            return obj;
+	        	}
+	        });
         }
 
-		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
-
-        this.set('positions', positions);
+        this.set('positions', positionsArray);
         this.setSelectedPosition(this.getSelectedPosition());
-        this.setActivities(YES, activityId);
 
         this.saveSelection();
+
+        this.setActivities(YES, activityId);
+
     }
 
     /* only set those activities that are related to the chosen position */
