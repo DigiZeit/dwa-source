@@ -350,6 +350,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
     	
+        if (orderId && orderId == that.getSelectedOrderItem()) return that.setPositions(positionId, activityId);
         if (!orderId) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
@@ -396,6 +397,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
+        if (positionId && positionId == that.getSelectedPositionItem()) return that.setActivities(YES, activityId);
         if (!positionId) positionId = that.getSelectedPositionItem();
         if (!positionId) positionId = 0;
 
