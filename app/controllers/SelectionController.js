@@ -377,7 +377,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        orderArray = _.map(orderArray, function(item) {
 	        	if (item) {
 		            item.isSelected = (item.value == orderId);
-		            return obj;
+		            return item;
 	        	}
 	        });
         }
@@ -441,7 +441,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        positionsArray = _.map(positionsArray, function(item) {
 	        	if (item) {
 		            item.isSelected = (item.value == orderId);
-		            return obj;
+		            return item;
 	        	}
 	        });
         }
