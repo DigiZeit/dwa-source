@@ -350,6 +350,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
     	
+        if (!orderId) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
@@ -395,7 +396,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
-    	var orderId = that.getSelectedOrderItem();
+        if (!positionId) positionId = that.getSelectedPositionItem();
+        if (!positionId) positionId = 0;
+
+        var orderId = that.getSelectedOrderItem();
         if (!orderId) return;
     	
         if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
@@ -403,8 +407,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
     	}
         
-        if (!positionId) positionId = 0;
-
         if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 			if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
 				DigiWebApp.OrderInfoController.init();
@@ -416,9 +418,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var positions = DigiWebApp.Position.getByVaterId(orderId);
 
-        var i = 0;
-        var selectedId = i;
-        if (typeof(positionId) != "undefined") selectedId = positionId;
         var positionsArray = [];
         if (positions.length < 1) {
         	positionsArray.push({label: M.I18N.l('noData'), value: '0'});
