@@ -105,7 +105,7 @@ DigiWebApp.HandOrder = M.Model.create({
 		}
 	}
 	
-	, hasPositions: funciton() {
+	, hasPositions: function() {
 		// noch gibt es keine Hand"ordner"
 		return false;
 	}
