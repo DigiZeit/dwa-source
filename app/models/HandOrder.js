@@ -104,6 +104,11 @@ DigiWebApp.HandOrder = M.Model.create({
 			return result;
 		}
 	}
+	
+	, hasPositions: funciton() {
+		// noch gibt es keine Hand"ordner"
+		return false;
+	}
 
 
 }, M.DataProviderLocalStorage);
