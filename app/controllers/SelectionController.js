@@ -448,7 +448,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         that.set('positions', positionsArray);
         
         // alle "verknüpften Elemente" ebenfalls aktualisieren
-        that.setSelectedPosition(this.getSelectedPosition());
+        that.setSelectedPosition(that.getSelectedPosition());
 
         that.setActivities(YES, activityId);
 
@@ -858,7 +858,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		if (that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId, posId);
 		}
-		if (that.getSelectedPositionItem() != posId) {
+		if (pos && that.getSelectedPositionItem() != posId) {
 			return that.setPositions(posId);
 		}
     }
