@@ -666,6 +666,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , initSelection: function() {
        var that = this;
        
+       that.set('orders', []);
+       that.set('positions', []);
+       that.set('activities', []);
        return that.setOrders(0,0,0);
        
     }
