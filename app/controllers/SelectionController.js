@@ -399,7 +399,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
-        that.setPositions(positionId, activityId);
+		return that.setPositions(positionId, activityId);
 		
     }
 
@@ -472,7 +472,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         // alle "verknüpften Elemente" ebenfalls aktualisieren
         that.setSelectedPosition(that.getSelectedPosition());
 
-        that.setActivities(YES, activityId);
+        return that.setActivities(YES, activityId);
 
     }
 
@@ -480,6 +480,81 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setActivities: function(checkForWorkPlan, activityId) {
     	var that = this;
     	
+    	if (activityId && activityId == that.getSelectedActivityItem()) return;
+        if (!activityId) activityId = that.getSelectedActivityItem();
+        if (!activityId) activityId = 0;
+        if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
+		     && DigiWebApp.BookingController.currentBooking  !== null
+		     && activityId == 0
+		) { 
+        	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
+    	}
+
+		var posId = that.getSelectedPositionItem();
+        if (posId) {
+			if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
+					DigiWebApp.OrderInfoController.init();
+				}
+				M.ViewManager.getView('orderInfoPage', 'position').setSelection(posId);
+				DigiWebApp.OrderInfoController.setItem();
+			}
+	
+	        var workPlans = []; 
+	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
+	        	if (parseIntRadixTen(wp.get("id")) === parseIntRadixTen(posId)) workPlans.push(wp);
+	        });
+	        i = 0;
+	
+	        /* if a workplan exists, only use those activities that are in the workplan */
+	        if (workPlans.length === 1) {
+	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
+	        } else {
+	            activities = DigiWebApp.SelectionController.getActivities();
+	        }
+        } else {
+            activities = DigiWebApp.SelectionController.getActivities();
+        }
+        
+        // reset orderId to a selectable value
+    	if (!_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
+    		activityId = 0;
+    	}
+
+        var activitiesArray = [];
+        if (activities.length < 1) {
+        	activitiesArray.push({label: M.I18N.l('noData'), value: '0'});
+        } else {
+	        var itemSelected = NO;
+	        var activitiesArray = _.map(activities, function(obj) {
+	        	if (obj) {
+		            return { label: obj.get('name'), value: obj.get('id') };
+	        	}
+	        });
+	        activitiesArray = _.compact(activitiesArray);
+	        if (activityId == 0) {
+	        	activityId = activitiesArray[0].value;
+	        }
+	        activitiesArray = _.map(activitiesArray, function(item) {
+	        	if (item) {
+		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(activityId));
+		            return item;
+	        	}
+	        });
+        }
+        
+        // set selection arrays to start content binding process
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+            M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').resetSelection();
+            that.set('activities', activitiesArray);
+            DigiWebApp.ScholppBookingController.resetButtons();
+    	} else {
+            that.set('activities', activitiesArray);
+    	}
+		
+        return; // that.saveSelection();
+
+        // alt-code
         var orderId = that.getSelectedOrderItem();
         var posId = that.getSelectedPositionItem();
 
@@ -590,87 +665,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
        
        return that.setOrders(0,0,0);
        
-       var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
-       var positions = DigiWebApp.Position.findSorted();
-       var activities = DigiWebApp.SelectionController.getActivities();
-
-       /**
-        * ORDERS
-        */
-
-       // create order selection
-       var orderArray = [];
-       if (orders) {
-           orderArray = _.map(orders, function(order) {
-        	   if (order) return { label: order.get('name'), value: order.get('id') };
-           });
-       }
-       // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('416')) {
-    	   orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:YES});
-       } else {
-    	   orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
-       }
-       orderArray = _.compact(orderArray);
-
-       /**
-        * POSITIONS
-        */
-
-       // create position selection
-       var positionArray = [];
-       if (positions) {
-           positionArray = _.map(positions, function(pos) {
-        	   if (pos) return { label: pos.get('name'), value: pos.get('id') };
-           });
-       }
-       // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('416')) {
-    	   positionArray.push({label: M.I18N.l('position'), value: '0', isSelected:YES});
-       } else {
-    	   positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
-       }
-       positionArray = _.compact(positionArray);
-
-       /**
-        * ACTIVITIES
-        */
-       var activityArray = [];
-       if (activities) {
-            activityArray = _.map(activities, function(act) {
-            	if ( typeof(act) === "undefined" ) {
-            		console.log("UNDEFINED ACTIVITY");
-            		return null;
-            	} else {
-            		return { label: act.get('name'), value: act.get('id') };
-            	}
-           });
-       }
-       // push "Bitte wählen Option"
-       if (DigiWebApp.SettingsController.featureAvailable('419')) {
-    	   activityArray.push({label: M.I18N.l('activity'), value: '0', isSelected:YES});
-       } else {
-    	   activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:YES});
-       }
-       activityArray = _.compact(activityArray);
-
-        this.resetSelection();
-        // set selection arrays to start content binding process
-        this.set('orders', orderArray);
-        this.set('positions', positionArray);
-        this.setSelectedPosition(this.getSelectedPosition());
-        this.set('activities', activityArray);
-        try {
-        	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            	M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
-            	DigiWebApp.ScholppBookingController.resetButtons();
-        	}
-    		M.ViewManager.getView(that.getPageToUse(), 'order').setSelection('0');
-    		M.ViewManager.getView(that.getPageToUse(), 'position').setSelection('0');
-    		M.ViewManager.getView(that.getPageToUse(), 'activity').setSelection('0');
-    	} catch(e3) { 
-    		//trackError(e3);
-    	}
     }
 
     , resetSelection: function() {
@@ -891,8 +885,27 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
         return M.ViewManager.getView(that.getPageToUse(), 'activity').getSelection(returnObject);
     }
-    , setSelectedActivity: function(pos) {
-    	// TODO
+    , setSelectedActivity: function(act) {
+    	var that = this;
+
+    	var actId = 0;
+    	var posId = that.getSelectedPositionItem();
+    	var orderId = that.getSelectedOrderItem();
+    	if (act && typeof(act) == "object") {
+    		actId = act.get("id");
+    	}
+		
+		that.skipSetSelectionBy = true;
+
+		if (that.getSelectedOrderItem() != orderId) {
+			return that.setOrders(orderId, posId, actId);
+		}
+		if (that.getSelectedPositionItem() != posId) {
+			return that.setPositions(posId, actId);
+		}
+		if (act && that.getSelectedActivityItem() != actId) {
+			return that.setActivities(YES, actId);
+		}
     }
     
     , getPageToUse: function() {
