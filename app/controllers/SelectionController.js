@@ -370,11 +370,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        orderArray = _.compact(orderArray);
-	        // push "Bitte wählen Option"
-	        if (DigiWebApp.SettingsController.featureAvailable('416')) {
-	        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected: NO});
+	        if (orderArray.length == 1) {
+	        	orderId = orderArray[0].value;
 	        } else {
-	        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+		        // push "Bitte wählen Option"
+		        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+		        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected: NO});
+		        } else {
+		        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+		        }
 	        }
 	        orderArray = _.map(orderArray, function(item) {
 	        	if (item) {
@@ -431,11 +435,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        positionsArray = _.compact(positionsArray);
-	        // push "Bitte wählen Option"
-	        if (DigiWebApp.SettingsController.featureAvailable('416')) {
-	        	positionsArray.push({label: M.I18N.l('position'), value: '0', isSelected: NO});
+	        if (positionsArray.length == 1) {
+	        	positionId = positionsArray[0].value;
 	        } else {
-	        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+		        // push "Bitte wählen Option"
+		        if (DigiWebApp.SettingsController.featureAvailable('416')) {
+		        	positionsArray.push({label: M.I18N.l('position'), value: '0', isSelected: NO});
+		        } else {
+		        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+		        }
 	        }
 	        positionsArray = _.map(positionsArray, function(item) {
 	        	if (item) {
