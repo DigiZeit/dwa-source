@@ -414,7 +414,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 			DigiWebApp.OrderInfoController.setItem();
 		}
 
-        var positions = DigiWebApp.Position.findSorted();
+        var positions = DigiWebApp.Position.getByVaterId(orderId);
 
         var i = 0;
         var selectedId = i;
