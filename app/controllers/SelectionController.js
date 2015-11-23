@@ -359,6 +359,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
         // filter orders: only orders with selectable elements
         orders = _.filter(orders, function(o) { return o.hasPositions(); });
         
+        // reset orderId to a selectable value
+    	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
+    		orderId = 0;
+    	}
+
         var orderArray = [];
         if (orders.length < 1) {
         	orderArray.push({label: M.I18N.l('noData'), value: '0'});
@@ -424,11 +429,16 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var positions = DigiWebApp.Position.getByVaterId(orderId);
 
-        var positionsArray = [];
+        // reset orderId to a selectable value
+    	if (!_.contains(_.pluck(_.pluck(positions, 'record'), 'id'), positionId)) {
+    		positionId = 0;
+    	}
+
+    	var positionsArray = [];
         if (positions.length < 1) {
         	positionsArray.push({label: M.I18N.l('noData'), value: '0'});
         } else {
-	        var itemSelected = NO;
+
 	        var positionsArray = _.map(positions, function(obj) {
 	        	if (obj) {
 		            return { label: obj.get('name'), value: obj.get('id') };
@@ -466,8 +476,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setActivities: function(checkForWorkPlan, activityId) {
     	var that = this;
     	
-        var posId = null;
-        var orderId = null;
+        var orderId = that.getSelectedOrderItem();
+        var posId = that.getSelectedPositionItem();
 
         var activities = [];
         var i = 0;
@@ -475,18 +485,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var selectedId = i;
         if (typeof(activityId) != "undefined") selectedId = activityId;
 
-        var posObj;
-        var orderObj;
-		if (checkForWorkPlan) {
-            orderObj = that.getSelectedOrderItem(YES);
-            if (orderObj) {
-            	orderId = orderObj.value;
-            }
-            posObj = that.getSelectedPositionItem(YES);
-            if (posObj) {
-                posId = posObj.value;
-            }
-        }
 		if (posId) {
 			if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
