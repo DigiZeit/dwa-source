@@ -388,8 +388,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
-		that.saveSelection();
-
         that.setPositions(positionId, activityId);
 		
     }
@@ -446,12 +444,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
         }
 
-        this.set('positions', positionsArray);
-        this.setSelectedPosition(this.getSelectedPosition());
+        that.set('positions', positionsArray);
+        
+        // alle "verknüpften Elemente" ebenfalls aktualisieren
+        that.setSelectedPosition(this.getSelectedPosition());
 
-        this.saveSelection();
-
-        this.setActivities(YES, activityId);
+        that.setActivities(YES, activityId);
 
     }
 

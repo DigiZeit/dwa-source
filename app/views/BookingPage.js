@@ -150,13 +150,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                     change: {
                           target: DigiWebApp.SelectionController
                         , action: function() {
-		    				var mySelection = M.ViewManager.getView('bookingPage', 'order').getSelection(YES);
-		    				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-		    					DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
-		    				} else {
-		    					DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
-		    				}
-                            this.setPositions();
+                            this.setOrders(this.getSelectedOrderItem());
                         }
                     }
 //	                , tap: {
@@ -181,8 +175,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 change: {
                       target: DigiWebApp.SelectionController
                     , action: function() {
-            			this.setSelectedPosition(this.getSelectedPosition());
-                        this.setActivities(YES);
+            			this.setPositions(this.getSelectedPositionItem());
                     }
                 }
 //	            , tap: {
