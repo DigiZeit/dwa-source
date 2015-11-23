@@ -137,22 +137,22 @@ DigiWebApp.BookingPage = M.PageView.design({
 		})
 		
         , order: M.SelectionListView.design({
-                  selectionMode: M.SINGLE_SELECTION_DIALOG
-                , initialText: M.I18N.l('noData')
-                , label: M.I18N.l('order')
-                , applyTheme: NO
-                , contentBinding: {
+              selectionMode: M.SINGLE_SELECTION_DIALOG
+            , initialText: M.I18N.l('noData')
+            , label: M.I18N.l('order')
+            , applyTheme: NO
+            , contentBinding: {
+                  target: DigiWebApp.SelectionController
+                , property: 'orders'
+            }
+            , events: {
+                change: {
                       target: DigiWebApp.SelectionController
-                    , property: 'orders'
-                }
-                , events: {
-                    change: {
-                          target: DigiWebApp.SelectionController
-                        , action: function() {
-                            this.setOrders(this.getSelectedOrderItem());
-                        }
+                    , action: function() {
+                        this.setOrders(this.getSelectedOrderItem());
                     }
                 }
+            }
         })
             
         , position: M.SelectionListView.design({

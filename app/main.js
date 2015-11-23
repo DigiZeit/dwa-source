@@ -1255,3 +1255,5 @@ var QueryString = function () {
 function htmlDecode(value){ 
 	return $('<div/>').html(value).text(); 
 }
+
+function hasValue(val) { return (typeof(val) != "undefined" && val != null) }

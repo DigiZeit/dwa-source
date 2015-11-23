@@ -351,7 +351,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
     	
         if (orderId && orderId == that.getSelectedOrderItem()) return that.setPositions(positionId, activityId);
-        if (!orderId) orderId = that.getSelectedOrderItem();
+        if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
@@ -406,12 +406,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
-        if (positionId && positionId == that.getSelectedPositionItem()) {
+        if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
             // alle "verknüpften Elemente" ebenfalls aktualisieren
             that.setSelectedPosition(that.getSelectedPosition());
         	return that.setActivities(YES, activityId);
         }
-        if (!positionId) positionId = that.getSelectedPositionItem();
+        if (!positionId && positionId != 0) positionId = that.getSelectedPositionItem();
         if (!positionId) positionId = 0;
 
         var orderId = that.getSelectedOrderItem();
@@ -484,7 +484,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	var posId = that.getSelectedPositionItem();
         if (posId) {
-			if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+			if (DigiWebApp.SettingsController.featureAvailable('406') 
+			 && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
 					DigiWebApp.OrderInfoController.init();
 				}
@@ -509,15 +510,17 @@ DigiWebApp.SelectionController = M.Controller.extend({
         }
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
-		     && DigiWebApp.BookingController.currentBooking  !== null
-		     && !activityId
+		         && DigiWebApp.BookingController.currentBooking  !== null
+		     && !activityId 
+		     && activityId != 0
 		) { 
         	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
     	}
-        if (!activityId) activityId = that.getSelectedActivityItem();
+        if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
 
         // reset activityId to a selectable value
-    	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
+    	if (!activityId 
+    	 || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
     	}
 
