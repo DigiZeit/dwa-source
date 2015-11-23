@@ -484,6 +484,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (activityId && activityId == that.getSelectedActivityItem()) return;
 
     	var posId = that.getSelectedPositionItem();
+    	var activities = [];
         if (posId) {
 			if (DigiWebApp.SettingsController.featureAvailable('406') 
 			 && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
