@@ -406,7 +406,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
-        if (positionId && positionId == that.getSelectedPositionItem()) return that.setActivities(YES, activityId);
+        if (positionId && positionId == that.getSelectedPositionItem()) {
+            // alle "verknüpften Elemente" ebenfalls aktualisieren
+            that.setSelectedPosition(that.getSelectedPosition());
+        	return that.setActivities(YES, activityId);
+        }
         if (!positionId) positionId = that.getSelectedPositionItem();
         if (!positionId) positionId = 0;
 
