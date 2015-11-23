@@ -517,7 +517,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         if (!activityId) activityId = that.getSelectedActivityItem();
 
         // reset activityId to a selectable value
-    	if (!activity || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
+    	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
     	}
 
