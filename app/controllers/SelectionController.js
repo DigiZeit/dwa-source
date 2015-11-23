@@ -481,16 +481,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
     	
     	if (activityId && activityId == that.getSelectedActivityItem()) return;
-        if (!activityId) activityId = that.getSelectedActivityItem();
-        if (!activityId) activityId = 0;
-        if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
-		     && DigiWebApp.BookingController.currentBooking  !== null
-		     && activityId == 0
-		) { 
-        	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
-    	}
 
-		var posId = that.getSelectedPositionItem();
+    	var posId = that.getSelectedPositionItem();
         if (posId) {
 			if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
@@ -516,8 +508,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
             activities = DigiWebApp.SelectionController.getActivities();
         }
         
-        // reset orderId to a selectable value
-    	if (!_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
+        if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
+		     && DigiWebApp.BookingController.currentBooking  !== null
+		) { 
+        	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
+    	}
+        if (!activityId) activityId = that.getSelectedActivityItem();
+
+        // reset activityId to a selectable value
+    	if (!activity || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
     	}
 
