@@ -510,6 +510,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		     && DigiWebApp.BookingController.currentBooking  !== null
+		     && !activityId
 		) { 
         	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
     	}
