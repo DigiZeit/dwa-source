@@ -54,11 +54,11 @@ DigiWebApp.BookingPage = M.PageView.design({
         }
     }
 
-    , cssClass: 'bookTimePage'
+    , cssClass: 'bookTimePage unselectable'
 
     , header: M.ToolbarView.design({
           childViews: 'materialButton title feierabendButton'
-        , cssClass: 'header unselectable'
+        , cssClass: 'header'
         , isFixed: YES
         , materialButton: M.ButtonView.design({
 	            value: M.I18N.l('BautagebuchMaterial')
@@ -140,7 +140,6 @@ DigiWebApp.BookingPage = M.PageView.design({
                   selectionMode: M.SINGLE_SELECTION_DIALOG
                 , initialText: M.I18N.l('noData')
                 , label: M.I18N.l('order')
-                //, cssClass: 'unselectable'
                 , applyTheme: NO
                 , contentBinding: {
                       target: DigiWebApp.SelectionController
@@ -153,11 +152,6 @@ DigiWebApp.BookingPage = M.PageView.design({
                             this.setOrders(this.getSelectedOrderItem());
                         }
                     }
-//	                , tap: {
-//	    				action: function() {
-//	                		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-//		  				}
-//	                }
                 }
         })
             
@@ -165,7 +159,6 @@ DigiWebApp.BookingPage = M.PageView.design({
               selectionMode: M.SINGLE_SELECTION_DIALOG
             , label: M.I18N.l('position')
             , initialText: M.I18N.l('noData')
-            //, cssClass: 'unselectable'
             , applyTheme: NO
             , contentBinding: {
                   target: DigiWebApp.SelectionController
@@ -178,11 +171,6 @@ DigiWebApp.BookingPage = M.PageView.design({
             			this.setPositions(this.getSelectedPositionItem());
                     }
                 }
-//	            , tap: {
-//					action: function() {
-//	            		try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
-//	  				}
-//	            }
             }
         })
 
@@ -190,7 +178,6 @@ DigiWebApp.BookingPage = M.PageView.design({
               selectionMode: M.SINGLE_SELECTION_DIALOG
             , label: M.I18N.l('activity')
             , initialText: M.I18N.l('noData')
-            //, cssClass: 'unselectable'
             , applyTheme: NO
             , contentBinding: {
                   target: DigiWebApp.SelectionController
@@ -203,13 +190,6 @@ DigiWebApp.BookingPage = M.PageView.design({
                         this.saveSelection();
                     }
                 }
-//	            , tap: {
-//					action: function(id, event) {
-//	            		//try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
-//	        			try{event.stopImmediatePropagation();}catch(e4){try{event.stopPropagation();}catch(e4){}}
-//	            		return false;
-//	  				}
-//	            }
             }
         })
 
@@ -230,10 +210,6 @@ DigiWebApp.BookingPage = M.PageView.design({
                     tap: {
                           target: DigiWebApp.BookingController
                         , action: 'book'
-            			    					
- 						/*, action: function() {
-				                DigiWebApp.BookingController.book();
-						}*/
                     }
                 }
             })

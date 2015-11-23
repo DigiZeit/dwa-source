@@ -376,7 +376,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        }
 	        orderArray = _.map(orderArray, function(item) {
 	        	if (item) {
-		            item.isSelected = (item.value == orderId);
+		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(orderId));
 		            return item;
 	        	}
 	        });
@@ -438,7 +438,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        }
 	        positionsArray = _.map(positionsArray, function(item) {
 	        	if (item) {
-		            item.isSelected = (item.value == orderId);
+		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(positionId));
 		            return item;
 	        	}
 	        });
@@ -572,7 +572,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
             if (!orderId || parseIntRadixTen(orderId) == 0) M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
     	}
 
-        this.saveSelection();
     }
 
     , initSelection: function() {
@@ -817,7 +816,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     		orderId = order.get("id");
     	}
 		that.skipSetSelectionBy = true;
-		if (that.getSelectedOrderItem() != orderId) {
+		if (order && that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId);
 		}
     }
@@ -839,12 +838,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
         return M.ViewManager.getView(that.getPageToUse(), 'position').getSelection(returnObject);
     }
-    , selectedPosition: null
     , setSelectedPosition: function(pos) {
     	var that = this;
-    	that.selectedPosition = pos;
+
     	var posId = 0;
-    	var orderId = 0;
+    	var orderId = that.getSelectedOrderItem();
     	var buttonLabel = M.I18N.l('selectSomething');
     	if (pos && typeof(pos) == "object") {
     		posId = pos.get("id");
