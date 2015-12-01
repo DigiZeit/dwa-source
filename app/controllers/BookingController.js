@@ -2034,7 +2034,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        return;
 	    }
 		
-		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadSignatures'));
+		//Bugfix: Dieser Loader bleibt manchmal stehen und man braucht diesen eigentlich nicht
+		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('loadSignatures'));
 
 		var bookingsLength = bookings.length;
     	var bookingsIndex = 0;
@@ -2210,7 +2211,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		  				}
 
 		  				  // Buchungsselektion erneuern
-		                  DigiWebApp.SelectionController.resetSelection();
+		                  //DigiWebApp.SelectionController.resetSelection();
 		                  if (CurrentAvailable) {
 		                      DigiWebApp.SelectionController.setSelectionByCurrentBooking();
 		                  } else {
