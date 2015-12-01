@@ -402,7 +402,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		if (!isHandauftrag) {
 			return that.setPositions(positionId, activityId);
 		} else {
-			return that.setActivities(activityId);
+        	return that.setActivities(YES, activityId);
 		}
 		
     }
@@ -435,6 +435,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 			DigiWebApp.OrderInfoController.setItem();
 		}
 
+        if (DigiWebApp.HandOrder.getById(orderId) != "undefined") {
+        	return that.setActivities(YES, activityId);
+        }
         var positions = DigiWebApp.Position.getByVaterId(orderId);
 
         // reset orderId to a selectable value

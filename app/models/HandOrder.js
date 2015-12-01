@@ -133,6 +133,13 @@ DigiWebApp.HandOrder = M.Model.create({
 		return false;
 	}
 
+    , getById: function(selectedId) {
+		var that = this;
+		return _.find(DigiWebApp[that.name].find(), function(item) {
+			return (item.get('id') == selectedId);
+		});
+	}
+
     , isHandposition: function() {
     	var vaterId = this.get("vaterId"); 
 		return (typeof(vaterId) != "undefined" && vaterId != null && parseIntRadixTen(vaterId) != 0);
