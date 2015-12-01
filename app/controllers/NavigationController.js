@@ -224,6 +224,10 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	}
     }
 
+    , backToHandOrderPageTransition: function() {
+        DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.POP, YES);
+    }
+
     , toSettingsPage: function() {
     	DigiWebApp.NavigationController.switchToPage('settingsPage', M.TRANSITION.NONE, NO);
     }
