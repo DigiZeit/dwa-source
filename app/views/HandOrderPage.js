@@ -25,12 +25,12 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 		, pagebeforeshow: {
 	    	action: function() {
 				console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
-//				// Freischaltung "Handpositionen"
-//				if (DigiWebApp.SettingsController.featureAvailable('430')) {
-//					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().show();
-//				} else {
-//					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().hide();
-//				}
+				// Freischaltung "Handpositionen"
+				if (DigiWebApp.SettingsController.featureAvailable('430')) {
+					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).show();
+				} else {
+					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).hide();
+				}
 			}
 	    }
  	}

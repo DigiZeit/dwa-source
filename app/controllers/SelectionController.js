@@ -357,7 +357,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // filter orders: only orders with selectable elements
-        orders = _.filter(orders, function(o) { return o.hasPositions(); });
+        orders = _.filter(orders, function(o) { return o.hasPositions() || o.name == DigiWebApp.HandOrder.name; });
         
         // reset orderId to a selectable value
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
@@ -399,7 +399,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
-		return that.setPositions(positionId, activityId);
+		if (!isHandauftrag) {
+			return that.setPositions(positionId, activityId);
+		} else {
+			return that.setActivities(activityId);
+		}
 		
     }
 
