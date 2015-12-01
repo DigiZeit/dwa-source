@@ -25,12 +25,12 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 		, pagebeforeshow: {
 	    	action: function() {
 				console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
-				// Freischaltung "Handpositionen"
-				if (DigiWebApp.SettingsController.featureAvailable('430')) {
-					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().show();
-				} else {
-					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().hide();
-				}
+//				// Freischaltung "Handpositionen"
+//				if (DigiWebApp.SettingsController.featureAvailable('430')) {
+//					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().show();
+//				} else {
+//					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).parent().parent().hide();
+//				}
 			}
 	    }
  	}
@@ -46,7 +46,9 @@ DigiWebApp.HandOrderPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToDashboardPage();}
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+                    	history.back();
+                    }
                 }
             }
         })
