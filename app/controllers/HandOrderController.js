@@ -10,11 +10,13 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 
       currentHandOrderName: ''
     , orderNameToSave: ''
+    , vaterId: null
 
     , save: function() {
 		var that = this;
         var orderName = that.orderNameToSave; //M.ViewManager.getView('handOrderPage', 'orderName').value;
         orderName = $.trim(orderName);
+        var vaterId = that.vaterId; //M.ViewManager.getView('handOrderPage', 'orderName').value;
 
         if (orderName) {
             var sameHandOrders = _.select(DigiWebApp.HandOrder.findSorted(), function(ho) {
@@ -53,6 +55,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 var op = DigiWebApp.HandOrder.createRecord({
                       name: orderName
                     , id: orderName
+                    , vaterId: vaterId
                     , isLocalOnly: YES
                 });
                 

@@ -96,7 +96,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
         })
 
         , targetFolderButton: M.ButtonView.design({
-              value: M.I18N.l('ordnerAuswaehlen')
+              value: M.I18N.l('keinOrdnerAusgewaehlt')
             , cssClass: 'orderButton'
             , events: {
                 tap: {
@@ -105,11 +105,18 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 						this.init(
 								  YES 
 								, function(obj) {
-									DigiWebApp.HandOrderPage.content.targetFolderButton.setValue(obj.get("name"));
-						        	DigiWebApp.NavigationController.backToHandOrderPageTransition();
+									  var buttonText = M.I18N.l('keinOrdnerAusgewaehlt');
+									  var vaterId = null;
+									  if (typeof(obj.get) == "function") {
+										  buttonText = obj.get("name");
+										  vaterId = obj.get("id");
+									  }
+									  DigiWebApp.HandOrderController.set('vaterId', vaterId);
+									  DigiWebApp.HandOrderPage.content.targetFolderButton.setValue(buttonText);
+									  DigiWebApp.NavigationController.backToHandOrderPageTransition();
 								}
 								, function() {
-						        	DigiWebApp.NavigationController.backToHandOrderPageTransition();
+									  DigiWebApp.NavigationController.backToHandOrderPageTransition();
 								}
 								, DigiWebApp.SelectionController.getSelectedOrderItem()
 						)

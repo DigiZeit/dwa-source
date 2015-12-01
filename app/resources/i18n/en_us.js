@@ -555,5 +555,6 @@ M.I18N.en_us = {
 	, auftragAuswaehlen: 'Select order'
 	, eineEbeneHoeher: '..' //'> Go to parent folder <'
 	, diesenOrdnerVerwenden: '> Use this folder <'
+	, keinOrdnerAusgewaehlt: '(no folder selected)'
 
 };
