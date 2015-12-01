@@ -107,11 +107,10 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 								, function(obj) {
 									  var buttonText = M.I18N.l('keinOrdnerAusgewaehlt');
 									  var vaterId = null;
-									  if (typeof(obj) != "undefined" 
-									   && typeof(obj.obj) != "undefined" 
-									   && typeof(obj.obj.get) == "function") {
-										  buttonText = obj.obj.get("name");
-										  vaterId = obj.obj.get("id");
+									  if (typeof(obj) != "undefined" && obj != null 
+									   && typeof(obj.get) == "function") {
+										  buttonText = obj.get("name");
+										  vaterId = obj.get("id");
 									  }
 									  DigiWebApp.HandOrderController.set('vaterId', vaterId);
 									  DigiWebApp.HandOrderPage.content.targetFolderButton.setValue(buttonText);
