@@ -164,9 +164,25 @@ DigiWebApp.Order = M.Model.create({
 		}
 		if (sortInApp) {
 			return _.sortBy(result, function(el) { return el.get('name'); });
-		} else {
-			return result;
 		}
+		return result;
+	}
+	
+	, getHandpositionen: function(sortInApp) {
+		var that = this;
+		var result = [];
+		if (sortInApp) {
+			result = DigiWebApp.HandOrder.find();
+		} else {
+			result = DigiWebApp.HandOrder.findSorted();
+		}
+		result = _.compact(_.filter(result, function(ho) {
+			return ho.isHandposition();
+		}));
+		if (sortInApp) {
+			return _.sortBy(result, function(el) { return el.get('name'); });
+		}
+		return result;
 	}
 
     , getList: function(paramObj) {
