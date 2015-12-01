@@ -253,7 +253,7 @@ DigiWebApp.Position = M.Model.create({
 			all = that.findSorted();
 		}
 		
-		all = DigiWebApp.Order.getHandpositionen(sortInApp).concat(all);
+		//all = DigiWebApp.Order.getHandpositionen(sortInApp).concat(all);
 		
 		if (typeof(vaterId) == "undefined" || vaterId == null || parseIntRadixTen(vaterId) == 0) {
 			_.each(all, function(el){
