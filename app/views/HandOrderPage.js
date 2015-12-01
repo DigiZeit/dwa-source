@@ -92,7 +92,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
         })
 
         , targetFolderButton: M.ButtonView.design({
-              value: M.I18N.l('assume')
+              value: M.I18N.l('ordnerAuswaehlen')
             , cssClass: 'orderButton'
             , events: {
                 tap: {
