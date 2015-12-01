@@ -110,7 +110,7 @@ DigiWebApp.HandOrder = M.Model.create({
 		return false;
 	}
 
-    , isHandposition: funciton() {
+    , isHandposition: function() {
     	var vaterId = this.get("vaterId"); 
 		return (typeof(vaterId) != "undefined" && vaterId != null && parseIntRadixTen(vaterId) != 0);
 	}
