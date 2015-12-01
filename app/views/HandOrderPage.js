@@ -105,7 +105,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 						this.init(
 								  YES 
 								, function(obj) {
-									DigiWebApp.HandOrderPage.content.orderButton.setValue(obj.get("name"));
+									DigiWebApp.HandOrderPage.content.targetFolderButton.setValue(obj.get("name"));
 						        	DigiWebApp.NavigationController.backToHandOrderPageTransition();
 								}
 								, function() {
