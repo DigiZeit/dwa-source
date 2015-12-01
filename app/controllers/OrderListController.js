@@ -85,7 +85,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 		} else {
 			var o = null;
-			if (that.parentStack.length > 0) that.parentStack[that.parentStack.length - 1];
+			if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1];
 			items.push({
 				  icon: that.useFolderIcon
 				, label: M.I18N.l('diesenOrdnerVerwenden')
