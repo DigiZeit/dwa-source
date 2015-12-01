@@ -18,13 +18,13 @@ DigiWebApp.HandOrderPage = M.PageView.design({
     , events: {
 		pageshow: {
 			action: function() {
-				console.log("DigiWebApp.HandOrderPage.pageshow");
+				//console.log("DigiWebApp.HandOrderPage.pageshow");
 				$('#' + DigiWebApp.HandOrderPage.content.orderName.id)[0].focus();
 			}
 	    }
 		, pagebeforeshow: {
 	    	action: function() {
-				console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
+				//console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
 				// Freischaltung "Handpositionen"
 				if (DigiWebApp.SettingsController.featureAvailable('430')) {
 					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).show();

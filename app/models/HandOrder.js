@@ -97,7 +97,7 @@ DigiWebApp.HandOrder = M.Model.create({
 	, getByVaterId: function(vaterId) {
 		var that = this;
 		var result = [];
-		var sortInApp = false;
+		var sortInApp = true;
 		var all = [];
 		if (sortInApp) {
 			all = that.find();
