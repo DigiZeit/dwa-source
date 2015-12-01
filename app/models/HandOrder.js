@@ -81,7 +81,7 @@ DigiWebApp.HandOrder = M.Model.create({
 		} else {
 			all = that.findSorted();
 		}
-		if (typeof(vaterId) == "undefined" || vaterId == null) {
+		if (typeof(vaterId) == "undefined" || vaterId == null || parseIntRadixTen(vaterId) == 0) {
 			_.each(all, function(el){
 				if (typeof(el.get("vaterId")) == "undefined" || el.get("vaterId") == null ) {
 					result.push(el);

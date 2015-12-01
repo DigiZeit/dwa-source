@@ -252,7 +252,7 @@ DigiWebApp.Position = M.Model.create({
 		} else {
 			all = that.findSorted();
 		}
-		if (typeof(vaterId) == "undefined" || vaterId == null) {
+		if (typeof(vaterId) == "undefined" || vaterId == null || parseIntRadixTen(vaterId) == 0) {
 			_.each(all, function(el){
 				if (typeof(el.get("orderId")) == "undefined" || el.get("orderId") == null ) {
 					result.push(el);
