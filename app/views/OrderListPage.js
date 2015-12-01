@@ -19,10 +19,12 @@ DigiWebApp.OrderListPage = M.PageView.design({
             //target: DigiWebApp.DashboardController,
             //action: 'init'
 			action: function() {
+				console.log("DigiWebApp.OrderListPage.pagebeforeshow");
 			}
         }
         , pageshow: {
         	action: function() {
+				console.log("DigiWebApp.OrderListPage.pageshow");
         	}
         }
     }
