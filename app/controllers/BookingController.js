@@ -127,7 +127,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                     //if (DigiWebApp.SettingsController.globalDebugMode) console.log('useCurrentBooking');
                     DigiWebApp.SelectionController.setSelectionByCurrentBooking();
                 } else {
-                    DigiWebApp.SelectionController.initSelection();
+                    //DigiWebApp.SelectionController.initSelection();
                 }
 
             }
