@@ -99,9 +99,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, init: function(onlyFolders, successHandler, errorHandler, startInFolderId) {
 		var that = this;
 		that.parentStack = [];
-		if (onlyFolders) that.onlyFolders = onlyFolders;
-		if (successHandler) that.successHandler = successHandler;
-		if (errorHandler) that.errorHandler = errorHandler;
+		if (typeof(onlyFolders) != "undefined") that.onlyFolders = onlyFolders;
+		if (typeof(successHandler) != "undefined") that.successHandler = successHandler;
+		if (typeof(errorHandler) != "undefined") that.errorHandler = errorHandler;
 		if (startInFolderId) {
 			var allOrders = DigiWebApp.Order.find();
 			// rebuild parentStack
