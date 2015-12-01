@@ -435,7 +435,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 			DigiWebApp.OrderInfoController.setItem();
 		}
 
-        if (DigiWebApp.HandOrder.getById(orderId) != "undefined") {
+        if (typeof(DigiWebApp.HandOrder.getById(orderId)) != "undefined") {
         	return that.setActivities(YES, activityId);
         }
         var positions = DigiWebApp.Position.getByVaterId(orderId);
