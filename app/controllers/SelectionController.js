@@ -31,14 +31,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , uebernachtungskennzeichenScholpp: null
     , spesenkennzeichenScholpp: null
     
-    /*
-    , setSelection: function() {
-        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
-        var positions = DigiWebApp.Position.findSorted();
-        var activities = DigiWebApp.SelectionController.getActivities();
-    }
-    */
-
     , setSelectionByPreviousSelection: function() {
         var that = this;
 		
@@ -46,62 +38,91 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
 		var mySelection = JSON.parse(JSON.stringify(that.selections));
         
-        this.resetSelection();
-
         this.setOrders(mySelection.order, mySelection.position, mySelection.activity);
-
-        this.setActivities(YES);
         
+        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+        	that.setUebernachtungskennzeichenScholpp();
+		}
+        
+    	that.setScholppButtons(YES);
+
+    }
+
+    , setSelectionWithCurrentHandOrderFirst: function() {
+        var that = this;
+
+        if (that.skipSetSelectionBy) return;
+        
+        this.setOrders(0,0,0);
+
+        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+        	that.setUebernachtungskennzeichenScholpp();
+		}
+    	
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+        	DigiWebApp.ScholppBookingController.resetButtons();    		
+    	}
+
+    	that.setScholppButtons(NO);
+
+    }
+    
+    , setSelectionByCurrentBooking: function() {
+        var that = this;
+
+        if (that.skipSetSelectionBy) return;
+
+        var booking = DigiWebApp.BookingController.currentBooking;
+        
+        // get the ids from the current booking
+        var orderId = (booking.get('orderId') == "0" ? 0 : booking.get('orderId')) || booking.get('handOrderId'); // we need to check handOrders also
+        var positionId = booking.get('positionId');
+        var activityId = booking.get('activityId');
+        var uebernachtungAuswahl = booking.get('uebernachtungAuswahl');
+        
+        that.setOrders(orderId, positionId, activityId);
+        
+        that.setScholppButtons(YES, YES)
+
+        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+        	that.setUebernachtungskennzeichenScholpp(uebernachtungAuswahl);
+		}
+        
+    }
+    
+    , setUebernachtungskennzeichenScholpp: function(uebernachtungsAuswahl) {
+    	var that = this;
+    	if (typeof(uebernachtungsAuswahl) == "undefined") uebernachtungsAuswahl = 6;
         /**
-         * ACTIVITIES
+         * Scholpp-Spesen: Übrnachtungskennzeichen 
          */
         itemSelected = NO;
-        var activityArray = _.map(this.get('activities'), function(act) {
-        	if ( typeof(act) === "undefined" ) {
-        		console.log("UNDEFINED ACTIVITY");
+        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
+        	if ( typeof(ueK) === "undefined" ) {
+        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
         	} else {        	
-        		var obj = { label: act.label, value: act.value };
-        		if (obj.value === mySelection.activity) {
+        		var obj = { label: ueK.label, value: ueK.value };
+        		if(parseIntRadixTen(obj.value) == uebernachtungsAuswahl) { // select "- -"
         			obj.isSelected = YES;
         			itemSelected = YES;
         		}
                 return obj;
         	}
         });
-        activityArray = _.compact(activityArray);
-//        // push "Bitte wählen Option"
-//        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-//        	activityArray.push({label: M.I18N.l('activity'), value: '0', isSelected:!itemSelected});
-//        } else {
-//        	activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-//        }
+        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
+        that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
+		that.saveSelection();
+    }
+    
+    , setScholppButtons: function(withSetArbeitsende, withSetToSix) {
+    	var that = this;
 
-        // set selection arrays to start content binding process
-        this.set('activities', activityArray);
-
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-	        /**
-	         * Scholpp-Spesen: Übernachtungskennzeichen 
-	         */
-	        itemSelected = NO;
-	        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
-	        	if ( typeof(ueK) === "undefined" ) {
-	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
-	        	} else {        	
-	        		var obj = { label: ueK.label, value: ueK.value };
-	        		if (obj.value === mySelection.uebernachtungskennzeichenScholpp) {
-	        			obj.isSelected = YES;
-	        			itemSelected = YES;
-	        		}
-	                return obj;
-	        	}
-	        });
-	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
-	        this.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-			this.saveSelection();
-		}
-        
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
+    	if (typeof(withSetArbeitsende) == "undefined") withSetArbeitsende = true;
+    	if (typeof(withSetToSix) == "undefined") withSetToSix = true;
+    	
+    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+    		DigiWebApp.ScholppBookingController.resetButtons(); 
+    	}
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		var activitySelection = that.getSelectedActivityItem(YES);
     		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
@@ -115,238 +136,26 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
 		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
 		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
 		    		} else if (activityName.indexOf("Pause") >= 0) {
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectPause();
 		    		} else {
-		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
+		    			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    		}
 	    		}
     		} else {
-    			DigiWebApp.ScholppBookingController.selectArbeitsende();
+    			if (withSetToSix) uebernachtungAuswahl = "6";
+    			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
     		}
     	}
-
     }
 
-    , setSelectionWithCurrentHandOrderFirst: function() {
-        var that = this;
-
-        if (that.skipSetSelectionBy) return;
-
-        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
-        //var positions = DigiWebApp.Position.findSorted();
-        var activities = DigiWebApp.SelectionController.getActivities();
-
-        
-        /**
-         * ORDERS
-         */
-        var itemSelected = NO;
-        var orderArray = _.map(orders, function(order) {
-        	if (order) {
-	            var obj =  { label: order.get('name'), value: order.get('id') };
-	            if(obj.label === DigiWebApp.HandOrderController.currentHandOrderName) {
-	                obj.isSelected = YES;
-	                itemSelected = YES;
-	            } else {
-	                obj.isSelected = NO;
-	            }
-	            return obj;
-        	}
-        });
-        
-        orderArray = _.compact(orderArray);
-        // push "Bitte wählen Option"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected:!itemSelected});
-        } else {
-        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-        }
-
-        /**
-         * POSITIONS (none for HandOrder)
-         */
-        var positionArray = [];
-        // push "Bitte wählen Option"
-        positionArray.push({label: M.I18N.l('noData'), value: '0', isSelected:YES});
-
-        /**
-         * ACTIVITIES
-         */
-        var i = 0;
-        var activityArray = _.map(activities, function(act) {
-        	if ( typeof(act) === "undefined" ) {
-        		console.log("UNDEFINED ACTIVITY");
-        		return null;
-        	} else {
-        		var obj = null;
-        		if (i === 0) {
-        			itemSelected = YES;
-        			obj = { label: act.get('name'), value: act.get('id'), isSelected:YES };
-        		} else {
-        			obj = { label: act.get('name'), value: act.get('id') };
-        		}
-                i++;
-                return obj;
-            }
-        });
-        activityArray = _.compact(activityArray);
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-        	activityArray.push({label: M.I18N.l('activity'), value: '0', isSelected:!itemSelected});
-        } else {
-        	activityArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-        }
-        
-        this.resetSelection();
-
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-	        /**
-	         * Scholpp-Spesen: Übrnachtungskennzeichen 
-	         */
-	        itemSelected = NO;
-	        var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
-	        	if ( typeof(ueK) === "undefined" ) {
-	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
-	        	} else {        	
-	        		var obj = { label: ueK.label, value: ueK.value };
-	        		if(parseIntRadixTen(obj.value) === 6) { // select "- -"
-	        			obj.isSelected = YES;
-	        			itemSelected = YES;
-	        		}
-	                return obj;
-	        	}
-	        });
-	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
-	        that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-			that.saveSelection();
-		}
-
-        // set selection arrays to start content binding process
-        this.set('orders', orderArray);
-		var mySelectionObj = that.getSelectedOrderItem(YES);
-		if (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value)) {
-			DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
-		} else {
-			DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
-		}
-
-		this.set('positions', positionArray);
-        that.setSelectedPosition(0);
-    	
-        this.set('activities', activityArray);
-        that.setSelectedActivity(0);
-    	
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-        	DigiWebApp.ScholppBookingController.resetButtons();    		
-    	}
-
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
-    		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
-	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === activitySelection.value);});
-	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
-	    		if (typeof(activitySelected) === "undefined") {
-	    			DigiWebApp.ScholppBookingController.selectArbeitsende();
-	    		} else {
-		    		var activityName = activitySelected.get("name");
-		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
-		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
-		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
-		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
-		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
-		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
-		    		} else if (activityName.indexOf("Pause") >= 0) {
-		    			DigiWebApp.ScholppBookingController.selectPause();
-		    		} else {
-		    			//DigiWebApp.ScholppBookingController.selectArbeitsende();
-		    		}
-	    		}
-    		} else {
-    			//DigiWebApp.ScholppBookingController.selectArbeitsende();
-    		}
-    	}
-
-    }
-
-    , setSelectionByCurrentBooking: function() {
-        var that = this;
-
-        if (that.skipSetSelectionBy) return;
-
-        this.resetSelection();
-
-        var booking = DigiWebApp.BookingController.currentBooking;
-        
-        // get the ids from the current booking
-        var orderId = (booking.get('orderId') == "0" ? 0 : booking.get('orderId')) || booking.get('handOrderId'); // we need to check handOrders also
-        var positionId = booking.get('positionId');
-        var activityId = booking.get('activityId');
-        var uebernachtungAuswahl = booking.get('uebernachtungAuswahl');
-        
-        this.setOrders(orderId, positionId, activityId);
-        
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-    		var activitySelection = M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').getSelection(YES);
-    		if (!DigiWebApp.BookingController.currentBooking) activitySelection = null;
-    		if (typeof(activitySelection) !== "undefined" && activitySelection != null) {
-	    		var activitySelected = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) === activitySelection.value);});
-	    		//DigiWebApp.Activity.find({query:{identifier: 'id', operator: '=', value: activitySelection.value}})[0];
-	    		if (typeof(activitySelected) === "undefined") {
-	    			uebernachtungAuswahl = "6";
-	    			DigiWebApp.ScholppBookingController.selectArbeitsende();
-	    		} else {
-		    		var activityName = activitySelected.get("name");
-		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
-		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
-		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
-		    			uebernachtungAuswahl = "6";
-		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
-		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
-		    			uebernachtungAuswahl = "6";
-		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
-		    		} else if (activityName.indexOf("Pause") >= 0) {
-		    			uebernachtungAuswahl = "6";
-		    			DigiWebApp.ScholppBookingController.selectPause();
-		    		} else {
-		    			uebernachtungAuswahl = "6";
-		    			DigiWebApp.ScholppBookingController.selectArbeitsende();
-		    		}
-	    		}
-    		} else {
-    			uebernachtungAuswahl = "6";
-    			DigiWebApp.ScholppBookingController.selectArbeitsende();
-    		}
-    	}
-
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
-	        /**
-	         * Scholpp-Spesen: Übrnachtungskennzeichen 
-	         */
-	        itemSelected = NO;
-	        var uebernachtungskennzeichenScholppArray = _.map(this.uebernachtungskennzeichenScholpp, function(ueK) {
-	        	if ( typeof(ueK) === "undefined" ) {
-	        		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
-	        	} else {        	
-	        		var obj = { label: ueK.label, value: ueK.value };
-	        		if (obj.value === uebernachtungAuswahl) {
-	        			obj.isSelected = YES;
-	        			itemSelected = YES;
-	        		}
-	                return obj;
-	        	}
-	        });
-	        uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
-	        this.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-			this.saveSelection();
-		}
-        
-    	//if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") { DigiWebApp.ScholppBookingController.resetButtons(); }
-    }
-    
     , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
     	
