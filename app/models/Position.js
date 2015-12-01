@@ -247,13 +247,14 @@ DigiWebApp.Position = M.Model.create({
 		var result = [];
 		var sortInApp = false;
 		var all = [];
-		var handpositionen = [];
 		if (sortInApp) {
 			all = that.find();
-			handpositionen = DigiWebApp.Order.find()
 		} else {
 			all = that.findSorted();
 		}
+		
+		all = DigiWebApp.Order.getHandpositionen(sortInApp).concat(all);
+		
 		if (typeof(vaterId) == "undefined" || vaterId == null || parseIntRadixTen(vaterId) == 0) {
 			_.each(all, function(el){
 				if (typeof(el.get("orderId")) == "undefined" || el.get("orderId") == null ) {
