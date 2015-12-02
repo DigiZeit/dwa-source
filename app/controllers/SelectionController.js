@@ -211,6 +211,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		if (!isHandauftrag) {
 			return that.setPositions(positionId, activityId);
 		} else {
+			M.ViewManager.getView('bookingPage', 'orderButton').setValue(mySelectionObj.label);
         	return that.setActivities(YES, activityId);
 		}
 		
