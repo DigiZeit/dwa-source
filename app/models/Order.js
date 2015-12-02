@@ -272,16 +272,27 @@ DigiWebApp.Order = M.Model.create({
 	    return true;
 	}
     
-    , hasPositions: function(direct) {
-		var childOrders = DigiWebApp.Order.getByVaterId(this.get('id'));
-		var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
-		var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
-    	var hasPositions = (childHandOrders.concat(childPositions).length > 0);
+    , hasPositions: function(direct, withHandPositions) {
+    	if (typeof(direct) == "undefined") direct = false;
+    	if (typeof(withHandPositions) == "undefined") withHandPositions = true;
+    	var hasPositions = false;
+
+    	var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
+    	hasPositions = (childPositions.length > 0);
     	if (hasPositions) return true;
-    	if (typeof(direct) != "undefined" && !direct) return false;
+
+    	if (!withHandPositions) return false;
+		
+    	var childHandOrders = DigiWebApp.HandOrder.getByVaterId(this.get('id'));
+    	hasPositions = (childHandOrders.concat(childPositions).length > 0);
+    	if (hasPositions) return true;
+
+    	if (!direct) return false;
+		
+    	var childOrders = DigiWebApp.Order.getByVaterId(this.get('id'));
     	_.each(childOrders, function(child){
     		if (!hasPositions) {
-    			if (child.hasPositions()) hasPositions = true;
+    			if (child.hasPositions(direct, withHandPositions)) hasPositions = true;
     		}
     	});
     	return hasPositions;
