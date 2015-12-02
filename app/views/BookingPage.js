@@ -122,7 +122,11 @@ DigiWebApp.BookingPage = M.PageView.design({
 								  NO 
 								, function(obj){
 									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
-									DigiWebApp.SelectionController.setSelectedPosition(obj);
+									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
+										DigiWebApp.SelectionController.setSelectedOrder(obj);
+									} else {
+										DigiWebApp.SelectionController.setSelectedPosition(obj);
+									}
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
 								, function(){
