@@ -166,7 +166,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // filter orders: only orders with selectable elements
-        orders = _.filter(orders, function(o) { return o.hasPositions() || o.name == DigiWebApp.HandOrder.name; });
+        orders = _.filter(orders, function(o) { return o.hasPositions(YES) || o.name == DigiWebApp.HandOrder.name; });
         
         // reset orderId to a selectable value
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
@@ -314,7 +314,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	
 	        var workPlans = []; 
 	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
-	        	if (parseIntRadixTen(wp.get("id")) === parseIntRadixTen(posId)) workPlans.push(wp);
+	        	if (wp.get("id") == posId) workPlans.push(wp);
 	        });
 	        i = 0;
 	
@@ -324,8 +324,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        } else {
 	            activities = DigiWebApp.SelectionController.getActivities();
 	        }
-//        } else {
-//            activities = DigiWebApp.SelectionController.getActivities();
+        } else {
+            activities = DigiWebApp.SelectionController.getActivities();
         }
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
