@@ -196,7 +196,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        }
 	        orderArray = _.map(orderArray, function(item) {
 	        	if (item) {
-		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(orderId));
+		            item.isSelected = (item.value == orderId);
 		            return item;
 	        	}
 	        });
