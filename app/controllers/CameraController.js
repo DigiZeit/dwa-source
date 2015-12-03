@@ -513,12 +513,15 @@ DigiWebApp.CameraController = M.Controller.extend({
 		var actId = actObj ? actObj.value : null;
 
 	    var handOrderId = null;
+	    var handOrderVaterId = null;
 	    var handOrderName = null;
 	    if (DigiWebApp.BookingController.isHandOrder(orderId)) {
 			handOrderId = orderId;
-			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
+			var handOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 			    if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
-			})[0].get('name');
+			})[0];
+			handOrderName = handOrderObj.get('name');
+			handOrderVaterId = handOrderObj.get('vaterId');
 			orderId = handOrderId;
 	
 			// a hand order has no position
@@ -539,6 +542,7 @@ DigiWebApp.CameraController = M.Controller.extend({
 	    var myMediaFile = that.newMediaFile({
 			  oId: orderId
 			, hoId: handOrderId
+			, hoVaterId: handOrderVaterId
 			, hoName: handOrderName
 			, lat: lat
 			, lon: lon
@@ -597,6 +601,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         return DigiWebApp.MediaFile.createRecord({
               orderId: obj.oId ? obj.oId : '0'
             , handOrderId: obj.hoId ? obj.hoId : '0'
+            , handOrderVaterId: obj.hoVaterId ? obj.hoVaterId : '0'
             , handOrderName: obj.hoName ? obj.hoName : '0'
             , latitude: obj.lat ? obj.lat : '0'
             , longitude: obj.lon ? obj.lon : '0'

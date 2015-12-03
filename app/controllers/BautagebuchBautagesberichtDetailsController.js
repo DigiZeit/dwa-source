@@ -21,6 +21,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 	, datumAsDate: null // runtime to feed date-textinput
 	
 	, handOrderId: null // in model
+	, handOrderVaterId: null // in model
 	, handOrderName: null // in model
 
 	, auftragsId: null // in model
@@ -71,6 +72,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		that.set("auftragsId", myItem.get("orderId"));
 		that.set("auftragsName", myItem.get("orderName"));
 		that.set("handOrderId", myItem.get("handOrderId"));
+		that.set("handOrderVaterId", myItem.get("handOrderVaterId"));
 		that.set("handOrderName", myItem.get("handOrderName"));
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
@@ -153,6 +155,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		that.item.set("orderName", that.auftragsName);
 		
 		that.item.set("handOrderId", that.handOrderId);
+		that.item.set("handOrderVaterId", that.handOrderVaterId);
 		that.item.set("handOrderName", that.handOrderName);
 
 		if (M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').getSelection() !== "0" ) {

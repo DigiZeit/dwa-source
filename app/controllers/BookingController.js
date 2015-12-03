@@ -206,6 +206,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     	    	var orderId;
     		    var handOrderId = null;
+    		    var handOrderVaterId = null;
     	    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     	    		orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
     	    	} else {
@@ -236,9 +237,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 			    if (that.isHandOrder(orderId)) {
 					handOrderId = orderId;
-					myHandOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
+					var myHandOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 						if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
-					})[0].get('name');
+					})[0]
+					myHandOrderName = myHandOrderObj.get('name');
+					handOrderVaterId = myHandOrderObj.get('vaterId');
 					myOrderName = myHandOrderName;
 					orderId = null;
 			
@@ -270,6 +273,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    	that.currentBooking.set("orderId", orderId);
 		    	that.currentBooking.set("orderName", myOrderName);
 				that.currentBooking.set("handOrderId", handOrderId);
+				that.currentBooking.set("handOrderVaterId", handOrderVaterId);
 				that.currentBooking.set("handOrderName", myHandOrderName);
 				that.currentBooking.set("positionId", posId);
 				that.currentBooking.set("positionName", myPositionName);
@@ -354,6 +358,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         // Bugfix 2515: Save checked input booking information
 		var orderId;
 		var handOrderId = null;
+		var handOrderVaterId = null;
 		if (typeof (DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
 		    orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
 		} else {
@@ -384,9 +389,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 		if (this.isHandOrder(orderId)) {
 		    handOrderId = orderId;
-		    myHandOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function (ord) {
+		    var myHandOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function (ord) {
 		        if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
-		    })[0].get('name');
+		    })[0];
+		    myHandOrderName = myHandOrderObj.get('name');
+			handOrderVaterId = myHandOrderObj.get('vaterId');
 		    myOrderName = myHandOrderName;
 		    orderId = null;
 		    // a handorder has no position
@@ -417,6 +424,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             orderId: orderId,
             orderName: myOrderName,
             handOrderId: handOrderId,
+            handOrderVaterId: handOrderVaterId,
             handOrderName: myHandOrderName,
             positionId: posId,
             positionName: myPositionName,
@@ -929,6 +937,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    	        that.currentBooking.set("orderId", that.checkedCurrentBooking.orderId);
 	    	        that.currentBooking.set("orderName", that.checkedCurrentBooking.orderName);
 	    	        that.currentBooking.set("handOrderId", that.checkedCurrentBooking.handOrderId);
+	    	        that.currentBooking.set("handOrderVaterId", that.checkedCurrentBooking.handOrderVaterId);
 	    	        that.currentBooking.set("handOrderName", that.checkedCurrentBooking.handOrderName);
 	    	        that.currentBooking.set("positionId", that.checkedCurrentBooking.positionId);
 	    	        that.currentBooking.set("positionName", that.checkedCurrentBooking.positionName);
@@ -984,6 +993,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		          oId: that.checkedCurrentBooking.orderId
                 , oName: that.checkedCurrentBooking.orderName
 				, hoId: that.checkedCurrentBooking.handOrderId
+				, hoVaterId: that.checkedCurrentBooking.handOrderVaterId
 				, hoName: that.checkedCurrentBooking.handOrderName
 				, lat: lat
 				, lon: lon
@@ -1203,6 +1213,7 @@ DigiWebApp.BookingController = M.Controller.extend({
               orderId: obj.oId ? obj.oId : null
             , orderName: obj.oName ? obj.oName : null
             , handOrderId: obj.hoId ? obj.hoId : null
+            , handOrderVaterId: obj.hoVaterId ? obj.hoVaterId : null
             , handOrderName: obj.hoName ? obj.hoName : null
             , latitude: obj.lat ? obj.lat : null
             , longitude: obj.lon ? obj.lon : null
@@ -1295,6 +1306,7 @@ DigiWebApp.BookingController = M.Controller.extend({
               orderId: obj.get('orderId')
             , orderName: myOrderName
             , handOrderId: obj.get('handOrderId')
+            , handOrderVaterId: obj.get('handOrderVaterId')
             , handOrderName: obj.get('handOrderName')
             , latitude: obj.get('latitude')
             , longitude: obj.get('longitude')
@@ -1399,6 +1411,7 @@ DigiWebApp.BookingController = M.Controller.extend({
               orderId: obj.get('orderId')
             , orderName: myOrderName
             , handOrderId: obj.get('handOrderId')
+            , handOrderVaterId: obj.get('handOrderVaterId')
             , handOrderName: obj.get('handOrderName')
             , latitude: obj.get('latitude')
             , longitude: obj.get('longitude')

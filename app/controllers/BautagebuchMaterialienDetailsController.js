@@ -15,6 +15,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 	, auftraegeList: null // runtime
 
 	, handOrderId: null // runtime
+	, handOrderVaterId: null // runtime
 	, handOrderName: null // runtime
 
 	, positionId: null // in model
@@ -88,6 +89,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		that.set("auftragId", myAuftragId);
 		that.set("auftragName", myAuftragName);
 		that.set("handOrderId", myItem.get("handOrderId"));
+		that.set("handOrderVaterId", myItem.get("handOrderVaterId"));
 		that.set("handOrderName", myItem.get("handOrderName"));
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
@@ -193,6 +195,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 		if (that.handOrderId) {
 			that.item.set("handOrderId", that.handOrderId);
+			that.item.set("handOrderVaterId", that.handOrderVaterId);
 			that.item.set("handOrderName", that.handOrderName);
 			that.item.set("positionId", null);
 			that.item.set("positionName", null);
@@ -200,6 +203,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			that.item.set("orderName", null);
 		} else {
 			that.item.set("handOrderId", null);
+			that.item.set("handOrderVaterId", null);
 			that.item.set("handOrderName", null);
 			that.item.set("positionId", that.positionId);
 			that.item.set("positionName", that.positionName);

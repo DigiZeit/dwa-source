@@ -71,6 +71,10 @@ DigiWebApp.MediaFile = M.Model.create({
         isRequired: NO
     })
     
+    , handOrderVaterId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , latitude: M.Model.attr('String', {
         isRequired:NO
     })

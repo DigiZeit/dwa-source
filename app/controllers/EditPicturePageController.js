@@ -476,12 +476,15 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 		var actId = actObj ? actObj.value : null;
 
 	    var handOrderId = null;
+	    var handOrderVaterId = null;
 	    var handOrderName = null;
 	    if (DigiWebApp.BookingController.isHandOrder(orderId)) {
 			handOrderId = orderId;
-			handOrderName = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
+			var handOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 			    if (ord) return ord.get('id') == orderId || ord.get('name') == orderId;
-			})[0].get('name');
+			})[0];
+			handOrderName = handOrderObj.get('name');
+			handOrderVaterId = handOrderObj.get('vaterId');
 			orderId = handOrderId;
 	
 			// a hand order has no position
@@ -491,6 +494,7 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 	    var myMediaFile = that.myMediaFile;
 		myMediaFile.set('orderId', orderId);
 		myMediaFile.set('handOrderId', handOrderId);
+		myMediaFile.set('handOrderVaterId', handOrderVaterId);
 		myMediaFile.set('handOrderName', handOrderName);
 		myMediaFile.set('positionId', posId);
 		myMediaFile.set('activityId', actId);

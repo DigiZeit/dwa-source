@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 	  item: null
 	  
 	, handOrderId: null // runtime
+	, handOrderVaterId: null // runtime
 	, handOrderName: null // runtime
 
 	, auftragId: null // runtime
@@ -54,6 +55,7 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 		that.set("auftragId", myAuftragId);
 		that.set("auftragName", myAuftragName);
 		that.set("handOrderId", myItem.get("handOrderId"));
+		that.set("handOrderVaterId", myItem.get("handOrderVaterId"));
 		that.set("handOrderName", myItem.get("handOrderName"));
 		that.set("positionId", myItem.get("positionId"));
 		that.set("positionName", myItem.get("positionName"));
@@ -101,11 +103,13 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 
 		if (that.handOrderId) {
 			that.item.set("handOrderId", that.handOrderId);
+			that.item.set("handOrderVaterId", that.handOrderVaterId);
 			that.item.set("handOrderName", that.handOrderName);
 			that.item.set("positionId", null);
 			that.item.set("positionName", null);
 		} else {
 			that.item.set("handOrderId", null);
+			that.item.set("handOrderVaterId", null);
 			that.item.set("handOrderName", null);
 			that.item.set("positionId", that.positionId);
 			that.item.set("positionName", that.positionName);
@@ -154,11 +158,13 @@ DigiWebApp.BautagebuchMedienDetailsController = M.Controller.extend({
 			    					DigiWebApp.BautagebuchMedienListeController.neu(YES);
 			    					if (that.handOrderId) {
 				    					that.set("handOrderId", myOldItem.record.handOrderId);
+				    					that.set("handOrderVaterId", myOldItem.record.handOrderVaterId);
 				    					that.set("handOrderName", myOldItem.record.handOrderName);
 			    						that.set("positionId", null);
 			    						that.set("positionName", null);
 			    					} else {
 				    					that.set("handOrderId", null);
+				    					that.set("handOrderVaterId", null);
 				    					that.set("handOrderName", null);
 				    					that.set("positionId", myOldItem.record.positionId);
 				    					that.set("positionName", myOldItem.record.positionName);

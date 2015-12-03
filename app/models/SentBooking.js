@@ -107,6 +107,10 @@ DigiWebApp.SentBooking = M.Model.create({
         isRequired: NO
     })
 
+    , handOrderVaterId: M.Model.attr('String', {
+        isRequired: NO
+    })
+
     , positionId: M.Model.attr('String', {
         isRequired: NO
     })

@@ -51,6 +51,7 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", null);
 		}
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderId", null);
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderVaterId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderName", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionName", null);

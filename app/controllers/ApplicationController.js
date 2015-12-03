@@ -1739,7 +1739,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			) {
     				rec = DigiWebApp.HandOrder.createRecord({
     					  id: el.handauftragsId
-    					, name: el.handauftragsBezeichnung
+      					, name: el.handauftragsBezeichnung
+    					, vaterId: el.auftragsId
     					, isLocalOnly: NO
     				});
     			} else if (
@@ -1748,6 +1749,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				rec = DigiWebApp.HandOrder.find(
     					{query:{identifier: 'id', operator: '=', value: el.handauftragsId}})[0];
     				rec.set("id", el.handauftragsId);
+    				rec.set("vaterId", el.auftragsId);
     				rec.set("name", el.handauftragsBezeichnung);
     				rec.set("isLocalOnly", NO);
     			} else if (
@@ -1756,6 +1758,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				rec = DigiWebApp.HandOrder.find(
     					{query:{identifier: 'name', operator: '=', value: el.handauftragsBezeichnung}})[0];
     				rec.set("id", el.handauftragsId);
+    				rec.set("vaterId", el.auftragsId);
     				rec.set("name", el.handauftragsBezeichnung);
     				rec.set("isLocalOnly", NO);
     			}
@@ -1765,6 +1768,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     				_.each(DigiWebApp.Booking.find(), function(booking) {
     					if (booking.get('handOrderId') !== null && 
     						booking.get('handOrderId') === el.handauftragsBezeichnung) {
+    						booking.set("handOrderVaterId", el.auftragsId);
     						booking.set("handOrderId", el.handauftragsId);
     						booking.save();
     					}
