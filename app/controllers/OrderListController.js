@@ -61,9 +61,6 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		}
 		var vaterId = null;
 		var order = DigiWebApp.Order.getById(selectedObjId);
-		if (typeof(order) == "undefined") {
-			order = DigiWebApp.HandOrder.getById(selectedObjId);
-		}
 		if (typeof(order) != "undefined" && order != null) {
 			vaterId = order.get("id");
 		}
