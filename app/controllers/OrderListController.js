@@ -65,7 +65,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			order = DigiWebApp.HandOrder.getById(selectedObjId);
 		}
 		if (typeof(order) != "undefined" && order != null) {
-			vaterId = order.get("vaterId");
+			vaterId = order.get("id");
 		}
 		_.each(DigiWebApp.Order.getByVaterId(vaterId), function(o) {
 			if (that.onlyFolders || o.hasPositions()) {
