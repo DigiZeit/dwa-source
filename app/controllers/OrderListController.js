@@ -59,7 +59,15 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				, obj: o.obj
 			});
 		}
-		_.each(DigiWebApp.Order.getByVaterId(selectedObjId), function(o) {
+		var vaterId = null;
+		var order = DigiWebApp.Order.getById(selectedObjId);
+		if (typeof(order) == "undefined") {
+			order = DigiWebApp.HandOrder.getById(selectedObjId);
+		}
+		if (typeof(order) != "undefined" && order != null) {
+			vaterId = order.get("vaterId");
+		}
+		_.each(DigiWebApp.Order.getByVaterId(vaterId), function(o) {
 			if (that.onlyFolders || o.hasPositions()) {
 				items.push({
 					  icon: that.closedFolderIcon
@@ -69,14 +77,14 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			}
 		});
 		if (!that.onlyFolders) {
-			_.each(DigiWebApp.HandOrder.getByVaterId(selectedObjId), function(o) {
+			_.each(DigiWebApp.HandOrder.getByVaterId(vaterId), function(o) {
 				items.push({
 					  icon: that.handOrderIcon
 					, label: o.get('name')
 					, obj: o
 				});
 			});
-			_.each(DigiWebApp.Position.getByVaterId(selectedObjId), function(o) {
+			_.each(DigiWebApp.Position.getByVaterId(vaterId), function(o) {
 				items.push({
 					  icon: that.orderIcon
 					, label: o.get('name')
