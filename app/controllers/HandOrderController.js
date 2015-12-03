@@ -90,12 +90,13 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                     DigiWebApp.SelectionController.showHandOrderFirst = YES;
                     this.currentHandOrderName = op.get("name");
 
+                    DigiWebApp.NavigationController.toBookTimePage(YES);
+
                     DigiWebApp.SelectionController.setOrders(op.get("id"));
                     
                     // PositionsComboBox ausblenden
                     DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 
-                    DigiWebApp.NavigationController.toBookTimePage(YES);
                 } else {
                     //M.DialogView.alert({
                     DigiWebApp.ApplicationController.nativeAlertDialogView({

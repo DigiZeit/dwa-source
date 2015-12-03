@@ -36,9 +36,9 @@ DigiWebApp.OrderListTemplateView = M.ListItemView.design({
         , computedValue: {
 	          valuePattern: '<%= label %>'
 	        , operation: function(v) {
-    			if (v == M.I18N.l('diesenOrdnerVerwenden')) {
-    				console.log(v);
-    			}
+//    			if (v == M.I18N.l('diesenOrdnerVerwenden')) {
+//    				console.log(v);
+//    			}
 	            return v;
 	        }
 	    }
