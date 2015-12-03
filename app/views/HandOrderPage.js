@@ -27,6 +27,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 				//console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
 				// Freischaltung "Handpositionen"
 				if (DigiWebApp.SettingsController.featureAvailable('430')) {
+                    M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(M.I18N.l('keinOrdnerAusgewaehlt'));
 					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).show();
 				} else {
 					$('#' + DigiWebApp.HandOrderPage.content.targetFolderButton.id).hide();
@@ -113,7 +114,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 										  vaterId = obj.get("id");
 									  }
 									  DigiWebApp.HandOrderController.set('vaterId', vaterId);
-									  DigiWebApp.HandOrderPage.content.targetFolderButton.setValue(buttonText);
+									  M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(buttonText);
 									  DigiWebApp.NavigationController.backToHandOrderPageTransition();
 								}
 								, function() {
