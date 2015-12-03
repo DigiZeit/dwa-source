@@ -285,9 +285,9 @@ DigiWebApp.BookingPage = M.PageView.design({
     			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
     		}
     	}
-    	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
-			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
-    	}
+//    	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
+//			try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").show(); } catch (e) {trackError(e);}
+//    	}
     }
 
 });
