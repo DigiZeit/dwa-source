@@ -355,7 +355,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        if (activityId == 0 && orderId != 0) {
+	        if (typeof(orderId) != "undefined" && activityId == 0 
+	         && typeof(orderId) != "undefined" && orderId != 0) {
 	        	activityId = activitiesArray[0].value;
 	        } else {
 	        	activities.push({label: M.I18N.l('selectSomething'), value: '0'});
