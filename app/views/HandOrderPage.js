@@ -114,11 +114,13 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 										  vaterId = obj.get("id");
 									  }
 									  DigiWebApp.HandOrderController.set('vaterId', vaterId);
-									  M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(buttonText);
 									  DigiWebApp.NavigationController.backToHandOrderPageTransition();
+									  M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(buttonText);
 								}
 								, function() {
+									  var buttonText = M.I18N.l('keinOrdnerAusgewaehlt');
 									  DigiWebApp.NavigationController.backToHandOrderPageTransition();
+									  M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(buttonText);
 								}
 								, DigiWebApp.SelectionController.getSelectedOrderItem()
 						)
