@@ -621,18 +621,19 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 									
 						}
 						this.init(
-								  NO 
+								  YES 
 								, function(obj){
-									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
-									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
-										DigiWebApp.SelectionController.setSelectedOrder(obj);
-									} else {
-										DigiWebApp.SelectionController.setSelectedPosition(obj);
-									}
-									DigiWebApp.NavigationController.backToBookTimePagePOP();
+									  // TODO: Ausgewählten Ordner setzen (siehe change-event in auftragComboBox bzw. positionComboBox)
+//									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
+//										DigiWebApp.SelectionController.setSelectedOrder(obj);
+//									} else {
+//										DigiWebApp.SelectionController.setSelectedPosition(obj);
+//									}
+									DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
+									DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.orderButton.setValue(obj.get("name"));
 								}
 								, function(){
-									DigiWebApp.NavigationController.backToBookTimePagePOP();
+									DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 								}
 								, vaterId
 						)
