@@ -359,16 +359,18 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        // nur Bitte Wählen, wenn kein Auftrag gesetzt
 	        if (orderId != "0") {
 	        	activityId = activitiesArray[0].value;
-	        } else {
-	        	activityId = 0;
-	        	activitiesArray.push({label: M.I18N.l('selectSomething'), value: '0'});
 	        }
+	        var itemSelected = NO;
 	        activitiesArray = _.map(activitiesArray, function(item) {
 	        	if (item) {
 		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(activityId));
+		            if (item.isSelected) itemSelected = YES;
 		            return item;
 	        	}
 	        });
+	        if (!itemSelected) {
+	        	activitiesArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: YES});
+	        }
         }
         
         // set selection arrays to start content binding process
