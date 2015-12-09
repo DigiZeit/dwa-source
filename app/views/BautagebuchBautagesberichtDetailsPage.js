@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+					var that = this;
 
 					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.datum) {
 						var datumArray = DigiWebApp.BautagebuchBautagesberichtDetailsController.datum.split(".");
@@ -117,58 +118,61 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 
 					
 			  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-						//$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeit)[0].disable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.plusGrid.stundePlusButton)[0].disable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.plusGrid.minutePlusButton)[0].disable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.minusGrid.stundeMinusButton)[0].disable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.minusGrid.minuteMinusButton)[0].disable();
+						//$(that.content.startUhrzeit)[0].disable();
+						$(that.content.startUhrzeitContainer.plusGrid.stundePlusButton)[0].disable();
+						$(that.content.startUhrzeitContainer.plusGrid.minutePlusButton)[0].disable();
+						$(that.content.startUhrzeitContainer.minusGrid.stundeMinusButton)[0].disable();
+						$(that.content.startUhrzeitContainer.minusGrid.minuteMinusButton)[0].disable();
 					} else {
-						//$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeit)[0].enable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.plusGrid.stundePlusButton)[0].enable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.plusGrid.minutePlusButton)[0].enable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.minusGrid.stundeMinusButton)[0].enable();
-						$(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.minusGrid.minuteMinusButton)[0].enable();
+						//$(that.content.startUhrzeit)[0].enable();
+						$(that.content.startUhrzeitContainer.plusGrid.stundePlusButton)[0].enable();
+						$(that.content.startUhrzeitContainer.plusGrid.minutePlusButton)[0].enable();
+						$(that.content.startUhrzeitContainer.minusGrid.stundeMinusButton)[0].enable();
+						$(that.content.startUhrzeitContainer.minusGrid.minuteMinusButton)[0].enable();
 					}
 			  		
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.mitarbeiter_zeiten_ButtonGrid.mitarbeiterButton.id).addClass("bigButton");
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.mitarbeiter_zeiten_ButtonGrid.zeitenButton.id).addClass("bigButton");
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.material_wetter_ButtonGrid.materialienButton.id).addClass("bigButton");
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.material_wetter_ButtonGrid.wetterButton.id).addClass("bigButton");
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.medien_notizen_ButtonGrid.medienButton.id).addClass("bigButton");
-			  		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.medien_notizen_ButtonGrid.notizenButton.id).addClass("bigButton");
+			  		$('#' + that.content.mitarbeiter_zeiten_ButtonGrid.mitarbeiterButton.id).addClass("bigButton");
+			  		$('#' + that.content.mitarbeiter_zeiten_ButtonGrid.zeitenButton.id).addClass("bigButton");
+			  		$('#' + that.content.material_wetter_ButtonGrid.materialienButton.id).addClass("bigButton");
+			  		$('#' + that.content.material_wetter_ButtonGrid.wetterButton.id).addClass("bigButton");
+			  		$('#' + that.content.medien_notizen_ButtonGrid.medienButton.id).addClass("bigButton");
+			  		$('#' + that.content.medien_notizen_ButtonGrid.notizenButton.id).addClass("bigButton");
 			  		
 			  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
 			  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
 			  		|| DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp") != "<standard>"
 			  		) {
-			  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().show();
+			  			$('#' + that.content.positionComboBox.id).parent().parent().parent().show();
 			  		} else {
-			  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().hide();
+			  			$('#' + that.content.positionComboBox.id).parent().parent().parent().hide();
 			  		}
 			  		
+			  		// Freischaltung 429
+			  		that.doHideShowOrderCombobox(YES);
+
 			  		DigiWebApp.BautagebuchBautagesberichtDetailsController.setStartUhrzeit();
 			  		
 	            	if (DigiWebApp.BautagebuchBautagesberichtDetailsController.get('handOrderId')) {
-	            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id + "_container").hide();
+	            		$('#' + that.content.positionComboBox.id + "_container").hide();
 //	            	} else {
-//	            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id + "_container").show();
+//	            		$('#' + that.content.positionComboBox.id + "_container").show();
 	            	}
 
-	            	$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id).prop('disabled', true);
-	            	$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id).prop('disabled', true);
+	            	$('#' + that.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id).prop('disabled', true);
+	            	$('#' + that.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id).prop('disabled', true);
 	            	
 	            	if (DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen 
 	            	||  DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-	            		$("label[for='"+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id+"']").show();
-	            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id).show();
+	            		$("label[for='"+that.content.startUhrzeitContainer.id+"']").show();
+	            		$('#' + that.content.startUhrzeitContainer.id).show();
 	            	} else {
-	            		$("label[for='"+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id+"']").hide();
-	            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.id).hide();
+	            		$("label[for='"+that.content.startUhrzeitContainer.id+"']").hide();
+	            		$('#' + that.content.startUhrzeitContainer.id).hide();
 	            	}
 	            	// Bugfix 2108: Rename in order to be consistent with DSO
 	            	if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
-	    	          	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.auftragComboBox.id, M.I18N.l('dtc6Ordner'));
-	    	        	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id, M.I18N.l('dtc6Auftrag'));
+	    	          	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(that.content.auftragComboBox.id, M.I18N.l('dtc6Ordner'));
+	    	        	DigiWebApp.ApplicationController.dtc6AktivRenameHelper(that.content.positionComboBox.id, M.I18N.l('dtc6Auftrag'));
 	    	        }
 			}
         }
@@ -178,6 +182,27 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
         	}
         }
     }
+
+	, doHideShowOrderCombobox: function(show) {
+		var that = this;
+		try { $('#' + that.content.auftragComboBox.id + "_container").hide(); } catch (e) {trackError(e);}
+		try { $('#' + that.content.orderButton.id).hide(); } catch (e) {trackError(e);}
+		try { $('label[for="' + that.content.orderButton.id + '"]').hide(); } catch (e) {trackError(e);}
+		if (show) {
+			// Freischaltung 429 "mehrstufige Auftragsauswahl"
+			if (DigiWebApp.SettingsController.featureAvailable("429")) {
+				try { $('#' + that.content.orderButton.id).show(); } catch (e) {trackError(e);}	
+				try { $('label[for="' + that.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
+			} else {
+				try { $('#' + that.content.auftragComboBox.id + "_container").show(); } catch (e) {trackError(e);}
+			}
+		}
+	//	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
+	//		try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); } catch (e) {trackError(e);}	
+	//		try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
+	//		try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
+	//	}
+	}
 
     , cssClass: 'bautagebuchBautagesberichtDetailsPage'
 
