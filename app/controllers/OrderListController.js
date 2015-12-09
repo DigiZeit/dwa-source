@@ -56,6 +56,27 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var that = this;
 		if (that.parentStack == null) that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
 		var items = [];
+		if (
+			   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
+			|| (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+		) {
+			var o = null;
+			var withPositionsInFolderCheck = false;
+			if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
+			if (
+					(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
+				|| (!withPositionsInFolderCheck && o != null)
+				|| ((that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+				     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
+				   )
+			) {
+				items.push({
+					  icon: that.useFolderIcon
+					, label: M.I18N.l('diesenOrdnerVerwenden')
+					, obj: o
+				});
+			}
+		}
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
 			var o = that.parentStack[that.parentStack.length - 1];
@@ -104,29 +125,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					, obj: o
 				});
 			});
-		} else {
-			if (
-				   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-				|| (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
-			) {
-				var o = null;
-				var withPositionsInFolderCheck = false;
-				if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
-				if (
-						(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-					|| (!withPositionsInFolderCheck && o != null)
-					|| ((that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
-					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
-					   )
-				) {
-					items.push({
-						  icon: that.useFolderIcon
-						, label: M.I18N.l('diesenOrdnerVerwenden')
-						, obj: o
-					});
-				}
-			}
-		}
+		} 
 		DigiWebApp.OrderListPage.header.title.setValue(that.getTitle());
 		that.set('items', items);
 	}
