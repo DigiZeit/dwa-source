@@ -645,27 +645,30 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
             		  target: DigiWebApp.OrderListController
             		, action: function() {
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-						var vaterId = null;
-						var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
-						if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
-							var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
-							if (typeof(potentialOrder) == "undefined" || potentialOrder == null) {
-								potentialOrder = DigiWebApp.HandOrder.getById(selectedOrder);
-							}
-							if (typeof(potentialOrder) != "undefined" && potentialOrder != null) {
-								vaterId = potentialOrder.get("vaterId");
-							}
-									
-						}
 						this.init(
 								  OrderSelectionMode.ALL 
 								, function(obj){
 									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 									  if (typeof(obj) != "undefined" && obj != null) {
-										  M.ViewManager.
-										  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
-										  	setSelection(obj.get("id"));
-										  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').events.change.action();
+										  var isFolder = (obj.name == DigiWebApp.Order.name);
+										  var isPosition = (obj.name == DigiWebApp.Position.name);
+										  var orderId = obj.get("id");
+										  var positionId = obj.get("id");
+										  if (isPosition) {
+											  orderId = obj.get("orderId");
+										  }
+										  if (isFolder || isHandauftrag) {
+											  M.ViewManager.
+											  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
+											  	setSelection(orderId);
+											  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').events.change.action();
+										  }
+										  if (isPosition) {
+											  M.ViewManager.
+											  	getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').
+											  	setSelection(positionId);
+											  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').events.change.action();
+										  }
 									  }
 								}
 								, function(){
