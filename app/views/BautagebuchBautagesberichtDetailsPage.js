@@ -627,7 +627,6 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 							}
 									
 						}
-						// TODO: wir brauchen hier Ordner mit hasPositions 
 						this.init(
 								  OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
 								, function(obj){
@@ -636,6 +635,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 										  M.ViewManager.
 										  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
 										  	setSelection(obj.get("id"));
+										  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').events.change.action();
 									  }
 								}
 								, function(){
