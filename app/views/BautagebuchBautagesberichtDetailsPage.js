@@ -700,7 +700,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		            change: {
 		                action: function(itemValues, items) {
 	        				var that = DigiWebApp.BautagebuchBautagesberichtDetailsPage;
-	        				var controller = controller;
+	        				var controller = DigiWebApp.BautagebuchBautagesberichtDetailsController;
 				  			that.doHideShowPositionCombobox(NO);
 	        				var mySelection = M.ViewManager.
 	        										getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
