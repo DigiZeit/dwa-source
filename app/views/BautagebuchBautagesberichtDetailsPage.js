@@ -11,7 +11,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-					var that = this;
+					var that = DigiWebApp.BautagebuchBautagesberichtDetailsPage;
 
 					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.datum) {
 						var datumArray = DigiWebApp.BautagebuchBautagesberichtDetailsController.datum.split(".");
