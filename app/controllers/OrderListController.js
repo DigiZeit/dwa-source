@@ -114,7 +114,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
 				if (
 						(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-					|| !withPositionsInFolderCheck
+					|| (!withPositionsInFolderCheck && o != null)
 					|| ((that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
 					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
 					   )
@@ -221,6 +221,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	     		&& selectedItem.icon == that.useFolderIcon)
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
 	     		&& selectedItem.icon == that.useFolderIcon
+	     		&& selectedItem.obj
 	     		&& selectedItem.obj.hasPositions(YES))
 	    ) {
 	    	//that.buttonToUpdate.setValue(selectedItem.label);
