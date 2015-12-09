@@ -17,17 +17,19 @@ DigiWebApp.OrderListController = M.Controller.extend({
 
 	  items: null
 	
-	, successHandler: function() {
+	, defaultSuccessHandler: function() {
 		var that = this;
 		// falls kein successHandler übergeben wurde im Zweifel errorHandler aufrufen 
 		that.errorHandler();
 	}
+	, successHandler: function() {}
 
-	, errorHandler: function() {
+	, defaultErrorHandler: function() {
 		var that = this;
 		// falls kein errorHandler übergeben wurde im Zweifel zurück zur BookingPage 
 		DigiWebApp.NavigationController.backToBookTimePagePOP();
 	}
+	, errorHandler: function() {}
 	
 	, latestId: null
 		
@@ -43,6 +45,73 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, closedFolderIcon: '48x48_plain_folder_closed.png'
 	, orderIcon: '48x48_plain_document.png'
 	, handOrderIcon: '48x48_plain_handauftrag.png'
+	
+	, init: function(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions) {
+		var that = this;
+		
+		that.parentStack = [];
+		
+		that.orderSelectionMode = OrderSelectionMode.POSITIONS;
+		that.successHandler = that.defaultSuccessHandler;
+		that.errorHandler = that.defaultErrorHandler;
+		that.withPositions = false;
+
+		if (typeof(orderSelectionMode) != "undefined") 
+				that.orderSelectionMode = orderSelectionMode;
+		if (typeof(successHandler) != "undefined") 
+				that.successHandler = successHandler;
+		if (typeof(errorHandler) != "undefined") 
+				that.errorHandler = errorHandler;
+		if (typeof(withPositions) != "undefined")
+				that.withPositions = withPositions;
+		
+		if (startInFolderId) {
+			var allOrders = DigiWebApp.Order.find();
+			// rebuild parentStack
+			var done = false;
+			var parentStack = [];
+			var folderId = startInFolderId;
+			var arr = _.filter(allOrders, function(o){ 
+				return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
+			});
+			if (arr && arr.length > 0) {
+				parentStack.push({
+					  	  icon: that.closedFolderIcon
+							, label: arr[0].get('name')
+							, obj: arr[0]
+						});
+			}
+			while (!done) {
+				var arr = _.filter(allOrders, function(o){ 
+					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
+				});
+				if (arr && arr.length > 0) {
+					var parentArr = _.filter(allOrders, function(o){ 
+						return parseIntRadixTen(o.get("id")) == parseIntRadixTen(arr[0].get("vaterId"));
+					});
+					if (parentArr && parentArr.length > 0) {
+						var parentItem = {
+								  	  icon: that.closedFolderIcon
+									, label: parentArr[0].get('name')
+									, obj: parentArr[0]
+								};
+						parentStack.push(parentItem);
+						folderId = parentArr[0].get("id");
+						//var vaterId = parentArr[0].get("vaterId");
+						//if (!vaterId || vaterId <= 0) done = true;
+					} else {
+						done = true;
+					}
+				} else {
+					done = true;
+				}
+				if (done) that.set('parentStack', parentStack.reverse());
+			}
+			that.reloadItems(startInFolderId);
+		} else {
+			that.reloadItems(null);
+		}
+	}
 
 	, getTitle: function() {
 		var that = this;
@@ -133,68 +202,6 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		} 
 		DigiWebApp.OrderListPage.header.title.setValue(that.getTitle());
 		that.set('items', items);
-	}
-	
-	, init: function(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions) {
-		var that = this;
-		
-		that.parentStack = [];
-		
-		if (typeof(orderSelectionMode) != "undefined") 
-				that.orderSelectionMode = orderSelectionMode;
-		if (typeof(successHandler) != "undefined") 
-				that.successHandler = successHandler;
-		if (typeof(errorHandler) != "undefined") 
-				that.errorHandler = errorHandler;
-		if (typeof(withPositions) != "undefined")
-				that.withPositions = withPositions;
-		
-		if (startInFolderId) {
-			var allOrders = DigiWebApp.Order.find();
-			// rebuild parentStack
-			var done = false;
-			var parentStack = [];
-			var folderId = startInFolderId;
-			var arr = _.filter(allOrders, function(o){ 
-				return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
-			});
-			if (arr && arr.length > 0) {
-				parentStack.push({
-					  	  icon: that.closedFolderIcon
-							, label: arr[0].get('name')
-							, obj: arr[0]
-						});
-			}
-			while (!done) {
-				var arr = _.filter(allOrders, function(o){ 
-					return parseIntRadixTen(o.get("id")) == parseIntRadixTen(folderId);
-				});
-				if (arr && arr.length > 0) {
-					var parentArr = _.filter(allOrders, function(o){ 
-						return parseIntRadixTen(o.get("id")) == parseIntRadixTen(arr[0].get("vaterId"));
-					});
-					if (parentArr && parentArr.length > 0) {
-						var parentItem = {
-								  	  icon: that.closedFolderIcon
-									, label: parentArr[0].get('name')
-									, obj: parentArr[0]
-								};
-						parentStack.push(parentItem);
-						folderId = parentArr[0].get("id");
-						//var vaterId = parentArr[0].get("vaterId");
-						//if (!vaterId || vaterId <= 0) done = true;
-					} else {
-						done = true;
-					}
-				} else {
-					done = true;
-				}
-				if (done) that.set('parentStack', parentStack.reverse());
-			}
-			that.reloadItems(startInFolderId);
-		} else {
-			that.reloadItems(null);
-		}
 	}
 
 	, itemSelected: function(id, m_id) {
