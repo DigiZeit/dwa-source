@@ -114,7 +114,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				if (
 						(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
 					|| ((that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
-					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES))
+					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
 					   )
 				) {
 					items.push({
