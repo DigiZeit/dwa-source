@@ -205,7 +205,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		var controller = DigiWebApp.BautagebuchBautagesberichtDetailsController;
 		try { $('#' + that.content.positionComboBox.id + "_container").hide(); } catch (e) {trackError(e);}
 		if (show && !controller.get('handOrderId')) {
-			try { $('#' + that.content.auftragComboBox.id + "_container").show(); } catch (e) {trackError(e);}
+			try { $('#' + that.content.positionComboBox.id + "_container").show(); } catch (e) {trackError(e);}
 		}
 	}
 
