@@ -658,7 +658,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 									
 						}
 						this.init(
-								  OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
+								  OrderSelectionMode.ALL 
 								, function(obj){
 									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 									  if (typeof(obj) != "undefined" && obj != null) {

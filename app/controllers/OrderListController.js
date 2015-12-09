@@ -9,7 +9,7 @@
 var OrderSelectionMode = {
 		  FOLDERS: 1
 		, POSITIONS: 2
-		, FOLDERS_WITH_HANDORDERS: 3
+		, ALL: 3
 }
 
 DigiWebApp.OrderListController = M.Controller.extend({
@@ -58,7 +58,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var items = [];
 		if (
 			   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-			|| (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+			|| (that.orderSelectionMode == OrderSelectionMode.ALL)
 		) {
 			var o = null;
 			var withPositionsInFolderCheck = false;
@@ -66,7 +66,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			if (
 					(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
 				|| (!withPositionsInFolderCheck && o != null)
-				|| ((that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+				|| ((that.orderSelectionMode == OrderSelectionMode.ALL)
 				     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
 				   )
 			) {
@@ -94,7 +94,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		_.each(DigiWebApp.Order.getByVaterId(vaterId), function(o) {
 			if (
 				   (that.orderSelectionMode == OrderSelectionMode.FOLDERS || o.hasPositions())
-				|| (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS && o.hasPositions())
+				|| (that.orderSelectionMode == OrderSelectionMode.ALL && o.hasPositions())
 			) {
 				items.push({
 					  icon: that.closedFolderIcon
@@ -105,7 +105,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		});
 		if (
 			   (that.orderSelectionMode == OrderSelectionMode.POSITIONS)
-			|| (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+			|| (that.orderSelectionMode == OrderSelectionMode.ALL)
 		) {
 			_.each(DigiWebApp.HandOrder.getByVaterId(vaterId), function(o) {
 				items.push({
@@ -116,7 +116,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			});
 		}
 		if (
-			   (that.orderSelectionMode == OrderSelectionMode.POSITIONS)
+				   (that.orderSelectionMode == OrderSelectionMode.POSITIONS)
+				|| (that.orderSelectionMode == OrderSelectionMode.ALL)
 		) {
 			_.each(DigiWebApp.Position.getByVaterId(vaterId), function(o) {
 				items.push({
@@ -218,7 +219,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	     || selectedItem.icon == that.handOrderIcon
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS 
 	     		&& selectedItem.icon == that.useFolderIcon)
-	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
+	     || (that.orderSelectionMode == OrderSelectionMode.ALL 
 	     		&& selectedItem.icon == that.useFolderIcon
 	     		&& selectedItem.obj != null
 	     		&& selectedItem.obj.hasPositions(NO, YES))
