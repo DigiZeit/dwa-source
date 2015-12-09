@@ -10,6 +10,7 @@ var OrderSelectionMode = {
 		  FOLDERS: 1
 		, POSITIONS: 2
 		, ALL: 3
+		, MAYBEALL: 4
 }
 
 DigiWebApp.OrderListController = M.Controller.extend({
@@ -31,6 +32,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, latestId: null
 		
 	, orderSelectionMode: OrderSelectionMode.POSITIONS
+	
+	, withPositions: false
 	
 	, parentStack: null
 	
@@ -118,6 +121,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		if (
 				   (that.orderSelectionMode == OrderSelectionMode.POSITIONS)
 				|| (that.orderSelectionMode == OrderSelectionMode.ALL)
+				|| (that.orderSelectionMode == OrderSelectionMode.MAYBEALL && that.withPositions)
 		) {
 			_.each(DigiWebApp.Position.getByVaterId(vaterId), function(o) {
 				items.push({
@@ -131,7 +135,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		that.set('items', items);
 	}
 	
-	, init: function(orderSelectionMode, successHandler, errorHandler, startInFolderId) {
+	, init: function(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions) {
 		var that = this;
 		
 		that.parentStack = [];
@@ -142,6 +146,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				that.successHandler = successHandler;
 		if (typeof(errorHandler) != "undefined") 
 				that.errorHandler = errorHandler;
+		if (typeof(withPositions) != "undefined")
+				that.withPositions = withPositions;
 		
 		if (startInFolderId) {
 			var allOrders = DigiWebApp.Order.find();

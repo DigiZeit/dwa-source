@@ -646,8 +646,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
             		, action: function() {
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 						this.init(
-								  OrderSelectionMode.ALL 
-								, function(obj){
+								  OrderSelectionMode.MAYBEALL 
+								, function(obj) {
 									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 									  if (typeof(obj) != "undefined" && obj != null) {
 										  var isFolder = (obj.name == DigiWebApp.Order.name);
@@ -675,6 +675,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 									DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 								}
 								, vaterId
+								, DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren
 						)
 						DigiWebApp.NavigationController.toOrderListPage();
 					}
