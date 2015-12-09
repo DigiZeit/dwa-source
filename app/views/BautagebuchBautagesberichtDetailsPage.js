@@ -198,11 +198,15 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 				try { $('#' + that.content.auftragComboBox.id + "_container").show(); } catch (e) {trackError(e);}
 			}
 		}
-	//	if (parseBool(DigiWebApp.SettingsController.getSetting("debug"))) {
-	//		try { $('#' + DigiWebApp.BookingPage.content.orderButton.id).show(); } catch (e) {trackError(e);}	
-	//		try { $('label[for="' + DigiWebApp.BookingPage.content.orderButton.id + '"]').show(); } catch (e) {trackError(e);}
-	//		try { $('#' + DigiWebApp.BookingPage.content.order.id + "_container").show(); } catch (e) {trackError(e);}
-	//	}
+	}
+
+	, doHideShowPositionCombobox: function(show) {
+		var that = this;
+		var controller = DigiWebApp.BautagebuchBautagesberichtDetailsController;
+		try { $('#' + that.content.positionComboBox.id + "_container").hide(); } catch (e) {trackError(e);}
+		if (show && !controller.get('handOrderId')) {
+			try { $('#' + that.content.auftragComboBox.id + "_container").show(); } catch (e) {trackError(e);}
+		}
 	}
 
     , cssClass: 'bautagebuchBautagesberichtDetailsPage'
@@ -695,36 +699,39 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 	        , events: {
 		            change: {
 		                action: function(itemValues, items) {
-	        				var mySelection = M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection(YES);
+	        				var that = DigiWebApp.BautagebuchBautagesberichtDetailsPage;
+	        				var controller = controller;
+				  			that.doHideShowPositionCombobox(NO);
+	        				var mySelection = M.ViewManager.
+	        										getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
+	        										getSelection(YES);
 	        				if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
 	        					var handOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
 	        					    if (ord) return ord.get('id') == mySelection.value || ord.get('name') == mySelection.label;
 	        					})[0];
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderId", handOrderObj.get("id"));
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderVaterId", handOrderObj.get("vaterId"));
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderName", handOrderObj.get("name"));
-			            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id + "_container").hide();
+			      				controller.set("handOrderId", handOrderObj.get("id"));
+			      				controller.set("handOrderVaterId", handOrderObj.get("vaterId"));
+			      				controller.set("handOrderName", handOrderObj.get("name"));
 	        				} else {
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderId", null);
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderVaterId", null);
-			      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("handOrderName", null);
-			            		$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id + "_container").show();
+			      				controller.set("handOrderId", null);
+			      				controller.set("handOrderVaterId", null);
+			      				controller.set("handOrderName", null);
+						  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
+						  		 || controller.item.get("bautagesberichtTyp") != "<standard>")
+						  		{
+						  			that.doHideShowPositionCombobox(YES);
+						  		}
 	        				}
-		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsId", mySelection.value);
-		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", mySelection.label);
+		      				controller.set("auftragsId", mySelection.value);
+		      				controller.set("auftragsName", mySelection.label);
 							M.ViewManager.
 								getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').
 							  	setValue(mySelection.label);
-		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.setPositionen(M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection(YES).value);
-
-					  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
-					  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
-					  		|| DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp") != "<standard>")
-					  		{
-					  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().show();
-					  		} else {
-					  			$('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.positionComboBox.id).parent().parent().parent().hide();
-					  		}
+		      				controller.setPositionen(
+		      						M.ViewManager.
+		      							getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
+		      							getSelection(YES).value
+		      				);
 
 	        			}
 		          }
