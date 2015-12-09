@@ -555,5 +555,6 @@ M.I18N.de_de = {
 	, eineEbeneHoeher: '..' //'> eine Ebene höher <'
 	, diesenOrdnerVerwenden: '> Diesen Ordner verwenden <'
 	, keinOrdnerAusgewaehlt: '(kein Ordner ausgewaehlt)'
+	, OrdnerHandauftrag: 'Ordner / Handauftrag'
 
 };

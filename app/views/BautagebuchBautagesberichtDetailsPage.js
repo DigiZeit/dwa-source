@@ -638,7 +638,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
         	
 		, orderButton: M.ButtonView.design({
 			  value: M.I18N.l('selectSomething')
-            , label: M.I18N.l('order')
+            , label: M.I18N.l('OrdnerHandauftrag')
             , cssClass: 'orderButton'
 			, events: {
 				tap: {
