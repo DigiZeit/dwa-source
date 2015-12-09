@@ -104,7 +104,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
                       target: DigiWebApp.OrderListController
                     , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){}
 						this.init(
-								  YES 
+								  OrderSelectionMode.FOLDERS 
 								, function(obj) {
 									  var buttonText = M.I18N.l('keinOrdnerAusgewaehlt');
 									  var vaterId = null;

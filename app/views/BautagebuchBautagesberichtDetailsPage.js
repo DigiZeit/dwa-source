@@ -33,13 +33,20 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		            //console.log(projektleiterArray);
 					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("projektleiterList", projektleiterArray);
 
-					// verfügbare Aufträge kopieren und ausgewählten selektieren
+                    M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').setValue(M.I18N.l('selectSomething'));
+
+                    // verfügbare Aufträge kopieren und ausgewählten selektieren
 		            var auftraegeArray = _.map(DigiWebApp.BautagebuchMainController.auftraege, function(o) {
 		            	if ( typeof(o) === "undefined" ) {
 		            		console.log("UNDEFINED ORDER");
 		            	} else {    
 		    				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId) {
 		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId);
+		                        if (o.isSelected) {
+		                        	M.ViewManager.
+		                        		getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').
+		                        		setValue(o.label);
+		                        }
 		    				}
 		                    return o;
 		            	}
@@ -620,17 +627,16 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 							}
 									
 						}
+						// TODO: wir brauchen hier Ordner mit hasPositions 
 						this.init(
-								  YES 
+								  OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
 								, function(obj){
-									  // TODO: Ausgewählten Ordner setzen (siehe change-event in auftragComboBox bzw. positionComboBox)
-//									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
-//										DigiWebApp.SelectionController.setSelectedOrder(obj);
-//									} else {
-//										DigiWebApp.SelectionController.setSelectedPosition(obj);
-//									}
-									DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
-									DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.orderButton.setValue(obj.get("name"));
+									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
+									  if (typeof(obj) != "undefined" && obj != null) {
+										  M.ViewManager.
+										  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
+										  	setSelection(obj.get("id"));
+									  }
 								}
 								, function(){
 									DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
@@ -680,6 +686,9 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 	        				}
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsId", mySelection.value);
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsName", mySelection.label);
+							M.ViewManager.
+								getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').
+							  	setValue(mySelection.label);
 		      				DigiWebApp.BautagebuchBautagesberichtDetailsController.setPositionen(M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection(YES).value);
 
 					  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true

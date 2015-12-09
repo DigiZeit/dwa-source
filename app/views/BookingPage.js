@@ -131,7 +131,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 									
 						}
 						this.init(
-								  NO 
+								  OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
 								, function(obj){
 									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
 									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
