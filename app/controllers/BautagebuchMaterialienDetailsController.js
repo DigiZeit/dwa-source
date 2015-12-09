@@ -129,7 +129,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 
 		var posSelection = M.ViewManager.getView('bautagebuchMaterialienDetailsPage', 'positionComboBox').getSelection();
 		var positionSelected = (typeof(posSelection) != "undefined" && posSelection != "0" );
-		if (!positionSelected) {
+		if (!positionSelected && !that.handOrderId) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                 title: M.I18N.l('noPosSelected')
               , message: M.I18N.l('noPosSelectedMsg')

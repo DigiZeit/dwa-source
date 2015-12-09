@@ -94,7 +94,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		var activitySelected = (typeof(actSelection) != "undefined" && actSelection != "0" );
 		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
 		
-		if (!positionSelected) {
+		if (!positionSelected && !that.handOrderId) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                 title: M.I18N.l('noPosSelected')
               , message: M.I18N.l('noPosSelectedMsg')
