@@ -105,13 +105,20 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				});
 			});
 		} else {
-			var o = null;
-			if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
-			items.push({
-				  icon: that.useFolderIcon
-				, label: M.I18N.l('diesenOrdnerVerwenden')
-				, obj: o
-			});
+			if (
+				   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
+				|| (    (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS)
+				     &&	(o.hasPositions(YES))
+				   )
+			) {
+				var o = null;
+				if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
+				items.push({
+					  icon: that.useFolderIcon
+					, label: M.I18N.l('diesenOrdnerVerwenden')
+					, obj: o
+				});
+			}
 		}
 		DigiWebApp.OrderListPage.header.title.setValue(that.getTitle());
 		that.set('items', items);
@@ -206,7 +213,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS 
 	     		&& selectedItem.icon == that.useFolderIcon)
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
-	     		&& selectedItem.icon == that.useFolderIcon)
+	     		&& selectedItem.icon == that.useFolderIcon
+	     		&& selectedItem.obj.hasPositions(YES))
 	    ) {
 	    	//that.buttonToUpdate.setValue(selectedItem.label);
 	    	return that.successHandler(selectedItem.obj);
