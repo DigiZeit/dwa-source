@@ -221,7 +221,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS_WITH_HANDORDERS 
 	     		&& selectedItem.icon == that.useFolderIcon
 	     		&& selectedItem.obj != null
-	     		&& selectedItem.obj.hasPositions(YES))
+	     		&& selectedItem.obj.hasPositions(NO, YES))
 	    ) {
 	    	//that.buttonToUpdate.setValue(selectedItem.label);
 	    	return that.successHandler(selectedItem.obj);
