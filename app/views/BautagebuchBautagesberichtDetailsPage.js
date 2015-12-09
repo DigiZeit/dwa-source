@@ -12,10 +12,11 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		  pagebeforeshow: {
             action: function() {
 					var that = DigiWebApp.BautagebuchBautagesberichtDetailsPage;
+					var controller = DigiWebApp.BautagebuchBautagesberichtDetailsController;
 
-					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.datum) {
-						var datumArray = DigiWebApp.BautagebuchBautagesberichtDetailsController.datum.split(".");
-						DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
+					if (controller.datum) {
+						var datumArray = controller.datum.split(".");
+						controller.set("datumAsDate", datumArray[2] + "-" + datumArray[1] + "-" + datumArray[0]);
 					}
 
 					//alert("pagebeforeshow");
@@ -24,15 +25,15 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		            	if ( typeof(o) === "undefined" ) {
 		            		console.log("UNDEFINED PROJEKTLEADER");
 		            	} else {    
-		    				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.projektleiterId) {
-		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.projektleiterId);
+		    				if (controller.projektleiterId) {
+		    					o.isSelected = (o.value === controller.projektleiterId);
 		    				}
 		                    return o;
 		            	}
 		            });
 		            projektleiterArray = _.compact(projektleiterArray);
 		            //console.log(projektleiterArray);
-					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("projektleiterList", projektleiterArray);
+					controller.set("projektleiterList", projektleiterArray);
 
                     M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').setValue(M.I18N.l('selectSomething'));
 
@@ -41,8 +42,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		            	if ( typeof(o) === "undefined" ) {
 		            		console.log("UNDEFINED ORDER");
 		            	} else {    
-		    				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId) {
-		    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId);
+		    				if (controller.auftragsId) {
+		    					o.isSelected = (o.value === controller.auftragsId);
 		                        if (o.isSelected) {
 		                        	M.ViewManager.
 		                        		getView('bautagebuchBautagesberichtDetailsPage', 'orderButton').
@@ -53,28 +54,28 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		            	}
 		            });
 					auftraegeArray = _.compact(auftraegeArray);
-					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftraegeList", auftraegeArray);
+					controller.set("auftraegeList", auftraegeArray);
 
 					// verfügbare Positionen kopieren und ausgewählten selektieren
-					if (DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId) {
-						DigiWebApp.BautagebuchBautagesberichtDetailsController.setPositionen(DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId);
+					if (controller.auftragsId) {
+						controller.setPositionen(controller.auftragsId);
     				} else {
 			            var positionenArray = _.map(DigiWebApp.BautagebuchMainController.positionen, function(o) {
 			            	if ( typeof(o) === "undefined" ) {
 			            		console.log("UNDEFINED POSITION");
 			            	} else {    
-//			    				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
-//			    					o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
+//			    				if (controller.positionId) {
+//			    					o.isSelected = (o.value === controller.positionId);
 //			    				}
 			                    return o;
 			            	}
 			            });
 			            positionenArray = _.compact(positionenArray);
-						DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionenList", positionenArray);
+						controller.set("positionenList", positionenArray);
     				}
 
 					// verfügbare Mitarbeiter kopieren und ausgewählte selektieren
-                    var mitarbeiterIds = DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds; 
+                    var mitarbeiterIds = controller.mitarbeiterIds; 
                     var mitarbeiterList = [];
                     var myMitarbeiterList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchMainController.mitarbeiter));
                     var mitarbeiterArray = mitarbeiterList;
@@ -93,7 +94,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 	            		mitarbeiterArray = DigiWebApp.BautagebuchMainController.mitarbeiter;
 	            	}
     				mitarbeiterArray = _.compact(mitarbeiterArray);
-					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterList", mitarbeiterArray);
+					controller.set("mitarbeiterList", mitarbeiterArray);
 					
 					// set mitarbeiterListSelected
                     var mitarbeiterListSelected = [];
@@ -114,7 +115,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		    			});
 	            	}
     				mitarbeiterArraySelected = _.compact(mitarbeiterArraySelected);
-					DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterListSelected", mitarbeiterArraySelected);
+					controller.set("mitarbeiterListSelected", mitarbeiterArraySelected);
 
 					
 			  		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
@@ -140,7 +141,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			  		
 			  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
 			  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
-			  		|| DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp") != "<standard>"
+			  		|| controller.item.get("bautagesberichtTyp") != "<standard>"
 			  		) {
 			  			$('#' + that.content.positionComboBox.id).parent().parent().parent().show();
 			  		} else {
@@ -150,9 +151,9 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			  		// Freischaltung 429
 			  		that.doHideShowOrderCombobox(YES);
 
-			  		DigiWebApp.BautagebuchBautagesberichtDetailsController.setStartUhrzeit();
+			  		controller.setStartUhrzeit();
 			  		
-	            	if (DigiWebApp.BautagebuchBautagesberichtDetailsController.get('handOrderId')) {
+	            	if (controller.get('handOrderId')) {
 	            		$('#' + that.content.positionComboBox.id + "_container").hide();
 //	            	} else {
 //	            		$('#' + that.content.positionComboBox.id + "_container").show();
