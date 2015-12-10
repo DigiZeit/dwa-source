@@ -100,6 +100,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     , init: function(isFirstLoad) {
     	if(DigiWebApp.DashboardPage.needsUpdate || isFirstLoad || this.appCacheUpdateReady()) {
         	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+        	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
         	var items;
         	if (ChefToolOnly) {
 	            items = [
@@ -108,6 +109,11 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	     	                    , icon: '48x48_plain_refresh.png'
 	     	                    , id: 'dataTransfer'
 	     	                }
+	      	                , {
+		  	                      label: M.I18N.l('handApplications')
+		  	                    , icon: '48x48_plain_handauftrag.png'
+		  	                    , id: 'handOrder'
+		  	                }
 	            ];
         	} else {
 	        	// Standard-Einträge
@@ -135,10 +141,13 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	            ];
         	}
             
-            // spezielle Features, wenn freigeschaltet:
+        	// spezielle Features, wenn freigeschaltet:
 
         	// Delete Handauftrag-Menuentry
-        	if (DigiWebApp.SettingsController.featureAvailable('410')) {
+        	if (
+        			DigiWebApp.SettingsController.featureAvailable('410')
+        		||	(ChefToolOnly && !Handpositionen)
+        	) {
         		items = _.map(items,function(item){
         			if (item.id !== "handOrder") return item;
         		});

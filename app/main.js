@@ -989,8 +989,9 @@ if (searchForFeature(409)) { // ChefTool-Only
 	try{delete DigiWebAppOrdinaryDesign.handOrderPage;}catch(e5){}
 }
 
-if ( !(searchForFeature(410)) && !(searchForFeature(409)) ) { // Menüeintrag "Handauftrag" ausblenden
-	// soll heißen, füge den View nur hinzu, wenn dieses Feature NICHT gesetzt ist.
+if (( !(searchForFeature(410)) && !(searchForFeature(409)) ) // Menüeintrag "Handauftrag" ausblenden
+|| searchForFeature(430)
+){ 
 	DigiWebAppOrdinaryDesign.handOrderPage = DigiWebApp.HandOrderPage;
 }
 
