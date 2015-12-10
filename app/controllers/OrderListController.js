@@ -150,9 +150,16 @@ DigiWebApp.OrderListController = M.Controller.extend({
 					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, NO))
 					   )
 				) {
+					var oName = M.I18N.l('keinenOrdnerVerwenden');
+					if (typeof(o) == "undefined") {
+						// just in case...
+						o = null;
+					} else if (o != null) {
+						oName = M.I18N.l('diesenOrdnerVerwenden') + ': ' + o.get("name");
+					}
 					items.push({
 						  icon: that.useFolderIcon
-						, label: M.I18N.l('diesenOrdnerVerwenden') + ': ' + o.get("name")
+						, label: oName
 						, obj: o
 					});
 				}
