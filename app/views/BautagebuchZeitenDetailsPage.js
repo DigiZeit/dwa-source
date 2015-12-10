@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+				DigiWebApp.BautagebuchZeitenDetailsPage.backDone = false;
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
 				var relevantDetailsController = DigiWebApp.BautagebuchZeitenDetailsController;
@@ -156,10 +157,12 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
         }
         , pagehide: {
             action: function() {
-
+        		
         	}
         }
     }
+	
+	, backDone: false
 	
     , cssClass: 'bautagebuchZeitenDetailsPage'
 
@@ -179,6 +182,8 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                     //, action: 'backToBautagebuchZeitenListePageTransition'
         			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){}
         				try{event.preventDefault();}catch(e8){}
+        				if (DigiWebApp.BautagebuchZeitenDetailsPage.backDone) return;
+        				DigiWebApp.BautagebuchZeitenDetailsPage.backDone = true;
         				history.back();
         			}
                 }
