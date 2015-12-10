@@ -236,6 +236,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	     || (that.orderSelectionMode == OrderSelectionMode.FOLDERS 
 	     		&& selectedItem.icon == that.useFolderIcon)
 	     || (that.orderSelectionMode == OrderSelectionMode.ALL 
+	     		&& selectedItem.icon == that.useFolderIcon)
+   	     || (that.orderSelectionMode == OrderSelectionMode.MAYBEALL 
 	     		&& selectedItem.icon == that.useFolderIcon
 	     		&& selectedItem.obj != null
 	     		&& selectedItem.obj.hasPositions(NO, YES))
