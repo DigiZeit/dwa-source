@@ -134,11 +134,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			|| (that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
 		) {
 			var o = null;
-			var withPositionsInFolderCheck = false;
 			if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
 			if (
 					(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-				|| (!withPositionsInFolderCheck || o == null)
 				|| ((that.orderSelectionMode == OrderSelectionMode.ALL || that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
 				     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, YES))
 				   )
