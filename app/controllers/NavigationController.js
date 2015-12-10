@@ -200,7 +200,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
 
     , toHandOrderPage: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-    	if (ChefToolOnly) {
+    	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
+    	if (ChefToolOnly && !Handpositionen) {
 			if (DigiWebApp.SettingsController.featureAvailable('404')) {
 	            DigiWebApp.NavigationController.toButtonDashboardPage();
 			} else {
@@ -213,7 +214,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
 
     , toHandOrderPageTransition: function() {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-    	if (ChefToolOnly) {
+    	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
+    	if (ChefToolOnly && !Handpositionen) {
 			if (DigiWebApp.SettingsController.featureAvailable('404')) {
 	            DigiWebApp.NavigationController.toButtonDashboardPage();
 			} else {
