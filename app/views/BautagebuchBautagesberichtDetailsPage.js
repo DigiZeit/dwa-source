@@ -671,12 +671,10 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 										  if (isPosition) {
 											  orderId = obj.get("orderId");
 										  }
-										  if (isFolder || isHandOrder) {
-											  M.ViewManager.
-											  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
-											  	setSelection(orderId);
-											  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').events.change.action();
-										  }
+										  M.ViewManager.
+										  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
+										  	setSelection(orderId);
+										  M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').events.change.action();
 										  if (isPosition) {
 											  M.ViewManager.
 											  	getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').
