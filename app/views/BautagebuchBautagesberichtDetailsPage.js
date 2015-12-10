@@ -661,13 +661,14 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 									  if (typeof(obj) != "undefined" && obj != null) {
 										  var isFolder = (obj.name == DigiWebApp.Order.name);
+										  var isHandOrder = (obj.name == DigiWebApp.HandOrder.name);
 										  var isPosition = (obj.name == DigiWebApp.Position.name);
 										  var orderId = obj.get("id");
 										  var positionId = obj.get("id");
 										  if (isPosition) {
 											  orderId = obj.get("orderId");
 										  }
-										  if (isFolder) {
+										  if (isFolder || isHandOrder) {
 											  M.ViewManager.
 											  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
 											  	setSelection(orderId);
