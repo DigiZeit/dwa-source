@@ -141,7 +141,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			  		
 			  		// Positionen-ComboBox ausblenden, falls DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren != true
 			  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
-			  		|| controller.item.get("bautagesberichtTyp") != "<standard>"
+			  		|| (typeof(controller.item.get("bautagesberichtTyp")) != "undefined" 
+			  				&& controller.item.get("bautagesberichtTyp") != "<standard>")
 			  		) {
 			  			$('#' + that.content.positionComboBox.id).parent().parent().parent().show();
 			  		} else {
