@@ -650,11 +650,13 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 						var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
 						if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
 							var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
-							if (typeof(potentialOrder) == "undefined" || potentialOrder == null)
+							if (typeof(potentialOrder) == "undefined" || potentialOrder == null) {
 								potentialOrder = DigiWebApp.HandOrder.getById(selectedOrder);
-							if (typeof(potentialOrder) != "undefined" && potentialOrder != null)
+								if (typeof(potentialOrder) != "undefined" && potentialOrder != null)
+									vaterId = potentialOrder.get("vaterId");
+							} else if (typeof(potentialOrder) != "undefined" && potentialOrder != null)
 								vaterId = potentialOrder.get("id");
-//								vaterId = potentialOrder.get("vaterId");
+							}
 						}
 						this.init(
 								  OrderSelectionMode.MAYBEALL 
