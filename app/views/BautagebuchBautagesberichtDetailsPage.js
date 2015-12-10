@@ -698,7 +698,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			      				controller.set("handOrderVaterId", null);
 			      				controller.set("handOrderName", null);
 						  		if (DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren 
-						  		 || controller.item.get("bautagesberichtTyp") != "<standard>")
+						  		|| (typeof(controller.item.get("bautagesberichtTyp")) != "undefined" 
+				  				    && controller.item.get("bautagesberichtTyp") != "<standard>")
 						  		{
 						  			that.doHideShowPositionCombobox(YES);
 						  		}

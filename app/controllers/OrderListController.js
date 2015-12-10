@@ -155,7 +155,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 						// just in case...
 						o = null;
 					} else if (o != null) {
-						oName = M.I18N.l('diesenOrdnerVerwenden') + ': ' + o.get("name");
+						oName = M.I18N.l('diesenOrdnerVerwenden') + o.get("name");
 					}
 					items.push({
 						  icon: that.useFolderIcon
