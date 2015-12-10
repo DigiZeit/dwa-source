@@ -612,7 +612,9 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
             		, action: function() {
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 						var vaterId = null;
-						var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
+						var selectedOrder = DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId;
+						if (typeof(selectedOrder) != "undefined" && selectedOrder != null)
+							selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
 						if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
 							var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
 							if (typeof(potentialOrder) == "undefined" || potentialOrder == null) {
