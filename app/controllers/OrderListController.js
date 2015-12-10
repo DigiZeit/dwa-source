@@ -128,26 +128,6 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var that = this;
 		if (that.parentStack == null) that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
 		var items = [];
-		if (
-			   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-			|| (that.orderSelectionMode == OrderSelectionMode.ALL)
-			|| (that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
-		) {
-			var o = null;
-			if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
-			if (
-					(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
-				|| ((that.orderSelectionMode == OrderSelectionMode.ALL || that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
-				     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, YES))
-				   )
-			) {
-				items.push({
-					  icon: that.useFolderIcon
-					, label: M.I18N.l('diesenOrdnerVerwenden')
-					, obj: o
-				});
-			}
-		}
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
 			var o = that.parentStack[that.parentStack.length - 1];
@@ -157,6 +137,26 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				, obj: o.obj
 			});
 		}
+		if (
+				   (that.orderSelectionMode == OrderSelectionMode.FOLDERS)
+				|| (that.orderSelectionMode == OrderSelectionMode.ALL)
+				|| (that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
+			) {
+				var o = null;
+				if (that.parentStack.length > 0) o = that.parentStack[that.parentStack.length - 1].obj;
+				if (
+						(that.orderSelectionMode == OrderSelectionMode.FOLDERS)
+					|| ((that.orderSelectionMode == OrderSelectionMode.ALL || that.orderSelectionMode == OrderSelectionMode.MAYBEALL)
+					     &&	(typeof(o) != "undefined" && o != null && o.hasPositions(YES, YES))
+					   )
+				) {
+					items.push({
+						  icon: that.useFolderIcon
+						, label: M.I18N.l('diesenOrdnerVerwenden')
+						, obj: o
+					});
+				}
+			}
 		var vaterId = null;
 		var order = DigiWebApp.Order.getById(selectedObjId);
 		if (typeof(order) != "undefined" && order != null) {
