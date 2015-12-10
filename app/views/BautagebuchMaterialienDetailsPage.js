@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+					DigiWebApp.BautagebuchMaterialienDetailsPage.backDone = false;
 					var itemSelected = NO;
 					var relevantDetailsController = DigiWebApp.BautagebuchMaterialienDetailsController;
 
@@ -185,6 +186,8 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
         }
     }
 
+	, backDone: false
+
     , cssClass: 'bautagebuchMaterialienDetailsPage'
 
     , childViews: 'header content'
@@ -201,7 +204,9 @@ DigiWebApp.BautagebuchMaterialienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMaterialienListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+        			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){}
+						if (DigiWebApp.BautagebuchMaterialienDetailsPage.backDone) return;
+						DigiWebApp.BautagebuchMaterialienDetailsPage.backDone = true; 
         				history.back();
         			}
                 }

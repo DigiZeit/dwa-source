@@ -181,7 +181,6 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchZeitenListePageTransition'
         			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){}
-        				try{event.preventDefault();}catch(e8){}
         				if (DigiWebApp.BautagebuchZeitenDetailsPage.backDone) return;
         				DigiWebApp.BautagebuchZeitenDetailsPage.backDone = true;
         				history.back();

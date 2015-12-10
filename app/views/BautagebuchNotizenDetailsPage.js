@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+					DigiWebApp.BautagebuchNotizenDetailsPage.backDone = false;
 					// verfügbare Positionen kopieren und ausgewählte selektieren
 					var itemSelected = NO;
 					var relevantDetailsController = DigiWebApp.BautagebuchNotizenDetailsController;
@@ -168,6 +169,8 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
         }
     }
 
+	, backDone: false
+
     , cssClass: 'bautagebuchNotizenDetailsPage'
 
     , childViews: 'header content'
@@ -184,7 +187,9 @@ DigiWebApp.BautagebuchNotizenDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchNotizenListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+					action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){}
+						if (DigiWebApp.BautagebuchNotizenDetailsPage.backDone) return;
+						DigiWebApp.BautagebuchNotizenDetailsPage.backDone = true;
         				history.back();
         			}
                 }

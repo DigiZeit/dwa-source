@@ -11,6 +11,7 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+				DigiWebApp.BautagebuchMedienDetailsPage.backDone = false;
 				// verfügbare Positionen kopieren und ausgewählte selektieren
 				var itemSelected = NO;
 //				var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
@@ -146,6 +147,8 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 		}
     }
 	
+	, backDone: false
+
     , cssClass: 'bautagebuchMedienDetailsPage'
 
     , childViews: 'header content'
@@ -162,7 +165,9 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
                 tap: {
                     //  target: DigiWebApp.NavigationController
                     //, action: 'backToBautagebuchMedienListePageTransition'
-        			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
+        			action: function(m_id, event) {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){}
+						if (DigiWebApp.BautagebuchMedienDetailsPage.backDone) return;
+						DigiWebApp.BautagebuchMedienDetailsPage.backDone = true; 
         				history.back();
         			}
                 }
