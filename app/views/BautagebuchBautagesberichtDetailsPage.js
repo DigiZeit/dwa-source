@@ -667,7 +667,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 										  if (isPosition) {
 											  orderId = obj.get("orderId");
 										  }
-										  if (isFolder || isHandauftrag) {
+										  if (isFolder) {
 											  M.ViewManager.
 											  	getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').
 											  	setSelection(orderId);
