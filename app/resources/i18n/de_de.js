@@ -553,7 +553,7 @@ M.I18N.de_de = {
 	, ordnerAuswaehlen: 'Ordner auswählen'
 	, auftragAuswaehlen: 'Auftrag auswählen'
 	, eineEbeneHoeher: '..' //'> eine Ebene höher <'
-	, diesenOrdnerVerwenden: '> Diesen Ordner verwenden <'
+	, diesenOrdnerVerwenden: 'verwende'
 	, keinOrdnerAusgewaehlt: '(kein Ordner ausgewaehlt)'
 	, OrdnerHandauftrag: 'Ordner / Handauftrag'
 

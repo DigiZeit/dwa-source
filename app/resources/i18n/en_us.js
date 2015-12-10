@@ -554,7 +554,7 @@ M.I18N.en_us = {
 	, ordnerAuswaehlen: 'Select folder'
 	, auftragAuswaehlen: 'Select order'
 	, eineEbeneHoeher: '..' //'> Go to parent folder <'
-	, diesenOrdnerVerwenden: '> Use this folder <'
+	, diesenOrdnerVerwenden: 'use'
 	, keinOrdnerAusgewaehlt: '(no folder selected)'
 	, OrdnerHandauftrag: 'Folder / Handorder'
 

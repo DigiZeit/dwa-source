@@ -152,7 +152,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				) {
 					items.push({
 						  icon: that.useFolderIcon
-						, label: o.get("name") //M.I18N.l('diesenOrdnerVerwenden')
+						, label: M.I18N.l('diesenOrdnerVerwenden') + ': ' + o.get("name")
 						, obj: o
 					});
 				}
