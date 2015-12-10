@@ -613,7 +613,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
 						var vaterId = null;
 						var selectedOrder = DigiWebApp.BautagebuchBautagesberichtDetailsController.auftragsId;
-						if (typeof(selectedOrder) != "undefined" && selectedOrder != null)
+						if (typeof(selectedOrder) == "undefined" || selectedOrder == null)
 							selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
 						if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
 							var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
