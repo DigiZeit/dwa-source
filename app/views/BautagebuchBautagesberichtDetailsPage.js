@@ -652,7 +652,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 							if (typeof(potentialOrder) == "undefined" || potentialOrder == null)
 								potentialOrder = DigiWebApp.HandOrder.getById(selectedOrder);
 							if (typeof(potentialOrder) != "undefined" && potentialOrder != null)
-								vaterId = potentialOrder.get("Id");
+								vaterId = potentialOrder.get("id");
 //								vaterId = potentialOrder.get("vaterId");
 						}
 						this.init(
