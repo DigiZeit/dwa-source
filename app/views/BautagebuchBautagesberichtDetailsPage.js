@@ -776,8 +776,13 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 	        , events: {
 		            change: {
 		                action: function(itemValues, items) {
-			  				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionId", M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').getSelection(YES).value);
-			  				DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionName", M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').getSelection(YES).label);
+	        				var controller = DigiWebApp.BautagebuchBautagesberichtDetailsController;
+	        				var selObj = M.ViewManager.
+		  									getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').
+		  									getSelection(YES);
+		  					if (typeof(selObj) != "undefined" && selObj != null) {
+			  				controller.set("positionId", selObj.value);
+			  				controller.set("positionName", selObj.label);
 		              }
 		          }
 		    }
