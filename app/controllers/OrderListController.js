@@ -127,10 +127,8 @@ DigiWebApp.OrderListController = M.Controller.extend({
 
 	, reloadItems: function(selectedObjId) {
 		var that = this;
-		(that.parentStack == null) 
-			? that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
-		(typeof(selectedObjId) != "undefined") 
-			? that.selectedObjId = null : that.selectedObjId = selectedObjId;
+		if (that.parentStack == null) that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
+		if (typeof(selectedObjId) != "undefined") that.selectedObjId = null : that.selectedObjId = selectedObjId;
 		var items = [];
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
@@ -268,8 +266,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				  var orderSelectionMode = that.orderSelectionMode;
 				  var successHandler = that.successHandler;
 				  var errorHandler = that.errorHandler;
-				  (typeof(startInFolderId) == "undefined") 
-					  ? startInFolderId = null;
+				  if (typeof(startInFolderId) == "undefined") startInFolderId = null;
 				  var withPositions = that.withPositions;
 				  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
 			}
