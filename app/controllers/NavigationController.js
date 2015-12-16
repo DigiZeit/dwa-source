@@ -198,7 +198,16 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	}
     }
 
-    , toHandOrderPage: function(vaterId, successCallback) {
+    , setHandOrderControllerProperties: function(vaterId, successCallback, errorCallback) {
+		if (typeof(vaterId) == "undefined") vaterId = null;
+		if (typeof(successCallback) == "undefined") successCallback = null;
+		if (typeof(successCallback) == "undefined") successCallback = null;
+		DigiWebApp.HandOrderController.set('vaterId', vaterId);
+		DigiWebApp.HandOrderController.set('successCallback', successCallback);
+		DigiWebApp.HandOrderController.set('errorCallback', errorCallback);
+    }
+    
+    , toHandOrderPage: function(vaterId, successCallback, errorCallback) {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
     	if (ChefToolOnly && !Handpositionen) {
@@ -208,15 +217,15 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	            DigiWebApp.NavigationController.toDashboardPage();
 			}
     	} else {
-    		if (typeof(vaterId) == "undefined") vaterId = null;
-    		if (typeof(successCallback) == "undefined") successCallback = null;
-    		DigiWebApp.HandOrderController.set('vaterId', vaterId);
-    		DigiWebApp.HandOrderController.set('successCallback', successCallback);
+    		DigiWebApp.NavigationController.setHandOrderControllerProperties(
+					 vaterId
+				   , successCallback
+				   , errorCallback);
     		DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.NONE, NO);
     	}
     }
 
-    , toHandOrderPageTransition: function(vaterId, successCallback) {
+    , toHandOrderPageTransition: function(vaterId, successCallback, errorCallback) {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
     	if (ChefToolOnly && !Handpositionen) {
@@ -226,19 +235,19 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	            DigiWebApp.NavigationController.toDashboardPage();
 			}
     	} else {
-    		if (typeof(vaterId) == "undefined") vaterId = null;
-    		if (typeof(successCallback) == "undefined") successCallback = null;
-    		DigiWebApp.HandOrderController.set('vaterId', vaterId);
-    		DigiWebApp.HandOrderController.set('successCallback', successCallback);
+    		DigiWebApp.NavigationController.setHandOrderControllerProperties(
+    					 vaterId
+					   , successCallback
+					   , errorCallback);
         	DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.SLIDEUP, NO);
     	}
     }
 
-    , backToHandOrderPageTransition: function(vaterId) {
-		if (typeof(vaterId) == "undefined") vaterId = null;
-		if (typeof(successCallback) == "undefined") successCallback = null;
-		DigiWebApp.HandOrderController.set('vaterId', vaterId);
-		DigiWebApp.HandOrderController.set('successCallback', successCallback);
+    , backToHandOrderPageTransition: function(vaterId, successCallback, errorCallback) {
+		DigiWebApp.NavigationController.setHandOrderControllerProperties(
+					 vaterId
+				   , successCallback
+				   , errorCallback);
         DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.POP, YES);
     }
 

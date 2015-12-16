@@ -12,7 +12,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
     , orderNameToSave: ''
     , vaterId: null
     
-    , defaultSuccessCallback: function() {
+    , defaultSuccessCallback: function(op) {
 		var that = this; 
 	    M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
 	    DigiWebApp.SelectionController.useSelections = NO;
@@ -27,7 +27,20 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	    DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
 	}
 
+	, defaultErrorCallback: function() {
+		DigiWebApp.NavigationController.backToDashboardPage();
+	}
+
 	, successCallback: null
+	
+	, errorCallback: null
+	
+	, back: function() {
+    	var errorCallback = that.defaultErrorCallback;
+    	if (typeof(that.errorCallback) != "undefined" && that.errorCallback != null)
+    		errorCallback = that.errorCallback;
+    	errorCallback();
+	}
 
     , save: function() {
 		var that = this;
@@ -105,7 +118,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 	var successCallback = that.defaultSuccessCallback;
                 	if (typeof(that.successCallback) != "undefined" && that.successCallback != null)
                 		successCallback = that.successCallback;
-                	successCallback();
+                	successCallback(op);
                 } else {
                     //M.DialogView.alert({
                     DigiWebApp.ApplicationController.nativeAlertDialogView({

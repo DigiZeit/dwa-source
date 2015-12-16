@@ -261,17 +261,19 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	}
 	
 	, toHandOrderPage: function() {
-		var that = this;		
+		var that = this;
+		var func = function(startInFolderId) {
+			  var orderSelectionMode = that.orderSelectionMode;
+			  var successHandler = that.successHandler;
+			  var errorHandler = that.errorHandler;
+			  if (typeof(startInFolderId) == "undefined") startInFolderId = null;
+			  var withPositions = that.withPositions;
+			  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
+		}
 		DigiWebApp.NavigationController.toHandOrderPageTransition(
 			  DigiWebApp.Order.getById(that.selectedObjId)
-			, function(startInFolderId) {
-				  var orderSelectionMode = that.orderSelectionMode;
-				  var successHandler = that.successHandler;
-				  var errorHandler = that.errorHandler;
-				  if (typeof(startInFolderId) == "undefined") startInFolderId = null;
-				  var withPositions = that.withPositions;
-				  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
-			}
+			, func
+			, func
 		);
 		
 	}

@@ -55,9 +55,9 @@ DigiWebApp.HandOrderPage = M.PageView.design({
             , anchorLocation: M.LEFT
             , events: {
                 tap: {
-                      target: DigiWebApp.NavigationController
+                      target: DigiWebApp.HandOrderController
                     , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-                    	this.backToDashboardPage();
+                    	this.back();
                     }
                 }
             }
