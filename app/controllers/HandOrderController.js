@@ -12,9 +12,12 @@ DigiWebApp.HandOrderController = M.Controller.extend({
     , orderNameToSave: ''
     , vaterId: null
     
-    , defaultSuccessCallback: function(op) {
-		var that = this; 
-	    M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
+    , resetHandOrderPage: function() {
+    	M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
+	}
+
+	, defaultSuccessCallback: function(op) {
+		var that = this;
 	    DigiWebApp.SelectionController.useSelections = NO;
 	    DigiWebApp.SelectionController.showHandOrderFirst = YES;
 	    that.currentHandOrderName = op.get("name");
@@ -28,6 +31,8 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	}
 
 	, defaultErrorCallback: function() {
+		var that = this;
+		that.resetHandOrderPage();
 		DigiWebApp.NavigationController.backToDashboardPage();
 	}
 
@@ -119,6 +124,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 	var successCallback = that.defaultSuccessCallback;
                 	if (typeof(that.successCallback) != "undefined" && that.successCallback != null)
                 		successCallback = that.successCallback;
+            		that.resetHandOrderPage();
                 	successCallback(op);
                 } else {
                     //M.DialogView.alert({
