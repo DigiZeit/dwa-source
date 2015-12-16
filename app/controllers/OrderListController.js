@@ -38,6 +38,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, withPositions: false
 	
 	, parentStack: null
+	, selectedObjId: null
 	
 	, useFolderIcon: '48x48_plain_folder_ok.png'
 	, folderUpIcon: '48x48_plain_folder_up.png'
@@ -126,7 +127,10 @@ DigiWebApp.OrderListController = M.Controller.extend({
 
 	, reloadItems: function(selectedObjId) {
 		var that = this;
-		if (that.parentStack == null) that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
+		(that.parentStack == null) 
+			? that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
+		(typeof(selectedObjId) != "undefined") 
+			? that.selectedObjId = null : that.selectedObjId = selectedObjId;
 		var items = [];
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
@@ -165,7 +169,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 				}
 			}
 		var vaterId = null;
-		var order = DigiWebApp.Order.getById(selectedObjId);
+		var order = DigiWebApp.Order.getById(that.selectedObjId);
 		if (typeof(order) != "undefined" && order != null) {
 			vaterId = order.get("id");
 		}
@@ -217,9 +221,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 
 		try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}		
 
-		if (this.latestId) $('#' + this.latestId).removeClass('selected');
+		if (that.latestId) $('#' + that.latestId).removeClass('selected');
 	    $('#' + id).addClass('selected');
-	    this.latestId = id;
+	    that.latestId = id;
 	
 	    var selectedItem = that.items[m_id];
 	    if (selectedItem.icon == that.folderUpIcon) {
@@ -253,6 +257,23 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	    	    
 	    // reload items from next folder
 		that.reloadItems(selectedItem.obj.get("id"));
+		
+	}
+	
+	, toHandOrderPage: function() {
+		var that = this;		
+		DigiWebApp.NavigationController.toHandOrderPageTransition(
+			  DigiWebApp.Order.getById(that.selectedObjId)
+			, function(startInFolderId) {
+				  var orderSelectionMode = that.orderSelectionMode;
+				  var successHandler = that.successHandler;
+				  var errorHandler = that.errorHandler;
+				  (typeof(startInFolderId) == "undefined") 
+					  ? startInFolderId = null;
+				  var withPositions = that.withPositions;
+				  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
+			}
+		);
 		
 	}
 	

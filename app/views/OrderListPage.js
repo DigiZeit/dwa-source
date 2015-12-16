@@ -30,7 +30,7 @@ DigiWebApp.OrderListPage = M.PageView.design({
     }
     
     , header: M.ToolbarView.design({
-          childViews: 'backButton title'
+          childViews: 'backButton title newButton'
         , cssClass: 'header unselectable'
         , isFixed: YES
         , title: M.LabelView.design({
@@ -48,6 +48,18 @@ DigiWebApp.OrderListPage = M.PageView.design({
       			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
       				DigiWebApp.OrderListController.errorHandler();
       			}
+              }
+          }
+        })
+        , newButton: M.ButtonView.design({
+            value: M.I18N.l('neu')
+          , icon: 'new'
+          , anchorLocation: M.RIGHT
+          , cssClass: 'green_background'
+          , events: {
+              tap: {
+	              target: DigiWebApp.OrderListController
+	            , action: 'toHandOrderPage'
               }
           }
       })

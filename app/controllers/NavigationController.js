@@ -198,7 +198,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	}
     }
 
-    , toHandOrderPage: function() {
+    , toHandOrderPage: function(vaterId, successCallback) {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
     	if (ChefToolOnly && !Handpositionen) {
@@ -208,11 +208,15 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	            DigiWebApp.NavigationController.toDashboardPage();
 			}
     	} else {
+    		if (typeof(vaterId) == "undefined") vaterId = null;
+    		if (typeof(successCallback) == "undefined") successCallback = null;
+    		DigiWebApp.HandOrderController.set('vaterId', vaterId);
+    		DigiWebApp.HandOrderController.set('successCallback', successCallback);
     		DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.NONE, NO);
     	}
     }
 
-    , toHandOrderPageTransition: function() {
+    , toHandOrderPageTransition: function(vaterId, successCallback) {
     	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
     	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
     	if (ChefToolOnly && !Handpositionen) {
@@ -222,11 +226,19 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	            DigiWebApp.NavigationController.toDashboardPage();
 			}
     	} else {
+    		if (typeof(vaterId) == "undefined") vaterId = null;
+    		if (typeof(successCallback) == "undefined") successCallback = null;
+    		DigiWebApp.HandOrderController.set('vaterId', vaterId);
+    		DigiWebApp.HandOrderController.set('successCallback', successCallback);
         	DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.SLIDEUP, NO);
     	}
     }
 
-    , backToHandOrderPageTransition: function() {
+    , backToHandOrderPageTransition: function(vaterId) {
+		if (typeof(vaterId) == "undefined") vaterId = null;
+		if (typeof(successCallback) == "undefined") successCallback = null;
+		DigiWebApp.HandOrderController.set('vaterId', vaterId);
+		DigiWebApp.HandOrderController.set('successCallback', successCallback);
         DigiWebApp.NavigationController.switchToPage('handOrderPage', M.TRANSITION.POP, YES);
     }
 

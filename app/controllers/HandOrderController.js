@@ -11,6 +11,23 @@ DigiWebApp.HandOrderController = M.Controller.extend({
       currentHandOrderName: ''
     , orderNameToSave: ''
     , vaterId: null
+    
+    , defaultSuccessCallback: function() {
+		var that = this; 
+	    M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
+	    DigiWebApp.SelectionController.useSelections = NO;
+	    DigiWebApp.SelectionController.showHandOrderFirst = YES;
+	    that.currentHandOrderName = op.get("name");
+	
+	    DigiWebApp.NavigationController.toBookTimePage(YES);
+	
+	    DigiWebApp.SelectionController.setOrders(op.get("id"));
+	    
+	    // PositionsComboBox ausblenden
+	    DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
+	}
+
+	, successCallback: null
 
     , save: function() {
 		var that = this;
@@ -85,18 +102,10 @@ DigiWebApp.HandOrderController = M.Controller.extend({
                 op.save();
                 
                 if (op) {
-                    M.ViewManager.getView('handOrderPage', 'orderName').setValue('');
-                    DigiWebApp.SelectionController.useSelections = NO;
-                    DigiWebApp.SelectionController.showHandOrderFirst = YES;
-                    this.currentHandOrderName = op.get("name");
-
-                    DigiWebApp.NavigationController.toBookTimePage(YES);
-
-                    DigiWebApp.SelectionController.setOrders(op.get("id"));
-                    
-                    // PositionsComboBox ausblenden
-                    DigiWebApp.BookingPage.doHideShowPositionCombobox(false);
-
+                	var successCallback = that.defaultSuccessCallback;
+                	if (typeof(that.successCallback) != "undefined" && that.successCallback != null)
+                		successCallback = that.successCallback;
+                	successCallback();
                 } else {
                     //M.DialogView.alert({
                     DigiWebApp.ApplicationController.nativeAlertDialogView({

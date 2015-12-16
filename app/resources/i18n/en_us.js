@@ -559,4 +559,6 @@ M.I18N.en_us = {
 	, keinOrdnerAusgewaehlt: '(no folder selected)'
 	, OrdnerHandauftrag: 'Folder / Handorder'
 
+	, neu: "New"
+
 };

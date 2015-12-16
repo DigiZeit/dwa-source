@@ -557,5 +557,7 @@ M.I18N.de_de = {
 	, keinenOrdnerVerwenden: '> keinen Ordner verwenden <'
 	, keinOrdnerAusgewaehlt: '(kein Ordner ausgewaehlt)'
 	, OrdnerHandauftrag: 'Ordner / Handauftrag'
+		
+	, neu: "Neu"
 
 };
