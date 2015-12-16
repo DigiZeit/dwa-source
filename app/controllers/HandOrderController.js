@@ -36,6 +36,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	, errorCallback: null
 	
 	, back: function() {
+		var that = this;
     	var errorCallback = that.defaultErrorCallback;
     	if (typeof(that.errorCallback) != "undefined" && that.errorCallback != null)
     		errorCallback = that.errorCallback;
