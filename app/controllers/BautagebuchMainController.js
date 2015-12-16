@@ -36,6 +36,24 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		}]
 	}
 
+	, ladeAuftraege: function() {
+		var that = this;
+		var auftraege = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
+        var auftraegeArray = _.map(_.compact(auftraege), function(o) {
+        	if ( typeof(o) === "undefined" ) {
+        		console.log("UNDEFINED ORDER");
+        	} else {   
+        		try {
+        			var obj = { label: o.get('name'), value: o.get('id') };
+        		} catch(e) { console.log(o); throw e;}
+                return obj;
+        	}
+        });
+        auftraegeArray = _.compact(auftraegeArray);
+        auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+        that.set('auftraege', auftraegeArray);
+	}
+
 	, init: function(isFirstLoad) {
 		var that = this;
 		
@@ -126,25 +144,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 			        
 			// Aufträge
 	        itemSelected = NO;
-			var auftraege = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
-	        var auftraegeArray = _.map(_.compact(auftraege), function(o) {
-	        	if ( typeof(o) === "undefined" ) {
-	        		console.log("UNDEFINED ORDER");
-	        	} else {   
-	        		try {
-	        			var obj = { label: o.get('name'), value: o.get('id') };
-            		} catch(e) { console.log(o); throw e;}
-	//        		if(obj.value === that.selections.activity) {
-	//        			obj.isSelected = YES;
-	//        			itemSelected = YES;
-	//        		}
-	                return obj;
-	        	}
-	        });
-	        auftraegeArray = _.compact(auftraegeArray);
-	        // push "Bitte wählen Option"
-	        auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
-	        that.set('auftraege', auftraegeArray);
+	        that.ladeAuftraege();
 	        
 			// Positionen
 	        itemSelected = NO;

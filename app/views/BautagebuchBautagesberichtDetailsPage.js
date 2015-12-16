@@ -628,6 +628,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 						this.init(
 								  OrderSelectionMode.MAYBEALL 
 								, function(obj) {
+									  DigiWebApp.BautagebuchMainController.ladeAuftraege();
 									  DigiWebApp.NavigationController.backToBautagebuchBautagesberichtDetailsPageTransition();
 									  if (typeof(obj) != "undefined" && obj != null) {
 										  var isPosition = (obj.name == DigiWebApp.Position.name);
