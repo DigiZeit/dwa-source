@@ -128,7 +128,9 @@ DigiWebApp.OrderListController = M.Controller.extend({
 	, reloadItems: function(selectedObjId) {
 		var that = this;
 		if (that.parentStack == null) that.init(that.orderSelectionMode, that.successHandler, that.errorHandler);
-		if (typeof(selectedObjId) != "undefined") that.selectedObjId = null : that.selectedObjId = selectedObjId;
+		(typeof(selectedObjId) != "undefined") 
+			? that.selectedObjId = null 
+			: that.selectedObjId = selectedObjId;
 		var items = [];
 		// parent-folders from stack
 		if (that.parentStack.length > 0) {
