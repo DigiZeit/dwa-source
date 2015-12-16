@@ -272,6 +272,7 @@ DigiWebApp.OrderListController = M.Controller.extend({
 			  if (typeof(startInFolderId) == "undefined") startInFolderId = null;
 			  var withPositions = that.withPositions;
 			  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
+			  DigiWebApp.NavigationController.toOrderListPage();
 		}
 		DigiWebApp.NavigationController.toHandOrderPageTransition(
 			  vaterId
