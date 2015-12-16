@@ -50,7 +50,7 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
         	}
         });
         auftraegeArray = _.compact(auftraegeArray);
-        auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+        auftraegeArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:NO});
         that.set('auftraege', auftraegeArray);
 	}
 
