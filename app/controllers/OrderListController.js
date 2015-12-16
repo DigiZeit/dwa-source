@@ -265,11 +265,13 @@ DigiWebApp.OrderListController = M.Controller.extend({
 		var vaterId = null;
 		var ordner = DigiWebApp.Order.getById(that.selectedObjId);
 		if (typeof(ordner) != "undefined" && ordner != null) vaterId = ordner.get('id');
-		var func = function(startInFolderId) {
+		var func = function(neuerHandauftrag) {
 			  var orderSelectionMode = that.orderSelectionMode;
 			  var successHandler = that.successHandler;
 			  var errorHandler = that.errorHandler;
-			  if (typeof(startInFolderId) == "undefined") startInFolderId = null;
+			  var startInFolderId = null
+			  if (typeof(neuerHandauftrag) != "undefined")
+				  startInFolderId = neuerHandauftrag.get('vaterId'); 
 			  var withPositions = that.withPositions;
 			  that.init(orderSelectionMode, successHandler, errorHandler, startInFolderId, withPositions);				  
 			  DigiWebApp.NavigationController.toOrderListPage();
