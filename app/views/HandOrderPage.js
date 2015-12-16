@@ -30,7 +30,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
 				//console.log("DigiWebApp.HandOrderPage.pagebeforeshow");
 				// Freischaltung "Handpositionen"
 				if (DigiWebApp.SettingsController.featureAvailable('430')) {
-					var vaterId = controller.get('vaterId');
+					var vaterId = that.controller.get('vaterId');
 					if (typeof(vaterId) != "undefined" && vaterId != null) {
 						var ordner = DigiWebApp.Order.getById(vaterId);
 						M.ViewManager.getView('handOrderPage', 'targetFolderButton').setValue(ordner.get('name'));
