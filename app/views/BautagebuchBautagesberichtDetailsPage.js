@@ -274,8 +274,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			      					}
 			      				}
 			      				, cancel: {
-			      					label: M.I18N.l('cancel')
-			      					action: function() {
+			      					  label: M.I18N.l('cancel')
+			      					, action: function() {
 			      					}
 			      				}
 			      			}
