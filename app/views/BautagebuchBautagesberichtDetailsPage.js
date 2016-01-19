@@ -264,18 +264,18 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		          		    , callbacks: {
 			      				confirm: {
 			      					  target: this
+			      					, label: M.I18N.l('apply') //TODO Übernehmen i.O.?
 			      					, action: function(value, date) {
 			      						DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datum", value);
 			      					}
 			      				}
 			      				, before: {
 			      					action: function(value, date) {
-			      					
 			      					}
 			      				}
 			      				, cancel: {
+			      					label: M.I18N.l('cancel')
 			      					action: function() {
-			      					
 			      					}
 			      				}
 			      			}

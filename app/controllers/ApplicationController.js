@@ -187,9 +187,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// etwaigen Loader ausblenden
 		DigiWebApp.ApplicationController.DigiLoaderView.hide()
 		
-		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok";
-		if (typeof(obj.cancelButtonValue) === "undefined") obj.cancelButtonValue = "Cancel";
-		if (typeof(obj.title) === "undefined") obj.title = "Confirm";
+		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok"; //TODO
+		if (typeof(obj.cancelButtonValue) === "undefined") obj.cancelButtonValue = M.I18N.l('cancel');
+		if (typeof(obj.title) === "undefined") obj.title = "Confirm"; //TODO
 		if (typeof(obj.message) === "undefined") obj.message = "";
 		if (typeof(navigator.notification) === "undefined") {
 			M.DialogView.confirm(obj);
