@@ -17,10 +17,9 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	}
 
 	, defaultSuccessCallback: function(op) {
-		var that = this;
 	    DigiWebApp.SelectionController.useSelections = NO;
 	    DigiWebApp.SelectionController.showHandOrderFirst = YES;
-	    that.currentHandOrderName = op.get("name");
+	    DigiWebApp.HandOrderController.currentHandOrderName = op.get("name");
 	
 	    DigiWebApp.NavigationController.toBookTimePage(YES);
 	
@@ -31,8 +30,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	}
 
 	, defaultErrorCallback: function() {
-		var that = this;
-		that.resetHandOrderPage();
+		DigiWebApp.HandOrderController.resetHandOrderPage();
 		DigiWebApp.NavigationController.backToDashboardPage();
 	}
 
