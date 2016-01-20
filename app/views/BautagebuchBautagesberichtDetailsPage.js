@@ -261,10 +261,11 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		          		    , dayNames: DigiWebApp.ApplicationController.dayNames
 		          		    , monthNamesShort: DigiWebApp.ApplicationController.monthNamesShort
 		          		    , monthNames: DigiWebApp.ApplicationController.monthNames
+	      					, cancelButtonValue: M.I18N.l('cancel')
+	      					, confirmButtonValue: M.I18N.l('apply') //TODO Übernehmen i.O.?
 		          		    , callbacks: {
 			      				confirm: {
 			      					  target: this
-			      					, label: M.I18N.l('apply') //TODO Übernehmen i.O.?
 			      					, action: function(value, date) {
 			      						DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datum", value);
 			      					}
@@ -274,8 +275,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 			      					}
 			      				}
 			      				, cancel: {
-			      					  label: M.I18N.l('cancel')
-			      					, action: function() {
+			      					action: function() {
 			      					}
 			      				}
 			      			}
