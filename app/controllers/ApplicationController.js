@@ -113,8 +113,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// etwaigen Loader ausblenden
 		DigiWebApp.ApplicationController.DigiLoaderView.hide()
 		
-		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok";
-		if (typeof(obj.title) === "undefined") obj.title = "Alert";
+		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = M.I18N.l('ok');
+		if (typeof(obj.title) === "undefined") obj.title = M.I18N.l('warnungDialog');
 		if (typeof(obj.message) === "undefined") obj.message = "";
 		var mycallback = function() { return; };
 		if (typeof(obj.callbacks) !== "undefined") {
@@ -187,9 +187,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		// etwaigen Loader ausblenden
 		DigiWebApp.ApplicationController.DigiLoaderView.hide()
 		
-		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = "Ok"; //TODO
+		if (typeof(obj.confirmButtonValue) === "undefined") obj.confirmButtonValue = M.I18N.l('ok');
 		if (typeof(obj.cancelButtonValue) === "undefined") obj.cancelButtonValue = M.I18N.l('cancel');
-		if (typeof(obj.title) === "undefined") obj.title = "Confirm"; //TODO
+		if (typeof(obj.title) === "undefined") obj.title = M.I18N.l('bestaetigenDialog');
 		if (typeof(obj.message) === "undefined") obj.message = "";
 		if (typeof(navigator.notification) === "undefined") {
 			M.DialogView.confirm(obj);
@@ -349,7 +349,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		
 		, nativeLoaderAvailable: function() {
 			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') == NO) return false;
-			if (typeof(navigator) == "undefined" || typeof(navigator.notification) == "undefined" || typeof(navigator.notification.activityStart) == "undefined" || typeof(navigator.notification.activityStop) == "undefined") {
+			if (typeof(navigator) == "undefined" 
+					|| typeof(navigator.notification) == "undefined" 
+					|| typeof(navigator.notification.activityStart) == "undefined" 
+					|| typeof(navigator.notification.activityStop) == "undefined") {
 				return false;
 			} else {
 				return true;
@@ -426,7 +429,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		, nativeProgressAvailable: function() {
 			if (DigiWebApp.SettingsController.getSetting('silentLoader') == YES) return false;
 			if (DigiWebApp.SettingsController.getSetting('useNativeLoader') == NO) return false;
-			if (typeof(navigator) == "undefined" || typeof(navigator.notification) == "undefined" || typeof(navigator.notification.progressStart) == "undefined" || typeof(navigator.notification.progressStop) == "undefined") {
+			if (typeof(navigator) == "undefined" 
+					|| typeof(navigator.notification) == "undefined" 
+					|| typeof(navigator.notification.progressStart) == "undefined" 
+					|| typeof(navigator.notification.progressStop) == "undefined") {
 				return false;
 			} else {
 				return true;

@@ -39,7 +39,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
         		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
         		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
         		DigiWebApp.NavigationController.toSplashViewPage();
-        		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+        		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
         		DigiWebApp.NavigationController.backToDashboardPage();
     		}
     	} else {
@@ -68,7 +68,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
 	    		DigiWebApp.NavigationController.toSplashViewPage();
-	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
 	    		//DigiWebApp.NavigationController.backToDashboardPagePOP();
     		}	
     	} else {
@@ -97,7 +97,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
 	    		DigiWebApp.NavigationController.toSplashViewPage();
-	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
 	    		//DigiWebApp.NavigationController.toDashboardPage();
     		}
     	} else {
@@ -126,7 +126,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
 	    		DigiWebApp.NavigationController.toSplashViewPage();
-	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
 	    		//DigiWebApp.NavigationController.toDashboardPageTransition();
     		}
     	} else {
@@ -155,7 +155,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
 	    		DigiWebApp.NavigationController.toSplashViewPage();
-	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
 	    		//DigiWebApp.NavigationController.toDashboardPageFlipTransition();
     		}
     	} else {
@@ -184,7 +184,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
 	    		//var o = DigiWebApp.ApplicationController.useSplashJustForFade;
 	    		DigiWebApp.ApplicationController.useSplashJustForFade = YES;
 	    		DigiWebApp.NavigationController.toSplashViewPage();
-	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0;
+	    		DigiWebApp.ApplicationController.useSplashJustForFade = 0; //TODO: NO?
 	    		//DigiWebApp.NavigationController.backToDashboardPageFlipTransition();
     		}
     	} else {

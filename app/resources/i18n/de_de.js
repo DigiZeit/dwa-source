@@ -44,8 +44,8 @@ M.I18N.de_de = {
 	, openBookingsOverwriteBySettingsUpdate : "Es existieren nicht übertragene Buchungen. Möchten Sie die Einstellungen trotzdem ändern? Alle bestehenden Buchungen gehen verloren!"
 	, yes: "Ja"
 	, no: "Nein"
-	, assume: "übernehmen"
-	, apply: "übernehmen"
+	, assume: "Übernehmen"
+	, apply: "Übernehmen"
 	, noOpenBookings: "Feierabendbuchung nicht erforderlich, da es keine offene Buchung abzuschließen gibt."
 	, connectionError: "Verbindungsfehler" // wird inzwischen nicht mehr gezeigt
 	, connectionErrorMsg: "Bei der Verbindung mit dem Service ist ein Fehler aufgetreten." // wird inzwischen nicht mehr gezeigt
@@ -271,7 +271,7 @@ M.I18N.de_de = {
 	, language_es_es: "Español"
 	, language_nl_nl: "Nederlands"
 	, refresh: "akt."
-	, cancel: "abbrechen"
+	, cancel: "Abbrechen"
 		
 	, selectSomethingOptional: "Bitte wählen... (optional)"
 	, bookingFrom: "Von"
@@ -353,7 +353,7 @@ M.I18N.de_de = {
 	, BautagebuchBautagesberichte: "Bautagesberichte"
 	, BautagebuchBautagesbericht: "Bautagesbericht"
 	, BautagebuchAdd: "neu"
-	, BautagebuchDelete: "löschen"
+	, BautagebuchDelete: "Löschen"
 	, BautagebuchBautagesberichtAbschliessen: "diesen Bautagesbericht abschließen"
 	, BautagebuchSaveOrClose: "Speichern oder Abschließen"
 	, BautagebuchWetter: "Wetter"
@@ -559,5 +559,7 @@ M.I18N.de_de = {
 	, OrdnerHandauftrag: 'Ordner / Handauftrag'
 		
 	, neu: "Neu"
-
+	, ok: "Ok"
+	, bestaetigenDialog: "Bitte bestätigen"
+	, warnungDialog: "Warnung"
 };

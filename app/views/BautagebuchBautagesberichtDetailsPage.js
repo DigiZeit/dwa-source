@@ -262,7 +262,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsPage = M.PageView.design({
 		          		    , monthNamesShort: DigiWebApp.ApplicationController.monthNamesShort
 		          		    , monthNames: DigiWebApp.ApplicationController.monthNames
 	      					, cancelButtonValue: M.I18N.l('cancel')
-	      					, confirmButtonValue: M.I18N.l('apply') //TODO Übernehmen i.O.?
+	      					, confirmButtonValue: M.I18N.l('apply')
 		          		    , callbacks: {
 			      				confirm: {
 			      					  target: this
