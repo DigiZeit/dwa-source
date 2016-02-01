@@ -606,6 +606,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            							//successCallback();
 			      						}
 			      	        		}
+	                			}
 		            		});
 	                		successCallback();
 	                	}
