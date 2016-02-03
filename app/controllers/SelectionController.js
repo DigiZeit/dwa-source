@@ -36,7 +36,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		
         if (that.skipSetSelectionBy) return;
         
-        writeToLog('setSelectionByPreviousSelection entry');
+        if (inDebug()) writeToLog('setSelectionByPreviousSelection entry');
 
 		var mySelection = JSON.parse(JSON.stringify(that.selections));
         
@@ -56,9 +56,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         if (that.skipSetSelectionBy) return;
         
-        writeToLog('setSelectionWithCurrentHandOrderFirst entry');
+        if (inDebug()) writeToLog('setSelectionWithCurrentHandOrderFirst entry');
 
-        this.setOrders(0,0,0);
+        this.setOrders(0, 0, 0);
 
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -78,7 +78,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         if (that.skipSetSelectionBy) return;
 
-        writeToLog('setSelectionByCurrentBooking entry');
+        if (inDebug()) writeToLog('setSelectionByCurrentBooking entry');
 
         var booking = DigiWebApp.BookingController.currentBooking;
         
@@ -168,7 +168,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setOrders: function(orderId, positionId, activityId) {
     	var that = this;
 
-        writeToLog('setOrders entry');
+    	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId + ', activityId=' + activityId);
 
         if (orderId && orderId == that.getSelectedOrderItem()) return that.setPositions(positionId, activityId);
         if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
@@ -214,7 +214,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
         }
         
-        writeToLog('setOrders, orderArray.length=' + orderArray.length);
+        if (inDebug()) writeToLog('setOrders, orderArray.length=' + orderArray.length);
         
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
@@ -232,8 +232,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     , setPositions: function(positionId, activityId) {
     	var that = this;
-
-        writeToLog('setPositions entry');
 
         if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
             // alle "verknüpften Elemente" ebenfalls aktualisieren
@@ -302,7 +300,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
         }
         
-        writeToLog('setPositions, positionsArray.length=' + positionsArray.length);
+        if (inDebug()) writeToLog('setPositions, positionsArray.length=' + positionsArray.length);
 
         that.set('positions', positionsArray);
         
@@ -316,8 +314,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     /* only set those activities that are related to the chosen position */
     , setActivities: function(checkForWorkPlan, activityId) {
     	var that = this;
-    	
-        writeToLog('setActivities entry');
     	
     	if (activityId && activityId == that.getSelectedActivityItem()) return;
 
@@ -395,7 +391,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        }
         }
         
-        writeToLog('setActivities, activitiesArray.length=' + activitiesArray.length);
+        if (inDebug()) writeToLog('setActivities, activitiesArray.length=' + activitiesArray.length);
         
         // set selection arrays to start content binding process
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
