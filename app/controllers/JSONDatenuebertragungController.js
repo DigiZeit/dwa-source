@@ -1277,6 +1277,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				return errorCallback();
 			} else {
 				// weiter in der Verarbeitungskette
+				//TODO: Warum hier kein Aufruf von setSelectionWithCurrentHandOrderFirst()/setSelectionByCurrentBooking()
+				//analog zu empfangePositionen?
 				return successCallback();
 			}
 			

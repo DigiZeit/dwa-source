@@ -377,6 +377,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
     , closingTime: function() {
     	if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+		writeToLog("Hauptmenü: '" + M.I18N.l('closingTime') + "' gedrückt");
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('bucheFeierabend'));
 		setTimeout(DigiWebApp.BookingController.closeDay,100);
     }
@@ -384,7 +385,10 @@ DigiWebApp.DashboardController = M.Controller.extend({
     , dataTransfer: function(isClosingDay) {
     	if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
 
-		writeToLog("Hauptmenü: '" + M.I18N.l('dataTransfer') + "' gedrückt");
+    	// Feierabend wird in closingTime() geloggt
+    	if (!isClosingDay) {
+    		writeToLog("Hauptmenü: '" + M.I18N.l('dataTransfer') + "' gedrückt");
+    	}
 
     	var startTransfer = NO;
     	if (DigiWebApp.DashboardController.lastTimestampDatatransfer !== null) {
