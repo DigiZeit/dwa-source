@@ -373,7 +373,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        activitiesArray = _.compact(activitiesArray);
 	        // Nur "Bitte wählen" auswählen, wenn kein Auftrag gesetzt
-	        if (orderId != "0") {
+	        if (orderId == "0") {
 	        	activityId = activitiesArray[0].value;
 	        }
 	        var itemSelected = NO;
@@ -384,9 +384,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		            return item;
 	        	}
 	        });
-	        if (!itemSelected) {
-	        	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
-	        }
+	        //if (!itemSelected) {
+	        //	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
+	        //}
         }
         
         if (inDebug()) writeToLog('setActivities, activitiesArray.length=' + activitiesArray.length);
