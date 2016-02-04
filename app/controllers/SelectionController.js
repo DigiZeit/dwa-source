@@ -196,7 +196,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        orderArray = _.compact(orderArray);
 	        if (orderArray.length == 1) {
-		        // Wenn es nur einen Ordner gibt dann diesen automatisch auswählen
+		        // Wenn es nur einen Ordner gibt, dann diesen automatisch auswählen
 	        	orderId = orderArray[0].value;
 	        } else {
 	        	// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
@@ -288,14 +288,14 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        
 	        // Ersten Auftrag in der Liste automatisch auswählen
         	positionId = positionsArray[0].value;
-
-        	positionsArray = _.map(positionsArray, function(item) {
-	        	if (item) {
-		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(positionId));
-		            return item;
-	        	}
-	        });
         }
+        
+    	positionsArray = _.map(positionsArray, function(item) {
+        	if (item) {
+	            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(positionId));
+	            return item;
+        	}
+        });
         
         if (inDebug()) writeToLog('setPositions, positionsArray.length=' + positionsArray.length);
 
