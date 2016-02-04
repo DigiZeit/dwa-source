@@ -235,6 +235,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setPositions: function(positionId, activityId) {
     	var that = this;
 
+    	if (inDebug()) writeToLog('setPositions(positionId=' + positionId + ', activityId=' + activityId);
+
         if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
             // alle "verknüpften Elemente" ebenfalls aktualisieren
             that.setSelectedPosition(that.getSelectedPosition());
@@ -311,6 +313,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var that = this;
     	
     	if (activityId && activityId == that.getSelectedActivityItem()) return;
+
+    	if (inDebug()) writeToLog('setActivities(checkForWorkPlan=' + checkForWorkPlan + ', activityId=' + activityId);
 
     	var posId = that.getSelectedPositionItem();
     	var orderId = that.getSelectedOrderItem();
