@@ -176,17 +176,17 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
-        // filter orders: only orders with selectable elements
+        // Ordner filtern: nur solche mit auswählbaren Elementen
         orders = _.filter(orders, function(o) { return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name; });
         
-        // reset orderId to a selectable value
+        // orderId  auf einen auswählbaren Wert zurücksetzen
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
     		orderId = 0;
     	}
 
         var orderArray = [];
-        if (orders.length < 1) {
-        	orderArray.push({label: M.I18N.l('noData'), value: '0'});
+        if (orders.length == 0) {
+        	orderArray.push( { label: M.I18N.l('noData'), value: '0' } );
         } else {
 	        var itemSelected = NO;
 	        var orderArray = _.map(orders, function(obj) {
@@ -196,14 +196,16 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        orderArray = _.compact(orderArray);
 	        if (orderArray.length == 1) {
+		        // Wenn es nur einen Ordner gibt dann diesen automatisch auswählen
 	        	orderId = orderArray[0].value;
 	        } else {
-		        // push "Bitte wählen Option"
 	        	// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
 		        if (DigiWebApp.SettingsController.featureAvailable('416')) {
-		        	orderArray.push({label: M.I18N.l('order'), value: '0', isSelected: NO});
+		        	// Scholpp-spezifisch: Eintrag "Auftrag" hinzufügen
+		        	orderArray.push( { label: M.I18N.l('order'), value: '0', isSelected: NO } );
 		        } else {
-		        	orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
+			        // Eintrag "Bitte wählen" hinzufügen
+		        	orderArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: NO } );
 		        }
 	        }
 	        orderArray = _.map(orderArray, function(item) {
@@ -264,15 +266,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
         }
         var positions = DigiWebApp.Position.getByVaterId(orderId);
 
-        // reset orderId to a selectable value
+        // positionId auf einen auswählbaren Wert zurücksetzen
     	if (!_.contains(_.pluck(_.pluck(positions, 'record'), 'id'), positionId)) {
     		positionId = 0;
     	}
 
     	var positionsArray = [];
-        if (positions.length < 1) {
+        if (positions.length == 0) {
         	//positionsArray.push({label: M.I18N.l('noData'), value: '0'});
-        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0'});
+        	positionsArray.push( { label: M.I18N.l('selectSomething'), value: '0' } );
         } else {
 
 	        var positionsArray = _.map(positions, function(obj) {
@@ -281,18 +283,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        positionsArray = _.compact(positionsArray);
-	        if (positionsArray.length == 1) {
-	        	positionId = positionsArray[0].value;
-	        } else {
-		        // push "Bitte wählen Option"
-	        	// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
-		        if (DigiWebApp.SettingsController.featureAvailable('416')) {
-		        	positionsArray.push({label: M.I18N.l('position'), value: '0', isSelected: NO});
-		        } else {
-		        	positionsArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: NO});
-		        }
-	        }
-	        positionsArray = _.map(positionsArray, function(item) {
+	        
+	        // Ersten Auftrag in der Liste automatisch auswählen
+        	positionId = positionsArray[0].value;
+
+        	positionsArray = _.map(positionsArray, function(item) {
 	        	if (item) {
 		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(positionId));
 		            return item;
@@ -337,7 +332,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        i = 0;
 	
-	        /* if a workplan exists, only use those activities that are in the workplan */
+	        // If a workplan exists, only use those activities that are in the workplan
 	        if (workPlans.length === 1) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
@@ -356,16 +351,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
         if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
 
-        // reset activityId to a selectable value
-    	if (!activityId 
-    	 || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
+        // activityId auf einen auswählbaren Wert zurücksetzen
+    	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
     	}
 
         var activitiesArray = [];
-        if (activities.length < 1) {
+        if (activities.length == 0) {
         	//activitiesArray.push({label: M.I18N.l('noData'), value: '0'});
-        	activitiesArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: YES});
+        	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
         } else {
 	        var itemSelected = NO;
 	        var activitiesArray = _.map(activities, function(obj) {
@@ -374,7 +368,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        // nur Bitte Wählen, wenn kein Auftrag gesetzt
+	        // Nur "Bitte wählen" auswählen, wenn kein Auftrag gesetzt
 	        if (orderId != "0") {
 	        	activityId = activitiesArray[0].value;
 	        }
@@ -387,7 +381,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        if (!itemSelected) {
-	        	activitiesArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: YES});
+	        	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
 	        }
         }
         
