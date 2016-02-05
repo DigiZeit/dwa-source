@@ -170,7 +170,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId + ', activityId=' + activityId);
 
-        if (orderId && orderId == that.getSelectedOrderItem()) return that.setPositions(positionId, activityId);
+        if (orderId && orderId == that.getSelectedOrderItem()) updatePositions(positionId, activityId);
         if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
@@ -179,7 +179,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         // Ordner filtern: nur solche mit auswählbaren Elementen
         orders = _.filter(orders, function(o) { return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name; });
         
-        // orderId  auf einen auswählbaren Wert zurücksetzen
+        // orderId auf einen auswählbaren Wert zurücksetzen
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
     		orderId = 0;
     	}
@@ -220,6 +220,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
+        
+        updatePositions(positionId, activityId);
+    }
+     
+    , updatePositions: function(positionId, activityId) {
 		var mySelectionObj = that.getSelectedOrderItem(YES);
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
@@ -275,7 +280,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	var positionsArray = [];
         if (positions.length == 0) {
-        	//positionsArray.push({label: M.I18N.l('noData'), value: '0'});
         	positionsArray.push( { label: M.I18N.l('selectSomething'), value: '0' } );
         } else {
 
@@ -308,7 +312,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     }
 
-    /* only set those activities that are related to the chosen position */
+    /* Nur die Leistungen anbieten, die dem ausgewählten Auftrag zugeordnet sind. */
     , setActivities: function(checkForWorkPlan, activityId) {
     	var that = this;
     	
@@ -336,7 +340,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        i = 0;
 	
-	        // If a workplan exists, only use those activities that are in the workplan
+	        // Wenn ein Arbeitsplan exisitiert dann nur die Leistungen verwenden die im Arbeitsplan sind.
 	        if (workPlans.length === 1) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
@@ -362,7 +366,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var activitiesArray = [];
         if (activities.length == 0) {
-        	//activitiesArray.push({label: M.I18N.l('noData'), value: '0'});
         	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
         } else {
 	        var itemSelected = NO;
