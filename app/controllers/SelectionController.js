@@ -225,6 +225,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     }
      
     , updatePositions: function(positionId, activityId) {
+    	var that = this;
+    	
 		var mySelectionObj = that.getSelectedOrderItem(YES);
 		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
