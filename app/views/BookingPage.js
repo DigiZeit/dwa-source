@@ -43,7 +43,18 @@ DigiWebApp.BookingPage = M.PageView.design({
         		}
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
         		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
-        		DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
+        		var isHandOrder = false;
+				var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
+				if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
+					var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
+					if (typeof(potentialOrder) == "undefined" || potentialOrder == null) {
+						potentialOrder = DigiWebApp.HandOrder.getById(selectedOrder);
+					}
+					if (typeof(potentialOrder) != "undefined" && potentialOrder != null) {
+						isHandOrder = true;
+					}
+				}
+        		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandOrder);
         		DigiWebApp.SelectionController.skipSetSelectionBy = false;
 			}
 		}

@@ -223,17 +223,21 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
         return that.updatePositions(positionId, activityId);
     }
-     
+
     , updatePositions: function(positionId, activityId) {
     	var that = this;
     	
 		var mySelectionObj = that.getSelectedOrderItem(YES);
-		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value))
+		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value));
+		
 		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
 		if (!isHandauftrag) {
 			return that.setPositions(positionId, activityId);
 		} else {
+			// Sicherstellen dass beim Handauftrag nicht parallel ein Auftrag gesetzt ist
+			that.setSelectedPosition(0);
+			
 			M.ViewManager.getView('bookingPage', 'orderButton').setValue(mySelectionObj.label);
         	return that.setActivities(YES, activityId);
 		}
@@ -377,7 +381,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        // Nur "Bitte wählen" auswählen, wenn kein Auftrag gesetzt
+	        // Nur "Bitte wählen" auswählen, wenn kein Ordner/Auftrag gesetzt
 	        if (orderId == "0") {
 	        	activityId = activitiesArray[0].value;
 	        }
