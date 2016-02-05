@@ -170,7 +170,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
     	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId + ', activityId=' + activityId);
 
-        if (orderId && orderId == that.getSelectedOrderItem()) updatePositions(positionId, activityId);
+        if (orderId && orderId == that.getSelectedOrderItem()) return updatePositions(positionId, activityId)
         if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
@@ -221,7 +221,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
         
-        updatePositions(positionId, activityId);
+        return updatePositions(positionId, activityId);
     }
      
     , updatePositions: function(positionId, activityId) {
