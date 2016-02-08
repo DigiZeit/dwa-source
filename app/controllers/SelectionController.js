@@ -354,7 +354,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         } else {
             activities = DigiWebApp.SelectionController.getActivities();
         }
-/*        
+        /* Die Aufrufer müssen orderId, positionId und activityId je nach Fall (ByPreviousSelection, ByCurrentBooking
+         * etc) korrekt setzen. An dieser Stelle sind nicht mehr alle Fälle unterscheidbar.
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		         && DigiWebApp.BookingController.currentBooking  !== null
 		     && !activityId 
@@ -363,7 +364,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
     	}
         if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
-*/
+        */
+        
         // activityId auf einen auswählbaren Wert zurücksetzen
     	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
