@@ -380,8 +380,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        // Nur "Bitte wählen" auswählen, wenn kein Ordner/Auftrag gesetzt
-	        if (orderId == "0") {
+	        // Erste Leistung auswählen, wenn ein Ordner/Auftrag gesetzt ist, sonst "Bitte wählen" durch activityId = 0
+	        if (orderId != "0") {
 	        	activityId = activitiesArray[0].value;
 	        }
 	        var itemSelected = NO;

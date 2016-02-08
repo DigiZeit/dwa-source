@@ -56,7 +56,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 					}
 				}
 				*/
-				// Wird schon über BookingController.init() in SelectionController.updatePositions() aufgerufen.
+				// Wird schon über BookingController.init() in SelectionController.updatePositions() aufgerufen:
         		//DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandOrder);
         		DigiWebApp.SelectionController.skipSetSelectionBy = false;
 			}
