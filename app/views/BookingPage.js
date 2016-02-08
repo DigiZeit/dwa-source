@@ -18,9 +18,11 @@ DigiWebApp.BookingPage = M.PageView.design({
             //, action: 'init'
 			action: function() {
 	
-				// gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
-				DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
-				DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
+				if (!DigiWebApp.SelectionController.skipSetSelectionBy) {
+					// gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
+					DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
+					DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
+				}
 				
 				// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
