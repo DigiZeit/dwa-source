@@ -446,6 +446,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , startGetLocationTimestamp: null
+    
+    // Ermittelt die Geokoordinate für die Zeitbuchung
     , getBookingLocation: function(outerSuccessCallback) {
     	
     	var successHandlerCalled = false;
@@ -740,6 +742,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //
 //   	}
     
+    // Prüft, ob alle Voraussetzungen für eine Zeitbuchung erfüllt sind
     , checkBooking: function(skipSelection) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in checkBooking");
 		
@@ -760,8 +763,8 @@ DigiWebApp.BookingController = M.Controller.extend({
             });
             return false;
         } else {
-            // check if hand order
-            if (!this.isHandOrder(orderId)) {// if it is not a hand order position and activity must be selected
+        	// if it is not a hand order, position and activity must be selected
+            if (!this.isHandOrder(orderId)) {
                 // check if position is set
                 if (!DigiWebApp.SelectionController.isPositionSelected()) {
                     //M.DialogView.alert({

@@ -356,7 +356,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         }
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
-		         && DigiWebApp.BookingController.currentBooking  !== null
+		     && DigiWebApp.BookingController.currentBooking  !== null
+		     && activityId != "undefined"
 		     && !activityId 
 		     && activityId != 0
 		) { 
@@ -382,7 +383,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        activitiesArray = _.compact(activitiesArray);
 	        // Erste Leistung auswählen, wenn ein Ordner/Auftrag und keine Leistung gesetzt ist, 
 	        // sonst "Bitte wählen" durch activityId = 0
-	        if (orderId != "0" && (activityId == null || activityId == 0)) {
+	        if (orderId != "0" && (activityId === "undefined" || activityId == null || activityId == 0)) {
 	        	activityId = activitiesArray[0].value;
 	        }
 	        var itemSelected = NO;
