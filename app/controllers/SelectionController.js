@@ -96,7 +96,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
         	that.setUebernachtungskennzeichenScholpp(uebernachtungAuswahl);
 		}
-        
     }
     
     , setUebernachtungskennzeichenScholpp: function(uebernachtungsAuswahl) {
@@ -120,7 +119,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
         that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-		that.saveSelection();
+		//Wird schon in setActivities aufgerufen(): that.saveSelection();
     }
     
     , setScholppButtons: function(withSetArbeitsende, withSetToSix) {
@@ -393,9 +392,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		            return item;
 	        	}
 	        });
-	        //if (!itemSelected) {
-	        //	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
-	        //}
+	        if (!itemSelected) {
+	        	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
+	        }
         }
         
         if (inDebug()) writeToLog('setActivities, activitiesArray.length=' + activitiesArray.length);
@@ -408,6 +407,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             that.set('activities', activitiesArray);
     	}
+    	that.saveSelection();
 		
         return; // that.saveSelection();
 
