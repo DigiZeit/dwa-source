@@ -285,6 +285,7 @@ DigiWebApp.BookingPage = M.PageView.design({
     }
 
     , doHideShowPositionCombobox: function(show) {
+    	if (inDebug()) writeToLog("doHideShowPositionCombobox(" + show + ")");
 		try { $('#' + DigiWebApp.BookingPage.content.position.id + "_container").hide(); } catch (e) {trackError(e);}
     	if (show) {
     		// Freischaltung 429 "mehrstufige Auftragsauswahl"
