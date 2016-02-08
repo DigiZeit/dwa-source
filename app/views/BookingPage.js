@@ -20,6 +20,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
+					//TODO Muss in diesem Fall doHideShowPositionCombobox() aufgerufen werden?
 				} else {
 					DigiWebApp.BookingController.init();
 					// Bugfix 2108: Rename in order to be consistent with DSO
@@ -43,19 +44,6 @@ DigiWebApp.BookingPage = M.PageView.design({
         		}
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
         		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
-        		/*
-        		var isHandOrder = false;
-				var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
-				if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
-					var potentialOrder = DigiWebApp.Order.getById(selectedOrder);
-					if (typeof(potentialOrder) == "undefined" || potentialOrder == null) {
-						potentialOrder = DigiWebApp.HandOrder.getById(selectedOrder);
-					}
-					if (typeof(potentialOrder) != "undefined" && potentialOrder != null) {
-						isHandOrder = true;
-					}
-				}
-				*/
 				// Wird schon über BookingController.init() in SelectionController.updatePositions() aufgerufen:
         		//DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandOrder);
         		DigiWebApp.SelectionController.skipSetSelectionBy = false;
