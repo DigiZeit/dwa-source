@@ -354,17 +354,16 @@ DigiWebApp.SelectionController = M.Controller.extend({
         } else {
             activities = DigiWebApp.SelectionController.getActivities();
         }
-        
+/*        
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
-		     && DigiWebApp.BookingController.currentBooking  !== null
-		     && typeof(activityId) !== "undefined"
+		         && DigiWebApp.BookingController.currentBooking  !== null
 		     && !activityId 
 		     && activityId != 0
 		) { 
         	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
     	}
         if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
-
+*/
         // activityId auf einen auswählbaren Wert zurücksetzen
     	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {
     		activityId = 0;
@@ -381,7 +380,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        	}
 	        });
 	        activitiesArray = _.compact(activitiesArray);
-	        // Erste Leistung auswählen, wenn ein Ordner/Auftrag und keine Leistung gesetzt ist, 
+	        // Erste Leistung auswählen wenn ein Ordner/Auftrag und keine Leistung gesetzt ist, 
 	        // sonst "Bitte wählen" durch activityId = 0
 	        if (orderId != "0" && (typeof(activityId) == "undefined" || activityId == null || activityId == 0)) {
 	        	activityId = activitiesArray[0].value;
