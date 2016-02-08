@@ -17,7 +17,7 @@ DigiWebApp.BookingPage = M.PageView.design({
             //  target: DigiWebApp.BookingController
             //, action: 'init'
 			action: function() {
-				// Freischaltung 416 "Tätigkeits-Icons"
+				// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
 				} else {
@@ -43,6 +43,7 @@ DigiWebApp.BookingPage = M.PageView.design({
         		}
 				// Freischaltung 429 "mehrstufige Auftragsauswahl"
         		DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
+        		/*
         		var isHandOrder = false;
 				var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
 				if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
@@ -54,7 +55,9 @@ DigiWebApp.BookingPage = M.PageView.design({
 						isHandOrder = true;
 					}
 				}
-        		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandOrder);
+				*/
+				// Wird schon über BookingController.init() in SelectionController.updatePositions() aufgerufen.
+        		//DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandOrder);
         		DigiWebApp.SelectionController.skipSetSelectionBy = false;
 			}
 		}
