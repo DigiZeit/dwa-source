@@ -357,7 +357,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		     && DigiWebApp.BookingController.currentBooking  !== null
-		     && activityId != "undefined"
+		     && activityId !== "undefined"
 		     && !activityId 
 		     && activityId != 0
 		) { 
