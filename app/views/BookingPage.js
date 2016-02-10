@@ -42,14 +42,16 @@ DigiWebApp.BookingPage = M.PageView.design({
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.feierabendButton.id).hide();
         		}
-				// Freischaltung 402 "Materialerfasung Only"
+				// Freischaltung 402 "Materialerfassung only"
         		if (DigiWebApp.SettingsController.featureAvailable('402')) {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).show(); 			
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
 
-        		DigiWebApp.SelectionController.skipSetSelectionBy = false;
+        		// Flag darf nicht beim Anzeigen zurückgesetzt werden, sonst wird beim zweiten Anzeigen des 
+        		// Buchen-Screens die Auswahl nicht mehr angezeigt.
+        		// DigiWebApp.SelectionController.skipSetSelectionBy = false;
         		
 			}
 		}
