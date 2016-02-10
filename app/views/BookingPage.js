@@ -49,9 +49,7 @@ DigiWebApp.BookingPage = M.PageView.design({
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
 
-        		// Flag darf nicht beim Anzeigen zurückgesetzt werden, sonst wird beim zweiten Anzeigen des 
-        		// Buchen-Screens die Auswahl nicht mehr angezeigt.
-        		// DigiWebApp.SelectionController.skipSetSelectionBy = false;
+        		DigiWebApp.SelectionController.skipSetSelectionBy = false;
         		
 			}
 		}
