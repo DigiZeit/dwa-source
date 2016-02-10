@@ -18,17 +18,15 @@ DigiWebApp.BookingPage = M.PageView.design({
             //, action: 'init'
 			action: function() {
 	
-				if (!DigiWebApp.SelectionController.skipSetSelectionBy) {
-					// gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
-					DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
-					DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
-				}
+				// gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
+				DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
+				DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 				
 				// Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
 				} else {
-					// Set up booking page according to the current app state (current booking, use selection etc) 
+					// Buchen-Screen gemäß des App-Zustands (CurrentBooking, useSelections etc) initialisieren
 					DigiWebApp.BookingController.init();
 					// Bugfix 2108: Rename in order to be consistent with DSO
 					if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
