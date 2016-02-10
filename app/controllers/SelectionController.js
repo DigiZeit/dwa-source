@@ -21,10 +21,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
         , spesenkennzeichenScholpp: null
     }
 
-    // Flag to use selection that has been made by hand
+    // use selection that has been made by hand
     , useSelections: NO
 
-    // Flag to show hand order at first position, only set to YES by HandOrderController
+    // show hand order at first position, only set to YES by HandOrderController
     , showHandOrderFirst: NO
 
     , uebernachtungskennzeichenScholpp: null
@@ -289,8 +289,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        });
 	        positionsArray = _.compact(positionsArray);
 	        
-	        // Ersten Auftrag in der Liste automatisch auswählen
-        	positionId = positionsArray[0].value;
+	        // Falls nichts gesetzt dann ersten Auftrag in der Liste automatisch auswählen
+	        if (!hasValue(positionId) || positionId == 0) {
+	        	positionId = positionsArray[0].value;
+	        }
         }
         
     	positionsArray = _.map(positionsArray, function(item) {

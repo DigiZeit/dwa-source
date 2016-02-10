@@ -49,6 +49,10 @@ DigiWebApp.BookingPage = M.PageView.design({
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
+        		
+        		// Nur einmal die Auswahl anzeigen. Wenn der User aus dem Buchen-Screen raus und wieder rein geht,
+        		// soll die aktuelle Buchung kommen, damit er sich diese wieder anzeigen lassen kann. 
+        		DigiWebApp.SelectionController.useSelections = NO;
 			}
 		}
         , pageshow: {
