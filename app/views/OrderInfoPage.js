@@ -70,7 +70,8 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 	                action: function() {
 		                var orderId = M.ViewManager.getView('orderInfoPage', 'order').getSelection(YES).value;
 		                if (orderId) {
-			                var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
+		                	// we need to check handOrders also
+			                var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
 			                _.each(orders, function(order) {
 		                    	if (order.get('id') == orderId) {
 		                    		DigiWebApp.OrderInfoController.set('activeOrder', [order]);
@@ -78,8 +79,10 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.order = M.ViewManager.getView('orderInfoPage', 'order').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(M.ViewManager.getView('orderInfoPage', 'order').getSelection());
+		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(
+		                    					M.ViewManager.getView('orderInfoPage', 'order').getSelection());
 		                    			DigiWebApp.SelectionController.setPositions();
+		                    			DigiWebApp.SelectionController.useSelections = YES;
 		                    		}
 		                    	}
 			                });
@@ -120,8 +123,10 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.position = M.ViewManager.getView('orderInfoPage', 'position').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(M.ViewManager.getView('orderInfoPage', 'position').getSelection());
+		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(
+		                    					M.ViewManager.getView('orderInfoPage', 'position').getSelection());
 		                    			DigiWebApp.SelectionController.setActivities(YES);
+		                    			DigiWebApp.SelectionController.useSelections = YES;
 		                    		}
 		                    	}
 			                });

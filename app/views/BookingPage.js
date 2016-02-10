@@ -28,7 +28,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				} else {
 					// Buchen-Screen gemäß des App-Zustands (CurrentBooking, useSelections etc) initialisieren
 					DigiWebApp.BookingController.init();
-					// Bugfix 2108: Rename in order to be consistent with DSO
+					// Ticket 2108: Rename in order to be consistent with DSO
 					if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.order.id, M.I18N.l('dtc6Ordner'));
 						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPage.content.position.id, M.I18N.l('dtc6Auftrag'));
@@ -144,12 +144,15 @@ DigiWebApp.BookingPage = M.PageView.design({
 						this.init(
 								  OrderSelectionMode.POSITIONS 
 								, function(obj){
+									// Callback wenn der Benutzer in der mehrst. Auftragsauswahl einen Ordner
+									// oder einen Auftrag ausgewählt hat.
 									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
 									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
 										DigiWebApp.SelectionController.setSelectedOrder(obj);
 									} else {
 										DigiWebApp.SelectionController.setSelectedPosition(obj);
 									}
+	                    			DigiWebApp.SelectionController.useSelections = YES;
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
 								, function(){

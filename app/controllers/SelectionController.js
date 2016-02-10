@@ -351,7 +351,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
             activities = DigiWebApp.SelectionController.getActivities();
         }
         /* Die Aufrufer müssen orderId, positionId und activityId je nach Fall (ByPreviousSelection, ByCurrentBooking
-         * etc) korrekt setzen. Hier sind nicht mehr alle Fälle unterscheidbar.
+         * etc) korrekt setzen. Hier sind nicht mehr alle Fälle unterscheidbar, konkret der Fall: currentBooking ja,
+         * aber trotzdem muss previousSelection angezeigt werden.
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		         && DigiWebApp.BookingController.currentBooking  !== null
 		     && !activityId 
@@ -407,7 +408,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             that.set('activities', activitiesArray);
     	}
-    	that.saveSelection();
 		
         return; // that.saveSelection();
 
@@ -589,7 +589,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	that.selections.position = that.getSelectedPositionItem();
     	that.selections.activity = that.getSelectedActivityItem();
 
-        if (!DigiWebApp.SelectionController.showHandOrderFirst) that.useSelections = YES;
+        //if (!DigiWebApp.SelectionController.showHandOrderFirst) that.useSelections = YES;
     }
     
     , getActivities: function(queryobj) {
