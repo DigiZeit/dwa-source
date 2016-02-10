@@ -13,8 +13,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , positions: null
     , activities: null
     
-	, skipSetSelectionBy: false
-
     , selections: {
           order: null
         , position: null
@@ -23,19 +21,19 @@ DigiWebApp.SelectionController = M.Controller.extend({
         , spesenkennzeichenScholpp: null
     }
 
-    // use selection that has been made by hand
+    // Flag to use selection that has been made by hand
     , useSelections: NO
 
+    // Flag to show hand order at first position, only set to YES by HandOrderController
     , showHandOrderFirst: NO
 
     , uebernachtungskennzeichenScholpp: null
+    
     , spesenkennzeichenScholpp: null
     
     , setSelectionByPreviousSelection: function() {
         var that = this;
 		
-        if (that.skipSetSelectionBy) return;
-        
         if (inDebug()) writeToLog('setSelectionByPreviousSelection entry');
 
 		var mySelection = JSON.parse(JSON.stringify(that.selections));
@@ -54,8 +52,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setSelectionWithCurrentHandOrderFirst: function() {
         var that = this;
 
-        if (that.skipSetSelectionBy) return;
-        
         if (inDebug()) writeToLog('setSelectionWithCurrentHandOrderFirst entry');
 
         this.setOrders(0, 0, 0);
@@ -75,8 +71,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     
     , setSelectionByCurrentBooking: function() {
         var that = this;
-
-        if (that.skipSetSelectionBy) return;
 
         if (inDebug()) writeToLog('setSelectionByCurrentBooking entry');
 
@@ -686,7 +680,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (order && typeof(order) == "object") {
     		orderId = order.get("id");
     	}
-		that.skipSetSelectionBy = true;
 		if (order && that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId);
 		}
@@ -725,8 +718,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		
 		M.ViewManager.getView('bookingPage', 'orderButton').setValue(buttonLabel);
 
-		that.skipSetSelectionBy = true;
-
 		if (that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId, posId);
 		}
@@ -763,8 +754,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (act && typeof(act) == "object") {
     		actId = act.get("id");
     	}
-		
-		that.skipSetSelectionBy = true;
 
 		if (that.getSelectedOrderItem() != orderId) {
 			return that.setOrders(orderId, posId, actId);

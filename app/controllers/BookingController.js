@@ -74,17 +74,17 @@ DigiWebApp.BookingController = M.Controller.extend({
      * 3) Presets the selection lists to show the data of the current open booking
      *
      * On first and every other load:
-     * If back from employee selection apge
-     * 1) sets isBackFromEmployeePage to NO and nothing more
+     * If back from employee selection page
+     * sets isBackFromEmployeePage to NO and nothing more
      *
      * Else
-     * Sets the selection list according to different flags in SelectionController:
+     * sets the selection list according to different flags in SelectionController:
      * showHandOrders or useSelection (selection made before)
      * if they are false, set selection to current open booking
      * if no open booking reset selection
      *
-     * @param {Boolean} isFirstLoad is passed if this function is used in a page event like pageshow => determines that the page is loaded for the very
-     * first time during this application life cycle
+     * @param {Boolean} isFirstLoad is passed if this function is used in a page event like pageshow 
+     * => determines that the page is loaded for the very first time during this application life cycle
      */
     , init: function(isFirstLoad) {
 	

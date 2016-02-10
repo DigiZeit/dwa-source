@@ -28,6 +28,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				if (DigiWebApp.SettingsController.featureAvailable("416")) {
 					DigiWebApp.NavigationController.toBookTimePage(); // zum Scholpp-Custom-BookingScreen
 				} else {
+					// Set up booking page according to the current app state (current booking, use selection etc) 
 					DigiWebApp.BookingController.init();
 					// Bugfix 2108: Rename in order to be consistent with DSO
 					if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
@@ -48,9 +49,6 @@ DigiWebApp.BookingPage = M.PageView.design({
         		} else {
         			$('#' + DigiWebApp.BookingPage.header.materialButton.id).hide();
         		}
-
-        		DigiWebApp.SelectionController.skipSetSelectionBy = false;
-        		
 			}
 		}
         , pageshow: {
