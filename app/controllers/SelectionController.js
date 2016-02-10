@@ -408,6 +408,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	} else {
             that.set('activities', activitiesArray);
     	}
+    	that.saveSelection();
 		
         return; // that.saveSelection();
 
