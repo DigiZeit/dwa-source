@@ -133,7 +133,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
         // Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
         if (DigiWebApp.SettingsController.featureAvailable('416')) {
-            // Ticket 2108
+			// Ticket 2108: Rename in order to be consistent with DSO
 			if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
 				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.order.id, M.I18N.l('dtc6Ordner'));
 				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.position.id, M.I18N.l('dtc6Auftrag'));
@@ -568,36 +568,30 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 1000);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again immediatedly")
-		                	getLocationNow(successCallback, nextOptions, getLocationNow);
-	                		
-	                		// Bugfix 3739: Dieser Dialog ging immer wieder auf, bis es entweder einen GPS-Timeout
-	                		// oder eine gültige Position gab. Die Information bringt dem User nichts, deswegen
-	                		// Dialog deaktiviert.
-//	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user")
-//	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//	                			  title: M.I18N.l('GPSError')
-//	                			, message: M.I18N.l('GPSalreadyRecieving')
-//	            	    		, callbacks: {
-//				      	        		  confirm: {
-//				      	            		  target: this
-//				      	            		, action: function() {
-//		                						writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again")
-//		                						// Bugfix 2515: 
-//		                						// here nextFunction is alreay null then throw exception
-//	                							//nextFunction(successCallback, nextOptions, nextFunction);
-//		                						getLocationNow(successCallback, nextOptions, getLocationNow);
-//				      						}
-//				      	        		}
-//				      	        		, cancel: {
-//				      	            		  target: this
-//				      	            		, action: function() {
-//				      	        				writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up")
-//				      	        				successCallback();
-//				      	    				}
-//				      	        		}
-//				      	    		}
-//		              		});
+	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user")
+	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                			  title: M.I18N.l('GPSError')
+	                			, message: M.I18N.l('GPSalreadyRecieving')
+	            	    		, callbacks: {
+				      	        		  confirm: {
+				      	            		  target: this
+				      	            		, action: function() {
+		                						writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again")
+		                						// Bugfix 2515: 
+		                						// here nextFunction is alreay null then throw exception
+	                							//nextFunction(successCallback, nextOptions, nextFunction);
+		                						getLocationNow(successCallback, nextOptions, getLocationNow);
+				      						}
+				      	        		}
+				      	        		, cancel: {
+				      	            		  target: this
+				      	            		, action: function() {
+				      	        				writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up")
+				      	        				successCallback();
+				      	    				}
+				      	        		}
+				      	    		}
+		              		});
 	                	}
                 	} else {
 	                	if (nextFunction) {

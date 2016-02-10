@@ -74,17 +74,17 @@ DigiWebApp.BookingController = M.Controller.extend({
      * 3) Presets the selection lists to show the data of the current open booking
      *
      * On first and every other load:
-     * If back from employee selection apge
-     * 1) sets isBackFromEmployeePage to NO and nothing more
+     * If back from employee selection page
+     * sets isBackFromEmployeePage to NO and nothing more
      *
      * Else
-     * Sets the selection list according to different flags in SelectionController:
+     * sets the selection list according to different flags in SelectionController:
      * showHandOrders or useSelection (selection made before)
      * if they are false, set selection to current open booking
      * if no open booking reset selection
      *
-     * @param {Boolean} isFirstLoad is passed if this function is used in a page event like pageshow => determines that the page is loaded for the very
-     * first time during this application life cycle
+     * @param {Boolean} isFirstLoad is passed if this function is used in a page event like pageshow 
+     * => determines that the page is loaded for the very first time during this application life cycle
      */
     , init: function(isFirstLoad) {
 	
@@ -129,11 +129,11 @@ DigiWebApp.BookingController = M.Controller.extend({
                 } else {
                     DigiWebApp.SelectionController.initSelection();
                 }
-
             }
         }
-        // Ticket 2108
+        // Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
         if (DigiWebApp.SettingsController.featureAvailable('416')) {
+            // Ticket 2108
 			if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
 				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.order.id, M.I18N.l('dtc6Ordner'));
 				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.position.id, M.I18N.l('dtc6Auftrag'));
@@ -186,23 +186,28 @@ DigiWebApp.BookingController = M.Controller.extend({
     	} catch(e) {}
     }
 
+    // Event-Handler für das Drücken des Buchen-Buttons
     , book: function() {
         // Bugfix 2515: Log
         var myDate = new Date();
         writeToLog('## book button ' + M.Date.create(myDate).format('HH:MM:ss.l'));
-    	DigiWebApp.ApplicationController.closeAppAfterCloseDay = NO;
-    	var that = DigiWebApp.BookingController;
-    	try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
-		if (this.checkBooking()) { // checkBooking checks for all booking-problems
 
+        DigiWebApp.ApplicationController.closeAppAfterCloseDay = NO;
+    	var that = DigiWebApp.BookingController;
+    	try { DigiWebApp.ApplicationController.vibrate(); } catch(e2) {}
+    	
+    	// checkBooking checks for all booking-problems
+		if (this.checkBooking()) {
 			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
-			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
+			var t = window.setTimeout(function() { window.clearTimeout(t); 
+					$('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
 
 			var myTimeStampEnd = null;
 			var timeEnd = new Date();
 			myTimeStampEnd = timeEnd.getTime();
 
-    		if (that.currentBooking && (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM'))) {
+    		if (that.currentBooking && (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == 
+    				M.Date.create(myTimeStampEnd).format('HH:MM'))) {
 
     	    	var orderId;
     		    var handOrderId = null;
@@ -245,12 +250,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 					myOrderName = myHandOrderName;
 					orderId = null;
 			
-					// a handorder has no position
+					// Ein Handauftrag hat keine posId
 					posId = null;
 			    } else {
 			    	try {
 			    		if (orderId != null) {
-			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
+			    			var myOrderLoad = _.find(DigiWebApp.Order.find(), function(a) 
+			    					{ return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(orderId));});
 			    			if (myOrderLoad && orderId != 0) myOrderName = myOrderLoad.get('name');
 			    		}
 			    	} catch(e4) { trackError(e4); }
@@ -258,14 +264,16 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 		    	try {
 		    		if (posId != null) {
-		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
+		    			var myPositionLoad = _.find(DigiWebApp.Position.find(), function(a) 
+		    					{ return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(posId));});
 		    			if (myPositionLoad && posId != 0) myPositionName = myPositionLoad.get('name');
 		    		}
 		    	} catch(e4) { trackError(e4); }
 		    	
 		    	try {
 		    		if (actId != null) {
-		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) { return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
+		    			var myActivityLoad = _.find(DigiWebApp.Activity.find(), function(a) 
+		    					{ return (parseIntRadixTen(a.get("id")) == parseIntRadixTen(actId));});
 		    			if (myActivityLoad && actId != 0) myActivityName = myActivityLoad.get('name');
 		    		}
 		    	} catch(e5) { trackError(e5); }
@@ -281,7 +289,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				that.currentBooking.set("activityName", myActivityName);
 				that.currentBooking.save();
 
-				try{that.startBookingNotification();}catch(e){}
+				try {that.startBookingNotification(); } catch(e) {}
 				
 			    if (that.autoSend()) {
 			    	that.sendCurrentBookings();
@@ -438,6 +446,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , startGetLocationTimestamp: null
+    
+    // Ermittelt die Geokoordinate für die Zeitbuchung
     , getBookingLocation: function(outerSuccessCallback) {
     	
     	var successHandlerCalled = false;
@@ -732,6 +742,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 //
 //   	}
     
+    // Prüft, ob alle Voraussetzungen für eine Zeitbuchung erfüllt sind
     , checkBooking: function(skipSelection) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in checkBooking");
 		
@@ -752,8 +763,8 @@ DigiWebApp.BookingController = M.Controller.extend({
             });
             return false;
         } else {
-            // check if hand order
-            if (!this.isHandOrder(orderId)) {// if it is not a hand order position and activity must be selected
+        	// if it is not a hand order, position and activity must be selected
+            if (!this.isHandOrder(orderId)) {
                 // check if position is set
                 if (!DigiWebApp.SelectionController.isPositionSelected()) {
                     //M.DialogView.alert({
