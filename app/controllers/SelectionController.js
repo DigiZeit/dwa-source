@@ -113,7 +113,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
         that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-		//Wird schon in setActivities aufgerufen(): that.saveSelection();
+		//TODO: Müsste überflüssig sein, wird schon in setActivities() aufgerufen:
+        that.saveSelection();
     }
     
     , setScholppButtons: function(withSetArbeitsende, withSetToSix) {
@@ -518,13 +519,21 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
     }
 
+    // Auswahl initialisieren. Falls es schon eine Auswahl gab dann diese verwenden, ansonsten "Bitte wählen" anzeigen.
     , initSelection: function() {
        var that = this;
-       
-       that.set('orders', []);
-       that.set('positions', []);
-       that.set('activities', []);
-       return that.setOrders(0, 0, 0);
+
+       if (that.selections.order != null)
+       {
+    	   setSelectionByPreviousSelection();
+       }
+       else
+       {
+	       that.set('orders', []);
+	       that.set('positions', []);
+	       that.set('activities', []);
+	       return that.setOrders(0, 0, 0);
+       }
     }
 
     , resetSelection: function() {
