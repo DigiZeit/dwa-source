@@ -519,15 +519,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
     }
 
-    // Auswahl initialisieren. Falls es schon eine Auswahl gab dann diese verwenden, ansonsten "Bitte wählen" anzeigen.
+    // Auswahl initialisieren. Falls es keine frühere Auswahl gibt, dann "Bitte wählen" anzeigen, ansonsten den
+    // Buchen-Screen unangetastet lassen.
     , initSelection: function() {
        var that = this;
 
-       if (that.selections.order != null)
-       {
-    	   setSelectionByPreviousSelection();
-       }
-       else
+       if (getSelectedOrder() == null)
        {
 	       that.set('orders', []);
 	       that.set('positions', []);
