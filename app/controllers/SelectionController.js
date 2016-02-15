@@ -524,7 +524,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , initSelection: function() {
        var that = this;
 
-       if (getSelectedOrder() == null)
+       if (that.getSelectedOrder() == null)
        {
 	       that.set('orders', []);
 	       that.set('positions', []);
