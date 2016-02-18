@@ -346,8 +346,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toButtonDashboardPage: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.NONE, NO);
     }
@@ -355,8 +356,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toButtonDashboardPageTransition: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, NO);
     }
@@ -364,8 +366,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToButtonDashboardPage: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.SLIDEUP, YES);
     }
@@ -373,8 +376,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToButtonDashboardPagePOP: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.POP, YES);
     }
@@ -382,8 +386,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backToButtonDashboardPageFlipTransition: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, YES);
     }
@@ -391,8 +396,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toButtonDashboardPageFlipTransition: function() {
     	var that = this;
     	if (!DigiWebApp.SettingsController.HasCredentials()) {
-    		return that.toSettingsPage();
-    	}
+    	    that.toSettingsPage();
+	        return;
+	    }
     	DigiWebApp.TabBar.setActiveTab(DigiWebApp.TabBar.tabItem2);
     	DigiWebApp.NavigationController.switchToPage('buttonsDashboard', M.TRANSITION.FLIP, NO);
     }
@@ -794,5 +800,17 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , toOrderListPage: function() {
     	DigiWebApp.NavigationController.switchToPage('orderListPage', M.TRANSITION.POP, NO);
     }
+
+    , backTimestamp: 0
     
+    , backIgnoreDuplicateCalls: function() {
+        // Workaround für doppelte Tap-Events der Zurück-Buttons:
+        // Aufruf ignorieren falls er innerhalb von 500 ms schon einmal kam
+        if (Date.now() < backTimestamp + 500) {
+            backTimestamp = Date.now();
+	        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
+	        history.back();
+	    }
+	}
+
 });

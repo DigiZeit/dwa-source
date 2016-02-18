@@ -1256,8 +1256,10 @@ var QueryString = function () {
 	return query_string;
 }();
 	
-function htmlDecode(value){ 
+function htmlDecode(value) { 
 	return $('<div/>').html(value).text(); 
 }
 
-function hasValue(val) { return (typeof(val) != "undefined" && val != null) }
+function hasValue(val) {
+    return (typeof(val) != "undefined" && val != null);
+}

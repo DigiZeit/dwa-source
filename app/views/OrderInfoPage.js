@@ -39,9 +39,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
                     target: DigiWebApp.NavigationController,
                     action: function() {
                         if (inDebug()) writeToLog('backButton tap in OrderInfoPage');
-                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
-                    	//this.backToDashboardPage();
-        				history.back();
+                        DigiWebApp.NavigationController.backIgnoreDuplicateCalls();
                     }
                 }
             }
