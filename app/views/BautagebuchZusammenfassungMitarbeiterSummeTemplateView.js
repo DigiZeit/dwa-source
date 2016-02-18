@@ -8,9 +8,8 @@
 
 DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemView.design({
 
-      isSelectable: NO
+    isSelectable: NO
 
-    //, childViews: 'grid'
 	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity mitarbeiterId'
 
     , events: {
@@ -98,12 +97,21 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 		  , computedValue: {
 		        valuePattern: '<%= activityName %>'
 		      , operation: function(v) {
-//					return ", " + v;
 					return v;
 		      }
 		  }
 	})
-		
+	
+	, remark: M.LabelView.design({
+	    cssClass: 'normal unselectable normalLabel'
+	  	  , isInline: YES
+		  , computedValue: {
+		      valuePattern: '<%= remark %>'
+		      , operation: function (v) {
+		          return v;
+		      }
+		  }
+	})
 
 	, vonbisdauer: M.LabelView.design({
 	    cssClass: 'normal unselectable normalLabel right'
@@ -111,41 +119,10 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	  , computedValue: {
 	        valuePattern: '<%= vonbisdauer %>'
 	      , operation: function(v) {
-					return ": " + v;
+				return ": " + v;
 	      }
 	  }
 	})
-			
-//	, grid: M.GridView.design({
-//		
-//		  layout: M.TWO_COLUMNS
-//		, childViews: 'name summe'
-//			
-//		, name: M.LabelView.design({
-//		    cssClass: 'normal unselectable bigLabel'
-//		  , computedValue: {
-//		        valuePattern: '<%= id %>'
-//		      , operation: function(v) {
-//				    		var myMitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find({query:{identifier: 'id', operator: '=', value: v}})[0];
-//				    		if (typeof myMitarbeiter !== "undefined") {
-//				    			return myMitarbeiter.vollername();
-//				        	} else {
-//				        		return v;
-//				        	}
-//	          }
-//		  }
-//		})
-//		
-//		, summe: M.LabelView.design({
-//		    cssClass: 'normal unselectable bigLabel'
-//		  , computedValue: {
-//		        valuePattern: '<%= id %>'
-//		      , operation: function(v) {
-//							return v;
-//	          }
-//		  }
-//		})
-//	})
 });
 
 

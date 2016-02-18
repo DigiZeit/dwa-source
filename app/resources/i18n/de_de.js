@@ -279,7 +279,7 @@ M.I18N.de_de = {
 	, bookingDuration: "Dauer"
 	, wrongTimes: "Falsche Uhrzeiten"
 	, wrongTimesMsg: "Der Von-Zeitpunkt kann nicht nach dem Bis-Zeitpunkt liegen! (Nachtschichten sind noch nicht möglich)"
-	, falscheZeitenIgnorieren: "eingegebene Zeiten nicht prüfen"
+	, falscheZeitenIgnorieren: "Eingegebene Zeiten nicht prüfen"
 	, characters: "Zeichen"
 	, GeraetekennungDesMA: "DTC-WebApp-Gerätekennung des Mitarbeiters"
 	, maximaleFeldlaengeErreicht: "maximale Feldlänge erreicht"

@@ -41,11 +41,8 @@ DigiWebApp.ActivityListPage = M.PageView.design({
           , anchorLocation: M.LEFT
           , events: {
               tap: {
-                  //  target: DigiWebApp.NavigationController
-                  //, action: 'backToBautagebuchZeitenListePageTransition'
-      			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e8){} 
-      				history.back();
-      			}
+                  target: DigiWebApp.NavigationController
+                  , action: 'backIgnoreDuplicateCalls'
               }
           }
       })

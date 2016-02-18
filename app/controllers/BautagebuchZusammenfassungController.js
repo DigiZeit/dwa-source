@@ -265,7 +265,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		var zeitbuchungenList = [];
 		if (parseBool(that.item.get("abgeschlossen")) || !DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")) {
 			// Zeitbuchungen wurden bereits berechnet oder es wird nicht in Stunden gebucht (sondern mit Von/Bis)
-			var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
+		    var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find(
+                { query: { identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId } }); 
 			zeitbuchungenList = _.sortBy(relevanteZeitbuchungen , function(z) {
 	            return parseIntRadixTen(D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('datum') + " " + z.get("von")).getTimestamp());
 	        });
@@ -293,7 +294,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		_.each(MAList, function(el) {
 			var items = [];
 			var mySumme = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " 00:00");
-			_.each(zeitbuchungenList,function(zeitbuch) {
+			_.each(zeitbuchungenList, function(zeitbuch) {
 				   var maIds = JSON.parse(zeitbuch.get("mitarbeiterIds"));
 				   _.each(maIds, function(maId) {
 					   	if (maId === el.get("id")) {
@@ -304,6 +305,7 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 					   					, handOrderName: zeitbuch.get("handOrderName")
 					   					, positionName: zeitbuch.get("positionName")
 					   					, activityName: zeitbuch.get("activityName")
+                                        , remark: zeitbuch.get("remark")
 					   					, mitarbeiterId: maId
 					   					, modelId: zeitbuch.m_id
 					   				};

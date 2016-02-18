@@ -50,12 +50,8 @@ DigiWebApp.FileChooserPage = M.PageView.design({
 	    	, anchorLocation: M.LEFT
 	    	, events: {
 	          	tap: {
-	              	//  target: DigiWebApp.NavigationController
-	              	//, action: DigiWebApp.FileChooserPage.NavigationControllerMethodToReturnTo
-	    			action: function() {
-	    				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} 
-	    				history.back();
-	    			}
+	              	target: DigiWebApp.NavigationController
+	              	, action: 'backIgnoreDuplicateCalls'
 	          	}
 	      	  }
 	    })
@@ -84,9 +80,7 @@ DigiWebApp.FileChooserPage = M.PageView.design({
 	      				this.html += '</form>';
 	                  	return this.html;
 	              	}
-	              })
-			  
-		      
+	              })  
 	  })
 	  
 });
