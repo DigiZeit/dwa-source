@@ -83,8 +83,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var uebernachtungAuswahl = booking.get('uebernachtungAuswahl');
         
         that.setOrders(orderId, positionId, activityId);
-        
-        that.setScholppButtons(YES, YES)
+
+        that.setScholppButtons(YES, YES);
 
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -98,7 +98,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         /**
          * Scholpp-Spesen: Übernachtungskennzeichen 
          */
-        itemSelected = NO;
+        var itemSelected = NO;
         var uebernachtungskennzeichenScholppArray = _.map(that.uebernachtungskennzeichenScholpp, function(ueK) {
         	if ( typeof(ueK) === "undefined" ) {
         		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
@@ -183,7 +183,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	orderArray.push( { label: M.I18N.l('noData'), value: '0' } );
         } else {
 	        var itemSelected = NO;
-	        var orderArray = _.map(orders, function(obj) {
+	        orderArray = _.map(orders, function(obj) {
 	        	if (obj) {
 		            return { label: obj.get('name'), value: obj.get('id') };
 	        	}
@@ -221,10 +221,13 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , updatePositions: function(positionId, activityId) {
     	var that = this;
     	
-		var mySelectionObj = that.getSelectedOrderItem(YES);
-		var isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value));
-		
-		DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
+    	var mySelectionObj = that.getSelectedOrderItem(YES);
+        var isHandauftrag = NO;
+    	if (hasValue(mySelectionObj)) {
+    	    isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value));
+    	}
+
+        DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
 		if (!isHandauftrag) {
 			return that.setPositions(positionId, activityId);
@@ -282,8 +285,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         if (positions.length == 0) {
         	positionsArray.push( { label: M.I18N.l('selectSomething'), value: '0' } );
         } else {
-
-	        var positionsArray = _.map(positions, function(obj) {
+	        positionsArray = _.map(positions, function(obj) {
 	        	if (obj) {
 		            return { label: obj.get('name'), value: obj.get('id') };
 	        	}
@@ -340,7 +342,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
 	        	if (wp.get("id") == posId) workPlans.push(wp);
 	        });
-	        i = 0;
 	
 	        // Wenn ein Arbeitsplan exisitiert dann nur die Leistungen verwenden die im Arbeitsplan sind.
 	        if (workPlans.length === 1) {
@@ -354,6 +355,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
         /* Die Aufrufer müssen orderId, positionId und activityId je nach Fall (ByPreviousSelection, ByCurrentBooking
          * etc) korrekt setzen. Hier sind nicht mehr alle Fälle unterscheidbar, konkret der Fall: currentBooking ja,
          * aber trotzdem muss previousSelection angezeigt werden.
+         * 
+         * TODO: diese Zeile dienten der "Wiederauswahl" der aktuell gebuchten Tätigkeit
+         *       wenn man Aufträger mit Arbeitsplan auswählt und zwischen diesen und Aufträgen
+         *       ohne Arbeitsplan hin und her wechselt
+         *       --> Funktionalität muss, wenn nicht hier, dann an anderer Stelle wieder hinzugefügt werden
+         *       (Beispiel "Klempner" --> (Auftrag ohne "Klempner" im Arbeitsplan) --> "Klempner")
         if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		         && DigiWebApp.BookingController.currentBooking  !== null
 		     && !activityId 
@@ -375,7 +382,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         	activitiesArray.push( { label: M.I18N.l('selectSomething'), value: '0', isSelected: YES } );
         } else {
 	        var itemSelected = NO;
-	        var activitiesArray = _.map(activities, function(obj) {
+	        activitiesArray = _.map(activities, function(obj) {
 	        	if (obj) {
 		            return { label: obj.get('name'), value: obj.get('id') };
 	        	}
@@ -386,7 +393,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 	        if (orderId != "0" && (!hasValue(activityId) || activityId == 0)) {
 	        	activityId = activitiesArray[0].value;
 	        }
-	        var itemSelected = NO;
+	        itemSelected = NO;
 	        activitiesArray = _.map(activitiesArray, function(item) {
 	        	if (item) {
 		            item.isSelected = (parseIntRadixTen(item.value) == parseIntRadixTen(activityId));
@@ -411,112 +418,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
     	that.saveSelection();
 		
-        return; // that.saveSelection();
-
-        // alt-code
-        var orderId = that.getSelectedOrderItem();
-        var posId = that.getSelectedPositionItem();
-
-        var activities = [];
-        var i = 0;
-
-        var selectedId = i;
-        if (typeof(activityId) != "undefined") selectedId = activityId;
-
-		if (posId) {
-	    	// Freischaltung 406 "Auftragsinfo"
-			if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
-				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
-					DigiWebApp.OrderInfoController.init();
-				}
-				M.ViewManager.getView('orderInfoPage', 'position').setSelection(posId);
-				DigiWebApp.OrderInfoController.setItem();
-			}
-	
-	        var workPlans = []; 
-	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
-	        	if (parseIntRadixTen(wp.get("id")) === parseIntRadixTen(posId)) workPlans.push(wp);
-	        });
-	        i = 0;
-	
-	        /* if a workplan exists, only use those activities that are in the workplan */
-	        if (workPlans.length === 1) {
-	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
-	        } else {
-	            activities = DigiWebApp.SelectionController.getActivities();
-	        }
-        } else {
-            activities = DigiWebApp.SelectionController.getActivities();
-        }
-
-        var currentBookingActivityId = -1;
-        if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null ) { 
-        	currentBookingActivityId = DigiWebApp.BookingController.currentBooking.get('activityId');
-        }
-		var currentBookingActivitySelectable = false;
-		_.each(activities, function(act) {
-        	if ( typeof(act) === "undefined" ) {
-        		console.log("UNDEFINED ACTIVITY");
-        		return null;
-        	} else {
-				if ( parseIntRadixTen(act.get('id')) === parseIntRadixTen(currentBookingActivityId) ) { 
-					currentBookingActivitySelectable = true; 
-				}
-			}
-		});
-		
-        activities = _.map(activities, function(act) {
-        	if ( typeof(act) === "undefined" ) {
-        		console.log("UNDEFINED ACTIVITY");
-        		return null;
-        	} else {
-        		var obj = null;
-        		if (currentBookingActivitySelectable) {
-        			obj = { label: act.get('name')
-        				  , value: act.get('id')
-        				  , isSelected: act.get('id') == currentBookingActivityId 
-        				  		? YES : NO };
-        		} else {
-	                if (typeof(positionId) != "undefined") {
-	        			obj = { label: act.get('name')
-	        				  , value: act.get('id')
-	        				  , isSelected: parseIntRadixTen(pos.get("id")) == parseIntRadixTen(selectedId) 
-	        				  		? YES : NO };
-	                } else {
-	        			obj = { label: act.get('name')
-	        				  , value: act.get('id')
-	        				  , isSelected: i === 0 
-	        				  		? YES : NO };
-	                }
-        		}
-                i += 1;
-                return obj;
-        	}
-        });
-
-        activities = _.compact(activities);
-
-        // new to show this when closing day is pressed (corresponds to a reset)
-        if (activities.length > 0) {
-            // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
-            if (DigiWebApp.SettingsController.featureAvailable('419')) {
-            	activities.push({label: M.I18N.l('activity'), value: '0', isSelected:NO});
-            } else {
-            	activities.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:NO});
-            }
-        } else {
-            activities.push({label: M.I18N.l('noData'), value: '0'});
-        }
-
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').resetSelection();
-            this.set('activities', activities);
-            DigiWebApp.ScholppBookingController.resetButtons();
-    	} else {
-            //M.ViewManager.getView('bookingPage', 'activity').resetSelection();
-            this.set('activities', activities);
-            if (!orderId || parseIntRadixTen(orderId) == 0) M.ViewManager.getView('bookingPage', 'activity').setSelection('0');
-    	}
+        return;
     }
 
     // Auswahl initialisieren. Falls es keine frühere Auswahl gibt, dann "Bitte wählen" anzeigen, ansonsten den
@@ -632,10 +534,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
 //                    operator: '=', 
 //                    value: actIds[i] 
 //                }})));
-            	var taet = _.find(alleTaetigkeiten, function(t){ return parseIntRadixTen(t.get("id")) === parseIntRadixTen(actIds[i])});
+            	var taet = _.find(alleTaetigkeiten, function(t) {
+	                 return parseIntRadixTen(t.get("id")) === parseIntRadixTen(actIds[i])
+	            });
             	if (taet) activities.push(taet);
             }
-
         }
         if (parseIntRadixTen(workplan.get("workplanType")) === 1) {
         	// only those activities which are bound to employee
@@ -666,12 +569,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     
     , getSelectedOrder: function() {
     	var that = this;
-    	var orderObj, orderId;
+    	var orderId;
     	var results = [];
-        orderObj = that.getSelectedOrderItem(YES);
+        var orderObj = that.getSelectedOrderItem(YES);
         if (orderObj) {
         	orderId = orderObj.value;
-        	var results = _.filter(DigiWebApp.Order.find(), function(o) {
+        	results = _.filter(DigiWebApp.Order.find(), function(o) {
         		return (o.get("id") == orderId);
         	});
         }
@@ -696,12 +599,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     
     , getSelectedPosition: function() {
     	var that = this;
-    	var posObj, posId;
+    	var posId;
     	var results = [];
-        posObj = that.getSelectedPositionItem(YES);
+        var posObj = that.getSelectedPositionItem(YES);
         if (posObj) {
         	posId = posObj.value;
-        	var results = _.filter(DigiWebApp.Position.find(), function(o) {
+        	results = _.filter(DigiWebApp.Position.find(), function(o) {
         		return (o.get("id") == posId);
         	});
         }
@@ -737,12 +640,12 @@ DigiWebApp.SelectionController = M.Controller.extend({
     
     , getSelectedActivity: function() {
     	var that = this;
-    	var actObj, actId;
+    	var actId;
     	var results = [];
-    	actObj = that.getSelectedActivityItem(YES);
+    	var actObj = that.getSelectedActivityItem(YES);
         if (actObj) {
         	actId = actObj.value;
-        	var results = _.filter(DigiWebApp.Activity.find(), function(o) {
+        	results = _.filter(DigiWebApp.Activity.find(), function(o) {
         		return (o.get("id") == actId);
         	});
         }

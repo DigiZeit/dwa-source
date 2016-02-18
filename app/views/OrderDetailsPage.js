@@ -3,7 +3,7 @@
 // Generated with: Espresso 
 //
 // Project: DigiWebApp
-// View: OrderInfoPage
+// View: OrderDetailsPage
 // ==========================================================================
 
 m_require('app/views/OrderInfoTemplateView');
@@ -33,7 +33,10 @@ DigiWebApp.OrderDetailsPage = M.PageView.design({
             , events: {
                 tap: {
                     target: DigiWebApp.NavigationController,
-                    action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToZeitbuchungDetailsPageTransition();}
+                    action: function() {
+                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
+                        this.backToZeitbuchungDetailsPageTransition();
+                    }
                 }
             }
         })

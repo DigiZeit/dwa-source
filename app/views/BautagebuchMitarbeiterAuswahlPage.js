@@ -81,8 +81,12 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
             , anchorLocation: M.LEFT
             , events: {
                 tap: {
-                      target: DigiWebApp.NavigationController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+                    // target: DigiWebApp.NavigationController
+                    action: function() {
+                        if (inDebug()) writeToLog('backButton tap in bautagebuchMitarbeiterAuswahlPage');
+                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
+                        history.back();
+                      }
                 }
             }
         })
@@ -173,7 +177,10 @@ DigiWebApp.BautagebuchMitarbeiterAuswahlPage = M.PageView.design({
                     tap: {
 		                //target: DigiWebApp.BautagebuchBautagesberichtDetailsController,
 		                //action: 'save'
-		    			action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} history.back();}
+		    			action: function() {
+		    			    try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
+		    			    history.back();
+					    }
                     }
                 }
             })
