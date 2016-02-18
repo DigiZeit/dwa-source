@@ -806,8 +806,8 @@ DigiWebApp.NavigationController = M.Controller.extend({
     , backIgnoreDuplicateCalls: function() {
         // Workaround für doppelte Tap-Events der Zurück-Buttons:
         // Aufruf ignorieren falls er innerhalb von 500 ms schon einmal kam
-        if (Date.now() < backTimestamp + 500) {
-            backTimestamp = Date.now();
+        if (Date.now() >= DigiWebApp.NavigationController.backTimestamp + 500) {
+            DigiWebApp.NavigationController.backTimestamp = Date.now();
 	        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
 	        history.back();
 	    }
