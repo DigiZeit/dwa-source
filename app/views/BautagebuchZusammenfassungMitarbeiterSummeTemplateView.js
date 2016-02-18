@@ -10,7 +10,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 
     isSelectable: NO
 
-	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity remark mitarbeiterId'
+	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity endOfLine remark mitarbeiterId'
 
     , events: {
         tap: {
