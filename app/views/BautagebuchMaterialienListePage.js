@@ -38,7 +38,7 @@ DigiWebApp.BautagebuchMaterialienListePage = M.PageView.design({
                     	if (myTyp == "<standard>") {
                     		this.backToBautagebuchBautagesberichtDetailsPageTransition();
                     	} else if (myTyp == "<materialerfassung_only>") {
-                    		DigiWebApp.NavigationController.backToDashboardPage();
+                    		this.backToDashboardPage();
                     	} else {
                     		history.back();
                     	}

@@ -177,7 +177,7 @@ M.I18N.en_us = {
 	, takePicture: "New photo"
 	, takePictureDemo: "New photo (DEMO)"
 	, mediaList: "Medialist"
-	, saveAsContact: "Save as contact"
+	, saveAsContact: "As contact"
 	, saveAsContactSuccess: "Contact successfully saved"
 	, saveAsContactError: "Saving failed"
 	, noContactsAvailable: "Contacts not available"
@@ -311,7 +311,7 @@ M.I18N.en_us = {
 	, bucheFeierabend: "closing day"
 
     , ServiceApp_ermittleGeokoordinate: 'ServiceApp: get geo coordinates'
-    , ServiceApp_datenUebertragen: 'ServiceApp: do dat atransfer'
+    , ServiceApp_datenUebertragen: 'ServiceApp: do data transfer'
 	, ServiceApp_engeKopplung: 'ServiceApp: tight coupling'
 	, ServiceApp_PORT: 'ServiceApp: Port'
 	, ServiceAppKommunikation: 'ServiceApp-Communication'
@@ -563,4 +563,13 @@ M.I18N.en_us = {
 	, ok: "Ok"
 	, bestaetigenDialog: "Please confirm"
 	, warnungDialog: "Alert"
+
+    , bohleFahrzeitPrivat: "Km with private car"
+    , bohleFahrzeitFirmenwagen: "Drive with company car"
+    , bohleFahrzeitBusBahn: "Bus/Train"
+    , bohleUebernachtungArt: "Type of overnight stay"
+    , bohleUebernachtungKeine: "No overnight stay"
+    , bohleUebernachtungPrivat: "Private overnight stay (without receipt)"
+    , bohleUebernachtungZahltFirma: "Room paid by company"
+    , bohleUebernachtungSelbstBezahlt: "Room paid by yourself (bill to be turned in as photo)"
 };

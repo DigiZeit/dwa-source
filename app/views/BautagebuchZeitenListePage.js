@@ -38,8 +38,13 @@ DigiWebApp.BautagebuchZeitenListePage = M.PageView.design({
                       target: DigiWebApp.NavigationController
                     , action: function() {
                         try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
-                        //this.backToBautagebuchBautagesberichtDetailsPageTransition();
-                        this.backIgnoreDuplicateCalls();
+                        // TODO Kommt man von BautagebuchZusammenfassungPage, dann ist der folgende
+                        // Rücksprung falsch.
+                        // this.backIgnoreDuplicateCalls() funktioniert aber auch nicht, dazu müsste
+                        // BautagebuchZeitenDetailsPage auch die Back-History verwenden, aber dort
+                        // gibt es einen Übersicht-Button und das alles zu prüfen kostet Zeit,
+                        // und bisher gibt es keine Kundenbeschwerden.
+                        this.backToBautagebuchBautagesberichtDetailsPageTransition();                        
                       }
                 }
             }

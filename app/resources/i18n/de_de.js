@@ -555,11 +555,20 @@ M.I18N.de_de = {
 	, eineEbeneHoeher: '..' //'> eine Ebene höher <'
 	, diesenOrdnerVerwenden: 'verwende: '
 	, keinenOrdnerVerwenden: '> keinen Ordner verwenden <'
-	, keinOrdnerAusgewaehlt: '(kein Ordner ausgewaehlt)'
+	, keinOrdnerAusgewaehlt: '(kein Ordner ausgewählt)'
 	, OrdnerHandauftrag: 'Ordner / Handauftrag'
 		
 	, neu: "Neu"
 	, ok: "Ok"
 	, bestaetigenDialog: "Bitte bestätigen"
 	, warnungDialog: "Warnung"
+
+    , bohleFahrzeitPrivat: "Km mit Privat-PKW"
+    , bohleFahrzeitFirmenwagen: "Fahrt mit Firmenwagen"
+    , bohleFahrzeitBusBahn: "Bus/Bahn"
+    , bohleUebernachtungArt: "Art der Übernachtung"
+    , bohleUebernachtungKeine: "Keine Übernachtung"
+    , bohleUebernachtungPrivat: "Übernachtung privat (ohne Beleg)"
+    , bohleUebernachtungZahltFirma: "Zimmer zahlt Firma"
+    , bohleUebernachtungSelbstBezahlt: "Zimmer selbst bezahlt (Rechnung ist als Foto einzureichen)"
 };
