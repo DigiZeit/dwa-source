@@ -422,17 +422,23 @@ DigiWebApp.SelectionController = M.Controller.extend({
         return;
     }
 
-    // Auswahl initialisieren. Falls es keine frühere Auswahl gibt, dann "Bitte wählen" anzeigen, ansonsten den
-    // Buchen-Screen unangetastet lassen.
+    // Auswahl initialisieren. Falls es keine frühere Auswahl gibt, "Bitte wählen" anzeigen, 
+    // ansonsten den Buchen-Screen unangetastet lassen.
     , initSelection: function() {
        var that = this;
 
        if (that.getSelectedOrder() == null)
        {
-	       that.set('orders', []);
-	       that.set('positions', []);
-	       that.set('activities', []);
-	       return that.setOrders(0, 0, 0);
+           if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+               M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
+               M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
+               //TODO Ordner/Auftrag/Leistung auch zurücksetzen
+           } else {
+               that.set('orders', []);
+               that.set('positions', []);
+               that.set('activities', []);
+               return that.setOrders(0, 0, 0);
+           }
        }
     }
 
