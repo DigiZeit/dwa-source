@@ -410,8 +410,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
         if (inDebug()) writeToLog('setActivities, activitiesArray.length=' + activitiesArray.length);
         
         // set selection arrays to start content binding process
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
-            M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').resetSelection();
+        if (typeof (DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+            //TODO Beim folgenden Aufruf gibt es den Fehler
+            //window.onerror: Uncaught TypeError: Cannot set property 'selectedIndex' of null 
+            //M.ViewManager.getView('bookingPageWithIconsScholpp', 'activity').resetSelection();
             that.set('activities', activitiesArray);
             DigiWebApp.ScholppBookingController.resetButtons();
     	} else {

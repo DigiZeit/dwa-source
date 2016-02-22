@@ -1815,15 +1815,22 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        } else {
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
     			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
-	        	var spesencallback = function() {
-			        // Start::Bemerkungsfeld (403)
+	        	var buchenCallback = function() {
 					if (
-					   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
-					|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-					){
-						// if remark-feature active: go to remarkpage
+					    // Freischaltung 403 "Bemerkungsfeld"
+					   (DigiWebApp.SettingsController.featureAvailable('403')
+                        && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+					    // Freischaltung 422 "Eingabe von gefahrenen Kilometern (aktuell nur KTG)"
+					|| (DigiWebApp.SettingsController.featureAvailable('422')
+                        && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+					    // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+                        //TODO Nicht nur bei Feierabendbuchung, auch bei Zeitdaten!
+                    || (DigiWebApp.SettingsController.featureAvailable('431'))
+					) {
+						// if remark or related feature active: go to remark page
 						that.refreshCurrentBooking(false);
-			        	DigiWebApp.NavigationController.toRemarkPage(function() {
+						DigiWebApp.NavigationController.toRemarkPage(function () {
+                            // Freischaltung 404 "Button-Menü"
 			    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
 				        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
 			    			} else {
@@ -1835,20 +1842,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 						// else: bookWithRemark
 			        	that.closeDayWithRemark();           					
 			        }
-			        // End::Bemerkungsfeld
 	        	};
-	
+
+    		    // Freischaltung 418 "Spesen/Auslöse"
 	        	if (DigiWebApp.SettingsController.featureAvailable('418')) {
-	        		DigiWebApp.NavigationController.toSpesenPage(function() {
-		    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
-			        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
-		    			} else {
-			        		DigiWebApp.NavigationController.backToDashboardPagePOP();
-		    			}
-	        			spesencallback();
-	        		});
+		            DigiWebApp.NavigationController.toSpesenPage(function() {
+		                // Freischaltung 404 "Button-Menü"
+		                if (DigiWebApp.SettingsController.featureAvailable('404')) {
+		                    DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
+		                } else {
+		                    DigiWebApp.NavigationController.backToDashboardPagePOP();
+		                }
+		                buchenCallback();
+		            });
 	        	} else {
-	        		spesencallback();
+	        	    buchenCallback();
 	        	}
 	        }	        
         } else {
