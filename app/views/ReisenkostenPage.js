@@ -105,14 +105,14 @@ DigiWebApp.ReisekostenPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('Reisekosten_Ausloese')
+              value: M.I18N.l('Spesen_Ausloese')
             , anchorLocation: M.CENTER
         })
         , anchorLocation: M.TOP
     })
 
     , content: M.ScrollView.design({
-          childViews: 'remark uebernachtungAuswahl spacer grid'
+          childViews: 'uebernachtungAuswahl spacer grid'
 
         , spacer: M.LabelView.design({
             value: '&nbsp;<br />'
