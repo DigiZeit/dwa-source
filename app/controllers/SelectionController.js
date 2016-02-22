@@ -90,7 +90,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     
     , setUebernachtungskennzeichenScholpp: function(uebernachtungAuswahl) {
         var that = this;
-        // Siehe Tabelle SonderbuchungseigenschaftVorgabe: 6 = "- -"
+        // Siehe DB-Tabelle SonderbuchungseigenschaftVorgabe: 6 = "- -"
     	if (typeof(uebernachtungAuswahl) == "undefined") uebernachtungAuswahl = 6;
         /**
          * Scholpp-Spesen: Übernachtungskennzeichen 
@@ -110,7 +110,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         });
         uebernachtungskennzeichenScholppArray = _.compact(uebernachtungskennzeichenScholppArray);
         that.set('uebernachtungskennzeichenScholpp', uebernachtungskennzeichenScholppArray);
-		//TODO: Müsste überflüssig sein, wird schon in setActivities() aufgerufen:
+        //TODO: Würde man den Aufruf dieser Methode vor setOrders() machen, dann wäre das folgende
+        // saveSelection() überflüssig, denn es wird auch in setActivities() aufgerufen:
         that.saveSelection();
     }
     
@@ -138,21 +139,21 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
 		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = "6";
+		    			if (withSetToSix) uebernachtungAuswahl = 6;
 		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
 		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = "6";
+		    			if (withSetToSix) uebernachtungAuswahl = 6;
 		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
 		    		} else if (activityName.indexOf("Pause") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = "6";
+		    			if (withSetToSix) uebernachtungAuswahl = 6;
 		    			DigiWebApp.ScholppBookingController.selectPause();
 		    		} else {
-		    			if (withSetToSix) uebernachtungAuswahl = "6";
+		    			if (withSetToSix) uebernachtungAuswahl = 6;
 		    			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    		}
 	    		}
     		} else {
-    			if (withSetToSix) uebernachtungAuswahl = "6";
+    			if (withSetToSix) uebernachtungAuswahl = 6;
     			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
     		}
     	}
