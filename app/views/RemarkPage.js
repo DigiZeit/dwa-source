@@ -57,6 +57,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 	        			    DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
 	        			    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
+	        			    // und TODO: Eingabe noch nicht erfolgt (ebenfalls showHideGefahreneKilometer!)
 	        			    if (DigiWebApp.SettingsController.featureAvailable('431')) {
 	        			        DigiWebApp.RemarkPage.showHideReisekosten(true);
 				            }
@@ -73,10 +74,52 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				    DigiWebApp.RemarkPage.showHideReisekosten(false);
 				}
 
-                // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung vorhanden
+			    // Uebernachtungskosten-Auswahl nur einblenden (und falls nötig initialisieren) 
+				// falls Freischaltung vorhanden und TODO: Feierabendbuchung
 			    // Freischaltung 431 "Bohle-Reisekostenabwicklung"
-			    DigiWebApp.RemarkPage.showHideUebernachtungskosten(
-				        DigiWebApp.SettingsController.featureAvailable('431'));
+				if (DigiWebApp.SettingsController.featureAvailable('431')) {
+
+				    if (DigiWebApp.UebernachtungAuswahlOption.find().length === 0) {
+				        var i = 1;
+				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+				            id: i,
+				            beschreibung: "Keine Übernachtung"
+				        }).saveSorted();
+				        i++; // 2
+				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+				            id: i,
+				            beschreibung: "Übernachtung privat (ohne Beleg)"
+				        }).saveSorted();
+				        i++; // 3
+				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+				            id: i,
+				            beschreibung: "Zimmer zahlt Firma"
+				        }).saveSorted();
+				        i++; // 4
+				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+				            id: i,
+				            beschreibung: "Zimmer zahlt Firma"
+				        }).saveSorted();
+				    }
+
+				    var uebernachtungOptionen = DigiWebApp.UebernachtungAuswahlOption.findSorted();
+				    uebernachtungOptionen = _.map(uebernachtungOptionen, function(opt) {
+				        if (opt) {
+				            var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
+				            if (opt.get('id') === 1) {
+				                obj.isSelected = YES;
+				            }
+				            return obj;
+				        }
+				    });
+				    /* remove false values with _.compact() */
+				    uebernachtungOptionen = _.compact(uebernachtungOptionen);
+				    DigiWebApp.BookingController.set("uebernachtungOptionen", uebernachtungOptionen);
+
+				    DigiWebApp.RemarkPage.showHideUebernachtungskosten(true);
+				} else {
+				    DigiWebApp.RemarkPage.showHideUebernachtungskosten(false);
+				}
 
 			    // Bemerkung laden
 				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
@@ -97,30 +140,25 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].focus();
 				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].blur();
 
-				// gefahreneKilometer laden
 				if (typeof (DigiWebApp.BookingController.currentBooking) !== "undefined"
                         && DigiWebApp.BookingController.currentBooking !== null) {
+				    // gefahreneKilometer laden
 				    if (typeof (DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer')) !== "undefined"
                             && DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer') !== null) {
-						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer');
 					} else {
-						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
-					}
+				    }
+				    // TODO Reisekosten laden
 				} else {
-					//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
 				}
-
-			    // TODO Reisekosten laden
-                // TODO Uebernachtungskosten laden
-			}
-        }
-    }
+			} // action
+        } // pagebeforeshow
+    } // events
 
     , showHideGefahreneKilometer(showElement) {
         // show/hide label
@@ -204,9 +242,11 @@ DigiWebApp.RemarkPage = M.PageView.design({
                         M.ViewManager.getView('remarkPage', 'remarkInput').value);
 	                DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer',
                         parseIntRadixTen(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value));
-	    			DigiWebApp.BookingController.currentBooking.save();
 	                // TODO Reisekosten speichern
-	                // TODO Uebernachtungskosten speichern
+	                DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
+                        M.ViewManager.getView('remarkPage', 'uebernachtungskosten').getSelection(YES).value);
+
+	                DigiWebApp.BookingController.currentBooking.save();
 
 	    			DigiWebApp.RemarkPage.myCallback();
 	            }
@@ -237,6 +277,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
+            //TODO Text abhängig davon, was gerade gemacht wird
               value: M.I18N.l('remark')
             , anchorLocation: M.CENTER
         })
@@ -259,10 +300,10 @@ DigiWebApp.RemarkPage = M.PageView.design({
                   label: M.I18N.l('remark')
                 , cssClass: 'remarkInput'
                 , hasMultipleLines: YES
-                , initialText: "max. 255 " + M.I18N.l('characters')
+                , initialText: "Max. 255 " + M.I18N.l('characters')
                 , numberOfChars: 255
         })
-            
+        
         , gefahreneKilometerInput: M.TextFieldView.design({
                 // TODO Labeltext abhängig von Freischaltung
                   label: M.I18N.l('gefahreneKilometer')
@@ -274,19 +315,19 @@ DigiWebApp.RemarkPage = M.PageView.design({
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , label: M.I18N.l('fahrtzeitFirmenwagen')
-            , contentBinding: {
+            //, contentBinding: {
                 //target: DigiWebApp.SettingsController
                 //, property: 'settings.autoTransferAfterBookTime'
-            }
+            //}
         })
 
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , label: M.I18N.l('fahrtzeitBusBahn')
-            , contentBinding: {
+            //, contentBinding: {
                 //target: DigiWebApp.SettingsController
                 //, property: 'settings.autoTransferAfterBookTime'
-            }
+            //}
         })
 
         , uebernachtungskosten: M.SelectionListView.design({
@@ -296,7 +337,6 @@ DigiWebApp.RemarkPage = M.PageView.design({
             //, cssClass: 'unselectable'
             , applyTheme: NO
             , contentBinding: {
-                //TODO Kann das einfach verwendet werden?
                 target: DigiWebApp.BookingController
                 , property: 'uebernachtungOptionen'
             }
@@ -310,7 +350,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         })
             
         , grid: M.GridView.design({
-        	
+
               childViews: 'button icon'
             , layout: {
                   cssClass: 'digiButton marginTop25'
@@ -337,7 +377,6 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , icon: M.ImageView.design({
                 value: 'theme/images/icon_bookTime.png'
             })
-            
         })
     })
 });

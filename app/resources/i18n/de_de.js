@@ -563,7 +563,7 @@ M.I18N.de_de = {
 	, bestaetigenDialog: "Bitte bestätigen"
 	, warnungDialog: "Warnung"
 
-    , fahrtzeitPrivat: "Km mit Privat-PKW"
+    , fahrtzeitPrivat: "Km mit Privat-Pkw"
     , fahrtzeitFirmenwagen: "Fahrt mit Firmenwagen"
     , fahrtzeitBusBahn: "Bus/Bahn"
     , uebernachtungArt: "Art der Übernachtung"
