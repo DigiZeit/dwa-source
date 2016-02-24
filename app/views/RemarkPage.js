@@ -83,22 +83,22 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				        var i = 1;
 				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
 				            id: i,
-				            beschreibung: "Keine Übernachtung"
+				            beschreibung: M.I18N.l('uebernachtungKeine')
 				        }).saveSorted();
 				        i++; // 2
 				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
 				            id: i,
-				            beschreibung: "Übernachtung privat (ohne Beleg)"
+				            beschreibung: M.I18N.l('uebernachtungPrivat')
 				        }).saveSorted();
 				        i++; // 3
 				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
 				            id: i,
-				            beschreibung: "Zimmer zahlt Firma"
+				            beschreibung: M.I18N.l('uebernachtungZahltFirma')
 				        }).saveSorted();
 				        i++; // 4
 				        DigiWebApp.UebernachtungAuswahlOption.createRecord({
 				            id: i,
-				            beschreibung: "Zimmer zahlt Firma"
+				            beschreibung: M.I18N.l('uebernachtungSelbstBezahlt')
 				        }).saveSorted();
 				    }
 

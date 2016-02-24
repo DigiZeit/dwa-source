@@ -1057,6 +1057,11 @@ if (searchForFeature(429) // mehrstufige Auftragsauswahl
 	DigiWebAppOrdinaryDesign.orderListPage = DigiWebApp.OrderListPage;
 }
 
+if (searchForFeature(431)) { // Bohle-Reisekostenabwicklung
+    DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage;
+    DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
+}
+
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {
