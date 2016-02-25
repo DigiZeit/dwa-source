@@ -58,11 +58,15 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				        });
 	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 	        			    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
-	        			    // und TODO: Eingabe noch nicht erfolgt (ebenfalls showHideGefahreneKilometer!)
+	        			    // und TODO: Eingabe noch nicht erfolgt
 	        			    if (featureReisekosten) {
-				                DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
+	        			        M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').label =
+                                    M.I18N.l('fahrtzeitPrivat');
+	        			        DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
 				                DigiWebApp.RemarkPage.showHideReisekosten(true);
-				            } else {
+	        			    } else {
+	        			        M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').label =
+                                    M.I18N.l('gefahreneKilometer');
 	        			        DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
 	        			        DigiWebApp.RemarkPage.showHideReisekosten(false);
 				            }
@@ -157,7 +161,16 @@ DigiWebApp.RemarkPage = M.PageView.design({
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
 				    }
-				    // TODO Reisekosten-Checkboxen laden
+				    // Reisekosten-Checkboxen laden
+				    if (typeof (DigiWebApp.BookingController.currentBooking.get('spesenAuswahl')) !== "undefined"
+				        && DigiWebApp.BookingController.currentBooking.get('spesenAuswahl') !== null
+                    ) {
+				        var spesen = DigiWebApp.BookingController.currentBooking.get('spesenAuswahl');
+				        // 5 = Fahrt mit Firmenwagen
+				        M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value = (spesen === 5);
+				        // 6 = Fahrt mit Bus/Bahn
+				        M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value = (spesen === 6);
+                    }
 				} else {
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
@@ -252,12 +265,20 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	                DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
 
 	                if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                    if (km !== 0) {
-	                        DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
-	                    } else {
-	                        // TODO Reisekostenauswahl speichern
+	                    // Parallel Spesenauswahl wenn Fahrt mit Privat-Pkw?
+	                    //if (km !== 0) {
+	                    //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
+	                    //} else {
+	                    // Reisekostenauswahl als Spesenauswahl speichern
+	                    if (M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value === 1) {
+	                        // 5 = Fahrt mit Firmenwagen
+    	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
+	                    } else if (M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value === 1) {
+	                        // 6 = Fahrt mit Bus/Bahn
+    	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
+	                    
 	                    }
-	                    DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
+	                DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
 	                        M.ViewManager.getView('remarkPage', 'uebernachtungskosten').getSelection(YES).value);
 	                }
 
