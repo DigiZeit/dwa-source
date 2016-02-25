@@ -971,7 +971,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    
 		    // reset remark
 	        try {
-                //TODO: Dieser Aufruf schlägt fehl
+                //TODO: Dieser Aufruf schlägt manchmal fehl
 		    	M.ViewManager.getView('remarkPage', 'remarkInput').value = '';
 		    } catch(e2) { }
 		    var remarkStr = '';
