@@ -356,20 +356,20 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , reisekostenFirmenwagen: M.ButtonView.design({
                 //selectionMode: M.MULTIPLE_SELECTION,
                 //cssClass: 'remarkInput',
-                value: M.I18N.l('fahrtzeitFirmenwagen'),
+                value: M.I18N.l('fahrtzeitFirmenwagen')
                 //contentBinding: {
                 //    target: DigiWebApp.BookingController,
                 //    property: 'propReisekostenFirmenwagen'
-                }
+                //}
             })
             
             , reisekostenBusBahn: M.ButtonView.design({
                 //selectionMode: M.MULTIPLE_SELECTION,
-                value: M.I18N.l('fahrtzeitBusBahn'),
+                value: M.I18N.l('fahrtzeitBusBahn')
                 //contentBinding: {
                 //    target: DigiWebApp.BookingController,
                 //    property: 'propReisekostenBusBahn'
-                }
+                //}
             })
         })
 
