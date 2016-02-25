@@ -352,6 +352,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
+                , cssClass: 'remarkInput'
             , label: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
                 target: DigiWebApp.BookingController
