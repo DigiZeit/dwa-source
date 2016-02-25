@@ -297,13 +297,19 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     		} else {
 				if (this.currentBooking) {
-					// Start::Bemerkungsfeld (403)
-					if (
-							   (DigiWebApp.SettingsController.featureAvailable('403') && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
-							|| (DigiWebApp.SettingsController.featureAvailable('422') && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+				    // Auf die RemarkPage gehen wenn
+				    // -Bemerkungen freigeschaltet und nicht optional sind
+				    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
+                    // -Bohle-Reisekostenabwicklung aktiv und Buchung fahrtzeitrelevant ist
+				    // Freischaltung 403 "Bemerkungsfeld"
+				    if ((DigiWebApp.SettingsController.featureAvailable('403')
+                        && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+				        // Freischaltung 422 "Eingabe von gefahrenen Kilometern (aktuell nur KTG)"
+				        // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+						|| ((   DigiWebApp.SettingsController.featureAvailable('422')
+                             || DigiWebApp.SettingsController.featureAvailable('431'))
+                            && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
 					){
-							// if remark-feature active and not optional: go to remarkpage
-							// or if gefahreneKilometer-Freischaltung is enabled: go to RemarkPage
 							this.refreshCurrentBooking(false);
 							DigiWebApp.NavigationController.toRemarkPage(function() {
 			    		        DigiWebApp.BookingController.set('isBackFromRemarkPage', YES);
@@ -332,8 +338,6 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     /**
-     * Called by clicking the button on bookingPage.
-     *
      * Does the "preprocessing of a booking"
      *
      * 1) If kolonne is available and no employee selected yet, show employees page
@@ -1825,8 +1829,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					|| (DigiWebApp.SettingsController.featureAvailable('422')
                         && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
 					    // Freischaltung 431 "Bohle-Reisekostenabwicklung"
-					    //TODO Nicht nur bei Feierabendbuchung, auch beim Beenden fahrtzeitrelevanter 
-					    // Zeitbuchungen und im Zeitdaten-Screen!
+					    //TODO Nicht nur bei Buchungsabschluss, auch im Zeitdaten-Screen!
                         //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
                     || (DigiWebApp.SettingsController.featureAvailable('431'))
 					) {

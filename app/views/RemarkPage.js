@@ -75,7 +75,9 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	        			    DigiWebApp.RemarkPage.showHideReisekosten(false);
 	        			}
 				        // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung 
-	        			// vorhanden und Feierabendbuchung
+				        // vorhanden und Feierabendbuchung
+				        //TODO istFeierabend ist zu diesem Zeitpunkt leider noch nicht gesetzt -
+                        // erst wenn die Buchung auch tatsächlich gemacht wird
 	        			if (currentActivity !== null && currentActivity.get("istFeierabend")) {
 			                DigiWebApp.RemarkPage.showHideUebernachtungskosten(true);
 			            } else {
@@ -313,7 +315,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-            //TODO Text abhängig davon, was gerade gemacht wird
+            //TODO Text abhängig davon, was gerade gemacht wird?
               value: M.I18N.l('remark')
             , anchorLocation: M.CENTER
         })
@@ -351,18 +353,16 @@ DigiWebApp.RemarkPage = M.PageView.design({
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
-                target: DigiWebApp.SettingsController
-                , property: 'settings.autoTransferAfterBookTime'
-                , label: M.I18N.l('fahrtzeitFirmenwagen')
+                target: DigiWebApp.RemarkPage
+                , property: 'propReisekostenFirmenwagen'
             }
         })
 
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
-                //target: DigiWebApp.SettingsController
-                //, property: 'settings.autoTransferAfterBookTime'
-                label: M.I18N.l('fahrtzeitBusBahn')
+                target: DigiWebApp.RemarkPage
+                , property: 'propReisekostenBusBahn'
             }
         })
 
@@ -413,7 +413,21 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , icon: M.ImageView.design({
                 value: 'theme/images/icon_bookTime.png'
             })
-        })
-    })
-});
+        }) // grid
+    }) // content
 
+    // Für contentBinding. Hier definiert weil es nicht als Bool-Property gespeichert wird, 
+    // sondern in spesenAuswahl landet.
+    , propReisekostenFirmenwagen: [{
+        value: 0
+        , label: M.I18N.l('fahrtzeitFirmenwagen')
+        , isSelected: false
+    }]
+
+    // Siehe propReisekostenFirmenwagen
+    , propReisekostenBusBahn: [{
+        value: 0
+        , label: M.I18N.l('fahrtzeitBusBahn')
+        , isSelected: false
+    }]
+});
