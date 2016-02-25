@@ -1827,6 +1827,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    // Freischaltung 431 "Bohle-Reisekostenabwicklung"
 					    //TODO Nicht nur bei Feierabendbuchung, auch beim Beenden fahrtzeitrelevanter 
 					    // Zeitbuchungen und im Zeitdaten-Screen!
+                        //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
                     || (DigiWebApp.SettingsController.featureAvailable('431'))
 					) {
 						// if remark or related feature active: go to remark page

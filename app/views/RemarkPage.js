@@ -20,7 +20,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
 				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
-			    var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
+			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
+				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
 				
 			    if (featureBemerkung) {
 	        		// show label
@@ -326,20 +327,20 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            , label: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
                 target: DigiWebApp.SettingsController
                 , property: 'settings.autoTransferAfterBookTime'
+                , label: M.I18N.l('fahrtzeitFirmenwagen')
             }
         })
 
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            , label: M.I18N.l('fahrtzeitBusBahn')
-            //, contentBinding: {
+            , contentBinding: {
                 //target: DigiWebApp.SettingsController
                 //, property: 'settings.autoTransferAfterBookTime'
-            //}
+                label: M.I18N.l('fahrtzeitBusBahn')
+            }
         })
 
         , uebernachtungskosten: M.SelectionListView.design({
