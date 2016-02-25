@@ -157,7 +157,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
 				    }
-				    // TODO Reisekosten laden
+				    // TODO Reisekosten-Checkboxen laden
 				} else {
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
@@ -203,13 +203,15 @@ DigiWebApp.RemarkPage = M.PageView.design({
     }
 
     , showHideUebernachtungskosten(showElement) {
-        $('[id=' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + ']').each(function () {
-            if (showElement) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
+        if (showElement) {
+            try {
+                 $('#' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + "_container").show();
+            } catch (e) { trackError(e); }
+        } else {
+            try {
+                 $('#' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + "_container").hide();
+            } catch (e) { trackError(e); }
+        }
     }
 
     , myCallback: function() {
@@ -318,7 +320,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         })
         
         , gefahreneKilometerInput: M.TextFieldView.design({
-                // TODO Labeltext abhängig von Freischaltung
+                // Labeltext wird in init() abhängig von Freischaltung gesetzt
                   label: M.I18N.l('gefahreneKilometer')
                 , cssClass: 'remarkInput'
                 , hasMultipleLines: NO
