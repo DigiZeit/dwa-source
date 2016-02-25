@@ -74,7 +74,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     // Siehe propReisekostenFirmenwagen
     , propReisekostenBusBahn: [{
         value: 1
-        , label: M.I18N.l('fahrtzeitFirmenwagen')
+        , label: M.I18N.l('fahrtzeitBusBahn')
         , isSelected: 1
     }]
 
