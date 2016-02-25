@@ -67,12 +67,14 @@ DigiWebApp.BookingController = M.Controller.extend({
     // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
     , propReisekostenFirmenwagen: [{
         value: 1
+        , label: M.I18N.l('fahrtzeitFirmenwagen')
         , isSelected: 1
     }]
 
     // Siehe propReisekostenFirmenwagen
     , propReisekostenBusBahn: [{
         value: 1
+        , label: M.I18N.l('fahrtzeitFirmenwagen')
         , isSelected: 1
     }]
 

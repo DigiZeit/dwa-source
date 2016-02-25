@@ -343,30 +343,34 @@ DigiWebApp.RemarkPage = M.PageView.design({
         })
         
         , gefahreneKilometerInput: M.TextFieldView.design({
-                // Labeltext wird in init() abhängig von Freischaltung gesetzt
-                  label: M.I18N.l('gefahreneKilometer')
-                , cssClass: 'remarkInput'
-                , hasMultipleLines: NO
-        	    , inputType: M.INPUT_NUMBER
+            // Labeltext wird in init() abhängig von Freischaltung gesetzt
+            label: M.I18N.l('gefahreneKilometer')
+            , cssClass: 'remarkInput'
+            , hasMultipleLines: NO
+        	, inputType: M.INPUT_NUMBER
         })
 
-        , reisekostenFirmenwagen: M.SelectionListView.design({
-            selectionMode: M.MULTIPLE_SELECTION
-                , cssClass: 'remarkInput'
-            , label: M.I18N.l('fahrtzeitFirmenwagen')
-            , contentBinding: {
-                target: DigiWebApp.BookingController
-                , property: 'propReisekostenFirmenwagen'
-            }
-        })
+        , reisekostenGroup: M.ButtonGroupView.design({
+            childViews: 'reisekostenFirmenwagen reisekostenBusBahn'
 
-        , reisekostenBusBahn: M.SelectionListView.design({
-            selectionMode: M.MULTIPLE_SELECTION
-            , label: M.I18N.l('fahrtzeitBusBahn')
-            , contentBinding: {
-                target: DigiWebApp.BookingController
-                , property: 'propReisekostenBusBahn'
-            }
+            , reisekostenFirmenwagen: M.SelectionListView.design({
+                //selectionMode: M.MULTIPLE_SELECTION,
+                //cssClass: 'remarkInput',
+                label: M.I18N.l('fahrtzeitFirmenwagen'),
+                contentBinding: {
+                    target: DigiWebApp.BookingController,
+                    property: 'propReisekostenFirmenwagen'
+                }
+            })
+            
+            ,reisekostenBusBahn: M.SelectionListView.design({
+                //selectionMode: M.MULTIPLE_SELECTION,
+                label: M.I18N.l('fahrtzeitBusBahn'),
+                contentBinding: {
+                    target: DigiWebApp.BookingController,
+                    property: 'propReisekostenBusBahn'
+                }
+            })
         })
 
         , uebernachtungskosten: M.SelectionListView.design({
