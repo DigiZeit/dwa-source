@@ -366,8 +366,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
             //, cssClass: 'remarkInput'
             //, value: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
-                //target: DigiWebApp.BookingController
-                //, property: 'propReisekostenFirmenwagen'
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenFirmenwagen'
                 target: DigiWebApp.SettingsController
                 , property: 'settings.autoSaveGPSData'
             }
