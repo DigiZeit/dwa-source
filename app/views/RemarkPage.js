@@ -358,7 +358,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 //target: DigiWebApp.BookingController
                 //, property: 'propReisekostenFirmenwagen'
                 target: DigiWebApp.SettingsController
-                , property: autoSaveGPSData
+                , property: settings.autoSaveGPSData
             }
         })
             
@@ -369,7 +369,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 //target: DigiWebApp.BookingController
                 //, property: 'propReisekostenBusBahn'
                 target: DigiWebApp.SettingsController
-                , property: useTransitionsSetting
+                , property: settings.useTransitionsSetting
             }
         })
 
