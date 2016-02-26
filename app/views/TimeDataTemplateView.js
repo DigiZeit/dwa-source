@@ -14,24 +14,24 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
 
     , events: {
         tap: {
-			action: function(id, m_id) {
-			    // Start::Bemerkungsfeld (403) oder Unterschrift (405)
-			    if (DigiWebApp.SettingsController.featureAvailable('403') || ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined"))) {
-					// if remark-feature active: go to remarkpage
-					// load booking in EditTimeData.bookingToEdit
-			    	//console.log('remark is active');
-					_.each(DigiWebApp.Booking.find(), function(booking) {
-						if (booking.m_id === m_id) {
-							DigiWebApp.EditTimeDataPage.bookingToEdit = booking;
-						}
-					});
-					DigiWebApp.NavigationController.toEditTimeDataPage();
-			    } else {
-					// else: nothing
-			    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log(id);
-			    }
-			    // End::Bemerkungsfeld oder Unterschrift
-			}
+            action: function (id, m_id) {
+                // Freischaltung 403 "Bemerkungsfeld"
+                // Freischaltung 405 "Unterschrift"
+                // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+                if (DigiWebApp.SettingsController.featureAvailable('403')
+                    || ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined"))
+                    || DigiWebApp.SettingsController.featureAvailable('431')
+                ) {
+                    // Ausgewählte Buchung in EditTimeData.bookingToEdit schreiben
+                    //console.log('remark is active');
+                    _.each(DigiWebApp.Booking.find(), function(booking) {
+                        if (booking.m_id === m_id) {
+                            DigiWebApp.EditTimeDataPage.bookingToEdit = booking;
+                        }
+                    });
+                    DigiWebApp.NavigationController.toEditTimeDataPage();
+                }
+            }
         }
     }
 
@@ -104,116 +104,6 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
             }
         }
     })
-
-//    , order: M.LabelView.design({
-//          cssClass: 'application unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= orderName %>'
-//            , operation: function(v) {
-//    			if (v !== "") {
-//                	return M.I18N.l('order') + ': ' + v;
-//                } else {
-//                    return M.I18N.l('order') + ': ' + M.I18N.l('notDefined');
-//                }
-//            }
-//        }
-//    })
-//
-//    , position: M.LabelView.design({
-//          cssClass: 'position unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= positionName %>'
-//            , operation: function(v) {
-//				if (v !== "") {
-//		        	return M.I18N.l('position') + ': ' + v;
-//		        } else {
-//		            return M.I18N.l('position') + ': ' + M.I18N.l('notDefined');
-//		        }
-//            }
-//        }
-//    })
-//
-//    , activity: M.LabelView.design({
-//          cssClass: 'activity unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= activityName %>'
-//            , operation: function(v) {
-//				if (v !== "") {
-//		        	return M.I18N.l('activity') + ': ' + v;
-//		        } else {
-//		            return M.I18N.l('activity') + ': ' + M.I18N.l('notDefined');
-//		        }
-//            }
-//        }
-//    })
-//    
-//    , order_ID: M.LabelView.design({
-//          cssClass: 'application unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= orderId %>'
-//            , operation: function(v) {
-//                var order = _.select(DigiWebApp.Order.findSorted().concat(DigiWebApp.HandOrder.findSorted()), function(o) {
-//                    return v == o.get('id') || v == o.get('name'); // || get('name') is for checking handOrders also
-//                });
-//                if(order && order.length > 0) {
-//                    order = order[0];
-//                    if (DigiWebApp.SettingsController.globalDebugMode) {
-//                    	return M.I18N.l('order') + ': ' + order.get('name') + ' (' + order.get('id') + ')';
-//                    } else {
-//                    	return M.I18N.l('order') + ': ' + order.get('name');
-//                    }
-//                } else {
-//                    return M.I18N.l('order') + ': ' + M.I18N.l('notDefined');
-//                }
-//            }
-//        }
-//    })
-//
-//    , position_ID: M.LabelView.design({
-//          cssClass: 'position unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= positionId %>'
-//            , operation: function(v) {
-//                if(v) {
-//                    var position = _.select(DigiWebApp.Position.findSorted(), function(p) {
-//                        return v == p.get('id');
-//                    });
-//                    if(position && position.length > 0) {
-//                        position = position[0];
-//                        return M.I18N.l('position') + ': ' + position.get('name');
-//                    } else {
-//                        return M.I18N.l('position') + ': ' + M.I18N.l('notDefined');
-//                    }
-//                } else {
-//                    return M.I18N.l('position') + ': ' + M.I18N.l('unknown');
-//                }
-//
-//            }
-//        }
-//    })
-//
-//    , activity_ID: M.LabelView.design({
-//          cssClass: 'activity unselectable'
-//        , computedValue: {
-//              valuePattern: '<%= activityId %>'
-//            , operation: function(v) {
-//                if(v) {
-//                    var activity = _.select(DigiWebApp.Activity.findSorted(), function(a) {
-//                        return v == a.get('id');
-//                    });
-//                    if(activity && activity.length > 0) {
-//                        activity = activity[0];
-//                        return M.I18N.l('activity') + ': ' + activity.get('name');
-//                    } else {
-//                        return M.I18N.l('activity') + ': ' + M.I18N.l('notDefined');
-//                    }
-//
-//                } else {
-//                    return M.I18N.l('activity') + ': ' + M.I18N.l('unknown');
-//                }
-//            }
-//        }
-//    })
     
     , order: M.LabelView.design({
           cssClass: 'application unselectable'

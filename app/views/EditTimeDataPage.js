@@ -10,7 +10,7 @@ m_require('app/views/TimeDataForEditTemplateView');
 
 DigiWebApp.EditTimeDataPage = M.PageView.design({
 
-      bookingToEdit: null
+    bookingToEdit: null
     
     , signaturePadAPI: null
 	
@@ -23,7 +23,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				DigiWebApp.BookingController.setTimeDataForEdit();
 				//DigiWebApp.BookingController.setNotBookedBookings();
 				
-        		// Feature 405 (Unterschrift)
+        		// Freischaltung 405: Unterschrift
         		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
         			$('#' + DigiWebApp.EditTimeDataPage.content.signature.id).show();
 					// init canvas
@@ -67,7 +67,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
 				}
 
-        		// enable feature 403
+			    // Freischaltung 403: Bemerkungsfeld
         		if (DigiWebApp.SettingsController.featureAvailable('403')) {
 	        		// show label
 					$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
@@ -87,17 +87,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	    					$(this).hide();
 	    			});
 				}
-//				if (DigiWebApp.SettingsController.featureAvailable('403')) {
-//					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).parent().show()
-//					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).show();
-//					$('label[for="' + DigiWebApp.EditTimeDataPage.content.remarkInput.id + '"]').show();
-//				} else {
-//					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).parent().hide()
-//					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).hide();
-//					$('label[for="' + DigiWebApp.EditTimeDataPage.content.remarkInput.id + '"]').hide();
-//				}
         		
-				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
+			    // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
         		if (DigiWebApp.SettingsController.featureAvailable('422')) {
         			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 	        			var currentActivity = null;
@@ -141,17 +132,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	    					$(this).hide();
 	    			});
 				}
-//				if (DigiWebApp.SettingsController.featureAvailable('422')) {
-//					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).parent().show()
-//					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).show();
-//					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').show();
-//				} else {
-//					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).parent().hide()
-//					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).hide();
-//					$('label[for="' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + '"]').hide();
-//				}
 
-        		// Feature 405 (Unterschrift)
+        		// Freischaltung 405: Unterschrift
         		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
         			// load signature
         			DigiWebApp.EditTimeDataPage.bookingToEdit.readFromFile(function(fileContent){
@@ -170,7 +152,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     }
 
     , myCallback: function() {
-
     }
     
     , tab_action_timeoutvar: null    
@@ -179,7 +160,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     	clearTimeout(DigiWebApp.EditTimeDataPage.tab_action_timeoutvar);
     	
     	var unterschriftString = "";
-    	// Feature 405 (Unterschrift)
+    	// Freischaltung 405: Unterschrift
 		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.EditTimeDataPage.signaturePadAPI) {
 			//unterschriftImageString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureImage();
     		unterschriftString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureString();
@@ -187,7 +168,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     	
 			//console.log(DigiWebApp.EditTimeDataPage.signaturePadAPI);
 			//console.log(unterschriftImageString);
-			
 		}
     	
     	if (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value.length > 255) {
@@ -277,7 +257,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                   label: M.I18N.l('remark')
                 , cssClass: 'remarkInput'
                 , hasMultipleLines: YES
-                , initialText: "max. 255 " + M.I18N.l('characters')
+                , initialText: "Max. 255 " + M.I18N.l('characters')
                 , numberOfChars: 255
         })
             

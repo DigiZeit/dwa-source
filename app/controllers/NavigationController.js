@@ -491,7 +491,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	}
     }
     
-    , toRemarkPage: function(mycallback) {
+    , toRemarkPage: function(mycallback, istFeierabendBuchung) {
     	if (typeof(mycallback) === "function") {
     		DigiWebApp.RemarkPage.myCallback = mycallback;
     	} else {
@@ -502,6 +502,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
         		DigiWebApp.BookingController.bookWithRemark();
         	};
     	}
+	    DigiWebApp.RemarkPage.istFeierabendBuchung = istFeierabendBuchung;
     	DigiWebApp.NavigationController.switchToPage('remarkPage', M.TRANSITION.POP, NO);
     }
     

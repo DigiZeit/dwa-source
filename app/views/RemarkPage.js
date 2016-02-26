@@ -75,14 +75,11 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	        			    DigiWebApp.RemarkPage.showHideReisekosten(false);
 	        			}
 				        // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung 
-				        // vorhanden und Feierabendbuchung
-				        //TODO istFeierabend ist zu diesem Zeitpunkt leider noch nicht gesetzt -
-                        // erst wenn die Buchung auch tatsächlich gemacht wird
-	        			if (currentActivity !== null && currentActivity.get("istFeierabend")) {
-			                DigiWebApp.RemarkPage.showHideUebernachtungskosten(true);
-			            } else {
-			                DigiWebApp.RemarkPage.showHideUebernachtungskosten(false);
-			            }
+				        // vorhanden und Feierabendbuchung.
+				        // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
+				        // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
+	        			DigiWebApp.RemarkPage.showHideUebernachtungskosten(
+                            featureReisekosten && DigiWebApp.RemarkPage.istFeierabendBuchung);
 			        } else {
         			    DigiWebApp.RemarkPage.showHideGefahreneKilometer(false);
         			    DigiWebApp.RemarkPage.showHideReisekosten(false);
@@ -231,6 +228,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
     , myCallback: function() {
     }
+
+    , istFeierabendBuchung: false
     
     , tab_action_timeoutvar: null    
     
@@ -374,7 +373,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         })
 
         , uebernachtungskosten: M.SelectionListView.design({
-            selectionMode: M.SINGLE_SELECTION//TODO _DIALOG
+            selectionMode: M.SINGLE_SELECTION_DIALOG
             , label: M.I18N.l('uebernachtungArt')
             , initialText: M.I18N.l('noData')
             //, cssClass: 'unselectable'

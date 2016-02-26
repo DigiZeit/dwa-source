@@ -150,7 +150,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                 }
             }
         }
-        // Freischaltung 416 "Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)"
+        // Freischaltung 416: Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)
         if (DigiWebApp.SettingsController.featureAvailable('416')) {
 			// Ticket 2108: Rename in order to be consistent with DSO
 			if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
@@ -320,11 +320,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 				    // -Bemerkungen freigeschaltet und nicht optional sind
 				    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
                     // -Bohle-Reisekostenabwicklung aktiv und Buchung fahrtzeitrelevant ist
-				    // Freischaltung 403 "Bemerkungsfeld"
+				    // Freischaltung 403: Bemerkungsfeld
 				    if ((DigiWebApp.SettingsController.featureAvailable('403')
                         && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
-				        // Freischaltung 422 "Eingabe von gefahrenen Kilometern (aktuell nur KTG)"
-				        // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+				        // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
+				        // Freischaltung 431: Bohle-Reisekostenabwicklung
 						|| ((   DigiWebApp.SettingsController.featureAvailable('422')
                              || DigiWebApp.SettingsController.featureAvailable('431'))
                             && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
@@ -336,7 +336,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			    				DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
 			    				DigiWebApp.BookingController.bookWithRemark();            					
-							});
+							}, /* istFeierabendBuchung */ false);
 					} else {
 						// else: bookWithRemark
 	    				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -641,6 +641,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            }, getLocationOptions); // getLocation() call
         	}; // getLocationNow()
     	
+        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 			if (DigiWebApp.SettingsController.featureAvailable('417') 
 			&& DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") 
 			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
@@ -1029,7 +1030,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 			
 			newOpenBooking.set('employees', employeeIdsArray.join());
 			
-			if (DigiWebApp.SettingsController.featureAvailable('419')) { // Scholpp-Spesen: Übrnachtungskennzeichen setzen
+	        // Freischaltung 419: Scholpp-Spesen und Scholpp-Kartendienst-Message
+			if (DigiWebApp.SettingsController.featureAvailable('419')) {
+			    // Scholpp-Spesen: Übernachtungskennzeichen setzen
 				if ((newOpenBooking.get("activityName") === "Reisezeit" || newOpenBooking.get("activityName") === "Fahrzeit")) {
 					var uebernachtungAuswahlObj = M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').getSelection(YES);
 					var uebernachtungAuswahl = uebernachtungAuswahlObj ? uebernachtungAuswahlObj.value : 6;
@@ -1079,6 +1082,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    }
 	    };
 	    
+        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterBookTime')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
@@ -1592,6 +1596,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        		DigiWebApp.SentBookingArchived.deleteAll();
 	        	}
 	        }
+    	    // Freischaltung 411: Zeitbuchungen X Tage auf Gerät vorhalten
 	        if (DigiWebApp.SettingsController.featureAvailable('411')) {
 				var daysToHoldBookingsOnDevice = 0;
 				try {
@@ -1841,13 +1846,13 @@ DigiWebApp.BookingController = M.Controller.extend({
     			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
 	        	var buchenCallback = function() {
 					if (
-					    // Freischaltung 403 "Bemerkungsfeld"
+					    // Freischaltung 403: Bemerkungsfeld
 					   (DigiWebApp.SettingsController.featureAvailable('403')
                         && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
-					    // Freischaltung 422 "Eingabe von gefahrenen Kilometern (aktuell nur KTG)"
+					    // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
 					|| (DigiWebApp.SettingsController.featureAvailable('422')
                         && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-					    // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+					    // Freischaltung 431: Bohle-Reisekostenabwicklung
 					    //TODO Nicht nur bei Buchungsabschluss, auch im Zeitdaten-Screen!
                         //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
                     || (DigiWebApp.SettingsController.featureAvailable('431'))
@@ -1855,24 +1860,23 @@ DigiWebApp.BookingController = M.Controller.extend({
 						// if remark or related feature active: go to remark page
 						that.refreshCurrentBooking(false);
 						DigiWebApp.NavigationController.toRemarkPage(function () {
-                            // Freischaltung 404 "Button-Menü"
+                            // Freischaltung 404: Button-Menü
 			    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
 				        		DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
 			    			} else {
 				        		DigiWebApp.NavigationController.backToDashboardPagePOP();
 			    			}
 			    			that.closeDayWithRemark();           					
-			            });
+						}, /* istFeierabendBuchung */ true);
 			        } else {
-						// else: bookWithRemark
-			        	that.closeDayWithRemark();           					
+			        	that.closeDayWithRemark();
 			        }
 	        	};
 
-    		    // Freischaltung 418 "Spesen/Auslöse"
+    		    // Freischaltung 418: Spesen/Auslöse
 	        	if (DigiWebApp.SettingsController.featureAvailable('418')) {
 		            DigiWebApp.NavigationController.toSpesenPage(function() {
-		                // Freischaltung 404 "Button-Menü"
+		                // Freischaltung 404: Button-Menü
 		                if (DigiWebApp.SettingsController.featureAvailable('404')) {
 		                    DigiWebApp.NavigationController.backToButtonDashboardPagePOP();
 		                } else {
@@ -1902,7 +1906,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         if (that.currentBooking) {
         	that.currentBooking.set("istFeierabend", true);
 
-        	bookingWasClosed = that.currentBooking.closeBooking(location)
+            bookingWasClosed = that.currentBooking.closeBooking(location);
 
 	    	if (bookingWasClosed) {
 	    		
@@ -1982,6 +1986,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        }
         };
         
+        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 	    if (DigiWebApp.SettingsController.featureAvailable('417') && DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")) {
 			if (DigiWebApp.SettingsController.getSetting("ServiceApp_engeKopplung") || DigiWebApp.SettingsController.getSetting('autoTransferAfterClosingDay')) {
 				// put, dann solange GET bis !=WAIT oder GPS-TIMEOUT erreicht
@@ -2225,8 +2230,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 		                  	  deleteBuchungsIds.push(el.m_id);
 		                      el.del();
 		                    }
-		                  });
+		                });
 		  				
+        		        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 		  				if (DigiWebApp.SettingsController.featureAvailable('417')) {
 							DigiWebApp.ServiceAppController.deleteBookings(
 								    deleteBuchungsIds
@@ -2280,6 +2286,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                          }
                           }
                           
+        		          // Freischaltung 402: Materialerfassung only
+        		          // Freischaltung 426: Notizen only
                           if (
                    	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
                    		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
