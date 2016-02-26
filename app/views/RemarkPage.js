@@ -166,13 +166,21 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				    ) {
 				        var spesen = DigiWebApp.BookingController.currentBooking.get('spesenAuswahl');
 				        // 5 = Fahrt mit Firmenwagen
-				        DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', (spesen === 5));
+				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
+				            value: 'fahrtzeitFirmenwagen'
+			                , label: M.I18N.l('fahrtzeitFirmenwagen')
+			                , isSelected: (spesen === 5)
+				        }]);
 				        //M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value = (spesen === 5);
 				        // 6 = Fahrt mit Bus/Bahn
 				        //M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value = (spesen === 6);
 				    } else {
-				        DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', false);
-				        DigiWebApp.BookingController.autoSaveGPSData.set('value', false);
+				        //DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', false);
+				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
+				            value: 'fahrtzeitFirmenwagen'
+			                , label: M.I18N.l('fahrtzeitFirmenwagen')
+			                , isSelected: (spesen === 5)
+				        }]);
                     }
 				} else {
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
