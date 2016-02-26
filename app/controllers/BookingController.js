@@ -78,6 +78,11 @@ DigiWebApp.BookingController = M.Controller.extend({
         , isSelected: 1
     }]
 
+    , autoSaveGPSData: [{
+        value: true
+        , label: M.I18N.l('autoSaveGPSData')
+        , isSelected: true
+    }]
 
     /**
      *

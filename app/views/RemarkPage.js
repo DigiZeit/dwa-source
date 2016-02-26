@@ -352,8 +352,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            , cssClass: 'remarkInput'
-            , value: M.I18N.l('fahrtzeitFirmenwagen')
+            //, cssClass: 'remarkInput'
+            //, value: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
                 //target: DigiWebApp.BookingController
                 //, property: 'propReisekostenFirmenwagen'
@@ -364,17 +364,17 @@ DigiWebApp.RemarkPage = M.PageView.design({
             
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            , value: M.I18N.l('fahrtzeitBusBahn')
+            //, value: M.I18N.l('fahrtzeitBusBahn')
             , contentBinding: {
-                //target: DigiWebApp.BookingController
-                //, property: 'propReisekostenBusBahn'
-                target: DigiWebApp.SettingsController
-                , property: 'settings.useTransitionsSetting'
+                target: DigiWebApp.BookingController
+                , property: 'autoSaveGPSData'
+                //target: DigiWebApp.SettingsController
+                //, property: 'settings.useTransitionsSetting'
             }
         })
 
         , uebernachtungskosten: M.SelectionListView.design({
-            selectionMode: M.SINGLE_SELECTION_DIALOG
+            selectionMode: M.SINGLE_SELECTION//TODO _DIALOG
             , label: M.I18N.l('uebernachtungArt')
             , initialText: M.I18N.l('noData')
             //, cssClass: 'unselectable'
