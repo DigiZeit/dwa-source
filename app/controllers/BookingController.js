@@ -73,9 +73,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     // Siehe propReisekostenFirmenwagen
     , propReisekostenBusBahn: [{
-        value: 1
+        value: true
         , label: M.I18N.l('fahrtzeitBusBahn')
-        , isSelected: 1
+        , isSelected: true
     }]
 
     , autoSaveGPSData: [{

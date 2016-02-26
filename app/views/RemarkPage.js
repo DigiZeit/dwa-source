@@ -20,9 +20,9 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
 				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
-			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
 				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
-				
+			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+
 			    if (featureBemerkung) {
 	        		// show label
 					$('[for=' + DigiWebApp.RemarkPage.content.remarkInput.id  + ']').each(function() {
@@ -162,13 +162,17 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				    }
 				    // Reisekosten-Checkboxen laden
 				    if (typeof (DigiWebApp.BookingController.currentBooking.get('spesenAuswahl')) !== "undefined"
-				        && DigiWebApp.BookingController.currentBooking.get('spesenAuswahl') !== null
-                    ) {
+				            && DigiWebApp.BookingController.currentBooking.get('spesenAuswahl') !== null
+				    ) {
 				        var spesen = DigiWebApp.BookingController.currentBooking.get('spesenAuswahl');
 				        // 5 = Fahrt mit Firmenwagen
-				        M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value = (spesen === 5);
+				        DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', (spesen === 5));
+				        //M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value = (spesen === 5);
 				        // 6 = Fahrt mit Bus/Bahn
-				        M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value = (spesen === 6);
+				        //M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value = (spesen === 6);
+				    } else {
+				        DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', false);
+				        DigiWebApp.BookingController.autoSaveGPSData.set('value', false);
                     }
 				} else {
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
