@@ -355,8 +355,10 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , cssClass: 'remarkInput'
             , value: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
-                target: DigiWebApp.BookingController,
-                property: 'propReisekostenFirmenwagen'
+                //target: DigiWebApp.BookingController
+                //, property: 'propReisekostenFirmenwagen'
+                target: DigiWebApp.SettingsController
+                , property: detailierteZeitdaten
             }
         })
             
@@ -364,8 +366,10 @@ DigiWebApp.RemarkPage = M.PageView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , value: M.I18N.l('fahrtzeitBusBahn')
             , contentBinding: {
-                target: DigiWebApp.BookingController,
-                property: 'propReisekostenBusBahn'
+                //target: DigiWebApp.BookingController
+                //, property: 'propReisekostenBusBahn'
+                target: DigiWebApp.SettingsController
+                , property: useTransitionsSetting
             }
         })
 
