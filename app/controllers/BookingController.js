@@ -78,12 +78,6 @@ DigiWebApp.BookingController = M.Controller.extend({
         , isSelected: true
     }]
 
-    , autoSaveGPSData: [{
-        value: true
-        , label: M.I18N.l('autoSaveGPSData')
-        , isSelected: true
-    }]
-
     /**
      *
      * On first load does:
@@ -328,7 +322,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						|| ((   DigiWebApp.SettingsController.featureAvailable('422')
                              || DigiWebApp.SettingsController.featureAvailable('431'))
                             && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-					){
+					) {
 							this.refreshCurrentBooking(false);
 							DigiWebApp.NavigationController.toRemarkPage(function() {
 			    		        DigiWebApp.BookingController.set('isBackFromRemarkPage', YES);
@@ -995,7 +989,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    
 		    // reset remark
 	        try {
-                //TODO: Dieser Aufruf schlägt manchmal fehl
+                //TODO: Dieser Aufruf gibt manchmal eine Exception auf der Konsole
 		    	M.ViewManager.getView('remarkPage', 'remarkInput').value = '';
 		    } catch(e2) { }
 		    var remarkStr = '';
@@ -1689,68 +1683,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     	}
     }
 
-    , setTimeDataForRemark: function() {
-    	try {
-	    	if ( DigiWebApp.BookingController.currentBooking === null ) { return; }
-	        var bookings = [DigiWebApp.BookingController.currentBooking];
-	        if (bookings.length > 0) {
-	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
-        		var d8Now = new D8();
-        		var inSommerzeit = (tagDerSommerzeit.timeBetween(d8Now) >= 0 && tagDerWinterzeit.timeBetween(d8Now) <= 0);
-        		//var inWinterzeit = ((tagDerWinterzeit.timeBetween(d8Now) >= 0 && tagDerSommerzeit.timeBetween(d8Now) >= 0) || (tagDerWinterzeit.timeBetween(d8Now) <= 0 && tagDerSommerzeit.timeBetween(d8Now) <= 0));
-        		var inWinterzeit = !inSommerzeit;
-	            _.each(bookings, function(booking) {
-	            	var startDate = booking.get('startDateString');
-	            	var startTime = booking.get('startTimeString');
-	            	if ((typeof(startDate) === "undefined" || !startDate || startDate === "")
-	            	|| (typeof(startTime) === "undefined" || !startTime || startTime === "")
-	            	) {
-	            		// Buchung aus alter WebAppVersion
-	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
-	                    startDate = d8start.format('dd.mm.yyyy');
-	                    startTime = d8start.format('HH:MM');
-	            	}
-	            	var endeDate = booking.get('endeDateString');
-	            	var endeTime = booking.get('endeTimeString');
-	            	if ((typeof(endeDate) === "undefined" || !endeDate || endeDate === "")
-	            	|| (typeof(endeTime) === "undefined" || !endeTime || endeTime === "")
-	            	) {
-	            		// Buchung aus alter WebAppVersion
-	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
-	                    endeDate = d8ende.format('dd.mm.yyyy');
-	                    endeTime = d8ende.format('HH:MM');
-	            	}
-	            	if (typeof(booking.get('timezoneOffset')) === "undefined") {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',-120' + ',' + startDate + ',' + startTime + ',' + endeDate + ',' + endeTime);
-	            	} else {
-	            		booking.set('date', booking.get('timeStampStart') + ',' + booking.get('timeStampEnd') + ',' + booking.get('timezoneOffset') + ',' + startDate + ',' + startTime + ',' + endeDate + ',' + endeTime);
-	            	}
-	                
-	                // set the handOrderId as orderId for correct display in list item view
-	                if (parseIntRadixTen(booking.get('orderId')) === 0 && parseIntRadixTen(booking.get('handOrderId')) !== 0) {
-	                    booking.set('orderId', booking.get('handOrderId'));
-	                }
-	
-	            });
-	            // newest booking at the top => first sort than reverse order
-	            bookings = _.sortBy(bookings, function(booking) {
-	                return parseIntRadixTen(booking.get('timeStampStart'));
-	            });
-	            this.set('timeDataForEdit', bookings.reverse());
-	        } else {
-	            this.set('timeDataForEdit', []);
-	        }
-    	} catch(e17) {
-            this.set('timeDataForEdit', []);
-    	}
-    }
-
     , setTimeDataForEdit: function() {
-    	try {
-	    	if ( DigiWebApp.EditTimeDataPage.bookingToEdit === null ) { return; }
-	        var bookings = [DigiWebApp.EditTimeDataPage.bookingToEdit];
-	        if (bookings.length > 0) {
+        try {
+            if ( DigiWebApp.EditTimeDataPage.bookingToEdit === null ) { return; }
+            var bookings = [DigiWebApp.EditTimeDataPage.bookingToEdit];
+            if (bookings.length > 0) {
 	        	var tagDerWinterzeit = D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("11/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
 	        	var tagDerSommerzeit = D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").addDays(-D8.create("04/01/" + new Date().getFullYear() + " 02:00:00").date.getDay());
         		var d8Now = new D8();

@@ -493,17 +493,18 @@ DigiWebApp.NavigationController = M.Controller.extend({
     
     , toRemarkPage: function(mycallback, istFeierabendBuchung) {
     	if (typeof(mycallback) === "function") {
-    		DigiWebApp.RemarkPage.myCallback = mycallback;
+    	    DigiWebApp.EditTimeDataPage.myCallback = mycallback;
     	} else {
     		//console.log("mycallback is not a function!");
     		// reset to default behaviour
-    		DigiWebApp.RemarkPage.myCallback = function() {
+    	    DigiWebApp.EditTimeDataPage.myCallback = function () {
     			DigiWebApp.NavigationController.toBookTimePage();
         		DigiWebApp.BookingController.bookWithRemark();
         	};
     	}
-	    DigiWebApp.RemarkPage.istFeierabendBuchung = istFeierabendBuchung;
-    	DigiWebApp.NavigationController.switchToPage('remarkPage', M.TRANSITION.POP, NO);
+    	DigiWebApp.EditTimeDataPage.buchungAbschliessen = true;
+    	DigiWebApp.EditTimeDataPage.istFeierabendBuchung = istFeierabendBuchung;
+    	DigiWebApp.NavigationController.switchToPage('editTimeDataPage', M.TRANSITION.POP, NO);
     }
     
     , toEditTimeDataPage: function(mycallback) {
@@ -516,7 +517,9 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			DigiWebApp.NavigationController.backToTimeDataPage();
         	};
     	}
-    	DigiWebApp.NavigationController.switchToPage('editTimeDataPage', M.TRANSITION.SLIDEUP, NO);
+        DigiWebApp.EditTimeDataPage.buchungAbschliessen = false;
+        DigiWebApp.EditTimeDataPage.istFeierabendBuchung = false;
+        DigiWebApp.NavigationController.switchToPage('editTimeDataPage', M.TRANSITION.SLIDEUP, NO);
     }    
 
     , toAnwesenheitslistePage: function() { 

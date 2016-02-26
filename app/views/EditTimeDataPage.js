@@ -18,11 +18,19 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     , events: {
 		pagebeforeshow: {
 			action: function() {
-	
-				// load data
+			    DigiWebApp.ApplicationController.DigiLoaderView.hide();
+
+			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
+			        DigiWebApp.EditTimeDataPage.bookingToEdit = DigiWebApp.BookingController.currentBooking;
+			    }
+			    
 				DigiWebApp.BookingController.setTimeDataForEdit();
-				//DigiWebApp.BookingController.setNotBookedBookings();
 				
+				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
+				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
+				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
+			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+
         		// Freischaltung 405: Unterschrift
         		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
         			$('#' + DigiWebApp.EditTimeDataPage.content.signature.id).show();
@@ -39,8 +47,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         			$('#' + DigiWebApp.EditTimeDataPage.content.signature.id).hide();
         		}
 						
-        		// load remark
-        		if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit !== null) {
+			    // Bemerkung laden
+        		if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
+                        && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
+                ) {
 					if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark')) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark') !== null) {
 						$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).val(DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark'));
 						M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark');
@@ -53,22 +63,62 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 					M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = "";
 				}
         		
-				// load gefahreneKilometer
-        		if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit !== null) {
-					if (typeof(DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer')) !== "undefined" && DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer') !== null) {
+        		if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
+                        && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
+                ) {
+        		    // gefahreneKilometer laden
+        		    if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer')) !== "undefined"
+                            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer') !== null) {
 						$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer'));
 						M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer');
 					} else {
 						$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
 						M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
 					}
-				} else {
+        		    // Reisekosten-Checkboxen laden
+        		    if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl')) !== "undefined"
+				            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl') !== null
+				    ) {
+        		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
+        		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
+        		            value: 'fahrtzeitFirmenwagen'
+			                , label: M.I18N.l('fahrtzeitFirmenwagen')
+			                , isSelected: (spesen === 5) // 5 = Fahrt mit Firmenwagen
+        		        }]);
+        		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
+        		            value: 'fahrtzeitBusBahn'
+			                , label: M.I18N.l('fahrtzeitBusBahn')
+			                , isSelected: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
+        		        }]);
+        		    } else {
+        		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
+        		            value: 'fahrtzeitFirmenwagen'
+			                , label: M.I18N.l('fahrtzeitFirmenwagen')
+			                , isSelected: false
+        		        }]);
+        		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
+        		            value: 'fahrtzeitBusBahn'
+			                , label: M.I18N.l('fahrtzeitBusBahn')
+			                , isSelected: false
+        		        }]);
+        		    }
+                } else {
 					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-				}
 
-			    // Freischaltung 403: Bemerkungsfeld
-        		if (DigiWebApp.SettingsController.featureAvailable('403')) {
+					DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
+					    value: 'fahrtzeitFirmenwagen'
+                        , label: M.I18N.l('fahrtzeitFirmenwagen')
+                        , isSelected: false
+					}]);
+					DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
+					    value: 'fahrtzeitBusBahn'
+                        , label: M.I18N.l('fahrtzeitBusBahn')
+                        , isSelected: false
+					}]);
+                }
+
+        		if (featureBemerkung) {
 	        		// show label
 					$('[for=' + DigiWebApp.EditTimeDataPage.content.remarkInput.id  + ']').each(function() {
 	    					$(this).show();
@@ -88,52 +138,94 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	    			});
 				}
         		
-			    // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
-        		if (DigiWebApp.SettingsController.featureAvailable('422')) {
-        			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
-	        			var currentActivity = null;
-	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseIntRadixTen(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
-	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
-			        		// show label
-							$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-			    					$(this).show();
-			    			});
-							// show textarea
-			        		$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-			    					$(this).show();
-			    			});
-	        			} else {
-	    					// hide label
-	    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    	    					$(this).hide();
-	    	    			});
-	    					// hide textarea
-	    					$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    	    					$(this).hide();
-	    	    			});
-	        			}
-        			} else {
-    					// hide label
-    	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-    	    					$(this).hide();
-    	    			});
-    					// hide textarea
-    					$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-    	    					$(this).hide();
-    	    			});
-        			}
-				} else {
-					// hide label
-	        		$('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    					$(this).hide();
-	    			});
-					// hide textarea
-					$('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id  + ']').each(function() {
-	    					$(this).hide();
-	    			});
-				}
+			    // gefahreneKilometer etc nur einblenden falls Freischaltung vorhanden und Leistung fahrtzeitrelevant
+        		if (featureGefahreneKilometer || featureReisekosten) {
+		            if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
+		                    && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
+		            ) {
+		                var currentActivity = null;
+		                _.each(DigiWebApp.Activity.find(), function(el) {
+		                    if (el.get("id") === parseIntRadixTen(
+		                            DigiWebApp.EditTimeDataPage.bookingToEdit.get("activityId"))
+		                    ) {
+		                        currentActivity = el;
+		                    }
+		                });
+		                if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
+		                    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
+		                    // und TODO: Eingabe noch nicht erfolgt
+		                    if (featureReisekosten) {
+		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
+		                            M.I18N.l('fahrtzeitPrivat');
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
+		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(true);
+		                    } else {
+		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
+		                            M.I18N.l('gefahreneKilometer');
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
+		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
+		                    }
+		                } else {
+		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
+		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
+		                }
+		                // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung 
+		                // vorhanden und Feierabendbuchung.
+		                // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
+		                // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
+		                DigiWebApp.EditTimeDataPage.showHideUebernachtungskosten(
+		                    featureReisekosten && DigiWebApp.EditTimeDataPage.istFeierabendBuchung);
+		            } else {
+		                DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
+		                DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
+		            }
+		        } else {
+        		    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
+        		    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
+        		}
 
-        		// Freischaltung 405: Unterschrift
+			    // Uebernachtungskosten-Auswahl (falls nötig) initialisieren
+			    // falls Freischaltung vorhanden
+        		if (featureReisekosten) {
+        		    if (DigiWebApp.UebernachtungAuswahlOption.find().length === 0) {
+        		        var i = 1;
+        		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+        		            id: i,
+        		            beschreibung: M.I18N.l('uebernachtungKeine')
+        		        }).saveSorted();
+        		        i++; // 2
+        		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+        		            id: i,
+        		            beschreibung: M.I18N.l('uebernachtungPrivat')
+        		        }).saveSorted();
+        		        i++; // 3
+        		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+        		            id: i,
+        		            beschreibung: M.I18N.l('uebernachtungZahltFirma')
+        		        }).saveSorted();
+        		        i++; // 4
+        		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
+        		            id: i,
+        		            beschreibung: M.I18N.l('uebernachtungSelbstBezahlt')
+        		        }).saveSorted();
+        		    }
+
+        		    var uebernachtungOptionen = DigiWebApp.UebernachtungAuswahlOption.findSorted();
+        		    uebernachtungOptionen = _.map(uebernachtungOptionen, function (opt) {
+        		        if (opt) {
+        		            var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
+        		            if (opt.get('id') === 1) {
+        		                obj.isSelected = YES;
+        		            }
+        		            return obj;
+        		        }
+        		    });
+        		    /* remove false values with _.compact() */
+        		    uebernachtungOptionen = _.compact(uebernachtungOptionen);
+        		    DigiWebApp.BookingController.set("uebernachtungOptionen", uebernachtungOptionen);
+        		}
+
+			    // Freischaltung 405: Unterschrift
         		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
         			// load signature
         			DigiWebApp.EditTimeDataPage.bookingToEdit.readFromFile(function(fileContent){
@@ -151,23 +243,75 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         }
     }
 
-    , myCallback: function() {
+    , showHideGefahreneKilometer(showElement) {
+        // show/hide label
+        $('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + ']').each(function () {
+            if (showElement) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        // show/hide textarea
+        $('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + ']').each(function () {
+            if (showElement) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    , showHideReisekosten(showElement) {
+        $('[id=' + DigiWebApp.EditTimeDataPage.content.reisekostenFirmenwagen.id + ']').each(function () {
+            if (showElement) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        $('[id=' + DigiWebApp.EditTimeDataPage.content.reisekostenBusBahn.id + ']').each(function () {
+            if (showElement) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    , showHideUebernachtungskosten(showElement) {
+        if (showElement) {
+            try {
+                $('#' + DigiWebApp.EditTimeDataPage.content.uebernachtungskosten.id + "_container").show();
+            } catch (e) { trackError(e); }
+        } else {
+            try {
+                $('#' + DigiWebApp.EditTimeDataPage.content.uebernachtungskosten.id + "_container").hide();
+            } catch (e) { trackError(e); }
+        }
+    }
+
+    // Callback der nach dem Speichern aufgerufen werden muss, wird vom BookingController gesetzt
+    , myCallback: function () {
     }
     
-    , tab_action_timeoutvar: null    
+    // Flag, ob eine Buchung abgeschlossen wird (früher RemarkPage) oder Zeitdaten editiert werden
+    , buchungAbschliessen: false
+
+    // Flagb ob eine Feierabendbuchung bearbeitet wird
+    , istFeierabendBuchung: false
+
+    , tab_action_timeoutvar: null
     
     , tab_action: function() {
     	clearTimeout(DigiWebApp.EditTimeDataPage.tab_action_timeoutvar);
     	
     	var unterschriftString = "";
     	// Freischaltung 405: Unterschrift
-		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.EditTimeDataPage.signaturePadAPI) {
-			//unterschriftImageString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureImage();
+    	if ((DigiWebApp.SettingsController.featureAvailable('405'))
+                && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.EditTimeDataPage.signaturePadAPI
+        ) {
     		unterschriftString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureString();
-			//var unterschriftRawValue = $('#' + DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.id).val();
-    	
-			//console.log(DigiWebApp.EditTimeDataPage.signaturePadAPI);
-			//console.log(unterschriftImageString);
 		}
     	
     	if (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value.length > 255) {
@@ -178,7 +322,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     		});
 		} else {
 			
-			if ( (DigiWebApp.SettingsController.getSetting('remarkIsMandatory')) && (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value === '') ) {
+    	    if ((DigiWebApp.SettingsController.getSetting('remarkIsMandatory'))
+                    && (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value === '')
+            ) {
 		        DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	    			  title: M.I18N.l('remarkIsMandatory')
@@ -193,21 +339,53 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    , message: M.I18N.l('specialCharProblemMsg')
 	                });
 	            } else {
-    				// save remark und gefahreneKilometer in bookingToEdit
-    				DigiWebApp.EditTimeDataPage.bookingToEdit.set('remark', M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
-    				DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
-    				DigiWebApp.EditTimeDataPage.bookingToEdit.save();
+	                if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
+	                    // Aktuelle Buchung speichern
+	                    DigiWebApp.BookingController.currentBooking.set('remark',
+                            M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
 
-    				if (unterschriftString !== "") {
-    					// save signature
-    					DigiWebApp.EditTimeDataPage.bookingToEdit.set('fileType', DigiWebApp.ApplicationController.CONSTTextFiletype);
-    					DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_breite", DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasWidth);
-    					DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_hoehe", DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasHeight);
-    					DigiWebApp.EditTimeDataPage.bookingToEdit.save();
-    					DigiWebApp.EditTimeDataPage.bookingToEdit.saveToFile(unterschriftString, DigiWebApp.EditTimeDataPage.myCallback);
-    				} else {
-    					DigiWebApp.EditTimeDataPage.myCallback();
-    				}
+	                    var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
+	                    DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
+
+	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
+	                        // Parallel Spesenauswahl wenn Fahrt mit Privat-Pkw?
+	                        //if (km !== 0) {
+	                        //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
+	                        //} else {
+	                        // Reisekostenauswahl als Spesenauswahl speichern
+	                        if (M.ViewManager.getView('editTimeDataPage', 'reisekostenFirmenwagen').isSelected === 1) {
+	                            // 5 = Fahrt mit Firmenwagen
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
+	                        } else if (M.ViewManager.getView('editTimeDataPage', 'reisekostenBusBahn').isSelected === 1) {
+	                            // 6 = Fahrt mit Bus/Bahn
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
+
+	                        }
+
+	                        DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
+                                M.ViewManager.getView('editTimeDataPage', 'uebernachtungskosten').getSelection(YES).value);
+	                    }
+
+	                    DigiWebApp.BookingController.currentBooking.save();
+
+	                    DigiWebApp.EditTimeDataPage.myCallback();
+	                } else {
+	                    // Bemerkung, gefahreneKilometer etc in bookingToEdit speichern
+	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('remark', M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
+	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
+	                    DigiWebApp.EditTimeDataPage.bookingToEdit.save();
+
+	                    if (unterschriftString !== "") {
+	                        // save signature
+	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set('fileType', DigiWebApp.ApplicationController.CONSTTextFiletype);
+	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_breite", DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasWidth);
+	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_hoehe", DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasHeight);
+	                        DigiWebApp.EditTimeDataPage.bookingToEdit.save();
+	                        DigiWebApp.EditTimeDataPage.bookingToEdit.saveToFile(unterschriftString, DigiWebApp.EditTimeDataPage.myCallback);
+	                    } else {
+	                        DigiWebApp.EditTimeDataPage.myCallback();
+	                    }
+	                }
 	            }
 			}
 		}
@@ -228,19 +406,27 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToTimeDataPage();}
+                    , action: function () {
+                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
+                        if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
+                              this.backToBookTimePagePOP();
+                          } else {
+                              this.backToTimeDataPage();
+                          }
+                    }
                 }
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('EditTimeDataPageTitle')
+            //TODO Text abhängig davon, was gerade gemacht wird
+            value: M.I18N.l('EditTimeDataPageTitle')
             , anchorLocation: M.CENTER
         })
         , anchorLocation: M.TOP
     })
 
     , content: M.ScrollView.design({
-          childViews: 'orderbox remarkInput gefahreneKilometerInput signature saveGrid'
+        childViews: 'orderbox remarkInput gefahreneKilometerInput signature reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten grid'
         
         , orderbox: M.ListView.design({
         	
@@ -254,33 +440,31 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         })
         
         , remarkInput: M.TextFieldView.design({
-                  label: M.I18N.l('remark')
-                , cssClass: 'remarkInput'
-                , hasMultipleLines: YES
-                , initialText: "Max. 255 " + M.I18N.l('characters')
-                , numberOfChars: 255
+            label: M.I18N.l('remark')
+            , cssClass: 'remarkInput'
+            , hasMultipleLines: YES
+            , initialText: "Max. 255 " + M.I18N.l('characters')
+            , numberOfChars: 255
         })
             
         , gefahreneKilometerInput: M.TextFieldView.design({
-                  label: M.I18N.l('gefahreneKilometer')
-                , cssClass: 'remarkInput'
-                , hasMultipleLines: NO
-        	    , inputType: M.INPUT_NUMBER
+            // Labeltext wird in init() abhängig von Freischaltung gesetzt
+            label: M.I18N.l('gefahreneKilometer')
+            , cssClass: 'remarkInput'
+            , hasMultipleLines: NO
+        	, inputType: M.INPUT_NUMBER
         })
             
         , signature: M.ContainerView.design({
-        	
-        	  childViews: 'signatureform'
-        		  
+        	childViews: 'signatureform'
             , cssClass: 'signaturecanvas marginTop20 marginBottom20'
 
         	, signatureform: M.FormView.design({
-            	
-            	  childViews: 'signaturecanvas'
+            	childViews: 'signaturecanvas'
             	
             	, signaturecanvas: M.CanvasView.design({
 
-            		  label: M.I18N.l('signature')
+            		label: M.I18N.l('signature')
 
             		, canvasWidth: 300
                     , canvasHeight: 150
@@ -306,12 +490,39 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             })
         })
         	        
+        , reisekostenFirmenwagen: M.SelectionListView.design({
+            selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenFirmenwagen'
+            }
+        })
+
+        , reisekostenBusBahn: M.SelectionListView.design({
+            selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenBusBahn'
+            }
+        })
+
+        , uebernachtungskosten: M.SelectionListView.design({
+            selectionMode: M.SINGLE_SELECTION_DIALOG
+            , label: M.I18N.l('uebernachtungArt')
+            , initialText: M.I18N.l('noData')
+            , applyTheme: NO
+            , contentBinding: {
+                target: DigiWebApp.BookingController
+                , property: 'uebernachtungOptionen'
+            }
+        })
+
         , saveGrid: M.GridView.design({
               childViews: 'saveButton icon'
             , layout: {
                   cssClass: 'digiButton marginTop25'
                 , columns: {
-                      0: 'saveRemarkButton'
+                      0: 'saveButton'
                     , 1: 'icon'
                 }
             }

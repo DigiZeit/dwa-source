@@ -16,7 +16,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				
-				DigiWebApp.BookingController.setTimeDataForRemark();
+				DigiWebApp.BookingController.setTimeDataForEdit();
 
 				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
@@ -289,10 +289,10 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	                    //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
 	                    //} else {
 	                    // Reisekostenauswahl als Spesenauswahl speichern
-	                    if (M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value === 1) {
+	                    if (M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').isSelected === 1) {
 	                        // 5 = Fahrt mit Firmenwagen
     	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
-	                    } else if (M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value === 1) {
+	                    } else if (M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').isSelected === 1) {
 	                        // 6 = Fahrt mit Bus/Bahn
     	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
 	                    
