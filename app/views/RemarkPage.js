@@ -165,21 +165,26 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				            && DigiWebApp.BookingController.currentBooking.get('spesenAuswahl') !== null
 				    ) {
 				        var spesen = DigiWebApp.BookingController.currentBooking.get('spesenAuswahl');
-				        // 5 = Fahrt mit Firmenwagen
 				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
 				            value: 'fahrtzeitFirmenwagen'
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: (spesen === 5)
+			                , isSelected: (spesen === 5) // 5 = Fahrt mit Firmenwagen
 				        }]);
-				        //M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').value = (spesen === 5);
-				        // 6 = Fahrt mit Bus/Bahn
-				        //M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').value = (spesen === 6);
-				    } else {
-				        //DigiWebApp.BookingController.propReisekostenFirmenwagen.set('value', false);
+				        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
+				            value: 'fahrtzeitBusBahn'
+			                , label: M.I18N.l('fahrtzeitBusBahn')
+			                , isSelected: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
+				        }]);
+                    } else {
 				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
 				            value: 'fahrtzeitFirmenwagen'
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: (spesen === 5)
+			                , isSelected: false
+				        }]);
+				        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
+				            value: 'fahrtzeitBusBahn'
+			                , label: M.I18N.l('fahrtzeitBusBahn')
+			                , isSelected: false
 				        }]);
                     }
 				} else {
@@ -274,6 +279,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	    			// Buchung speichern
 	                DigiWebApp.BookingController.currentBooking.set('remark',
                         M.ViewManager.getView('remarkPage', 'remarkInput').value);
+
 	                var km = parseIntRadixTen(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value);
 	                DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
 
@@ -291,7 +297,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
     	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
 	                    
 	                    }
-	                DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
+
+	                    DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
 	                        M.ViewManager.getView('remarkPage', 'uebernachtungskosten').getSelection(YES).value);
 	                }
 
@@ -363,24 +370,17 @@ DigiWebApp.RemarkPage = M.PageView.design({
 
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            //, cssClass: 'remarkInput'
-            //, value: M.I18N.l('fahrtzeitFirmenwagen')
             , contentBinding: {
                 target: DigiWebApp.BookingController
                 , property: 'propReisekostenFirmenwagen'
-                //target: DigiWebApp.SettingsController
-                //, property: 'settings.autoSaveGPSData'
             }
         })
             
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
-            //, value: M.I18N.l('fahrtzeitBusBahn')
             , contentBinding: {
-                target: DigiWebApp.SettingsController
-                , property: 'autoSaveGPSData'
-                //target: DigiWebApp.SettingsController
-                //, property: 'settings.useTransitionsSetting'
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenBusBahn'
             }
         })
 
@@ -388,24 +388,16 @@ DigiWebApp.RemarkPage = M.PageView.design({
             selectionMode: M.SINGLE_SELECTION_DIALOG
             , label: M.I18N.l('uebernachtungArt')
             , initialText: M.I18N.l('noData')
-            //, cssClass: 'unselectable'
             , applyTheme: NO
             , contentBinding: {
                 target: DigiWebApp.BookingController
                 , property: 'uebernachtungOptionen'
             }
-            , events: {
-                change: {
-                    target: DigiWebApp.BookingController
-                    , action: function () {
-                    }
-                }
-            }
         })
             
         , grid: M.GridView.design({
+            childViews: 'button icon'
 
-              childViews: 'button icon'
             , layout: {
                   cssClass: 'digiButton marginTop25'
                 , columns: {
