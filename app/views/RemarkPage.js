@@ -358,7 +358,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 //target: DigiWebApp.BookingController
                 //, property: 'propReisekostenFirmenwagen'
                 target: DigiWebApp.SettingsController
-                , property: detailierteZeitdaten
+                , property: autoSaveGPSData
             }
         })
             
