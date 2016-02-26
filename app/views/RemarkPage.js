@@ -323,7 +323,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-        childViews: 'orderbox remarkInput gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten grid'
+        childViews: 'orderbox remarkInput gefahreneKilometerInput reisekostenGroup uebernachtungskosten grid'
         
         , orderbox: M.ListView.design({
             contentBinding: {
@@ -350,10 +350,11 @@ DigiWebApp.RemarkPage = M.PageView.design({
         	, inputType: M.INPUT_NUMBER
         })
 
-        //, reisekostenGroup: M.ButtonGroupView.design({
-        //    childViews: 'reisekostenFirmenwagen reisekostenBusBahn'
+        , reisekostenGroup: M.GridView.design({
+            childViews: 'reisekostenFirmenwagen reisekostenBusBahn'
+			, layout: M.TWO_COLUMNS
 
-            , reisekostenFirmenwagen: M.ButtonView.design({
+            , reisekostenFirmenwagen: M.SelectionListView.design({
                 selectionMode: M.MULTIPLE_SELECTION,
                 //cssClass: 'remarkInput',
                 value: M.I18N.l('fahrtzeitFirmenwagen')
@@ -363,7 +364,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 }
             })
             
-            , reisekostenBusBahn: M.ButtonView.design({
+            , reisekostenBusBahn: M.SelectionListView.design({
                 selectionMode: M.MULTIPLE_SELECTION,
                 value: M.I18N.l('fahrtzeitBusBahn')
                 , contentBinding: {
@@ -371,7 +372,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
                     property: 'propReisekostenBusBahn'
                 }
             })
-        //})
+        })
 
         , uebernachtungskosten: M.SelectionListView.design({
             selectionMode: M.SINGLE_SELECTION_DIALOG
