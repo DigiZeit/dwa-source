@@ -30,9 +30,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
 				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
 			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+			    var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
 
         		// Freischaltung 405: Unterschrift
-        		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
+			    if (featureUnterschrift && !DigiWebApp.EditTimeDataPage.buchungAbschliessen
+                        && (typeof window.requestFileSystem !== "undefined")
+                ) {
         			$('#' + DigiWebApp.EditTimeDataPage.content.signature.id).show();
 					// init canvas
 					var sigPadOptions = {
@@ -225,10 +228,11 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		    DigiWebApp.BookingController.set("uebernachtungOptionen", uebernachtungOptionen);
         		}
 
-			    // Freischaltung 405: Unterschrift
-        		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined")) {
-        			// load signature
-        			DigiWebApp.EditTimeDataPage.bookingToEdit.readFromFile(function(fileContent){
+        		if (featureUnterschrift && !DigiWebApp.EditTimeDataPage.buchungAbschliessen
+                        && (typeof window.requestFileSystem !== "undefined")
+        		) {
+        			// Unterschrift laden
+        			DigiWebApp.EditTimeDataPage.bookingToEdit.readFromFile(function(fileContent) {
         				if (fileContent && (fileContent !== "")) {
        						DigiWebApp.EditTimeDataPage.signaturePadAPI.regenerate(fileContent);
         				} else {
@@ -348,18 +352,16 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
 
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                        // Parallel Spesenauswahl wenn Fahrt mit Privat-Pkw?
-	                        //if (km !== 0) {
-	                        //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
-	                        //} else {
 	                        // Reisekostenauswahl als Spesenauswahl speichern
-	                        if (M.ViewManager.getView('editTimeDataPage', 'reisekostenFirmenwagen').isSelected === 1) {
+	                        if (km !== 0) {
+	                        // Parallel Spesenauswahl wenn Fahrt mit Privat-Pkw?
+	                        //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
+	                        } else if (DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected === 1) {
 	                            // 5 = Fahrt mit Firmenwagen
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
-	                        } else if (M.ViewManager.getView('editTimeDataPage', 'reisekostenBusBahn').isSelected === 1) {
+	                        } else if (DigiWebApp.BookingController.propReisekostenBusBahn.isSelected === 1) {
 	                            // 6 = Fahrt mit Bus/Bahn
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
-
 	                        }
 
 	                        DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
