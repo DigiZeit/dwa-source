@@ -22,14 +22,20 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
 			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
 			        DigiWebApp.EditTimeDataPage.bookingToEdit = DigiWebApp.BookingController.currentBooking;
+			        DigiWebApp.EditTimeDataPage.header.title.set("value",
+                        M.I18N.l('remark'));
+			    } else {
+			        DigiWebApp.EditTimeDataPage.header.title.set("value", 
+                        M.I18N.l('EditTimeDataPageTitle'));
 			    }
 			    
 				DigiWebApp.BookingController.setTimeDataForEdit();
 				
 				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
+			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen
+			    // bzw. KannUebernachtungskostenBuchen)
 				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
-			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
 			    var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
 
         		// Freischaltung 405: Unterschrift
@@ -247,7 +253,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         }
     }
 
-    , showHideGefahreneKilometer(showElement) {
+    , showHideGefahreneKilometer: function(showElement) {
         // show/hide label
         $('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + ']').each(function () {
             if (showElement) {
@@ -266,7 +272,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         });
     }
 
-    , showHideReisekosten(showElement) {
+    , showHideReisekosten: function(showElement) {
         $('[id=' + DigiWebApp.EditTimeDataPage.content.reisekostenFirmenwagen.id + ']').each(function () {
             if (showElement) {
                 $(this).show();
@@ -283,7 +289,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         });
     }
 
-    , showHideUebernachtungskosten(showElement) {
+    , showHideUebernachtungskosten: function(showElement) {
         if (showElement) {
             try {
                 $('#' + DigiWebApp.EditTimeDataPage.content.uebernachtungskosten.id + "_container").show();
@@ -420,7 +426,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-            //TODO Text abhängig davon, was gerade gemacht wird
+            // Text wird, abhängig davon, was gerade gemacht wird, in pagebeforeshow() gesetzt
             value: M.I18N.l('EditTimeDataPageTitle')
             , anchorLocation: M.CENTER
         })

@@ -333,7 +333,6 @@ DigiWebApp.RemarkPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-            //TODO Text abhängig davon, was gerade gemacht wird?
               value: M.I18N.l('remark')
             , anchorLocation: M.CENTER
         })

@@ -309,12 +309,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    }
 
     		} else {
-				if (this.currentBooking) {
-				    // Auf die RemarkPage gehen wenn
+    		    if (this.currentBooking) {
+                    // Aktuelle Buchung abschließen
+				    // --> Auf die EditTimeDataPage gehen wenn
 				    // -Bemerkungen freigeschaltet und nicht optional sind
 				    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
                     // -Bohle-Reisekostenabwicklung aktiv und Buchung fahrtzeitrelevant ist
-				    // Freischaltung 403: Bemerkungsfeld
+    		        //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+    		        // Freischaltung 403: Bemerkungsfeld
 				    if ((DigiWebApp.SettingsController.featureAvailable('403')
                         && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
 				        // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
@@ -1790,8 +1792,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 					|| (DigiWebApp.SettingsController.featureAvailable('422')
                         && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
 					    // Freischaltung 431: Bohle-Reisekostenabwicklung
-					    //TODO Nicht nur bei Buchungsabschluss, auch im Zeitdaten-Screen!
-                        //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal)
+					    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen
+					    // bzw. KannUebernachtungskostenBuchen)
                     || (DigiWebApp.SettingsController.featureAvailable('431'))
 					) {
 						// if remark or related feature active: go to remark page

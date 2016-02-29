@@ -2181,7 +2181,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                	if (el[prefix + 'keyId'] === "425") DigiWebApp.ApplicationController.restartApp = YES;		// feste Pause stornieren
 	                	if (el[prefix + 'keyId'] === "426") DigiWebApp.ApplicationController.restartApp = YES;		// Notizen only
 	                	if (el[prefix + 'keyId'] === "427") DigiWebApp.ApplicationController.restartApp = YES;		// Bautagebuch: TätigkeitslistenPage in Zeitbuchungs-Details
-                        //TODO Warum sind 429 und 430 hier nicht aufgelistet?
+	                    //if (el[prefix + 'keyId'] === "428") DigiWebApp.ApplicationController.restartApp = YES;		// manuelle Materialstammdatenübertragung
+	                	if (el[prefix + 'keyId'] === "429") DigiWebApp.ApplicationController.restartApp = YES;		// mehrstufige Auftragsauswahl
+	                	if (el[prefix + 'keyId'] === "430") DigiWebApp.ApplicationController.restartApp = YES;		// Handpositionen 
 	                	if (el[prefix + 'keyId'] === "431") DigiWebApp.ApplicationController.restartApp = YES;		// Bohle-Reisekostenabwicklung
                     }
 	                

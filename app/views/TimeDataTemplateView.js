@@ -21,6 +21,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 if (DigiWebApp.SettingsController.featureAvailable('403')
                     || ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined"))
                     || DigiWebApp.SettingsController.featureAvailable('431')
+                    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
                 ) {
                     // Ausgewählte Buchung in EditTimeData.bookingToEdit schreiben
                     //console.log('remark is active');
