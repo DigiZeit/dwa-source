@@ -195,7 +195,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         } // pagebeforeshow
     } // events
 
-    , showHideGefahreneKilometer(showElement) {
+    , showHideGefahreneKilometer: function(showElement) {
         // show/hide label
         $('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + ']').each(function () {
             if (showElement) {
@@ -214,7 +214,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         });
     }
 
-    , showHideReisekosten(showElement) {
+    , showHideReisekosten: function(showElement) {
         $('[id=' + DigiWebApp.RemarkPage.content.reisekostenFirmenwagen.id + ']').each(function () {
             if (showElement) {
                 $(this).show();
@@ -231,7 +231,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
         });
     }
 
-    , showHideUebernachtungskosten(showElement) {
+    , showHideUebernachtungskosten: function(showElement) {
         if (showElement) {
             try {
                  $('#' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + "_container").show();
