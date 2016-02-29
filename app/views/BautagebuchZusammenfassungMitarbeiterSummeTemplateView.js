@@ -10,7 +10,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 
     isSelectable: NO
 
-	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity endOfLine remark mitarbeiterId'
+	, childViews: 'positionName handOrderName vonbisdauer endOfLine activity endOfLine2 remark mitarbeiterId'
 
     , events: {
         tap: {
@@ -47,7 +47,7 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	})
 
 	, endOfLine: M.LabelView.design({
-		value: ''
+	    value: ''
 	})
 
 	, positionName: M.LabelView.design({
@@ -80,6 +80,17 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 	  }
 	})
 	
+	, vonbisdauer: M.LabelView.design({
+	    cssClass: 'normal unselectable normalLabel right'
+	  , isInline: YES
+	  , computedValue: {
+	      valuePattern: '<%= vonbisdauer %>'
+	      , operation: function (v) {
+	          return ": " + v;
+	      }
+	  }
+	})
+
 	, activity: M.LabelView.design({
 		    cssClass: 'normal unselectable normalLabel'
 	  	  , isInline: YES
@@ -91,26 +102,18 @@ DigiWebApp.BautagebuchZusammenfassungMitarbeiterSummeTemplateView = M.ListItemVi
 		  }
 	})
 	
-	, remark: M.LabelView.design({
-	    cssClass: 'normal unselectable normalLabel'
-	  	  , isInline: YES
-		  , computedValue: {
-		      valuePattern: '<%= remark %>'
-		      , operation: function (v) {
-		          return v;
-		      }
-		  }
+	, endOfLine2: M.LabelView.design({
+	    value: ''
 	})
 
-	, vonbisdauer: M.LabelView.design({
-	    cssClass: 'normal unselectable normalLabel right'
-	  , isInline: YES
-	  , computedValue: {
-	        valuePattern: '<%= vonbisdauer %>'
-	      , operation: function(v) {
-				return ": " + v;
-	      }
-	  }
+	, remark: M.LabelView.design({
+	    cssClass: 'normal unselectable normalLabel'
+		, computedValue: {
+		    valuePattern: '<%= remark %>'
+		    , operation: function (v) {
+		        return v;
+		    }
+		}
 	})
 });
 
