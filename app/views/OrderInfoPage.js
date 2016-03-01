@@ -75,9 +75,11 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.order = M.ViewManager.getView('orderInfoPage', 'order').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
+		                    		    // TODO Es ist nicht immer die bookingPage, es sollte 
+                                        // SelectionController.getPageToUse() verwendet werden
 		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(
 		                    					M.ViewManager.getView('orderInfoPage', 'order').getSelection());
-		                    			DigiWebApp.SelectionController.setPositions();
+		                    			DigiWebApp.SelectionController.setPositions(null, null, YES);
 		                    			DigiWebApp.SelectionController.useSelections = YES;
 		                    		}
 		                    	}
@@ -121,7 +123,7 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			DigiWebApp.SelectionController.set('selections', s);
 		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(
 		                    					M.ViewManager.getView('orderInfoPage', 'position').getSelection());
-		                    			DigiWebApp.SelectionController.setActivities(YES);
+		                    			DigiWebApp.SelectionController.setActivities(YES, YES);
 		                    			DigiWebApp.SelectionController.useSelections = YES;
 		                    		}
 		                    	}

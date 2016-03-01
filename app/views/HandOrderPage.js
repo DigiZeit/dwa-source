@@ -55,7 +55,6 @@ DigiWebApp.HandOrderPage = M.PageView.design({
                 tap: {
                       target: DigiWebApp.HandOrderController
                     , action: function () {
-                        if (inDebug()) writeToLog('backButton tap in HandOrderPage');
                         try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
                     	this.back();
                     }

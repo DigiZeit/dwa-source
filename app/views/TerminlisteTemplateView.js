@@ -42,15 +42,21 @@ DigiWebApp.TerminlisteTemplateView = M.ListItemView.design({
 								DigiWebApp.OrderInfoController.activePosition = [position];
 								DigiWebApp.OrderInfoController.setItem();
 							} else {
-								// vorausgewählte Buchungsliste
+							    // vorausgewählte Buchungsliste
+							    // TODO Mehrere Punkte:
+							    // 1) Falls init() aufgerufen wird, muss nicht noch setPositions() und setActivites()
+							    // aufgerufen werden, das macht init() schon
+							    // 2) setPositions() ruft setActivities auf, das ist also auch doppelt
+							    // 3) Es ist nicht immer die bookingPage, es sollte SelectionController.getPageToUse() 
+							    // verwendet werden
 								if (typeof(M.ViewManager.getView('bookingPage', 'order').getSelection()) === "undefined") {
 									DigiWebApp.BookingController.init();
 								}
 								DigiWebApp.NavigationController.toBookTimePageTransition();
 								M.ViewManager.getView('bookingPage', 'order').setSelection(position.get("orderId"));
-								DigiWebApp.SelectionController.setPositions();
+								DigiWebApp.SelectionController.setPositions(null, null, YES);
 								M.ViewManager.getView('bookingPage', 'position').setSelection(position.get("id"));
-								DigiWebApp.SelectionController.setActivities(YES);
+								DigiWebApp.SelectionController.setActivities(YES, YES);
 							}
 						}
 			}

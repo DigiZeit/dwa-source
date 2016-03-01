@@ -22,11 +22,15 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
 			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
 			        DigiWebApp.EditTimeDataPage.bookingToEdit = DigiWebApp.BookingController.currentBooking;
-			        DigiWebApp.EditTimeDataPage.header.title.set("value",
+			        DigiWebApp.EditTimeDataPage.header.title.set('value',
                         M.I18N.l('remark'));
-			    } else {
-			        DigiWebApp.EditTimeDataPage.header.title.set("value", 
+			        DigiWebApp.EditTimeDataPage.content.saveGrid.saveButton.set('value',
+			            M.I18N.l('closeBooking'));
+                } else {
+			        DigiWebApp.EditTimeDataPage.header.title.set('value', 
                         M.I18N.l('EditTimeDataPageTitle'));
+			        DigiWebApp.EditTimeDataPage.content.saveGrid.saveButton.set('value',
+			            M.I18N.l('assume'));
 			    }
 			    
 				DigiWebApp.BookingController.setTimeDataForEdit();
@@ -35,8 +39,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
 			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen
 			    // bzw. KannUebernachtungskostenBuchen)
-				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
-			    var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
+				var featureFahrtkosten = DigiWebApp.SettingsController.featureAvailable('431');
+			    // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
+			    // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
+				var featureUebernachtungskosten = DigiWebApp.SettingsController.featureAvailable('431')
+			        && DigiWebApp.EditTimeDataPage.istFeierabendBuchung;
+				var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
 
         		// Freischaltung 405: Unterschrift
 			    if (featureUnterschrift && !DigiWebApp.EditTimeDataPage.buchungAbschliessen
@@ -148,7 +156,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				}
         		
 			    // gefahreneKilometer etc nur einblenden falls Freischaltung vorhanden und Leistung fahrtzeitrelevant
-        		if (featureGefahreneKilometer || featureReisekosten) {
+        		if (featureGefahreneKilometer || featureFahrtkosten) {
 		            if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
 		                    && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
 		            ) {
@@ -163,7 +171,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 		                    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
 		                    // und TODO: Eingabe noch nicht erfolgt
-		                    if (featureReisekosten) {
+		                    if (featureFahrtkosten) {
 		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
 		                            M.I18N.l('fahrtzeitPrivat');
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
@@ -178,12 +186,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                }
-		                // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung 
-		                // vorhanden und Feierabendbuchung.
-		                // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
-		                // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
-		                DigiWebApp.EditTimeDataPage.showHideUebernachtungskosten(
-		                    featureReisekosten && DigiWebApp.EditTimeDataPage.istFeierabendBuchung);
 		            } else {
 		                DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
@@ -193,9 +195,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
         		}
 
-			    // Uebernachtungskosten-Auswahl (falls nötig) initialisieren
-			    // falls Freischaltung vorhanden
-        		if (featureReisekosten) {
+			    // Uebernachtungskosten-Auswahl nur (falls nötig) initialisieren
+			    // und einblenden falls Freischaltung vorhanden und Feierabendbuchung.
+        		if (featureUebernachtungskosten) {
+        		    DigiWebApp.EditTimeDataPage.showHideUebernachtungskosten(
+                        featureFahrtkosten && DigiWebApp.EditTimeDataPage.istFeierabendBuchung);
+
         		    if (DigiWebApp.UebernachtungAuswahlOption.find().length === 0) {
         		        var i = 1;
         		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
@@ -232,7 +237,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		    /* remove false values with _.compact() */
         		    uebernachtungOptionen = _.compact(uebernachtungOptionen);
         		    DigiWebApp.BookingController.set("uebernachtungOptionen", uebernachtungOptionen);
-        		}
+        		} // if (featureUebernachtungskosten)
 
         		if (featureUnterschrift && !DigiWebApp.EditTimeDataPage.buchungAbschliessen
                         && (typeof window.requestFileSystem !== "undefined")
@@ -297,7 +302,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         } else {
             try {
                 $('#' + DigiWebApp.EditTimeDataPage.content.uebernachtungskosten.id + "_container").hide();
-            } catch (e) { trackError(e); }
+            } catch (e2) { trackError(e2); }
         }
     }
 

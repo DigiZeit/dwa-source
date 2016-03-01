@@ -23,7 +23,7 @@ DigiWebApp.HandOrderController = M.Controller.extend({
 	
 	    DigiWebApp.NavigationController.toBookTimePage(YES);
 	
-	    DigiWebApp.SelectionController.setOrders(op.get("id"));
+	    DigiWebApp.SelectionController.setOrders(op.get("id"), null, null, YES);
 	    
 	    // PositionsComboBox ausblenden
 	    DigiWebApp.BookingPage.doHideShowPositionCombobox(false);

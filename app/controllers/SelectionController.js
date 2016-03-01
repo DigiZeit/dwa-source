@@ -38,7 +38,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         var mySelection = JSON.parse(JSON.stringify(that.selections));
         
-		this.setOrders(mySelection.order, mySelection.position, mySelection.activity);
+		this.setOrders(mySelection.order, mySelection.position, mySelection.activity, NO);
         
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -53,7 +53,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 
         if (inDebug()) writeToLog('setSelectionWithCurrentHandOrderFirst entry');
 
-        this.setOrders(0, 0, 0);
+        this.setOrders(0, 0, 0, YES);
 
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -78,7 +78,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var positionId = booking.get('positionId');
         var activityId = booking.get('activityId');
         
-        that.setOrders(orderId, positionId, activityId);
+        that.setOrders(orderId, positionId, activityId, YES);
 
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
         if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -101,7 +101,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		console.log("UNDEFINED uebernachtungskennzeichenScholpp");
         	} else {        	
         		var obj = { label: ueK.label, value: ueK.value };
-        		if (parseIntRadixTen(obj.value) === uebernachtungAuswahl) {
+        		if (parseIntRadixTen(obj.value) == uebernachtungAuswahl) {
         			obj.isSelected = YES;
         			itemSelected = YES;
         		}
@@ -139,40 +139,43 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		    		if (activityName.indexOf("Reisezeit") >= 0 || activityName.indexOf("Fahrzeit") >= 0) {
 		    			DigiWebApp.ScholppBookingController.selectFahrzeit();
 		    		} else if (activityName.indexOf("Arbeitszeit") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = 6;
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectArbeitszeit();
 		    		} else if (activityName.indexOf("Unterbrechung") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = 6;
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectUnterbrechung();
 		    		} else if (activityName.indexOf("Pause") >= 0) {
-		    			if (withSetToSix) uebernachtungAuswahl = 6;
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			DigiWebApp.ScholppBookingController.selectPause();
 		    		} else {
-		    			if (withSetToSix) uebernachtungAuswahl = 6;
+		    			if (withSetToSix) uebernachtungAuswahl = "6";
 		    			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
 		    		}
 	    		}
     		} else {
-    			if (withSetToSix) uebernachtungAuswahl = 6;
+    			if (withSetToSix) uebernachtungAuswahl = "6";
     			if (withSetArbeitsende) DigiWebApp.ScholppBookingController.selectArbeitsende();
     		}
     	}
         return uebernachtungAuswahl;
     }
 
-    , setOrders: function(orderId, positionId, activityId) {
+    , setOrders: function(orderId, positionId, activityId, canUseCurrentBooking) {
     	var that = this;
 
-    	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId + ', activityId=' + activityId);
+    	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId
+            + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
-        if (orderId && orderId == that.getSelectedOrderItem()) return that.updatePositions(positionId, activityId);
+    	if (orderId && orderId == that.getSelectedOrderItem()) {
+	        return that.updatePositions(positionId, activityId, canUseCurrentBooking);
+	    }
         if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
         if (!orderId) orderId = 0;
 
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // Ordner filtern: nur solche mit auswählbaren Elementen
-        orders = _.filter(orders, function(o) { return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name; });
+        //TODO Nur Test orders = _.filter(orders, function(o) { return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name; });
         
         // orderId auf einen auswählbaren Wert zurücksetzen
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {
@@ -216,10 +219,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
         // set selection arrays to start content binding process
         that.set('orders', orderArray);
         
-        return that.updatePositions(positionId, activityId);
+        return that.updatePositions(positionId, activityId, canUseCurrentBooking);
     }
 
-    , updatePositions: function(positionId, activityId) {
+    , updatePositions: function(positionId, activityId, canUseCurrentBooking) {
     	var that = this;
     	
     	var mySelectionObj = that.getSelectedOrderItem(YES);
@@ -231,25 +234,26 @@ DigiWebApp.SelectionController = M.Controller.extend({
         DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
 		
 		if (!isHandauftrag) {
-			return that.setPositions(positionId, activityId);
+		    return that.setPositions(positionId, activityId, canUseCurrentBooking);
 		} else {
 			// Sicherstellen dass beim Handauftrag nicht parallel ein Auftrag gesetzt ist
-			that.setSelectedPosition(0);
+		    that.setSelectedPosition(0, canUseCurrentBooking);
 			
 			M.ViewManager.getView('bookingPage', 'orderButton').setValue(mySelectionObj.label);
-        	return that.setActivities(YES, activityId);
+			return that.setActivities(YES, canUseCurrentBooking, activityId);
 		}
     }
 
-    , setPositions: function(positionId, activityId) {
+    , setPositions: function(positionId, activityId, canUseCurrentBooking) {
     	var that = this;
 
-    	if (inDebug()) writeToLog('setPositions(positionId=' + positionId + ', activityId=' + activityId);
+    	if (inDebug()) writeToLog('setPositions(positionId=' + positionId
+            + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
         if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
             // alle "verknüpften Elemente" ebenfalls aktualisieren
-            that.setSelectedPosition(that.getSelectedPosition());
-        	return that.setActivities(YES, activityId);
+            that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
+            return that.setActivities(YES, canUseCurrentBooking, activityId);
         }
         if (!positionId && positionId != 0) positionId = that.getSelectedPositionItem();
         if (!positionId) positionId = 0;
@@ -273,7 +277,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		}
 
         if (typeof(DigiWebApp.HandOrder.getById(orderId)) != "undefined") {
-        	return that.setActivities(YES, activityId);
+            return that.setActivities(YES, canUseCurrentBooking, activityId);
         }
         var positions = DigiWebApp.Position.getByVaterId(orderId);
 
@@ -311,24 +315,25 @@ DigiWebApp.SelectionController = M.Controller.extend({
         that.set('positions', positionsArray);
         
         // alle "verknüpften Elemente" ebenfalls aktualisieren
-        that.setSelectedPosition(that.getSelectedPosition());
+        that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
 
-        return that.setActivities(YES, activityId);
-
+        return that.setActivities(YES, canUseCurrentBooking, activityId);
     }
 
-    /* Nur die Leistungen anbieten, die dem ausgewählten Auftrag zugeordnet sind. */
-    , setActivities: function(checkForWorkPlan, activityId) {
+    , setActivities: function(checkForWorkPlan, canUseCurrentBooking, activityId) {
     	var that = this;
     	
     	if (activityId && activityId == that.getSelectedActivityItem()) return;
 
-    	if (inDebug()) writeToLog('setActivities(checkForWorkPlan=' + checkForWorkPlan + ', activityId=' + activityId);
+    	if (inDebug()) writeToLog('setActivities(checkForWorkPlan=' + checkForWorkPlan
+            + ', canUseCurrentBooking=' + canUseCurrentBooking + ', activityId=' + activityId);
 
     	var posId = that.getSelectedPositionItem();
     	var orderId = that.getSelectedOrderItem();
     	var activities = [];
-        if (posId) {
+    	if (posId) {
+    	    /* Nur die Leistungen anbieten, die dem ausgewählten Auftrag zugeordnet sind (Arbeitsplan). */
+
         	// Freischaltung 406 "Auftragsinfo"
 			if (DigiWebApp.SettingsController.featureAvailable('406') 
 			 && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
@@ -353,23 +358,19 @@ DigiWebApp.SelectionController = M.Controller.extend({
         } else {
             activities = DigiWebApp.SelectionController.getActivities();
         }
-        /* Die Aufrufer müssen orderId, positionId und activityId je nach Fall (ByPreviousSelection, ByCurrentBooking
-         * etc) korrekt setzen. Hier sind nicht mehr alle Fälle unterscheidbar, konkret der Fall: currentBooking ja,
-         * aber trotzdem muss previousSelection angezeigt werden.
-         * 
-         * TODO: diese Zeile dienten der "Wiederauswahl" der aktuell gebuchten Tätigkeit
-         *       wenn man Aufträger mit Arbeitsplan auswählt und zwischen diesen und Aufträgen
-         *       ohne Arbeitsplan hin und her wechselt
-         *       --> Funktionalität muss, wenn nicht hier, dann an anderer Stelle wieder hinzugefügt werden
-         *       (Beispiel "Klempner" --> (Auftrag ohne "Klempner" im Arbeitsplan) --> "Klempner")
-        if ( typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
-		         && DigiWebApp.BookingController.currentBooking  !== null
-		     && !activityId 
-		     && activityId != 0
+        // Falls keine activityId übergeben wurde, muss ggf. auf die Leistung der laufenden Buchung
+        // zurückgefallen werden (Beispiel Leistung "Klempner" --> Auswahl von Auftrag ohne "Klempner" 
+        // im Arbeitsplan --> Auswahl von Auftrag ohne Arbeitsplan -> Klempner muss automatisch
+        // ausgewählt werden).
+        if (canUseCurrentBooking
+            && typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
+		    && DigiWebApp.BookingController.currentBooking  !== null
+		    && !activityId 
+		    && activityId != 0
 		) { 
         	activityId = DigiWebApp.BookingController.currentBooking.get('activityId');
     	}
-        */
+        
         // Vorher ausgewählte Leistung übernehmen sofern keine explizit gesetzt werden soll.
         if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
         
@@ -439,7 +440,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
                that.set('orders', []);
                that.set('positions', []);
                that.set('activities', []);
-               return that.setOrders(0, 0, 0);
+               return that.setOrders(0, 0, 0, YES);
            }
        }
     }
@@ -451,6 +452,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
         		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').setSelection('6');
         	}
+            // TODO: fix resetSelection (die folgende Zeile kam vermutlich nur beim testen bzgl. des nicht funktionierenden resetSelections hier rein)
         	return that.initSelection();
     		M.ViewManager.getView(that.getPageToUse(), 'order').resetSelection();
     		M.ViewManager.getView(that.getPageToUse(), 'position').resetSelection();
@@ -595,14 +597,14 @@ DigiWebApp.SelectionController = M.Controller.extend({
         return M.ViewManager.getView(that.getPageToUse(), 'order').getSelection(returnObject);
     }
     
-    , setSelectedOrder: function(order) {
+    , setSelectedOrder: function (order, canUseCurrentBooking) {
     	var that = this;
     	var orderId = 0;
     	if (order && typeof(order) == "object") {
     		orderId = order.get("id");
     	}
 		if (order && that.getSelectedOrderItem() != orderId) {
-			return that.setOrders(orderId);
+		    return that.setOrders(orderId, null, null, canUseCurrentBooking);
 		}
     }
     
@@ -625,7 +627,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
         return M.ViewManager.getView(that.getPageToUse(), 'position').getSelection(returnObject);
     }
     
-    , setSelectedPosition: function(pos) {
+    , setSelectedPosition: function(pos, canUseCurrentBooking) {
     	var that = this;
 
     	var posId = 0;
@@ -640,10 +642,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		M.ViewManager.getView('bookingPage', 'orderButton').setValue(buttonLabel);
 
 		if (that.getSelectedOrderItem() != orderId) {
-			return that.setOrders(orderId, posId);
+			return that.setOrders(orderId, posId, null, canUseCurrentBooking);
 		}
 		if (pos && that.getSelectedPositionItem() != posId) {
-			return that.setPositions(posId);
+		    return that.setPositions(posId, canUseCurrentBooking);
 		}
     }
     
@@ -666,26 +668,27 @@ DigiWebApp.SelectionController = M.Controller.extend({
         return M.ViewManager.getView(that.getPageToUse(), 'activity').getSelection(returnObject);
     }
     
-    , setSelectedActivity: function(act) {
-    	var that = this;
+    // Wird nirgends benutzt
+    //, setSelectedActivity: function(act) {
+    //	var that = this;
 
-    	var actId = 0;
-    	var posId = that.getSelectedPositionItem();
-    	var orderId = that.getSelectedOrderItem();
-    	if (act && typeof(act) == "object") {
-    		actId = act.get("id");
-    	}
+    //	var actId = 0;
+    //	var posId = that.getSelectedPositionItem();
+    //	var orderId = that.getSelectedOrderItem();
+    //	if (act && typeof(act) == "object") {
+    //		actId = act.get("id");
+    //	}
 
-		if (that.getSelectedOrderItem() != orderId) {
-			return that.setOrders(orderId, posId, actId);
-		}
-		if (that.getSelectedPositionItem() != posId) {
-			return that.setPositions(posId, actId);
-		}
-		if (act && that.getSelectedActivityItem() != actId) {
-			return that.setActivities(YES, actId);
-		}
-    }
+	//	if (that.getSelectedOrderItem() != orderId) {
+	//		return that.setOrders(orderId, posId, actId);
+	//	}
+	//	if (that.getSelectedPositionItem() != posId) {
+	//		return that.setPositions(posId, actId);
+	//	}
+	//	if (act && that.getSelectedActivityItem() != actId) {
+	//		return that.setActivities(YES, actId);
+	//	}
+    //}
     
     , getPageToUse: function() {
     	var pageToUse = 'bookingPage';

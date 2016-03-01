@@ -268,11 +268,11 @@ function writeToLog(myWriteContent, mySuccessCallback, myErrorCallback) {
 		writeContent = JSON.stringify(myWriteContent);
 	}
 	writeContent = "----------------------------------------------------------------------\n" 
-	+ now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-"
-    + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":"
-    + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "."
-    + ("0" + now.getMilliseconds()).slice(-2) + " "
-	+ writeContent + "\n";
+	    + now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-"
+        + ("0" + now.getDate()).slice(-2) + " " + ("0" + now.getHours()).slice(-2) + ":"
+        + ("0" + now.getMinutes()).slice(-2) + ":" + ("0" + now.getSeconds()).slice(-2) + "."
+        + ("0" + now.getMilliseconds()).slice(-2) + " "
+	    + writeContent + "\n";
 	
 	console.log(writeContent.toString());
 
@@ -958,7 +958,6 @@ if (searchForFeature(402)) { // Materialerfassung
 
 if (searchForFeature(403) && !(searchForFeature(409))) { // Bemerkungsfeld
 	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
-	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
 if (searchForFeature(404)) { // Button-Menü (mit Icons alá DTC6) (aktuell nur bei Scholpp; diese Freischaltung deaktiviert auch die Animationen)
@@ -1031,7 +1030,6 @@ if (searchForFeature(418)) { // Spesen/Auslöse (wird bei Feierabend abgefragt)
 
 if (searchForFeature(422)) { // gefahrene Kilometer
 	DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage; // für 405 & 403
-	DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
 if (searchForFeature(423)) { // Terminliste
@@ -1059,7 +1057,6 @@ if (searchForFeature(429) // mehrstufige Auftragsauswahl
 
 if (searchForFeature(431)) { // Bohle-Reisekostenabwicklung
     DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage;
-    DigiWebAppOrdinaryDesign.remarkPage = DigiWebApp.RemarkPage;
 }
 
 var restartOnBlackBerry = true;

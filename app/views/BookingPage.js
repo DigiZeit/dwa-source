@@ -143,19 +143,19 @@ DigiWebApp.BookingPage = M.PageView.design({
 						}
 						this.init(
 								  OrderSelectionMode.POSITIONS 
-								, function(obj){
+								, function(obj) {
 									// Callback wenn der Benutzer in der mehrst. Auftragsauswahl einen Ordner
 									// oder einen Auftrag ausgewählt hat.
 									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
 									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
-										DigiWebApp.SelectionController.setSelectedOrder(obj);
+										DigiWebApp.SelectionController.setSelectedOrder(obj, YES);
 									} else {
-										DigiWebApp.SelectionController.setSelectedPosition(obj);
+										DigiWebApp.SelectionController.setSelectedPosition(obj, YES);
 									}
 	                    			DigiWebApp.SelectionController.useSelections = YES;
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
-								, function(){
+								, function() {
 									DigiWebApp.NavigationController.backToBookTimePagePOP();
 								}
 								, vaterId
@@ -179,7 +179,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 change: {
                       target: DigiWebApp.SelectionController
                     , action: function() {
-                        this.setOrders(this.getSelectedOrderItem());
+                        this.setOrders(this.getSelectedOrderItem(), null, null, YES);
                     }
                 }
             }
@@ -198,7 +198,7 @@ DigiWebApp.BookingPage = M.PageView.design({
                 change: {
                       target: DigiWebApp.SelectionController
                     , action: function() {
-            			this.setPositions(this.getSelectedPositionItem());
+            			this.setPositions(this.getSelectedPositionItem(), null, YES);
                     }
                 }
             }

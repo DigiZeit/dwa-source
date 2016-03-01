@@ -41,7 +41,7 @@ DigiWebApp.ActivityListPage = M.PageView.design({
           , anchorLocation: M.LEFT
           , events: {
               tap: {
-                  target: DigiWebApp.NavigationController
+                    target: DigiWebApp.NavigationController
                   , action: 'backIgnoreDuplicateCalls'
               }
           }

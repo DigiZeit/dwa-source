@@ -344,7 +344,7 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                 change: {
                       target: DigiWebApp.SelectionController
                     , action: function() {
-                        this.setActivities(YES);
+                        this.setActivities(YES, YES);
                     }
                 }
 //	            , tap: {

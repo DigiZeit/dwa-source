@@ -992,7 +992,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    // reset remark
 	        try {
                 //TODO: Dieser Aufruf gibt manchmal eine Exception auf der Konsole
-		    	M.ViewManager.getView('remarkPage', 'remarkInput').value = '';
+	            M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = '';
 		    } catch(e2) { }
 		    var remarkStr = '';
 	        // Bugfix 2515: Use correctly checked booking information
