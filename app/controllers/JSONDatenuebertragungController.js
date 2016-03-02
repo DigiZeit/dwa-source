@@ -652,12 +652,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	}
 	
 	, sendeSonderbuchungen: function(mybuchungen, mysuccessCallback, myerrorCallback, myisClosingDay) {
-		
-    	writeToLog("sendeSonderbuchungen");
-		if (!myisClosingDay || !mybuchungen || mybuchungen.length == 0) {
-		
-			mysuccessCallback();
-			
+	    if (!myisClosingDay || !mybuchungen || mybuchungen.length == 0) {
+
+		    writeToLog('sendeSonderbuchungen: nichts zu versenden');
+
+		    mysuccessCallback();
 		} else {
 
 			var absenden = function(buchungen, successCallback, errorCallback) {
@@ -673,6 +672,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				});
 	
 				if (items.length !== 0) {
+				    writeToLog('sendeSonderbuchungen: ' + items.length + ' Buchungen zu versenden');
+
 					var data = {"sonderbuchungen": items};
 					
 					var internalSuccessCallback = function(data2, msg, request) {
@@ -712,7 +713,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					};
 					DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 				} else {
-					successCallback();
+				    writeToLog('sendeSonderbuchungen: keine Buchungen zu versenden');
+				    successCallback();
 				}
 			};
 	

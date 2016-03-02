@@ -1399,7 +1399,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	);
         }
         
-        // lade Sonderbuchungen
+        // Sende Sonderbuchungen
         var isClosingDay = (!DigiWebApp.BookingController.currentBooking);
         var mySonderbuchungen = _.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return !parseBool(n.get("uebertragen")) });
         DigiWebApp.JSONDatenuebertragungController.sendeSonderbuchungen(mySonderbuchungen, contSync, contSync, isClosingDay);
