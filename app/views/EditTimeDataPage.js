@@ -17,8 +17,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	/* Use the 'events' property to bind events like 'pageshow' */
     , events: {
         pagebeforeshow: {
-              target: 
-			, action: function() {
+			action: function() {
 			    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
 			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
