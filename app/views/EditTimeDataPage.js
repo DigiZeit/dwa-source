@@ -530,8 +530,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , numberOfChars: 255
         })
 
-        , fahrtzeitPrivatLabel: M.TextLabel.design({
+        , fahrtzeitPrivatLabel: M.LabelView.design({
             value: M.I18N.l('fahrtzeitPrivat')
+            , anchorLocation: M.LEFT
         })
 
         , gefahreneKilometerInput: M.TextFieldView.design({
