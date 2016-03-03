@@ -1797,9 +1797,9 @@ DigiWebApp.BookingController = M.Controller.extend({
     			    // -Bohle-Reisekostenabwicklung aktiv, Buchung fahrtzeitrelevant ist und
     			    //  noch keine Eingabe gemacht wurde oder Übernachtungskosten abgefragt werden sollen
     			    var fahrzeitrelevant = DigiWebApp.Activity.findById(
-		                this.currentBooking.get('activityId')).get('istFahrzeitRelevant');
+		                that.currentBooking.get('activityId')).get('istFahrzeitRelevant');
     			    var km = DigiWebApp.Activity.findById(
-		                this.currentBooking.get('activityId')).get('gefahreneKilometer');
+		                that.currentBooking.get('activityId')).get('gefahreneKilometer');
     			    // Freischaltung 431: Bohle-Reisekostenabwicklung
     			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
     			    var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
