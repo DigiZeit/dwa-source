@@ -103,23 +103,23 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
         		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: 'fahrtzeitFirmenwagen'
+        		            value: (spesen === 5) // 5 = Fahrt mit Firmenwagen
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: (spesen === 5) // 5 = Fahrt mit Firmenwagen
+			                , isSelected: (spesen === 5)
         		        }]);
         		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-        		            value: 'fahrtzeitBusBahn'
+        		            value: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
 			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
+			                , isSelected: (spesen === 6)
         		        }]);
         		    } else {
         		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: 'fahrtzeitFirmenwagen'
+        		            value: false
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
 			                , isSelected: false
         		        }]);
         		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-        		            value: 'fahrtzeitBusBahn'
+        		            value: false
 			                , label: M.I18N.l('fahrtzeitBusBahn')
 			                , isSelected: false
         		        }]);
@@ -129,12 +129,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
 
 					DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-					    value: 'fahrtzeitFirmenwagen'
+					    value: false
                         , label: M.I18N.l('fahrtzeitFirmenwagen')
                         , isSelected: false
 					}]);
 					DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-					    value: 'fahrtzeitBusBahn'
+					    value: false
                         , label: M.I18N.l('fahrtzeitBusBahn')
                         , isSelected: false
 					}]);
@@ -379,17 +379,23 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                        if (km !== 0) {
 	                        // Parallel Spesenauswahl setzen wenn Fahrt mit Privat-Pkw?
 	                        //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
-	                        } else if (DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected === true) {
+	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                                        'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
 	                            // 5 = Fahrt mit Firmenwagen
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
-	                        } else if (DigiWebApp.BookingController.propReisekostenBusBahn.isSelected === true) {
+	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                                        'editTimeDataPage', 'reisekostenBusBahn') === YES) {
 	                            // 6 = Fahrt mit Bus/Bahn
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
 	                        }
 
-	                        DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
-                                M.ViewManager.getView('editTimeDataPage', 'uebernachtungskosten').getSelection(YES).value);
-	                    }
+	                        var sel = M.ViewManager.getView('editTimeDataPage', 
+                                'uebernachtungskosten').getSelection(YES);
+                            if (hasValue(sel)) {
+                                DigiWebApp.BookingController.currentBooking.set(
+                                    'uebernachtungAuswahl', sel.value);
+                            }
+                        }
 
 	                    DigiWebApp.BookingController.currentBooking.save();
 
@@ -412,10 +418,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                        if (km !== 0) {
 	                            // Parallel Spesenauswahl setzen wenn Fahrt mit Privat-Pkw?
 	                            //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
-	                        } else if (DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected === true) {
+	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                                        'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
 	                            // 5 = Fahrt mit Firmenwagen
 	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 5);
-	                        } else if (DigiWebApp.BookingController.propReisekostenBusBahn.isSelected === true) {
+	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                                        'editTimeDataPage', 'reisekostenBusBahn') === YES) {
 	                            // 6 = Fahrt mit Bus/Bahn
 	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 6);
 	                        }
@@ -440,6 +448,15 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	            }
 			}
 		}
+    }
+
+    , getCheckboxValue: function (pageName, viewName) {
+        var view = M.ViewManager.getView(pageName, viewName);
+        if (hasValue(view)) {
+            return $('#' + view.id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        } else {
+            return null;
+        }
     }
 
     , childViews: 'header content'
