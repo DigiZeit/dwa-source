@@ -16,8 +16,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	
 	/* Use the 'events' property to bind events like 'pageshow' */
     , events: {
-		pagebeforeshow: {
-			action: function() {
+        pagebeforeshow: {
+              target: DigiWebApp.EditTimeDataPage
+			, action: function() {
 			    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
 			    if (this.buchungAbschliessen) {
@@ -167,7 +168,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                var currentActivity = null;
 		                _.each(DigiWebApp.Activity.find(), function(el) {
 		                    if (el.get("id") === parseIntRadixTen(
-		                            this.bookingToEdit.get("activityId"))
+		                            DigiWebApp.EditTimeDataPage.bookingToEdit.get("activityId"))
 		                    ) {
 		                        currentActivity = el;
 		                    }
@@ -191,14 +192,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                        this.showHideReisekosten(false);
 		                    } else {
 		                        this.showHideGefahreneKilometer(false);
-		                        this.showHideReisekosten(false);
+		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    }
 		                } else {
-		                    this.showHideGefahreneKilometer(false);
-		                    this.showHideReisekosten(false);
+		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
+		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                }
 		            } else {
-		                this.showHideGefahreneKilometer(false);
+		                DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                this.showHideReisekosten(false);
 		            }
 		        } else {
@@ -255,12 +256,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         			// Unterschrift laden
         			this.bookingToEdit.readFromFile(function(fileContent) {
         				if (fileContent && (fileContent !== "")) {
-       						this.signaturePadAPI.regenerate(fileContent);
+        				    DigiWebApp.EditTimeDataPage.signaturePadAPI.regenerate(fileContent);
         				} else {
-        					this.signaturePadAPI.clearCanvas();
+        				    DigiWebApp.EditTimeDataPage.signaturePadAPI.clearCanvas();
         				}
         			}, function() {
-        				this.signaturePadAPI.clearCanvas();
+        			    DigiWebApp.EditTimeDataPage.signaturePadAPI.clearCanvas();
         			});
         		}
 				
