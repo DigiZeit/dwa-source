@@ -332,9 +332,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var orderId = that.getSelectedOrderItem();
     	var activities = [];
     	if (posId) {
-    	    /* Nur die Leistungen anbieten, die dem ausgewählten Auftrag zugeordnet sind (Arbeitsplan). */
 
-        	// Freischaltung 406 "Auftragsinfo"
+    	    // Freischaltung 406 "Auftragsinfo"
 			if (DigiWebApp.SettingsController.featureAvailable('406') 
 			 && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 				if (typeof(M.ViewManager.getView('orderInfoPage', 'position').getSelection()) === "undefined") {
@@ -358,10 +357,10 @@ DigiWebApp.SelectionController = M.Controller.extend({
         } else {
             activities = DigiWebApp.SelectionController.getActivities();
         }
-        // Falls keine activityId übergeben wurde, muss ggf. auf die Leistung der laufenden Buchung
-        // zurückgefallen werden (Beispiel Leistung "Klempner" --> Auswahl von Auftrag ohne "Klempner" 
-        // im Arbeitsplan --> Auswahl von Auftrag ohne Arbeitsplan -> Klempner muss automatisch
-        // ausgewählt werden).
+        // Bei Änderungen in der Buchungs-Selektion wird versucht die aktuell gebuchte Leistung 
+        // ausgewählt zu lassen, es sei denn diese Leistung ist in der aktuellen Selektion nicht 
+        // enthalten. Bei erneuter Selektionsänderung wird erneut versucht die aktuell gebuchte 
+    	// Leistung zu setzen.
         if (canUseCurrentBooking
             && typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" 
 		    && DigiWebApp.BookingController.currentBooking  !== null

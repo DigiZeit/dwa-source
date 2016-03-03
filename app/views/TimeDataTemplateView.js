@@ -15,9 +15,11 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
     , events: {
         tap: {
             action: function (id, m_id) {
-                // Freischaltung 403 "Bemerkungsfeld"
-                // Freischaltung 405 "Unterschrift"
-                // Freischaltung 431 "Bohle-Reisekostenabwicklung"
+                // Bearbeiten der Zeitbuchung nur wenn es eine dieser Freischaltungen gibt:
+                // 403: Bemerkungsfeld
+                // 405: Unterschrift
+                // 431: Bohle-Reisekostenabwicklung 
+                // (zusätzlich Ressourcenmerkmal KannReisekostenBuchen nötig)
                 if (DigiWebApp.SettingsController.featureAvailable('403')
                     || ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined"))
                     || DigiWebApp.SettingsController.featureAvailable('431')
@@ -96,12 +98,10 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                         return v[3] + ', ' + v[4] + ' - ' + v[6] + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
                     }
 
-
                 } else {
                     //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + M.I18N.l('open');
                 	return v[3] + ', ' + v[4] + ' - ' + M.I18N.l('open');
                 }
-
             }
         }
     })
@@ -150,7 +150,6 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 } else {
                     return dtc6Auftrag + ': ' + M.I18N.l('unknown');
                 }
-
             }
         }
     })

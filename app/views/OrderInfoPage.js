@@ -121,6 +121,8 @@ DigiWebApp.OrderInfoPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.position = M.ViewManager.getView('orderInfoPage', 'position').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
+		                    		    // TODO Es ist nicht immer die bookingPage, es sollte 
+		                    		    // SelectionController.getPageToUse() verwendet werden
 		                    			M.ViewManager.getView('bookingPage', 'position').setSelection(
 		                    					M.ViewManager.getView('orderInfoPage', 'position').getSelection());
 		                    			DigiWebApp.SelectionController.setActivities(YES, YES);

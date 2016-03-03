@@ -10,20 +10,20 @@ m_require('app/views/TimeDataForEditTemplateView');
 
 DigiWebApp.RemarkPage = M.PageView.design({
 
+    /* Use the 'events' property to bind events like 'pageshow' */
       events: {
 		pagebeforeshow: {
+            //target: DigiWebApp.MyController,
+            //action: 'init'
 			action: function() {
 
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				
-				DigiWebApp.BookingController.setTimeDataForEdit();
-
-				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
-				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
-				var featureReisekosten = DigiWebApp.SettingsController.featureAvailable('431');
-			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
-
-			    if (featureBemerkung) {
+				// load data
+				DigiWebApp.BookingController.setTimeDataForRemark();
+				//DigiWebApp.BookingController.setNotBookedBookings();
+								
+        		if (DigiWebApp.SettingsController.featureAvailable('403')) {
 	        		// show label
 					$('[for=' + DigiWebApp.RemarkPage.content.remarkInput.id  + ']').each(function() {
 	    					$(this).show();
@@ -42,95 +42,71 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	    					$(this).hide();
 	    			});
 				}
+//				if (DigiWebApp.SettingsController.featureAvailable('403')) {
+//					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).parent().show()
+//					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).show();
+//					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').show();
+//				} else {
+//					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).parent().hide()
+//					$('#' + DigiWebApp.RemarkPage.content.remarkInput.id).hide();
+//					$('label[for="' + DigiWebApp.RemarkPage.content.remarkInput.id + '"]').hide();
+//				}
         		
-			    // gefahreneKilometer etc nur einblenden falls Freischaltung vorhanden und Leistung fahrtzeitrelevant
-			    if (featureGefahreneKilometer || featureReisekosten) {
-				    if (typeof (DigiWebApp.BookingController.currentBooking) !== "undefined"
-                        && DigiWebApp.BookingController.currentBooking !== null
-                    ) {
+				// gefahreneKilometer ausblenden falls Freischaltung dazu fehlt
+        		if (DigiWebApp.SettingsController.featureAvailable('422')) {
+        			if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 	        			var currentActivity = null;
-	        			_.each(DigiWebApp.Activity.find(), function(el) {
-	        			    if (el.get("id") === parseIntRadixTen(
-                                DigiWebApp.BookingController.currentBooking.get("activityId"))
-                            ) {
-				                currentActivity = el;
-				            }
-				        });
+	        			_.each(DigiWebApp.Activity.find(), function(el) {if (el.get("id") === parseIntRadixTen(DigiWebApp.BookingController.currentBooking.get("activityId"))) currentActivity = el;});
 	        			if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
-	        			    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
-	        			    // und TODO: Eingabe noch nicht erfolgt
-	        			    if (featureReisekosten) {
-	        			        M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').label =
-                                    M.I18N.l('fahrtzeitPrivat');
-	        			        DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
-				                DigiWebApp.RemarkPage.showHideReisekosten(true);
-	        			    } else {
-	        			        M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').label =
-                                    M.I18N.l('gefahreneKilometer');
-	        			        DigiWebApp.RemarkPage.showHideGefahreneKilometer(true);
-	        			        DigiWebApp.RemarkPage.showHideReisekosten(false);
-				            }
-				        } else {
-	        			    DigiWebApp.RemarkPage.showHideGefahreneKilometer(false);
-	        			    DigiWebApp.RemarkPage.showHideReisekosten(false);
+			        		// show label
+							$('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+			    					$(this).show();
+			    			});
+							// show textarea
+			        		$('[id=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+			    					$(this).show();
+			    			});
+	        			} else {
+	    					// hide label
+	    	        		$('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    	    					$(this).hide();
+	    	    			});
+	    					// hide textarea
+	    					$('[id=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    	    					$(this).hide();
+	    	    			});
 	        			}
-				        // Uebernachtungskosten-Auswahl nur einblenden falls Freischaltung 
-				        // vorhanden und Feierabendbuchung.
-				        // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
-				        // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
-	        			DigiWebApp.RemarkPage.showHideUebernachtungskosten(
-                            featureReisekosten && DigiWebApp.RemarkPage.istFeierabendBuchung);
-			        } else {
-        			    DigiWebApp.RemarkPage.showHideGefahreneKilometer(false);
-        			    DigiWebApp.RemarkPage.showHideReisekosten(false);
+        			} else {
+    					// hide label
+    	        		$('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+    	    					$(this).hide();
+    	    			});
+    					// hide textarea
+    					$('[id=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+    	    					$(this).hide();
+    	    			});
         			}
 				} else {
-				    DigiWebApp.RemarkPage.showHideGefahreneKilometer(false);
-				    DigiWebApp.RemarkPage.showHideReisekosten(false);
+					// hide label
+	        		$('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    					$(this).hide();
+	    			});
+					// hide textarea
+					$('[id=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id  + ']').each(function() {
+	    					$(this).hide();
+	    			});
 				}
-
-			    // Uebernachtungskosten-Auswahl (falls nötig) initialisieren
-				// falls Freischaltung vorhanden
-			    if (featureReisekosten) {
-			        if (DigiWebApp.UebernachtungAuswahlOption.find().length === 0) {
-			            var i = 1;
-			            DigiWebApp.UebernachtungAuswahlOption.createRecord({
-			                id: i,
-			                beschreibung: M.I18N.l('uebernachtungKeine')
-			            }).saveSorted();
-			            i++; // 2
-			            DigiWebApp.UebernachtungAuswahlOption.createRecord({
-			                id: i,
-			                beschreibung: M.I18N.l('uebernachtungPrivat')
-			            }).saveSorted();
-			            i++; // 3
-			            DigiWebApp.UebernachtungAuswahlOption.createRecord({
-			                id: i,
-			                beschreibung: M.I18N.l('uebernachtungZahltFirma')
-			            }).saveSorted();
-			            i++; // 4
-			            DigiWebApp.UebernachtungAuswahlOption.createRecord({
-			                id: i,
-			                beschreibung: M.I18N.l('uebernachtungSelbstBezahlt')
-			            }).saveSorted();
-			        }
-
-			        var uebernachtungOptionen = DigiWebApp.UebernachtungAuswahlOption.findSorted();
-			        uebernachtungOptionen = _.map(uebernachtungOptionen, function(opt) {
-			            if (opt) {
-			                var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
-			                if (opt.get('id') === 1) {
-			                    obj.isSelected = YES;
-			                }
-			                return obj;
-			            }
-			        });
-			        /* remove false values with _.compact() */
-			        uebernachtungOptionen = _.compact(uebernachtungOptionen);
-			        DigiWebApp.BookingController.set("uebernachtungOptionen", uebernachtungOptionen);
-			    }
-
-			    // Bemerkung laden
+//				if (DigiWebApp.SettingsController.featureAvailable('422')) {
+//					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).parent().show()
+//					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).show();
+//					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').show();
+//				} else {
+//					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).parent().hide()
+//					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).hide();
+//					$('label[for="' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + '"]').hide();
+//				}
+				
+				// load remark
 				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
 					if (typeof(DigiWebApp.BookingController.currentBooking.get('remark')) !== "undefined" && DigiWebApp.BookingController.currentBooking.get('remark') !== null) {
 						//M.ViewManager.getView('remarkPage', 'remarkInput').setValue(DigiWebApp.BookingController.currentBooking.get('remark'));
@@ -149,104 +125,29 @@ DigiWebApp.RemarkPage = M.PageView.design({
 				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].focus();
 				//$('#' + DigiWebApp.RemarkPage.content.remarkInput.id)[0].blur();
 
-				if (typeof (DigiWebApp.BookingController.currentBooking) !== "undefined"
-                        && DigiWebApp.BookingController.currentBooking !== null) {
-				    // gefahreneKilometer laden
-				    if (typeof (DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer')) !== "undefined"
-                            && DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer') !== null) {
+				// load gefahreneKilometer
+				if (typeof(DigiWebApp.BookingController.currentBooking) !== "undefined" && DigiWebApp.BookingController.currentBooking !== null) {
+					if (typeof(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer')) !== "undefined" && DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer') !== null) {
+						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val(DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer'));
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = DigiWebApp.BookingController.currentBooking.get('gefahreneKilometer');
 					} else {
+						//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
 						$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 						M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
-				    }
-				    // Reisekosten-Checkboxen laden
-				    if (typeof (DigiWebApp.BookingController.currentBooking.get('spesenAuswahl')) !== "undefined"
-				            && DigiWebApp.BookingController.currentBooking.get('spesenAuswahl') !== null
-				    ) {
-				        var spesen = DigiWebApp.BookingController.currentBooking.get('spesenAuswahl');
-				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-				            value: 'fahrtzeitFirmenwagen'
-			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: (spesen === 5) // 5 = Fahrt mit Firmenwagen
-				        }]);
-				        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-				            value: 'fahrtzeitBusBahn'
-			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
-				        }]);
-                    } else {
-				        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-				            value: 'fahrtzeitFirmenwagen'
-			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: false
-				        }]);
-				        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-				            value: 'fahrtzeitBusBahn'
-			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: false
-				        }]);
-                    }
+					}
 				} else {
+					//M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').setValue(null);
 					$('#' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value = "0";
 				}
-			} // action
-        } // pagebeforeshow
-    } // events
-
-    , showHideGefahreneKilometer: function(showElement) {
-        // show/hide label
-        $('[for=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + ']').each(function () {
-            if (showElement) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-        // show/hide textarea
-        $('[id=' + DigiWebApp.RemarkPage.content.gefahreneKilometerInput.id + ']').each(function () {
-            if (showElement) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-
-    , showHideReisekosten: function(showElement) {
-        $('[id=' + DigiWebApp.RemarkPage.content.reisekostenFirmenwagen.id + ']').each(function () {
-            if (showElement) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-        $('[id=' + DigiWebApp.RemarkPage.content.reisekostenBusBahn.id + ']').each(function () {
-            if (showElement) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-
-    , showHideUebernachtungskosten: function(showElement) {
-        if (showElement) {
-            try {
-                 $('#' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + "_container").show();
-            } catch (e) { trackError(e); }
-        } else {
-            try {
-                 $('#' + DigiWebApp.RemarkPage.content.uebernachtungskosten.id + "_container").hide();
-            } catch (e) { trackError(e); }
+			}
         }
     }
 
     , myCallback: function() {
-    }
 
-    , istFeierabendBuchung: false
+    }
     
     , tab_action_timeoutvar: null    
     
@@ -260,8 +161,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
     			, message: M.I18N.l('remarkTooLongMessage')
     		});
 		} else {
-		    if ((DigiWebApp.SettingsController.getSetting('remarkIsMandatory'))
-                    && (M.ViewManager.getView('remarkPage', 'remarkInput').value === '')) {
+			
+			if ( (DigiWebApp.SettingsController.getSetting('remarkIsMandatory')) && (M.ViewManager.getView('remarkPage', 'remarkInput').value === '') ) {
 		        DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	    			  title: M.I18N.l('remarkIsMandatory')
@@ -276,34 +177,12 @@ DigiWebApp.RemarkPage = M.PageView.design({
 	                    , message: M.I18N.l('specialCharProblemMsg')
 	                });
 	            } else {
-	    			// Buchung speichern
-	                DigiWebApp.BookingController.currentBooking.set('remark',
-                        M.ViewManager.getView('remarkPage', 'remarkInput').value);
-
-	                var km = parseIntRadixTen(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value);
-	                DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
-
-	                if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                    // Parallel Spesenauswahl wenn Fahrt mit Privat-Pkw?
-	                    //if (km !== 0) {
-	                    //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
-	                    //} else {
-	                    // Reisekostenauswahl als Spesenauswahl speichern
-	                    if (M.ViewManager.getView('remarkPage', 'reisekostenFirmenwagen').isSelected === 1) {
-	                        // 5 = Fahrt mit Firmenwagen
-    	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 5);
-	                    } else if (M.ViewManager.getView('remarkPage', 'reisekostenBusBahn').isSelected === 1) {
-	                        // 6 = Fahrt mit Bus/Bahn
-    	                    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 6);
-	                    
-	                    }
-
-	                    DigiWebApp.BookingController.currentBooking.set('uebernachtungAuswahl',
-	                        M.ViewManager.getView('remarkPage', 'uebernachtungskosten').getSelection(YES).value);
-	                }
-
-	                DigiWebApp.BookingController.currentBooking.save();
-
+	            	
+	    			// save booking
+	    			DigiWebApp.BookingController.currentBooking.set('remark', M.ViewManager.getView('remarkPage', 'remarkInput').value);
+	    			DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', parseIntRadixTen(M.ViewManager.getView('remarkPage', 'gefahreneKilometerInput').value));
+	    			DigiWebApp.BookingController.currentBooking.save();
+	    			
 	    			DigiWebApp.RemarkPage.myCallback();
 	            }
 			}
@@ -325,10 +204,7 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , events: {
                 tap: {
                       target: DigiWebApp.NavigationController
-                    , action: function() {
-                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
-                        this.backToBookTimePagePOP();
-                      }
+                    , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.backToBookTimePagePOP();}
                 }
             }
         })
@@ -340,63 +216,37 @@ DigiWebApp.RemarkPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-        childViews: 'orderbox remarkInput gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten grid'
+          childViews: 'orderbox remarkInput gefahreneKilometerInput grid'
         
         , orderbox: M.ListView.design({
-            contentBinding: {
+        	
+              contentBinding: {
             	  target: DigiWebApp.BookingController
             	, property: 'timeDataForEdit'
         	}
 
         	, listItemTemplateView: DigiWebApp.TimeDataForEditTemplateView
+        	
         })
 
         , remarkInput: M.TextFieldView.design({
                   label: M.I18N.l('remark')
                 , cssClass: 'remarkInput'
                 , hasMultipleLines: YES
-                , initialText: "Max. 255 " + M.I18N.l('characters')
+                , initialText: "max. 255 " + M.I18N.l('characters')
                 , numberOfChars: 255
         })
-        
-        , gefahreneKilometerInput: M.TextFieldView.design({
-            // Labeltext wird in init() abhängig von Freischaltung gesetzt
-            label: M.I18N.l('gefahreneKilometer')
-            , cssClass: 'remarkInput'
-            , hasMultipleLines: NO
-        	, inputType: M.INPUT_NUMBER
-        })
-
-        , reisekostenFirmenwagen: M.SelectionListView.design({
-            selectionMode: M.MULTIPLE_SELECTION
-            , contentBinding: {
-                target: DigiWebApp.BookingController
-                , property: 'propReisekostenFirmenwagen'
-            }
-        })
             
-        , reisekostenBusBahn: M.SelectionListView.design({
-            selectionMode: M.MULTIPLE_SELECTION
-            , contentBinding: {
-                target: DigiWebApp.BookingController
-                , property: 'propReisekostenBusBahn'
-            }
-        })
-
-        , uebernachtungskosten: M.SelectionListView.design({
-            selectionMode: M.SINGLE_SELECTION_DIALOG
-            , label: M.I18N.l('uebernachtungArt')
-            , initialText: M.I18N.l('noData')
-            , applyTheme: NO
-            , contentBinding: {
-                target: DigiWebApp.BookingController
-                , property: 'uebernachtungOptionen'
-            }
+        , gefahreneKilometerInput: M.TextFieldView.design({
+                  label: M.I18N.l('gefahreneKilometer')
+                , cssClass: 'remarkInput'
+                , hasMultipleLines: NO
+        	    , inputType: M.INPUT_NUMBER
         })
             
         , grid: M.GridView.design({
-            childViews: 'button icon'
-
+        	
+              childViews: 'button icon'
             , layout: {
                   cssClass: 'digiButton marginTop25'
                 , columns: {
@@ -411,6 +261,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {
+                        //  target: DigiWebApp.NavigationController
+                        //, action: 'toSettingsPage'
             			action: function() {
         					DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
         					DigiWebApp.RemarkPage.tab_action_timeoutvar = setTimeout("DigiWebApp.RemarkPage.tab_action();", 50);
@@ -422,6 +274,8 @@ DigiWebApp.RemarkPage = M.PageView.design({
             , icon: M.ImageView.design({
                 value: 'theme/images/icon_bookTime.png'
             })
-        }) // grid
-    }) // content
+            
+        })
+    })
 });
+

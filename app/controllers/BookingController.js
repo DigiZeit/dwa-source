@@ -314,16 +314,23 @@ DigiWebApp.BookingController = M.Controller.extend({
 				    // --> Auf die EditTimeDataPage gehen wenn
 				    // -Bemerkungen freigeschaltet und nicht optional sind
 				    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
-                    // -Bohle-Reisekostenabwicklung aktiv und Buchung fahrtzeitrelevant ist
+    		        // -Bohle-Reisekostenabwicklung aktiv, Buchung fahrtzeitrelevant ist und
+                    //  noch keine Eingabe gemacht wurde
+		            var fahrzeitrelevant = DigiWebApp.Activity.findById(
+		                this.currentBooking.get('activityId')).get('istFahrzeitRelevant');
+		            var km = DigiWebApp.Activity.findById(
+		                this.currentBooking.get('activityId')).get('gefahreneKilometer');
+    		        // Freischaltung 431: Bohle-Reisekostenabwicklung
     		        //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+		            var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
+		                && fahrzeitrelevant && !hasValue(km));
+
     		        // Freischaltung 403: Bemerkungsfeld
 				    if ((DigiWebApp.SettingsController.featureAvailable('403')
                         && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
 				        // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
-				        // Freischaltung 431: Bohle-Reisekostenabwicklung
-						|| ((   DigiWebApp.SettingsController.featureAvailable('422')
-                             || DigiWebApp.SettingsController.featureAvailable('431'))
-                            && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
+						|| (DigiWebApp.SettingsController.featureAvailable('422') && fahrzeitrelevant)
+                        || featureFahrtkosten
 					) {
 							this.refreshCurrentBooking(false);
 							DigiWebApp.NavigationController.toRemarkPage(function() {
@@ -1783,18 +1790,30 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        } else {
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
     			var t = window.setTimeout(function(){ window.clearTimeout(t); $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green'); }, 500);
-	        	var buchenCallback = function() {
-					if (
-					    // Freischaltung 403: Bemerkungsfeld
-					   (DigiWebApp.SettingsController.featureAvailable('403')
-                        && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
+    			var buchenCallback = function () {
+    			    // Auf die EditTimeDataPage (früher RemarkPage) gehen wenn
+    			    // -Bemerkungen freigeschaltet und nicht optional sind
+    			    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
+    			    // -Bohle-Reisekostenabwicklung aktiv, Buchung fahrtzeitrelevant ist und
+    			    //  noch keine Eingabe gemacht wurde oder Übernachtungskosten abgefragt werden sollen
+    			    var fahrzeitrelevant = DigiWebApp.Activity.findById(
+		                this.currentBooking.get('activityId')).get('istFahrzeitRelevant');
+    			    var km = DigiWebApp.Activity.findById(
+		                this.currentBooking.get('activityId')).get('gefahreneKilometer');
+    			    // Freischaltung 431: Bohle-Reisekostenabwicklung
+    			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+    			    var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
+		                && fahrzeitrelevant && !hasValue(km));
+    			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannUebernachtungskostenBuchen):
+    			    var featureUebernachtungskosten = (DigiWebApp.SettingsController.featureAvailable('431'));
+
+					if (// Freischaltung 403: Bemerkungsfeld
+					    (DigiWebApp.SettingsController.featureAvailable('403')
+                         && !DigiWebApp.SettingsController.getSetting('remarkIsOptional'))
 					    // Freischaltung 422: Eingabe von gefahrenen Kilometern (aktuell nur KTG)
-					|| (DigiWebApp.SettingsController.featureAvailable('422')
-                        && DigiWebApp.Activity.findById(DigiWebApp.BookingController.currentBooking.get('activityId')).get('istFahrzeitRelevant'))
-					    // Freischaltung 431: Bohle-Reisekostenabwicklung
-					    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen
-					    // bzw. KannUebernachtungskostenBuchen)
-                    || (DigiWebApp.SettingsController.featureAvailable('431'))
+					    || (DigiWebApp.SettingsController.featureAvailable('422') && fahrzeitrelevant)
+                        || featureFahrtkosten
+                        || featureUebernachtungskosten
 					) {
 						// if remark or related feature active: go to remark page
 						that.refreshCurrentBooking(false);
