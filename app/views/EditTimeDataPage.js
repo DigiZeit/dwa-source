@@ -17,7 +17,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	/* Use the 'events' property to bind events like 'pageshow' */
     , events: {
         pagebeforeshow: {
-			action: function() {
+            action: function () {
+                // Hinweis: this statt DigiWebApp.EditTimeDataPage funktioniert nicht, auch nicht
+                // wenn man target: DigiWebApp.EditTimeDataPage angibt.
+
 			    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
 			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
@@ -103,12 +106,12 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
         		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: (spesen === 5) // 5 = Fahrt mit Firmenwagen
+        		            value: false //TODO (spesen === 5) // 5 = Fahrt mit Firmenwagen
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
 			                , isSelected: (spesen === 5)
         		        }]);
         		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-        		            value: (spesen === 6) // 6 = Fahrt mit Bus/Bahn
+        		            value: false //TODO(spesen === 6) // 6 = Fahrt mit Bus/Bahn
 			                , label: M.I18N.l('fahrtzeitBusBahn')
 			                , isSelected: (spesen === 6)
         		        }]);
@@ -178,16 +181,18 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
 		                    // und - bei buchungAbschliessen - Eingabe noch nicht erfolgt
 		                    if (featureFahrtkosten) {
-		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
-                                    M.I18N.l('fahrtzeitPrivat');
+		                        DigiWebApp.EditTimeDataPage.setLabelText(
+                                    DigiWebApp.EditTimeDataPage.editTimeDataPagecontent.gefahreneKilometerInput.id,
+                                    M.I18N.l('fahrtzeitPrivat'));
 		                        var show = !(DigiWebApp.EditTimeDataPage.buchungAbschliessen
 		                            && hasValue(
                                         DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer')));
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(show);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(show);
 		                    } else if (featureGefahreneKilometer) {
-		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
-		                            M.I18N.l('gefahreneKilometer');
+		                        DigiWebApp.EditTimeDataPage.setLabelText(
+                                    DigiWebApp.EditTimeDataPage.editTimeDataPagecontent.gefahreneKilometerInput.id,
+		                            M.I18N.l('gefahreneKilometer'));
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    } else {
@@ -377,8 +382,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
 	                        // Reisekostenauswahl als Spesenauswahl speichern
 	                        if (km !== 0) {
-	                        // Parallel Spesenauswahl setzen wenn Fahrt mit Privat-Pkw?
-	                        //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
+	                            // Wenn der User hin und her ändert, muss die Spesenauswahl
+	                            // zurückgesetzt werden. Zu klären: expliziter Wert 
+	                            // 4 = Fahrt mit Privat-Pkw oder ein Wert, der später ignoriert wird?
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 4);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
 	                            // 5 = Fahrt mit Firmenwagen
@@ -416,8 +423,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
 	                        // Reisekostenauswahl als Spesenauswahl speichern
 	                        if (km !== 0) {
-	                            // Parallel Spesenauswahl setzen wenn Fahrt mit Privat-Pkw?
-	                            //    DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 1);
+	                            // Wenn der User hin und her ändert, muss die Spesenauswahl
+	                            // zurückgesetzt werden. Zu klären: expliziter Wert 
+	                            // 4 = Fahrt mit Privat-Pkw oder ein Wert, der später ignoriert wird?
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 4);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
 	                            // 5 = Fahrt mit Firmenwagen
@@ -449,6 +458,13 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 			}
 		}
     }
+
+    , setLabelText: function (id, textValue) {
+        if (typeof (id) !== 'undefined') {
+            $('#' + id).parent().parent().parent()[0].firstChild.textContent = textValue;
+        }
+    }
+
 
     , getCheckboxValue: function (pageName, viewName) {
         var view = M.ViewManager.getView(pageName, viewName);
