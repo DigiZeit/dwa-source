@@ -510,7 +510,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-        childViews: 'orderbox remarkInput gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten signature saveGrid'
+        childViews: 'orderbox remarkInput fahrtzeitPrivatLabel gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten signature saveGrid'
         
         , orderbox: M.ListView.design({
         	
@@ -529,10 +529,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , initialText: "Max. 255 " + M.I18N.l('characters')
             , numberOfChars: 255
         })
-            
+
+        , fahrtzeitPrivatLabel: M.TextLabel.design({
+            value: M.I18N.l('fahrtzeitPrivat')
+        })
+
         , gefahreneKilometerInput: M.TextFieldView.design({
             // Labeltext wird in init() abhängig von Freischaltung gesetzt
-            label: M.I18N.l('gefahreneKilometer')
+            label: ''//TODOM.I18N.l('gefahreneKilometer')
             , cssClass: 'remarkInput'
             , hasMultipleLines: NO
         	, inputType: M.INPUT_NUMBER
