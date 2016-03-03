@@ -181,25 +181,27 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
 		                    // und - bei buchungAbschliessen - Eingabe noch nicht erfolgt
 		                    if (featureFahrtkosten) {
-		                        DigiWebApp.EditTimeDataPage.setLabelText(
-                                    DigiWebApp.EditTimeDataPage.editTimeDataPagecontent.gefahreneKilometerInput.id,
-                                    M.I18N.l('fahrtzeitPrivat'));
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(false);
 		                        var show = !(DigiWebApp.EditTimeDataPage.buchungAbschliessen
 		                            && hasValue(
                                         DigiWebApp.EditTimeDataPage.bookingToEdit.get('gefahreneKilometer')));
+		                        DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(show);
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(show);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(show);
 		                    } else if (featureGefahreneKilometer) {
-		                        DigiWebApp.EditTimeDataPage.setLabelText(
-                                    DigiWebApp.EditTimeDataPage.editTimeDataPagecontent.gefahreneKilometerInput.id,
-		                            M.I18N.l('gefahreneKilometer'));
+		                        DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(false);
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(true);
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    } else {
+		                        showHideFahrtzeitPrivatLabel(false);
+		                        showHideGefahreneKilometerLabel(false);
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    }
 		                } else {
+		                    showHideFahrtzeitPrivatLabel(false);
+		                    showHideGefahreneKilometerLabel(false);
 		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                }
@@ -274,7 +276,27 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         }
     }
 
-    , showHideGefahreneKilometer: function(showElement) {
+	, showHideFahrtzeitPrivatLabel: function(showElement) {
+	    $('[for=' + DigiWebApp.EditTimeDataPage.content.fahrtzeitPrivatLabel.id + ']').each(function () {
+	        if (showElement) {
+	            $(this).show();
+	        } else {
+	            $(this).hide();
+	        }
+	    });
+	}
+
+    , showHideGefahreneKilometerLabel: function(showElement) {
+        $('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerLabel.id + ']').each(function () {
+            if (showElement) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    , showHideGefahreneKilometer: function (showElement) {
         // show/hide label
         $('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id + ']').each(function () {
             if (showElement) {
@@ -459,13 +481,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		}
     }
 
-    , setLabelText: function (id, textValue) {
-        if (typeof (id) !== 'undefined') {
-            $('#' + id).parent().parent().parent()[0].firstChild.textContent = textValue;
-        }
-    }
-
-
     , getCheckboxValue: function (pageName, viewName) {
         var view = M.ViewManager.getView(pageName, viewName);
         if (hasValue(view)) {
@@ -509,8 +524,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         , anchorLocation: M.TOP
     })
 
-    , content: M.ScrollView.design({
-        childViews: 'orderbox remarkInput fahrtzeitPrivatLabel gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten signature saveGrid'
+    , content: M.ScrollView.design({ //TODO 
+        childViews: 'orderbox remarkInput fahrtzeitPrivatLabel gefahreneKilometerLabel gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten signature saveGrid'
         
         , orderbox: M.ListView.design({
         	
@@ -535,9 +550,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , anchorLocation: M.LEFT
         })
 
+        , gefahreneKilometerLabel: M.LabelView.design({
+            value: M.I18N.l('gefahreneKilometer')
+            , anchorLocation: M.LEFT
+        })
+
         , gefahreneKilometerInput: M.TextFieldView.design({
-            // Labeltext wird in init() abhängig von Freischaltung gesetzt
-            label: ''//TODOM.I18N.l('gefahreneKilometer')
+            // Ändern klappt nicht, deshalb getrenntes Label "kilometerLabel"
+            label: ''
             , cssClass: 'remarkInput'
             , hasMultipleLines: NO
         	, inputType: M.INPUT_NUMBER
