@@ -277,7 +277,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     }
 
 	, showHideFahrtzeitPrivatLabel: function(showElement) {
-	    $('[for=' + DigiWebApp.EditTimeDataPage.content.fahrtzeitPrivatLabel.id + ']').each(function () {
+	    $('[id=' + DigiWebApp.EditTimeDataPage.content.fahrtzeitPrivatLabel.id + ']').each(function () {
 	        if (showElement) {
 	            $(this).show();
 	        } else {
@@ -287,7 +287,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	}
 
     , showHideGefahreneKilometerLabel: function(showElement) {
-        $('[for=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerLabel.id + ']').each(function () {
+        $('[id=' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerLabel.id + ']').each(function () {
             if (showElement) {
                 $(this).show();
             } else {
@@ -524,7 +524,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         , anchorLocation: M.TOP
     })
 
-    , content: M.ScrollView.design({ //TODO 
+    , content: M.ScrollView.design({
         childViews: 'orderbox remarkInput fahrtzeitPrivatLabel gefahreneKilometerLabel gefahreneKilometerInput reisekostenFirmenwagen reisekostenBusBahn uebernachtungskosten signature saveGrid'
         
         , orderbox: M.ListView.design({
@@ -556,7 +556,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         })
 
         , gefahreneKilometerInput: M.TextFieldView.design({
-            // Ändern klappt nicht, deshalb getrenntes Label "kilometerLabel"
+            // Ändern klappt nicht, deshalb getrennte Labels
             label: ''
             , cssClass: 'remarkInput'
             , hasMultipleLines: NO
