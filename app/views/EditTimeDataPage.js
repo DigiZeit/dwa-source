@@ -179,10 +179,13 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                            M.I18N.l('fahrtzeitPrivat');
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(true);
-		                    } else {
+		                    } else if (featureGefahreneKilometer) {
 		                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').label =
 		                            M.I18N.l('gefahreneKilometer');
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
+		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
+		                    } else {
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    }
 		                } else {
@@ -471,8 +474,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , hasMultipleLines: NO
         	, inputType: M.INPUT_NUMBER
             , events: {
-                change: {
-                    action: function () {
+                keyup: {
+                    /* executed in scope of DOMWindow because no target defined */
+                    action: function (selectedValue, selectedItem) {
                         DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
                         DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
