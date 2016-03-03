@@ -168,8 +168,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                        currentActivity = el;
 		                    }
 		                });
-		                var km = DigiWebApp.Activity.findById(
-                            this.currentBooking.get('activityId')).get('gefahreneKilometer');
 
 		                if (currentActivity !== null && currentActivity.get("istFahrzeitRelevant")) {
 		                    // Reisekosten-Checkboxen nur einblenden falls Freischaltung vorhanden
@@ -476,7 +474,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 change: {
                     action: function () {
                         DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
-                        DigiWebApp.BookingController.propReisekostenBusBahn = false;
+                        DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
                 }
             }
@@ -527,7 +525,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 change: {
                     action: function () {
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
-                        DigiWebApp.BookingController.propReisekostenBusBahn = false;
+                        DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
                 }
             }
@@ -543,7 +541,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 change: {
                     action: function () {
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
-                        DigiWebApp.BookingController.propReisekostenFirmenwagen = false;
+                        DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
                     }
                 }
             }
