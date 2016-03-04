@@ -559,8 +559,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 keyup: {
                     /* executed in scope of DOMWindow because no target defined */
                     action: function (selectedValue, selectedItem) {
-                        //DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
-                        //DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
+                        setReisekostenFirmenwagen(false);
+                        setReisekostenBusBahn(false);
                     }
                 }
             }
@@ -605,11 +605,11 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
                 target: DigiWebApp.BookingController
-                , property: 'propReisekostenFirmenwagen'
+                , property: 'reisekostenFirmenwagen'
             }
             , contentBindingReverse: {
                 target: DigiWebApp.BookingController
-                , property: 'propReisekostenFirmenwagen'
+                , property: 'reisekostenFirmenwagen'
             }
             , events: {
                 change: {
@@ -626,11 +626,11 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
                 target: DigiWebApp.BookingController
-                , property: 'propReisekostenBusBahn'
+                , property: 'reisekostenBusBahn'
             }
             , contentBindingReverse: {
                 target: DigiWebApp.BookingController
-                , property: 'propReisekostenBusBahn'
+                , property: 'reisekostenBusBahn'
             }
             , events: {
                 change: {
