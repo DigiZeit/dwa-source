@@ -182,10 +182,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                }
 		            } else {
+		                DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(false);
+		                DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(false);
 		                DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		            }
 		        } else {
+        		    DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(false);
+        		    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(false);
         		    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
         		    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
         		}
