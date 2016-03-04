@@ -25,8 +25,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
 			    if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
 			        DigiWebApp.EditTimeDataPage.bookingToEdit = DigiWebApp.BookingController.currentBooking;
-			        DigiWebApp.EditTimeDataPage.header.title.set('value',
-                        M.I18N.l('remark'));
+			        DigiWebApp.EditTimeDataPage.header.title.set('value', M.I18N.l('remark'));
 			        DigiWebApp.EditTimeDataPage.content.saveGrid.saveButton.set('value',
 			            M.I18N.l('closeBooking'));
                 } else {
@@ -194,14 +193,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(true);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    } else {
-		                        showHideFahrtzeitPrivatLabel(false);
-		                        showHideGefahreneKilometerLabel(false);
+		                        DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(false);
+		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(false);
 		                        DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                        DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                    }
 		                } else {
-		                    showHideFahrtzeitPrivatLabel(false);
-		                    showHideGefahreneKilometerLabel(false);
+		                    DigiWebApp.EditTimeDataPage.showHideFahrtzeitPrivatLabel(false);
+		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometerLabel(false);
 		                    DigiWebApp.EditTimeDataPage.showHideGefahreneKilometer(false);
 		                    DigiWebApp.EditTimeDataPage.showHideReisekosten(false);
 		                }
@@ -271,7 +270,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         			    DigiWebApp.EditTimeDataPage.signaturePadAPI.clearCanvas();
         			});
         		}
-				
 			}
         }
     }
@@ -351,7 +349,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     // Flag, ob eine Buchung abgeschlossen wird (früher RemarkPage) oder Zeitdaten editiert werden
     , buchungAbschliessen: false
 
-    // Flagb ob eine Feierabendbuchung bearbeitet wird
+    // Flag, ob eine Feierabendbuchung bearbeitet wird
     , istFeierabendBuchung: false
 
     , tab_action_timeoutvar: null
@@ -556,7 +554,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         })
 
         , gefahreneKilometerInput: M.TextFieldView.design({
-            // Ändern klappt nicht, deshalb getrennte Labels
+            // Ändern des Label wäre sehr umständlich weil kein eigener LabelView, 
+            // deshalb getrennte Labels die in pagebeforeshow passend ein/ausgeblendet werden.
             label: ''
             , cssClass: 'remarkInput'
             , hasMultipleLines: NO
@@ -613,6 +612,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 target: DigiWebApp.BookingController
                 , property: 'propReisekostenFirmenwagen'
             }
+            , contentBindingReverse: {
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenFirmenwagen'
+            }
             , events: {
                 change: {
                     action: function () {
@@ -626,6 +629,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         , reisekostenBusBahn: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
+                target: DigiWebApp.BookingController
+                , property: 'propReisekostenBusBahn'
+            }
+            , contentBindingReverse: {
                 target: DigiWebApp.BookingController
                 , property: 'propReisekostenBusBahn'
             }

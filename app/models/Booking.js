@@ -143,6 +143,14 @@ DigiWebApp.Booking = M.Model.create({
         isRequired: NO
     })
     
+    , reisekostenFirmenwagen : M.Model.attr('Boolean', {
+        isRequired: NO
+    })
+
+    , reisekostenBusBahn : M.Model.attr('Boolean', {
+        isRequired: NO
+    })
+
     , spesenAuswahl: M.Model.attr('String', {
         isRequired: NO
     })
