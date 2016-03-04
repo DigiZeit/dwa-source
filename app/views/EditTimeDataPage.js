@@ -564,8 +564,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 keyup: {
                     /* executed in scope of DOMWindow because no target defined */
                     action: function (selectedValue, selectedItem) {
-                        DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
-                        DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
+                        //DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
+                        //DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
                 }
             }
@@ -619,8 +619,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , events: {
                 change: {
                     action: function () {
-                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(0);
-                        //M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
+                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
+                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
                         //DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
                 }
@@ -640,8 +640,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , events: {
                 change: {
                     action: function () {
-                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(0);
-                        //M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
+                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
+                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
                         //DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
                     }
                 }
