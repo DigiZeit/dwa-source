@@ -104,17 +104,19 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl') !== null
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
-        		        setReisekostenFirmenwagen(spesen == '5'); // 5 = Fahrt mit Bus/Bahn
-        		        setReisekostenBusBahn(spesen == '6'); // 6 = Fahrt mit Bus/Bahn
+        		        // 5 = Fahrt mit Bus/Bahn
+        		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(spesen == '5');
+        		        // 6 = Fahrt mit Bus/Bahn
+        		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(spesen == '6');
         		    } else {
-        		        setReisekostenFirmenwagen(false);
-		                setReisekostenBusBahn(false);
+        		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
+        		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(false);
         		    }
                 } else {
 					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-					setReisekostenFirmenwagen(false);
-					setReisekostenBusBahn(false);
+					DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
+					DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(false);
                 }
 
         		if (featureBemerkung) {
@@ -559,8 +561,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 keyup: {
                     /* executed in scope of DOMWindow because no target defined */
                     action: function (selectedValue, selectedItem) {
-                        setReisekostenFirmenwagen(false);
-                        setReisekostenBusBahn(false);
+                        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
+                        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(false);
                     }
                 }
             }
@@ -616,7 +618,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val('0');
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = '0';
-                        setReisekostenBusBahn(false);
+                        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(false);
                     }
                 }
             }
@@ -637,7 +639,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-                        setReisekostenFirmenwagen(false);
+                        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
                     }
                 }
             }
