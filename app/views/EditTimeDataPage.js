@@ -621,7 +621,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val('0');
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = '0';
-                        //DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
+                        DigiWebApp.BookingController.set('propReisekostenBusBahn', false);
                     }
                 }
             }
@@ -642,7 +642,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-                        //DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
+                        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', false);
                     }
                 }
             }
