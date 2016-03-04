@@ -104,42 +104,17 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl') !== null
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
-        		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: false //TODO (spesen === 5) // 5 = Fahrt mit Firmenwagen
-			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: true //(spesen == '5')
-        		        }]);
-        		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-        		            value: false //TODO(spesen === 6) // 6 = Fahrt mit Bus/Bahn
-			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: (spesen == '6')
-        		        }]);
+        		        setReisekostenFirmenwagen(spesen == '5'); // 5 = Fahrt mit Bus/Bahn
+        		        setReisekostenBusBahn(spesen == '6'); // 6 = Fahrt mit Bus/Bahn
         		    } else {
-        		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: true
-			                , label: M.I18N.l('fahrtzeitFirmenwagen')
-			                , isSelected: false
-        		        }]);
-        		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-        		            value: false
-			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: true
-        		        }]);
+        		        setReisekostenFirmenwagen(false);
+		                setReisekostenBusBahn(false);
         		    }
                 } else {
 					$('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
 					M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-
-					DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-					    value: false
-                        , label: M.I18N.l('fahrtzeitFirmenwagen')
-                        , isSelected: false
-					}]);
-					DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
-					    value: false
-                        , label: M.I18N.l('fahrtzeitBusBahn')
-                        , isSelected: false
-					}]);
+					setReisekostenFirmenwagen(false);
+					setReisekostenBusBahn(false);
                 }
 
         		if (featureBemerkung) {
@@ -340,6 +315,26 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                 $('#' + DigiWebApp.EditTimeDataPage.content.uebernachtungskosten.id + "_container").hide();
             } catch (e2) { trackError(e2); }
         }
+    }
+
+    , setReisekostenFirmenwagen: function(isSet) {
+        DigiWebApp.BookingController.set('reisekostenFirmenwagen', [
+            {
+                value: false //TODO (spesen === 5) // 5 = Fahrt mit Firmenwagen
+                , label: M.I18N.l('fahrtzeitFirmenwagen')
+                , isSelected: isSet
+            }
+        ]);
+    }
+
+    , setReisekostenBusBahn: function(isSet) {
+        DigiWebApp.BookingController.set('reisekostenBusBahn', [
+            {
+                value: false //TODO(spesen === 6) // 6 = Fahrt mit Bus/Bahn
+                , label: M.I18N.l('fahrtzeitBusBahn')
+                , isSelected: isSet
+            }
+        ]);
     }
 
     // Callback der nach dem Speichern aufgerufen werden muss, wird vom BookingController gesetzt
@@ -621,7 +616,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val('0');
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = '0';
-                        DigiWebApp.BookingController.set('propReisekostenBusBahn', false);
+                        setReisekostenBusBahn(false);
                     }
                 }
             }
@@ -642,7 +637,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                     action: function () {
                         $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val("0");
                         M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = "0";
-                        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', false);
+                        setReisekostenFirmenwagen(false);
                     }
                 }
             }
