@@ -71,7 +71,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         , isSelected: false
     }]
 
-    // Siehe propReisekostenFirmenwagen
+    // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
     , propReisekostenBusBahn: [{
         value: false
         , label: M.I18N.l('fahrtzeitBusBahn')
@@ -1259,7 +1259,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , startTimeString: timeString
             , endeTimeString: ""
             , modelVersion: "1"
-            , gefahreneKilometer: 0
+            //TODO OK dass das initial nicht mehr gesetzt wird? , gefahreneKilometer: 0
         });
     }
 

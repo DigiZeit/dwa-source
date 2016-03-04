@@ -116,14 +116,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		        }]);
         		    } else {
         		        DigiWebApp.BookingController.set('propReisekostenFirmenwagen', [{
-        		            value: false
+        		            value: true
 			                , label: M.I18N.l('fahrtzeitFirmenwagen')
 			                , isSelected: false
         		        }]);
         		        DigiWebApp.BookingController.set('propReisekostenBusBahn', [{
         		            value: false
 			                , label: M.I18N.l('fahrtzeitBusBahn')
-			                , isSelected: false
+			                , isSelected: true
         		        }]);
         		    }
                 } else {
