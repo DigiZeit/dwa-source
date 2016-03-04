@@ -619,8 +619,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , events: {
                 change: {
                     action: function () {
-                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
-                        DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
+                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(0);
+                        //M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
+                        //DigiWebApp.BookingController.propReisekostenBusBahn.isSelected = false;
                     }
                 }
             }
@@ -639,8 +640,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , events: {
                 change: {
                     action: function () {
-                        M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
-                        DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
+                        $('#' + DigiWebApp.EditTimeDataPage.content.gefahreneKilometerInput.id).val(0);
+                        //M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value = 0;
+                        //DigiWebApp.BookingController.propReisekostenFirmenwagen.isSelected = false;
                     }
                 }
             }
