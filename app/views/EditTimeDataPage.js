@@ -45,7 +45,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 			    // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
 				var featureUebernachtungskosten = DigiWebApp.SettingsController.featureAvailable('431')
                     && DigiWebApp.SettingsController.getSetting('kannUebernachtungskostenBuchen')
-			        && DigiWebApp.EditTimeDataPage.istFeierabendBuchung);
+			        && DigiWebApp.EditTimeDataPage.istFeierabendBuchung));
 				var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
 
         		// Freischaltung 405: Unterschrift
