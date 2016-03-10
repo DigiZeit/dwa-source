@@ -38,14 +38,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 			    DigiWebApp.BookingController.setTimeDataForEdit();
 
 				var featureBemerkung = DigiWebApp.SettingsController.featureAvailable('403');
-				var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
-			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen
-			    // bzw. KannUebernachtungskostenBuchen):
-				var featureFahrtkosten = DigiWebApp.SettingsController.featureAvailable('431');
-			    // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
+                var featureGefahreneKilometer = DigiWebApp.SettingsController.featureAvailable('422');
+				var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
+				    && DigiWebApp.SettingsController.getSetting('kannFahrtkostenBuchen'));
+                // istFeierabend von currentBooking ist zu diesem Zeitpunkt noch nicht 
 			    // gesetzt - erst wenn die Buchung tatsächlich gemacht wird. Deshalb Extraflag.
 				var featureUebernachtungskosten = DigiWebApp.SettingsController.featureAvailable('431')
-			        && DigiWebApp.EditTimeDataPage.istFeierabendBuchung;
+                    && DigiWebApp.SettingsController.getSetting('kannUebernachtungskostenBuchen')
+			        && DigiWebApp.EditTimeDataPage.istFeierabendBuchung);
 				var featureUnterschrift = DigiWebApp.SettingsController.featureAvailable('405');
 
         		// Freischaltung 405: Unterschrift
@@ -104,9 +104,9 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl') !== null
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
-        		        // 5 = Fahrt mit Bus/Bahn
+        		        // 5 = Fahrt mit Bus/Bahn (Für Freischaltung 431) //TODO ferneinstellbar machen
         		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(spesen == '5');
-        		        // 6 = Fahrt mit Bus/Bahn
+        		        // 6 = Fahrt mit Bus/Bahn (Für Freischaltung 431) //TODO ferneinstellbar machen
         		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(spesen == '6');
         		    } else {
         		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
@@ -326,7 +326,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     , setReisekostenFirmenwagen: function(isSet) {
         DigiWebApp.BookingController.set('reisekostenFirmenwagen', [
             {
-                value: false //TODO (spesen === 5) // 5 = Fahrt mit Firmenwagen
+                value: false 
                 , label: M.I18N.l('fahrtzeitFirmenwagen')
                 , isSelected: isSet
             }
@@ -336,7 +336,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     , setReisekostenBusBahn: function(isSet) {
         DigiWebApp.BookingController.set('reisekostenBusBahn', [
             {
-                value: false //TODO(spesen === 6) // 6 = Fahrt mit Bus/Bahn
+                value: false 
                 , label: M.I18N.l('fahrtzeitBusBahn')
                 , isSelected: isSet
             }
@@ -435,11 +435,11 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
 	                    var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
 	                    if (!hasValue(km)) {
+                            // zweifelsfrei markieren, dass gespeichert wurde
 	                        km = 0;
 	                    }
 
-	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer',
-                            M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
+	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', km);
 
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
 	                        // Reisekostenauswahl als Spesenauswahl speichern
@@ -447,7 +447,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                            // Wenn der User hin und her ändert, muss die Spesenauswahl
 	                            // zurückgesetzt werden. Zu klären: expliziter Wert 
 	                            // 4 = Fahrt mit Privat-Pkw oder ein Wert, der später ignoriert wird?
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', '4');
+	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', '4');
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
 	                            // 5 = Fahrt mit Firmenwagen

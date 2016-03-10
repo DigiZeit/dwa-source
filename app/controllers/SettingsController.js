@@ -85,6 +85,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , progressViewVerwendenAb: 300
         , logDelete: false
         , logSave: false
+        , kannFahrtkostenBuchen: false
+        , kannUebernachtungskostenBuchen: false
     }
 
     , defaultsettings: null
@@ -145,7 +147,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         // Start::Terminliste (423)
         if (DigiWebApp.SettingsController.featureAvailable('423')) {
         	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).show();
-        	DigiWebApp.SettingsController.set('terminlisteEinstellungen_titel', DigiWebApp.SettingsController.terminlisteEinstellungen_titel)
+            DigiWebApp.SettingsController.set('terminlisteEinstellungen_titel', DigiWebApp.SettingsController.terminlisteEinstellungen_titel);
         } else {
         	$('#' + DigiWebApp.SettingsPage.content.terminlisteEinstellungen.id).hide();
         }
@@ -154,7 +156,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         // Start::FestePauseStornieren (425)
         if (DigiWebApp.SettingsController.featureAvailable('425')) {
         	$('#' + DigiWebApp.SettingsPage.content.festePauseStornierenEinstellungen.id).show();
-        	DigiWebApp.SettingsController.set('festePauseStornierenEinstellungen_titel', DigiWebApp.SettingsController.festePauseStornierenEinstellungen_titel)
+            DigiWebApp.SettingsController.set('festePauseStornierenEinstellungen_titel', DigiWebApp.SettingsController.festePauseStornierenEinstellungen_titel);
         } else {
         	$('#' + DigiWebApp.SettingsPage.content.festePauseStornierenEinstellungen.id).hide();
         }
@@ -356,7 +358,23 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            if (typeof(record.record.logSave) !== "undefined") {
 	            	logSave = record.get('logSave');
 	            }
-            } catch (e) {}
+            } catch (e) { }
+
+            //, kannFahrtkostenBuchen: false
+            var kannFahrtkostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
+            try {
+                if (typeof (record.record.kannFahrtkostenBuchen) !== "undefined") {
+                    kannFahrtkostenBuchen = record.get('logSave');
+                }
+            } catch (e) { }
+
+            //, kannUebernachtungskostenBuchen: false
+            var kannUebernachtungskostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
+            try {
+                if (typeof (record.record.kannUebernachtungskostenBuchen) !== "undefined") {
+                    kannUebernachtungskostenBuchen = record.get('logSave');
+                }
+            } catch (e) { }
             
             // Bugfix 2142: get branding from local storage
             var branding = DigiWebApp.SettingsController.defaultsettings.get("branding");
@@ -570,8 +588,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , progressViewVerwendenAb: progressViewVerwendenAb
 	           , logDelete: logDelete
 	           , logSave: logSave
-               
-            };
+               , kannFahrtkostenBuchen: kannFahrtkostenBuchen
+               , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
+			}; // settings = {
         /* default values */
         } else {
         	//console.log("using default settings");
@@ -720,11 +739,12 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , progressViewVerwendenAb: DigiWebApp.SettingsController.defaultsettings.get("progressViewVerwendenAb")
 	           , logDelete: DigiWebApp.SettingsController.defaultsettings.get("logDelete")
 	           , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
-               
-            };
+               , kannFahrtkostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen')
+               , kannUebernachtungskostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen')
+            }; // settings = {
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
-        }
+        } // end default settings
                 
         that.set('settings', settings);
 		if (typeof window.logDelete != "undefined") { window.logDelete = parseBool(settings.logDelete); }
@@ -983,6 +1003,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	closeAppAfterCloseDay = $('#' + M.ViewManager.getView('settingsPage', 'closeAppAfterCloseDay').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         }
         
+        // Alle Einstellungen, die kein GUI haben
     	var DTC6aktiv                       = DigiWebApp.SettingsController.getSetting('DTC6aktiv');
     	var useNativeLoader					= DigiWebApp.SettingsController.getSetting('useNativeLoader');
     	var pictureEncodingType				= DigiWebApp.SettingsController.getSetting('pictureEncodingType');
@@ -995,6 +1016,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var progressViewVerwendenAb         = DigiWebApp.SettingsController.getSetting('progressViewVerwendenAb');
         var logDelete						= DigiWebApp.SettingsController.getSetting("logDelete");
         var logSave							= DigiWebApp.SettingsController.getSetting("logSave");
+        var kannFahrtkostenBuchen           = DigiWebApp.SettingsController.getSetting("kannFahrtkostenBuchen");
+        var kannUebernachtungskostenBuchen  = DigiWebApp.SettingsController.getSetting("kannUebernachtungskostenBuchen");
 
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1027,7 +1050,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
             }
         }
 
-
         //M.DialogView.confirm({
         DigiWebApp.ApplicationController.nativeConfirmDialogView({
               title: M.I18N.l('hint')
@@ -1037,7 +1059,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                     action: function() {
                         var record = DigiWebApp.Settings.find()[0];
                         /* if there already is a record, update it */
-                        if(record) {
+                        if (record) {
 
                             /* if some of the hard stuff changed, check for open and not-transfered bookings */
                             var isNew = record.get('company') == '' && record.get('password') == '' && record.get('connectionCode') == '' && record.get('workerId') == '';
@@ -1052,7 +1074,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                             	
                                 /* check for open bookings */
                                 var bookings = DigiWebApp.Booking.find();
-                                if(bookings.length > 0) {
+                                if (bookings.length > 0) {
                                     //M.DialogView.confirm({
                                     DigiWebApp.ApplicationController.nativeConfirmDialogView({
                                           title: M.I18N.l('hint')
@@ -1128,6 +1150,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('progressViewVerwendenAb', progressViewVerwendenAb);
                                                     record.set('logDelete', logDelete);
                                                     record.set('logSave', logSave);
+                                                    record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
+                                                    record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1159,7 +1183,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                             }
                                         }
                                     });
-                                } else {
+                                } else { // if (bookings.length > 0)
                     				DigiWebApp.ApplicationController.restartApp = YES;
                                 	record.set('debug', debug);
                                 	record.set('treatAllAsTablet', treatAllAsTablet);
@@ -1227,13 +1251,15 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('progressViewVerwendenAb', progressViewVerwendenAb);
                                     record.set('logDelete', logDelete);
                                     record.set('logSave', logSave);
+                                    record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
+                                    record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
                                     DigiWebApp.SettingsController.saveSettings(record, YES);
                             		DigiWebApp.SettingsController.saveDone = YES;
-                                }
-                            } else if (isNew) {
+                                } //if/else (bookings.length > 0)
+                            } else if (isNew) { // if (!isNew && ...
                             	record.set('debug', debug);
                             	record.set('treatAllAsTablet', treatAllAsTablet);
                             	record.set('treatAllAsPhone', treatAllAsPhone);
@@ -1300,6 +1326,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('progressViewVerwendenAb', progressViewVerwendenAb);
                                 record.set('logDelete', logDelete);
                                 record.set('logSave', logSave);
+                                record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
+                                record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1373,6 +1401,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('progressViewVerwendenAb', progressViewVerwendenAb);
                                 record.set('logDelete', logDelete);
                                 record.set('logSave', logSave);
+                                record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
+                                record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1448,8 +1478,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , progressViewVerwendenAb: progressViewVerwendenAb
                                 , logDelete: logDelete
                                 , logSave: logSave
-
-                          });
+                                , kannFahrtkostenBuchen, kannFahrtkostenBuchen
+                                , kannUebernachtungskostenBuchen, kannUebernachtungskostenBuchen
+                            }); // record =
 
                             /* now save */
                             //alert("saveSettings (createNewOne)");

@@ -308,14 +308,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 				    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
     		        // -Bohle-Reisekostenabwicklung aktiv, Buchung fahrtzeitrelevant ist und
                     //  noch keine Eingabe gemacht wurde
-		            var fahrzeitrelevant = DigiWebApp.Activity.findById(
+		            var fahrtzeitrelevant = DigiWebApp.Activity.findById(
 		                this.currentBooking.get('activityId')).get('istFahrzeitRelevant');
 		            var km = DigiWebApp.Activity.findById(
 		                this.currentBooking.get('activityId')).get('gefahreneKilometer');
     		        // Freischaltung 431: Bohle-Reisekostenabwicklung
-    		        //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
 		            var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
-		                && fahrzeitrelevant && !hasValue(km));
+                        && DigiWebApp.SettingsController.getSetting('kannFahrtkostenBuchen')
+		                && fahrtzeitrelevant && !hasValue(km));
 
     		        // Freischaltung 403: Bemerkungsfeld
 				    if ((DigiWebApp.SettingsController.featureAvailable('403')
@@ -636,7 +636,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            }, getLocationOptions); // getLocation() call
         	}; // getLocationNow()
     	
-        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
+            // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 			if (DigiWebApp.SettingsController.featureAvailable('417') 
 			&& DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") 
 			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
@@ -1251,7 +1251,7 @@ DigiWebApp.BookingController = M.Controller.extend({
             , startTimeString: timeString
             , endeTimeString: ""
             , modelVersion: "1"
-            //TODO OK dass das initial nicht mehr gesetzt wird? , gefahreneKilometer: 0
+            //TODO bis ins DSO prüfen, dass das nicht mehr immer setzen bei KTG keine Probleme macht: , gefahreneKilometer: 0
         });
     }
 
@@ -1787,17 +1787,18 @@ DigiWebApp.BookingController = M.Controller.extend({
     			    // -Bemerkungen freigeschaltet und nicht optional sind
     			    // -gefahreneKilometer-Freischaltung aktiv und Buchung fahrtzeitrelevant ist
     			    // -Bohle-Reisekostenabwicklung aktiv, Buchung fahrtzeitrelevant ist und
-    			    //  noch keine Eingabe gemacht wurde oder Übernachtungskosten abgefragt werden sollen
+    			    //  noch keine Eingabe gemacht wurde
+    			    // -Bohle-Reisekostenabwicklung aktiv ist und Übernachtungskosten abgefragt werden sollen
     			    var fahrzeitrelevant = DigiWebApp.Activity.findById(
 		                that.currentBooking.get('activityId')).get('istFahrzeitRelevant');
     			    var km = DigiWebApp.Activity.findById(
 		                that.currentBooking.get('activityId')).get('gefahreneKilometer');
     			    // Freischaltung 431: Bohle-Reisekostenabwicklung
-    			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
     			    var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
+                        && DigiWebApp.SettingsController.getSetting('kannFahrtkostenBuchen')
 		                && fahrzeitrelevant && !hasValue(km));
-    			    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannUebernachtungskostenBuchen):
-    			    var featureUebernachtungskosten = (DigiWebApp.SettingsController.featureAvailable('431'));
+    			    var featureUebernachtungskosten = (DigiWebApp.SettingsController.featureAvailable('431')
+                        && DigiWebApp.SettingsController.getSetting('kannUebernachtungskostenBuchen'));
 
 					if (// Freischaltung 403: Bemerkungsfeld
 					    (DigiWebApp.SettingsController.featureAvailable('403')

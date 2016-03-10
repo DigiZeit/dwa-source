@@ -2010,7 +2010,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		DigiWebApp.ApplicationController.DigiProgressView.hide();
 	    		that.setCallbackStatus('features', 'local', YES);
     		}
-    	} else {
+    	} else { // if (data !== null || data !== '') {
 			doReturn = true;
     	}
 
@@ -2101,22 +2101,40 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 data['return'] = [data['return']];
             }
 
-    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('features'), data['return'].length, 0);
-            // reset settings without gui-elements
-            //DigiWebApp.SettingsController.setSetting('debug', false);
-            DigiWebApp.SettingsController.setSetting('treatAllAsTablet', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
-            DigiWebApp.SettingsController.setSetting('treatAllAsPhone', DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
-            DigiWebApp.SettingsController.setSetting('settingsPassword', DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
+            DigiWebApp.ApplicationController.DigiProgressView.show(
+                M.I18N.l('Save'), M.I18N.l('features'), data['return'].length, 0);
+
+    	    // Alle Einstellungen zurücksetzen, die kein GUI haben
+    	    //DigiWebApp.SettingsController.setSetting('debug', false);
+            DigiWebApp.SettingsController.setSetting('treatAllAsTablet',
+                DigiWebApp.SettingsController.defaultsettings.get('treatAllAsTablet'));
+            DigiWebApp.SettingsController.setSetting('treatAllAsPhone',
+                DigiWebApp.SettingsController.defaultsettings.get('treatAllAsPhone'));
+            DigiWebApp.SettingsController.setSetting('settingsPassword',
+                DigiWebApp.SettingsController.defaultsettings.get('settingsPassword'));
             var oldBranding = DigiWebApp.SettingsController.getSetting('branding');
-            DigiWebApp.SettingsController.setSetting('branding', DigiWebApp.SettingsController.defaultsettings.get('branding'));
-            DigiWebApp.SettingsController.setSetting('silentLoader', DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
-            DigiWebApp.SettingsController.setSetting('mapType', DigiWebApp.SettingsController.defaultsettings.get('mapType'));
-            //DigiWebApp.SettingsController.setSetting('useTransitionsSetting', DigiWebApp.SettingsController.defaultsettings.get('useTransitionsSetting'));
-            DigiWebApp.SettingsController.setSetting('datatransfer_min_delay', DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
-            DigiWebApp.SettingsController.setSetting('GPSTimeOut', DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
-            DigiWebApp.SettingsController.setSetting('WebserviceTimeOut', DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
-            DigiWebApp.SettingsController.setSetting('LoaderTimeOut', DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
-            DigiWebApp.SettingsController.setSetting('debugDatabaseServer', DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
+            DigiWebApp.SettingsController.setSetting('branding',
+                DigiWebApp.SettingsController.defaultsettings.get('branding'));
+            DigiWebApp.SettingsController.setSetting('silentLoader',
+                DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
+            DigiWebApp.SettingsController.setSetting('mapType',
+                DigiWebApp.SettingsController.defaultsettings.get('mapType'));
+    	    //DigiWebApp.SettingsController.setSetting('useTransitionsSetting', 
+            //    DigiWebApp.SettingsController.defaultsettings.get('useTransitionsSetting'));
+            DigiWebApp.SettingsController.setSetting('datatransfer_min_delay',
+                DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
+            DigiWebApp.SettingsController.setSetting('GPSTimeOut',
+                DigiWebApp.SettingsController.defaultsettings.get('GPSTimeOut'));
+            DigiWebApp.SettingsController.setSetting('WebserviceTimeOut',
+                DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut'));
+            DigiWebApp.SettingsController.setSetting('LoaderTimeOut',
+                DigiWebApp.SettingsController.defaultsettings.get('LoaderTimeOut'));
+            DigiWebApp.SettingsController.setSetting('debugDatabaseServer',
+                DigiWebApp.SettingsController.defaultsettings.get('debugDatabaseServer'));
+            DigiWebApp.SettingsController.setSetting('kannFahrtkostenBuchen',
+                DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen'));
+            DigiWebApp.SettingsController.setSetting('kannUebernachtungskostenBuchen',
+                DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen'));
 
             DigiWebApp.ApplicationController.triggerUpdate = NO;
             
@@ -2192,7 +2210,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                
 	            }
                 DigiWebApp.ApplicationController.triggerUpdate = YES;
-            });
+            }); // _.each(data['return'], function(el, i)
             // zueinander inkompatible Einstellungen korrigieren
             if (DigiWebApp.SettingsController.getSetting('remarkIsOptional')) {
             	DigiWebApp.SettingsController.setSetting('remarkIsMandatory', false);
@@ -2207,7 +2225,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     		DigiWebApp.ApplicationController.DigiProgressView.hide();
             this.setCallbackStatus('features', 'local', YES);
             
-        } else {
+    	} else { // if (data && data['return'])
 
         	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("keine Features empfangen");
 
@@ -2301,7 +2319,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	DigiWebApp.ApplicationController.syncRunning = NO;
     	
         // go to next page
-        if(that.isReadyToProceed()) {
+        if (that.isReadyToProceed()) {
             if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
             	if (DigiWebApp.SettingsController.featureAvailable('409')) {
     	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
@@ -2349,7 +2367,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         if (that.profilingSingleRun) {
         	that.profilingIntervalVar = null;
     	}
-
     }
 
     /**
@@ -2458,7 +2475,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	||  (typeof(startTime) === "undefined" || !startTime || startTime === "")
 	            	) {
 	            		// Buchung aus alter WebApp-Version
-	            		var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) + (1000 * 60 * (new Date(Number(booking.get('timeStampStart'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
+	            	    var d8start = D8.create(new Date(Number(booking.get('timeStampStart')) +
+                            (1000 * 60 * (new Date(Number(
+                                booking.get('timeStampStart'))).getTimezoneOffset() -
+                                booking.get('timezoneOffset')))));
 	                    startDate = d8start.format('dd.mm.yyyy');
 	                    startTime = d8start.format('HH:MM');
 	                    booking.set('startDateString', startDate);
@@ -2471,7 +2491,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	||  (typeof(endeTime) === "undefined" || !endeTime || endeTime === "")
 	            	) {
 	            		// Buchung aus alter WebApp-Version
-	            		var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) + (1000 * 60 * (new Date(Number(booking.get('timeStampEnd'))).getTimezoneOffset() - booking.get('timezoneOffset')))));
+	            	    var d8ende = D8.create(new Date(Number(booking.get('timeStampEnd')) +
+                            (1000 * 60 * (new Date(Number(
+                                booking.get('timeStampEnd'))).getTimezoneOffset() -
+                                booking.get('timezoneOffset')))));
 	                    endeDate = d8ende.format('dd.mm.yyyy');
 	                    endeTime = d8ende.format('HH:MM');
 	                    booking.set('endeDateString', endeDate);
@@ -2481,7 +2504,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            	booking.set("modelVersion", "1");
 	    			booking.save();
 	            	writeToLog("Buchung auf modelVersion 1 aktualisiert: " + JSON.stringify(booking));
-		    			
 	        	});
 	        }
 	        	

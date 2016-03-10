@@ -19,11 +19,12 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 // 403: Bemerkungsfeld
                 // 405: Unterschrift
                 // 431: Bohle-Reisekostenabwicklung 
-                // (zusätzlich Ressourcenmerkmal KannReisekostenBuchen nötig)
+                //      (zusätzlich Mitarbeitermerkmal KannFahrtkostenBuchen nötig)
                 if (DigiWebApp.SettingsController.featureAvailable('403')
-                    || ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined"))
-                    || DigiWebApp.SettingsController.featureAvailable('431')
-                    //TODO Außerdem nur wenn Feature für MA aktiviert ist (Ressourcenmerkmal KannReisekostenBuchen)
+                    || (DigiWebApp.SettingsController.featureAvailable('405')
+                            && (typeof window.requestFileSystem !== "undefined"))
+                    || (DigiWebApp.SettingsController.featureAvailable('431')
+                            && DigiWebApp.SettingsController.getSetting('kannFahrtkostenBuchen'))
                 ) {
                     // Ausgewählte Buchung in EditTimeData.bookingToEdit schreiben
                     //console.log('remark is active');
@@ -97,7 +98,6 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                         //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + date2.format('HH:MM') + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
                         return v[3] + ', ' + v[4] + ' - ' + v[6] + ' ' + M.I18N.l('oclock') + ', ' + timeBetween + ' h';
                     }
-
                 } else {
                     //return date1.format('dd.mm.yyyy') + ', ' + date1.format('HH:MM') + ' - ' + M.I18N.l('open');
                 	return v[3] + ', ' + v[4] + ' - ' + M.I18N.l('open');
