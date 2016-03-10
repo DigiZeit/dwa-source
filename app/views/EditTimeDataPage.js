@@ -104,10 +104,10 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 				            && DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl') !== null
 				    ) {
         		        var spesen = DigiWebApp.EditTimeDataPage.bookingToEdit.get('spesenAuswahl');
-        		        // 5 = Fahrt mit Bus/Bahn (Für Freischaltung 431) //TODO ferneinstellbar machen
-        		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(spesen == '5');
-        		        // 6 = Fahrt mit Bus/Bahn (Für Freischaltung 431) //TODO ferneinstellbar machen
-        		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(spesen == '6');
+        		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(spesen == 
+                            DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
+        		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(spesen == 
+                            DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
         		    } else {
         		        DigiWebApp.EditTimeDataPage.setReisekostenFirmenwagen(false);
         		        DigiWebApp.EditTimeDataPage.setReisekostenBusBahn(false);
@@ -198,25 +198,24 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 			    // und einblenden falls Freischaltung vorhanden und Feierabendbuchung.
         		if (featureUebernachtungskosten) {
         		    if (DigiWebApp.UebernachtungAuswahlOption.find().length === 0) {
-        		        var i = 1;
+        		        // Auswahhliste initialisieren
+        		        // Die Zahlenwerte müssen mit den entsprechenden VorgabeId in der
+        		        // Tabelle [SonderbuchungseigenschaftVorgabe] in der DIGI-DB übereinstimmen!
         		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
-        		            id: i,
-        		            beschreibung: M.I18N.l('uebernachtungKeine')
+        		            id: DigiWebApp.BookingController.constFs431UebernachtungsauswahlKeine,
+        		            beschreibung: M.I18N.l('fs431UebernachtungKeine')
         		        }).saveSorted();
-        		        i++; // 2
         		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
-        		            id: i,
-        		            beschreibung: M.I18N.l('uebernachtungPrivat')
+        		            id: DigiWebApp.BookingController.constFs431UebernachtungsauswahlPrivat,
+        		            beschreibung: M.I18N.l('fs431UebernachtungPrivat')
         		        }).saveSorted();
-        		        i++; // 3
         		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
-        		            id: i,
-        		            beschreibung: M.I18N.l('uebernachtungZahltFirma')
+        		            id: DigiWebApp.BookingController.constFs431UebernachtungsauswahlZahltFirma,
+        		            beschreibung: M.I18N.l('fs431UebernachtungZahltFirma')
         		        }).saveSorted();
-        		        i++; // 4
         		        DigiWebApp.UebernachtungAuswahlOption.createRecord({
-        		            id: i,
-        		            beschreibung: M.I18N.l('uebernachtungSelbstBezahlt')
+        		            id: DigiWebApp.BookingController.constFs431UebernachtungsauswahlSelbstBezahlt,
+        		            beschreibung: M.I18N.l('fs431UebernachtungSelbstBezahlt')
         		        }).saveSorted();
         		    }
 
@@ -324,20 +323,20 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     }
 
     , setReisekostenFirmenwagen: function(isSet) {
-        DigiWebApp.BookingController.set('reisekostenFirmenwagen', [
+        DigiWebApp.BookingController.set('fs431ReisekostenFirmenwagen', [
             {
                 value: false 
-                , label: M.I18N.l('fahrtzeitFirmenwagen')
+                , label: M.I18N.l('fs431FahrtzeitFirmenwagen')
                 , isSelected: isSet
             }
         ]);
     }
 
     , setReisekostenBusBahn: function(isSet) {
-        DigiWebApp.BookingController.set('reisekostenBusBahn', [
+        DigiWebApp.BookingController.set('fs431ReisekostenBusBahn', [
             {
                 value: false 
-                , label: M.I18N.l('fahrtzeitBusBahn')
+                , label: M.I18N.l('fs431FahrtzeitBusBahn')
                 , isSelected: isSet
             }
         ]);
@@ -401,20 +400,20 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
 
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                        // Reisekostenauswahl als Spesenauswahl speichern
+	                        // Fahrtkostenauswahl als Spesenauswahl speichern
 	                        if (km !== 0) {
-	                            // Wenn der User hin und her ändert, muss die Spesenauswahl
-	                            // zurückgesetzt werden. Zu klären: expliziter Wert 
-	                            // 4 = Fahrt mit Privat-Pkw oder ein Wert, der später ignoriert wird?
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', '4');
+	                            // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
+                                // dass der User hin und her ändert.
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
-	                            // 5 = Fahrt mit Firmenwagen
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', '5');
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenBusBahn') === YES) {
-	                            // 6 = Fahrt mit Bus/Bahn
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', '6');
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
 	                        }
 
 	                        var sel = M.ViewManager.getView('editTimeDataPage', 
@@ -444,18 +443,18 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
 	                        // Reisekostenauswahl als Spesenauswahl speichern
 	                        if (km !== 0) {
-	                            // Wenn der User hin und her ändert, muss die Spesenauswahl
-	                            // zurückgesetzt werden. Zu klären: expliziter Wert 
-	                            // 4 = Fahrt mit Privat-Pkw oder ein Wert, der später ignoriert wird?
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', '4');
+	                            // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
+	                            // dass der User hin und her ändert.
+	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl',
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
-	                            // 5 = Fahrt mit Firmenwagen
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', '5');
+	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
                                         'editTimeDataPage', 'reisekostenBusBahn') === YES) {
-	                            // 6 = Fahrt mit Bus/Bahn
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', '6');
+	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
+                                    DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
 	                        }
 	                    }
 
@@ -545,7 +544,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         })
 
         , fahrtzeitPrivatLabel: M.LabelView.design({
-            value: M.I18N.l('fahrtzeitPrivat')
+            value: M.I18N.l('fs431FahrtzeitPrivat')
             , anchorLocation: M.LEFT
         })
 
@@ -572,50 +571,15 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             }
         })
             
-        , signature: M.ContainerView.design({
-        	childViews: 'signatureform'
-            , cssClass: 'signaturecanvas marginTop20 marginBottom20'
-
-        	, signatureform: M.FormView.design({
-            	childViews: 'signaturecanvas'
-            	
-            	, signaturecanvas: M.CanvasView.design({
-
-            		label: M.I18N.l('signature')
-
-            		, canvasWidth: 300
-                    , canvasHeight: 150
-                	
-                    , render: function() {
-                    	if (this.label) {
-                    		this.html += '<label for="' + this.id + '" class="signaturecanvaslabel">' + this.label + '</label>';
-                    	}
-    					this.html += '  <div id="' + this.id + '_container" class="sig sigWrapper">';
-        				this.html += '    <canvas id="' + this.id + '_canvas" class="pad" width="' + this.canvasWidth + 'px" height="' + this.canvasHeight + 'px"></canvas>';
-        				this.html += '    <input id="' + this.id + '" type="hidden" name="output" class="output">';
-        				this.html += '  </div>';
-                    	return this.html;
-                	}
-    	        })
-                	
-                , render: function() {
-            		this.html += '<form method="post" action="" class="sigPad">';
-                	this.renderChildViews();
-    				this.html += '</form>';
-                	return this.html;
-            	}
-            })
-        })
-         
         , reisekostenFirmenwagen: M.SelectionListView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
                 target: DigiWebApp.BookingController
-                , property: 'reisekostenFirmenwagen'
+                , property: 'fs431ReisekostenFirmenwagen'
             }
             , contentBindingReverse: {
                 target: DigiWebApp.BookingController
-                , property: 'reisekostenFirmenwagen'
+                , property: 'fs431ReisekostenFirmenwagen'
             }
             , events: {
                 change: {
@@ -632,11 +596,11 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             selectionMode: M.MULTIPLE_SELECTION
             , contentBinding: {
                 target: DigiWebApp.BookingController
-                , property: 'reisekostenBusBahn'
+                , property: 'fs431ReisekostenBusBahn'
             }
             , contentBindingReverse: {
                 target: DigiWebApp.BookingController
-                , property: 'reisekostenBusBahn'
+                , property: 'fs431ReisekostenBusBahn'
             }
             , events: {
                 change: {
@@ -651,13 +615,48 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 
         , uebernachtungskosten: M.SelectionListView.design({
             selectionMode: M.SINGLE_SELECTION_DIALOG
-            , label: M.I18N.l('uebernachtungArt')
+            , label: M.I18N.l('fs431UebernachtungArt')
             , initialText: M.I18N.l('noData')
             , applyTheme: NO
             , contentBinding: {
                 target: DigiWebApp.BookingController
                 , property: 'uebernachtungOptionen'
             }
+        })
+
+        , signature: M.ContainerView.design({
+            childViews: 'signatureform'
+            , cssClass: 'signaturecanvas marginTop20 marginBottom20'
+
+        	, signatureform: M.FormView.design({
+        	    childViews: 'signaturecanvas'
+
+            	, signaturecanvas: M.CanvasView.design({
+
+            	    label: M.I18N.l('signature')
+
+            		, canvasWidth: 300
+                    , canvasHeight: 150
+
+                    , render: function () {
+                        if (this.label) {
+                            this.html += '<label for="' + this.id + '" class="signaturecanvaslabel">' + this.label + '</label>';
+                        }
+                        this.html += '  <div id="' + this.id + '_container" class="sig sigWrapper">';
+                        this.html += '    <canvas id="' + this.id + '_canvas" class="pad" width="' + this.canvasWidth + 'px" height="' + this.canvasHeight + 'px"></canvas>';
+                        this.html += '    <input id="' + this.id + '" type="hidden" name="output" class="output">';
+                        this.html += '  </div>';
+                        return this.html;
+                    }
+            	})
+
+                , render: function () {
+                    this.html += '<form method="post" action="" class="sigPad">';
+                    this.renderChildViews();
+                    this.html += '</form>';
+                    return this.html;
+                }
+        	})
         })
 
         , saveGrid: M.GridView.design({

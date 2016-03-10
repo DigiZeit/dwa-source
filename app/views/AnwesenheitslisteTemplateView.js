@@ -183,7 +183,7 @@ DigiWebApp.AnwesenheitslisteTemplateView = M.ListItemView.design({
         valuePattern: '<%= handauftragsBezeichnung %>'
       , operation: function(v) {
 			if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "-" && v !== "null" && v !== null) {
-				return M.I18N.l('handApplications') + ': ' + v;
+				return M.I18N.l('handOrder') + ': ' + v;
 			} else {
 				return '';
 			}

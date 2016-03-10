@@ -62,7 +62,7 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'datum von bis spacerNachBis dauer infoButton spacerNachButton order position handApplications activity activityPositionInWorkplan spacerNachActivityPositionInWorkplan remark farbeAmpel gpsBreite gpsLaenge showBookingCoordinatesInMapButton gpsBreitePosition gpsLaengePosition showPositionCoordinatesInMapButton'
+    	  childViews: 'datum von bis spacerNachBis dauer infoButton spacerNachButton order position handOrder activity activityPositionInWorkplan spacerNachActivityPositionInWorkplan remark farbeAmpel gpsBreite gpsLaenge showBookingCoordinatesInMapButton gpsBreitePosition gpsLaengePosition showPositionCoordinatesInMapButton'
         	  
         , cssClass: 'content'
 
@@ -215,13 +215,13 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	      	, isInline: YES
 		})
 	
-        , handApplications: M.LabelView.design({
+        , handOrder: M.LabelView.design({
             computedValue: {
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
       					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== null) {
-      						return M.I18N.l('handApplications') + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung");
+      						return M.I18N.l('handOrder') + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung");
       					} else {
       						return '';
       					}

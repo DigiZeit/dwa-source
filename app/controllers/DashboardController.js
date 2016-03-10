@@ -58,11 +58,14 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			        case M.I18N.l('dataTransfer'):
 			        	myButtonItem.icon = '48x48_plain_refresh.png';
 			            break;
-			        case M.I18N.l('handApplications'):
+			        case M.I18N.l('handOrder'):
 			        	myButtonItem.icon = '48x48_plain_handauftrag.png';
 			            break;
 			        case M.I18N.l('timeData'):
 			        	myButtonItem.icon = '48x48_plain_note_view.png';
+			            break;
+			        case M.I18N.l('kolonneAendern'):
+			            myButtonItem.icon = '48x48_plain_businessmen.png';
 			            break;
 			        case M.I18N.l('orderInfo'):
 			        	myButtonItem.icon = '48x48_plain_folder_view.png';
@@ -104,21 +107,21 @@ DigiWebApp.DashboardController = M.Controller.extend({
         	var items;
         	if (ChefToolOnly) {
 	            items = [
-	                          {
-	     	                      label: M.I18N.l('dataTransfer')
-	     	                    , icon: '48x48_plain_refresh.png'
-	     	                    , id: 'dataTransfer'
-	     	                }
-	      	                , {
-		  	                      label: M.I18N.l('handApplications')
-		  	                    , icon: '48x48_plain_handauftrag.png'
-		  	                    , id: 'handOrder'
-		  	                }
+	                {
+	     	                label: M.I18N.l('dataTransfer')
+	     	            , icon: '48x48_plain_refresh.png'
+	     	            , id: 'dataTransfer'
+	     	        }
+	      	        , {
+		  	                label: M.I18N.l('handOrder')
+		  	            , icon: '48x48_plain_handauftrag.png'
+		  	            , id: 'handOrder'
+		  	        }
 	            ];
         	} else {
 	        	// Standard-Einträge
 	            items = [
-	                  {
+	                {
 	                      label: M.I18N.l('closingTime')
 	                    , icon: '48x48_plain_home.png'
 	                    , id: 'closingTime'
@@ -129,7 +132,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	                    , id: 'dataTransfer'
 	                }
 	                , {
-	                      label: M.I18N.l('handApplications')
+	                      label: M.I18N.l('handOrder')
 	                    , icon: '48x48_plain_handauftrag.png'
 	                    , id: 'handOrder'
 	                }
@@ -138,12 +141,17 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	                    , icon: '48x48_plain_note_view.png'
 	                    , id: 'timeData'
 	                }
+	                , {
+	                    label: M.I18N.l('kolonneAendern')
+	                    , icon: '48x48_plain_businessmen.png'
+	                    , id: 'kolonneAendern'
+	                }
 	            ];
         	}
             
-        	// spezielle Features, wenn freigeschaltet:
+        	// Spezielle Features, die von Freischaltungen oä. abhängen:
 
-        	// Delete Handauftrag-Menuentry
+        	// Menüpunkt "Handauftrag" entfernen
         	if (
         			DigiWebApp.SettingsController.featureAvailable('410')
         		||	(ChefToolOnly && !Handpositionen)
@@ -154,13 +162,23 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
         	
-        	// Delete Feierabend-Menuentry
+    	    // Menüpunkt "Feierabend" entfernen
         	if (DigiWebApp.SettingsController.featureAvailable('420')) {
         		items = _.map(items,function(item){
         			if (item.id !== "closingTime") return item;
         		});
         		items = _.compact(items);
         	}
+
+    	    // Menüpunkt "Kolonne ändern" entfernen
+            /*
+        	if (DigiWebApp.EmployeeController.employeeState == 0) {
+        	    items = _.map(items, function (item) {
+        	        if (item.id !== "kolonneAendern") return item;
+        	    });
+        	    items = _.compact(items);
+        	}
+            */
         	
             // Start::AuftragsInfo
         	var AuftragsInfoAvailable = (DigiWebApp.SettingsController.featureAvailable('406'));
@@ -376,14 +394,18 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , closingTime: function() {
-    	if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+    	if (DigiWebApp.DashboardPage.content.list.selectedItem) {
+	        $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+	    }
 		writeToLog("Hauptmenü: '" + M.I18N.l('closingTime') + "' gedrückt");
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('bucheFeierabend'));
 		setTimeout(DigiWebApp.BookingController.closeDay,100);
     }
 
     , dataTransfer: function(isClosingDay) {
-    	if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+    	if (DigiWebApp.DashboardPage.content.list.selectedItem) {
+	        $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+	    }
 
     	// Feierabend wird in closingTime() geloggt
     	if (!isClosingDay) {
@@ -486,6 +508,10 @@ DigiWebApp.DashboardController = M.Controller.extend({
         DigiWebApp.NavigationController.toTimeDataPageTransition();
     }
 
+    , kolonneAendern: function() {
+        writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
+    }
+
     , handOrder: function() {
         DigiWebApp.NavigationController.toHandOrderPageTransition();
     }
@@ -544,7 +570,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautagesberichteListeController.neu("<materialerfassung_only>", YES, M.I18N.l('materialPickUp'));
 	      	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.BautagebuchMaterialienListeController.neu, function(){}, YES);
 		}
-
 	}
 	
 	, notizen: function() {
@@ -569,7 +594,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			DigiWebApp.BautagebuchBautagesberichteListeController.neu("<notizen_only>", YES, M.I18N.l('BautagebuchNotizen'));
 	      	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(DigiWebApp.BautagebuchNotizenListeController.neu, function(){}, YES);
 		}
-		
 	}
 
 	, tagescheckliste: function() {

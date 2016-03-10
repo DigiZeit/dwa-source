@@ -63,12 +63,29 @@ DigiWebApp.BookingController = M.Controller.extend({
     // Bugfix 2515: Objekt, um die Selektion beim Tippen
     // des Buchen-Buttons zu speichern
     , checkedCurrentBooking: null
-    
-    // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
-    , reisekostenFirmenwagen: null
+
+    // Konstanten für die Buchungs-Property "spesenAuswahl".
+    // Die Zahlenwerte müssen mit den entsprechenden VorgabeId in der
+    // Tabelle [SonderbuchungseigenschaftVorgabe] in der DIGI-DB übereinstimmen!
+    // Noch unklar: Explizite Buchung "1 = Fahrt mit Privat-Pkw" erwünscht oder soll diese
+    // nicht angezeigt werden weil es eine gefahreneKilometer-Buchung gibt?
+    , constFs431SpesenauswahlPrivatPkw: '1'
+    , constFs431SpesenauswahlFirmenwagen: '2'
+    , constFs431SpesenauswahlBusBahn: '3'
+
+    // Konstanten für die Buchungs-Property "uebernachtungsAuswahl".
+    // Die Zahlenwerte müssen mit den entsprechenden VorgabeId in der
+    // Tabelle [SonderbuchungseigenschaftVorgabe] in der DIGI-DB übereinstimmen!
+    , constFs431UebernachtungsauswahlKeine: '1'
+    , constFs431UebernachtungsauswahlPrivat: '2'
+    , constFs431UebernachtungsauswahlZahltFirma: '3'
+    , constFs431UebernachtungsauswahlSelbstBezahlt: '4'
 
     // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
-    , reisekostenBusBahn: null
+    , fs431ReisekostenFirmenwagen: null
+
+    // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
+    , fs431ReisekostenBusBahn: null
 
     /**
      *
