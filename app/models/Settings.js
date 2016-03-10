@@ -141,5 +141,9 @@ DigiWebApp.Settings = M.Model.create({
     , logDelete: M.Model.attr('Boolean')
     
     , logSave: M.Model.attr('Boolean')
+
+    , kannFahrtkostenBuchen: M.Model.attr('Boolean')
+
+    , kannUebernachtungskostenBuchen: M.Model.attr('Boolean')
     
 }, M.DataProviderLocalStorage);
