@@ -170,15 +170,13 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
 
-    	    // Menüpunkt "Kolonne ändern" entfernen
-            /*
+    	    // Menüpunkt "Kolonne ändern" entfernen wenn Kolonnenauswahl nicht aktiv
         	if (DigiWebApp.EmployeeController.employeeState == 0) {
         	    items = _.map(items, function (item) {
         	        if (item.id !== "kolonneAendern") return item;
         	    });
         	    items = _.compact(items);
         	}
-            */
         	
             // Start::AuftragsInfo
         	var AuftragsInfoAvailable = (DigiWebApp.SettingsController.featureAvailable('406'));
