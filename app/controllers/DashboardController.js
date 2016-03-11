@@ -170,8 +170,10 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
 
-    	    // Menüpunkt "Kolonne ändern" entfernen wenn Kolonnenauswahl nicht aktiv
-        	if (DigiWebApp.EmployeeController.employeeState == 0) {
+    	    // Menüpunkt "Kolonne ändern" erst mal nicht anzeigen
+        	// (später nur wenn Kolonnenauswahl nicht aktiv)
+    	    //if (DigiWebApp.EmployeeController.employeeState == 0) {
+            {
         	    items = _.map(items, function (item) {
         	        if (item.id !== "kolonneAendern") return item;
         	    });
