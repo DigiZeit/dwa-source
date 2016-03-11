@@ -115,7 +115,6 @@ DigiWebApp.InfoPage = M.PageView.design({
                   selectionMode: M.SINGLE_SELECTION_DIALOG
                 , label: M.I18N.l('applicationLanguage')
                 , applyTheme: NO
-                //, childViews: "languageDeDe languageEnUs languageEsEs languageFrFr languageNlNl"
                 , childViews: "languageDeDe languageEnUs"
 				, languageDeDe: M.SelectionListItemView.design({
 			          value: 'de_de'
@@ -124,18 +123,6 @@ DigiWebApp.InfoPage = M.PageView.design({
 			    , languageEnUs: M.SelectionListItemView.design({
 			          value: 'en_us'
 			        , label: M.I18N.l('language_en_us')
-			    })
-			    , languageFrFr: M.SelectionListItemView.design({
-			          value: 'fr_fr'
-			        , label: M.I18N.l('language_fr_fr')
-			    })
-			    , languageEsEs: M.SelectionListItemView.design({
-			          value: 'es_es'
-			        , label: M.I18N.l('language_es_es')
-			    })
-			    , languageNlNl: M.SelectionListItemView.design({
-			          value: 'nl_nl'
-			        , label: M.I18N.l('language_nl_nl')
 			    })
                 , events: {
                     change: {

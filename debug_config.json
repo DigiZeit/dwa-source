@@ -13,9 +13,6 @@
     "supportedLanguages": [
           "de_de"
         , "en_us"
-        , "fr_fr"
-        , "es_es"
-        , "nl_nl"
     ],
     "defaultLanguage": "de_de",
     "htmlHeader": [

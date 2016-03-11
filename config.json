@@ -13,9 +13,6 @@
     "supportedLanguages": [
           "de_de"
         , "en_us"
-        , "fr_fr"
-        , "es_es"
-        , "nl_nl"
     ],
     "defaultLanguage": "de_de",
     "htmlHeader": [
@@ -27,7 +24,7 @@
         , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.8.4.6979 beta",
+        "version": "1.8.4.6980 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",

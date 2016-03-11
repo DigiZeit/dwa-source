@@ -1478,8 +1478,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , progressViewVerwendenAb: progressViewVerwendenAb
                                 , logDelete: logDelete
                                 , logSave: logSave
-                                , kannFahrtkostenBuchen, kannFahrtkostenBuchen
-                                , kannUebernachtungskostenBuchen, kannUebernachtungskostenBuchen
+                                , kannFahrtkostenBuchen: kannFahrtkostenBuchen
+                                , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
                             }); // record =
 
                             /* now save */
