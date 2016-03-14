@@ -195,7 +195,7 @@ DigiWebApp.ZeitbuchungenTemplateView = M.ListItemView.design({
             valuePattern: '<%= handauftragsBezeichnung %>'
           , operation: function(v) {
 				if (v !== "" && typeof(v) !== "undefined" && v !== "undefined" && v !== "null" && v !== null) {
-					return M.I18N.l('handOrder') + ': ' + v;
+					return M.I18N.l('handApplications') + ': ' + v;
 				} else {
 					return '';
 				}

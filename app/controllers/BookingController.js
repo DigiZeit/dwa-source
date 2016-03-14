@@ -1268,7 +1268,6 @@ DigiWebApp.BookingController = M.Controller.extend({
             , startTimeString: timeString
             , endeTimeString: ""
             , modelVersion: "1"
-            //TODO bis ins DSO prüfen, dass das nicht mehr immer setzen bei KTG keine Probleme macht: , gefahreneKilometer: 0
         });
     }
 

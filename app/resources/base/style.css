@@ -1049,11 +1049,11 @@ label.ui-input-text, .ui-controlgroup-label {
     color: #ffffff;
 }
 
-/* handOrderPage */
-.handOrderPage [data-role="content"] div:nth-child(2) {
+/* handApplicationPage */
+.handApplicationPage [data-role="content"] div:nth-child(2) {
     margin-top: 20px;
 }
-.handOrderPage .ui-content input {
+.handApplicationPage .ui-content input {
     margin-bottom: 50px;
 }
 

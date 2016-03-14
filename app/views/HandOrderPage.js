@@ -13,7 +13,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
     //  childViews: 'header content tabBar'
       childViews: 'header content'
 
-    , cssClass: 'handOrderPage'
+    , cssClass: 'handApplicationPage'
     	
     , controller: DigiWebApp.HandOrderController
 
@@ -62,7 +62,7 @@ DigiWebApp.HandOrderPage = M.PageView.design({
             }
         })
         , title: M.LabelView.design({
-              value: M.I18N.l('handOrder')
+              value: M.I18N.l('handApplications')
             , anchorLocation: M.CENTER
         })
         , anchorLocation: M.TOP

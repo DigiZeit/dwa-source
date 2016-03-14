@@ -58,7 +58,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 			        case M.I18N.l('dataTransfer'):
 			        	myButtonItem.icon = '48x48_plain_refresh.png';
 			            break;
-			        case M.I18N.l('handOrder'):
+			        case M.I18N.l('handApplications'):
 			        	myButtonItem.icon = '48x48_plain_handauftrag.png';
 			            break;
 			        case M.I18N.l('timeData'):
@@ -113,7 +113,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	     	            , id: 'dataTransfer'
 	     	        }
 	      	        , {
-		  	                label: M.I18N.l('handOrder')
+	      	            label: M.I18N.l('handApplications')
 		  	            , icon: '48x48_plain_handauftrag.png'
 		  	            , id: 'handOrder'
 		  	        }
@@ -132,7 +132,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	                    , id: 'dataTransfer'
 	                }
 	                , {
-	                      label: M.I18N.l('handOrder')
+	                    label: M.I18N.l('handApplications')
 	                    , icon: '48x48_plain_handauftrag.png'
 	                    , id: 'handOrder'
 	                }
