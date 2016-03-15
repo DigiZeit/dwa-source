@@ -19,7 +19,7 @@ DigiWebApp.TimeDataTemplateView = M.ListItemView.design({
                 // 403: Bemerkungsfeld
                 // 405: Unterschrift
                 // 431: Bohle-Reisekostenabwicklung 
-                //      (zusätzlich Mitarbeitermerkmal KannFahrtkostenBuchen nötig)
+                //      (zusätzlich Ressourcenmerkmal KannFahrtkostenBuchen nötig)
                 if (DigiWebApp.SettingsController.featureAvailable('403')
                     || (DigiWebApp.SettingsController.featureAvailable('405')
                             && (typeof window.requestFileSystem !== "undefined"))
