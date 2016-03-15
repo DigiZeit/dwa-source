@@ -329,8 +329,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                     //  noch keine Eingabe gemacht wurde
 		            var fahrtzeitrelevant = DigiWebApp.Activity.findById(
 		                this.currentBooking.get('activityId')).get('istFahrzeitRelevant');
-		            var km = DigiWebApp.Activity.findById(
-		                this.currentBooking.get('gefahreneKilometer');
+		            var km = this.currentBooking.get('gefahreneKilometer');
     		        // Freischaltung 431: Bohle-Reisekostenabwicklung
 		            var featureFahrtkosten = (DigiWebApp.SettingsController.featureAvailable('431')
                         && DigiWebApp.SettingsController.getSetting('kannFahrtkostenBuchen')
