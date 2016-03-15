@@ -411,9 +411,14 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
                                     DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
 	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
-                                        'editTimeDataPage', 'reisekostenBusBahn') === YES) {
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl', 
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
+	                            'editTimeDataPage', 'reisekostenBusBahn') === YES) {
+	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+	                                DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
+	                        } else {
+	                            // Wenn nichts eingegeben wurde, dann keine Spesenauswahl übertragen.
+	                            // Sonst wird für Zeitbuchungen ohne Auswahl eine Sonderbuchung
+                                // "Fahrt mit Privat-Pkw" erzeugt.
+	                            DigiWebApp.BookingController.currentBooking.remove('spesenAuswahl');
 	                        }
 
 	                        var sel = M.ViewManager.getView('editTimeDataPage', 

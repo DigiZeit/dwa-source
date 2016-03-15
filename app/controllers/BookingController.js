@@ -67,19 +67,19 @@ DigiWebApp.BookingController = M.Controller.extend({
     // Konstanten für die Buchungs-Property "spesenAuswahl".
     // Die Zahlenwerte müssen mit den entsprechenden VorgabeId in der
     // Tabelle [SonderbuchungseigenschaftVorgabe] in der DIGI-DB übereinstimmen!
-    // Noch unklar: Explizite Buchung "1 = Fahrt mit Privat-Pkw" erwünscht oder soll diese
+    // Noch unklar: Explizite Buchung "4 = Fahrt mit Privat-Pkw" erwünscht oder soll diese
     // nicht angezeigt werden weil es eine gefahreneKilometer-Buchung gibt?
-    , constFs431SpesenauswahlPrivatPkw: '1'
-    , constFs431SpesenauswahlFirmenwagen: '2'
-    , constFs431SpesenauswahlBusBahn: '3'
+    , constFs431SpesenauswahlPrivatPkw: '4'
+    , constFs431SpesenauswahlFirmenwagen: '5'
+    , constFs431SpesenauswahlBusBahn: '6'
 
     // Konstanten für die Buchungs-Property "uebernachtungsAuswahl".
     // Die Zahlenwerte müssen mit den entsprechenden VorgabeId in der
     // Tabelle [SonderbuchungseigenschaftVorgabe] in der DIGI-DB übereinstimmen!
-    , constFs431UebernachtungsauswahlKeine: '1'
-    , constFs431UebernachtungsauswahlPrivat: '2'
-    , constFs431UebernachtungsauswahlZahltFirma: '3'
-    , constFs431UebernachtungsauswahlSelbstBezahlt: '4'
+    , constFs431UebernachtungsauswahlKeine: '7'
+    , constFs431UebernachtungsauswahlPrivat: '8'
+    , constFs431UebernachtungsauswahlZahltFirma: '9'
+    , constFs431UebernachtungsauswahlSelbstBezahlt: '10'
 
     // Wird nicht als Bool-Property gespeichert, sondern landet in spesenAuswahl.
     , fs431ReisekostenFirmenwagen: null
@@ -111,8 +111,10 @@ DigiWebApp.BookingController = M.Controller.extend({
     , init: function(isFirstLoad) {
 	
 		if (isFirstLoad) {
-			DigiWebApp.SelectionController.set("uebernachtungskennzeichenScholpp", JSON.parse('[{"label":"Keine Übernachtung","value":"1","isSelected":true},{"label":"Pauschal","value":"2"},{"label":"Beleg (Hotel)","value":"3"},{"label":"Heimreise","value":"4"},{"label":"Baustellenwechsel","value":"5"},{"label":"- -","value":"6"}]'));
-			DigiWebApp.SelectionController.set("spesenkennzeichenScholpp", JSON.parse('[{"label":" ","value":"1","isSelected":true}]'));
+		    DigiWebApp.SelectionController.set("uebernachtungskennzeichenScholpp",
+                JSON.parse('[{"label":"Keine Übernachtung","value":"1","isSelected":true},{"label":"Pauschal","value":"2"},{"label":"Beleg (Hotel)","value":"3"},{"label":"Heimreise","value":"4"},{"label":"Baustellenwechsel","value":"5"},{"label":"- -","value":"6"}]'));
+		    DigiWebApp.SelectionController.set("spesenkennzeichenScholpp",
+                JSON.parse('[{"label":" ","value":"1","isSelected":true}]'));
 		}
 		
 		var p = M.Environment.getPlatform();
