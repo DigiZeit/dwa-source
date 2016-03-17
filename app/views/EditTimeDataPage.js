@@ -223,7 +223,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		    uebernachtungOptionen = _.map(uebernachtungOptionen, function (opt) {
         		        if (opt) {
         		            var obj = { label: opt.get('beschreibung'), value: opt.get('id') };
-        		            if (opt.get('id') === 1) {
+        		            if (opt.get('id') === DigiWebApp.BookingController.constFs431UebernachtungsauswahlKeine) {
         		                obj.isSelected = YES;
         		            }
         		            return obj;
@@ -414,11 +414,6 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
 	                            'editTimeDataPage', 'reisekostenBusBahn') === YES) {
 	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
 	                                DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
-	                        } else {
-	                            // Wenn nichts eingegeben wurde, dann keine Spesenauswahl übertragen.
-	                            // Sonst wird für Zeitbuchungen ohne Auswahl eine Sonderbuchung
-                                // "Fahrt mit Privat-Pkw" erzeugt.
-	                            DigiWebApp.BookingController.currentBooking.remove('spesenAuswahl');
 	                        }
 
 	                        var sel = M.ViewManager.getView('editTimeDataPage', 
