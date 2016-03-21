@@ -101,7 +101,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	}
 
     , init: function(isFirstLoad) {
-    	if(DigiWebApp.DashboardPage.needsUpdate || isFirstLoad || this.appCacheUpdateReady()) {
+    	if (DigiWebApp.DashboardPage.needsUpdate || isFirstLoad || this.appCacheUpdateReady()) {
         	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
         	var Handpositionen = (DigiWebApp.SettingsController.featureAvailable('430'));
         	var items;
@@ -170,10 +170,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
 
-    	    // Menüpunkt "Kolonne ändern" erst mal nicht anzeigen
-        	// (später nur wenn Kolonnenauswahl nicht aktiv)
-    	    //if (DigiWebApp.EmployeeController.employeeState == 0) {
-            {
+    	    // Menüpunkt "Kolonne ändern" nicht anzeigen, wenn Kolonnenauswahl nicht aktiv ist.
+    	    if (DigiWebApp.EmployeeController.employeeState == 0) {
         	    items = _.map(items, function (item) {
         	        if (item.id !== "kolonneAendern") return item;
         	    });
@@ -320,12 +318,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
                 id: 'info'
             });
             
-            /*items.push({
-                label: "ButtonMenu",
-                icon: 'icon_info.png',
-                id: 'buttonMenu'
-            });*/
-
             this.set('items', items);
             this.set('itemsWithoutUpdate', items);
             DigiWebApp.DashboardPage.needsUpdate = false;
@@ -510,6 +502,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
     , kolonneAendern: function() {
         writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
+        DigiWebApp.NavigationController.toEmployeePage();
     }
 
     , handOrder: function() {

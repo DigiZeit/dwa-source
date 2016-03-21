@@ -61,7 +61,7 @@ DigiWebApp.EmployeeController = M.Controller.extend({
     }
 
     /**
-     * Saves the employee selection ny setting the isSelected property of the selected employee records to YES.
+     * Saves the employee selection by setting the isSelected property of the selected employee records to YES.
      *
      * Triggered by the tap event on the button on EmployeePage.
      */
@@ -85,23 +85,11 @@ DigiWebApp.EmployeeController = M.Controller.extend({
                     employee.save();
                 }
             });
-            //DialogView.alert with action
-            //M.DialogView.alert({
-            this.callbackEmployeesSave();
-//            DigiWebApp.ApplicationController.nativeAlertDialogView({
-//                  title: M.I18N.l('employeeSelectionSuccess')
-//                , message: M.I18N.l('employeeSelectionSuccessMsg')
-//                , callbacks: {
-//                    confirm: {
-//                          target: this
-//                        , action: 'callbackEmployeesSave'
-//                        //, action: this.callbackEmployeesSave
-//                    }
-//                }
-//            });
 
-        } else { // no employee selected
-            //M.DialogView.alert({
+            this.callbackEmployeesSave();
+
+        } else {
+            // no employee selected
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                   title: M.I18N.l('employeeSelection')
                 , message: M.I18N.l('employeeSelectionMsg')
@@ -124,6 +112,10 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         // save Selection in local storage to have it accessible after application restart
         localStorage.setItem(DigiWebApp.EmployeeController.empSelectionKey, that.getSelectedEmployeesAsString());
         that.setEmployeeState(2);
+
+        // TODO: Entweder hier (durch Setzen eines anderen callbackEmployeesSave?) oder in
+        // BookingController.book() muss unterschieden und die laufende Buchung einfach
+        // abgeändert werden.
         DigiWebApp.BookingController.book();
     }
 
