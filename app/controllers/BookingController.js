@@ -126,19 +126,17 @@ DigiWebApp.BookingController = M.Controller.extend({
             DigiWebApp.ApplicationController.setTransitionsSetting();
 		}
 	
-		if (this.isBackFromRemarkPage || this.isBackFromEmployeePage) {
-			this.refreshCurrentBooking(false);
-		} else {
-			this.refreshCurrentBooking(true);
-		}
-
         if (this.isBackFromEmployeePage) {
+			this.refreshCurrentBooking(false);
             DigiWebApp.BookingController.set('isBackFromEmployeePage', NO);
         } else if (this.isBackFromRemarkPage) {
+			this.refreshCurrentBooking(false);
             DigiWebApp.BookingController.set('isBackFromRemarkPage', NO);
-            //console.log("isBackFromRemarkPage");
         } else {
-			//this.refreshCurrentBooking(true);
+            // Optimierung: Parameter setSelection = true ist unnötig weil die Auswahllisten im 
+            // folgenden if/else-Block in jedem Fall gefüllt werden.
+            this.refreshCurrentBooking(false);
+
             if (DigiWebApp.SelectionController.useSelections) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
                 DigiWebApp.SelectionController.setSelectionByPreviousSelection();
@@ -877,7 +875,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	            } // if(this.currentBooking)
 	            
 	            this.refreshCurrentBookingClosed();
-	            this.refreshCurrentBooking();
+	            this.refreshCurrentBooking(false);
 	    		var that = this;
 	    		var myTimeStampEnd = null;
     			var timeEnd = new Date();

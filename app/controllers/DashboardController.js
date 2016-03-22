@@ -170,8 +170,10 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
 
-    	    // Menüpunkt "Kolonne ändern" nicht anzeigen, wenn Kolonnenauswahl nicht aktiv ist.
-    	    if (DigiWebApp.EmployeeController.employeeState == 0) {
+    	    // Menüpunkt "Kolonne ändern" erst mal nicht anzeigen
+        	// (später nur wenn Kolonnenauswahl nicht aktiv)
+    	    //if (DigiWebApp.EmployeeController.employeeState == 0) {
+            {
         	    items = _.map(items, function (item) {
         	        if (item.id !== "kolonneAendern") return item;
         	    });
@@ -502,7 +504,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 
     , kolonneAendern: function() {
         writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
-        DigiWebApp.NavigationController.toEmployeePage();
+        //DigiWebApp.NavigationController.toEmployeePage();
     }
 
     , handOrder: function() {

@@ -373,7 +373,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 
 			// wurde eine Projektleiterliste erhalten?
 			if (typeof(data.projektleiter) === "undefined") {
-				trackError("missing mitarbeiterliste");
+				trackError("Fehlende Projektleiterliste");
 				return errorCallback();
 			}
 			
@@ -382,7 +382,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 				// ohne Projektleiter geht im Bautagebuch nichts
 				return errorCallback();
 			} else {
-				// ist data.materialliste auch wirklich ein Array?
+				// ist data.projektleiter auch wirklich ein Array?
 				var myLength = null;
 				try {
 					myLength = data.projektleiter.length;
@@ -394,7 +394,8 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			}
 			
 			// data.projektleiter enthält also myLength Elemente
-    		DigiWebApp.ApplicationController.DigiProgressView.show(M.I18N.l('Save'), M.I18N.l('projektleiter'), myLength, 0);
+			DigiWebApp.ApplicationController.DigiProgressView.show(
+                M.I18N.l('Save'), M.I18N.l('projektleiter'), myLength, 0);
 
     		// alle "alten" Projektleiter löschen
 			DigiWebApp.BautagebuchProjektleiter.deleteAll();
@@ -403,27 +404,26 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 			_.each(data.projektleiter, function(el) {
 	    		DigiWebApp.ApplicationController.DigiProgressView.increase();
 				if (typeof(el.id) === "undefined") {
-					trackError("missing id");
+					trackError("Fehlende ProjektleiterID");
 					return errorCallback();
-//				} else if (typeof(el.projektleiterId) === "undefined") {
-//					trackError("missing projektleiterId");
-//					return errorCallback();
 				} else if (typeof(el.vorname) === "undefined") {
-					trackError("missing projektleiter vorname");
+					trackError("Fehlender Vorname des Projektleiters");
 					return errorCallback();
 				} else if (typeof(el.nachname) === "undefined") {
-					trackError("missing projektleiter nachname");
+					trackError("Fehlender Nachname des Projektleiters");
 					return errorCallback();
+				} else if (el.id == 0 || (!hasValue(el.vorname) && !hasValue(el.nachname))) {
+				    // Für Ticket 3885: Ungültiges Element protokollieren, aber nicht abbrechen
+				    trackError("Ungültiges Projektleiter-Element: id=" + el.id 
+                        + " vorname=" + el.vorname + " nachname=" + el.nachname);
 				} else {
-					
-					//if (el.id === el.projektleiterId) {
-						// projektleiter (el) zur Liste hinzufügen
-						// Mitarbeiter (el) zur Liste hinzufügen wenn dieser nicht schon hinzugefügt wurde
-						if (DigiWebApp.BautagebuchProjektleiter.find({query:{identifier: 'id', operator: '=', value: el.id}}).length === 0) {
-							DigiWebApp.BautagebuchProjektleiter.createRecord({id: el.id, vorname: el.vorname, nachname: el.nachname}).saveSorted();
-						}
-					//}
-
+    			    // Projektleiter (el) zur Liste hinzufügen, wenn dieser nicht schon hinzugefügt wurde
+				    if (DigiWebApp.BautagebuchProjektleiter.find(
+                        { query: { identifier: 'id', operator: '=', value: el.id } }).length === 0
+                    ) {
+				        DigiWebApp.BautagebuchProjektleiter.createRecord(
+                            { id: el.id, vorname: el.vorname, nachname: el.nachname }).saveSorted();
+					}
 				}
 			});
 			

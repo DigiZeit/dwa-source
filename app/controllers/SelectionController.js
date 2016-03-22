@@ -175,7 +175,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // Ordner filtern: nur solche mit auswählbaren Elementen
-        orders = _.filter(orders, function(o) { return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name; });
+        orders = _.filter(orders, function(o) {
+            return o.hasPositions(YES, NO) || o.name == DigiWebApp.HandOrder.name;
+        });
 
           // orderId auf einen auswählbaren Wert zurücksetzen
     	if (!_.contains(_.pluck(_.pluck(orders, 'record'), 'id'), orderId)) {

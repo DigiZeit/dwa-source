@@ -22,7 +22,6 @@ DigiWebApp.EmployeeController = M.Controller.extend({
      * 0: no kolonne
      * 1: kolonne, but employees not selected yet
      * 2: employees selected
-     * 
      */
     , employeeState: 0
 
@@ -114,8 +113,8 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         that.setEmployeeState(2);
 
         // TODO: Entweder hier (durch Setzen eines anderen callbackEmployeesSave?) oder in
-        // BookingController.book() muss unterschieden und die laufende Buchung einfach
-        // abgeändert werden.
+        // BookingController.book() muss unterschieden und die laufende Buchung "einfach"
+        // abgeschlossen und eine neue begonnen werden.
         DigiWebApp.BookingController.book();
     }
 
