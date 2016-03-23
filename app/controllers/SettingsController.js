@@ -93,6 +93,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
     
     , init: function(isFirstLoad, myinteractWithServiceApp, afterReset) {
     	
+	    writeToLog('SettingsController.init()');
+
     	var that = DigiWebApp.SettingsController;
     	
     	var interactWithServiceApp = (myinteractWithServiceApp && DigiWebApp.SettingsController.featureAvailable('417'));

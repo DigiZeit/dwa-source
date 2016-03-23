@@ -414,7 +414,7 @@ DigiWebApp.BautagebuchDatenuebertragungController = M.Controller.extend({
 					return errorCallback();
 				} else if (el.id == 0 || (!hasValue(el.vorname) && !hasValue(el.nachname))) {
 				    // Für Ticket 3885: Ungültiges Element protokollieren, aber nicht abbrechen
-				    trackError("Ungültiges Projektleiter-Element: id=" + el.id 
+				    trackError("Ungültiges Element in Projektleiter-Liste: id=" + el.id 
                         + " vorname=" + el.vorname + " nachname=" + el.nachname);
 				} else {
     			    // Projektleiter (el) zur Liste hinzufügen, wenn dieser nicht schon hinzugefügt wurde

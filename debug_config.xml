@@ -35,7 +35,7 @@
 	<preference name="orientation" value="default" />
 	<preference name="load-url-timeout" value="60000" />
 	<preference name="SplashScreenDelay" value="60000"/>
-	<preference name="show-splash-screen-spinner" value="true" />
+	<preference name="show-splash-screen-spinner" value="false" />
 	<preference name="keepRunning" value="true" />
 	<preference name="BackgroundColor" value="0xffffffff"/>
 	

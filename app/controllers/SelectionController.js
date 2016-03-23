@@ -175,7 +175,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
         var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
 
         // Ohne diese Freischaltungen wird nur der Positionen-Webservice benutzt, der keine
-        // Ordner ohne Aufträge liefert.
+        // Ordner ohne Aufträge liefert - in dem Fall können wir uns die langsame Filterung
+        // sparen.
         // Freischaltung 429: mehrstufige Auftragsauswahl
         // Freischaltung 430: Handpositionen
         if (DigiWebApp.SettingsController.featureAvailable("429")

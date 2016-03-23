@@ -133,7 +133,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			this.refreshCurrentBooking(false);
             DigiWebApp.BookingController.set('isBackFromRemarkPage', NO);
         } else {
-            // Optimierung: Parameter setSelection = true ist unnötig weil die Auswahllisten im 
+            // Optimierung: Parameter setSelection = true ist unnötig, weil die Auswahllisten im 
             // folgenden if/else-Block in jedem Fall gefüllt werden.
             this.refreshCurrentBooking(false);
 

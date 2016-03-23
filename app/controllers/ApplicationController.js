@@ -1203,24 +1203,38 @@ DigiWebApp.ApplicationController = M.Controller.extend({
      * @param isFirstLoad is passed if this function is used in a page event like pageshow => determines that the page is loaded for the very
      * first time during this application life cycle
      */
-    , init: function(isFirstLoad) {
+    , init: function (isFirstLoad) {
 
-    	DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
-            if(this.page) {
+	    writeToLog('Version: ' + M.Application.getConfig('version'));
+	    if (typeof(device) !== "undefined") {
+	        var output = 'Device Name: ' + device.name + '\n' +
+	            'Device Model: ' + device.model + '\n' +
+	            'Device Platform: ' + device.platform + '\n' +
+	            'Device UUID: ' + device.uuid + '\n' +
+	            'Device Version: ' + device.version;
+	        writeToLog(output);
+	    }
+	    if (typeof (navigator.connection) !== "undefined") {
+	        writeToLog('Connection type: ' + navigator.connection.type);
+	    }
+
+        DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
+            if (this.page) {
                 M.Controller.switchToTab(this,YES);
             } else {
                 this.parentView.setActiveTab(this);
             }
-        };
+	    };
+
     	DigiWebApp.TabBar.tabItem2.internalEvents.tap.action = function () {
-            if(this.page) {
+            if (this.page) {
                 M.Controller.switchToTab(this,NO);
             } else {
                 this.parentView.setActiveTab(this);
             }
         };
        
-       DigiWebApp.ApplicationController.callbackStatus = {
+        DigiWebApp.ApplicationController.callbackStatus = {
             position: {
                   remote: NO
                 , local: NO
@@ -1273,19 +1287,21 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                }
 	            }
 	            if (isCurrentBookingAvailable === YES) {
+	                writeToLog('isCurrentBookingAvailable === YES');
 	            	DigiWebApp.NavigationController.toBookTimePage();
 	            	if (parseBool(DigiWebApp.SettingsController.getSetting('stammdatenabgleichBeimAppStart'))) {
 		                DigiWebApp.BookingController.sendBookings(NO, YES);
 	            	}
 	                return;
 	            } else {
+	                writeToLog('isCurrentBookingAvailable === NO');
 	            	DigiWebApp.NavigationController.toBookTimePage();
 	                DigiWebApp.BookingController.sendBookings(NO, YES);
 	            }
 	        } else if (
 	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
 		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
-	        ){
+	        ) {
             	        	
 	        	DigiWebApp.BautagebuchDatenuebertragungController.ausgekoppelteSenden(function(){
 					DigiWebApp.NavigationController.toBookTimePage();
@@ -1293,10 +1309,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     			});
             		
             } else {
-
             	DigiWebApp.NavigationController.toBookTimePage();
 	        	DigiWebApp.ApplicationController.startsync();
-	        	
 	        }
         };
         
