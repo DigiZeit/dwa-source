@@ -1207,11 +1207,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	    writeToLog('Version: ' + M.Application.getConfig('version'));
 	    if (typeof(device) !== "undefined") {
-	        var output = 'Device Name: ' + device.name + '\n' +
+	        var output = '\nDevice Name: ' + device.name + '\n' +
 	            'Device Model: ' + device.model + '\n' +
 	            'Device Platform: ' + device.platform + '\n' +
-	            'Device UUID: ' + device.uuid + '\n' +
-	            'Device Version: ' + device.version;
+	            'Device Version: ' + device.version + '\n' +
+                'Device UUID: ' + device.uuid;
 	        writeToLog(output);
 	    }
 	    if (typeof (navigator.connection) !== "undefined") {

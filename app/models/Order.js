@@ -277,7 +277,7 @@ DigiWebApp.Order = M.Model.create({
     	if (typeof(withHandPositions) == "undefined") withHandPositions = true;
     	var hasPositions = false;
 
-        // TODO Optimierungspotential: Hier werden alle Kinder angefordert, nur um zu schauen
+        // TODO Optimierungspotential: Hier werden alle Kinder geholt, nur um zu schauen
         // ob es welche gibt -> Position.anyByVaterId(id), Rückgabe true/false
     	var childPositions = DigiWebApp.Position.getByVaterId(this.get('id'));
     	hasPositions = (childPositions.length > 0);
