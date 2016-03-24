@@ -1207,8 +1207,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	    writeToLog('Version: ' + M.Application.getConfig('version'));
 	    if (typeof(device) !== "undefined") {
-	        var output = '\nDevice Name: ' + device.name + '\n' +
-	            'Device Model: ' + device.model + '\n' +
+	        var output = '\nDevice Model: ' + device.model + '\n' +
 	            'Device Platform: ' + device.platform + '\n' +
 	            'Device Version: ' + device.version + '\n' +
                 'Device UUID: ' + device.uuid;
