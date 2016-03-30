@@ -992,11 +992,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 
     , resumehandler: function() {
-        writeToLog("DIGI-WebApp resume");
+        writeToLog("resume");
     }
 
   	, pausehandler: function() {
-        writeToLog("DIGI-WebApp pause");	      
+        writeToLog("pause");	      
 	}
 	
 	, inAppBrowser_var: null
