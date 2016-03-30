@@ -535,13 +535,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		DigiWebApp.ApplicationController.timeoutdeviceready_var = setTimeout("DigiWebApp.ApplicationController.timeoutdevicereadyhandler()", startTimeout);
         		//document.addEventListener("deviceready", DigiWebApp.ApplicationController.devicereadyhandler, false);
         		$(document).bind('deviceready', DigiWebApp.ApplicationController.devicereadyhandler);
+        		$(document).bind('resume', DigiWebApp.ApplicationController.resumehandler);
+        		$(document).bind('pause', DigiWebApp.ApplicationController.pausehandler);
         		
         	} else {
 			    //if (inDebug() && staticDebugging) alert(navigator.platform + ", realregSecEv " + " device defined --> devicereadyhandler");
         		DigiWebApp.ApplicationController.devicereadyhandler();
         	}
         }
-
     }
 
     , setSkipEvents: function() {
@@ -860,6 +861,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 	
 	, devicereadyhandlerDone: false
+
 	, devicereadyhandler: function() {
 		var that = this;
 		
@@ -943,6 +945,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 	
 	, realdevicereadyhandlerDone: false
+
 	, realDeviceReadyHandler: function() {
 		var that = this;
 		
@@ -986,7 +989,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
         	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
         }
-	        
+	}
+
+    , resumehandler: function() {
+        writeToLog("DIGI-WebApp resume");
+    }
+
+  	, pausehandler: function() {
+        writeToLog("DIGI-WebApp pause");	      
 	}
 	
 	, inAppBrowser_var: null
