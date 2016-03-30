@@ -26,7 +26,7 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
-	<preference name="phonegap-version" value="3.7.0" />
+	<preference name="phonegap-version" value="5.2.0" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
@@ -85,8 +85,9 @@ which PhoneGap requires. -->
 <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
 <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
-<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
-<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" /> -->
+  <!-- Nicht aktualisieren, wurde bei 18.3.6583 wieder rückgängig gemacht. -->
+  <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
+  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" /> -->
 
 <!-- prevent screen-sleep --> 
 <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
@@ -95,28 +96,32 @@ which PhoneGap requires. -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
 <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
-<!-- iOS9 -->   
-	<!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
-	<gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.3' /> 
+  <!-- iOS9 -->
+  <!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
+  <gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.3' /> 
 
-<gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	<string>@versionCode@</string> 
-</gap:config-file>
-<gap:config-file platform="ios" parent="UIStatusBarHidden">
-<!-- 2015-10: true since new styling -->
+  <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
+	  <string>@versionCode@</string> 
+  </gap:config-file>
+
+  <gap:config-file platform="ios" parent="UIStatusBarHidden">
+    <!-- 2015-10: true since new styling -->
     <true/>
-</gap:config-file>
-<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-<!-- 2015-10: false since new styling -->
+  </gap:config-file>
+
+  <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
+  <!-- 2015-10: false since new styling -->
     <false/>
-</gap:config-file>
-<gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
+  </gap:config-file>
+
+  <gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
     <array>
     </array>
-</gap:config-file>
-<feature name="StatusBar">
+  </gap:config-file>
+  
+  <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true" />
-</feature>
+  </feature>
 
 <!-- geolocation on ios8 -->   
 	<gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file> 
