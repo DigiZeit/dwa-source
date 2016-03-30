@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "6994"
-	version 	  = "1.8.5.6994">
+	versionCode   = "6995"
+	version 	  = "1.8.5.6995">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -26,7 +26,7 @@
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
 	
-	<preference name="phonegap-version" value="5.2.0" />
+	<preference name="phonegap-version" value="cli-5.2.0" />
 	<preference name="android-minSdkVersion" value="8" />
 	<preference name="android-installLocation" value="auto" />
 	<preference name="fullscreen" value="false" />
@@ -101,7 +101,7 @@ which PhoneGap requires. -->
   <gap:plugin name='cordova-plugin-wkwebview' source='npm' version='0.6.3' /> 
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	  <string>6994</string> 
+	  <string>6995</string> 
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
