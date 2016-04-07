@@ -288,7 +288,9 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapOSMAlert'));
 							}
-							url_byAddress = "http://nominatim.openstreetmap.org/search/" + country + "/" + city + "/" + street + "/" + housenumber + "?format=html&polygon=1&addressdetails=" + addressdetails;
+							url_byAddress = "https://nominatim.openstreetmap.org/search/" 
+                                + country + "/" + city + "/" + street + "/" + housenumber
+                                + "?format=html&polygon=1&addressdetails=" + addressdetails;
 							break;
 						case "Bing":
 							if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -296,7 +298,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapBingAlert'));
 							}
-							url_byAddress = "http://www.bing.com/maps/default.aspx?rtp=~adr." + street + " " + housenumber + " " + zip + " " + city + " " + country;
+							url_byAddress = "https://www.bing.com/maps/default.aspx?rtp=~adr."
+                                + street + " " + housenumber + " " + zip + " " + city + " " + country;
 							break;
 						case "Google":
 							if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -304,7 +307,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapGoogleAlert'));
 							}
-							url_byAddress = "http://maps.google.com/maps?q=" + street + " " + housenumber + " " + zip + " " + city + " " + country + "&hl=de";
+							url_byAddress = "https://maps.google.com/maps?q="
+                                + street + " " + housenumber + " " + zip + " " + city + " " + country + "&hl=de";
 							break;
 						default:
 							url_byAddress = "disabled";
@@ -318,10 +322,16 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 			    						plugins.childBrowser.showWebPage(encodeURI(url_byAddress), { showNavigationBar: true });
 			    					} catch(e6) { alert("Error: " + e6.message); }
 			    				} else {
-			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                        url_byAddress,
+                                        'childBrowser',
+                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byAddress,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+							    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                    url_byAddress,
+                                    'childBrowser',
+                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
 							// TODO: Error-Message for disabled Map-Services
@@ -354,7 +364,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapOSMAlert'));
 								}
-								url_byCoordinates = "http://www.openstreetmap.org/index.html?mlat=" + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
+								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
+                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
 								break;
 							case "Bing":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -362,7 +373,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapBingAlert'));
 								}
-								url_byCoordinates = "http://www.bing.com/maps/default.aspx?rtp=adr.~pos." + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
+								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
+                                    + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
 								break;
 							case "Google":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -370,7 +382,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapGoogleAlert'));
 								}
-								url_byCoordinates = "http://maps.google.com/maps?q=" + latitude + "+" + longitude + "&hl=de";
+								url_byCoordinates = "https://maps.google.com/maps?q="
+                                    + latitude + "+" + longitude + "&hl=de";
 								break;
 							default:
 								url_byCoordinates = "disabled";

@@ -62,11 +62,18 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var successCallback = sendObj['successCallback'];
 		var errorCallback = sendObj['errorCallback'];
 		var additionalQueryParameter = sendObj['additionalQueryParameter'];
-		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
+		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut")
+            ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut")
+            : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
 		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 		
-		var myURL =  'http://' + that.DatabaseServer + '/WebAppServices/' + webservice + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId') + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
+		var myURL = 'https://' + that.DatabaseServer + '/WebAppServices/' + webservice
+            + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
+            + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
+            + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
+            + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion
+            + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
@@ -87,22 +94,32 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
 		                //console.log(xhr);
 		                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
-						try{writeToLog("Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+						try {
+						    writeToLog("Rückgabe des Webservices: " + xhr.responseText);
+						} catch(e) {};
 		                successCallback(data, msg, xhr);
 		            }
-		            , onError: function(xhr, err) {// error callback of sendData
+		            , onError: function(xhr, err) { // error callback of sendData
 		                DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		                that.setDatabaseServer(null);
 		                console.error(err);
 		                console.error(xhr);
-						try{trackError(err,function(){
-							try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+                        writeToLog("## sendDataWithServer err='" + err + "' status='" + xhr.status
+                            + "responseType='" + xhr.responseType + "' response='" + xhr.response
+                            + "' responseText='" + xhr.responseText
+                            + "' headers='" + xhr.getAllResponseHeaders() + "'");
+		                try {
+		                    trackError(err, function () {
+							try {
+							    writeToLog("Fehlerhafte Rückgabe des Webservices!");
+							} catch(e) {};
 							errorCallback(xhr, err);
-						});}catch(e){};
+		                    });
+		                } catch(e) {};
 		            }
 	    });
 		
-    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen", function(){
+    	writeToLog("WebService POST '" + webservice + "'", function() {
     		req.send();
     	});
     }
@@ -151,12 +168,14 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
 		}
-		var webservice = recieveObj['webservice']
-		var loaderText = recieveObj['loaderText']
-		var successCallback = recieveObj['successCallback']
-		var errorCallback = recieveObj['errorCallback']
-		var additionalQueryParameter = recieveObj['additionalQueryParameter']
-		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut") : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
+	    var webservice = recieveObj['webservice'];
+	    var loaderText = recieveObj['loaderText'];
+	    var successCallback = recieveObj['successCallback'];
+	    var errorCallback = recieveObj['errorCallback'];
+	    var additionalQueryParameter = recieveObj['additionalQueryParameter'];
+		var timeoutSetting = DigiWebApp.SettingsController.getSetting("WebserviceTimeOut")
+            ? DigiWebApp.SettingsController.getSetting("WebserviceTimeOut")
+            : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
 		var timeout = recieveObj['timeout'] ? recieveObj['timeout'] : timeoutSetting;
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
@@ -174,16 +193,25 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				databaseServer = that.GatewayServer;
 		}
 			
-		var myURL = 'http://' + databaseServer + '/WebAppServices/' + webservice + '?modus=' + myModus + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company') + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password') + '&geraeteId=' + myGeraeteId + '&geraeteTyp=' + myGeraeteTyp + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion + '&requestTimestamp=' + M.Date.now().date.valueOf();
+		var myURL = 'https://' + databaseServer + '/WebAppServices/' + webservice
+            + '?modus=' + myModus
+            + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
+            + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
+            + '&geraeteId=' + myGeraeteId
+            + '&geraeteTyp=' + myGeraeteTyp
+            + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion
+            + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		//console.log(myURL);
 		if (additionalQueryParameter) {
 			myURL = myURL + '&' + additionalQueryParameter;
 		}
-    	writeToLog("JSON-WebService '" + webservice + "' wird aufgerufen");
+
+		writeToLog("WebService GET '" + webservice + "'");
     	if (inDebug()) {
     		writeToLog("myURL '" + myURL + "'");
     	}
-		M.Request.init({
+
+	    M.Request.init({
 			  url: myURL
 			, beforeSend: function(xhr) {
                 DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
@@ -197,19 +225,24 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				successCallback(data, msg, request);
 			}
-            , onError: function(xhr, err) {// error callback
+            , onError: function(xhr, err) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
                 that.DatabaseServer = null;
                 //console.error(err);
                 //console.error(xhr);
-                writeToLog('## recieveDataWithServer ' + err);
-                writeToLog('## recieveDataWithServer ' + xhr.status + ' ' + xhr.responseType
-                		+ ' ' + xhr.response + ' ' + xhr.getAllResponseHeaders());
-				try{trackError(err,function(){
-					try{writeToLog("fehlerhafte Rückgabe des Webservices: " + xhr.responseText);}catch(e){};
+                writeToLog("## recieveDataWithServer err='" + err + "' status='" + xhr.status
+                    + "responseType='" + xhr.responseType + "' response='" + xhr.response
+                    + "' responseText='" + xhr.responseText
+                    + "' headers='" + xhr.getAllResponseHeaders() + "'");
+                try {
+                    trackError(err, function () {
+					try {
+					    writeToLog("Fehlerhafte Rückgabe des Webservices!");
+					} catch(e) {};
 					errorCallback(xhr, err);
-				});}catch(e){};
+                    });
+                } catch (e) {};
 			}
 		}).send();
 	}
@@ -307,7 +340,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	        								workerId = escape(scrStr(workerId, 4711));
 	        								connectionCode = escape(scrStr(connectionCode, 4711));
 	        							}
-						    			location.href = 'http://' + that.DatabaseServer + location.pathname 
+						    			location.href = 'https://' + that.DatabaseServer + location.pathname 
 						    					+ "?c=" + company 
 						    					+ "&p=" + password 
 						    					+ "&v=" + connectionCode
@@ -362,7 +395,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         		, additionalQueryParameter : ''
         		, geraeteIdOverride: false
         };
-		if (inDebug() && staticDebugging) alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl " + "vor recieveDataWithServer (primary)" + myGatewayServer);
+		if (inDebug() && staticDebugging) {
+		    alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl "
+                + "vor recieveDataWithServer (primary)" + myGatewayServer);
+		}
 		that.recieveDataWithServerAuthenticated(receiveObj);
 	}
 	
@@ -632,7 +668,10 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				successCallback();
 			}
 		};
-		if (DigiWebApp.SettingsController.featureAvailable('417') && (DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") || DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen"))) {
+		if (DigiWebApp.SettingsController.featureAvailable('417')
+            && (DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate")
+                || DigiWebApp.SettingsController.getSetting("ServiceApp_datenUebertragen"))
+        ) {
 			DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('ServiceAppKommunikation'));
 			//if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
 			DigiWebApp.ServiceAppController.refreshWAITBookings(function(){

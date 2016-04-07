@@ -41,7 +41,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
 		this.setOrders(mySelection.order, mySelection.position, mySelection.activity, NO);
         
         // Freischaltung 419 "Scholpp-Spesen und Scholpp-Kartendienst-Message"
-        if (DigiWebApp.SettingsController.featureAvailable('419')) {
+		if (DigiWebApp.SettingsController.featureAvailable('419')) {
+		    // TODO: Fehler in der folgenden Codezeile wenn die FS 419 aktiv ist:
+            // Exception TypeError: Object #<Object> has no method 'get'
             var uebernachtungAuswahl = mySelection.get('uebernachtungAuswahl');
             uebernachtungAuswahl = that.setScholppButtons(uebernachtungAuswahl, YES);
             that.setUebernachtungskennzeichenScholpp(uebernachtungAuswahl);
@@ -279,6 +281,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
         
     	// Freischaltung 406 "Auftragsinfo"
         if (DigiWebApp.SettingsController.featureAvailable('406') && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+            // TODO: Fehler in der folgenden Zeile auf iPhone oder xCover 3: 
+            // window.onerror: Uncaught TypeError: Cannot call method 'getSelection' of null
+            // Kann es sein, dass die orderInfoPage noch nicht geladen ist?
 			if (typeof(M.ViewManager.getView('orderInfoPage', 'order').getSelection()) === "undefined") {
 				DigiWebApp.OrderInfoController.init();
 			}

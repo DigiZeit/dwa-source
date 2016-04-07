@@ -691,7 +691,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 		if (that.devicereadyhandlerDone || that.realdevicereadyhandlerDone) return;
 		DigiWebApp.ApplicationController.timeouthappened = true;
-		var myStartInfo = "DIGI-WebApp hat Plattform \"" + M.Environment.getPlatform() + "\" (" + navigator.userAgent + ") erkannt. Es werden keine Eventhandler registriert! (Version " + M.Application.getConfig('version') + ")";
+		var myStartInfo = "DIGI-WebApp hat Plattform \"" + M.Environment.getPlatform() + "\" ("
+            + navigator.userAgent + ") erkannt. Es werden keine Eventhandler registriert! (Version "
+            + M.Application.getConfig('version') + ")";
         console.log(myStartInfo);
         // if in Chrome: enable FileSystem
         if (typeof(navigator.webkitPersistentStorage) !== "undefined") {

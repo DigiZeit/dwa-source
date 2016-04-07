@@ -84,7 +84,9 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
 					if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-    					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") === "" || DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") === "-") {
+					    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") === ""
+                            || DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") === "-"
+                        ) {
     						return M.I18N.l('since') + ' ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("von");
     					} else {
     						return DigiWebApp.ZeitbuchungenController.itemForDetails.get("von");
@@ -103,7 +105,9 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	              value: ''
 	            , operation: function(v) {
 	    	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-	    					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "-") {
+	    	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== ""
+                                && DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "-"
+                            ) {
 	    						return ' - ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis");
 	    					} else {
 	    						return '';
@@ -126,8 +130,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	              value: ''
 	            , operation: function(v) {
 	    	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-	    					if ((DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer") !== "" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer") !== "-" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer")) !== "undefined")
-	    					&& (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "-")
+	    	  			    if ((DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer") !== ""
+                                && DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer") !== "-"
+                                && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer")) !== "undefined")
+	    					    && (DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== ""
+                                && DigiWebApp.ZeitbuchungenController.itemForDetails.get("bis") !== "-")
 	    					) {
 	    						return M.I18N.l('dauer') + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("dauer");
 	    					} else {
@@ -148,7 +155,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
         			// Bugfix 2108: Rename in order to be consistent with DSO
         			var dtc6Ordner = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Ordner') : M.I18N.l('order');
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung") !== null
+                        ) {
       						//$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.infoButton.id).button("enable");
       						return dtc6Ordner + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("auftragsBezeichnung");
       					} else {
@@ -171,7 +182,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
         			// Bugfix 2108: Rename in order to be consistent with DSO
         			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung") !== null
+                        ) {
       						//$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.infoButton.id).button("enable");
       						return dtc6Auftrag + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsBezeichnung");
       					} else {
@@ -220,7 +235,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung") !== null
+                        ) {
       						return M.I18N.l('handApplications') + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("handauftragsBezeichnung");
       					} else {
       						return '';
@@ -238,9 +257,15 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit") !== null
+                        ) {
       						// Bugfix 2108: Rename in order to be consistent with DSO
-      						return ((DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Leistung') : M.I18N.l('activity')) + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit");
+      	  			        return ((DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES)
+                                ? M.I18N.l('dtc6Leistung') : M.I18N.l('activity'))
+                                + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeit");
       					} else {
       						return '';
       					}
@@ -258,7 +283,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") !== null
+                        ) {
       						return ' (' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("taetigkeitreihenfolge") + ')';
       					} else {
       						return '';
@@ -281,7 +310,11 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== "null" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== "null"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark") !== null
+                        ) {
       						return M.I18N.l('remark') + ': ' + DigiWebApp.ZeitbuchungenController.itemForDetails.get("remark");
       					} else {
       						return '';
@@ -299,7 +332,12 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== "0.0" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== 0 && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== "0.0"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== 0
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite") !== null
+                        ) {
       						$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.showBookingCoordinatesInMapButton.id).show();
       						var str = new Number(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite"));
       						return M.I18N.l('booking') + '-' + M.I18N.l('latitude') + ': ' + str.toFixed(6);
@@ -321,7 +359,12 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== "0.0" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== 0 && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== "0.0"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== 0
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge") !== null
+                        ) {
       						$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.showBookingCoordinatesInMapButton.id).show();
       						var str = new Number(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge"));
       						return M.I18N.l('booking') + '-' + M.I18N.l('longitude') + ': ' + str.toFixed(6);
@@ -343,7 +386,12 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== "0.0" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== 0 && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== "0.0"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== 0
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition") !== null
+                        ) {
       						$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.showPositionCoordinatesInMapButton.id).show();
       						var str = new Number(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition"));
       						// Bugfix 2108: Rename in order to be consistent with DSO
@@ -367,7 +415,12 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition")) !== "undefined" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== "0.0" && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== 0 && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== null) {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition")) !== "undefined"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== "0.0"
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== 0
+                            && DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition") !== null
+                        ) {
       						$('#' + DigiWebApp.ZeitbuchungDetailsPage.content.showPositionCoordinatesInMapButton.id).show();
       						var str = new Number(DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition"));
       						// Bugfix 2108: Rename in order to be consistent with DSO
@@ -391,9 +444,14 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                 value: ''
               , operation: function(v) {
       	  			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-      					if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("farbeAmpel") !== "" && typeof(DigiWebApp.ZeitbuchungenController.itemForDetails.get("farbeAmpel")) !== "undefined") {
+      	  			    if (DigiWebApp.ZeitbuchungenController.itemForDetails.get("farbeAmpel") !== ""
+                            && typeof (DigiWebApp.ZeitbuchungenController.itemForDetails.get("farbeAmpel")) !== "undefined"
+                        ) {
       						var myColor = DigiWebApp.ZeitbuchungenController.itemForDetails.get("farbeAmpel");
-      						return M.I18N.l('geozoneTrafficlight') + ': ' + '<span style="box-shadow: 2px 2px 6px rgba(0,0,0,0.6);background:' + myColor + ';color:' + myColor + ';margin-right: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+      						return M.I18N.l('geozoneTrafficlight') + ': '
+                                + '<span style="box-shadow: 2px 2px 6px rgba(0,0,0,0.6);background:' + myColor 
+                                + ';color:' + myColor
+                                + ';margin-right: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
       					} else {
       						return '';
       					}
@@ -430,7 +488,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapOSMAlert'));
 								}
-								url_byCoordinates = "http://www.openstreetmap.org/index.html?mlat=" + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
+								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
+                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
 								break;
 							case "Bing":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -438,7 +497,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapBingAlert'));
 								}
-								url_byCoordinates = "http://www.bing.com/maps/default.aspx?rtp=adr.~pos." + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
+								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
+                                    + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
 								break;
 							case "Google":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -446,7 +506,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapGoogleAlert'));
 								}
-								url_byCoordinates = "http://maps.google.com/maps?q=" + latitude + "+" + longitude + "&hl=de";
+								url_byCoordinates = "https://maps.google.com/maps?q="
+                                    + latitude + "+" + longitude + "&hl=de";
 								break;
 							default:
 								url_byCoordinates = "disabled";
@@ -460,10 +521,16 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 				    					plugins.childBrowser.showWebPage(encodeURI(url_byCoordinates), { showNavigationBar: true });
 			    					} catch(e3) { alert("Error: " + e3.message); }
 			    				} else {
-			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                        url_byCoordinates,
+                                        'childBrowser',
+                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                    url_byCoordinates,
+                                    'childBrowser',
+                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
 							// TODO: Error-Message for disabled Map-Services
@@ -498,7 +565,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapOSMAlert'));
 								}
-								url_byCoordinates = "http://www.openstreetmap.org/index.html?mlat=" + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
+								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
+                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
 								break;
 							case "Bing":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -506,7 +574,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapBingAlert'));
 								}
-								url_byCoordinates = "http://www.bing.com/maps/default.aspx?rtp=adr.~pos." + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
+								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
+                                    + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
 								break;
 							case "Google":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -514,7 +583,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 								} else {
 									alert(M.I18N.l('showInMapGoogleAlert'));
 								}
-								url_byCoordinates = "http://maps.google.com/maps?q=" + latitude + "+" + longitude + "&hl=de";
+								url_byCoordinates = "https://maps.google.com/maps?q="
+                                    + latitude + "+" + longitude + "&hl=de";
 								break;
 							default:
 								url_byCoordinates = "disabled";
@@ -523,15 +593,28 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 						if (url_byCoordinates !== "disabled") {
 		    				if (typeof(plugins) !== "undefined") {
 			    				if (typeof(plugins.childBrowser) !== "undefined") {
-			    					try { plugins.childBrowser.close(); } catch(e4) { alert("Error: " + e4.message); }
-			    					try { 
-				    					plugins.childBrowser.showWebPage(encodeURI(url_byCoordinates), { showNavigationBar: true });
-			    					} catch(e5) { alert("Error: " + e5.message); }
+			    					try {
+								        plugins.childBrowser.close();
+								    } catch (e4) {
+								        alert("Error: " + e4.message);
+								    }
+			    					try {
+			    					    plugins.childBrowser.showWebPage(
+                                            encodeURI(url_byCoordinates), { showNavigationBar: true });
+								    } catch (e5) {
+								        alert("Error: " + e5.message);
+								    }
 			    				} else {
-			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                        url_byCoordinates,
+                                        'childBrowser',
+                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                    url_byCoordinates,
+                                    'childBrowser',
+                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
 							// TODO: Error-Message for disabled Map-Services
