@@ -87,6 +87,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , logSave: false
         , kannFahrtkostenBuchen: false
         , kannUebernachtungskostenBuchen: false
+        , benutzeHttps: true
     }
 
     , defaultsettings: null
@@ -378,6 +379,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 }
             } catch (e) { }
             
+            //, benutzeHttps: true
+            var benutzeHttps = DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps");
+            try {
+	            if (typeof(record.record.benutzeHttps) !== "undefined") {
+	            	logSave = record.get('benutzeHttps');
+	            }
+            } catch (e) { }
+
             // Bugfix 2142: get branding from local storage
             var branding = DigiWebApp.SettingsController.defaultsettings.get("branding");
             try {
@@ -592,6 +601,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , logSave: logSave
                , kannFahrtkostenBuchen: kannFahrtkostenBuchen
                , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
+               , benutzeHttps: benutzeHttps
 			}; // settings = {
         /* default values */
         } else {
@@ -743,6 +753,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
                , kannFahrtkostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen')
                , kannUebernachtungskostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen')
+	           , benutzeHttps: DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps")
             }; // settings = {
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -1020,6 +1031,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var logSave							= DigiWebApp.SettingsController.getSetting("logSave");
         var kannFahrtkostenBuchen           = DigiWebApp.SettingsController.getSetting("kannFahrtkostenBuchen");
         var kannUebernachtungskostenBuchen  = DigiWebApp.SettingsController.getSetting("kannUebernachtungskostenBuchen");
+        var benutzeHttps					= DigiWebApp.SettingsController.getSetting("benutzeHttps");
 
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1154,6 +1166,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('logSave', logSave);
                                                     record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
+                                                    record.set('benutzeHttps', benutzeHttps);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1255,6 +1268,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('logSave', logSave);
                                     record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
+                                    record.set('benutzeHttps', benutzeHttps);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1330,6 +1344,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('logSave', logSave);
                                 record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
+                                record.set('benutzeHttps', benutzeHttps);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1405,6 +1420,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('logSave', logSave);
                                 record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
+                                record.set('benutzeHttps', benutzeHttps);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1482,6 +1498,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , logSave: logSave
                                 , kannFahrtkostenBuchen: kannFahrtkostenBuchen
                                 , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
+                                , benutzeHttps: benutzeHttps
                             }); // record =
 
                             /* now save */

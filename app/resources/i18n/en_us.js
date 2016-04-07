@@ -191,6 +191,7 @@ M.I18N.en_us = {
 	, showInMapOSMAlert: "We will now forward you to the chosen mapservice:\n\nOpenStreetMap"
 	, showInMapGoogleAlert: "We will now forward you to the chosen mapservice:\n\nGoogle-Maps"
 	, showInMapBingAlert: "We will now forward you to the chosen mapservice:\n\nBing-Maps"
+    , showInMapDisabled: "???"
 	, updateApplication: "Update DIGI-WebApp"
 	, applicationUpdateAvailable: "Update available"
 	, applicationUpdateAvailableMsg: "DIGI-WebApp has been updated. Do you now want to switch to the newer version now?\n\nYou can as well update later with the update-button in the main menu."

@@ -63,8 +63,12 @@ DigiWebApp.Zeitbuchungen = M.Model.create({
 
     , responsePath: 'zeitbuchungen'
 
-    , url: function(datum, mitarbeiterID) {
-        var myURL = 'https://' + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
+    , url: function (datum, mitarbeiterID) {
+        var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
+        myUrl = myUrl + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
             + '/WebAppServices/zeitdaten?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
@@ -73,9 +77,9 @@ DigiWebApp.Zeitbuchungen = M.Model.create({
             + '&datum=' + datum
             + '&requestTimestamp=' + M.Date.now().date.valueOf();
         if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
-        	console.log('Zeitbuchungen: using ' + myURL);
+        	console.log('Zeitbuchungen: using ' + myUrl);
         }
-		return myURL;
+		return myUrl;
     }
 
     /* map needs to return record obj which can be handled by createRecord */

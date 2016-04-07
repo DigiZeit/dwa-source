@@ -67,18 +67,22 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             : DigiWebApp.SettingsController.defaultsettings.get('WebserviceTimeOut');
 		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
-		
-		var myURL = 'https://' + that.DatabaseServer + '/WebAppServices/' + webservice
+
+		var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
+        myUrl = myUrl + that.DatabaseServer + '/WebAppServices/' + webservice
             + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
             + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion
             + '&requestTimestamp=' + M.Date.now().date.valueOf();
 		if (additionalQueryParameter) {
-			myURL = myURL + '&' + additionalQueryParameter;
+			myUrl = myUrl + '&' + additionalQueryParameter;
 		}
 		var req = M.Request.init({
-					  url: myURL
+					  url: myUrl
 					, method: 'POST'
 		            , data: JSON.stringify(data)
 		            , timeout: timeout
@@ -91,7 +95,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		                    "text/plain"
 		                );
 		            }
-		            , onSuccess: function(data2, msg, xhr) { // success callback of sendData
+		            , onSuccess: function(data2, msg, xhr) {
 		                //console.log(xhr);
 		                if (!omitLoaderHide) { DigiWebApp.ApplicationController.DigiLoaderView.hide(); }
 						try {
@@ -99,29 +103,32 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						} catch(e) {};
 		                successCallback(data, msg, xhr);
 		            }
-		            , onError: function(xhr, err) { // error callback of sendData
+		            , onError: function(xhr, err) {
 		                DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		                that.setDatabaseServer(null);
 		                console.error(err);
 		                console.error(xhr);
                         writeToLog("## sendDataWithServer err='" + err + "' status='" + xhr.status
-                            + "responseType='" + xhr.responseType + "' response='" + xhr.response
+                            + "' responseType='" + xhr.responseType + "' response='" + xhr.response
                             + "' responseText='" + xhr.responseText
                             + "' headers='" + xhr.getAllResponseHeaders() + "'");
 		                try {
 		                    trackError(err, function () {
-							try {
-							    writeToLog("Fehlerhafte Rückgabe des Webservices!");
-							} catch(e) {};
-							errorCallback(xhr, err);
+							    try {
+							        writeToLog("Fehlerhafte Rückgabe des Webservices!");
+							    } catch(e1) {};
+							    errorCallback(xhr, err);
 		                    });
 		                } catch(e) {};
 		            }
 	    });
 		
-    	writeToLog("WebService POST '" + webservice + "'", function() {
+    	writeToLog("JSON POST '" + webservice + "'", function() {
     		req.send();
     	});
+    	if (inDebug()) {
+    		writeToLog("myUrl '" + myUrl + "'");
+    	}
     }
 
 	, recieveData: function(recieveObj) {
@@ -193,7 +200,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				databaseServer = that.GatewayServer;
 		}
 			
-		var myURL = 'https://' + databaseServer + '/WebAppServices/' + webservice
+		var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
+		myUrl = myUrl + 'http://' + databaseServer + '/WebAppServices/' + webservice
             + '?modus=' + myModus
             + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
@@ -201,18 +212,17 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
             + '&geraeteTyp=' + myGeraeteTyp
             + '&softwareVersion=' + DigiWebApp.RequestController.softwareVersion
             + '&requestTimestamp=' + M.Date.now().date.valueOf();
-		//console.log(myURL);
 		if (additionalQueryParameter) {
-			myURL = myURL + '&' + additionalQueryParameter;
+			myUrl = myUrl + '&' + additionalQueryParameter;
 		}
 
-		writeToLog("WebService GET '" + webservice + "'");
+		writeToLog("JSON GET '" + webservice + "'");
     	if (inDebug()) {
-    		writeToLog("myURL '" + myURL + "'");
+    		writeToLog("myUrl '" + myUrl + "'");
     	}
 
 	    M.Request.init({
-			  url: myURL
+			  url: myUrl
 			, beforeSend: function(xhr) {
                 DigiWebApp.ApplicationController.DigiLoaderView.show(loaderText);
             }
@@ -229,18 +239,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
                 DigiWebApp.RequestController.DatabaseServer = null;
                 that.DatabaseServer = null;
-                //console.error(err);
-                //console.error(xhr);
                 writeToLog("## recieveDataWithServer err='" + err + "' status='" + xhr.status
-                    + "responseType='" + xhr.responseType + "' response='" + xhr.response
+                    + "' responseType='" + xhr.responseType + "' response='" + xhr.response
                     + "' responseText='" + xhr.responseText
                     + "' headers='" + xhr.getAllResponseHeaders() + "'");
                 try {
                     trackError(err, function () {
-					try {
-					    writeToLog("Fehlerhafte Rückgabe des Webservices!");
-					} catch(e) {};
-					errorCallback(xhr, err);
+					    try {
+					        writeToLog("Fehlerhafte Rückgabe des Webservices!");
+					    } catch(e1) {};
+					    errorCallback(xhr, err);
                     });
                 } catch (e) {};
 			}
@@ -340,7 +348,12 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	        								workerId = escape(scrStr(workerId, 4711));
 	        								connectionCode = escape(scrStr(connectionCode, 4711));
 	        							}
-						    			location.href = 'https://' + that.DatabaseServer + location.pathname 
+			                            location.href = 'https://';
+                                        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+                                            location.href = 'http://';
+                                        }
+	        							location.href = location.href
+                                                + that.DatabaseServer + location.pathname
 						    					+ "?c=" + company 
 						    					+ "&p=" + password 
 						    					+ "&v=" + connectionCode

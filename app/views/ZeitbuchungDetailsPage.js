@@ -8,19 +8,6 @@
 
 DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 
-//      events: {
-//		  pagebeforeshow: {
-//            action: function() {
-//
-//			}
-//        }
-//        , pagehide: {
-//            action: function() {
-//
-//        	}
-//        }
-//    }
-
 	  updateContent: function() {
 		_.each(DigiWebApp.ZeitbuchungDetailsPage.content, function(c) { 
 			try {
@@ -71,8 +58,10 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                   value: ''
                 , operation: function(v) {
         			if (DigiWebApp.ZeitbuchungenController.itemForDetails !== null) {
-        				return DigiWebApp.ZeitbuchungenController.itemForDetails.get("datum") + ', ';
-        			}
+			            return DigiWebApp.ZeitbuchungenController.itemForDetails.get("datum") + ', ';
+			        } else {
+			            return '';
+			        }
                 }
             }
         	, isInline: YES
@@ -476,65 +465,10 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
-						var longitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge");
 						var latitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreite");
+						var longitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaenge");
 						var zoom = '15';
-						var url_byCoordinates = "";
-						if ((longitude === '0.0' && latitude === '0.0') || (longitude === 0 && latitude === 0)) return;
-						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
-							case "OSM":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapOSMAlert'));
-								}
-								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
-                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
-								break;
-							case "Bing":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapBingAlert'));
-								}
-								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
-                                    + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
-								break;
-							case "Google":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapGoogleAlert'));
-								}
-								url_byCoordinates = "https://maps.google.com/maps?q="
-                                    + latitude + "+" + longitude + "&hl=de";
-								break;
-							default:
-								url_byCoordinates = "disabled";
-								break;
-						}
-						if (url_byCoordinates !== "disabled") {
-		    				if (typeof(plugins) !== "undefined") {
-			    				if (typeof(plugins.childBrowser) !== "undefined") {
-			    					try { plugins.childBrowser.close(); } catch(e2) { alert("Error: " + e2.message); }
-			    					try { 
-				    					plugins.childBrowser.showWebPage(encodeURI(url_byCoordinates), { showNavigationBar: true });
-			    					} catch(e3) { alert("Error: " + e3.message); }
-			    				} else {
-			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        url_byCoordinates,
-                                        'childBrowser',
-                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
-			    				}
-		    				} else {
-		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    url_byCoordinates,
-                                    'childBrowser',
-                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
-		    				}
-						} else {
-							// TODO: Error-Message for disabled Map-Services
-						}
+	                    DigiWebApp.ZeitbuchungDetailsPage.showPosInMap(latitude, longitude, zoom);
 	    			}
 	            }
 	        }
@@ -553,78 +487,88 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	        , events: {
 	            tap: {
 	                action: function() {
-						var longitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition");
 						var latitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsBreitePosition");
+						var longitude = DigiWebApp.ZeitbuchungenController.itemForDetails.get("gpsLaengePosition");
 						var zoom = '15';
-						var url_byCoordinates = "";
-						if ((longitude === '0.0' && latitude === '0.0') || (longitude === 0 && latitude === 0)) return;
-						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
-							case "OSM":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapOSMAlert'));
-								}
-								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
-                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
-								break;
-							case "Bing":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapBingAlert'));
-								}
-								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
-                                    + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
-								break;
-							case "Google":
-								if (DigiWebApp.SettingsController.featureAvailable('419')) {
-									alert(M.I18N.l('showInMapScholpp'));
-								} else {
-									alert(M.I18N.l('showInMapGoogleAlert'));
-								}
-								url_byCoordinates = "https://maps.google.com/maps?q="
-                                    + latitude + "+" + longitude + "&hl=de";
-								break;
-							default:
-								url_byCoordinates = "disabled";
-								break;
-						}
-						if (url_byCoordinates !== "disabled") {
-		    				if (typeof(plugins) !== "undefined") {
-			    				if (typeof(plugins.childBrowser) !== "undefined") {
-			    					try {
-								        plugins.childBrowser.close();
-								    } catch (e4) {
-								        alert("Error: " + e4.message);
-								    }
-			    					try {
-			    					    plugins.childBrowser.showWebPage(
-                                            encodeURI(url_byCoordinates), { showNavigationBar: true });
-								    } catch (e5) {
-								        alert("Error: " + e5.message);
-								    }
-			    				} else {
-			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        url_byCoordinates,
-                                        'childBrowser',
-                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
-			    				}
-		    				} else {
-		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    url_byCoordinates,
-                                    'childBrowser',
-                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
-		    				}
-						} else {
-							// TODO: Error-Message for disabled Map-Services
-						}
+	                    DigiWebApp.ZeitbuchungDetailsPage.showPosInMap(latitude, longitude, zoom);
 	    			}
 	            }
 	        }
 	    })
     	
     })
+
+    , showPosInMap: function(latitude, longitude, zoom) {
+        if ((longitude === '0.0' && latitude === '0.0') || (longitude === 0 && latitude === 0)) {
+            return;
+        }
+        var urlByCoordinates = "https://";
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            urlByCoordinates = 'http://';
+        }
+        switch (DigiWebApp.SettingsController.getSetting('mapType')) {
+        case "OSM":
+            if (DigiWebApp.SettingsController.featureAvailable('419')) {
+                alert(M.I18N.l('showInMapScholpp'));
+            } else {
+                alert(M.I18N.l('showInMapOSMAlert'));
+            }
+            urlByCoordinates = urlByCoordinates
+                + "www.openstreetmap.org/index.html?mlat="
+                + latitude + "&mlon=" + longitude + "#map=" + zoom + "&layers=M";
+            break;
+        case "Bing":
+            if (DigiWebApp.SettingsController.featureAvailable('419')) {
+                alert(M.I18N.l('showInMapScholpp'));
+            } else {
+                alert(M.I18N.l('showInMapBingAlert'));
+            }
+            urlByCoordinates = urlByCoordinates
+                + "www.bing.com/maps/default.aspx?rtp=adr.~pos."
+                + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
+            break;
+        case "Google":
+            if (DigiWebApp.SettingsController.featureAvailable('419')) {
+                alert(M.I18N.l('showInMapScholpp'));
+            } else {
+                alert(M.I18N.l('showInMapGoogleAlert'));
+            }
+            urlByCoordinates = urlByCoordinates
+                + "maps.google.com/maps?q="
+                + latitude + "+" + longitude + "&hl=de";
+            break;
+        default:
+            urlByCoordinates = "disabled";
+            break;
+        }
+        if (urlByCoordinates !== "disabled") {
+            if (typeof(plugins) !== "undefined") {
+                if (typeof(plugins.childBrowser) !== "undefined") {
+                    try {
+                        plugins.childBrowser.close();
+                    } catch (e8) {
+                        alert("Error: " + e8.message);
+                    }
+                    try {
+                        plugins.childBrowser.showWebPage(encodeURI(
+                            urlByCoordinates), { showNavigationBar: true });
+                    } catch (e9) {
+                        alert("Error: " + e9.message);
+                    }
+                } else {
+                    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                        urlByCoordinates, 'childBrowser',
+                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+                }
+            } else {
+                DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                    urlByCoordinates, 'childBrowser',
+                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+            }
+        } else {
+            alert(M.I18N.l('showInMapDisabled'));
+        }
+    }
 
 });
 

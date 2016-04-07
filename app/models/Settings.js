@@ -145,5 +145,7 @@ DigiWebApp.Settings = M.Model.create({
     , kannFahrtkostenBuchen: M.Model.attr('Boolean')
 
     , kannUebernachtungskostenBuchen: M.Model.attr('Boolean')
+
+    , benutzeHttps: M.Model.attr('Boolean')
     
 }, M.DataProviderLocalStorage);

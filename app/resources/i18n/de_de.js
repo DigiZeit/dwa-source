@@ -191,6 +191,7 @@ M.I18N.de_de = {
 	, showInMapOSMAlert: "Wir leiten Sie nun zum gewählten Kartendienst weiter:\n\nOpenStreetMap"
 	, showInMapGoogleAlert: "Wir leiten Sie nun zum gewählten Kartendienst weiter:\n\nGoogle-Maps"
 	, showInMapBingAlert: "Wir leiten Sie nun zum gewählten Kartendienst weiter:\n\nBing-Maps"
+    , showInMapDisabled: "???"
 	, updateApplication: "Update DIGI-WebApp"
 	, applicationUpdateAvailable: "Update verfügbar"
 	, applicationUpdateAvailableMsg: "DIGI-WebApp wurde aktualisiert. Möchten Sie jetzt die neue Version verwenden?\n\nSie können dies auch später mit dem Update-Button im Hauptmenü anstoßen."

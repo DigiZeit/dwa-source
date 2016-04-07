@@ -280,7 +280,10 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var street = DigiWebApp.OrderInfoController.items[0].positionStrasse;
 						var housenumber = DigiWebApp.OrderInfoController.items[0].positionHausnummer;
 						var addressdetails = '0';
-						var url_byAddress = '';
+						var urlByAddress = 'https://';
+                        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+                            urlByAddress = 'http://';
+                        }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 						case "OSM":
 							if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -288,7 +291,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapOSMAlert'));
 							}
-							url_byAddress = "https://nominatim.openstreetmap.org/search/" 
+							urlByAddress = urlByAddress
+							    + "nominatim.openstreetmap.org/search/" 
                                 + country + "/" + city + "/" + street + "/" + housenumber
                                 + "?format=html&polygon=1&addressdetails=" + addressdetails;
 							break;
@@ -298,7 +302,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapBingAlert'));
 							}
-							url_byAddress = "https://www.bing.com/maps/default.aspx?rtp=~adr."
+							urlByAddress = urlByAddress
+							    + "www.bing.com/maps/default.aspx?rtp=~adr."
                                 + street + " " + housenumber + " " + zip + " " + city + " " + country;
 							break;
 						case "Google":
@@ -307,34 +312,41 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							} else {
 								alert(M.I18N.l('showInMapGoogleAlert'));
 							}
-							url_byAddress = "https://maps.google.com/maps?q="
-                                + street + " " + housenumber + " " + zip + " " + city + " " + country + "&hl=de";
+							urlByAddress = urlByAddress
+							    + "maps.google.com/maps?q="
+                                + street + " " + housenumber + " " + zip + " " + city + " " + country
+                                + "&hl=de";
 							break;
 						default:
-							url_byAddress = "disabled";
+							urlByAddress = "disabled";
 							break;
 						}
-						if (url_byAddress !== "disabled") {
+						if (urlByAddress !== "disabled") {
 							if (typeof(plugins) !== "undefined") {
 			    				if (typeof(plugins.childBrowser) !== "undefined") {
-			    					try { plugins.childBrowser.close(); } catch(e5) { alert("Error: " + e5.message); }
+			    					try {
+								        plugins.childBrowser.close();
+								    } catch (e5) {
+								         alert("Error: " + e5.message);
+								    }
 			    					try { 
-			    						plugins.childBrowser.showWebPage(encodeURI(url_byAddress), { showNavigationBar: true });
+			    					    plugins.childBrowser.showWebPage(encodeURI(
+                                            urlByAddress), { showNavigationBar: true });
 			    					} catch(e6) { alert("Error: " + e6.message); }
 			    				} else {
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        url_byAddress,
+                                        urlByAddress,
                                         'childBrowser',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
 							    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    url_byAddress,
+                                    urlByAddress,
                                     'childBrowser',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
-							// TODO: Error-Message for disabled Map-Services
+                            alert(M.I18N.l('showInMapDisabled'));
 						}
 						return false;
 	    			}
@@ -344,19 +356,23 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	
 	    , showCoordinatesInMapButton: M.ButtonView.design({
 	          value: M.I18N.l('showCoordinatesInMap')
-	        //, cssClass: 'digiButton'
-	        //, anchorLocation: M.CENTER
 	        , events: {
 	            tap: {
 	                action: function() {
-	    				try{DigiWebApp.ApplicationController.vibrate();}catch(e7){}
+	    				try{ DigiWebApp.ApplicationController.vibrate(); } catch(e7) {}
 						if (DigiWebApp.OrderInfoController.items.length === 0) {
 							DigiWebApp.OrderInfoController.set('items', DigiWebApp.OrderDetailsController.positionForDetails);
 						}
-						var longitude = DigiWebApp.OrderInfoController.items[0].positionLongitude;
 						var latitude = DigiWebApp.OrderInfoController.items[0].positionLatitude;
+						var longitude = DigiWebApp.OrderInfoController.items[0].positionLongitude;
 						var zoom = '15';
-						var url_byCoordinates = "";
+                        if ((longitude === '0.0' && latitude === '0.0') || (longitude === 0 && latitude === 0)) {
+                            return;
+                        }
+						var urlByCoordinates = "https://";
+                        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+                            urlByCoordinates = 'http://';
+                        }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 							case "OSM":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -364,8 +380,9 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapOSMAlert'));
 								}
-								url_byCoordinates = "https://www.openstreetmap.org/index.html?mlat="
-                                    + latitude + "&mlon=" + longitude + "&zoom=" + zoom + "&layers=M";
+								urlByCoordinates = urlByCoordinates
+                                    + "www.openstreetmap.org/index.html?mlat="
+                                    + latitude + "&mlon=" + longitude + "#map=" + zoom + "&layers=M";
 								break;
 							case "Bing":
 								if (DigiWebApp.SettingsController.featureAvailable('419')) {
@@ -373,7 +390,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapBingAlert'));
 								}
-								url_byCoordinates = "https://www.bing.com/maps/default.aspx?rtp=adr.~pos."
+								urlByCoordinates = urlByCoordinates
+								    + "www.bing.com/maps/default.aspx?rtp=adr.~pos."
                                     + latitude + "_" + longitude + "_&lvl=" + (zoom + 1);
 								break;
 							case "Google":
@@ -382,28 +400,40 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								} else {
 									alert(M.I18N.l('showInMapGoogleAlert'));
 								}
-								url_byCoordinates = "https://maps.google.com/maps?q="
+								urlByCoordinates = urlByCoordinates
+								    + "maps.google.com/maps?q="
                                     + latitude + "+" + longitude + "&hl=de";
 								break;
 							default:
-								url_byCoordinates = "disabled";
+								urlByCoordinates = "disabled";
 								break;
 						}
-						if (url_byCoordinates !== "disabled") {
+						if (urlByCoordinates !== "disabled") {
 		    				if (typeof(plugins) !== "undefined") {
 			    				if (typeof(plugins.childBrowser) !== "undefined") {
-			    					try { plugins.childBrowser.close(); } catch(e8) { alert("Error: " + e8.message); }
-			    					try { 
-				    					plugins.childBrowser.showWebPage(encodeURI(url_byCoordinates), { showNavigationBar: true });
-			    					} catch(e9) { alert("Error: " + e9.message); }
+			    					try {
+								        plugins.childBrowser.close();
+								    } catch (e8) {
+								        alert("Error: " + e8.message);
+								    }
+			    					try {
+								        plugins.childBrowser.showWebPage(encodeURI(
+								            urlByCoordinates), { showNavigationBar: true });
+								    } catch (e9) {
+								         alert("Error: " + e9.message);
+								    }
 			    				} else {
-			    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                        urlByCoordinates, 'childBrowser',
+                                        'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-		    					DigiWebApp.ApplicationController.inAppBrowser_var = window.open(url_byCoordinates,'childBrowser','width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                                    urlByCoordinates, 'childBrowser',
+                                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
-							// TODO: Error-Message for disabled Map-Services
+                            alert(M.I18N.l('showInMapDisabled'));
 						}
 	    			}
 	            }

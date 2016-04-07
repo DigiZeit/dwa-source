@@ -112,7 +112,11 @@ DigiWebApp.OnlinePosition = M.Model.create({
 
     , url: function(datum, mitarbeiterID) {
 		var positionsId = DigiWebApp.ZeitbuchungenController.itemForDetails.get("positionsId");
-		var myURL = 'https://' + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
+        var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
+        myUrl = myUrl + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
             + '/WebAppServices/positionen?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
@@ -120,9 +124,9 @@ DigiWebApp.OnlinePosition = M.Model.create({
             + '&positionsId=' + positionsId
             + '&requestTimestamp=' + M.Date.now().date.valueOf();
         if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
-        	console.log('Positionen: using ' + myURL);
+        	console.log('Positionen: using ' + myUrl);
         }
-		return myURL;
+		return myUrl;
     }
 
     /* map needs to return record obj which can be handled by createRecord */

@@ -64,17 +64,21 @@ DigiWebApp.Anwesenheitsliste = M.Model.create({
 
     , responsePath: 'anwesenheitsliste'
 
-    , url: function() {
-        var myURL = 'https://' + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
+    , url: function () {
+        var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
+        myUrl = myUrl + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
             + '/WebAppServices/anwesenheitsliste?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
             + '&geraeteTyp=2&softwareVersion=' + DigiWebApp.RequestController.softwareVersion
             + '&requestTimestamp=' + M.Date.now().date.valueOf();
         if (DigiWebApp.ApplicationController.profilingIntervalVar === null) {
-        	console.log('Anwesenheitsliste: using ' + myURL);
+        	console.log('Anwesenheitsliste: using ' + myUrl);
         }
-		return myURL;
+		return myUrl;
     }
 
     /* map needs to return record obj which can be handled by createRecord */
