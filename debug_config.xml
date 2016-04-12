@@ -86,7 +86,8 @@
 <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="1.0.0" />
 <gap:plugin name="cordova-plugin-vibration" source="npm" version="0.3.11" />
 
-<gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" />
+<gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" />
+<!-- <gap:plugin name="wellbload.cordova.background-geolocation" version="0.3.4" /> -->
 <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
   <!-- Nicht aktualisieren, wurde bei 1.8.3.6583 wieder rückgängig gemacht. -->
@@ -94,7 +95,8 @@
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" /> -->
 
 <!-- prevent screen-sleep --> 
-<gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" />
+<!-- <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" /> -->
+<gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
 <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
