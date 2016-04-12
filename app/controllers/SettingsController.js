@@ -926,6 +926,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var autoTransferAfterClosingDay    = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterClosingDayCheck').id    + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var autoSyncAfterBookTime          = $('#' + M.ViewManager.getView('settingsPage', 'autoSyncAfterBookTimeCheck').id          + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var stammdatenabgleichBeimAppStart = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeimAppStartCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var benutzeHttps				   = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'benutzeHttps');
         var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
@@ -1038,7 +1039,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var logSave							= DigiWebApp.SettingsController.getSetting("logSave");
         var kannFahrtkostenBuchen           = DigiWebApp.SettingsController.getSetting("kannFahrtkostenBuchen");
         var kannUebernachtungskostenBuchen  = DigiWebApp.SettingsController.getSetting("kannUebernachtungskostenBuchen");
-        var benutzeHttps					= DigiWebApp.SettingsController.getSetting("benutzeHttps");
 
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1637,7 +1637,16 @@ DigiWebApp.SettingsController = M.Controller.extend({
         }
     	if (typeof(prop) != "undefined" && prop == 'debug') return inDebug();
     }
-      
+
+    , getCheckboxValue: function (pageName, viewName) {
+        var view = M.ViewManager.getView(pageName, viewName);
+        if (hasValue(view)) {
+            return $('#' + view.id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        } else {
+            return null;
+        }
+    }
+
 	, featureAvailable: function(featureId) {
 			
 		if ( typeof(featureId) !== "string" ) {
