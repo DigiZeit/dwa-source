@@ -495,7 +495,6 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
 	            }
 	        }
 	    })
-    	
     })
 
     , showPosInMap: function(latitude, longitude, zoom) {
