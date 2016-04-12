@@ -33,10 +33,8 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , anchorLocation: M.LEFT
             , events: {
                 tap: {
-                    //  target: DigiWebApp.NavigationController
-                    //, action: 'backToDashboardPage'
         			action: function() {
-        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        				try{ DigiWebApp.ApplicationController.vibrate(); } catch(e2) {}
         				if (DigiWebApp.SettingsController.HasCredentials()) {
         					DigiWebApp.NavigationController.backToDashboardPage();
         				}
@@ -52,7 +50,15 @@ DigiWebApp.SettingsPage = M.PageView.design({
     })
 
     , content: M.ScrollView.design({
-          childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck closeAppAfterCloseDay autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck BookingReminderHoursGrid remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy GPSenableHighAccuracyFallback GPSmaximumAgeMinutesGrid GPSBackgroundService detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
+        childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid'
+            + ' autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck closeAppAfterCloseDay'
+            + ' autoSyncAfterBookTimeCheck stammdatenabgleichBeimAppStartCheck BookingReminderHoursGrid'
+            + ' benutzeHttps remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy'
+            + ' GPSenableHighAccuracyFallback GPSmaximumAgeMinutesGrid GPSBackgroundService'
+            + ' detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer'
+            + ' bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen'
+            + ' ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln'
+            + ' vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -170,6 +176,13 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , contentBinding: {
                   target: DigiWebApp.SettingsController
                 , property: 'settings.autoSyncAfterBookTime'
+            }
+        })
+        , benutzeHttps: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.benutzeHttps'
             }
         })
         , remarkIsMandatory: M.SelectionListView.design({
@@ -367,54 +380,53 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 , property: 'settings.auftragsDetailsKoppeln'
             }
         })
-
         , terminlisteEinstellungen: M.ContainerView.design({
-      	  		  childViews: 'terminlisteEinstellungen_titel terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum' // terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
-      	  		, cssClass: 'terminlisteEinstellungen'
-		        , terminlisteEinstellungen_titel: M.ListView.design({
-	        	  	  isDividedList: YES
-	                , contentBinding: {
-		            	  target: DigiWebApp.SettingsController
-		            	, property: 'terminlisteEinstellungen_titel'
-		        	}
-		        	, listItemTemplateView: DigiWebApp.DummyTemplateView
-	  	      	})
-	  	      	, terminliste_keineKuenstlichenTermine: M.SelectionListView.design({
-	        	  	  selectionMode: M.MULTIPLE_SELECTION
-		            , contentBinding: {
-		                  target: DigiWebApp.SettingsController
-		                , property: 'settings.terminliste_keineKuenstlichenTermine'
-		            }
-		        })
-		        , terminliste_ignoriereAuftragszeitraum: M.SelectionListView.design({
-		              selectionMode: M.MULTIPLE_SELECTION
-		            , contentBinding: {
-		                  target: DigiWebApp.SettingsController
-		                , property: 'settings.terminliste_ignoriereAuftragszeitraum'
-		            }
-		        })
+            childViews: 'terminlisteEinstellungen_titel terminliste_keineKuenstlichenTermine terminliste_ignoriereAuftragszeitraum'
+      	  	, cssClass: 'terminlisteEinstellungen'
+		    , terminlisteEinstellungen_titel: M.ListView.design({
+	        	  	isDividedList: YES
+	            , contentBinding: {
+		            	target: DigiWebApp.SettingsController
+		            , property: 'terminlisteEinstellungen_titel'
+		        }
+		        , listItemTemplateView: DigiWebApp.DummyTemplateView
+	  	    })
+	  	    , terminliste_keineKuenstlichenTermine: M.SelectionListView.design({
+	        	  	selectionMode: M.MULTIPLE_SELECTION
+		        , contentBinding: {
+		                target: DigiWebApp.SettingsController
+		            , property: 'settings.terminliste_keineKuenstlichenTermine'
+		        }
+		    })
+		    , terminliste_ignoriereAuftragszeitraum: M.SelectionListView.design({
+		            selectionMode: M.MULTIPLE_SELECTION
+		        , contentBinding: {
+		                target: DigiWebApp.SettingsController
+		            , property: 'settings.terminliste_ignoriereAuftragszeitraum'
+		        }
+		    })
         })
 
         , festePauseStornierenEinstellungen: M.ContainerView.design({
-		  		  childViews: 'festePauseStornierenEinstellungen_titel festePauseStornieren_nurAktuellerTag'
-		  		, cssClass: 'festePauseStornierenEinstellungen'
-		        , festePauseStornierenEinstellungen_titel: M.ListView.design({
-	      	  	  isDividedList: YES
-	              , contentBinding: {
-		            	  target: DigiWebApp.SettingsController
-		            	, property: 'festePauseStornierenEinstellungen_titel'
-		        	}
-		        	, listItemTemplateView: DigiWebApp.DummyTemplateView
-		      	})
-		      	, festePauseStornieren_nurAktuellerTag: M.SelectionListView.design({
-	      	  	  selectionMode: M.MULTIPLE_SELECTION
-		            , contentBinding: {
-		                  target: DigiWebApp.SettingsController
-		                , property: 'settings.festePauseStornieren_nurAktuellerTag'
-		            }
-		        })
+		  		childViews: 'festePauseStornierenEinstellungen_titel festePauseStornieren_nurAktuellerTag'
+		  	, cssClass: 'festePauseStornierenEinstellungen'
+		    , festePauseStornierenEinstellungen_titel: M.ListView.design({
+	      	  	isDividedList: YES
+	            , contentBinding: {
+		            	target: DigiWebApp.SettingsController
+		            , property: 'festePauseStornierenEinstellungen_titel'
+		        }
+		        , listItemTemplateView: DigiWebApp.DummyTemplateView
+		    })
+		    , festePauseStornieren_nurAktuellerTag: M.SelectionListView.design({
+	      	  	selectionMode: M.MULTIPLE_SELECTION
+		        , contentBinding: {
+		                target: DigiWebApp.SettingsController
+		            , property: 'settings.festePauseStornieren_nurAktuellerTag'
+		        }
+		    })
         })
-	  
+
         , grid: M.GridView.design({
               childViews: 'button icon'
             , layout: {
