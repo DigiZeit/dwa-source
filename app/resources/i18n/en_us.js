@@ -63,6 +63,8 @@ M.I18N.en_us = {
 	, autoSyncAfterBookTimeCheck: "Auto-Transfer of master data"
 	, autoTransferAfterBookTimeCheck: "Auto-Transfer after new booking"
 	, autoTransferAfterClosingDayCheck: "Auto-Transfer after closing time"
+	, stammdatenabgleichBeimAppStart: "Transfer master data upon each app-start"
+    , benutzeHttps: "Encrypt transmitted data (https)"
 	, autoSaveGPSData: "Save GPS-Data in bookings"
 	, listOfTimeData: "List of all bookings"
 	, selectSomething: "Select something..."
@@ -464,8 +466,6 @@ M.I18N.en_us = {
 
 	, unexpectedErrorWhileHandlingBooking: "Unexpected error while handling booking"
 		
-	, stammdatenabgleichBeimAppStart: "Transfer master data upon each app-start"
-
 	, bookingTooShort: "Booking is too short"
 	, bookingTooShortMsg: "This booking is too short and could not get closed!"
 

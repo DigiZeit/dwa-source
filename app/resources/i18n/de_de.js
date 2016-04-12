@@ -63,6 +63,8 @@ M.I18N.de_de = {
 	, autoSyncAfterBookTimeCheck: "Auto-Stammdatenübertragung"
 	, autoTransferAfterBookTimeCheck: "Auto-Buchungsübertragung nach Buchung"
 	, autoTransferAfterClosingDayCheck: "Auto-Buchungsübertragung nach Feierabend"
+	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich bei jedem App-Start"
+    , benutzeHttps: "Verschlüsselte Datenübertragung (https)"
 	, autoSaveGPSData: "GPS-Daten beim Buchen speichern"
 	, listOfTimeData: "Liste aller gebuchten Zeitdaten"
 	, selectSomething: "Bitte wählen..."
@@ -463,8 +465,6 @@ M.I18N.de_de = {
 		
 	, unexpectedErrorWhileHandlingBooking: "Unerwarteter Fehler beim Abschließen einer Buchung"
 
-	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich bei jedem App-Start"
-		
 	, bookingTooShort: "Buchung zu kurz"
 	, bookingTooShortMsg: "Diese Buchung ist zu kurz und kann noch nicht abgeschlossen werden!"
 

@@ -475,6 +475,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
 	                , isSelected: record.get('stammdatenabgleichBeimAppStart')
 	            }]
+                , benutzeHttps: [{
+                    value: benutzeHttps
+	                , label: M.I18N.l('benutzeHttps')
+                    , isSelected: benutzeHttps
+	            }]
                 , autoSaveGPSData: [{
                       value: record.get('autoSaveGPSData')
                     , label: M.I18N.l('autoSaveGPSData')
@@ -601,7 +606,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , logSave: logSave
                , kannFahrtkostenBuchen: kannFahrtkostenBuchen
                , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
-               , benutzeHttps: benutzeHttps
 			}; // settings = {
         /* default values */
         } else {
@@ -645,7 +649,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , stammdatenabgleichBeimAppStart: [{
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeimAppStart")
 	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
-	            }]
+                }]
+   	            , benutzeHttps: [{
+                      value: DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps")
+                    , label: M.I18N.l('benutzeHttps')
+                }]
                 , autoSaveGPSData: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData")
                     , label: M.I18N.l('autoSaveGPSData')
@@ -753,7 +761,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	           , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
                , kannFahrtkostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen')
                , kannUebernachtungskostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen')
-	           , benutzeHttps: DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps")
             }; // settings = {
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
