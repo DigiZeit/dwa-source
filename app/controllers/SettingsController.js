@@ -383,7 +383,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             var benutzeHttps = DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps");
             try {
 	            if (typeof(record.record.benutzeHttps) !== "undefined") {
-	            	logSave = record.get('benutzeHttps');
+	            	benutzeHttps = record.get('benutzeHttps');
 	            }
             } catch (e) { }
 
@@ -943,7 +943,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	}
         }
 
-        var detailierteZeitdaten         = $('#' + M.ViewManager.getView('settingsPage', 'detailierteZeitdaten').id            + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var detailierteZeitdaten = $('#' + M.ViewManager.getView('settingsPage', 'detailierteZeitdaten').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
         var GPSDataIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'GPSDataIsMandatory') !== null) {
