@@ -87,7 +87,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , logSave: false
         , kannFahrtkostenBuchen: false
         , kannUebernachtungskostenBuchen: false
-        , benutzeHttps: true
+        , benutzeHttps: false
     }
 
     , defaultsettings: null

@@ -1330,8 +1330,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }         
     }
     
-    /** Diese Funktion dient dazu, die GUI-Elemente der SettingsPage je nach Situation
-     *  aus- oder einzublenden.
+    /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
+     *  die GUI-Elemente der SettingsPage je nach Situation aus- oder einzublenden.
      */
     , enforceChefToolOnly: function(hideOverrideOverride) {
         var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert
