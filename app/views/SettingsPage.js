@@ -443,7 +443,12 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 , events: {
                     tap: {
                           target: DigiWebApp.SettingsController
-                        , action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e3){} this.save();}
+                        , action: function() {
+                              try {
+                                  DigiWebApp.ApplicationController.vibrate();
+                              } catch (e3) {}
+                              this.save();
+                          }
                     }
                 }
             })

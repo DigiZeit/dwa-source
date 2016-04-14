@@ -1327,13 +1327,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         
         if (DigiWebApp.SettingsController.EnforceCredentials()) {
         	DigiWebApp.ApplicationController.updateModels(fortfahren);
-        }
-                
+        }         
     }
     
+    /** Diese Funktion dient dazu, die GUI-Elemente der SettingsPage je nach Situation
+     *  aus- oder einzublenden.
+     */
     , enforceChefToolOnly: function(hideOverrideOverride) {
-    	var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert || !DigiWebApp.SettingsController.HasCredentials() || hideOverrideOverride);
-    	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+        var hideOverride = (DigiWebApp.SettingsController.showCredentialsAlert
+            || !DigiWebApp.SettingsController.HasCredentials() || hideOverrideOverride);
+    	var chefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+
+        // Freischaltung 417: Unterstützung für die DIGI-ServiceApp
 		if (DigiWebApp.SettingsController.featureAvailable('417')) { 
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_ermittleGeokoordinate.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_datenUebertragen.id  + ']').each(function() { $(this).show(); });}catch(e){}
@@ -1347,14 +1352,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_PORTGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.ServiceApp_FallBack.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		}
-		if (ChefToolOnly || hideOverride) {
+		if (chefToolOnly || hideOverride) {
 	    	// hide tabbar
 			try{$('[id=' + DigiWebApp.TabBar.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			// hide checkboxes in settings
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
+            try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
 			try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.daysToHoldBookingsOnDeviceSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -1375,14 +1381,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).show(); }); } catch (e) { }
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).show(); }); } catch (e) { }
+            // Freischaltung 403: Bemerkungsfeld
 			if (DigiWebApp.SettingsController.featureAvailable('403')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
-			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id  + ']').each(function() { $(this).show(); });}catch(e){}
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id + ']').each(function () { $(this).show(); }); } catch (e) { }
+            // Freischaltung 411: Zeitbuchungen X Tage auf Gerät vorhalten
 			if (DigiWebApp.SettingsController.featureAvailable('411')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.daysToHoldBookingsOnDeviceSliderContainer.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
+            // Freischaltung 406: Auftragsinfo
 			if (DigiWebApp.SettingsController.featureAvailable('406')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.auftragsDetailsKoppeln.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
@@ -1394,16 +1404,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.closeAppAfterCloseDay.id  + ']').each(function() { $(this).show(); });}catch(e){}
 		}
-		
-
     }
 
     , startsync: function(isFirstLoad) {
     	var that = this;
-    	DigiWebApp.JSONDatenuebertragungController.authentifizieren(function() {
-    		that.startsyncAuthenticated(isFirstLoad);
-    	})
-    }
+	    DigiWebApp.JSONDatenuebertragungController.authentifizieren(function() {
+	        that.startsyncAuthenticated(isFirstLoad);
+	    });
+	}
     
     , startsyncAuthenticated: function(isFirstLoad) {
     	var that = this;
