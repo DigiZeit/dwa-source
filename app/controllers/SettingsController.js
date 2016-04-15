@@ -379,7 +379,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 }
             } catch (e) { }
             
-            //, benutzeHttps: true
+            //, benutzeHttps: false
             var benutzeHttps = DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps");
             try {
 	            if (typeof(record.record.benutzeHttps) !== "undefined") {
@@ -1643,7 +1643,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         if (hasValue(view)) {
             return $('#' + view.id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         } else {
-            return null;
+            return NO;
         }
     }
 

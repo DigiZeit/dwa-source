@@ -64,7 +64,7 @@ M.I18N.de_de = {
 	, autoTransferAfterBookTimeCheck: "Auto-Buchungsübertragung nach Buchung"
 	, autoTransferAfterClosingDayCheck: "Auto-Buchungsübertragung nach Feierabend"
 	, stammdatenabgleichBeimAppStart: "Stammdatenabgleich bei jedem App-Start"
-    , benutzeHttps: "Verschlüsselte Datenübertragung (https)"
+    , benutzeHttps: "Verschlüsselte Datenübertragung (HTTPS)"
 	, autoSaveGPSData: "GPS-Daten beim Buchen speichern"
 	, listOfTimeData: "Liste aller gebuchten Zeitdaten"
 	, selectSomething: "Bitte wählen..."

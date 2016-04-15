@@ -64,7 +64,7 @@ M.I18N.en_us = {
 	, autoTransferAfterBookTimeCheck: "Auto-Transfer after new booking"
 	, autoTransferAfterClosingDayCheck: "Auto-Transfer after closing time"
 	, stammdatenabgleichBeimAppStart: "Transfer master data upon each app-start"
-    , benutzeHttps: "Encrypt transmitted data (https)"
+    , benutzeHttps: "Encrypt transmitted data (HTTPS)"
 	, autoSaveGPSData: "Save GPS-Data in bookings"
 	, listOfTimeData: "List of all bookings"
 	, selectSomething: "Select something..."

@@ -348,11 +348,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	        								workerId = escape(scrStr(workerId, 4711));
 	        								connectionCode = escape(scrStr(connectionCode, 4711));
 	        							}
-			                            location.href = 'https://';
-                                        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-                                            location.href = 'http://';
-                                        }
-	        							location.href = location.href
+						    			location.href = location.protocol + '//'
                                                 + that.DatabaseServer + location.pathname
 						    					+ "?c=" + company 
 						    					+ "&p=" + password 
