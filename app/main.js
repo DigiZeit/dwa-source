@@ -345,8 +345,8 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 				   		}, errorCallback);     // dataDirectory.getFile
 				   	}, errorCallback);         // fileSystem.root.getDirectory
 			    }, errorCallback);             // window.requestFileSystem
-			}, function(e) {
-				  console.error('[writeToLog]: Error while requesting Quota', e);
+			}, function(err) {
+				  console.error('[writeToLog]: Error while requesting Quota', err);
   		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 		                title: M.I18N.l('error')
 		              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err

@@ -383,7 +383,8 @@ DigiWebApp.MediaListController = M.Controller.extend({
 		    	var done = false;
 
 		    	//_.each(mediaFiles, function(el) {
-		    	if (mediaFiles.length > 0) { var el = mediaFiles[0];
+		    	if (mediaFiles.length > 0) {
+		    	    var el = mediaFiles[0];
 		    	
 		    		var items = [];
 					var rec = JSON.parse(JSON.stringify(el)); // clone to new Object
