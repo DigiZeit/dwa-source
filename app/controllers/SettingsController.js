@@ -631,6 +631,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , workerId: DigiWebApp.SettingsController.defaultsettings.get("workerId")
                 , timeouthappened: DigiWebApp.ApplicationController.timeouthappened
             	, skipEvents: DigiWebApp.ApplicationController.skipEvents
+                , deviceModel: device.model
+                , devicePlatform: device.platform
+                , deviceVersion: device.version
+                , deviceUuid: device.uuid
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
                 , mapType: DigiWebApp.SettingsController.defaultsettings.get("mapType")

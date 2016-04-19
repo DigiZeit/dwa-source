@@ -213,7 +213,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7014'
+              value: 'Build: 7015'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
