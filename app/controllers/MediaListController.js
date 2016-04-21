@@ -397,7 +397,7 @@ DigiWebApp.MediaListController = M.Controller.extend({
 					
 					writeToLog('sending mediaFile ' + rec.record.fileName);
 	    			
-    				var mindestMedienTimeout = 60000;
+    				var mindestMedienTimeout = 300000; // 5 min
     				var myTimeout = DigiWebApp.SettingsController.getSetting('WebserviceTimeOut');
     				if (parseIntRadixTen(DigiWebApp.SettingsController.getSetting('WebserviceTimeOut')) < mindestMedienTimeout) {
     					myTimeout = mindestMedienTimeout;

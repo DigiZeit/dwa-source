@@ -202,8 +202,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (webservice == 'allgemein/empfangeUrl') {
 		    if (databaseServer == null || databaseServer == '') {
 		        databaseServer = that.GatewayServer;
-                myUrl = 'http://';
 		    }
+            // TODO Nicht mehr auf HTTP zurückfallen, sobald primary.digi-gateway.de = vitellius HTTPS kann.
+            myUrl = 'http://';
 		}
 		
 		myUrl = myUrl + databaseServer + '/WebAppServices/' + webservice
