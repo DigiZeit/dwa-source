@@ -9,10 +9,8 @@
 DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
-
 	, GatewayServer: 'primary.digi-gateway.de'
 	, GatewayPool: 'pool.digi-gateway.de'
-	, TestServer: "vespasian.digi-zeitserver.de"
 	, DatabaseServer: null
 	, DatabaseServerTimestamp: null
 	, AuthentifizierenCode: null
@@ -187,7 +185,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var geraeteIdOverride = recieveObj['geraeteIdOverride'] ? recieveObj['geraeteIdOverride'] : NO;
 		var myModus = recieveObj['modus'] ? recieveObj['modus'] : 0;
 		var databaseServer = that.DatabaseServer;
-		// hack um Mitarbeiternamen ziehen zu können
+
+	    // Hack, um Mitarbeiternamen ziehen zu können
 		var myGeraeteId = DigiWebApp.SettingsController.getSetting('workerId');
 		var myGeraeteTyp = 2;
 		if (geraeteIdOverride) {
@@ -195,15 +194,18 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myGeraeteTyp = 3;
 		}
 		
-		if (webservice == 'allgemein/empfangeUrl') {
-			if(databaseServer == null || databaseServer == '')
-				databaseServer = that.GatewayServer;
-		}
-			
 		var myUrl = 'https://';
         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
             myUrl = 'http://';
         }
+
+		if (webservice == 'allgemein/empfangeUrl') {
+		    if (databaseServer == null || databaseServer == '') {
+		        databaseServer = that.GatewayServer;
+                myUrl = 'http://';
+		    }
+		}
+		
 		myUrl = myUrl + databaseServer + '/WebAppServices/' + webservice
             + '?modus=' + myModus
             + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
@@ -306,20 +308,14 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
     	var myGatewayServer = that.GatewayServer;
 
-    	if (inDebug()) {
-    		that.setDatabaseServer(that.TestServer);
-			that.DatabaseServer = that.TestServer;
-			myGatewayServer = that.DatabaseServer;
-		}
-    	    	
-    	if (typeof(device) === "undefined") {
-    		myGatewayServer = location.host;
-    	}
+        // Bei Ausführung im Browser den Server, von dem die App geladen wurde, als Gateway verwenden.
+    	//if (typeof(device) === "undefined") {
+    	//  myGatewayServer = location.host;
+    	//}
 
     	var successFunc = function(data, msg, xhr) {
-    		//console.log(data);
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    	if (data !== null) {
+	    	if (data != null) {
 	    		var objEmpfangeUrl = data.empfangeUrl;
 	    		that.setDatabaseServer(objEmpfangeUrl.url);
 	    	} else {
@@ -327,6 +323,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	    		that.setDatabaseServer(that.GatewayServer);
 	    	}
 	    	that.setDatabaseServerTimestamp(new Date().getTime());
+
+    	    // Bei Ausführung im Browser den Benutzer umleiten, falls er die App auf einem
+            // anderen Server gestartet als den, dem die Firma zugeordnet ist.
 	    	if (typeof(device) === "undefined") {
 	    		if ((location.host !== that.DatabaseServer)) {
 	        		DigiWebApp.ApplicationController.nativeConfirmDialogView({

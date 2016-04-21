@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "7016"
-	version 	  = "1.8.5.7016">
+	versionCode   = "7017"
+	version 	  = "1.8.5.7017">
 
 	<name>DIGI-WebApp Beta</name>
 
@@ -34,9 +34,16 @@
   <!-- all: hides the status bar at the top of the screen -->
   <preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="false" />
-  <!-- <preference name="orientation" value="portrait" /> -->
-	<preference name="orientation" value="default" />
-	<preference name="load-url-timeout" value="60000" />
+  <platform name="ios">
+    <preference name="orientation" value="portrait" />
+  </platform>
+  <platform name="android">
+    <preference name="orientation" value="default" />
+  </platform>
+  <platform name="winphone">
+    <preference name="orientation" value="default" />
+  </platform>
+  <preference name="load-url-timeout" value="60000" />
 	<preference name="SplashScreenDelay" value="60000"/>
   <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
 	<preference name="show-splash-screen-spinner" value="true" />
@@ -61,14 +68,6 @@
   your config.xml instead; you will still have the INTERNET permission on your app,
   which PhoneGap requires. -->
   <preference name="permissions" value="none" />
-
-  <!-- to enable single features use the following examples -->
-	<feature name="http://api.phonegap.com/1.0/geolocation" />
-	<feature name="http://api.phonegap.com/1.0/network" />
-	<feature name="http://api.phonegap.com/1.0/camera" />
-	<feature name="http://api.phonegap.com/1.0/file" />
-	<feature name="http://api.phonegap.com/1.0/contacts" />
-	<feature name="http://api.phonegap.com/1.0/notification"/>
 
 <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 <gap:plugin name="cordova-plugin-camera" source="npm" version="0.3.6" />
@@ -122,7 +121,7 @@
   <allow-intent href="https://*/*" />
   
   <gap:config-file platform="ios" parent="CFBundleShortVersionString"> 
-	  <string>7016</string> 
+	  <string>7017</string> 
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">

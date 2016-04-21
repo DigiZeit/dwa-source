@@ -1279,10 +1279,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         // set settings
         DigiWebApp.SettingsController.init(YES,YES);
         
-//		if (inDebug() && onIOS) {
-//			DigiWebApp.SettingsController.setSetting("debugDatabaseServer", "vespasian.digi-zeiterver.de");
-//		}
-		
         DigiWebApp.ApplicationController.setTransitionsSetting();
         
         var fortfahren = function() {
