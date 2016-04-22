@@ -310,9 +310,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
     	var myGatewayServer = that.GatewayServer;
 
         // Bei Ausführung im Browser den Server, von dem die App geladen wurde, als Gateway verwenden.
-    	//if (typeof(device) === "undefined") {
-    	//  myGatewayServer = location.host;
-    	//}
+    	if (typeof(device) === "undefined") {
+    	    myGatewayServer = location.host;
+    	}
 
     	var successFunc = function(data, msg, xhr) {
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
