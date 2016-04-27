@@ -204,9 +204,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		        databaseServer = that.GatewayServer;
 		    }
 		    // TODO Nicht mehr auf HTTP zurückfallen, sobald primary.digi-gateway.de = vitellius HTTPS kann.
-		    // Wird nur auf den Geräten gemacht. Die Browser weigern sich, HTTPS-URLs abzurufen,
-		    // wenn die App per HTTPS geladen wurde. Bei Ausführung im Browser wird deshalb auch
-            // NIE primary.digi-gateway.de verwendet.
+		    // Wird nur auf den Geräten gemacht. Die Browser weigern sich, HTTP-URLs abzurufen,
+		    // wenn die App per HTTPS geladen wurde.
 		    if (typeof(device) !== "undefined") {
 		        myUrl = 'http://';
 		    }
@@ -315,11 +314,11 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
     	var myGatewayServer = that.GatewayServer;
 
 	    // Bei Ausführung im Browser den Server, von dem die App geladen wurde, als Gateway verwenden.
-	    // Das heisst, dass im Browser NIE primary.digi-gateway.de verwendet wird!
+	    // MB: Das heisst, dass im Browser NIE für empfangeUrl auf primary.digi-gateway.de umgeleitet wird!
         // Siehe auch Kommentar zum Zurückfallen auf HTTP in recieveDataWithServerAuthenticated().
-    	if (typeof(device) === "undefined") {
-    	    myGatewayServer = location.host;
-    	}
+    	//if (typeof(device) === "undefined") {
+    	//    myGatewayServer = location.host;
+    	//}
 
     	var successFunc = function(data, msg, xhr) {
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();

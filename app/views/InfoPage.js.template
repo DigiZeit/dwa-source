@@ -40,7 +40,6 @@ DigiWebApp.InfoPage = M.PageView.design({
 
     , cssClass: 'infoPage'
 
-    //, childViews: 'header content tabBar'
     , childViews: 'header content'
 
     , header: M.ToolbarView.design({
@@ -89,7 +88,11 @@ DigiWebApp.InfoPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-          childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel spacer9 versionLabel cordovaVersionLabel companyLabel streetLabel cityLabel phoneLabel emailLabel1 spacer1 emailLabel2 spacer2 spacer3 TMPVersionLabel spacer4 deviceinfo spacer5 connectioninfo spacer6 environmentinfo spacer7 localStorageUsage spacer10 toggleWeinreButton'
+          childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel'
+			+ ' spacer9 versionLabel companyLabel streetLabel cityLabel phoneLabel'
+			+ ' emailLabel1 spacer1 emailLabel2 spacer2 spacer3 spacer4 deviceinfo spacer5'
+			+ ' connectioninfo spacer6 cordovaVersionLabel environmentinfo spacer7'
+			+ ' localStorageUsage spacer10 toggleWeinreButton'
 
         , logo: M.ImageView.design({
         	// Bugfix 2142: Restyling in order to be consistent with DSO
@@ -97,7 +100,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                 value: ''
                 , operation: function() {
 	                var myBranding = DigiWebApp.SettingsController.getSetting("branding");
-                	if(typeof(myBranding) != "undefined" && myBranding != "") {
+                	if (typeof(myBranding) != "undefined" && myBranding != "") {
                 		if (myBranding.toLowerCase() === 'scholpp')
                 			return 'theme/images/DigiLogo2013_scholpp.png';
                 		else
@@ -131,11 +134,6 @@ DigiWebApp.InfoPage = M.PageView.design({
                             M.I18N.setLanguage(selectedLanguage);
                         }
                     }
-//			        , tap: {
-//						action: function() {
-//			        		try{DigiWebApp.ApplicationController.vibrate();}catch(e5){}
-//							}
-//			        }
                 }
         })
 
@@ -195,18 +193,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                 			output = output + 'PhoneGap: ' + device.phonegap;
                 		}
                     }
-                    //console.log("cordovaVersionLabel: " + output);
                     return output;
-                }
-            }
-            , cssClass: 'infoLabel marginBottom25 unselectable'
-        })
-
-        , TMPVersionLabel: M.LabelView.design({
-              computedValue: {
-                  value: ''
-                , operation: function(v) {
-                	return 'The-M-Project: ' + M.Version;
                 }
             }
             , cssClass: 'infoLabel marginBottom25 unselectable'
@@ -331,7 +318,6 @@ DigiWebApp.InfoPage = M.PageView.design({
                 	if (typeof(M.Environment) !== "undefined") {
                     	output = 'Environment Platform: '     + M.Environment.getPlatform()     + '<br />';
                     }
-                    //console.log("environmentinfo: " + output);
                     return output;
                 }
             }
@@ -344,13 +330,11 @@ DigiWebApp.InfoPage = M.PageView.design({
                 , operation: function(v) {
                 	var output = "";
                 	if (typeof(device) !== "undefined") {
-                    	output = 'Device Name: '     + device.name     + '<br />' + 
-			                     'Device Model: ' + device.model + '<br />' + 
+                    	output = 'Device Model: ' + device.model + '<br />' + 
 			                     'Device Platform: ' + device.platform + '<br />' + 
-                                 'Device UUID: '     + device.uuid     + '<br />' + 
-                                 'Device Version: '  + device.version  + '<br />';
+                                 'Device Version: '  + device.version  + '<br />' +
+								 'Device UUID: '     + device.uuid     + '<br />'; 
                     }
-                    //console.log("deviceinfo: " + output);
                     return output;
                 }
             }
@@ -398,12 +382,6 @@ DigiWebApp.InfoPage = M.PageView.design({
 	                        dataType: 'jsonp',
 	                        success: function(location) {
     		                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    	                	//var company = DigiWebApp.SettingsController.getSetting("company");
-	    	                	//var mitarbeiterId = DigiWebApp.SettingsController.getSetting("mitarbeiterId");
-	    	                	//var mitarbeiterVorname = DigiWebApp.SettingsController.getSetting("mitarbeiterVorname");
-	    	                	//var mitarbeiterNachname = DigiWebApp.SettingsController.getSetting("mitarbeiterNachname");
-	    	                	//var weinreUserId = company + "_" + mitarbeiterId + "_" + escape(mitarbeiterVorname) + "_" + escape(mitarbeiterNachname);
-	    	                	//var weinreUserId = company + mitarbeiterId;
 	                            var weinreUserIP = location.ip;
 	    	                	if (!toggleWeinre(weinreUserIP)) {
 	    	                		alert(M.I18N.l("fernwartungKonnteNichtGestartetWerden"));
