@@ -1144,13 +1144,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			if (errorHappened) {
 				return errorCallback();
 			} else {
-				// weiter in der Verarbeitungskette
-				//TODO: Müsste überflüssig sein, wird am Ende der Kette in afterTransfer -> BookingController.init() gemacht
-				if (DigiWebApp.BookingController.currentBooking == null) {
-					DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
-				} else {
-					DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-				}
 				return successCallback();
 			}
 			

@@ -168,13 +168,18 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId
             + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
-    	if (orderId && orderId == that.getSelectedOrderItem()) {
-	        return that.updatePositions(positionId, activityId, canUseCurrentBooking);
-	    }
-        if (!orderId && orderId != 0) orderId = that.getSelectedOrderItem();
-        if (!orderId) orderId = 0;
+    	//if (orderId && orderId == that.getSelectedOrderItem()) {
+	    //    return that.updatePositions(positionId, activityId, canUseCurrentBooking);
+	    //}
+        if (!orderId && orderId != 0) {
+            orderId = that.getSelectedOrderItem();
+        }
+        if (!orderId) {
+            orderId = 0;
+        }
 
-        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()); // we need to check handOrders also
+        // Handaufträge müssen auch geprüft werden
+        var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
 
         // Ohne diese Freischaltungen wird nur der Positionen-Webservice benutzt, der keine
         // Ordner ohne Aufträge liefert - in dem Fall können wir uns die langsame Filterung
@@ -263,16 +268,22 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (inDebug()) writeToLog('setPositions(positionId=' + positionId
             + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
-        if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
-            // alle "verknüpften Elemente" ebenfalls aktualisieren
-            that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
-            return that.setActivities(YES, canUseCurrentBooking, activityId);
+        //if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
+        //    // alle "verknüpften Elemente" ebenfalls aktualisieren
+        //    that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
+        //    return that.setActivities(YES, canUseCurrentBooking, activityId);
+        //}
+        if (!positionId && positionId != 0) {
+            positionId = that.getSelectedPositionItem();
         }
-        if (!positionId && positionId != 0) positionId = that.getSelectedPositionItem();
-        if (!positionId) positionId = 0;
+        if (!positionId) {
+            positionId = 0;
+        }
 
         var orderId = that.getSelectedOrderItem();
-        if (!orderId) return;
+        if (!orderId) {
+            return;
+        }
     	
         if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
     		M.ViewManager.getView('bookingPageWithIconsScholpp', 'uebernachtungskennzeichen').resetSelection();
@@ -339,7 +350,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setActivities: function(checkForWorkPlan, canUseCurrentBooking, activityId) {
     	var that = this;
     	
-    	if (activityId && activityId == that.getSelectedActivityItem()) return;
+    	//if (activityId && activityId == that.getSelectedActivityItem()) {
+	    //    return;
+	    //}
 
     	if (inDebug()) writeToLog('setActivities(checkForWorkPlan=' + checkForWorkPlan
             + ', canUseCurrentBooking=' + canUseCurrentBooking + ', activityId=' + activityId);
@@ -387,7 +400,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	}
         
         // Vorher ausgewählte Leistung übernehmen sofern keine explizit gesetzt werden soll.
-        if (!activityId && activityId != 0) activityId = that.getSelectedActivityItem();
+        if (!activityId && activityId != 0) {
+            activityId = that.getSelectedActivityItem();
+        }
         
         // activityId auf einen auswählbaren Wert zurücksetzen
     	if (!activityId || !_.contains(_.pluck(_.pluck(activities, 'record'), 'id'), activityId)) {

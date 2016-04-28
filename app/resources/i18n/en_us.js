@@ -575,4 +575,7 @@ M.I18N.en_us = {
     , fs431UebernachtungSelbstBezahlt: "Room paid by yourself (bill to be turned in as photo)"
 
     , kolonneAendern: "Change crew"
+
+    , distanceTooFar: "Distance too big"
+    , distanceTooFarMessage: "You are not allowed to enter a longer distance."
 };

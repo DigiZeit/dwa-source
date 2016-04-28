@@ -89,8 +89,8 @@ DigiWebApp.InfoPage = M.PageView.design({
     , content: M.ScrollView.design({
 
           childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel'
-			+ ' spacer9 versionLabel companyLabel streetLabel cityLabel phoneLabel'
-			+ ' emailLabel1 spacer1 emailLabel2 spacer2 spacer3 spacer4 deviceinfo spacer5'
+			+ ' spacer9 versionLabel spacer2 companyLabel streetLabel cityLabel phoneLabel'
+			+ ' emailLabel1 spacer1 emailLabel2 spacer3 spacer4 deviceinfo spacer5'
 			+ ' connectioninfo spacer6 cordovaVersionLabel environmentinfo spacer7'
 			+ ' localStorageUsage spacer10 toggleWeinreButton'
 
@@ -178,7 +178,11 @@ DigiWebApp.InfoPage = M.PageView.design({
                     return 'Version: ' + M.Application.getConfig('version');
                 }
             }
-            , cssClass: 'infoLabel unselectable'
+            , cssClass: 'infoLabel marginBottom25 unselectable'
+        })
+
+        , spacer2: M.LabelView.design({
+            value: ' '
         })
 
         , cordovaVersionLabel: M.LabelView.design({
@@ -196,11 +200,11 @@ DigiWebApp.InfoPage = M.PageView.design({
                     return output;
                 }
             }
-            , cssClass: 'infoLabel marginBottom25 unselectable'
+            , cssClass: 'infoLabel unselectable'
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7021'
+              value: 'Build: 7022'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -239,10 +243,6 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , spacer1: M.LabelView.design({
-            value: ' '
-        })
-
-        , spacer2: M.LabelView.design({
             value: ' '
         })
 
@@ -321,7 +321,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                     return output;
                 }
             }
-            , cssClass: 'infoLabel marginTop25 unselectable'
+            , cssClass: 'infoLabel unselectable'
         })
 
         , deviceinfo: M.LabelView.design({
