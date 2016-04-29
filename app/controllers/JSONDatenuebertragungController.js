@@ -1144,6 +1144,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			if (errorHappened) {
 				return errorCallback();
 			} else {
+				// weiter in der Verarbeitungskette
+			    DigiWebApp.SelectionController.updateNachUebertragung = true;
 				return successCallback();
 			}
 			

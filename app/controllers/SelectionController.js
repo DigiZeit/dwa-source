@@ -27,6 +27,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     // show hand order at first position, only set to YES by HandOrderController
     , showHandOrderFirst: NO
 
+    , updateNachUebertragung: true
+
     , uebernachtungskennzeichenScholpp: null
     
     , spesenkennzeichenScholpp: null
@@ -48,7 +50,9 @@ DigiWebApp.SelectionController = M.Controller.extend({
             uebernachtungAuswahl = that.setScholppButtons(uebernachtungAuswahl, YES);
             that.setUebernachtungskennzeichenScholpp(uebernachtungAuswahl);
 		}
-    }
+
+        that.updateNachUebertragung = false;
+      }
 
     , setSelectionWithCurrentHandOrderFirst: function() {
         var that = this;
@@ -66,6 +70,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
         	DigiWebApp.ScholppBookingController.resetButtons();    		
     	}
+
+        that.updateNachUebertragung = false;
     }
     
     , setSelectionByCurrentBooking: function() {
@@ -88,6 +94,8 @@ DigiWebApp.SelectionController = M.Controller.extend({
             uebernachtungAuswahl = that.setScholppButtons(uebernachtungAuswahl, YES, YES);
             that.setUebernachtungskennzeichenScholpp(uebernachtungAuswahl);
 		}
+
+        that.updateNachUebertragung = false;
     }
     
     , setUebernachtungskennzeichenScholpp: function(uebernachtungAuswahl) {
@@ -168,9 +176,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (inDebug()) writeToLog('setOrders(orderId=' + orderId + ', positionId=' + positionId
             + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
-    	//if (orderId && orderId == that.getSelectedOrderItem()) {
-	    //    return that.updatePositions(positionId, activityId, canUseCurrentBooking);
-	    //}
+    	if (orderId && orderId == that.getSelectedOrderItem()
+                && that.updateNachUebertragung === false
+        ) {
+	        return that.updatePositions(positionId, activityId, canUseCurrentBooking);
+	    }
         if (!orderId && orderId != 0) {
             orderId = that.getSelectedOrderItem();
         }
@@ -268,11 +278,13 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	if (inDebug()) writeToLog('setPositions(positionId=' + positionId
             + ', activityId=' + activityId + ", canUseCurrentBooking=" + canUseCurrentBooking);
 
-        //if (hasValue(positionId) && positionId == that.getSelectedPositionItem()) {
-        //    // alle "verknüpften Elemente" ebenfalls aktualisieren
-        //    that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
-        //    return that.setActivities(YES, canUseCurrentBooking, activityId);
-        //}
+    	if (hasValue(positionId) && positionId == that.getSelectedPositionItem()
+                 && that.updateNachUebertragung === false
+        ) {
+            // alle "verknüpften Elemente" ebenfalls aktualisieren
+            that.setSelectedPosition(that.getSelectedPosition(), canUseCurrentBooking);
+            return that.setActivities(YES, canUseCurrentBooking, activityId);
+        }
         if (!positionId && positionId != 0) {
             positionId = that.getSelectedPositionItem();
         }
@@ -350,9 +362,11 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , setActivities: function(checkForWorkPlan, canUseCurrentBooking, activityId) {
     	var that = this;
     	
-    	//if (activityId && activityId == that.getSelectedActivityItem()) {
-	    //    return;
-	    //}
+    	if (activityId && activityId == that.getSelectedActivityItem()
+                && that.updateNachUebertragung === false
+        ) {
+	        return;
+	    }
 
     	if (inDebug()) writeToLog('setActivities(checkForWorkPlan=' + checkForWorkPlan
             + ', canUseCurrentBooking=' + canUseCurrentBooking + ', activityId=' + activityId);

@@ -576,5 +576,5 @@ M.I18N.de_de = {
     , kolonneAendern: "Kolonne ändern"
 
     , distanceTooFar: "Entfernung zu groß"
-    , distanceTooFarMessage: "Sie können keine größere Entfernung eingeben."
+    , distanceTooFarMessage: "Die eingegebene Entfernung ist zu groß (max. 99999 km)."
 };

@@ -90,7 +90,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 
           childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel'
 			+ ' spacer9 versionLabel spacer2 companyLabel streetLabel cityLabel phoneLabel'
-			+ ' emailLabel1 spacer1 emailLabel2 spacer3 spacer4 deviceinfo spacer5'
+			+ ' emailLabel1 spacer1 emailLabel2 spacer3 deviceinfo spacer5'
 			+ ' connectioninfo spacer6 cordovaVersionLabel environmentinfo spacer7'
 			+ ' localStorageUsage spacer10 toggleWeinreButton'
 
@@ -204,7 +204,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7023'
+              value: 'Build: 7024'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -307,7 +307,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                     return output;
                 }
             }
-            , cssClass: 'infoLabel marginTop25 unselectable'
+            , cssClass: 'infoLabel unselectable'
         })
 
         , environmentinfo: M.LabelView.design({
@@ -338,7 +338,7 @@ DigiWebApp.InfoPage = M.PageView.design({
                     return output;
                 }
             }
-            , cssClass: 'infoLabel marginTop25 unselectable'
+            , cssClass: 'infoLabel unselectable'
         })
 
         , connectioninfo: M.LabelView.design({

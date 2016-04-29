@@ -355,128 +355,144 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
     , tab_action_timeoutvar: null
     
     , tab_action: function() {
-    	clearTimeout(DigiWebApp.EditTimeDataPage.tab_action_timeoutvar);
-    	
-    	var unterschriftString = "";
-    	// Freischaltung 405: Unterschrift
-    	if ((DigiWebApp.SettingsController.featureAvailable('405'))
-                && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.EditTimeDataPage.signaturePadAPI
-        ) {
-    		unterschriftString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureString();
-		}
-    	
-    	if (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value.length > 255) {
-	        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-    		DigiWebApp.ApplicationController.nativeAlertDialogView({
-    			  title: M.I18N.l('remarkTooLong')
-    			, message: M.I18N.l('remarkTooLongMessage')
-    		});
-		} else {
-			
-    	    if ((DigiWebApp.SettingsController.getSetting('remarkIsMandatory'))
+        clearTimeout(DigiWebApp.EditTimeDataPage.tab_action_timeoutvar);
+
+        if (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value.length > 255) {
+            DigiWebApp.ApplicationController.DigiLoaderView.hide();
+            DigiWebApp.ApplicationController.nativeAlertDialogView({
+                title: M.I18N.l('remarkTooLong'),
+                message: M.I18N.l('remarkTooLongMessage')
+            });
+        } else {
+            if ((DigiWebApp.SettingsController.getSetting('remarkIsMandatory'))
                     && (M.ViewManager.getView('editTimeDataPage', 'remarkInput').value === '')
             ) {
-		        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    		DigiWebApp.ApplicationController.nativeAlertDialogView({
-	    			  title: M.I18N.l('remarkIsMandatory')
-	    			, message: M.I18N.l('remarkIsMandatoryMessage')
-	    		});
-			} else {
-	            //if (/[[^a-zA-Z0-9_-äöüÄÖÜ,. !?;:/\\@€=]]+/.test(M.ViewManager.getView('editTimeDataPage', 'remarkInput').value)) {
-	            if (DigiWebApp.ApplicationController.sonderzeichenCheck(M.ViewManager.getView('editTimeDataPage', 'remarkInput').value)) {
-	    	        DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	                DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                      title: M.I18N.l('specialCharProblem')
-	                    , message: M.I18N.l('specialCharProblemMsg')
-	                });
-	            } else {
-	                if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
-	                    // Aktuelle Buchung speichern
-	                    DigiWebApp.BookingController.currentBooking.set('remark',
-                            M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
+                DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                DigiWebApp.ApplicationController.nativeAlertDialogView({
+                    title: M.I18N.l('remarkIsMandatory'),
+                    message: M.I18N.l('remarkIsMandatoryMessage')
+                });
+            } else {
+                //if (/[[^a-zA-Z0-9_-äöüÄÖÜ,. !?;:/\\@€=]]+/.test(
+                //M.ViewManager.getView('editTimeDataPage', 'remarkInput').value)) {
+                if (DigiWebApp.ApplicationController.sonderzeichenCheck(
+                        M.ViewManager.getView('editTimeDataPage', 'remarkInput').value)) {
+                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                    DigiWebApp.ApplicationController.nativeAlertDialogView({
+                        title: M.I18N.l('specialCharProblem'),
+                        message: M.I18N.l('specialCharProblemMsg')
+                    });
+                } else {
+                    var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage',
+                        'gefahreneKilometerInput').value);
 
-	                    var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage',
-                            'gefahreneKilometerInput').value);
-	                    DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
+                    if (km > 99999) {
+                        DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                        DigiWebApp.ApplicationController.nativeAlertDialogView({
+                            title: M.I18N.l('distanceTooFar'),
+                            message: M.I18N.l('distanceTooFarMessage')
+                        });
+                    } else {
+                        DigiWebApp.EditTimeDataPage.speichereBuchung();
+                    }
+                }
+            } // if/else remark = ''
+        } // if/else remark > 255
+    }
 
-	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                        // Fahrtkostenauswahl als Spesenauswahl speichern
-	                        if (km !== 0) {
-	                            // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
-                                // dass der User hin und her ändert.
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
-	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
-                                        'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
-	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
-	                            'editTimeDataPage', 'reisekostenBusBahn') === YES) {
-	                            DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
-	                                DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
-	                        }
+    , speichereBuchung: function () {
+        var unterschriftString = "";
+        // Freischaltung 405: Unterschrift
+        if ((DigiWebApp.SettingsController.featureAvailable('405'))
+                && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.EditTimeDataPage.signaturePadAPI
+        ) {
+            unterschriftString = DigiWebApp.EditTimeDataPage.signaturePadAPI.getSignatureString();
+        }
 
-	                        var sel = M.ViewManager.getView('editTimeDataPage', 
-                                'uebernachtungskosten').getSelection(YES);
-                            if (hasValue(sel)) {
-                                DigiWebApp.BookingController.currentBooking.set(
-                                    'uebernachtungAuswahl', sel.value);
-                            }
-                        }
+        var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage',
+            'gefahreneKilometerInput').value);
 
-	                    DigiWebApp.BookingController.currentBooking.save();
+        if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
+	        // Aktuelle Buchung speichern
+	        DigiWebApp.BookingController.currentBooking.set('remark',
+                M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
 
-	                    DigiWebApp.EditTimeDataPage.myCallback();
-	                } else {
-	                    // Bemerkung, gefahreneKilometer etc in bookingToEdit speichern
-	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('remark',
-                            M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
+   	        DigiWebApp.BookingController.currentBooking.set('gefahreneKilometer', km);
 
-	                    var km = parseIntRadixTen(M.ViewManager.getView('editTimeDataPage', 'gefahreneKilometerInput').value);
-	                    if (!hasValue(km)) {
-                            // zweifelsfrei markieren, dass gespeichert wurde
-	                        km = 0;
-	                    }
-
-	                    DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', km);
-
-	                    if (DigiWebApp.SettingsController.featureAvailable('431')) {
-	                        // Reisekostenauswahl als Spesenauswahl speichern
-	                        if (km !== 0) {
-	                            // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
-	                            // dass der User hin und her ändert.
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl',
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
-	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
-                                        'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
-	                        } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
-                                        'editTimeDataPage', 'reisekostenBusBahn') === YES) {
-	                            DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
-                                    DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
-	                        }
-	                    }
-
-	                    if (unterschriftString !== "") {
-	                        // save signature
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set('fileType',
-                                DigiWebApp.ApplicationController.CONSTTextFiletype);
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_breite",
-                                DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasWidth);
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_hoehe",
-                                DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasHeight);
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.save();
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.saveToFile(
-                                unterschriftString, DigiWebApp.EditTimeDataPage.myCallback);
-	                    } else {
-	                        DigiWebApp.EditTimeDataPage.bookingToEdit.save();
-	                        DigiWebApp.EditTimeDataPage.myCallback();
-	                    }
-	                }
+	        if (DigiWebApp.SettingsController.featureAvailable('431')) {
+	            // Fahrtkostenauswahl als Spesenauswahl speichern
+	            if (km !== 0) {
+	                // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
+                    // dass der User hin und her ändert.
+	                DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+                        DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
+	            } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                            'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
+	                DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+                        DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
+	            } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+	                'editTimeDataPage', 'reisekostenBusBahn') === YES) {
+	                DigiWebApp.BookingController.currentBooking.set('spesenAuswahl',
+	                    DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
 	            }
-			}
-		}
+
+	            var sel = M.ViewManager.getView('editTimeDataPage', 
+                    'uebernachtungskosten').getSelection(YES);
+                if (hasValue(sel)) {
+                    DigiWebApp.BookingController.currentBooking.set(
+                        'uebernachtungAuswahl', sel.value);
+                }
+            }
+
+	        DigiWebApp.BookingController.currentBooking.save();
+
+	        DigiWebApp.EditTimeDataPage.myCallback();
+	    } else {
+	        // Bemerkung, gefahreneKilometer etc in bookingToEdit speichern
+	        DigiWebApp.EditTimeDataPage.bookingToEdit.set('remark',
+                M.ViewManager.getView('editTimeDataPage', 'remarkInput').value);
+
+	        if (!hasValue(km)) {
+                // zweifelsfrei markieren, dass gespeichert wurde
+	            km = 0;
+	        }
+
+	        DigiWebApp.EditTimeDataPage.bookingToEdit.set('gefahreneKilometer', km);
+
+	        if (DigiWebApp.SettingsController.featureAvailable('431')) {
+	            // Reisekostenauswahl als Spesenauswahl speichern
+	            if (km !== 0) {
+	                // Auch hier muss eine Spesenauswahl gesetzt werden, für den Fall
+	                // dass der User hin und her ändert.
+	                DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl',
+                        DigiWebApp.BookingController.constFs431SpesenauswahlPrivatPkw);
+	            } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                            'editTimeDataPage', 'reisekostenFirmenwagen') === YES) {
+	                DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
+                        DigiWebApp.BookingController.constFs431SpesenauswahlFirmenwagen);
+	            } else if (DigiWebApp.EditTimeDataPage.getCheckboxValue(
+                            'editTimeDataPage', 'reisekostenBusBahn') === YES) {
+	                DigiWebApp.EditTimeDataPage.bookingToEdit.set('spesenAuswahl', 
+                        DigiWebApp.BookingController.constFs431SpesenauswahlBusBahn);
+	            }
+	        }
+
+	        if (unterschriftString !== "") {
+	            // save signature
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.set('fileType',
+                    DigiWebApp.ApplicationController.CONSTTextFiletype);
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_breite",
+                    DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasWidth);
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.set("unterschrift_hoehe",
+                    DigiWebApp.EditTimeDataPage.content.signature.signatureform.signaturecanvas.canvasHeight);
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.save();
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.saveToFile(
+                    unterschriftString, DigiWebApp.EditTimeDataPage.myCallback);
+	        } else {
+	            DigiWebApp.EditTimeDataPage.bookingToEdit.save();
+	            DigiWebApp.EditTimeDataPage.myCallback();
+	        }
+	    }
     }
 
     , getCheckboxValue: function (pageName, viewName) {

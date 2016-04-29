@@ -577,5 +577,5 @@ M.I18N.en_us = {
     , kolonneAendern: "Change crew"
 
     , distanceTooFar: "Distance too big"
-    , distanceTooFarMessage: "You are not allowed to enter a longer distance."
+    , distanceTooFarMessage: "The distance you entered is too big (max. 99999 km)."
 };
