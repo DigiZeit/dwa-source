@@ -316,9 +316,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	    // Bei Ausführung im Browser den Server, von dem die App geladen wurde, als Gateway verwenden.
 	    // MB: Das heisst, dass im Browser NIE für empfangeUrl auf primary.digi-gateway.de umgeleitet wird!
         // Siehe auch Kommentar zum Zurückfallen auf HTTP in recieveDataWithServerAuthenticated().
-    	//if (typeof(device) === "undefined") {
-    	//    myGatewayServer = location.host;
-    	//}
+    	if (typeof(device) === "undefined") {
+    	    myGatewayServer = location.host;
+    	}
 
     	var successFunc = function(data, msg, xhr) {
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
