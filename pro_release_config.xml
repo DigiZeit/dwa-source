@@ -56,7 +56,7 @@
   <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
   <preference name="prerendered-icon" value="false" />
 
-  <!-- ios: control whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
+  <!-- ios: controls whether the screen "bounces" when scrolled beyond the top or bottom on iOS. By default, the bounce is on -->
   <preference name="webviewbounce" value="false" />
 	<preference name="disallowOverscroll" value="true" />
 	<preference name="DisallowOverscroll" value="true" />

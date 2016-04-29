@@ -27,7 +27,7 @@ DigiWebApp.SelectionController = M.Controller.extend({
     // show hand order at first position, only set to YES by HandOrderController
     , showHandOrderFirst: NO
 
-    , updateNachUebertragung: true
+    , updateNachUebertragung: false
 
     , uebernachtungskennzeichenScholpp: null
     
