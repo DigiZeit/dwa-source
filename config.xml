@@ -3,8 +3,8 @@
 	xmlns:gap	  = "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		      = "com.digi.webappbeta"
-	versionCode   = "7028"
-	version 	  = "1.8.6.7028">
+	versionCode   = "7029"
+	version 	  = "1.8.6.7029">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -71,18 +71,17 @@
 
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
   <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
-  <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.13" />
-  <gap:plugin name="cordova-plugin-contacts" source="npm" version="0.2.16" />
+  <gap:plugin name="cordova-plugin-console" source="npm" version="1.0.3" />
+  <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.1.0" />
   <gap:plugin name="cordova-plugin-device" source="npm" version="0.3.0" />
-  <gap:plugin name="cordova-plugin-dialogs" source="npm" version="0.3.0" />
-  <gap:plugin name="cordova-plugin-file" source="npm" version="1.3.3" />
-  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="0.3.12" />
+  <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
+  <gap:plugin name="cordova-plugin-file" source="npm" version="4.2.0" />
+  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
   <!--<gap:plugin name="cordova-plugin-inappbrowser" version="1.0.1" source='npm' /> -->
   <!-- for newer phonegap -->
-  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="0.6.0" />
-  <gap:plugin name="cordova-plugin-media-capture" source="npm" version="0.3.3" />
-  <gap:plugin name="cordova-plugin-network-information" source="npm" version="0.2.15" />
-  <!-- <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" /> -->
+  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.4.0" />
+  <gap:plugin name="cordova-plugin-media-capture" source="npm" version="1.3.0" />
+  <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
 
@@ -91,7 +90,7 @@
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
   <!-- Nicht aktualisieren, wurde bei 1.8.3.6583 wieder rückgängig gemacht. -->
-  <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" />
+  <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.4" />
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" /> -->
 
   <!-- prevent screen-sleep -->
@@ -104,10 +103,10 @@
 
   <!-- iOS9 -->
   <!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
-  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.3" />
+  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" />
 
   <!-- Plugin and config to enable and restrict network access -->
-  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.1" />
+  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
 
   <access origin="*" subdomains="true" />
   <access origin="http://127.0.0.1*" subdomains="true" />
@@ -122,7 +121,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7028</string>
+    <string>7029</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
