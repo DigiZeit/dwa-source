@@ -88,7 +88,7 @@
   <gap:plugin name="wellbload.cordova.background-geolocation" source="pgb" version="0.3.4" />
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
-  <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" />
+  <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.7.5" />
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" version="0.8.2" /> -->
 
   <!-- prevent screen-sleep -->
@@ -101,10 +101,10 @@
 
   <!-- iOS9 -->
   <!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
-  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.3" />
+  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" />
 
   <!-- Plugin and config to enable and restrict network access -->
-  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.1" />
+  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
 
   <access origin="*" subdomains="true" />
   <access origin="http://127.0.0.1*" subdomains="true" />
