@@ -104,7 +104,7 @@
   <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.3" />
 
   <!-- Plugin and config to enable and restrict network access -->
-  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
+  <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.1" />
 
   <access origin="*" subdomains="true" />
   <access origin="http://127.0.0.1*" subdomains="true" />
