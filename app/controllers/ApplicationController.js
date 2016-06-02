@@ -1017,7 +1017,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , backButtonTimeoutVar: null
     
     , backbuttonhandler: function() {
-    	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+	    if (inDebug()) {
+	        writeToLog('ApplicationController.backbuttonhandler()');
+	    }
+	    var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (DigiWebApp.SettingsController.HasCredentials()) {
 	    	if (
 	    	   (DigiWebApp.TabBar.tabItem1.isActive) 
