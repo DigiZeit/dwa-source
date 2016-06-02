@@ -950,9 +950,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 	, realDeviceReadyHandler: function() {
 		var that = this;
-		
-		if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
-		if (!that.realdevicereadyhandlerDone) that.realdevicereadyhandlerDone = true;
+
+	    if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) {
+	        clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+	    }
+	    if (!that.realdevicereadyhandlerDone) {
+	        that.realdevicereadyhandlerDone = true;
+	    }
 
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
@@ -981,14 +985,22 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); };}, 1000);
 		}
     	
-    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+    	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) {
+	        clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
+	    }
 		
     	DigiWebApp.ApplicationController.setImageClass();
 	
     	DigiWebApp.ApplicationController.init(true);
 
-        if ((this.skipEvents !== true) || (( M.Environment.getPlatform().substr(0,10) === "BlackBerry") && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-        	$(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
+    	if ((this.skipEvents !== true)
+            || ((M.Environment.getPlatform().substr(0, 10) === "BlackBerry")
+                && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
+       	    if (inDebug()) {
+	           writeToLog('ApplicationController.backbuttonhandler()');
+    	    }
+
+            $(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
         	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
         }
 	}

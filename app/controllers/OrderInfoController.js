@@ -380,7 +380,11 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	   	eMail[0] = new ContactField('work', myemail, true);
 	   	myContact.emails = eMail;
 
-        //addresses: An array of all the contact's addresses. (ContactAddresses[])
+        if (inDebug()) {
+            writeToLog('OrderInfoController.saveAsContactSave() myContact erweitert');
+        }
+
+          //addresses: An array of all the contact's addresses. (ContactAddresses[])
         var myContactAdress = new ContactAddress();
 			//pref: Set to true if this ContactAddress contains the user's preferred value. (boolean)
     		//myContactAdress.pref = true; //mostly unsupported
@@ -396,6 +400,10 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
         	myContactAdress.postalCode = item.positionPLZ;
 			//country: The country name. (DOMString)
         	myContactAdress.country = item.positionLand;
+
+        if (inDebug()) {
+            writeToLog('OrderInfoController.saveAsContactSave() myContactAdress erzeugt');
+        }
 
            	if (myContact.addresses === null)	{
            		var addresses = [myContactAdress];
