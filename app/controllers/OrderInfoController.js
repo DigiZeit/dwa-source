@@ -351,13 +351,13 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
         
 		//name: An object containing all components of a persons name. (ContactName)
     	var myContactName = new ContactName();
-	    	//formatted: The complete name of the contact. (DOMString)
-	    	//familyName: The contacts family name. (DOMString)
-	    	//givenName: The contacts given name. (DOMString)
-	    	//middleName: The contacts middle name. (DOMString)
-	    	//honorificPrefix: The contacts prefix (example Mr. or Dr.) (DOMString)
-	    	//honorificSuffix: The contacts suffix (example Esq.). (DOMString)
-		myContactName.givenName = M.I18N.l('orderInfo');
+	    //formatted: The complete name of the contact. (DOMString)
+	    //familyName: The contacts family name. (DOMString)
+	    //givenName: The contacts given name. (DOMString)
+	    //middleName: The contacts middle name. (DOMString)
+	    //honorificPrefix: The contacts prefix (example Mr. or Dr.) (DOMString)
+	    //honorificSuffix: The contacts suffix (example Esq.). (DOMString)
+		myContactName.givenName = JSON.parse(JSON.stringify(M.I18N.l('orderInfo')));
 		myContactName.familyName = item.orderName + ", " + item.positionName;
 		myContactName.honorificPrefix = 'DIGI-WebApp';
 	   	myContact.name = myContactName;
@@ -384,22 +384,22 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
             writeToLog('OrderInfoController.saveAsContactSave() myContact erweitert');
         }
 
-          //addresses: An array of all the contact's addresses. (ContactAddresses[])
+        //addresses: An array of all the contact's addresses. (ContactAddresses[])
         var myContactAdress = new ContactAddress();
-			//pref: Set to true if this ContactAddress contains the user's preferred value. (boolean)
-    		//myContactAdress.pref = true; //mostly unsupported
-			//type: A string that tells you what type of field this is (example: 'home'). _(DOMString)
-        	myContactAdress.type = "Work";
-			//formatted: The full address formatted for display. (DOMString)
-			//streetAddress: The full street address. (DOMString)
-        	myContactAdress.streetAddress = item.positionStrasseUndHausnummer;
-			//locality: The city or locality. (DOMString)
-        	myContactAdress.locality = item.positionOrt;
-			//region: The state or region. (DOMString)
-			//postalCode: The zip code or postal code. (DOMString)
-        	myContactAdress.postalCode = item.positionPLZ;
-			//country: The country name. (DOMString)
-        	myContactAdress.country = item.positionLand;
+		//pref: Set to true if this ContactAddress contains the user's preferred value. (boolean)
+    	//myContactAdress.pref = true; //mostly unsupported
+		//type: A string that tells you what type of field this is (example: 'home'). _(DOMString)
+        myContactAdress.type = "Work";
+		//formatted: The full address formatted for display. (DOMString)
+		//streetAddress: The full street address. (DOMString)
+        myContactAdress.streetAddress = item.positionStrasseUndHausnummer;
+		//locality: The city or locality. (DOMString)
+        myContactAdress.locality = item.positionOrt;
+		//region: The state or region. (DOMString)
+		//postalCode: The zip code or postal code. (DOMString)
+        myContactAdress.postalCode = item.positionPLZ;
+		//country: The country name. (DOMString)
+        myContactAdress.country = item.positionLand;
 
         if (inDebug()) {
             writeToLog('OrderInfoController.saveAsContactSave() myContactAdress erzeugt');
@@ -421,8 +421,8 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
         //photos: An array of the contact's photos. (ContactField[])
 		//categories: An array of all the contacts user defined categories. (ContactField[])
 		//urls: An array of web pages associated to the contact. (ContactField[])
-
-		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('saveAsContact'));
+        //TODO Text zurückändern!
+		DigiWebApp.ApplicationController.DigiLoaderView.show("Kontakt wird gespeichert");
 		myContact.save(
             DigiWebApp.OrderInfoController.saveAsContactSuccess,
             DigiWebApp.OrderInfoController.saveAsContactError);
