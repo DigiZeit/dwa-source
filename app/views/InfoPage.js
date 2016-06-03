@@ -191,7 +191,9 @@ DigiWebApp.InfoPage = M.PageView.design({
                 , operation: function(v) {
                 	var output = '';
                 	if (typeof(device) !== "undefined") {
-                		if (typeof(device.cordova) !== "undefined") output = output + 'Cordova: ' + device.cordova;
+                		if (typeof(device.cordova) !== "undefined") {
+							output = output + 'Cordova: ' + device.cordova;
+						}
                 		if (typeof(device.phonegap) !== "undefined") {
                 			if (output !== "") output = output + "<br/>"; 
                 			output = output + 'PhoneGap: ' + device.phonegap;
@@ -204,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7042'
+              value: 'Build: 7043'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 

@@ -101,7 +101,7 @@
 
   <!-- iOS9 -->
   <!-- <gap:plugin name='@telerik/cordova-plugin-wkwebview' source='npm' version='0.6.3' /> --> <!-- "plugin unsupported" :-( -->
-  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" />
+  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.3" />
 
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
