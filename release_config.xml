@@ -35,7 +35,7 @@
   <preference name="fullscreen" value="false" />
 	<preference name="autorotate" value="true" readonly="false" />
   <platform name="ios">
-    <preference name="orientation" value="portrait" />
+    <preference name="orientation" value="default" />
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
@@ -98,7 +98,7 @@
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
   <!-- iOS9 -->
-  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.3" />
+  <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" />
 
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />

@@ -182,7 +182,7 @@ M.I18N.en_us = {
 	, saveAsContact: "As contact"
 	, saveAsContactSuccess: "Contact successfully saved"
 	, saveAsContactError: "Saving failed"
-	, noContactsAvailable: "Contacts not available"
+	, noContactsAvailable: "Contacts are not available on this platform."
 	, contactExistsMultiple: "The contact for this order exists multiple times!"
 	, saveAsContactChangeQuestionTitle: "Change contact?"
 	, saveAsContactChangeQuestionMsg: "A matching contact was found. Do you want to change that contact?"

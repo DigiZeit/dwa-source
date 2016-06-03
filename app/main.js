@@ -1068,33 +1068,35 @@ if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	}
 }
 
-function scrStr(to_enc, scrId) {
-	var result="";
-	for (var i=0; i < to_enc.length; ++i) {
-		result+=String.fromCharCode(scrId^to_enc.charCodeAt(i));
+function scrStr(toEnc, scrId) {
+	var result = "";
+	for (var i = 0; i < toEnc.length; ++i) {
+		result += String.fromCharCode(scrId ^ toEnc.charCodeAt(i));
 	}
 	return result;
 }
 
-function unScrStr(to_dec, scrId) {
-	var result="";
-	for(var i=0; i<to_dec.length; i++) {
-		result+=String.fromCharCode(scrId^to_dec.charCodeAt(i));
+function unScrStr(toDec, scrId) {
+	var result = "";
+	for (var i = 0; i < toDec.length; i++) {
+		result += String.fromCharCode(scrId ^ toDec.charCodeAt(i));
 	}
 	return result;
 }
 
 var ua = navigator.userAgent;
-var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua)
-var onIOS = /iPhone|iPad|iPod/i.test(ua)
-var onAndroid = /Android/i.test(ua)
+var onMobile = /Android|webOS|PlayBook|Kindle|Kindle Fire|Opera Mobi|Windows Phone|iPhone|iPad|iPod|BlackBerry/i.test(ua);
+var onIOS = /iPhone|iPad|iPod/i.test(ua);
+var onAndroid = /Android/i.test(ua);
+var onWindowsPhone = /Windows Phone/i.test(ua);
 var onSamsung = /Samsung|GT\-|SM\-/i.test(ua);
 var onAndroid23 = false;
 var onAndroid3 = false;
 var onAndroid4 = false;
 var onAndroid5 = false;
-if ( onAndroid ) {
-  var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+
+if (onAndroid) {
+  var androidversion = parseFloat(ua.slice(ua.indexOf("Android") + 8)); 
     if (androidversion < 3) {
       onAndroid23 = true;
   } else if (androidversion < 4) {
@@ -1105,6 +1107,7 @@ if ( onAndroid ) {
 	  onAndroid5 = true;
   }
 }
+
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	// we will reset the design to DigiWebAppOrdinaryDesign later on in SplashViewPage.onPageshow
 	DigiWebApp.app = M.Application.design(DigiWebAppBlackBerryDesign);

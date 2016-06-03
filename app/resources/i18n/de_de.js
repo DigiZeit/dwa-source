@@ -182,7 +182,7 @@ M.I18N.de_de = {
 	, saveAsContact: "Als Kontakt"
 	, saveAsContactSuccess: "Kontakt erfolgreich gespeichert"
 	, saveAsContactError: "Speichern fehlgeschlagen"
-	, noContactsAvailable: "Kontakte nicht verfügbar"
+	, noContactsAvailable: "Kontakte sind auf dieser Plattform nicht verfügbar."
 	, contactExistsMultiple: "Der Kontakt für diesen Auftrag existiert mehrfach!"
 	, saveAsContactChangeQuestionTitle: "Kontakt ändern?"
 	, saveAsContactChangeQuestionMsg: "Es wurde ein passender Kontakt gefunden. Möchten Sie diesen ändern?"

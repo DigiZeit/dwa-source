@@ -366,7 +366,10 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var latitude = DigiWebApp.OrderInfoController.items[0].positionLatitude;
 						var longitude = DigiWebApp.OrderInfoController.items[0].positionLongitude;
 						var zoom = '15';
-                        if ((longitude === '0.0' && latitude === '0.0') || (longitude === 0 && latitude === 0)) {
+						if ((longitude === '0.0' && latitude === '0.0')
+                            || (longitude === '0' && latitude === '0')
+                            || (longitude === '' && latitude === '')
+                            || (longitude === 0 && latitude === 0)) {
                             return;
                         }
 						var urlByCoordinates = "https://";

@@ -15,11 +15,9 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     , activeOrder: null
     , activePosition: null
     , items: []
-    //, debugitems: []
 
     /*
-    * Sample function
-    * To handle the first load of a page.
+    * Handle the first load of a page.
     */
     , init: function(isFirstLoad) {
         if (isFirstLoad) {
@@ -53,7 +51,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	            return obj;
 	        });
 	        orderArray = _.compact(orderArray);
-	        // push "Bitte wählen Option"
+	        // "Bitte wählen" zur Auswahlliste hinzufügen
 	        if (itemSelected === NO) orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
 	        
 	        itemSelected = NO;
@@ -77,7 +75,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	        	return obj;
 	        });
 	        positionArray = _.compact(positionArray);
-	        // push "Bitte wählen Option"
+	        // "Bitte wählen" zur Auswahlliste hinzufügen
 	        if (itemSelected === NO) positionArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
         } else {
 	        orderArray = _.map(orders, function(order) {
@@ -91,7 +89,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	            return obj;
 	        });
 	        orderArray = _.compact(orderArray);
-	        // push "Bitte wählen Option"
+	        // "Bitte wählen" zur Auswahlliste hinzufügen
 	        if (itemSelected === NO) orderArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
 	        
 	        itemSelected = NO;
@@ -217,8 +215,11 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     }
 
     , saveAsContact: function() {
-    	// are we on a mobile device with navigator.contacts?
-    	if (typeof(navigator.contacts) === "undefined") {
+        // Im Browser sowie bei iOS, Android 2.3 und Windows Phone (siehe Ticket 4083)
+        // das Speichern in den Kontakten sperren - weil es nicht funktioniert.
+        if ((typeof(navigator.contacts) === "undefined")
+            || onIOS || onAndroid23 || onWindowsPhone
+        ) {
     		DigiWebApp.ApplicationController.nativeAlertDialogView({
     			  title: M.I18N.l('saveAsContact')
     			, message: M.I18N.l('noContactsAvailable')
@@ -226,8 +227,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     		return;
     	}
     	var item = DigiWebApp.OrderInfoController.items[0];
-    	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("searching contact for orderName=" + item.orderName + ", positionName=" + item.positionName);
-    	// try to load the contact to prevent duplicates
+    	// Try to load the contact to prevent duplicates
     	var options = new ContactFindOptions();
     	options.filter = item.orderName + ", " + item.positionName; 
     	var fields = ["displayName", "name", "givenName", "familyName"];
@@ -356,7 +356,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	    //middleName: The contacts middle name. (DOMString)
 	    //honorificPrefix: The contacts prefix (example Mr. or Dr.) (DOMString)
 	    //honorificSuffix: The contacts suffix (example Esq.). (DOMString)
-		myContactName.givenName = JSON.parse(JSON.stringify(M.I18N.l('orderInfo')));
+		myContactName.givenName = M.I18N.l('orderInfo');
 		myContactName.familyName = item.orderName + ", " + item.positionName;
 		myContactName.honorificPrefix = 'DIGI-WebApp';
 	   	myContact.name = myContactName;
@@ -378,10 +378,6 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 	   	try { myemail = item.positionEmail; } catch(e3) { trackError(e3); }
 	   	eMail[0] = new ContactField('work', myemail, true);
 	   	myContact.emails = eMail;
-
-        if (inDebug()) {
-            writeToLog('OrderInfoController.saveAsContactSave() myContact erweitert');
-        }
 
         //addresses: An array of all the contact's addresses. (ContactAddresses[])
         var myContactAdress = new ContactAddress();
@@ -418,10 +414,8 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		//categories: An array of all the contacts user defined categories. (ContactField[])
         //urls: An array of web pages associated to the contact. (ContactField[])
 
-        var saveContact = JSON.parse(JSON.stringify(myContact));
-        
 		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('saveAsContact'));
-		saveContact.save(
+		myContact.save(
             DigiWebApp.OrderInfoController.saveAsContactSuccess,
             DigiWebApp.OrderInfoController.saveAsContactError);
     }
