@@ -331,7 +331,6 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     }
     
     , saveAsContactFoundError: function() {
-    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 		DigiWebApp.ApplicationController.nativeAlertDialogView({
 			  title: M.I18N.l('saveAsContact')
 			, message: M.I18N.l('error')
@@ -339,7 +338,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		return;
     }
     
-    , saveAsContactSave: function (myContact) {
+    , saveAsContactSave: function(myContact) {
         if (inDebug()) {
             writeToLog('OrderInfoController.saveAsContactSave()');
             writeToLog(myContact);
@@ -401,29 +400,28 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		//country: The country name. (DOMString)
         myContactAdress.country = item.positionLand;
 
-        if (inDebug()) {
-            writeToLog('OrderInfoController.saveAsContactSave() myContactAdress erzeugt');
+        if (myContact.addresses === null)	{
+           	var addresses = [myContactAdress];
+            myContact.addresses = addresses;
+        } else {
+           	myContact.addresses[0] = myContactAdress;
         }
-
-           	if (myContact.addresses === null)	{
-           		var addresses = [myContactAdress];
-            	myContact.addresses = addresses;
-           	} else {
-           		myContact.addresses[0] = myContactAdress;
-           	}
         	
         //ims: An array of all the contact's IM addresses. (ContactField[])
 		//organizations: An array of all the contact's organizations. (ContactOrganization[])
 		//birthday: The birthday of the contact. (Date)
 		//note: A note about the contact. (DOMString)
         var dateNow = new Date();
-        myContact.note = item.positionBeschreibung + " (" + M.I18N.l('contactLastChange') + ": " + dateNow.toString() + ")";
+        myContact.note = item.positionBeschreibung + " (" + M.I18N.l('contactLastChange') + ": "
+            + dateNow.toString() + ")";
         //photos: An array of the contact's photos. (ContactField[])
 		//categories: An array of all the contacts user defined categories. (ContactField[])
-		//urls: An array of web pages associated to the contact. (ContactField[])
-        //TODO Text zurückändern!
-		DigiWebApp.ApplicationController.DigiLoaderView.show("Kontakt wird gespeichert");
-		myContact.save(
+        //urls: An array of web pages associated to the contact. (ContactField[])
+
+        var saveContact = JSON.parse(JSON.stringify(myContact));
+        
+		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('saveAsContact'));
+		saveContact.save(
             DigiWebApp.OrderInfoController.saveAsContactSuccess,
             DigiWebApp.OrderInfoController.saveAsContactError);
     }
