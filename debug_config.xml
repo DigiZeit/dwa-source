@@ -35,7 +35,7 @@
   <preference name="fullscreen" value="false" />
   <preference name="autorotate" value="true" readonly="false" />
   <platform name="ios">
-    <preference name="orientation" value="default" />
+    <preference name="orientation" value="portrait" />
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
