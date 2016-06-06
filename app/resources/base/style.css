@@ -1,0 +1,1996 @@
+body {
+    background-color: #ffffff !important;
+    background-image: url('images/roter_balken.png') !important;
+    background-position:right bottom !important;
+    background-repeat:repeat-y !important;
+    background-attachment:fixed !important; 
+}
+
+.ui-body-c {
+/*	color: #fff !important;*/
+	text-weight: bold;
+}
+
+.ui-page {
+	/* -webkit-backface-visibility: hidden; */
+	/* -webkit-transform: translateZ(0); */
+}
+
+  .ui-body-c input[type="text"]
+, .ui-body-c input[type="password"]
+, .ui-body-c input[type="textarea"]
+, .ui-body-c input[type="number"]
+, .ui-body-c input[type="tel"]
+, .ui-body-c input[type="time"]
+, .ui-body-c input[type="date"]
+{
+	color: #000 !important;
+}
+
+textarea.ui-input-text {
+	color: #000 !important;
+}
+
+/*.tmp-actionsheet {
+	zoom: 1.4 !important;
+}
+
+.bautagebuchBautagesberichtDetailsPage {
+	zoom: 1.4;
+}*/
+
+@media (min-width: 767px) {
+	body {
+		zoom: 1.4;
+	}
+	
+	.noZoom {
+		zoom: 1.0 !important;
+	}
+	
+	.sigWrapper.current {
+		margin-left: 10%;
+		zoom: reset !important;
+	}
+	.sigWrapper2.current {
+		margin-left: 10%;
+		zoom: reset !important;
+	}
+	
+	
+}
+
+.red div {
+    color: #990000;	
+}
+
+.green div {
+    color: #009900;	
+}
+
+.green_background {
+	background: green;
+	color: #fff;
+    text-shadow: none;
+}
+
+.red_background {
+	background: #b00000;
+	color: #fff;
+    text-shadow: none;
+}
+
+.delButton {
+    margin-top: 30px;	
+}
+
+.red span {
+    color: #FFFFFF;	
+    background-color: #990000;	
+}
+
+.green span {
+    color: #FFFFFF;	
+    background-color: #009900;	
+}
+
+fieldset legend {
+	margin-bottom: 10px;
+	color: #FFFFFF;
+}
+
+  .ui-header .ui-btn-left
+, .ui-header .ui-btn-right
+{
+	margin-top: 3px; /* pre jqm 1.1 (post jqm 1.1: 3px)*/
+}
+
+.ui-li-has-arrow .ui-btn-inner a.ui-link-inherit, 
+.ui-li-static.ui-li-has-arrow {
+	padding-right: 0px;
+}
+
+.ui-page {    
+	/*background: url('images/320x480_90_DIGI-WebApp.png');*/
+    background-color: #003366 !important;
+    background-position:right bottom !important;
+    background-repeat:repeat-y !important;
+	background-attachment:fixed !important; 
+
+	/*  funktioniert leider nicht mit transitions:    
+    top: 40px !important;
+	*/
+
+}
+
+/* SCHOLPP-Branding */
+.SCHOLPPbranding .ui-body-c {
+/*	color: #fff !important; */
+	text-weight: bold;
+}
+.splashViewPage.SCHOLPP_w320 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w480 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w640 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w800 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1024 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1080 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w1536 { background: #003366 !important }
+.splashViewPage.SCHOLPP_w5000 { background: #003366 !important }
+.SCHOLPP_w320 { background: url('images/320x480_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w480 { background: url('images/480x800_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w640 { background: url('images/640x960_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w800 { background: url('images/800x1280_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1024 { background: url('images/1024x1024_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1080 { background: url('images/1080x1920_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w1536 { background: url('images/1536x2048_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.SCHOLPP_w5000 { background: url('images/5000x5000_90_SCHOLPP.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+
+/* 
+* DIGI-WEBAPP-DSO-Branding 
+*/
+.DIGI-WEBAPP-DSObranding .ui-body-c {
+	color: #000 !important; 
+	text-weight: bold;
+}
+
+.splashViewPage.DIGI-WEBAPP-DSO_w320 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w480 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w640 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w800 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1024 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1080 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w1536 { background-color: #ffffff !important }
+.splashViewPage.DIGI-WEBAPP-DSO_w5000 { background-color: #ffffff !important }
+.DIGI-WEBAPP-DSO_w320 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w480 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w640 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w800 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1024 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1080 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w1536 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+.DIGI-WEBAPP-DSO_w5000 { background-color: #ffffff !important; background-image: url('images/roter_balken.png'); background-position:right bottom !important; background-repeat:repeat-y !important; background-attachment:fixed !important;}
+
+.DIGI-WEBAPP-DSObranding .ui-focus {
+	-webkit-box-shadow: 0 0 12px #D4242D !important;
+	-moz-box-shadow: 0 0 12px #D4242D !important;
+	box-shadow: 0 0 12px #D4242D !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-active {
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .dashboardPage .ui-content li {
+	color: #000 !important;
+	background: url('images/arrow_grey.png') 100% 50% no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .fileChooserPage .inputfile {
+	background-color: #ffffff !important; 
+	background-image: url('images/roter_balken.png') !important; 
+	background-position: right bottom !important; 
+	background-repeat:repeat-y !important; 
+	background-attachment:fixed !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-content label, 
+.DIGI-WEBAPP-DSObranding .settingsPasswordPage .ui-content .ui-block-a {
+	color: #000 !important;
+	text-weight: bold;
+}
+
+.DIGI-WEBAPP-DSObranding .header {
+	background: #D4242D !important;
+}
+
+.DIGI-WEBAPP-DSObranding .infoLabel {
+	color: #000 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .whiteLabel {
+	color: #000 !important;
+    font-size: 0.9em !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage .ui-listview {
+	background: #dadada !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage,
+.DIGI-WEBAPP-DSObranding .mediaListPage,
+.DIGI-WEBAPP-DSObranding .zeitbuchungenPage,
+.DIGI-WEBAPP-DSObranding .remarkPage {
+	background-image: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .signaturecanvaslabel {
+	background-color: #BCBCBC !important;
+	width: 300px;
+}
+
+.DIGI-WEBAPP-DSObranding .infoLabel .ui-link {
+	color: #000 !important;
+	text-decoration: underline;
+    font-weight: normal !important;	
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog {
+	background: #fff; 
+	zoom: reset !important;
+	border: 2px solid #444;
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog-header {
+	background: #D4242D; 
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-up-b,
+.DIGI-WEBAPP-DSObranding .ui-btn-hover-b {
+	background: #D4242D !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-down-b {
+	background: #A10301 !important;
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-up-d,
+.DIGI-WEBAPP-DSObranding .ui-btn-hover-d {
+	background: #BCBCBC !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-btn-down-d {
+	background: #9c9c9c !important;
+	border-color: #aaa !important;
+}
+
+.DIGI-WEBAPP-DSObranding .tmp-dialog-content,
+.DIGI-WEBAPP-DSObranding .settingsPage .ui-block-a {
+	color: #000 !important; 
+}
+
+.DIGI-WEBAPP-DSObranding .red_background {
+	background: #D4242D;
+	color: #ffffff !important;
+    text-shadow: none;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-select .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-select .ui-btn,
+.DIGI-WEBAPP-DSObranding .orderButton.ui-btn,
+.DIGI-WEBAPP-DSObranding .digiButton .ui-btn {
+	background: #BCBCBC !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-listview .ui-btn {
+	background: #ffffff !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-title {
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .content .ui-btn,
+.DIGI-WEBAPP-DSObranding .infoPage .ui-content .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .ui-content .bautagebuchButton .ui-btn,
+.DIGI-WEBAPP-DSObranding .mediaListPage .uploadMediaFiles .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage .uploadMaterial .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchListePage .uploadNotizen .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .ui-content .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .settingsPage .ui-content .ui-btn-inner {
+	background: #BCBCBC !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-listview a {
+	color: #000 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchNotizenDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchMedienDetailsPage .whiteText 
+, .DIGI-WEBAPP-DSObranding .bautagebuchMaterialienDetailsPage .whiteText 
+{
+    color: #000 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .timeDataPage .sentBookings .ui-listview {
+	background: #D4242D !important;
+	font-style: italic !important;
+    padding-left: 0.7em;
+}
+
+.DIGI-WEBAPP-DSObranding .green_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .green_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchWetterPage .content .green_background .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .green_background .ui-btn-inner{
+	background: green !important;
+	color: #fff !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .red_background .ui-btn-inner,
+.DIGI-WEBAPP-DSObranding .bautagebuchBautagesberichtDetailsPage .red_background .ui-btn,
+.DIGI-WEBAPP-DSObranding .bautagebuchZeitenDetailsPage .red_background .ui-btn-inner{
+	background: #D4242D !important;
+	color: #fff !important;
+	text-shadow: none !important;
+}
+
+.DIGI-WEBAPP-DSObranding .activityListPage .ui-content li {
+	color: #000 !important;
+	background: url('images/arrow_grey.png') 100% 50% no-repeat;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-checkbox-on .ui-icon-checkbox-on {
+	background-color: #DD2D2D !important;
+}
+
+.DIGI-WEBAPP-DSObranding [data-role="list-divider"] {
+	background: #D4242D !important;
+	text-shadow: none !important;
+	border-color: #ddd !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-slider-track {
+	background: #f9f9f9 !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-slider-bg {
+	background: #BCBCBC !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-book:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-book,
+.DIGI-WEBAPP-DSObranding [data-icon=book] .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') 0 0 no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-book:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-book,
+.DIGI-WEBAPP-DSObranding [data-icon=book].ui-btn-active .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') -32px 0 no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-menu:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-menu,
+.DIGI-WEBAPP-DSObranding [data-icon=menu] .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') 0 -32px no-repeat !important;
+}
+
+.DIGI-WEBAPP-DSObranding .ui-icon-menu:after,
+.DIGI-WEBAPP-DSObranding .ui-icon-menu,
+.DIGI-WEBAPP-DSObranding [data-icon=menu].ui-btn-active .ui-icon {
+	width: 32px !important;
+	height: 32px !important;
+	margin-left: -16px !important;
+	margin-top: -3px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	background: url('images/tabSprite_DSO.png') -32px -32px no-repeat !important;
+}
+
+.infoLabel a, 
+.infoLabel a:hover, 
+.infoLabel a:active, 
+.infoLabel a:visited {
+    text-decoration: underline;
+    color: #FFFFFF !important;
+    font-weight: normal !important;
+}
+
+/* SPLASH SCREEN STYLES */
+.appTitle {
+    font-size: 3.0em;
+    font-weight:800;
+    text-align: center;
+    margin-top:20%;
+}
+
+.infoBox {
+    text-align: center;
+}
+
+.infoMsg {
+}
+
+.logoInfoPage {
+    width: 100%;
+}
+
+.logoSplashPage {
+	display: block;
+    width: 92%;
+    margin-top: 14px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+/* END OF SPLASH SCREEN STYLES */
+
+img.photo {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 75%;
+}
+
+img.audioIcon {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 75%
+}
+
+[data-role="content"] {
+    text-shadow: none;
+}
+
+/* custom button */
+  [data-theme="digiButton"]
+, [data-theme="bautagebuchButton"]
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #000000;
+}
+
+  [data-theme="digiButton"] span.ui-btn-inner
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+  .ui-content .digiButton 
+, .ui-content .bautagebuchButton 
+{
+    position: relative;
+    /*height: 40px;*/
+}
+
+.ui-content .digiButton .icon
+{
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.ui-content .digiButton .icon img
+{
+    width: 50px;
+    height: 50px;
+}
+
+  .ui-content .digiButton.hack .icon 
+, .ui-content .digiButton.hack .icon 
+{
+    top: -25px;
+}
+
+  .digiButton
+{
+	margin-top: 20px;
+}
+
+[data-theme="bautagebuchButton"] span.ui-btn-inner
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 40px;
+}
+.ui-content .bautagebuchButton .icon img
+{
+    width: 40px;
+    height: 40px;
+}
+.ui-content .bautagebuchButton .icon
+{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+}
+.bautagebuchButton
+{
+	margin-top: 0px;
+	/*width: 135%;
+	height: 100% !important;*/
+}
+.bautagebuchButton span.ui-btn-inner {
+	padding: 20px;
+	margin-left: 65px;
+}
+
+.bigButton div.ui-block-a {
+	width: 100%;
+}
+
+div.timecontainer div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+div.timecontainer .column1, div.timecontainer .column2, div.timecontainer .column3 {
+    float: left;
+    text-align:center;
+}
+div.timecontainer .column1 {
+    width:45%;
+}
+div.timecontainer .column2 {
+    width:10%;
+	padding-top: 25px;
+}
+div.timecontainer .column3 {
+    width:45%;
+}
+
+div.vonbiscontainer div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+div.vonbiscontainer .column1, div.vonbiscontainer .column2, div.vonbiscontainer .column3 , div.vonbiscontainer .column4 , div.vonbiscontainer .column5 {
+    float: left;
+    text-align:center;
+}
+div.vonbiscontainer .column1 {
+    width:24%;
+}
+div.vonbiscontainer .column2 {
+    width:24%;
+}
+div.vonbiscontainer .column3 {
+    width:4%;
+	padding-top: 25px;
+}
+div.vonbiscontainer .column4 {
+    width:24%;
+}
+div.vonbiscontainer .column5 {
+    width:24%;
+}
+
+.ui-grid-a {
+	clear: both !important;
+}
+
+/* custom scholppButton */
+.scholppButton
+{
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 0px solid #000000;
+    opacity: 0.9;
+	margin: 3px
+}
+
+.scholppButton [data-role="button"] {
+	margin: 0px;
+}
+
+.scholppButton span.ui-btn-inner
+{
+    font-weight: bold;
+    font-size: 10px !important;
+    color: #333;
+    text-decoration: none;
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-shadow: 0 0px 0 #000 !important;
+}
+
+.ui-content .scholppButton {
+    position: relative;
+    height: 60px;
+    padding-bottom: 15px;
+}
+
+.ui-content .scholppButton .buttonSelected {
+    background: green;
+    color: #ffffff;
+		/* frei gewaehlter Name*/
+        -webkit-animation-name: white_to_green;   
+        /* Abspieldauer  in Sekunden*/
+        -webkit-animation-duration: .5s;
+        /* Wiederholungen in Zahlen*/   
+        -webkit-iteration-count: 1; 
+        /* Verhalten am Ende bei Wiederholungen mit: normal / reverse / alternate / alternate-reverse */
+        -webkit-animation-direction: normal; 
+        /* Animatioskurve mit: ease / ease-in / ease-out / ease-in-out / liner / bezier */
+        -webkit-animation-timing-function: linear;
+        /* Fill-Mode für den Effekt bei einem Delay sichtbar mit: none / forwards / backwards / both */
+        animation-fill-mode: forwards;
+}
+
+.ui-content .scholppButton .icon img 
+{
+    width: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: -53px;
+    position: relative;
+}
+
+.scholppButtonMenuIcon.ui-li-thumb
+{ 
+    width: 48px;
+    top: 15px;
+    left: 15px;
+}
+
+.buttonDashboardPage [data-theme="scholppButton"] span.ui-btn-inner {
+	font-size: 25px;
+	top: 5px;
+	text-align: right;
+	margin-right: 15px;
+}
+
+.ui-content .scholppButton.hack .icon {
+    top: -25px;
+}
+
+@-webkit-keyframes white_to_green {
+        0% {
+            background-color:white;
+        }
+        50% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        100% {
+            border-width: 0px;
+            background-color:green;
+        }
+ }
+ 
+/* end custom scholppButton */
+
+
+/* custom bautagebuchButton v1
+.bautagebuchButton
+{
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 0px solid #000000;
+    opacity: 0.9;
+	margin: 3px
+}
+
+.bautagebuchButton [data-role="button"] {
+	margin: 0px;
+}
+
+.bautagebuchButton span.ui-btn-inner
+{
+    font-weight: bold;
+    font-size: 10px !important;
+    color: #333;
+    text-decoration: none;
+    moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.ui-content .bautagebuchButton {
+    position: relative;
+    height: 40px;
+    padding-bottom: 15px;
+}
+
+.ui-content .bautagebuchButton .buttonSelected {
+    background: green;
+    color: #ffffff;
+        -webkit-animation-name: white_to_green_to_white;   
+        -webkit-animation-duration: .5s;
+        -webkit-iteration-count: 1; 
+        -webkit-animation-direction: normal; 
+        -webkit-animation-timing-function: linear;
+        animation-fill-mode: forwards;
+}
+
+.ui-content .bautagebuchButton .icon img 
+{
+    width: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: -35px;
+    position: relative;
+}
+
+.bautagebuchButtonMenuIcon.ui-li-thumb
+{ 
+    width: 48px;
+    top: 15px;
+    left: 15px;
+}
+
+.buttonDashboardPage [data-theme="bautagebuchButton"] span.ui-btn-inner {
+	font-size: 25px;
+	top: 5px;
+	text-align: right;
+	margin-right: 15px;
+}
+
+.ui-content .bautagebuchButton.hack .icon {
+    top: -25px;
+}
+
+*/
+
+@-webkit-keyframes white_to_green_to_white {
+        0% {
+            background-color:white;
+        }
+        25% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        50% {
+            border-width: 0px;
+            background-color:green;
+        }
+        75% {
+            border-width: 2px;
+            background-color:transparent;
+        }
+        1000% {
+            background-color:white;
+        }
+ }
+ 
+
+label.ui-input-text, .ui-controlgroup-label {
+	color: #ffffff;
+	background: transparent;
+}
+
+.header {
+    font-size: 20px;
+    border: 0px;
+    height: 40px;
+    padding-top: 5px;
+	/*  funktioniert leider nicht mit transitions:    
+    position: fixed !important;
+    top: 0px !important;
+    margin-bottom: 40px;
+    */
+}
+
+.dashboardPage .ui-content .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.dashboardPage .ui-content .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.dashboardPage .ui-content li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.dashboardPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.dashboardPage .ui-content .ui-grid-b:nth-child(3) {
+    margin-top: 20px;
+}
+
+/*.dashboardPage .ui-content li:nth-child(1), 
+.dashboardPage .ui-content li:nth-child(2) {
+    background: none;
+}
+
+.dashboardPage .ui-content li:nth-child(1).selected, 
+.dashboardPage .ui-content li:nth-child(2).selected {
+    background: #BCBCBC;
+}*/
+
+.dashboardPage .ui-content li.selected {
+    background: #BCBCBC;
+}
+
+.dashboardPage .ui-content li img {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.buttonDashboardPage .ui-content {
+    overflow: hidden;
+}
+.buttonDashboardPage .ui-content li {
+    border:  none;
+    padding: 0px;
+    margin: 0px;
+    min-height: 77px;
+    height: 77px;
+    text-shadow: none;
+    background: none;
+}
+
+/* Feierabend-Icon oben rechts */
+.bookTimePage .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
+.bookTimePage .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
+.bookTimePage .ui-btn-right { width: 80px; }
+
+/* Feierabend-Icon oben rechts */
+.bookTimePageWithIcons .ui-btn-right .ui-btn-inner.ui-btn-corner-all { height: 13px; width: 40px; }
+.bookTimePageWithIcons .ui-btn-right .ui-icon.ui-icon-home.ui-icon-shadow { margin-left: 25px; }
+.bookTimePageWithIcons .ui-btn-right { width: 80px; }
+
+/* mediaListPage */
+
+.actionsList .ui-li-thumb {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.actionsList .ui-li.ui-li-static.ui-btn-up-c.ui-li-has-thumb.ui-first-child.ui-last-child {
+	background: transparent;	
+	border: transparent;
+	text-shadow: 0 0;
+	padding-top: 15px;
+}
+
+.mediaListPage .mediafilesList .ui-listview li {
+    padding-left: 0.7em;
+}
+
+.mediaListPage .mediafilesList .ui-listview .icon {
+    width: 32px;
+    margin-left: 10px;
+    margin-top: 37px;
+    margin-right: -40px;
+}
+
+.mediaListPage .mediafilesList .ui-listview .date {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #000000 !important;
+    margin-left: -100px;
+}
+
+.mediaListPage .mediafilesList .ui-listview .application, 
+.mediaListPage .mediafilesList .ui-listview .position, 
+.mediaListPage .mediafilesList .ui-listview .activity, 
+.mediaListPage .mediafilesList .ui-listview .remark, 
+.mediaListPage .mediafilesList .ui-listview .location {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000;
+	margin-left: -40px;
+}
+
+/* demoMediaPage */
+.demoMediaPage .ui-content li {
+    border:  none;
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-left: 64px;
+    min-height: 36px;
+    height: 36px;
+    padding-top: 16px;
+    text-shadow: none;
+    background: url('images/arrow_white.png') 100% 50% no-repeat;
+}
+
+.demoMediaPage .ui-content li img {
+    width: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.demoMediaPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.demoMediaPage .ui-content .ui-grid-b {
+    text-align: center;
+    font-size: 12px;
+}
+
+.demoMediaPage .ui-content .ui-grid-b img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+/* bookTimePage */
+.bookTimePage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+.bookTimePage .ui-content .ui-grid-a .ui-block-b {
+    width: 15%;
+    padding-top: 28px;
+    text-align: right;
+}
+
+.bookTimePage .ui-content .ui-grid-a:nth-child(3) {
+    margin-bottom: 20px;
+}
+
+.bookTimePageWithIcons .ui-content .ui-grid-a:nth-child(3) {
+    margin-bottom: 20px;
+}
+
+/*.ui-btn-inner.ui-btn-corner-all:not(.ui-select) {
+	padding-left: 0px;
+	padding-right: 0px;
+}*/
+
+/* employeePage */
+.employeePage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.employeePage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.employeePage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+/* infoPage */
+.infoPage .ui-content .ui-grid-a .ui-block-a {
+    width: 85%;
+}
+
+.infoPage .ui-content .ui-grid-a .ui-block-a label {
+    width: 100%;
+    font-weight: bold;
+}
+
+.infoPage .ui-content .ui-grid-a .ui-block-a div.ui-select {
+    width: 100%;
+}
+
+  .infoLabel 
+, .infoPage label.ui-select 
+{
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+/* handApplicationPage */
+.handApplicationPage [data-role="content"] div:nth-child(2) {
+    margin-top: 20px;
+}
+.handApplicationPage .ui-content input {
+    margin-bottom: 50px;
+}
+
+/* timeDataPage & remarkPage */
+.timeDataPage .sentBookings .ui-listview {
+	background: #003366;
+	font-style: italic !important;
+    padding-left: 0.7em;
+}
+
+.remarkPage .ui-listview li {
+    padding-left: 0.7em;
+    margin-bottom: 30px;
+}
+
+.timeDataPage .ui-listview li {
+    padding-left: 0.7em;
+}
+
+.timeDataPage .ui-listview .date, 
+.remarkPage .ui-listview .date {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #000000 !important;
+}
+
+.timeDataPage .ui-listview .application, 
+.timeDataPage .ui-listview .position, 
+.timeDataPage .ui-listview .activity, 
+.timeDataPage .ui-listview .location, 
+.timeDataPage .ui-listview .remark, 
+.timeDataPage .ui-listview .tagLabel, 
+.remarkPage .ui-listview .application, 
+.remarkPage .ui-listview .position, 
+.remarkPage .ui-listview .activity, 
+.remarkPage .ui-listview .location, 
+.remarkPage .ui-listview .remark,
+.timeDataPage .ui-listview .tagLabel {
+    font-size: 12px;
+    font-weight: normal;
+    /*margin-left: 25px;*/
+    color: #000000;
+}
+
+/* orderInfoPage */
+.orderInfoPage .ui-listview li {
+    padding-left: 0.7em;
+    margin-left: 20px;
+    margin-right: 20px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.orderInfoPage .ui-listview .orderName, 
+.orderInfoPage .ui-listview .positionName {
+    font-weight: bold;
+    margin-left: 20px;
+    color: #000000 !important;
+}
+
+.orderInfoPage .ui-listview .orderName {
+    font-size: 18px;
+}
+
+  .orderInfoPage .ui-listview .positionName
+, .orderInfoPage .ui-listview .positionEmail
+, .orderInfoPage .ui-listview .positionEmail a
+, .orderInfoPage .ui-listview .positionEmail a:hover
+, .orderInfoPage .ui-listview .positionEmail a:active
+, .orderInfoPage .ui-listview .positionEmail a:visited
+{
+    font-size: 12px !important;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.orderInfoPage div.ui-btn-text {
+	margin-top: 10px;
+}
+
+/* anwesenheitslistePage */
+.anwesenheitslistePage .ui-listview { 
+    font-size: 12px;
+    color: #000000 !important;
+}
+
+.anwesenheitslistePage .ui-listview .bold {
+    font-weight: bold;
+}
+
+.anwesenheitslistePage .ui-listview .normal { 
+    font-weight: normal;
+}
+
+/* zeitbuchungenPage */
+.zeitbuchungenPage .ui-listview { 
+/*    padding-left: 0.7em; */
+    font-size: 12px;
+    color: #000000 !important;
+}
+
+.zeitbuchungenPage .ui-listview .bold {
+    font-weight: bold;
+}
+
+.zeitbuchungenPage .ui-listview .normal { 
+    font-weight: normal;
+}
+
+.zeitbuchungenPage .ui-title {
+	margin-top: 0px;
+}
+
+/* zeitbuchungDetailsPage */
+
+.zeitbuchungDetailsPage .content {
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border: 1px solid #B3B3B3;
+	background: #F0F0F0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+  .zeitbuchungDetailsPage .datum 
+, .zeitbuchungDetailsPage .von 
+, .zeitbuchungDetailsPage .bis 
+, .zeitbuchungDetailsPage .dauer 
+{
+    font-size: 16px;
+    font-weight: bold;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage .smallDetail 
+{
+    font-size: 12px;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage .normalDetail 
+{
+    font-size: 15px;
+	color: #000000;
+}
+
+.zeitbuchungDetailsPage .posInfoButton 
+{
+    moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #bbb;
+    margin-left: 0px;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FDFDFD),to(#EEE));
+	background-image: -webkit-linear-gradient(#FDFDFD,#EEE);
+	background-image: -moz-linear-gradient(#FDFDFD,#EEE);
+	background-image: -ms-linear-gradient(#FDFDFD,#EEE);
+	background-image: -o-linear-gradient(#FDFDFD,#EEE);
+	background-image: linear-gradient(#FDFDFD,#EEE);
+}
+.zeitbuchungDetailsPage .ui-btn-hover-posInfoButton {
+	border:1px solid #bbb;
+	background:#dadada;
+    font-weight: bold;
+	color:#101010;
+	text-shadow:0 1px 1px #fff;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#ededed),to(#dadada));
+	background-image:-webkit-linear-gradient(#ededed,#dadada);
+	background-image:-moz-linear-gradient(#ededed,#dadada);
+	background-image:-ms-linear-gradient(#ededed,#dadada);
+	background-image:-o-linear-gradient(#ededed,#dadada);
+	background-image:linear-gradient(#ededed,#dadada);
+}
+
+.zeitbuchungDetailsPage .posInfoButton span.ui-btn-inner 
+{
+    padding: .6em 10px;
+}
+
+/* settingsPage */
+.settingsPage input[type="text"], 
+.settingsPage input[type="password"], 
+.settingstePage input[type="text"], 
+.settingsPasswordPage input[type="password"],
+.settingsPasswordPage input[type="textarea"]
+{
+    width: 90%;
+}
+
+.settingsPage .ui-content .ui-block-a, 
+.settingsPasswordPage .ui-content .ui-block-a {
+    font-size: 14px;
+    padding-top: 10px;
+    color: #FFFFFF;
+    margin-top: 0px;
+}
+
+.settingsPage .ui-content .ui-grid-a, 
+.settingsPasswordPage .ui-content .ui-grid-a {
+    margin-bottom: 10px;
+}
+
+.settingsPage .ui-content .lastSelectBox_container, 
+.settingsPasswordPage .ui-content .lastSelectBox_container {
+    margin-bottom: 10px;
+}
+
+.settingsPage .daysToHoldBookingsOnDeviceLabel {
+    font-size: 14px;
+    padding-top: 10px;
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.settingsPage .daysToHoldBookingsOnDeviceSlider {
+    margin-bottom: 10px;
+}
+
+.settingsPage .startUhrzeit {
+	text-align: center;
+}
+
+.terminlisteEinstellungen {
+	margin-top: 30px;
+}
+.terminlisteEinstellungen li {
+	margin-bottom: 20px;
+}
+
+.settingsPage .digiButton {
+	margin-top: 20px;
+}
+
+.fileChooserPage .inputfile {
+	text-align: center;
+	background: #fff;
+}
+
+/*.bautagebuchBautagesberichtDetailsPage .ui-title {
+	margin: -12px 20px 20px 20px;
+	padding: 3px 90px 0px 90px;
+	border: 0px;
+	height: 64px !important;
+}*/
+
+  .bautagebuchWetterPage .whiteText 
+, .bautagebuchBautagesberichtDetailsPage .whiteText 
+, .bautagebuchZeitenDetailsPage .whiteText 
+, .bautagebuchNotizenDetailsPage .whiteText 
+, .bautagebuchMedienDetailsPage .whiteText 
+, .bautagebuchMaterialienDetailsPage .whiteText 
+{
+    color: #FFFFFF;
+}
+
+.bautagebuchListePage .small
+{
+    font-size: 12px;
+	color: #000000;
+	white-space: normal !important;
+}
+
+  .startUhrzeit
+{
+	font-size: 1.5em !important;
+}
+
+.startUhrzeit_container
+{
+	/*font-size: 1.5em !important;*/
+}
+
+.plusMinusButton {
+	background: #aaa;
+}
+
+.bautagebuchListePage {
+	color: #000 !important;
+}
+  .bautagebuchZeitenDetailsPage .ui-content .ui-block-a 
+, .bautagebuchZeitenDetailsPage .ui-content .ui-block-b 
+{
+    padding-top: 10px;
+    padding-bottom: 20px;
+	width: 50%;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+/*  .tmp-dialog-footer .ui-btn.ui-btn-up-c.ui-btn-corner-all.ui-shadow
+, .tmp-dialog-footer .ui-btn.ui-btn-hover-c.ui-btn-corner-all.ui-shadow
+{
+	height: 60px;
+}
+
+.tmp-dialog-footer .ui-btn-up-c .ui-btn-inner.ui-btn-corner-all
+{
+	margin-top: 10px;
+}*/
+
+  .bautagebuchZeitenDetailsPage input.ui-input-text
+, .bautagebuchBautagesberichtDetailsPage input.ui-input-text
+{
+	text-align: center !important;
+	width: 98% !important;
+}
+
+/*  .bautagebuchZeitenDetailsPage .dauerInput_container
+{
+    padding-bottom: 20px;
+}*/
+.transparent {
+	border: transparent;
+	color:  transparent;
+	background: transparent;
+	height:	0px;
+	width: 0px;
+}
+  .bautagebuchWetterPage .centerText
+, .bautagebuchZeitenDetailsPage .ui-grid-a 
+{
+    text-align: center;
+}
+
+.bautagebuchWetterPage .marginBottom5px {
+    margin-bottom: 5px;
+}
+
+.bautagebuchNotizenDetailsPage .dataInput {
+	margin-bottom: 20px;
+	height: 400px;
+}
+
+.bautagebuchNotizenDetailsPage .remarkInput {
+	margin-bottom: 20px;
+	height: 50px;
+}
+
+.bautagebuchNotizenDetailsPage .dataInputInitial {
+	margin-bottom: 20px;
+	height: 400px;
+	vertical-align: middle; 
+	text-align: center;
+	font-weight: bold;
+	background: #F3E2A9;
+}
+
+.bautagebuchMedienDetailsPage .remarkInputInitial {
+	margin-bottom: 20px;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+	background: #F3E2A9;
+}
+
+.tmp-slider-container.tmp-slider-is-slider-only {
+	padding-top: 4px !important; 
+}
+  .bautagebuchWetterPage .temperaturView
+, .bautagebuchWetterPage .luftfeuchteView
+, .bautagebuchWetterPage .bewoelkungView
+, .bautagebuchWetterPage .niederschlagView
+, .bautagebuchWetterPage .windView
+{
+    margin-top: 20px;
+}
+
+.bautagebuchWetterPage fieldset
+{
+	margin: 40px 4px 40px 4px;
+}
+
+  .bautagebuchWetterPage .temperaturView div
+, .bautagebuchWetterPage .luftfeuchteView div
+, .bautagebuchWetterPage .bewoelkungView div
+, .bautagebuchWetterPage .niederschlagView div
+, .bautagebuchWetterPage .windView div
+{
+    margin-top: 5px;
+}
+
+.bautagebuchWetterPage .bold {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+  .bautagebuchZeitenListePage .ui-listview .location
+, .bautagebuchZeitenListePage .ui-listview .small
+{
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 25px;
+    color: #000000;
+}
+
+.bautagebuchZusammenfassungScrollView {
+	background: #fff;
+	opacity: 0.75;
+	padding: 15px;
+}
+
+
+.bautagebuchZusammenfassungScrollView li.ui-li-static {
+	color: #000;
+}
+
+.bautagebuchZusammenfassungScrollView .hugeLabel {
+	font-size: 24px;
+}
+.bautagebuchZusammenfassungScrollView .bigLabel {
+	font-size: 18px;
+}
+.bautagebuchZusammenfassungScrollView .normalLabel {
+	font-size: 12px;
+}
+.bautagebuchZusammenfassungScrollView .bold {
+	font-weight: bold;
+}
+.bautagebuchZusammenfassungScrollView .right {
+	right: 60px;
+	position: absolute;
+	text-align: right;
+}
+.bautagebuchZusammenfassungScrollView .underline {
+	text-decoration: underline;
+}
+
+  .bautagebuchZusammenfassungScrollView .leistungsnachweisList
+, .bautagebuchZusammenfassungScrollView .materialienList
+, .bautagebuchZusammenfassungScrollView .medienList
+, .bautagebuchZusammenfassungScrollView .notizenList
+{
+	border-top-color: #999;
+	border-top-style: solid;
+	border-top-width: 2px;
+	padding-top: 20px;
+}
+
+.bautagebuchZusammenfassungScrollView .borderBottom
+{
+	border-bottom-color: #999;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	padding-bottom: 20px;
+}
+
+.bautagebuchZusammenfassungScrollView .ui-listview {
+	margin: 10px;
+}
+
+.bautagebuchZusammenfassungScrollView .wetterBlock {
+ 	right: 30px;
+}
+
+.bautagebuchListePage li.ui-li-static {
+	color: #000;
+}
+
+.bautagebuchListePage .leistungsnachweisList
+{
+	padding: 0px;	
+}
+
+.bigButton {
+	/*padding-top: 20px;*/
+	/*height: 60px;*/
+}
+
+.bigButton .left {
+	margin-right: 5px;
+}
+
+.bigButton .right {
+	margin-left: 5px;
+}
+
+.detailsGrid .ui-block-a {
+	width: 65%;
+}
+.detailsGrid .ui-block-b {
+	width: 35%;
+}
+
+.wetterBlock .ui-block-a {
+	width: 70% !important;
+}
+.wetterBlock .ui-block-b {
+	width: 30% !important;
+	text-align: right;
+}
+
+/* IOS LIKE FOOTER / TABBAR */
+.ui-footer {
+    border-color: #0d0d0d;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #000000), color-stop(0.51, #000000), color-stop(0.5, #151515), color-stop(0, #2d2d2d));
+}
+
+.ui-footer .ui-btn {
+    border: 0 none;
+    background: transparent;
+}
+
+.ui-footer .ui-btn-active {
+    -webkit-border-radius: 4px !important;
+    border-radius: 4px !important;
+    background: none rgba(255, 255, 255, 0.14);
+}
+
+.ui-footer .ui-btn-inner {
+    border-color: #434343;
+    padding: 0px !important;
+    padding-top: 32px !important;
+}
+
+.ui-footer .ui-btn-text {
+    font-size: 10px;
+    text-shadow: 0 none;
+}
+
+/*
+.ui-footer .ui-icon 
+{
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+*/
+
+.ui-icon-book:after,
+.ui-icon-book,
+[data-icon=book] .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) 0 0 no-repeat;
+}
+
+.ui-btn-active .ui-icon-book:after,
+.ui-btn-active .ui-icon-book,
+[data-icon=book].ui-btn-active .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) -32px 0 no-repeat;
+}
+
+.ui-icon-menu:after,
+.ui-icon-menu,
+[data-icon=menu] .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) 0 -32px no-repeat;
+}
+
+.ui-btn-active .ui-icon-menu:after,
+.ui-btn-active .ui-icon-menu,
+[data-icon=menu].ui-btn-active .ui-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px !important;
+    margin-top: -3px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    background: url(images/tabSprite.png) -32px -32px no-repeat;
+}
+
+.hiddenLabel {
+	opacity: 0;
+}
+
+.zeitenAendernButton {
+	float: right;
+	top: -6px;
+	margin-right: 10px !important;
+}
+
+/* allgemeine Klassen */
+div.ui-select {
+    margin-bottom: 10px;
+}
+
+label.ui-select, label {
+	color: #ffffff;
+}
+
+option.ui-select {
+	color: #00000 !important;
+}
+
+li.ui-li {
+	color: #ffffff;
+}
+
+.whiteLabel {
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+.whiteLabel16px {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.marginTop40 {
+    margin-top: 40px;
+}
+
+.marginTop12 {
+    margin-top: 12px;
+}
+
+.marginTop20 {
+    margin-top: 20px;
+}
+
+.marginTop25 {
+    margin-top: 25px;
+}
+
+.marginTop25important {
+    margin-top: 25px !important;
+}
+
+.marginBottom50 {
+    margin-bottom: 50px;
+}
+
+.marginBottom25 {
+    margin-bottom: 25px;
+}
+
+.marginBottom20 {
+    margin-bottom: 20px;
+}
+
+.marginBottom12 {
+    margin-bottom: 12px;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+.marginLeft20 {
+    margin-left: 20px;
+}
+
+.marginLeft35 {
+    margin-left: 35px;
+}
+
+.marginRight40 {
+	margin-right: 40px;
+}
+
+.moveUp38 {
+    margin-top: -38px;
+}
+
+.marginTop0 {
+	margin-top: 0px;
+}
+
+.ui-navbar {
+    height: 47px;
+}
+
+.bautagebuchZusammenfassungScrollView .signaturecanvaslabel {
+	color: #000 !important;
+	font-weight: bold;
+	font-size: 18px !important;
+}
+
+.signaturecanvaslabel {
+	font-size: 16px !important;
+    color: #FFFFFF !important;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	font-style: normal !important;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.signaturecanvas {
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 150px;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   margin-bottom: 50px;
+}
+
+.signaturecanvas2 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+	height: 320px;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.sigWrapper.current {
+	zoom: reset !important;
+	border-color: transparent !important;
+}
+
+.tmp-dialog {
+	background-color: #003366; 
+	zoom: reset !important;
+}
+
+.ui-loader {
+	zoom: reset !important;
+}
+
+.tmp-dialog-header {
+	height: 15%;
+}
+
+.tmp-dialog-content {
+	height: 45%;
+}
+
+*.unselectable, 
+.unselectable_container {
+/*   
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+*/
+}
+
+.imageCanvas {
+	border: 3px solid #fff;
+	display: block;
+    margin-left: auto;
+    margin-right: auto; /**/
+}
+
+.imageContainer {
+/*	border: 3px solid #fff; 
+	display: block;
+    margin-left: auto;
+    margin-right: auto; */
+}
+
+.demophoto {
+	width: 80%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.terminlistePage .normal {
+    font-size: 10px;
+    font-weight: normal;
+    margin-left: 25px;
+    color: #000000;	
+}
+
+.terminlistePage .normalInline {
+    font-size: 10px;
+    font-weight: normal;
+    color: #000000;	
+}
+
+.terminlistePage .bold {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 25px;
+    color: #000000;	
+}
+
+.terminlistePage .boldInline {
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;	
+}
+
+.terminlistePage .red {
+    font-size: 10px;
+    font-weight: bold;
+    color: #FF0000;	
+}
+.terminlistePage .ui-title {
+	margin: 0px 0px 0px 90px;
+}
+
+.dateTitle.ui-input-text.ui-body-a {
+	font-weight: bold !important;
+	color: #fff !important;
+	padding-left: 8px;
+}
+
+div.dateTitleGrid div {
+    text-shadow:none;
+    color: #FFFFFF;
+    font-weight:bold;
+    width:100%;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	height: 35px !important;
+}
+
+div.dateTitleGrid .dateTitleGridColumn1, div.dateTitleGrid .dateTitleGridColumn2 {
+    float: left;
+    text-align:center;
+}
+
+div.dateTitleGrid .dateTitleGridColumn1 {
+    width:15%;
+	padding-top: 9px;
+}
+
+div.dateTitleGrid .dateTitleGridColumn2 {
+    width:80%;
+	margin-right: 5px;
+}
+
+.preLine {
+	white-space: pre-line;
+}
+
+.festePauseStornierenPage .ui-listview {
+	margin-bottom: 0px;
+}
+
+.festePauseStornierenPage .festePausen_container {
+	margin-bottom: 25px;
+}
+.festePauseStornierenEinstellungen {
+	margin-top: 30px;
+}
+.festePauseStornierenEinstellungen li {
+	margin-bottom: 20px;
+}
+
+.dw {
+	zoom: reset;	
+}
+
+.bautagebuchMaterialienDetailsPage div.ui-input-text {
+	height: 40px;
+}
+.bautagebuchMaterialienDetailsPage input.ui-input-text {
+	font-size: 18px;
+	/*text-align: right;*/
+	text-align: center;
+}
+.bautagebuchMaterialienDetailsPage input.ui-input-text .materialInput {
+	text-align: center;
+}
+.bautagebuchMaterialienDetailsPage div.ui-block-b div.ui-btn.ui-shadow.ui-btn-corner-all.ui-btn-icon-right.ui-btn-up-c {
+	margin-right: 0px;
+}
+
+.activityListPage .ui-content li {
+	border: none;
+	font-size: 15px;
+	padding-left: 10px;
+	border-bottom-color: grey;
+	border-bottom-style: double;
+	min-height: 26px;
+	text-shadow: none;
+	background: url('images/arrow_white.png') 100% 50% no-repeat;
+	padding-right: 26px;
+	padding-bottom: 2px;
+}
+
+.activityListPage .ui-content li.selected {
+    background: #BCBCBC url('images/arrow_white.png') 100% 50% no-repeat;
+    color: #FFFFFF;
+}
+
+.activityListPage .ui-content li:nth-child(1) {
+	border-top-color: grey;
+	border-top-style: double;
+}
+
+.scholppNotSent {
+    padding-left: 0.7em;
+	background: red !important;
+}
+
+.scholppSent {
+    padding-left: 0.7em;
+	background: green !important;
+}
+
+.orderListEntry {
+	margin-right: 10px;
+	color: #000000 !important;
+	text-shadow: none !important;
+	min-height: inherit !important;
+}
+
+.orderListEntry .ui-li-thumb {
+	height: 35px;
+}

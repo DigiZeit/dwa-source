@@ -1,0 +1,69 @@
+{
+    "name" : "DigiWebApp",
+    "mode": "production",
+    "debugLevel": 0,
+    "eliminate": false,
+    "minify": true,
+    "proxies": [
+        {
+            "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
+            "proxyAlias": "Handy2WebServices"
+        }
+    ],
+    "supportedLanguages": [
+          "de_de"
+        , "en_us"
+    ],
+    "defaultLanguage": "de_de",
+    "htmlHeader": [
+        "<meta charset=\"utf-8\">",
+        "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">",
+        "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
+    ],
+    "application": {
+        "version": "@version@.@versionCode@",
+        "debugMode": "false",
+        "keyPrefix": "#m#",
+        "keySuffix": "_",
+        "timeStampCreated": "created_at",
+        "timeStampUpdated": "updated_at",
+        "m_id": "m_id"
+    },
+    "defaultDeployTarget": "digi-gps.de-latest",
+    "deploy": {
+        "digi-gps.de-testing": {
+            "method": "ftp",
+            "ftp": {
+                "deleteTargetPath": true,
+                "host": "digi-gps.de",
+                "port": 21,
+                "username": "digiwebapp",
+                "password": "Digizeit08",
+                "targetPath": "/digiwebapp-testing/deployed/",
+                "debugLevel": 0
+            }
+        },
+        "digi-gps.de-latest": {
+            "method": "ftp",
+            "ftp": {
+                "host": "digi-gps.de",
+                "port": 21,
+                "username": "digiwebapp",
+                "password": "Digizeit08",
+                "targetPath": "/digiwebapp-latest/deployed/",
+                "debugLevel": 0
+            }
+        }
+    },    
+    "libraries": [
+          {"name": "xml2json", "refs": ["jquery.xml2json_1.3.js"]}
+        , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
+        , {"name": "SignaturePad", "refs": ["*"]}
+        , {"name": "jstz", "refs": ["*"]}
+        , {"name": "digiUI", "refs": ["*"]}
+        , {"name": "Math.uuid.js", "refs": ["*"]}
+    ]
+}

@@ -1,0 +1,7 @@
+While upgrading The-M-Project take care of the following framework-modifications done by DIGI:
+
+1. in "The-M-Project/modules/ui/page.js":
+	in writeToDOM: DIGI-MOD "restartOnBlackBerry"
+	
+2. in "The-M-Project/modules/core/foundation/controller.js":
+	in switchToTab: DIGI-MOD "back"
