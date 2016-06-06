@@ -111,10 +111,6 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         // save Selection in local storage to have it accessible after application restart
         localStorage.setItem(DigiWebApp.EmployeeController.empSelectionKey, that.getSelectedEmployeesAsString());
         that.setEmployeeState(2);
-
-        // TODO: Entweder hier (durch Setzen eines anderen callbackEmployeesSave?) oder in
-        // BookingController.book() muss unterschieden und die laufende Buchung "einfach"
-        // abgeschlossen und eine neue begonnen werden.
         DigiWebApp.BookingController.book();
     }
 

@@ -996,10 +996,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if ((this.skipEvents !== true)
             || ((M.Environment.getPlatform().substr(0, 10) === "BlackBerry")
                 && (DigiWebApp.ApplicationController.timeouthappened !== true))) {
-       	    if (inDebug()) {
-	           writeToLog('ApplicationController.backbuttonhandler()');
-    	    }
-
             $(document).bind('backbutton', DigiWebApp.ApplicationController.backbuttonhandler);
         	$(document).bind('menubutton', DigiWebApp.ApplicationController.menubuttonhandler);
         }
@@ -1029,9 +1025,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , backButtonTimeoutVar: null
     
     , backbuttonhandler: function() {
-	    if (inDebug()) {
-	        writeToLog('ApplicationController.backbuttonhandler()');
-	    }
+	    //if (inDebug()) {
+	    //    writeToLog('ApplicationController.backbuttonhandler()');
+	    //}
 	    var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
 		if (DigiWebApp.SettingsController.HasCredentials()) {
 	    	if (
@@ -1065,7 +1061,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		
 	    	} else {
 	    		// catch double-fire of backbutton-event via timeout
-	    		DigiWebApp.ApplicationController.backButtonTimeoutVar = setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()",500);
+	    	    DigiWebApp.ApplicationController.backButtonTimeoutVar =
+                    setTimeout("DigiWebApp.ApplicationController.backButtonToBookTimePage()", 500);
 	    		//DigiWebApp.NavigationController.toBookTimePage();
 			}
 		} else {
