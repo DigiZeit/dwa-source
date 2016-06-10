@@ -155,12 +155,16 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
         // Freischaltung 416: Tätigkeits-Icons auf dem Buchen-Screen (Scholpp only)
         if (DigiWebApp.SettingsController.featureAvailable('416')) {
-			// Ticket 2108: Rename in order to be consistent with DSO
-			if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
-				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.order.id, M.I18N.l('dtc6Ordner'));
-				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.position.id, M.I18N.l('dtc6Auftrag'));
-				DigiWebApp.ApplicationController.dtc6AktivRenameHelper(DigiWebApp.BookingPageWithIconsScholpp.content.activity.id, M.I18N.l('dtc6Leistung'));
-			}
+            // Ticket 2108: Rename in order to be consistent with DSO
+            //TODO Thema lösen/aufräumen
+			//if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
+			//    DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
+            //        DigiWebApp.BookingPageWithIconsScholpp.content.order.id, M.I18N.l('dtc6Ordner'));
+			//    DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
+            //        DigiWebApp.BookingPageWithIconsScholpp.content.position.id, M.I18N.l('dtc6Auftrag'));
+			//    DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
+            //        DigiWebApp.BookingPageWithIconsScholpp.content.activity.id, M.I18N.l('dtc6Leistung'));
+			//}
 		}
     }
 
