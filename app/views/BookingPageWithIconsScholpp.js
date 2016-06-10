@@ -17,17 +17,11 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
 		    action: function () {
 		        if (!DigiWebApp.SettingsController.featureAvailable('424')) {
             		if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
-            		    M.ViewManager.getView("bookingPageWithIconsScholpp", "fahrzeitButtonGrid").button.value
-                            = "Reisezeit";
-		                M.ViewManager.getView("bookingPageWithIconsScholpp", "fahrzeitButtonGrid").icon.value
-                            = "theme/images/48x48_plain_car_compact_grey.png";
-                        //$('#' + DigiWebApp.bookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.button.value = "";
-                    } else {
-            		    M.ViewManager.getView("bookingPageWithIconsScholpp", "fahrzeitButtonGrid").button.value
-                            = "";
-		                M.ViewManager.getView("bookingPageWithIconsScholpp", "fahrzeitButtonGrid").icon.value
-                            = "";
-                        // $('#' + DigiWebApp.BookingPage.header.feierabendButton.id).show();
+		                $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.button.id).show();
+            		    $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.icon.id).show();
+            		} else {
+		                $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.button.id).hide();
+            		    $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.icon.id).hide();
                     }
 
 		        }
