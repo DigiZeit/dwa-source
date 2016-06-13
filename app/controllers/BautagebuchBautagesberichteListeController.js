@@ -20,7 +20,10 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		if (ChefToolOnly) {
 			DigiWebApp.BautagebuchBautagesberichteListePage.header.backButton.setValue(M.I18N.l("mainMenu"));
 		}
-		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(), function(item) { return parseBool(item.get("abgeschlossen")); });
+		var abgeschlosseneBautagesberichte = _.filter(DigiWebApp.BautagebuchBautagesbericht.find(),
+            function(item) {
+                return parseBool(item.get("abgeschlossen"));
+            });
 		if (abgeschlosseneBautagesberichte.length == 0) {
 			$('#' + DigiWebApp.BautagebuchBautagesberichteListePage.uebertragenButton.id).hide();
 		} else {
@@ -32,17 +35,22 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		//var that = this;
 		
 		if (bautagesberichtTyp) {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp", bautagesberichtTyp);
+		    DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp",
+                bautagesberichtTyp);
 		} else {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp", "<standard>");
+		    DigiWebApp.BautagebuchBautagesberichtDetailsController.set("bautagesberichtTyp",
+                "<standard>");
 		}
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.init(YES);
 		if (DigiWebApp.SettingsController.getSetting('bautagebuchLimit_autoStartUhrzeit')) {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("startUhrzeit", D8.now().format("HH:MM"));
+		    DigiWebApp.BautagebuchBautagesberichtDetailsController.set("startUhrzeit",
+                D8.now().format("HH:MM"));
 		} else {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("startUhrzeit", DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit);
+		    DigiWebApp.BautagebuchBautagesberichtDetailsController.set("startUhrzeit",
+                DigiWebApp.BautagebuchEinstellungenController.settings.startUhrzeit);
 		}
-		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datum", D8.now().format("dd.mm.yyyy"));
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("datum",
+            D8.now().format("dd.mm.yyyy"));
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("projektleiterId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("auftragsId", null);
 		if (orderName) {
@@ -56,12 +64,17 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionId", null);
 		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("positionName", null);
 		if (DigiWebApp.BautagebuchEinstellungenController.settings.alleMitarbeiterVorselektiert) {
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return parseIntRadixTen(obj.value);}));
+		    DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds",
+                _.map(DigiWebApp.BautagebuchMainController.mitarbeiter, function(obj) {
+                    return parseIntRadixTen(obj.value);
+                }));
 		} else {
 			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", null);
 		}
-		DigiWebApp.BautagebuchBautagesberichtDetailsController.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
-		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("item", DigiWebApp.BautagebuchBautagesbericht.createRecord({
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.setWetter(
+            DigiWebApp.BautagebuchMainController.wetterDefaults);
+		DigiWebApp.BautagebuchBautagesberichtDetailsController.set("item",
+            DigiWebApp.BautagebuchBautagesbericht.createRecord({
 			  id: Math.uuid()
 			, datum: DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
 			, startUhrzeit: DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit
@@ -71,5 +84,4 @@ DigiWebApp.BautagebuchBautagesberichteListeController = M.Controller.extend({
 			DigiWebApp.NavigationController.toBautagebuchBautagesberichtDetailsPageTransition();
 		}
 	}
-
 });

@@ -62,30 +62,67 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 		if (DigiWebApp.BautagebuchMengeneinheit.findSorted().length === 0) {
 			// Es gibt noch keine Mengeneinheiten oder sind in DSO nicht gepflegt
 			var i = 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Stück", kuerzel: "Stk"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Packung", kuerzel: "Pkg"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Karton", kuerzel: "Ktn"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Palette", kuerzel: "Pal"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Gramm", kuerzel: "g"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Kilogramm", kuerzel: "kg"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Zentner", kuerzel: "Ztr"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Tonne", kuerzel: "t"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Millimeter", kuerzel: "mm"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Zentimeter", kuerzel: "cm"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Meter", kuerzel: "m"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Laufmeter", kuerzel: "lfm"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Kilometer", kuerzel: "km"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Quadratmeter", kuerzel: "qm"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Milliliter", kuerzel: "ml"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Deziliter", kuerzel: "dl"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Liter", kuerzel: "l"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Hektoliter", kuerzel: "hl"}).saveSorted(); i = i + 1;
-			DigiWebApp.BautagebuchMengeneinheit.createRecord({id: i, bezeichnung: "Kubikmeter", kuerzel: "kbm"}).saveSorted(); i = i + 1;
+			DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Stück", kuerzel: "Stk" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Packung", kuerzel: "Pkg" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Karton", kuerzel: "Ktn" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Palette", kuerzel: "Pal" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Gramm", kuerzel: "g" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Kilogramm", kuerzel: "kg" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Zentner", kuerzel: "Ztr" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Tonne", kuerzel: "t" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Millimeter", kuerzel: "mm" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Zentimeter", kuerzel: "cm" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Meter", kuerzel: "m" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Laufmeter", kuerzel: "lfm" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Kilometer", kuerzel: "km" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Quadratmeter", kuerzel: "qm" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Milliliter", kuerzel: "ml" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Deziliter", kuerzel: "dl" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Liter", kuerzel: "l" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Hektoliter", kuerzel: "hl" }).saveSorted();
+            i = i + 1;
+            DigiWebApp.BautagebuchMengeneinheit.createRecord(
+                { id: i, bezeichnung: "Kubikmeter", kuerzel: "kbm" }).saveSorted();
+            i = i + 1;
 		}
 		
         var itemSelected = NO;
         try {
-
 	        // Projektleiter
 			var projektleiter = DigiWebApp.BautagebuchProjektleiter.find();
 			if (projektleiter.length !== 0) {
@@ -100,18 +137,22 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            		console.log("UNDEFINED PROJEKTLEADER");
 	            	} else {   
 	            		try {
-	            			var obj = { label: o.vollername(), value: o.get('id'), order: myOrder };
+	            		    var obj = {
+	            		        label: o.vollername(),
+	            		        value: o.get('id'),
+	            		        order: myOrder
+	            		    };
 	            		} catch(e) { console.log(o); throw e;}
-	//            		if(obj.value === that.selections.activity) {
-	//            			obj.isSelected = YES;
-	//            			itemSelected = YES;
-	//            		}
 	                    return obj;
 	            	}
 	            });
 	            projektleiterArray = _.compact(projektleiterArray);
 	            // push "Bitte wählen Option"
-	            projektleiterArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+	            projektleiterArray.push({
+	                label: M.I18N.l('selectSomething'),
+	                value: '0',
+	                isSelected: !itemSelected
+	            });
 	            that.set('projektleiter', projektleiterArray);
 			}
 			
@@ -129,12 +170,13 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            		console.log("UNDEFINED WORKER");
 	            	} else {  
 	            		try {
-	            			var obj = { label: o.vollername(), value: o.get('id'), order: myOrder};
+	            		    var obj = {
+	            		        label: o.vollername(),
+	            		        value: o.get('id'),
+	            		        order: myOrder
+	            		    };
 	            		} catch(e) { console.log(o); throw e;}
-	//            		if(obj.value === that.selections.activity) {
 	            			obj.isSelected = NO;
-	//            			itemSelected = YES;
-	//            		}
 	                    return obj;
 	            	}
 	            });
@@ -154,18 +196,21 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	        		console.log("UNDEFINED ORDER");
 	        	} else {
 	        		try {
-	        			var obj = { label: o.get('name'), value: o.get('id') };
-	        		} catch(e) { console.log(o); throw e;}
-	//        		if(obj.value === that.selections.activity) {
-	//        			obj.isSelected = YES;
-	//        			itemSelected = YES;
-	//        		}
+			            var obj = { label: o.get('name'), value: o.get('id') };
+			        } catch (e) {
+			            console.log(o);
+			            throw e;
+			        }
 	                return obj;
 	        	}
 	        });
 	        positionenArray = _.compact(positionenArray);
 	        // push "Bitte wählen Option"
-	        positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+	        positionenArray.push({
+	            label: M.I18N.l('selectSomething'),
+	            value: '0',
+	            isSelected: !itemSelected
+	        });
 	        that.set('positionen', positionenArray);
 	        
 			var materialienArray = [];
@@ -178,19 +223,22 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            		console.log("UNDEFINED MATERIAL");
 	            	} else {
 	            		try {
-	            			var obj = { label: o.get("bezeichnung"), value: o.get('id') };
+	            			var obj = {
+	            			    label: o.get("bezeichnung"),
+	            			    value: o.get('id')
+				            };
 	            		} catch(e) { console.log(o); throw e;}
-	//            		if(obj.value === that.selections.activity) {
-	//            			obj.isSelected = YES;
-	//            			itemSelected = YES;
-	//            		}
 	                    return obj;
 	            	}
 	            });
 	            materialienArray = _.compact(materialienArray);
 			}
 	        // push "Manuelle Eingabe"
-	        materialienArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
+			materialienArray.push({
+			    label: M.I18N.l('BautagebuchManuelleEingabe'),
+			    value: '0',
+			    isSelected: !itemSelected
+			});
 	        that.set('materialien', materialienArray);
 	
 			var mengeneinheitenArray = [];
@@ -206,18 +254,17 @@ DigiWebApp.BautagebuchMainController = M.Controller.extend({
 	            		try {
 	            			var obj = { label: o.get("kuerzel"), value: o.get('id') };
 	            		} catch(e) { console.log(o); throw e;}
-	//            		if(obj.value === that.selections.activity) {
-	//            			obj.isSelected = YES;
-	//            			itemSelected = YES;
-	//            		}
 	                    return obj;
 	            	}
 	            });
 	    		mengeneinheitenArray = _.compact(mengeneinheitenArray);
 			}
-	        // push "Manuelle Eingabe"
-			//mengeneinheitenArray.push({label: M.I18N.l('BautagebuchManuelleEingabe'), value: '0', isSelected:!itemSelected});
-			mengeneinheitenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected:!itemSelected});
+	        // Eintrag "Bitte wählen" hinzufügen
+			mengeneinheitenArray.push({
+			    label: M.I18N.l('selectSomething'),
+			    value: '0',
+			    isSelected: !itemSelected
+			});
 	        that.set('mengeneinheiten', mengeneinheitenArray);
 	        
         } catch (e) {

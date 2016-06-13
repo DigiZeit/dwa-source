@@ -13,11 +13,13 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 	, init: function(isFirstLoad) {
 		var that = this;
 		
-		var myItems = DigiWebApp.BautagebuchMaterialBuchung.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id'));
+		var myItems = DigiWebApp.BautagebuchMaterialBuchung.findSorted(
+            DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id'));
 		if (myItems.length == 0) {
 			$('#' + DigiWebApp.BautagebuchMaterialienListePage.uebertragenButton.id).hide();
 		} else {
-			if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('bautagesberichtTyp') != "<standard>") {
+		    if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get(
+                    'bautagesberichtTyp') != "<standard>") {
 				$('#' + DigiWebApp.BautagebuchMaterialienListePage.uebertragenButton.id).show();
 			} else {
 				$('#' + DigiWebApp.BautagebuchMaterialienListePage.uebertragenButton.id).hide();
@@ -34,22 +36,26 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 	}
 
 	, neu: function() {
-		//var that = this;
-		
-		DigiWebApp.BautagebuchMaterialienDetailsController.set("item", DigiWebApp.BautagebuchMaterialBuchung.createRecord({
+	    DigiWebApp.BautagebuchMaterialienDetailsController.set("item",
+            DigiWebApp.BautagebuchMaterialBuchung.createRecord({
 			  bautagesberichtId: DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')
 		}));
 		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId')) {
-			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId'));
-			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderName'));
+		    DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId'));
+		    DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderName'));
 		} else {
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragId", null);
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("auftragName", null);
 		}
 		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId')) {
-			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId'));
-			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderVaterId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderVaterId'));
-			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderName'));
+		    DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId'));
+		    DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderVaterId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderVaterId'));
+		    DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderName",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderName'));
 		} else {
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderId", null);
 			DigiWebApp.BautagebuchMaterialienDetailsController.set("handOrderVaterId", null);
@@ -74,7 +80,5 @@ DigiWebApp.BautagebuchMaterialienListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchMaterialienDetailsController.set("lieferantId", null);
 
 		DigiWebApp.NavigationController.toBautagebuchMaterialienDetailsPageTransition();
-	
 	}
-
 });

@@ -23,7 +23,6 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
 		                $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.button.id).hide();
             		    $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.icon.id).hide();
                     }
-
 		        }
 		        DigiWebApp.BookingController.init();
 		    }
@@ -229,8 +228,8 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
                         tap: {
                             action: function () {
-                                try { DigiWebApp.ApplicationController.vibrate(); } catch (e8) { }
                                 if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
+                                    try { DigiWebApp.ApplicationController.vibrate(); } catch (e8) { }
                                     DigiWebApp.ScholppBookingController.bucheFahrzeit();
                                 }
                             }
@@ -242,8 +241,8 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
 	                  tap: {
 	                        action: function () {
-	                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e9) { }
 	                            if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
+    	                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e9) { }
 	                                DigiWebApp.ScholppBookingController.bucheFahrzeit();
 	                            }
 	                        }

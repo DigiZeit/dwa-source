@@ -13,11 +13,13 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 	, init: function(isFirstLoad) {
 		var that = this;
 		
-		var myItems = DigiWebApp.BautagebuchNotiz.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id'));
+		var myItems = DigiWebApp.BautagebuchNotiz.findSorted(
+            DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id'));
 		if (myItems.length == 0) {
 			$('#' + DigiWebApp.BautagebuchNotizenListePage.uebertragenButton.id).hide();
 		} else {
-			if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('bautagesberichtTyp') != "<standard>") {
+		    if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get(
+                'bautagesberichtTyp') != "<standard>") {
 				$('#' + DigiWebApp.BautagebuchNotizenListePage.uebertragenButton.id).show();
 			} else {
 				$('#' + DigiWebApp.BautagebuchNotizenListePage.uebertragenButton.id).hide();
@@ -25,25 +27,29 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 		}
 
 		that.set("items", myItems);
-		
 	}
 
 	, neu: function() {
-		
-		DigiWebApp.BautagebuchNotizenDetailsController.set("item", DigiWebApp.BautagebuchNotiz.createRecord({
+	    DigiWebApp.BautagebuchNotizenDetailsController.set("item",
+            DigiWebApp.BautagebuchNotiz.createRecord({
 			  bautagesberichtId: DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')
 		}));
 		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId')) {
-			DigiWebApp.BautagebuchNotizenDetailsController.set("auftragId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId'));
-			DigiWebApp.BautagebuchNotizenDetailsController.set("auftragName", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderName'));
+		    DigiWebApp.BautagebuchNotizenDetailsController.set("auftragId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderId'));
+		    DigiWebApp.BautagebuchNotizenDetailsController.set("auftragName",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('orderName'));
 		} else {
 			DigiWebApp.BautagebuchNotizenDetailsController.set("auftragId", null);
 			DigiWebApp.BautagebuchNotizenDetailsController.set("auftragName", null);
 		}
 		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId')) {
-			DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId'));
-			DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderVaterId", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderVaterId'));
-			DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderName", DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderName'));
+		    DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderId'));
+		    DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderVaterId",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderVaterId'));
+		    DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderName",
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('handOrderName'));
 		} else {
 			DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderId", null);
 			DigiWebApp.BautagebuchNotizenDetailsController.set("handOrderVaterId", null);
@@ -56,7 +62,5 @@ DigiWebApp.BautagebuchNotizenListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchNotizenDetailsController.set("data", null);
 
 		DigiWebApp.NavigationController.toBautagebuchNotizenDetailsPageTransition();
-	
 	}
-	
 });

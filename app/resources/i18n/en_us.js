@@ -578,4 +578,9 @@ M.I18N.en_us = {
 
     , distanceTooFar: "Distance too big"
     , distanceTooFarMessage: "The distance you entered is too big (max. 99999 km)."
+
+    , bautagebuchWeitereMaterialbuchung: "Additional material booking?"
+	, bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
+	, bautagebuchWeitereNotiz: "Additional note?"
+	, bautagebuchWeitereNotizMsg: "Add another note using this selection?"
 };

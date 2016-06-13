@@ -55,12 +55,13 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		var myPosition = _.filter(DigiWebApp.Position.findSorted(), function(position) {
 			return (position.get('id') == myItem.get("positionId"));
 		})[0];
-		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()), function(auftrag) {
-			if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
-				return (auftrag.get('id') == myItem.get('handOrderId'));
-			} else {
-				return (auftrag.get('id') == myPosition.get('orderId'));
-			}
+		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(
+            DigiWebApp.Order.findSorted()), function (auftrag) {
+			    if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
+				    return (auftrag.get('id') == myItem.get('handOrderId'));
+			    } else {
+				    return (auftrag.get('id') == myPosition.get('orderId'));
+			    }
 		})[0];
 		var myAuftragId = myAuftrag.get('id');
 		var myAuftragName = myAuftrag.get('name');
@@ -92,7 +93,8 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		var actSelection = M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'activityComboBox').getSelection();
 		var positionSelected = (typeof(posSelection) != "undefined" && posSelection != "0" );
 		var activitySelected = (typeof(actSelection) != "undefined" && actSelection != "0" );
-		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
+		var mitarbeiterSelected = (!(DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds === null
+            || DigiWebApp.BautagebuchZeitenDetailsController.mitarbeiterIds.length === 0));
 		
 		if (!positionSelected && !that.handOrderId) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -117,7 +119,8 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		}
 		
 		var ueberschneidungFound = NO;
-		if (!DigiWebApp.BautagebuchEinstellungenController.settings.falscheZeitenIgnorieren && !DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
+		if (!DigiWebApp.BautagebuchEinstellungenController.settings.falscheZeitenIgnorieren
+            && !DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
 			// prüfen, ob einer der selektierten MAs bereits eine ggfs. überschneidende Zeitbuchung hat
 			var bautagesberichteAmGleichenDatum = DigiWebApp.BautagebuchBautagesbericht.find({query:{
 				  identifier: 'datum'
@@ -133,10 +136,26 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 					}});
 					_.each(myZeitbuchungen, function(z) {
 						if (JSON.parse(z.get("mitarbeiterIds")).indexOf(m) != -1 && z.m_id != that.item.m_id) {
-							var zVonD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
-							var zBisD8Timestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("bis")).getTimestamp();
-							var thatVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.von).getTimestamp();
-							var thatBisTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + that.bis).getTimestamp();
+						    var zVonD8Timestamp = D8.create(
+                                DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+                                + " "
+                                + z.get("von"))
+                                .getTimestamp();
+						    var zBisD8Timestamp = D8.create(
+                                DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+                                + " "
+                                + z.get("bis"))
+                                .getTimestamp();
+						    var thatVonTimestamp = D8.create(
+                                DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+                                + " "
+                                + that.von)
+                                .getTimestamp();
+						    var thatBisTimestamp = D8.create(
+                                DigiWebApp.BautagebuchBautagesberichtDetailsController.datum
+                                + " "
+                                + that.bis)
+                                .getTimestamp();
 							// neuer Von-Zeitpunkt in anderer Zeitbuchung?
 							if (zVonD8Timestamp < thatVonTimestamp && thatVonTimestamp < zBisD8Timestamp) {
 								ueberschneidungFound = YES;
@@ -164,7 +183,8 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		}
 			
 		var continueSave = function() {
-			if (!DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen") && !DigiWebApp.BautagebuchEinstellungen.find()[0].get("falscheZeitenIgnorieren")) {
+		    if (!DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")
+                && !DigiWebApp.BautagebuchEinstellungen.find()[0].get("falscheZeitenIgnorieren")) {
 				var myVon = D8.create("01.01.1993 " + DigiWebApp.BautagebuchZeitenDetailsController.get("von"));
 				var myBis = D8.create("01.01.1993 " + DigiWebApp.BautagebuchZeitenDetailsController.get("bis"));
 				if (myVon.getTimestamp() > myBis.getTimestamp()) {
@@ -203,7 +223,9 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 			var itemWasNew = (that.item.state == M.STATE_NEW);
 			if (that.item.saveSorted()) {
 				var backToListFunc = function() {
-	    			DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
+				    DigiWebApp.BautagebuchZeitenListeController.set("items",
+                        DigiWebApp.BautagebuchZeitbuchung.findSorted(
+                            DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
 	    			DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
 				}
 				if (itemWasNew) {
@@ -279,7 +301,6 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		} else {
 			continueSave();
 		}
-		
 	}
 	
 	, deleteZeitbuchung: function() {
@@ -294,7 +315,9 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
               		  target: this
               		, action: function() {
 						if (that.item.deleteSorted()) {		
-							DigiWebApp.BautagebuchZeitenListeController.set("items", DigiWebApp.BautagebuchZeitbuchung.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
+						    DigiWebApp.BautagebuchZeitenListeController.set("items",
+                                DigiWebApp.BautagebuchZeitbuchung.findSorted(
+                                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
 							DigiWebApp.NavigationController.backToBautagebuchZeitenListePageTransition();
 							return true;
 						} else {
@@ -354,31 +377,39 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 	, setDauer: function() {
 		var that = this;
   		if (DigiWebApp.BautagebuchZeitenDetailsController.dauer) {
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[0]).padLeft(2,"0");
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[1]).padLeft(2,"0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.stundeFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[0]).padLeft(2, "0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.dauerContainer.dauerGrid.minuteFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.dauer.split(":")[1]).padLeft(2, "0");
   		}
 	}
 	
 	, setVonBis: function() {
 		var that = this;
   		if (DigiWebApp.BautagebuchZeitenDetailsController.von) {
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeVonFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[0]).padLeft(2,"0");
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[1]).padLeft(2,"0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeVonFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[0]).padLeft(2, "0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteVonFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.von.split(":")[1]).padLeft(2, "0");
   		}
   		if (DigiWebApp.BautagebuchZeitenDetailsController.bis) {
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.bis.split(":")[0]).padLeft(2,"0");
-  			$('#'+DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.bis.split(":")[1]).padLeft(2,"0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.stundeBisFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.bis.split(":")[0]).padLeft(2, "0");
+  		    $('#' + DigiWebApp.BautagebuchZeitenDetailsPage.content.VonBisContainer.VonBisGrid.minuteBisFeld.id)[0].value
+                = parseIntRadixTen(DigiWebApp.BautagebuchZeitenDetailsController.bis.split(":")[1]).padLeft(2, "0");
   		}
-  		if (DigiWebApp.BautagebuchZeitenDetailsController.von && DigiWebApp.BautagebuchZeitenDetailsController.bis && !DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
+  		if (DigiWebApp.BautagebuchZeitenDetailsController.von
+            && DigiWebApp.BautagebuchZeitenDetailsController.bis
+            && !DigiWebApp.BautagebuchEinstellungenController.settings.inStundenBuchen) {
   			// Dauer aktualisieren
 				var myVon = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.von);
 				var myBis = D8.create("01.01.2000 " + DigiWebApp.BautagebuchZeitenDetailsController.bis);
 				var minutesInBetween = myVon.timeBetween(myBis, "minutes");
 				var hoursInBetween = Math.floor(minutesInBetween / 60);
 				var remainingMinutes = minutesInBetween % 60;
-				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer", hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
+				DigiWebApp.BautagebuchZeitenDetailsController.set("dauer",
+                    hoursInBetween.padLeft(2) + ":" + remainingMinutes.padLeft(2));
 				that.setDauer();
   		}
 	}
-	
 });

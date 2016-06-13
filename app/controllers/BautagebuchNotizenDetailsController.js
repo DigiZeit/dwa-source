@@ -38,7 +38,8 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		var myPosition = _.filter(DigiWebApp.Position.findSorted(), function(position) {
 			return (position.get('id') == myItem.get("positionId"));
 		})[0];
-		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted()), function(auftrag) {
+		var myAuftrag = _.filter(DigiWebApp.HandOrder.findSorted().concat(
+                DigiWebApp.Order.findSorted()), function (auftrag) {
 			if (myItem.get("handOrderId") && myItem.get("handOrderId").length > 0) {
 				return (auftrag.get('id') == myItem.get('handOrderId'));
 			} else {
@@ -65,7 +66,8 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		
 		var myTyp = DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("bautagesberichtTyp");
     	if (myTyp == "<notizen_only>") {
-			var orderSelected = (M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection() !== "0" );
+    	    var orderSelected = (M.ViewManager.getView(
+                'bautagebuchNotizenDetailsPage', 'auftragComboBox').getSelection() !== "0");
 			if (!orderSelected) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                title: M.I18N.l('noOrderSelected')
@@ -75,7 +77,8 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 			}
 		}
 
-		var posSelection = M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'positionComboBox').getSelection();
+    	var posSelection = M.ViewManager.getView(
+            'bautagebuchNotizenDetailsPage', 'positionComboBox').getSelection();
 		var positionSelected = (typeof(posSelection) != "undefined" && posSelection != "0" );
 		if (!positionSelected && !that.handOrderId) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -84,15 +87,6 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
             });
 			return false;
 		}
-		
-		//var activitySelected = (M.ViewManager.getView('bautagebuchNotizenDetailsPage', 'activityComboBox').getSelection() !== "0" );
-		//if (!activitySelected) {
-        //    DigiWebApp.ApplicationController.nativeAlertDialogView({
-        //        title: M.I18N.l('noActSelected')
-        //      , message: M.I18N.l('noActSelectedMsg')
-        //    });
-		//	return false;
-		//}
 		
 		if (that.handOrderId) {
 			that.item.set("handOrderId", that.handOrderId);
@@ -119,13 +113,50 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		} else {
 			that.item.set("data", null);
 		}
-		if (that.item.saveSorted()) {		
-			DigiWebApp.BautagebuchNotizenListeController.set("items", DigiWebApp.BautagebuchNotiz.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
-			DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
+	    if (that.item.saveSorted()) {
+	        var backToListFunc = function() {
+	            DigiWebApp.BautagebuchNotizenListeController.set("items",
+	                DigiWebApp.BautagebuchNotiz.findSorted(
+	                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
+	            DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
+	        }
+	        DigiWebApp.ApplicationController.nativeConfirmDialogView({
+		          	    title: M.I18N.l('bautagebuchWeitereNotiz')
+				    , message: M.I18N.l('bautagebuchWeitereNotizMsg')
+			        , confirmButtonValue: M.I18N.l('yes')
+			        , cancelButtonValue: M.I18N.l('no')
+			        , callbacks: {
+			          	confirm: {
+			              	  target: this
+			                , action: function() {
+			    			    var myOldItem = JSON.parse(JSON.stringify(that.item));
+			    			    DigiWebApp.BautagebuchNotizenListeController.neu();
+                                // Auftrag/Handauftrag und Leistung beibehalten
+			    			    that.set("positionId", myOldItem.record.positionId);
+			    			    that.set("positionName", myOldItem.record.positionName);
+			    			    that.set("handOrderId", myOldItem.record.handOrderId);
+			    			    that.set("handOrderVaterId", myOldItem.record.handOrderVaterId);
+			    			    that.set("handOrderName", myOldItem.record.handOrderName);
+			    			    that.set("activityId", myOldItem.record.activityId);
+			    			    that.set("activityName", myOldItem.record.activityName);
+                                // Notiz zurücksetzen
+                                that.set("data", "");
+			    			    $('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].value = "";
+						    }
+			            }
+			            , cancel: {
+			              	    target: this
+			                , action: function() {
+			          		    backToListFunc();
+				        	    return true;
+			      		    }
+			            }
+			        }
+		        });
 			return true;
 		} else {
 			return false;
-		}
+		} // if/else (that.item.saveSorted())
 	}
 	
 	, deleteNotiz: function() {
@@ -140,7 +171,9 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
             		  target: this
             		, action: function() {
 						if (that.item.deleteSorted()) {		
-							DigiWebApp.BautagebuchNotizenListeController.set("items", DigiWebApp.BautagebuchNotiz.findSorted(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
+						    DigiWebApp.BautagebuchNotizenListeController.set("items",
+                                DigiWebApp.BautagebuchNotiz.findSorted(
+                                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
 							DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
 							return true;
 						} else {
@@ -171,7 +204,8 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		    	} else {
 		    		if (parseIntRadixTen(pos.get('orderId')) == parseIntRadixTen(auftragsId)) {
 		    			var obj = { label: pos.get('name'), value: pos.get('id'), isSelected: NO };
-			    		if (parseIntRadixTen(pos.get('id')) == parseIntRadixTen(that.item.get("positionId"))) {
+		    			if (parseIntRadixTen(pos.get('id')) == parseIntRadixTen(
+                            that.item.get("positionId"))) {
 			    			obj.isSelected = YES;
 			    			itemSelected = YES;
 			    			that.set('positionId', pos.get('id'));
@@ -223,9 +257,13 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		    	}
 		    });
 		    taetigkeitenArray = _.compact(taetigkeitenArray);
-		    taetigkeitenArray.push({label: M.I18N.l('selectSomethingOptional'), value: '0', isSelected: !itemSelected});
+		    taetigkeitenArray.push(
+                {
+                    label: M.I18N.l('selectSomethingOptional'),
+                    value: '0',
+                    isSelected: !itemSelected
+                });
 			that.set("activityList", taetigkeitenArray);
 		}
 	}
-
 });

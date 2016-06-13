@@ -41,7 +41,7 @@ M.I18N.de_de = {
 	, error: "Fehler"
 	, doClosingTime: "Feierabend wird durchgeführt..."
 	, confirmClosingTimeMessage: "Sind Sie sicher, dass Sie die Feierabendbuchung durchführen möchten?"
-	, openBookingsOverwriteBySettingsUpdate : "Es existieren nicht übertragene Buchungen. Möchten Sie die Einstellungen trotzdem ändern? Alle bestehenden Buchungen gehen verloren!"
+	, openBookingsOverwriteBySettingsUpdate: "Es existieren nicht übertragene Buchungen. Möchten Sie die Einstellungen trotzdem ändern? Alle bestehenden Buchungen gehen verloren!"
 	, yes: "Ja"
 	, no: "Nein"
 	, assume: "Übernehmen"
@@ -233,9 +233,9 @@ M.I18N.de_de = {
 	, editPicture: "Bild bearbeiten"
 	, deleteLabel: "Löschen"
 	, errorWhileDeletingMediaFile: "Die Mediendatei konnte nicht gelöscht werden!"
-	, loadMediaFile: "lade Mediendatei"
-	, saveMediaFile: "speichere Mediendatei"
-	, deleteMediaFile: "lösche Mediendatei"
+	, loadMediaFile: "Lade Mediendatei"
+	, saveMediaFile: "Speichere Mediendatei"
+	, deleteMediaFile: "Lösche Mediendatei"
 	, profilingTook: "Dieser Datenabgleich dauerte"
 	, geozoneTrafficlight: "Geozonenampel"
 	, showBookingCoordinatesInMap: "Buchung in Karte zeigen"
@@ -577,4 +577,9 @@ M.I18N.de_de = {
 
     , distanceTooFar: "Entfernung zu groß"
     , distanceTooFarMessage: "Die eingegebene Entfernung ist zu groß (max. 99999 km)."
+
+    , bautagebuchWeitereMaterialbuchung: "Weitere Materialbuchung?"
+	, bautagebuchWeitereMaterialbuchungMsg: "Weitere Materialbuchung für diese Auswahl anlegen?"
+	, bautagebuchWeitereNotiz: "Weitere Notiz?"
+	, bautagebuchWeitereNotizMsg: "Weitere Notiz für diese Auswahl anlegen?"
 };

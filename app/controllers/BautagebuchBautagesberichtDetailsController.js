@@ -57,7 +57,10 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		if (isFirstLoad) {
 			// setting defaults for contentBinding
 			that.setWetter(DigiWebApp.BautagebuchMainController.wetterDefaults);
-			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds", _.map(DigiWebApp.BautagebuchMainController.mitarbeiter,function(obj){return parseIntRadixTen(obj.value);}));
+			DigiWebApp.BautagebuchBautagesberichtDetailsController.set("mitarbeiterIds",
+                _.map(DigiWebApp.BautagebuchMainController.mitarbeiter, function(obj) {
+                    return parseIntRadixTen(obj.value);
+                }));
 		}
 	}
 	
@@ -99,9 +102,13 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		var that = this;
 		
 		if (!skipChecks) {
-			var orderSelected = (M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection() !== "0" );
-			var projektleiterSelected = (M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'projektleiterComboBox').getSelection() !== "0" );
-			var mitarbeiterSelected = (!(DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds === null || DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds.length === 0));
+		    var orderSelected = (M.ViewManager.getView(
+                'bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection() !== "0");
+		    var projektleiterSelected = (M.ViewManager.getView(
+                'bautagebuchBautagesberichtDetailsPage', 'projektleiterComboBox').getSelection() !== "0");
+		    var mitarbeiterSelected
+                = (!(DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds === null
+                   || DigiWebApp.BautagebuchBautagesberichtDetailsController.mitarbeiterIds.length === 0));
 			
 			if (!orderSelected) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -139,7 +146,9 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 			}});
 			var earliestTimestamp = null;
 			_.each(myZeitbuchungen, function(z) {
-				var zVonTimestamp = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von")).getTimestamp();
+			    var zVonTimestamp = D8.create(
+                    DigiWebApp.BautagebuchBautagesberichtDetailsController.datum + " " + z.get("von"))
+                    .getTimestamp();
 				if (!earliestTimestamp || earliestTimestamp > zVonTimestamp) {
 					earliestTimestamp = zVonTimestamp;
 				}
@@ -158,7 +167,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		that.item.set("handOrderVaterId", that.handOrderVaterId);
 		that.item.set("handOrderName", that.handOrderName);
 
-		if (M.ViewManager.getView('bautagebuchBautagesberichtDetailsPage', 'positionComboBox').getSelection() !== "0" ) {
+		if (M.ViewManager.getView(
+                'bautagebuchBautagesberichtDetailsPage', 'positionComboBox').getSelection() !== "0") {
 			that.item.set("positionId", that.positionId);
 			that.item.set("positionName", that.positionName);
 		}
@@ -173,7 +183,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		that.item.set("wechselhaft", that.wetter.wechselhaft);
 		
 		if (that.item.saveSorted()) {		
-			DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+		    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                DigiWebApp.BautagebuchBautagesbericht.findSorted());
 			if (typeof(successcallback) === "function") successcallback();
 			return true;
 		} else {
@@ -186,7 +197,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		var that = this;
 		if (skipQuestion) {
 			that.item.deleteSorted(function() {
-				DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+			    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                    DigiWebApp.BautagebuchBautagesbericht.findSorted());
 				if (typeof(successCallback) === "function") successCallback();
 			});
 		} else {
@@ -200,7 +212,8 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 	            		  target: this
 	            		, action: function() {
 	            			that.item.deleteSorted(function() {
-	            				DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+	            			    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                                    DigiWebApp.BautagebuchBautagesbericht.findSorted());
 	            				if (typeof(successCallback) === "function") successCallback();
 	            			});
 						}
@@ -213,7 +226,7 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 	        		}
 	    		}
 			});
-		}
+		} // if/else (skipQuestion)
 	}
 
 	, finish: function(successcallback, errorcallback) {
@@ -264,8 +277,12 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 	
 	, setStartUhrzeit: function() {
   		if (DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit) {
-  			$('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit.split(":")[0]).padLeft(2,"0");
-  			$('#'+DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value = parseIntRadixTen(DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit.split(":")[1]).padLeft(2,"0");
+  		    $('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.stundeFeld.id)[0].value
+                = parseIntRadixTen(
+                    DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit.split(":")[0]).padLeft(2, "0");
+  		    $('#' + DigiWebApp.BautagebuchBautagesberichtDetailsPage.content.startUhrzeitContainer.startUhrzeitGrid.minuteFeld.id)[0].value
+                = parseIntRadixTen(
+                    DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit.split(":")[1]).padLeft(2, "0");
   		}
 	}
 });

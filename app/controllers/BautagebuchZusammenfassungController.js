@@ -53,7 +53,6 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		}
 		
 		// geladene dauer-zeitbuchungen in von/bis-zeitbuchungen umrechnen:
-		
 	}
 	
 	, load: function(myItem, readOnly) {
@@ -85,14 +84,14 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		that.setPositionen(myItem.get("orderId"));
 		
 		that.set("ZeitbuchungenPerMitarbeiterList", that.getZeitbuchungenPerMitarbeiterList());
-		
 	}
 
 	, save: function(successcallback, errorcallback) {
 		var that = this;
 			
 		if (that.item.saveSorted()) {		
-			DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+		    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                DigiWebApp.BautagebuchBautagesbericht.findSorted());
 			if (typeof(successcallback) === "function") successcallback();
 			return true;
 		} else {
@@ -104,7 +103,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	, deleteBautagesbericht: function(successcallback, errorcallback) {
 		var that = this;
 		if (that.item.deleteSorted()) {
-			DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+		    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                DigiWebApp.BautagebuchBautagesbericht.findSorted());
 			if (typeof(successcallback) === "function") successcallback();
 			return true;
 		} else {
@@ -124,22 +124,29 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		}
 
 		var unterschriftString = "";
-    	// Feature 405 (Unterschrift)
-		if ((DigiWebApp.SettingsController.featureAvailable('405')) && (typeof window.requestFileSystem !== "undefined") && DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI) {
-			//unterschriftImageString = DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI.getSignatureImage();
+    	// Freischaltung 405: Unterschrift
+		if ((DigiWebApp.SettingsController.featureAvailable('405'))
+            && (typeof window.requestFileSystem !== "undefined")
+            && DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI) {
+		    //unterschriftImageString 
+            //= DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI.getSignatureImage();
     		unterschriftString = DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI.getSignatureString();
-			//var unterschriftRawValue = $('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.signature.signatureform.signaturecanvas.id).val();
+		    //var unterschriftRawValue 
+            //= $('#' + DigiWebApp.BautagebuchZusammenfassungPage.content.signature.signatureform.signaturecanvas.id).val();
     	
 			//console.log(DigiWebApp.BautagebuchZusammenfassungPage.signaturePadAPI);
 			//console.log(unterschriftImageString);
     		that.item.set('fileType', DigiWebApp.ApplicationController.CONSTTextFiletype);
     		that.item.saveToFile(unterschriftString, function(){
     			
-    		    that.item.set("unterschrift_breite", DigiWebApp.BautagebuchZusammenfassungPage.content.container.signature.signatureform.signaturecanvas.canvasWidth);
-    		    that.item.set("unterschrift_hoehe", DigiWebApp.BautagebuchZusammenfassungPage.content.container.signature.signatureform.signaturecanvas.canvasHeight);
+    		    that.item.set("unterschrift_breite",
+                    DigiWebApp.BautagebuchZusammenfassungPage.content.container.signature.signatureform.signaturecanvas.canvasWidth);
+    		    that.item.set("unterschrift_hoehe",
+                    DigiWebApp.BautagebuchZusammenfassungPage.content.container.signature.signatureform.signaturecanvas.canvasHeight);
 
     			if (that.save()) {
-    				DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+    			    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                        DigiWebApp.BautagebuchBautagesbericht.findSorted());
     				if (typeof(successcallback) === "function") successcallback();
     				return true;
     			} else {
@@ -149,7 +156,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
     		});
 		} else {
 			if (that.save()) {
-				DigiWebApp.BautagebuchBautagesberichteListeController.set("items", DigiWebApp.BautagebuchBautagesbericht.findSorted());
+			    DigiWebApp.BautagebuchBautagesberichteListeController.set("items",
+                    DigiWebApp.BautagebuchBautagesbericht.findSorted());
 				if (typeof(successcallback) === "function") successcallback();
 				return true;
 			} else {
@@ -187,8 +195,11 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		var that = this;
 		var result = [];
 		var letztesBisArr = [];
-		letztesBisArr["0"] = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit);
-		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
+		letztesBisArr["0"] = D8.create(
+            DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum")
+            + " " + DigiWebApp.BautagebuchBautagesberichtDetailsController.startUhrzeit);
+		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find(
+            { query: { identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId } });
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
             return parseIntRadixTen(z.get('_createdAt'));
         });
@@ -209,11 +220,12 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 			m.set("timeStampStart", letztesBis.getTimestamp());
 			var dauer = m.get("dauer");
 			
-			var naechstesBis = letztesBis.addHours(parseIntRadixTen(dauer.split(":")[0])).addMinutes(parseIntRadixTen(dauer.split(":")[1]));
+			var naechstesBis = letztesBis.addHours(parseIntRadixTen(
+                dauer.split(":")[0])).addMinutes(parseIntRadixTen(dauer.split(":")[1]));
 			letztesBis = naechstesBis;
 			
 			// letztesBis für alle MAs dieser Zeitbuchung setzen
-			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId){
+			_.each(JSON.parse(m.get('mitarbeiterIds')), function(mId) {
 				letztesBisArr["" + mId] = letztesBis;
 			});
 			
@@ -234,15 +246,24 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 	, setzeTimestamps: function(saveit) {
 		var that = this;
 		var result = [];
-		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find({query:{identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId}}); 
+		var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find(
+            { query: { identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId } });
 		var relevanteZeitbuchungenSorted = _.sortBy(relevanteZeitbuchungen , function(z) {
             return parseIntRadixTen(z.get('_createdAt'));
         });
 
 		_.each(relevanteZeitbuchungenSorted, function(m) {
 
-			m.set("timeStampStart", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("von")).getTimestamp());
-			m.set("timeStampEnd", D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " " + m.get("bis")).getTimestamp());
+		    m.set("timeStampStart", D8.create(
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum")
+                + " "
+                + m.get("von"))
+                .getTimestamp());
+		    m.set("timeStampEnd", D8.create(
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum")
+                + " "
+                + m.get("bis"))
+                .getTimestamp());
 
 			if (typeof saveit !== "undefined" && parseBool(saveit)) {
 				m.saveSorted();
@@ -256,19 +277,23 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
         });
 		
 		return resultSorted;
-		
 	}
 
 	, getZeitbuchungenPerMitarbeiterList: function() {
 		var that = this;
 		var MAList = [];
 		var zeitbuchungenList = [];
-		if (parseBool(that.item.get("abgeschlossen")) || !DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")) {
+		if (parseBool(that.item.get("abgeschlossen"))
+            || !DigiWebApp.BautagebuchEinstellungen.find()[0].get("inStundenBuchen")) {
 			// Zeitbuchungen wurden bereits berechnet oder es wird nicht in Stunden gebucht (sondern mit Von/Bis)
 		    var relevanteZeitbuchungen = DigiWebApp.BautagebuchZeitbuchung.find(
                 { query: { identifier: 'bautagesberichtId', operator: '=', value: that.bautagesberichtId } }); 
 			zeitbuchungenList = _.sortBy(relevanteZeitbuchungen , function(z) {
-	            return parseIntRadixTen(D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('datum') + " " + z.get("von")).getTimestamp());
+			    return parseIntRadixTen(D8.create(
+                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('datum')
+                    + " "
+                    + z.get("von"))
+                    .getTimestamp());
 	        });
 		} else {
 			zeitbuchungenList = that.berechneVonBis();
@@ -276,7 +301,8 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		_.each(zeitbuchungenList, function(m) {
 			  var zeitbuchungMAIds = JSON.parse(m.get("mitarbeiterIds"));
 			  _.each(zeitbuchungMAIds, function(el) {
-	        		var myMitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find({query:{identifier: 'id', operator: '=', value: el}})[0];
+			      var myMitarbeiter = DigiWebApp.BautagebuchMitarbeiter.find(
+                      { query: { identifier: 'id', operator: '=', value: el } })[0];
 	        		if (typeof myMitarbeiter !== "undefined") {
 		        		var found = NO;
 	        			_.each(MAList, function(MAListEntry) {
@@ -293,27 +319,32 @@ DigiWebApp.BautagebuchZusammenfassungController = M.Controller.extend({
 		var result = [];
 		_.each(MAList, function(el) {
 			var items = [];
-			var mySumme = D8.create(DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " 00:00");
+			var mySumme = D8.create(
+                DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("datum") + " 00:00");
 			_.each(zeitbuchungenList, function(zeitbuch) {
 				   var maIds = JSON.parse(zeitbuch.get("mitarbeiterIds"));
 				   _.each(maIds, function(maId) {
 					   	if (maId === el.get("id")) {
 				    	  // benutze diese Zeitbuchung
-					   		mySumme = mySumme.addHours(zeitbuch.get("dauer").split(":")[0]).addMinutes(zeitbuch.get("dauer").split(":")[1]);
-					   				var zeitbuchItem = {
-					   					  vonbisdauer : zeitbuch.get("von") + " - " + zeitbuch.get("bis") + " (" + zeitbuch.get("dauer") + "h)"
-					   					, handOrderName: zeitbuch.get("handOrderName")
-					   					, positionName: zeitbuch.get("positionName")
-					   					, activityName: zeitbuch.get("activityName")
-                                        , remark: zeitbuch.get("remark")
-					   					, mitarbeiterId: maId
-					   					, modelId: zeitbuch.m_id
-					   				};
-					   				items.push(zeitbuchItem);
+					   	    mySumme = mySumme.addHours(zeitbuch.get("dauer").split(":")[0])
+                                .addMinutes(zeitbuch.get("dauer").split(":")[1]);
+					   		var zeitbuchItem = {
+					   				vonbisdauer : zeitbuch.get("von") + " - " + zeitbuch.get("bis") + " (" + zeitbuch.get("dauer") + "h)"
+					   			, handOrderName: zeitbuch.get("handOrderName")
+					   			, positionName: zeitbuch.get("positionName")
+					   			, activityName: zeitbuch.get("activityName")
+                                , remark: zeitbuch.get("remark")
+					   			, mitarbeiterId: maId
+					   			, modelId: zeitbuch.m_id
+					   		};
+					   		items.push(zeitbuchItem);
 				      	}
 				   });
 			});
-			var maItem = {"label": el.vollername() + ": " + mySumme.format("HH:MM") + "h", "items":items};
+			var maItem = {
+			    "label": el.vollername() + ": " + mySumme.format("HH:MM") + "h",
+			    "items": items
+			};
 			result.push(maItem);
 		});
 		return result;
