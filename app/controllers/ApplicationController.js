@@ -2160,8 +2160,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.SettingsController.defaultsettings.get('silentLoader'));
             DigiWebApp.SettingsController.setSetting('mapType',
                 DigiWebApp.SettingsController.defaultsettings.get('mapType'));
-    	    //DigiWebApp.SettingsController.setSetting('useTransitionsSetting', 
-            //    DigiWebApp.SettingsController.defaultsettings.get('useTransitionsSetting'));
             DigiWebApp.SettingsController.setSetting('datatransfer_min_delay',
                 DigiWebApp.SettingsController.defaultsettings.get('datatransfer_min_delay'));
             DigiWebApp.SettingsController.setSetting('GPSTimeOut',
@@ -2176,6 +2174,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen'));
             DigiWebApp.SettingsController.setSetting('kannUebernachtungskostenBuchen',
                 DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen'));
+            DigiWebApp.SettingsController.setSetting('kannReisezeitBuchen',
+                DigiWebApp.SettingsController.defaultsettings.get('kannReisezeitBuchen'));
 
             DigiWebApp.ApplicationController.triggerUpdate = NO;
             
