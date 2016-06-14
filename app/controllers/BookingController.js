@@ -526,11 +526,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     		M.LocationManager.getLocation(that, successCallback, function(error) {
                 	if ( error === M.LOCATION_POSITION_UNAVAILABLE ) {
 	                	if (nextFunction) {
-	                		writeToLog("GPS-ERROR: POSITION_UNAVAILABLE, trying again in 100ms")
+		                    writeToLog("GPS-ERROR: POSITION_UNAVAILABLE, trying again in 100ms");
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: POSITION_UNAVAILABLE, giving up")
+		                    writeToLog("GPS-ERROR: POSITION_UNAVAILABLE, giving up");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSunavailable')
@@ -547,11 +547,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === M.LOCATION_TIMEOUT ) {
 	                	if (nextFunction) {
-	                		writeToLog("GPS-ERROR: TIMEOUT, trying again in 100ms")
+		                    writeToLog("GPS-ERROR: TIMEOUT, trying again in 100ms");
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: TIMEOUT, giving up")
+		                    writeToLog("GPS-ERROR: TIMEOUT, giving up");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPStimeout')
@@ -568,11 +568,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === M.LOCATION_PERMISSION_DENIED ) {
 	                	if (nextFunction) {
-	                		writeToLog("GPS-ERROR: PERMISSION_DENIED, trying again in 100ms")
+		                    writeToLog("GPS-ERROR: PERMISSION_DENIED, trying again in 100ms");
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: PERMISSION_DENIED, giving up")
+		                    writeToLog("GPS-ERROR: PERMISSION_DENIED, giving up");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSmissingPermission')
@@ -589,11 +589,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else if ( error === M.LOCATION_ALREADY_RECEIVING ) {
 	                	if (nextFunction) {
-	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again in 1000ms")
+		                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again in 1000ms");
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 1000);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user")
+		                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSalreadyRecieving')
@@ -601,7 +601,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				      	        		  confirm: {
 				      	            		  target: this
 				      	            		, action: function() {
-		                						writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again")
+							                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again");
 		                						// Bugfix 2515: 
 		                						// here nextFunction is alreay null then throw exception
 	                							//nextFunction(successCallback, nextOptions, nextFunction);
@@ -611,7 +611,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				      	        		, cancel: {
 				      	            		  target: this
 				      	            		, action: function() {
-				      	        				writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up")
+							                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up");
 				      	        				successCallback();
 				      	    				}
 				      	        		}
@@ -620,11 +620,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                	}
                 	} else {
 	                	if (nextFunction) {
-	                		writeToLog("GPS-ERROR: unknown GPS-error, trying again in 100ms")
+		                    writeToLog("GPS-ERROR: unknown GPS-error, trying again in 100ms");
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 100);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-	                		writeToLog("GPS-ERROR: unknown GPS-error, giving up")
+		                    writeToLog("GPS-ERROR: unknown GPS-error, giving up");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSunknownError') + error
@@ -1148,10 +1148,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 						var continueFunc = function() {
 							var getWAITFunc = function() {
 								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
-								DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
+								DigiWebApp.ServiceAppController.refreshWAITBookings(function() {
 									if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 									finishBooking();
-								},function(err){
+								}, function(err) {
 									DigiWebApp.ApplicationController.DigiLoaderView.hide();
 									trackError(err);
 								});

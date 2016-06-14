@@ -67,17 +67,17 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , stammdatenabgleichBeimAppStart: false
         , festePauseStornieren_nurAktuellerTag: true
         , startTimeout: 10000
-        , GPSenableHighAccuracy: NO
-        , GPSenableHighAccuracyFallback: YES
+        , GPSenableHighAccuracy: false
+        , GPSenableHighAccuracyFallback: true
         , GPSmaximumAgeMinutes: 3
-        , GPSBackgroundService: NO
+        , GPSBackgroundService: false
         , BookingReminderHours: 11
-        , closeAppAfterCloseDay: YES
-        , DTC6aktiv: NO
-        , useNativeLoader: YES
+        , closeAppAfterCloseDay: true
+        , DTC6aktiv: false
+        , useNativeLoader: true
         , pictureEncodingType: "JPEG"
         , pictureEncodingQuality: 50
-        , pictureAllowEdit: YES
+        , pictureAllowEdit: true
         , mengeneingabeMitTelKeyboard: false
         , scrId: 8367
         , overrideApplicationQuota: '-1'
@@ -812,7 +812,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
 //				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
-				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
+				DigiWebApp.ServiceAppController.refreshWAITBookings(function() {
 //					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 					DigiWebApp.BookingController.init(YES);
 				},function(err){trackError(err);}

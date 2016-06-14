@@ -241,8 +241,8 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
                         tap: {
                             action: function () {
+                                try { DigiWebApp.ApplicationController.vibrate(); } catch (e8) { }
                                 if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
-                                    try { DigiWebApp.ApplicationController.vibrate(); } catch (e8) { }
                                     DigiWebApp.ScholppBookingController.bucheFahrzeit();
                                 }
                             }
@@ -254,8 +254,8 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                   , events: {
 	                  tap: {
 	                        action: function () {
+  	                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e9) { }
 	                            if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
-    	                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e9) { }
 	                                DigiWebApp.ScholppBookingController.bucheFahrzeit();
 	                            }
 	                        }

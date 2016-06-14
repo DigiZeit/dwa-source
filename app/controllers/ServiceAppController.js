@@ -697,7 +697,7 @@ DigiWebApp.ServiceAppController = M.Controller.extend({
 					DigiWebApp.ApplicationController.DigiLoaderView.hide();
 					errorCallback("ERROR in refreshWAITBookings: " + e11.message);
 				}
-			}, function(){
+			}, function() {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				if (fileNamesToDelete !== [] && fileNamesToDelete !== null && typeof(fileNamesToDelete) !== "undefined") {
 //					that.deleteFilesInServiceApp(fileNamesToDelete, function(data){
