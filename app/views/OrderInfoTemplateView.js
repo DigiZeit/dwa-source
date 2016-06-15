@@ -342,14 +342,14 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                         urlByAddress,
-                                        'childBrowser',
+                                        '_blank',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
     					        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 							    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                     urlByAddress,
-                                    'childBrowser',
+                                    '_blank',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
@@ -437,13 +437,13 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 			    				} else {
 							        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        urlByCoordinates, 'childBrowser',
+                                        urlByCoordinates, '_blank',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
 						        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
 		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    urlByCoordinates, 'childBrowser',
+                                    urlByCoordinates, '_blank',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
