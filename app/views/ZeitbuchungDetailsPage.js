@@ -549,17 +549,21 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                         alert("Error: " + e8.message);
                     }
                     try {
+						writeToLog("plugins.childBrowser.showWebPage(), url="
+							+ encodeURI(urlByCoordinates));
                         plugins.childBrowser.showWebPage(encodeURI(
                             urlByCoordinates), { showNavigationBar: true });
                     } catch (e9) {
                         alert("Error: " + e9.message);
                     }
                 } else {
+			        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
                     DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                         urlByCoordinates, 'childBrowser',
                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
                 }
             } else {
+		        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
                 DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                     urlByCoordinates, 'childBrowser',
                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');

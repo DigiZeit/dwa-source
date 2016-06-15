@@ -812,7 +812,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
 //				if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT");
-				DigiWebApp.ServiceAppController.refreshWAITBookings(function() {
+				DigiWebApp.ServiceAppController.refreshWAITBookings(function(){
 //					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("refreshWAIT done");
 					DigiWebApp.BookingController.init(YES);
 				},function(err){trackError(err);}

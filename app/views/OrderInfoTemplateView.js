@@ -257,7 +257,10 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , events: {
 	            tap: {
 	                target: DigiWebApp.OrderInfoController,
-	                action: function() {try{DigiWebApp.ApplicationController.vibrate();}catch(e2){} this.saveAsContact();}
+	                action: function() {
+	                    try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
+	                    this.saveAsContact();
+	                }
 	            }
 	          }
 	    })
@@ -269,7 +272,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , events: {
 	            tap: {
 	                action: function(buttonid, ev) {
-	    				try{DigiWebApp.ApplicationController.vibrate();}catch(e4){}
+	    				try { DigiWebApp.ApplicationController.vibrate(); } catch(e4) {}
 	    				if (DigiWebApp.OrderInfoController.items.length === 0) {
 	    					DigiWebApp.OrderInfoController.set('items', DigiWebApp.OrderDetailsController.positionForDetails);
 	    				}
@@ -329,17 +332,21 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								    } catch (e5) {
 								         alert("Error: " + e5.message);
 								    }
-			    					try { 
+			    					try {
+								        writeToLog("plugins.childBrowser.showWebPage(), url="
+								            + encodeURI(urlByAddress));
 			    					    plugins.childBrowser.showWebPage(encodeURI(
                                             urlByAddress), { showNavigationBar: true });
 			    					} catch(e6) { alert("Error: " + e6.message); }
 			    				} else {
+							        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                         urlByAddress,
                                         'childBrowser',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
+    					        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 							    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                     urlByAddress,
                                     'childBrowser',
@@ -419,18 +426,22 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								    } catch (e8) {
 								        alert("Error: " + e8.message);
 								    }
-			    					try {
-								        plugins.childBrowser.showWebPage(encodeURI(
+			    				    try {
+							            writeToLog("plugins.childBrowser.showWebPage(), url="
+							                + encodeURI(urlByCoordinates));
+							            plugins.childBrowser.showWebPage(encodeURI(
 								            urlByCoordinates), { showNavigationBar: true });
 								    } catch (e9) {
 								         alert("Error: " + e9.message);
 								    }
 			    				} else {
+							        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                         urlByCoordinates, 'childBrowser',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
+						        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
 		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                     urlByCoordinates, 'childBrowser',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');

@@ -169,14 +169,6 @@ function toIntArray(myArray) {
 	return _.compact(result);
 }
 
-function setTestLogin() {
-	$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val("312");
-	$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val("stuttgart11");
-	$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val("digi$");
-	$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val("1");
-	DigiWebApp.SettingsController.save();
-}
-
 var newAppVersionAvailable = NO;
 
 M.Application.useTransitions = NO;
