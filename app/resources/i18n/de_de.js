@@ -580,6 +580,4 @@ M.I18N.de_de = {
 
     , bautagebuchWeitereMaterialbuchung: "Weitere Materialbuchung?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Weitere Materialbuchung für diese Auswahl anlegen?"
-	, bautagebuchWeitereNotiz: "Weitere Notiz?"
-	, bautagebuchWeitereNotizMsg: "Weitere Notiz für diese Auswahl anlegen?"
 };

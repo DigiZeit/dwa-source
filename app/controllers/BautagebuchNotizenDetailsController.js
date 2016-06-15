@@ -113,50 +113,15 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 		} else {
 			that.item.set("data", null);
 		}
-	    if (that.item.saveSorted()) {
-	        var backToListFunc = function() {
-	            DigiWebApp.BautagebuchNotizenListeController.set("items",
-	                DigiWebApp.BautagebuchNotiz.findSorted(
-	                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
-	            DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
-	        }
-	        DigiWebApp.ApplicationController.nativeConfirmDialogView({
-		          	    title: M.I18N.l('bautagebuchWeitereNotiz')
-				    , message: M.I18N.l('bautagebuchWeitereNotizMsg')
-			        , confirmButtonValue: M.I18N.l('yes')
-			        , cancelButtonValue: M.I18N.l('no')
-			        , callbacks: {
-			          	confirm: {
-			              	  target: this
-			                , action: function() {
-			    			    var myOldItem = JSON.parse(JSON.stringify(that.item));
-			    			    DigiWebApp.BautagebuchNotizenListeController.neu();
-                                // Auftrag/Handauftrag und Leistung beibehalten
-			    			    that.set("positionId", myOldItem.record.positionId);
-			    			    that.set("positionName", myOldItem.record.positionName);
-			    			    that.set("handOrderId", myOldItem.record.handOrderId);
-			    			    that.set("handOrderVaterId", myOldItem.record.handOrderVaterId);
-			    			    that.set("handOrderName", myOldItem.record.handOrderName);
-			    			    that.set("activityId", myOldItem.record.activityId);
-			    			    that.set("activityName", myOldItem.record.activityName);
-                                // Notiz zurücksetzen
-                                that.set("data", "");
-			    			    $('#' + DigiWebApp.BautagebuchNotizenDetailsPage.content.dataInput.id)[0].value = "";
-						    }
-			            }
-			            , cancel: {
-			              	    target: this
-			                , action: function() {
-			          		    backToListFunc();
-				        	    return true;
-			      		    }
-			            }
-			        }
-		        });
+		if (that.item.saveSorted()) {		
+		    DigiWebApp.BautagebuchNotizenListeController.set("items",
+                DigiWebApp.BautagebuchNotiz.findSorted(
+                    DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get('id')));
+			DigiWebApp.NavigationController.backToBautagebuchNotizenListePageTransition();
 			return true;
 		} else {
 			return false;
-		} // if/else (that.item.saveSorted())
+		}
 	}
 	
 	, deleteNotiz: function() {
@@ -266,4 +231,5 @@ DigiWebApp.BautagebuchNotizenDetailsController = M.Controller.extend({
 			that.set("activityList", taetigkeitenArray);
 		}
 	}
+
 });

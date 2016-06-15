@@ -581,6 +581,4 @@ M.I18N.en_us = {
 
     , bautagebuchWeitereMaterialbuchung: "Additional material booking?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
-	, bautagebuchWeitereNotiz: "Additional note?"
-	, bautagebuchWeitereNotizMsg: "Add another note using this selection?"
 };
