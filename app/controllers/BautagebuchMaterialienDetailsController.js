@@ -244,8 +244,8 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			    			    var myOldItem = JSON.parse(JSON.stringify(that.item));
 			    			    DigiWebApp.BautagebuchMaterialienListeController.neu();
                                 // Auftrag/Handauftrag und Leistung beibehalten
-			                    that.set("orderId", myOldItem.record.auftragId);
-			                    that.set("orderName", myOldItem.record.auftragName);
+			                    that.set("orderId", myOldItem.record.orderId);
+			                    that.set("orderName", myOldItem.record.orderName);
 			    			    that.set("positionId", myOldItem.record.positionId);
 			    			    that.set("positionName", myOldItem.record.positionName);
 			    			    that.set("handOrderId", myOldItem.record.handOrderId);
@@ -266,7 +266,7 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 		                        that.setMaterialien(false);
                                 that.setMengeneinheiten(false);
 		                        $('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.materialInput.id)[0].value = "";
-				                $('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeGrid.mengenInput.id)[0].value = 0;
+				                $('#' + DigiWebApp.BautagebuchMaterialienDetailsPage.content.mengeGrid.mengenInput.id)[0].value = null;
 				            }
 			            }
 			            , cancel: {
