@@ -243,9 +243,11 @@ DigiWebApp.BautagebuchMaterialienDetailsController = M.Controller.extend({
 			                , action: function() {
 			    			    var myOldItem = JSON.parse(JSON.stringify(that.item));
 			    			    DigiWebApp.BautagebuchMaterialienListeController.neu();
-                                // Auftrag/Handauftrag und Leistung beibehalten
-			                    that.set("orderId", myOldItem.record.orderId);
-			                    that.set("orderName", myOldItem.record.orderName);
+			                    // Auftrag/Handauftrag und Leistung beibehalten
+			                    // Falle: Im item wird orderId/Name verwendet, 
+			    			    // im Controller auftragId/Name!
+			                    that.set("auftragId", myOldItem.record.orderId);
+			                    that.set("auftragName", myOldItem.record.orderName);
 			    			    that.set("positionId", myOldItem.record.positionId);
 			    			    that.set("positionName", myOldItem.record.positionName);
 			    			    that.set("handOrderId", myOldItem.record.handOrderId);
