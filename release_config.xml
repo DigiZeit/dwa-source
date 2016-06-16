@@ -70,7 +70,7 @@
   <preference name="permissions" value="none" />
 
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-  <gap:plugin name="cordova-plugin-camera" source="npm" version="0.3.6" />
+  <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
   <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
   <gap:plugin name="cordova-plugin-contacts" source="npm" version="0.2.13" />
   <gap:plugin name="cordova-plugin-device" source="npm" version="0.2.12" />

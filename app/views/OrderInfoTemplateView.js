@@ -285,7 +285,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var addressdetails = '0';
 						var urlByAddress = 'https://';
                         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-                            urlByAddress = 'http://';
+                            urlByAddress = 'https://';
                         }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 						case "OSM":
@@ -381,7 +381,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
                         }
 						var urlByCoordinates = "https://";
                         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-                            urlByCoordinates = 'http://';
+                            urlByCoordinates = 'https://';
                         }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 							case "OSM":

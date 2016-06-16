@@ -112,7 +112,7 @@ fieldset legend {
 
 .ui-page {    
 	/*background: url('images/320x480_90_DIGI-WebApp.png');*/
-    background-color: #003366 !important;
+    background-color: #ffffff !important;
     background-position:right bottom !important;
     background-repeat:repeat-y !important;
 	background-attachment:fixed !important; 
@@ -1163,7 +1163,7 @@ label.ui-input-text, .ui-controlgroup-label {
 
 /* timeDataPage & remarkPage */
 .timeDataPage .sentBookings .ui-listview {
-	background: #003366;
+	background: #ffffff;
 	font-style: italic !important;
     padding-left: 0.7em;
 }
@@ -1904,7 +1904,7 @@ li.ui-li {
 }
 
 .tmp-dialog {
-	background-color: #003366; 
+	background-color: #ffffff; 
 	zoom: reset !important;
 }
 

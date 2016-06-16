@@ -593,7 +593,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	                		window.setTimeout(function() { nextFunction(successCallback, nextOptions); }, 1000);
 	                		DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	                	} else {
-		                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, asking user");
+	                	    // Der Fehler tritt praktisch nur auf, wenn schon eine Buchung läuft.
+                            // In dem Fall soll die zweite Buchung eh nicht ausgeführt werden.
+		                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up");
 	                		DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                			  title: M.I18N.l('GPSError')
 	                			, message: M.I18N.l('GPSalreadyRecieving')
@@ -601,19 +603,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				      	        		  confirm: {
 				      	            		  target: this
 				      	            		, action: function() {
-							                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, trying again");
-		                						// Bugfix 2515: 
-		                						// here nextFunction is alreay null then throw exception
-	                							//nextFunction(successCallback, nextOptions, nextFunction);
-		                						getLocationNow(successCallback, nextOptions, getLocationNow);
 				      						}
-				      	        		}
-				      	        		, cancel: {
-				      	            		  target: this
-				      	            		, action: function() {
-							                    writeToLog("GPS-ERROR: ALREADY_RECEIVING, giving up");
-				      	        				successCallback();
-				      	    				}
 				      	        		}
 				      	    		}
 		              		});
@@ -685,83 +675,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 			}
    	}
 
-//    , getBookingLocation: function(mysuccessCallback) {
-//    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in getBookingLocation");
-//
-//    	var that = DigiWebApp.BookingController;
-//    	
-//		// Get GPS-Position if set in Settings
-//    	var getLocationNow = function(successCallback) {
-//	            DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut') * 2);
-//	
-//	            /*var getLocationOptions =  { 
-//	            		enableHighAccuracy: YES, 
-//	            		maximumAge: 0, 
-//	            		timeout: 240000 
-//	            	};*/
-//	            var getLocationOptions =  { enableHighAccuracy: NO, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
-//	
-//	            M.LocationManager.getLocation(that, successCallback, function(error) {
-//	            	
-//		            var getLocationOptions =  { enableHighAccuracy: YES, timeout: DigiWebApp.SettingsController.getSetting('GPSTimeOut') };
-//		        	
-//		            M.LocationManager.getLocation(that, successCallback, function(error) {
-//		            	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-//		
-//		            	//M.LocationManager.getLocation(that, successCallback, function(error) {
-//		                	//if (DigiWebApp.SettingsController.globalDebugMode) trackError("error=" + error + ", error.code="+error.code + ", error.message=" + error.message);
-//		                	/*
-//		                	 * error = "PERMISSION_DENIED" || "POSITION_UNAVAILABLE" || "TIMEOUT"
-//		                    */
-//		                	if ( error === "POSITION_UNAVAILABLE" ) {
-//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//		                			  title: M.I18N.l('GPSError')
-//		                			, message: M.I18N.l('GPSunavailable')
-//		                		});
-//		                	} else if ( error === "TIMEOUT" ) {
-//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//		                			  title: M.I18N.l('GPSError')
-//		                			, message: M.I18N.l('GPStimeout')
-//		                		});
-//		                	} else if ( error === "PERMISSION_DENIED" ) {
-//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//		                			  title: M.I18N.l('GPSError')
-//		                			, message: M.I18N.l('GPSmissingPermission')
-//		                		});
-//		                	} else {
-//		                		DigiWebApp.ApplicationController.nativeAlertDialogView({
-//		                			  title: M.I18N.l('GPSError')
-//		                			, message: M.I18N.l('GPSunknownError') + error
-//		                		});
-//		                	}
-//		                    //M.LocationManager.getLocation(that, successCallback, successCallback);
-//		                	successCallback();
-//		            }, getLocationOptions);
-//	            }, getLocationOptions);
-//        	};
-//    	
-//			if (DigiWebApp.SettingsController.featureAvailable('417') 
-//			&& DigiWebApp.SettingsController.getSetting("ServiceApp_ermittleGeokoordinate") 
-//			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
-//				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
-//		            DigiWebApp.ServiceAppController.knockknock(function(data) {
-//		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is available");
-//		            	mysuccessCallback();
-//		            }, function() {
-//		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
-//		            	getLocationNow(mysuccessCallback);
-//		            });
-//				} else {
-//					mysuccessCallback();
-//				}
-//			} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
-//				getLocationNow(mysuccessCallback);
-//			} else {
-//				mysuccessCallback();
-//			}
-//
-//   	}
-    
     // Prüft, ob alle Voraussetzungen für eine Zeitbuchung erfüllt sind
     , checkBooking: function(skipSelection) {
     	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in checkBooking");
@@ -2472,5 +2385,4 @@ DigiWebApp.BookingController = M.Controller.extend({
 			try{pluginObj.notification.local.cancel('4712');}catch(e){}
 		}
 	}
-
 });
