@@ -459,9 +459,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     
     , skipEvents: false
     
+    /** Wird von SplashViewPage.pagebeforeshow() aufgerufen
+     */
     , regSecEv: function(isFirstLoad) {
-		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
-    	console.log(DigiWebApp.app.config.version);
+		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
+        console.log(DigiWebApp.app.config.version);
     	var that = this;
     	setTimeout(function() {
     		that.realregSecEv(isFirstLoad);
@@ -1216,13 +1218,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
     /**
-     * init is called by the pageshow event defined in DigiWebApp.SplashViewPage.
-     * It initializes the callbackStatus object and the application's settings.
+     * init initializes the callbackStatus object and the application's settings.
      * After that it reads the company and password setting. If they are not defined, an alert appears, indicating that
      * no credentials are entered and the app redirects to the settings page.
      * If credentials are entered, the data receiving process is started by calling
      * authenticate of this controller.
-     *
      *
      * @param isFirstLoad is passed if this function is used in a page event like pageshow => determines that the page is loaded for the very
      * first time during this application life cycle

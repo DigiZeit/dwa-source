@@ -45,6 +45,7 @@
   </platform>
   <preference name="load-url-timeout" value="60000" />
   <preference name="SplashScreenDelay" value="60000"/>
+  <preference name="FadeSplashScreen" value="false"/>
   <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
   <preference name="show-splash-screen-spinner" value="true" />
   <preference name="keepRunning" value="true" />

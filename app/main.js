@@ -841,7 +841,8 @@ $(window).bind('load', function(e) {
 						console.log(ex);
 					}
 				} else {
-					DigiWebApp.NavigationController.toSplashViewPageTransition();
+				    DigiWebApp.NavigationController.toSplashViewPageTransition();
+                    //TODO Warum auch toDashboardPage()???
 					DigiWebApp.NavigationController.toDashboardPage();
 				}
 			} else {
