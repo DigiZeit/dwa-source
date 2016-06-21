@@ -6,7 +6,7 @@
 // View: SplashViewPage
 // ==========================================================================
 
-/** Der SplashView wird im Eventhandler für window.onload in main.js aktiviert.
+/** Der SplashView wird bei Ausführung im Browser im Eventhandler für window.onload in main.js aktiviert.
  *  Außerdem wird der SplashView für Screen-Übergange (Transistions) verwendet, siehe z.B.
  *  NavigationController.backToBookTimePage()
  */
@@ -15,6 +15,7 @@ DigiWebApp.SplashViewPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
+            	writeToLog("in SplashViewPage.pagebeforeshow");
 				if (!(window.newAppVersionAvailable || DigiWebApp.ApplicationController.useSplashJustForFade)) {
 					if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 					    DigiWebApp.ApplicationController.blackBerryRestart_var = setTimeout(
@@ -27,6 +28,7 @@ DigiWebApp.SplashViewPage = M.PageView.design({
         }
 		, pageshow: {
             action: function() {
+            	writeToLog("in SplashViewPage.pageshow");
 				if (!(window.newAppVersionAvailable || DigiWebApp.ApplicationController.useSplashJustForFade)) {
 						DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
 				}

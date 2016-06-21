@@ -382,7 +382,6 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 			errorCallback(e2);
 		}
 	}
-
 }
 
 
@@ -434,7 +433,6 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 	} catch(ex2) {}
 	
 	return true;
-
 }
 
 window.onerror = function (msg, url, line) {
@@ -815,11 +813,11 @@ if (typeof(localStorage) !== "undefined") {
 }
 
 $(window).bind('load', function(e) {
-	//console.log("window onload event");
+	console.log("window onload event");
 	if (window.applicationCache) {
 		$(window.applicationCache).bind('updateready', function(e2) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-				console.log("Browser downloaded a new app cache");
+				writeToLog("Browser downloaded a new app cache");
 				window.newAppVersionAvailable = YES;
 				if (confirm(M.I18N.l('applicationUpdateAvailableMsg') + "\n\n" + DigiWebApp.app.config.version)) { 
 					// Swap it in and reload the page to get the new hotness.

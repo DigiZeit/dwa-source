@@ -102,7 +102,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, blackBerryRestart_var: null
 	
 	, blackBerryRestart: function() {
-		if (DigiWebApp.ApplicationController.blackBerryRestart_var !== null) {clearTimeout(DigiWebApp.ApplicationController.blackBerryRestart_var);}
+		if (DigiWebApp.ApplicationController.blackBerryRestart_var !== null) {
+		    clearTimeout(DigiWebApp.ApplicationController.blackBerryRestart_var);
+		}
 		DigiWebApp.app = M.Application.design(DigiWebAppOrdinaryDesign);
 		DigiWebApp.app.main();
 		DigiWebApp.ApplicationController.regSecEv(YES);
@@ -471,7 +473,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
 	, realregSecEv: function(isFirstLoad) {
-    	//console.log("in regSecEv");
+    	writeToLog("in realregSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
