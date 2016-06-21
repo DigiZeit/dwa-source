@@ -907,7 +907,7 @@ var DigiWebAppBlackBerryDesign = {
 
 var DigiWebAppOrdinaryDesign = {
 
-      entryPage : DigiWebApp.BookingPage // früher 'splashView'
+      entryPage : 'splashView'
 
     , splashView: DigiWebApp.SplashViewPage
 

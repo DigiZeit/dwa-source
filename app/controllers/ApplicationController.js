@@ -491,7 +491,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 	that.clickCounter++;
                 	if (that.clickCounter > that.clickLimit) {
                 		that.clickCounter = 0;
-                		that.showConfirmDialog();
+                		that.showResetConfirmDialog();
                 	}
                 }
             });
@@ -501,7 +501,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             		that.clickCounter++;
                 	if (that.clickCounter > that.clickLimit) {
                 		that.clickCounter = 0;
-                		that.showConfirmDialog();
+                		that.showResetConfirmDialog();
                 	}
             	}
             });
@@ -730,7 +730,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (DigiWebApp.ApplicationController.emergencyStringEntered === DigiWebApp.ApplicationController.emergencyCode) {
 			DigiWebApp.ApplicationController.emergencyStartedTimestamp = event.timeStamp;
 			DigiWebApp.ApplicationController.emergencyStringEntered = "";
-			DigiWebApp.ApplicationController.showConfirmDialog();
+			DigiWebApp.ApplicationController.showResetConfirmDialog();
 		}
 		return true;
 	}
@@ -1111,7 +1111,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
     }
     
-    , showConfirmDialog: function() {
+    , showResetConfirmDialog: function() {
     	var that = this;
         DigiWebApp.ApplicationController.nativeConfirmDialogView({
               title: M.I18N.l('secretQuestion')
