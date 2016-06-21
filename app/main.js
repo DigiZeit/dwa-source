@@ -817,7 +817,7 @@ $(window).bind('load', function(e) {
 	if (window.applicationCache) {
 		$(window.applicationCache).bind('updateready', function(e2) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-				writeToLog("Browser downloaded a new app cache");
+				console.log("Browser downloaded a new app cache");
 				window.newAppVersionAvailable = YES;
 				if (confirm(M.I18N.l('applicationUpdateAvailableMsg') + "\n\n" + DigiWebApp.app.config.version)) { 
 					// Swap it in and reload the page to get the new hotness.
@@ -907,7 +907,7 @@ var DigiWebAppBlackBerryDesign = {
 
 var DigiWebAppOrdinaryDesign = {
 
-      entryPage : 'splashView'
+      entryPage : DigiWebApp.BookingPage // früher 'splashView'
 
     , splashView: DigiWebApp.SplashViewPage
 

@@ -506,7 +506,7 @@ M.I18N.de_de = {
 	, BautagebuchUeberschneidendeZeitbuchungMsg: "Diese Zeitbuchung würde zu einer Überschneidung mit einem anderen Bautagesbericht führen! Trotzdem speichern?"
 	
 	, GPSenableHighAccuracy: 'GPS mit hoher Genauigkeit (sonst niedrig/Netzwerke)'
-	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit nieriger Genauigkeit'
+	, GPSenableHighAccuracyFallback: 'GPS-Suche zusätzlich mit hoher Genauigkeit nach fehlendem Ergebnis mit niedriger Genauigkeit'
 	, GPSmaximumAgeMinutes: 'Maximales GPS-Alter (in Minuten)'
 	, GPSBackgroundService: 'GPS-Hintergrunddienst'
 	, GPSBackgroundServiceNotificationTitle: 'DIGI-WebApp GPS-Cache'
