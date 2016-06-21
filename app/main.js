@@ -841,7 +841,7 @@ $(window).bind('load', function(e) {
 				} else {
 				    DigiWebApp.NavigationController.toSplashViewPageTransition();
                     //TODO Warum auch toDashboardPage()???
-					DigiWebApp.NavigationController.toDashboardPage();
+					//DigiWebApp.NavigationController.toDashboardPage();
 				}
 			} else {
 				// Manifest didn't changed. Nothing new to server.

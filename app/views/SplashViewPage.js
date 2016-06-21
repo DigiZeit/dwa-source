@@ -15,7 +15,7 @@ DigiWebApp.SplashViewPage = M.PageView.design({
       events: {
 		  pagebeforeshow: {
             action: function() {
-            	writeToLog("in SplashViewPage.pagebeforeshow");
+            	//console.log("in SplashViewPage.pagebeforeshow");
 				if (!(window.newAppVersionAvailable || DigiWebApp.ApplicationController.useSplashJustForFade)) {
 					if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 					    DigiWebApp.ApplicationController.blackBerryRestart_var = setTimeout(
@@ -28,7 +28,7 @@ DigiWebApp.SplashViewPage = M.PageView.design({
         }
 		, pageshow: {
             action: function() {
-            	writeToLog("in SplashViewPage.pageshow");
+            	//console.log("in SplashViewPage.pageshow");
 				if (!(window.newAppVersionAvailable || DigiWebApp.ApplicationController.useSplashJustForFade)) {
 						DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
 				}
