@@ -160,7 +160,7 @@ M.I18N.en_us = {
 	, GPSunavailable: "The GPS-Receiver is not enabled! No geo location will be recorded!"
 	, GPStimeout: "The current geo position could not be determined!"
 	, GPSmissingPermission: "DIGI-WebApp is missing the permission to determine a geo position!"
-	, GPSalreadyRecieving: "The GPS-Receiver is busy! Try again?"
+	, GPSalreadyRecieving: "The GPS-Receiver is busy!"
 	, GPSunknownError: "Unkown GPS-Error: "
 	, ERROR: "Error"
 	, media: "Media"

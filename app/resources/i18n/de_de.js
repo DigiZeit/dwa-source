@@ -160,7 +160,7 @@ M.I18N.de_de = {
 	, GPSunavailable: "Der GPS-Sensor ist deaktiviert! Es kann keine Position ermittelt werden!"
 	, GPStimeout: "Es konnte keine GPS-Position ermittelt werden!"
 	, GPSmissingPermission: "Die DIGI-WebApp hat keine Berechtigung, um GPS-Positionen zu ermitteln!"
-	, GPSalreadyRecieving: "Der GPS-Empfänger ist bereits beschäftigt! Erneut versuchen?"
+	, GPSalreadyRecieving: "Der GPS-Empfänger ist bereits beschäftigt!"
 	, GPSunknownError: "Unbekannter GPS-Fehler: "
 	, ERROR: "Fehler"
 	, media: "Medien"

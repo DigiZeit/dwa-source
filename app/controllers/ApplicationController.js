@@ -464,7 +464,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     /** Wird von SplashViewPage.pagebeforeshow() aufgerufen
      */
     , regSecEv: function(isFirstLoad) {
-		//DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('waitingForDevice'));
         console.log(DigiWebApp.app.config.version);
     	var that = this;
     	setTimeout(function() {
@@ -473,7 +472,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
     
 	, realregSecEv: function(isFirstLoad) {
-    	writeToLog("in realregSecEv");
+    	//console.log("in realregSecEv");
     	
         DigiWebApp.ApplicationController.setImageClass();
         
@@ -510,7 +509,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         		console.log("registering emergencyhandler");
         		$(document).bind('keydown', DigiWebApp.ApplicationController.keydownHandler);
         	}
-
         }
 				
 		// no fade-effects on header
