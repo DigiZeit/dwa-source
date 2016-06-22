@@ -503,7 +503,7 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
         }
         var urlByCoordinates = "https://";
         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            urlByCoordinates = 'https://';
+            urlByCoordinates = 'http://';
         }
         switch (DigiWebApp.SettingsController.getSetting('mapType')) {
         case "OSM":
@@ -541,6 +541,7 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
             break;
         }
         if (urlByCoordinates !== "disabled") {
+			var myUrl = encodeURI(urlByCoordinates);
             if (typeof(plugins) !== "undefined") {
                 if (typeof(plugins.childBrowser) !== "undefined") {
                     try {
@@ -549,10 +550,8 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
                         alert("Error: " + e8.message);
                     }
                     try {
-						writeToLog("plugins.childBrowser.showWebPage(), url="
-							+ encodeURI(urlByCoordinates));
-                        plugins.childBrowser.showWebPage(encodeURI(
-                            urlByCoordinates), { showNavigationBar: true });
+						writeToLog("plugins.childBrowser.showWebPage(), url=" + myUrl);
+                        plugins.childBrowser.showWebPage(myUrl, { showNavigationBar: true });
                     } catch (e9) {
                         alert("Error: " + e9.message);
                     }

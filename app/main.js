@@ -382,6 +382,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 			errorCallback(e2);
 		}
 	}
+
 }
 
 
@@ -433,6 +434,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 	} catch(ex2) {}
 	
 	return true;
+
 }
 
 window.onerror = function (msg, url, line) {
@@ -813,7 +815,7 @@ if (typeof(localStorage) !== "undefined") {
 }
 
 $(window).bind('load', function(e) {
-	console.log("window onload event");
+	//console.log("window onload event");
 	if (window.applicationCache) {
 		$(window.applicationCache).bind('updateready', function(e2) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
@@ -840,8 +842,7 @@ $(window).bind('load', function(e) {
 					}
 				} else {
 				    DigiWebApp.NavigationController.toSplashViewPageTransition();
-                    //TODO Warum auch toDashboardPage()???
-					//DigiWebApp.NavigationController.toDashboardPage();
+					DigiWebApp.NavigationController.toDashboardPage();
 				}
 			} else {
 				// Manifest didn't changed. Nothing new to server.

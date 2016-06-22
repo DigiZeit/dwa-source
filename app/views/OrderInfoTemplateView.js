@@ -285,7 +285,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var addressdetails = '0';
 						var urlByAddress = 'https://';
                         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-                            urlByAddress = 'https://';
+                            urlByAddress = 'http://';
                         }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 						case "OSM":
@@ -342,14 +342,14 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 							        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                         urlByAddress,
-                                        '_blank',
+                                        'childBrowser',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
     					        writeToLog("window.open(), url=" + encodeURI(urlByAddress));
 							    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                                     urlByAddress,
-                                    '_blank',
+                                    'childBrowser',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
@@ -381,7 +381,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
                         }
 						var urlByCoordinates = "https://";
                         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-                            urlByCoordinates = 'https://';
+                            urlByCoordinates = 'http://';
                         }
 						switch ( DigiWebApp.SettingsController.getSetting('mapType') ) {
 							case "OSM":
@@ -420,6 +420,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						}
 						if (urlByCoordinates !== "disabled") {
 		    				if (typeof(plugins) !== "undefined") {
+							    var myUrl = encodeURI(urlByCoordinates);
 			    				if (typeof(plugins.childBrowser) !== "undefined") {
 			    					try {
 								        plugins.childBrowser.close();
@@ -427,23 +428,21 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 								        alert("Error: " + e8.message);
 								    }
 			    				    try {
-							            writeToLog("plugins.childBrowser.showWebPage(), url="
-							                + encodeURI(urlByCoordinates));
-							            plugins.childBrowser.showWebPage(encodeURI(
-								            urlByCoordinates), { showNavigationBar: true });
+							            writeToLog("plugins.childBrowser.showWebPage(), url=" + myUrl);
+							            plugins.childBrowser.showWebPage(myUrl, { showNavigationBar: true });
 								    } catch (e9) {
 								         alert("Error: " + e9.message);
 								    }
 			    				} else {
-							        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
+							        writeToLog("window.open(), url=" + urlByCoordinates);
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        urlByCoordinates, '_blank',
+                                        urlByCoordinates, 'childBrowser',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
-						        writeToLog("window.open(), url=" + encodeURI(urlByCoordinates));
+						        writeToLog("window.open(), url=" + urlByCoordinates);
 		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    urlByCoordinates, '_blank',
+                                    urlByCoordinates, 'childBrowser',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {

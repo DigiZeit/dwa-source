@@ -479,9 +479,9 @@ M.I18N.en_us = {
 
 	, uebersicht: "Overview"
 
-	, bautagebuchWeitereZeitbuchung: "Another booking?"
+	, bautagebuchWeitereZeitbuchung: "Additional booking?"
 	, bautagebuchWeitereZeitbuchungMsg: "Add another booking using this selection?"
-	, bautagebuchWeiteresFoto: "Another image?"
+	, bautagebuchWeiteresFoto: "Additional image?"
 	, bautagebuchWeiteresFotoMsg: "Add another image for this selection?"
 	
 	, arbeitsbeginn: "Start of work"

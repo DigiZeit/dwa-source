@@ -6,7 +6,7 @@
 // View: SplashViewPage
 // ==========================================================================
 
-/** Der SplashView wird bei Ausführung im Browser im Eventhandler für window.onload in main.js aktiviert.
+/** Der SplashView wird als entryPage definiert und damit als erste Seite beim Start dargestellt.
  *  Außerdem wird der SplashView für Screen-Übergange (Transistions) verwendet, siehe z.B.
  *  NavigationController.backToBookTimePage()
  */
