@@ -841,7 +841,7 @@ $(window).bind('load', function(e) {
 						console.log(ex);
 					}
 				} else {
-				    DigiWebApp.NavigationController.toSplashViewPageTransition();
+					DigiWebApp.NavigationController.toSplashViewPageTransition();
 					DigiWebApp.NavigationController.toDashboardPage();
 				}
 			} else {

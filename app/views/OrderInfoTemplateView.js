@@ -436,13 +436,13 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 			    				} else {
 							        writeToLog("window.open(), url=" + urlByCoordinates);
 			    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                        urlByCoordinates, 'childBrowser',
+                                        urlByCoordinates, '_blank',
                                         'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 			    				}
 		    				} else {
 						        writeToLog("window.open(), url=" + urlByCoordinates);
 		    				    DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                                    urlByCoordinates, 'childBrowser',
+                                    urlByCoordinates, '_blank',
                                     'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
 		    				}
 						} else {
