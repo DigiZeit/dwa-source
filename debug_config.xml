@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns	  = "http://www.w3.org/ns/widgets"
-	xmlns:gap	  = "http://phonegap.com/ns/1.0"
+<widget xmlns	= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		      = "com.digi.webappbeta"
-	versionCode   = "@versionCode@"
-	version 	  = "@version@.@versionCode@">
+	id		    = "com.digi.webappbeta"
+	versionCode = "@versionCode@"
+	version 	= "@version@.@versionCode@">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -93,7 +93,6 @@
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" /> -->
 
   <!-- prevent screen-sleep -->
-  <!-- <gap:plugin name="nl.x-services.plugins.insomnia" version="4.0.1" /> -->
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
   <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
@@ -180,8 +179,7 @@
   <icon src="theme/images/winphone_small_tile_110x110_DSO.png" gap:platform="winphone" gap:role="background" />
 
   <!-- if a single splash screen is specified the build will use it for all builds.
-      Currently, all platforms except iOS use a single splash screen.
-	<gap:splash src="theme/images/splash_default_320x426_DSO.png" /> -->
+      Currently, all platforms except iOS use a single splash screen. -->
   <!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> -->
 
   <gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
