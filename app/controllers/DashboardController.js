@@ -195,15 +195,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
             
             // Start::MediaMenu
         	var TakePictureAvailable = (DigiWebApp.SettingsController.featureAvailable('400'));
-            var RecordAudioAvailable = (DigiWebApp.SettingsController.featureAvailable('401'));
-            if ( ( RecordAudioAvailable ) && !ChefToolOnly ) {
-            	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
-                items.push({
-                      label: M.I18N.l('media') + " (DEMO)"
-                    , icon: '48x48_plain_camera2.png'
-                    , id: 'demomedia'
-                });
-            }
             if ( TakePictureAvailable ) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log("enabling Feature MediaMenu");
                 items.push({
@@ -541,10 +532,6 @@ DigiWebApp.DashboardController = M.Controller.extend({
         DigiWebApp.NavigationController.toInfoPageTransition();
     }
         
-    , demomedia: function() {
-        DigiWebApp.NavigationController.toDemoMediaPageTransition();
-    }
-    
     , media: function() {
         DigiWebApp.NavigationController.toMediaListPageTransition();
         DigiWebApp.MediaListController.neu();

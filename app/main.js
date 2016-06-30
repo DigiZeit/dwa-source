@@ -938,8 +938,6 @@ if (searchForFeature(400)) { // Camera
 if (searchForFeature(401)) { // Audio
 	DigiWebAppOrdinaryDesign.mediaListPage = DigiWebApp.MediaListPage; // für 400 & 401
 	DigiWebAppOrdinaryDesign.audioPage = DigiWebApp.AudioPage;
-	DigiWebAppOrdinaryDesign.demoaudioPage = DigiWebApp.DemoAudioPage;
-	DigiWebAppOrdinaryDesign.demomediaPage = DigiWebApp.DemoMediaPage;
 	DigiWebAppOrdinaryDesign.fileChooserPage = DigiWebApp.FileChooserPage;
 }
 
