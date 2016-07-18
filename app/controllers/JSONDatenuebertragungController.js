@@ -641,25 +641,29 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				// aktuelle scrId protokollieren
 				var scrId = DigiWebApp.SettingsController.getSetting("scrId");
 				writeToLog(scrId, function() {
-					// zeitdaten-array protokollieren
-					var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
-					if (items.length > 1) { itemsLengthLogStr += "en"; }
-					writeToLog(itemsLengthLogStr, function() {
-						var sendObj = {
-							  data: data
-							, webservice: "zeitdaten"
-							, loaderText: M.I18N.l('sendDataMsg')
-							, successCallback: internalSuccessCallback
-							, errorCallback: internalErrorCallback
-						};
-						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
-					});
-
+				    // zeitdaten-array protokollieren
+				    var logStr = JSON.stringify(data);
 				    if (DigiWebApp.SettingsController.getSetting("doScr")) {
-				        writeToLog(escape(scrStr(JSON.stringify(data), scrId)));
-				    } else {
-				        writeToLog(JSON.stringify(data));
+				        logStr = escape(scrStr(logStr, scrId));
 				    }
+				    writeToLog(logStr, function() {
+				        var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
+				        if (items.length > 1) {
+				            itemsLengthLogStr += "en";
+				        }
+						writeToLog(itemsLengthLogStr, function() {
+							var sendObj = {
+								  data: data
+								, webservice: "zeitdaten"
+								, loaderText: M.I18N.l('sendDataMsg')
+								, successCallback: internalSuccessCallback
+								, errorCallback: internalErrorCallback
+								//, additionalQueryParameter:
+								//, timeout: 60000
+							};
+							DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
+						});
+				    });
 				});
 			} else {
 				successCallback();
