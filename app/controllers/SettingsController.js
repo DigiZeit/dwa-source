@@ -89,6 +89,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , kannUebernachtungskostenBuchen: false // Nur Bohle
         , kannReisezeitBuchen: true // Nur Scholpp
         , benutzeHttps: false
+        , doScr: true
+        , logfilesLoeschenNachTagen: 40
     }
 
     , defaultsettings: null
@@ -396,6 +398,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) { }
 
+            //, doScr: true
+            var doScr = DigiWebApp.SettingsController.defaultsettings.get("doScr");
+            try {
+	            if (typeof(record.record.doScr) !== "undefined") {
+	            	doScr = record.get('doScr');
+	            }
+            } catch (e) { }
+
+            //, logfilesLoeschenNachTagen: 40
+            var logfilesLoeschenNachTagen = DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
+            try {
+	            if (typeof(record.record.logfilesLoeschenNachTagen) !== "undefined") {
+	            	logfilesLoeschenNachTagen = record.get('logfilesLoeschenNachTagen');
+	            }
+            } catch (e) { }
+
             // Bugfix 2142: get branding from local storage
             var branding = DigiWebApp.SettingsController.defaultsettings.get("branding");
             try {
@@ -616,6 +634,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , kannFahrtkostenBuchen: kannFahrtkostenBuchen
                , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
                , kannReisezeitBuchen: kannReisezeitBuchen
+               , doScr: doScr
+               , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
 			}; // settings = {
         /* default values */
         } else {
@@ -772,6 +792,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , kannFahrtkostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen')
                , kannUebernachtungskostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen')
                , kannReisezeitBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannReisezeitBuchen')
+               , doScr: DigiWebApp.SettingsController.defaultsettings.get('doScr')
+               , logfilesLoeschenNachTagen: DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen')
             }; // settings = {
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -1051,6 +1073,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var kannFahrtkostenBuchen           = DigiWebApp.SettingsController.getSetting("kannFahrtkostenBuchen");
         var kannUebernachtungskostenBuchen  = DigiWebApp.SettingsController.getSetting("kannUebernachtungskostenBuchen");
         var kannReisezeitBuchen             = DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen");
+        var doScr                           = DigiWebApp.SettingsController.getSetting("doScr");
+        var logfilesLoeschenNachTagen       = DigiWebApp.SettingsController.getSetting("logfilesLoeschenNachTagen");
 
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1095,7 +1119,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
                         if (record) {
 
                             /* if some of the hard stuff changed, check for open and not-transfered bookings */
-                            var isNew = record.get('company') == '' && record.get('password') == '' && record.get('connectionCode') == '' && record.get('workerId') == '';
+                            var isNew = record.get('company') == ''
+                                && record.get('password') == ''
+                                && record.get('connectionCode') == ''
+                                && record.get('workerId') == '';
                             if (!isNew && (    record.get('company')        != company
                             				|| record.get('password')       != password
                             				|| record.get('connectionCode') != connectionCode
@@ -1187,6 +1214,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                                     record.set('benutzeHttps', benutzeHttps);
+                                                    record.set('doScr', doScr);
+                                                    record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1290,6 +1319,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                     record.set('benutzeHttps', benutzeHttps);
+                                    record.set('doScr', doScr);
+                                    record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1367,6 +1398,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                 record.set('benutzeHttps', benutzeHttps);
+                                record.set('doScr', doScr);
+                                record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1444,6 +1477,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                 record.set('benutzeHttps', benutzeHttps);
+                                record.set('doScr', doScr);
+                                record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1523,6 +1558,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
                                 , kannReisezeitBuchen: kannReisezeitBuchen
                                 , benutzeHttps: benutzeHttps
+                                , doScr: doScr
+                                , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
                             }); // record =
 
                             /* now save */
@@ -1622,15 +1659,21 @@ DigiWebApp.SettingsController = M.Controller.extend({
     }
 
     , getSetting: function(prop) {
-    	if (typeof(prop) != "undefined" && prop == 'debug') return inDebug();
+        if (typeof (prop) != "undefined" && prop == "debug") {
+            return inDebug();
+        }
         var setting = DigiWebApp.Settings.find()[0];
-        if ( typeof(setting) !== "undefined" ) {
+        if (typeof(setting) !== "undefined" ) {
         	var propvalue = setting.get(prop); 
-        	if ( typeof(propvalue) === "undefined" || (propvalue !== null && typeof(propvalue["xsi:nil"]) !== "undefined" && (propvalue["xsi:nil"] === "true" || propvalue["xsi:nil"] === true))) { 
+        	if (typeof (propvalue) === "undefined"
+                || (propvalue !== null && typeof (propvalue["xsi:nil"]) !== "undefined"
+                        && (propvalue["xsi:nil"] === "true" || propvalue["xsi:nil"] === true))) {
         		try {
-        			propvalue = DigiWebApp.SettingsController.defaultsettings_object[prop];
-        			setting.set(prop, propvalue);
-        		} catch(e4) { trackError("ERROR: setting.get for prop=" + prop); }
+		            propvalue = DigiWebApp.SettingsController.defaultsettings_object[prop];
+		            setting.set(prop, propvalue);
+		        } catch (e4) {
+		            trackError("ERROR: setting.get for prop=" + prop);
+		        }
         	}
             return propvalue;
         }
@@ -1638,12 +1681,18 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
     , setSetting: function(prop, value, immediateSave) {
         var setting = DigiWebApp.Settings.find()[0];
-        if ( typeof(setting) !== "undefined" ) {
+        if (typeof(setting) !== "undefined" ) {
         	try {
         		setting.set(prop, value);
-        		if (immediateSave) return setting.save();
-        		if (prop == "logDelete" && (typeof window.logDelete != "undefined")) { window.logDelete = parseBool(value); }
-        		if (prop == "logSave" && (typeof window.logSave != "undefined")) { window.logSave = parseBool(value); }
+        		if (immediateSave) {
+		            return setting.save();
+		        }
+        		if (prop == "logDelete" && (typeof window.logDelete != "undefined")) {
+		            window.logDelete = parseBool(value);
+		        }
+        		if (prop == "logSave" && (typeof window.logSave != "undefined")) {
+		            window.logSave = parseBool(value);
+		        }
     		} catch(e5) { trackError("ERROR: setting.set for prop=" + prop); }
         	if ((prop === "currentTimezoneOffset") || (prop === "currentTimezone")) {
         		// be superSilent
@@ -1652,7 +1701,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		DigiWebApp.SettingsController.saveSettings(setting, NO, YES);
         	}
         }
-    	if (typeof(prop) != "undefined" && prop == 'debug') return inDebug();
+    	if (typeof(prop) != "undefined" && prop == 'debug') {
+	        return inDebug();
+	    }
     }
 
     , getCheckboxValue: function (pageName, viewName) {
@@ -1666,11 +1717,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 
 	, featureAvailable: function(featureId) {
 			
-		if ( typeof(featureId) !== "string" ) {
+		if (typeof(featureId) !== "string" ) {
 			return false;
 		}
 	
-		if ( featureId.length === 0) {
+		if (featureId.length === 0) {
 			return false;
 		}
 	
@@ -1683,7 +1734,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 		} else {
 			return (FeatureSetting.get('isAvailable') === "true");
 		}
-	
 	}
 	
 	, refreshMitarbeiterNameVorname: function(MitarbeiterWebAppID, callback) {
@@ -1691,7 +1741,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
         	DigiWebApp.Anwesenheitsliste.find({urlParams:{},callbacks: {success: { action: function(records) {
         		try { 
         			_.each(records, function(record) {
-        				try { if (record.get("geraeteId") === MitarbeiterWebAppID) DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");} catch(e6) { trackError(e6); }
+        				try {
+				            if (record.get("geraeteId") === MitarbeiterWebAppID) {
+				                DigiWebApp.SettingsController.mitarbeiterNameVorname = record.get("nameVorname");
+				            }
+				        } catch(e6) { trackError(e6); }
         			}); 
         			if (callback) {
         				callback();

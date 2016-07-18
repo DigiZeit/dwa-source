@@ -658,23 +658,26 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 		errorCallback = myErrorCallback;
 	}
 	
-	if (typeof(logDirectory) != "object" || typeof(logDirectory.createReader) != "function") return errorCallback();
+	if (typeof(logDirectory) != "object" || typeof(logDirectory.createReader) != "function") {
+	    return errorCallback();
+	}
 	
 	logDirectory.createReader().readEntries(function(entries){
 		var filesToDeleteArray = [];
 		var fileNamesToDeleteArray = [];
-		var daysToHoldBookingsOnDevice = parseIntRadixTen(DigiWebApp.SettingsController.getSetting("daysToHoldBookingsOnDevice"));
-        var minDateInt = parseIntRadixTen(D8.create().addDays(-daysToHoldBookingsOnDevice).format("yyyymmdd"));
-        writeToLog("removing logfiles older than " + minDateInt + " (older than " + daysToHoldBookingsOnDevice + " days)", function(){
+		var logfilesLoeschenNachTagen = parseIntRadixTen(
+            DigiWebApp.SettingsController.getSetting("logfilesLoeschenNachTagen"));
+		var minDateInt = parseIntRadixTen(
+            D8.create().addDays(-logfilesLoeschenNachTagen).format("yyyymmdd"));
+        writeToLog("Lösche Logfiles, die älter sind als " + minDateInt
+                + " (älter als " + logfilesLoeschenNachTagen + " Tage)", function () {
 			_.each(entries, function(entry) {
 				if (entry.name.substr(10) == "_DIGI-WebApp.log.txt") {
-					// is file too old?
-					var tooOld = false;
-					var year = entry.name.substr(0,4);
-					var month = entry.name.substr(5,2);
-					var day = entry.name.substr(8,2);
-		            var myInt = parseIntRadixTen(year+month+day);
-		            tooOld = (myInt < minDateInt);
+					var year = entry.name.substr(0, 4);
+					var month = entry.name.substr(5, 2);
+					var day = entry.name.substr(8, 2);
+		            var myInt = parseIntRadixTen(year + month + day);
+		            var tooOld = (myInt < minDateInt);
 					if (tooOld) {
 						filesToDeleteArray.push(entry);
 						fileNamesToDeleteArray.push(entry.name);
@@ -686,7 +689,8 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	        if (filesToDelete > 0) {
 	        	var plural = "";
 	        	if (filesToDelete > 1) plural = "s";
-	            writeToLog("removing " + filesToDelete + " logfile" + plural + ":\n" + fileNamesToDeleteArray.join("\n"), function(){
+	        	writeToLog("Lösche " + filesToDelete + " Logfile" + plural + ":\n"
+                        + fileNamesToDeleteArray.join("\n"), function () {
 		        	var checkIfDoneFunc = function() {
 		        		if (++filesDeleted >= filesToDelete) {
 		        			successCallback();
@@ -705,7 +709,6 @@ function autoCleanLogFilesFromDirectory(logDirectory, mySuccessCallback, myError
 	        }
         });
      });
-
 }
 
 function createFile(dirname, filename) {

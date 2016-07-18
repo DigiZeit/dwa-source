@@ -595,7 +595,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 						if (!zeitbuch.get("latitude")) {
 							zeitbuch.set("latitude", "0");
 						}
-						
 					}
 					
 					zeitbuch.set("gpsLaengeVon",zeitbuch.get("longitude"));
@@ -622,10 +621,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	                    localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
 	                    localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
 	                }
-//			        DigiWebApp.ApplicationController.nativeAlertDialogView({
-//			              title: M.I18N.l('connectionError')
-//			            , message: M.I18N.l('connectionErrorMsg')
-//			        });
 					errorCallback();
 				};
 				var internalSuccessCallback = function(data2, msg, request) {
@@ -645,26 +640,27 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 				
 				// aktuelle scrId protokollieren
 				var scrId = DigiWebApp.SettingsController.getSetting("scrId");
-				writeToLog(scrId, function(){
+				writeToLog(scrId, function() {
 					// zeitdaten-array protokollieren
-					writeToLog(escape(scrStr(JSON.stringify(data), scrId)), function() {
-						var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
-						if (items.length > 1) { itemsLengthLogStr += "en"; }
-						writeToLog(itemsLengthLogStr, function() {
-							var sendObj = {
-								  data: data
-								, webservice: "zeitdaten"
-								, loaderText: M.I18N.l('sendDataMsg')
-								, successCallback: internalSuccessCallback
-								, errorCallback: internalErrorCallback
-								//, additionalQueryParameter:
-								//, timeout: 60000
-							};
-							DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
-						});
+					var itemsLengthLogStr = "Sende " + items.length + " Zeitbuchung";
+					if (items.length > 1) { itemsLengthLogStr += "en"; }
+					writeToLog(itemsLengthLogStr, function() {
+						var sendObj = {
+							  data: data
+							, webservice: "zeitdaten"
+							, loaderText: M.I18N.l('sendDataMsg')
+							, successCallback: internalSuccessCallback
+							, errorCallback: internalErrorCallback
+						};
+						DigiWebApp.JSONDatenuebertragungController.sendData(sendObj);
 					});
-				});
 
+				    if (DigiWebApp.SettingsController.getSetting("doScr")) {
+				        writeToLog(escape(scrStr(JSON.stringify(data), scrId)));
+				    } else {
+				        writeToLog(JSON.stringify(data));
+				    }
+				});
 			} else {
 				successCallback();
 			}

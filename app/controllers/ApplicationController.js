@@ -1979,6 +1979,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		DigiWebApp.SettingsController.setSetting(
                     'kannReisezeitBuchen',
                     DigiWebApp.SettingsController.defaultsettings.get('kannReisezeitBuchen'));
+	    		DigiWebApp.SettingsController.setSetting(
+                    'doScr',
+                    DigiWebApp.SettingsController.defaultsettings.get('doScr'));
+	    		DigiWebApp.SettingsController.setSetting(
+                    'logfilesLoeschenNachTagen',
+                    DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen'));
 	    		DigiWebApp.ApplicationController.triggerUpdate = NO;
 
 	    		// create a record for each feature returned from the server and save it
