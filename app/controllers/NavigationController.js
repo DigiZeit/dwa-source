@@ -489,6 +489,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     			DigiWebApp.NavigationController.backToTimeDataPage();
         	};
     	}
+	    DigiWebApp.BookingController.istKolonnenaenderung = false;
         DigiWebApp.EditTimeDataPage.buchungAbschliessen = false;
         DigiWebApp.EditTimeDataPage.istFeierabendBuchung = false;
         DigiWebApp.NavigationController.switchToPage('editTimeDataPage', M.TRANSITION.SLIDEUP, NO);

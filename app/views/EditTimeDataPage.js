@@ -521,11 +521,19 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                       target: DigiWebApp.NavigationController
                     , action: function () {
                         try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) { }
-                        if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
-                              this.backToBookTimePagePOP();
-                          } else {
-                              this.backToTimeDataPage();
-                          }
+						// Achtung: für den Fall "istKolonnenänderung" wird in diese Page mittels toRemarkPage gesprungen
+                        if (DigiWebApp.BookingController.istKolonnenaenderung) {
+                            if (DigiWebApp.SettingsController.featureAvailable('404')) {
+                                DigiWebApp.NavigationController.backToButtonDashboardPage();
+                            } else {
+                                DigiWebApp.NavigationController.backToDashboardPage();
+                            }
+                        } else if (DigiWebApp.EditTimeDataPage.buchungAbschliessen) {
+			    		    DigiWebApp.BookingController.set('isBackFromRemarkPage', true);
+                            this.backToBookTimePagePOP();
+                        } else {
+                            this.backToTimeDataPage();
+                        }
                     }
                 }
             }

@@ -9,8 +9,8 @@
 DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
 	  consoleLogOutput: YES
-	, GatewayServer: 'primary.digi-gateway.de'
-	, GatewayPool: 'pool.digi-gateway.de'
+	, GatewayServer: 'primary-gateway.digi-zeitserver.de'
+	, GatewayPool: 'gateway.digi-zeitserver.de'
 	, DatabaseServer: null
 	, DatabaseServerTimestamp: null
 	, AuthentifizierenCode: null
@@ -194,23 +194,16 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			myGeraeteTyp = 3;
 		}
 		
-		var myUrl = 'https://';
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            myUrl = 'http://';
-        }
-
 		if (webservice == 'allgemein/empfangeUrl') {
 		    if (databaseServer == null || databaseServer == '') {
 		        databaseServer = that.GatewayServer;
 		    }
-		    // TODO Nicht mehr auf HTTP zurückfallen, sobald primary.digi-gateway.de = vitellius HTTPS kann.
-		    // Wird nur auf den Geräten gemacht. Die Browser weigern sich, HTTP-URLs abzurufen,
-		    // wenn die App per HTTPS geladen wurde.
-		    if (typeof(device) !== "undefined") {
-		        myUrl = 'http://';
-		    }
 		}
 		
+		var myUrl = 'https://';
+        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
+            myUrl = 'http://';
+        }
 		myUrl = myUrl + databaseServer + '/WebAppServices/' + webservice
             + '?modus=' + myModus
             + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
@@ -569,16 +562,9 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	            return parseIntRadixTen(z.get('_createdAt'));
 	        });
 			
-			var employeeIds = localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey) || localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKeyTmp);
-			var employeeIdsArray = [];
-			if ((employeeIds) && employeeIds !== "0") {
-				// Kolonne aktiv
-				employeeIdsArray = employeeIds.split(",");
-			} else {
-				employeeIdsArray = [DigiWebApp.SettingsController.getSetting("mitarbeiterId")];
-			}
-					
-			_.each(relevanteZeitbuchungenSorted, function(el) {
+			_.each(relevanteZeitbuchungenSorted, function (el) {
+
+			    var employeeIdsArray = el.get("employees").split(",");
 				
 				_.each(employeeIdsArray, function(maId) {
 					var zeitbuch = DigiWebApp.Booking.createRecord({

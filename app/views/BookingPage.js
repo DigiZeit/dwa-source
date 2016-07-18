@@ -14,11 +14,8 @@ DigiWebApp.BookingPage = M.PageView.design({
 
     , events: {
 		  pagebeforeshow: {
-            //  target: DigiWebApp.BookingController
-            //, action: 'init'
-			action: function() {
-	
-				// gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
+			action: function() {	
+				// Gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
 				DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
 				DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 				
@@ -72,7 +69,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 	          , events: {
 	              tap: {
 		      			action: function() {
-        					try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        					try{ DigiWebApp.ApplicationController.vibrate(); } catch(e2) {}
 	        				DigiWebApp.DashboardController.materialerfassung();
 						}
 	              }
@@ -117,7 +114,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 		// position:    Combobox für Auftragsauswahl (DTC5: Position)
 		// activity:    Combobox für Leistungsauswahl (DTC5: Tätigkeit)
 		// currentBookingLabel: Anzeige der laufenden Buchung unterhalb des Buchen-Buttons
-          childViews: 'orderButton order position activity grid currentBookingLabel' //'gridOrder gridPosition gridActivity grid',
+          childViews: 'orderButton order position activity grid currentBookingLabel'
         , cssClass: 'unselectable'
 
 		, orderButton: M.ButtonView.design({
@@ -128,7 +125,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 				tap: {
             		  target: DigiWebApp.OrderListController
             		, action: function() {
-						try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+						try { DigiWebApp.ApplicationController.vibrate(); } catch(e2) {}
 						var vaterId = null;
 						var selectedOrder = DigiWebApp.SelectionController.getSelectedOrderItem();
 						if (typeof(selectedOrder) != "undefined" && selectedOrder != null) {
@@ -138,28 +135,27 @@ DigiWebApp.BookingPage = M.PageView.design({
 							}
 							if (typeof(potentialOrder) != "undefined" && potentialOrder != null) {
 								vaterId = potentialOrder.get("vaterId");
-							}
-									
+							}	
 						}
-						this.init(
+		                  this.init(
 								  OrderSelectionMode.POSITIONS 
 								, function(obj) {
-									// Callback wenn der Benutzer in der mehrst. Auftragsauswahl einen Ordner
-									// oder einen Auftrag ausgewählt hat.
-									//DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
-									if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
-										DigiWebApp.SelectionController.setSelectedOrder(obj, YES);
-									} else {
-										DigiWebApp.SelectionController.setSelectedPosition(obj, YES);
-									}
-	                    			DigiWebApp.SelectionController.useSelections = YES;
-									DigiWebApp.NavigationController.backToBookTimePagePOP();
-								}
+		                          // Callback wenn der Benutzer in der mehrst. Auftragsauswahl einen Ordner
+		                          // oder einen Auftrag ausgewählt hat.
+		                          //DigiWebApp.BookingPage.content.orderButton.setValue(obj.get("name"));
+		                          if (typeof(obj) != "undefined" && obj != null && obj.name == DigiWebApp.HandOrder.name) {
+		                              DigiWebApp.SelectionController.setSelectedOrder(obj, YES);
+		                          } else {
+		                              DigiWebApp.SelectionController.setSelectedPosition(obj, YES);
+		                          }
+		                          DigiWebApp.SelectionController.useSelections = YES;
+		                          DigiWebApp.NavigationController.backToBookTimePagePOP();
+		                      	}
 								, function() {
-									DigiWebApp.NavigationController.backToBookTimePagePOP();
-								}
+		                          DigiWebApp.NavigationController.backToBookTimePagePOP();
+		                      	}
 								, vaterId
-						)
+		                  );
 						DigiWebApp.NavigationController.toOrderListPage();
 					}
 	      		}
@@ -238,8 +234,11 @@ DigiWebApp.BookingPage = M.PageView.design({
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {
-                          target: DigiWebApp.BookingController
-                        , action: 'book'
+                        target: DigiWebApp.BookingController
+                        , action: function() {
+                            this.istKolonnenaenderung = false;
+                            this.book();
+                        }
                     }
                 }
             })

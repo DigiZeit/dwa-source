@@ -171,9 +171,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
         		items = _.compact(items);
         	}
 
-    	    // Menüpunkt "Kolonne ändern" erst mal nicht anzeigen
-        	// (später nur wenn Kolonnenauswahl nicht aktiv)
-    	    //if (DigiWebApp.EmployeeController.employeeState == 0) 
+    	    // Menüpunkt "Kolonne ändern" nicht anzeigen, wenn Kolonnenauswahl nicht aktiv
+    	    if (DigiWebApp.EmployeeController.getEmployeeState() == 0) 
         	{
         	    items = _.map(items, function (item) {
         	        if (item.id !== "kolonneAendern") return item;
@@ -520,8 +519,24 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , kolonneAendern: function() {
-        writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
-        //DigiWebApp.NavigationController.toEmployeePage();
+        if (DigiWebApp.BookingController.currentBooking) {
+            writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
+            DigiWebApp.BookingController.istKolonnenaenderung = true;
+    		DigiWebApp.BookingController.refreshCurrentBooking(false);
+            if (DigiWebApp.BookingController.istEditTimeDataNoetig()) {
+				DigiWebApp.NavigationController.toRemarkPage(function() {
+			    	DigiWebApp.NavigationController.toEmployeePage();
+				}, /* istFeierabendBuchung */ false);
+            } else {
+                DigiWebApp.NavigationController.toEmployeePage();
+            }
+        } else {
+            writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt, aber keine laufende Buchung");
+            DigiWebApp.ApplicationController.nativeAlertDialogView({
+                  title: M.I18N.l('hint')
+                , message: M.I18N.l('kolonneOhneBuchung')
+            });
+        }
     }
 
     , handOrder: function() {

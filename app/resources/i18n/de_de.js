@@ -200,6 +200,7 @@ M.I18N.de_de = {
 	, noApplicationUpdateAvailableMsg: "DIGI-WebApp ist bereits auf dem aktuellen Stand"
 	, useTransitionsSetting: "Animationen"
 	, waitingForDevice: "Bitte warten..."
+	, recordAudio: "Sprachaufzeichnung (DEMO)"
 	, signature: "Unterschrift"
 	, materialPickUp: "Materialerfassung"
 	, dailyChecklist: "Tagescheckliste (DEMO)"
@@ -572,6 +573,9 @@ M.I18N.de_de = {
     , fs431UebernachtungSelbstBezahlt: "Zimmer selbst bezahlt (Rechnung ist als Foto einzureichen)"
 
     , kolonneAendern: "Kolonne ändern"
+    , kolonneOhneBuchung: "Es gibt keine offene Buchung."
+    , kolonneAktuelleBuchungGeaendert: "Die Kolonnenauswahl für die soeben begonnene Zeitbuchung wurde geändert."
+    , kolonneAbmeldung: "Melde Mitarbeiter ab"
 
     , distanceTooFar: "Entfernung zu groß"
     , distanceTooFarMessage: "Die eingegebene Entfernung ist zu groß (max. 99999 km)."

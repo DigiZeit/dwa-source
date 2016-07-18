@@ -322,7 +322,8 @@ DigiWebApp.Booking = M.Model.create({
 			return false;
 			
 		} else {
-				
+			
+            // "Normaler" Abschluss einer Buchung
 	        if (location) {
 	        	that.set('latitude_bis',  location.latitude);
 	        	that.set('longitude_bis', location.longitude);

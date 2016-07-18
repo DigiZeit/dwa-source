@@ -2054,7 +2054,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    			DigiWebApp.DashboardPage.needsUpdate = true;
 	    			DigiWebApp.MediaListPage.needsUpdate = true;
 	    		}
-	    		DigiWebApp.DashboardController.init(YES);
 	    		DigiWebApp.MediaListController.init(YES);
 	    		DigiWebApp.ApplicationController.triggerUpdate = NO;
 	    		DigiWebApp.ApplicationController.DigiProgressView.hide();

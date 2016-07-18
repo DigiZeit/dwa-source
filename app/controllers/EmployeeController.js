@@ -17,7 +17,8 @@ DigiWebApp.EmployeeController = M.Controller.extend({
     , empSelectionKeyTmp: M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'employeeSelectionTmp'
 
     /**
-     * Value determing the state of the employee selection
+     * Value determing the state of the employee selection.
+     * Only used in normal booking process, not while changing the Kolonne.
      *
      * 0: no kolonne
      * 1: kolonne, but employees not selected yet
@@ -31,7 +32,6 @@ DigiWebApp.EmployeeController = M.Controller.extend({
      * employeeSelection on EmployeePage has contentBinding on it to fill the list.
      */
     , employees: null
-
 
     /**
      * Passes to setEmployeesForList.
@@ -48,14 +48,21 @@ DigiWebApp.EmployeeController = M.Controller.extend({
      * Triggers content binding for employeeSelection by using set on employees.
      */
     , setEmployeesForList: function() {
-        if (this.getEmployeeState() == 1) {
-            var employees = DigiWebApp.Employee.findSorted();
-            if (employees.length > 0) {
-                employees = _.map(employees, function(em) {
-                    if (em) return { label: em.get('name'), value: em.get('id') };
-                });
-                this.set('employees', employees);
-            }
+        var employees = DigiWebApp.Employee.findSorted();
+        if (employees.length > 0) {
+            var selEmployees = DigiWebApp.EmployeeController.getSelectedEmployees();
+            employees = _.map(employees, function(em) {
+                if (em) {
+                    var obj = { label: em.get('name'), value: em.get('id') };
+                    _.each(selEmployees, function(selEmp) {
+    					if (selEmp.get('id') === obj.value) {
+    						obj.isSelected = true;
+    					}
+    				});
+                    return obj;
+                }
+            });
+            this.set('employees', employees);
         }
     }
 
@@ -76,7 +83,9 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         if (selection.length > 0) {
             _.each(selection, function(sel) { // sel is employee id
                 var employee = _.select(DigiWebApp.Employee.find(), function(e) {
-                    if (e) return e.get('id') == sel;
+                    if (e) {
+                        return e.get('id') == sel;
+                    }
                 });
                 employee = _.isArray(employee) ? employee[0] : employee;
                 if (employee) {
@@ -97,22 +106,34 @@ DigiWebApp.EmployeeController = M.Controller.extend({
     }
 
     /**
-     * Saves the selection of the employees in localStorage and moves back to the booking screen.
+     * Saves the selection of the employees in localStorage and, if booking normally,
+     * moves back to the booking screen and calls BookingController.book()
+     * or, when changing the Kolonne, calls BookingController.bucheKolonnenaenderung() .
      *
      * Called via callback of the employee selection success alert (to avoid rendering bugs with the alert)
      */
     , callbackEmployeesSave: function() {
     
         var that = DigiWebApp.EmployeeController;
-        
-        DigiWebApp.BookingController.set('isBackFromEmployeePage', YES);
-        DigiWebApp.NavigationController.backToBookTimePagePOP();
 
-        // save Selection in local storage to have it accessible after application restart
+        // Save selection in local storage to have it accessible after application restart
         localStorage.setItem(DigiWebApp.EmployeeController.empSelectionKey, that.getSelectedEmployeesAsString());
-        that.setEmployeeState(2);
-        DigiWebApp.BookingController.book();
-    }
+
+        if (DigiWebApp.BookingController.istKolonnenaenderung === true) {
+            DigiWebApp.BookingController.bucheKolonnenaenderung();
+			if (DigiWebApp.SettingsController.featureAvailable('404')) {
+	            DigiWebApp.NavigationController.backToButtonDashboardPage();
+			} else {
+				DigiWebApp.NavigationController.backToDashboardPage();
+			}
+        } else {
+            DigiWebApp.BookingController.set('isBackFromEmployeePage', YES);
+            DigiWebApp.NavigationController.backToBookTimePagePOP();
+
+            that.setEmployeeState(2);
+            DigiWebApp.BookingController.book();
+        }
+      }
 
     /**
      * Returns an array of all employee records that are selected.
@@ -122,7 +143,9 @@ DigiWebApp.EmployeeController = M.Controller.extend({
         var employees = DigiWebApp.Employee.find();
         if (employees.length > 0) {
             var selectedEmployees = _.select(employees, function(e) {
-                if (e) return e.get('isSelected') === true;
+                if (e) {
+                    return e.get('isSelected') === true;
+                }
             });
             return selectedEmployees;
         }
@@ -135,11 +158,11 @@ DigiWebApp.EmployeeController = M.Controller.extend({
      * Format: "<id1>,<id2>,...,<idN>"
      */
     , getSelectedEmployeesAsString: function() {
-        if (this.getEmployeeState === 0) {
+        if (this.getEmployeeState() === 0) {
             return '0';
         }
 
-        if (this.getEmployeeState === 1) {
+        if (this.getEmployeeState() === 1) {
             return '';
         }
 

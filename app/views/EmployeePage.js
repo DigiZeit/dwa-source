@@ -20,9 +20,34 @@ DigiWebApp.EmployeePage = M.PageView.design({
     , cssClass: 'employeePage'
 
     , header: M.ToolbarView.design({
-          cssClass: 'header'
+          childViews: 'backButton title'
+        , cssClass: 'header'
         , isFixed: YES
-        , value: M.I18N.l('selectEmployee')
+        , backButton: M.ButtonView.design({
+              value: M.I18N.l('back')
+            , icon: 'arrow-l'
+            , anchorLocation: M.LEFT
+            , events: {
+                tap: {
+                    action: function() {
+                        if (DigiWebApp.BookingController.istKolonnenaenderung === true) {
+                            if (DigiWebApp.SettingsController.featureAvailable('404')) {
+                                DigiWebApp.NavigationController.backToButtonDashboardPage();
+                            } else {
+                                DigiWebApp.NavigationController.backToDashboardPage();
+                            }
+                        } else {
+                            DigiWebApp.BookingController.set('isBackFromEmployeePage', YES);
+                            DigiWebApp.NavigationController.backToBookTimePagePOP();
+                        }
+                    }
+                }
+            }
+        })
+        , title: M.LabelView.design({
+              value: M.I18N.l('selectEmployee')
+            , anchorLocation: M.CENTER
+        })
         , anchorLocation: M.TOP
     })
 

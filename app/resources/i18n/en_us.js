@@ -200,6 +200,7 @@ M.I18N.en_us = {
 	, noApplicationUpdateAvailableMsg: "DIGI-WebApp is already up to date"
 	, useTransitionsSetting: "Transitions"
 	, waitingForDevice: "Please wait..."
+	, recordAudio: "Audiorecording (DEMO)"
 	, signature: "Signature"
 	, materialPickUp: "Material pick up"
 	, dailyChecklist: "Daily checklist (DEMO)"
@@ -573,6 +574,9 @@ M.I18N.en_us = {
     , fs431UebernachtungSelbstBezahlt: "Room paid by yourself (bill to be turned in as photo)"
 
     , kolonneAendern: "Change crew"
+    , kolonneOhneBuchung: "There is no open booking."
+    , kolonneAktuelleBuchungGeaendert: "The crew selection was changed for the booking that was just started."
+    , kolonneAbmeldung: "Signing off employee(s)"
 
     , distanceTooFar: "Distance too big"
     , distanceTooFarMessage: "The distance you entered is too big (max. 99999 km)."

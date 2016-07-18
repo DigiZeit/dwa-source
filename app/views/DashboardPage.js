@@ -17,13 +17,12 @@ DigiWebApp.DashboardPage = M.PageView.design({
 
     , events: {
 		  pagebeforeshow: {
-            //target: DigiWebApp.DashboardController,
-            //action: 'init'
-			action: function() {
+		    action: function () {
+                // Freischaltung 404: Button-Menü
 				if (DigiWebApp.SettingsController.featureAvailable('404')) {
 					DigiWebApp.NavigationController.toButtonDashboardPage();
 				} else {
-					DigiWebApp.DashboardController.init();
+					DigiWebApp.DashboardController.init(false);
 				}
 			}
         }
