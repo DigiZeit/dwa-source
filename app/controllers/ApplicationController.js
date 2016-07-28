@@ -280,11 +280,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, show: function(message, timeout, title) {
-            if (DigiWebApp.SettingsController.getSetting("debug")) {
-                writeToLog("DigiLoaderView.show() loaderMessage = " + this.loaderMessage
-                    + " timeoutId = " + this.timeoutId);
-            }
-
 			var mytitle = '';
 			if (typeof(title) != "undefined") {
 				mytitle = title;
@@ -313,14 +308,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			
 			if (this.nativeLoaderAvailable()) {
                 if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.show() native loaderMessage = " + this.loaderMessage
-                        + " timeoutId = " + this.timeoutId);
+                    writeToLog("DigiLoaderView.show() native loaderMessage = '" + this.loaderMessage
+                        + "' timeoutId = " + this.timeoutId);
                 }
 				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
 			} else {
                 if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.show() HTML loaderMessage = " + this.loaderMessage
-                        + " timeoutId = " + this.timeoutId);
+                    writeToLog("DigiLoaderView.show() HTML loaderMessage = '" + this.loaderMessage
+                        + "' timeoutId = " + this.timeoutId);
                 }
 				M.LoaderView.show(this.loaderMessage);
 			}
