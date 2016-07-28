@@ -524,7 +524,8 @@ DigiWebApp.DashboardController = M.Controller.extend({
             DigiWebApp.BookingController.istKolonnenaenderung = true;
     		DigiWebApp.BookingController.refreshCurrentBooking(false);
             if (DigiWebApp.BookingController.istEditTimeDataNoetig()) {
-				DigiWebApp.NavigationController.toRemarkPage(function() {
+                DigiWebApp.NavigationController.toRemarkPage(function () {
+                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			    	DigiWebApp.NavigationController.toEmployeePage();
 				}, /* istFeierabendBuchung */ false);
             } else {
