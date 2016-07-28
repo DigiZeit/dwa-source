@@ -272,9 +272,15 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = null;
 			if (this.nativeLoaderAvailable()) {
+                if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    writeToLog("DigiLoaderView.hide() native");
+                }
 				navigator.notification.activityStop();
 				return true;
 			} else {
+                if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    writeToLog("DigiLoaderView.hide() HTML");
+                }
 				return M.LoaderView.hide(true);
 			}
 		}
