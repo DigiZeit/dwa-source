@@ -264,8 +264,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 		, hide: function () {
             if (DigiWebApp.SettingsController.getSetting("debug")) {
-                writeToLog("DigiLoaderView.hide() loaderMessage = " + this.loaderMessage
-                    + " timeoutId = " + this.timeoutId);
+                writeToLog("DigiLoaderView.hide() loaderMessage = '" + this.loaderMessage
+                    + "' timeoutId = " + this.timeoutId);
             }
 			this.loaderMessage = " ";
 			this.loaderTitle = "";
