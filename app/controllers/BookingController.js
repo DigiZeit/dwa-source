@@ -358,20 +358,20 @@ DigiWebApp.BookingController = M.Controller.extend({
         if (DigiWebApp.SettingsController.getSetting("debug")) console.log("in bookWithRemark");
 
 		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
 
         // refresh bookings from localStorage
         // this also calls this.setBookedBookings() and this.setArchivedDays()
         this.setNotBookedBookings();
         this.refreshCurrentBooking(false);
 
-    	// EmployeeSelection (Kolonne)
         if (DigiWebApp.EmployeeController.getEmployeeState() == 1) {
             // Kolonnenfunktion, aber Mitarbeiter noch nicht ausgewählt
-            DigiWebApp.ApplicationController.DigiLoaderView.hide();
             DigiWebApp.NavigationController.toEmployeePage();
             return;
         }
+
+   		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('Save'));
+
         // Bugfix 2515: Save checked input booking information
 		var orderId;
 		var handOrderId = null;

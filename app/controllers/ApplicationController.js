@@ -262,7 +262,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			return M.LoaderView.refCount !== 0;
 		} 
 
-		, hide: function() {
+		, hide: function () {
+            if (DigiWebApp.SettingsController.getSetting("debug")) {
+                writeToLog("DigiLoaderView.hide() loaderMessage = " + this.loaderMessage
+                    + " timeoutId = " + this.timeoutId);
+            }
 			this.loaderMessage = " ";
 			this.loaderTitle = "";
 			window.clearTimeout(this.timeoutId);
@@ -276,7 +280,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		, show: function(message, timeout, title) {
-			var that = this;
+            if (DigiWebApp.SettingsController.getSetting("debug")) {
+                writeToLog("DigiLoaderView.show() loaderMessage = " + this.loaderMessage
+                    + " timeoutId = " + this.timeoutId);
+            }
 
 			var mytitle = '';
 			if (typeof(title) != "undefined") {
@@ -298,14 +305,24 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 			// Loader nach definiertem TimeOut automatisch verstecken
 			var myTimeout = timeout;
-			if (!myTimeout) myTimeout = DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
+			if (!myTimeout) {
+			    myTimeout = DigiWebApp.SettingsController.getSetting('LoaderTimeOut');
+			}
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = window.setTimeout(myTimeout, this.hide);
 			
 			if (this.nativeLoaderAvailable()) {
+                if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    writeToLog("DigiLoaderView.show() native loaderMessage = " + this.loaderMessage
+                        + " timeoutId = " + this.timeoutId);
+                }
 				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
 			} else {
-				return M.LoaderView.show(this.loaderMessage);
+                if (DigiWebApp.SettingsController.getSetting("debug")) {
+                    writeToLog("DigiLoaderView.show() HTML loaderMessage = " + this.loaderMessage
+                        + " timeoutId = " + this.timeoutId);
+                }
+				M.LoaderView.show(this.loaderMessage);
 			}
 		}
 		
