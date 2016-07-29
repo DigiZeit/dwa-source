@@ -1509,26 +1509,26 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	if (!ChefToolOnly) {
 
 	        // check order
-	        if(DigiWebApp.Order.findSorted().length > 0) {
+	        if (DigiWebApp.Order.findSorted().length > 0) {
 	            that.setCallbackStatus('order', 'local', YES);
 	        }
 	        
 	        // check positions
-	        if(DigiWebApp.Position.findSorted().length > 0) {
+	        if (DigiWebApp.Position.findSorted().length > 0) {
 	            that.setCallbackStatus('position', 'local', YES);
 	        }
 	        
 	        // check activities
-	        if(DigiWebApp.Activity.findSorted().length > 0) {
+	        if (DigiWebApp.Activity.findSorted().length > 0) {
 	            that.setCallbackStatus('activity', 'local', YES);
 	        }
 	        
 	        // check features
-	        if(DigiWebApp.Features.find().length > 0) {
+	        if (DigiWebApp.Features.find().length > 0) {
 	            that.setCallbackStatus('features', 'local', YES);
 	        }
 	
-	        if (DigiWebApp.SettingsController.globalDebugMode) {
+            if (DigiWebApp.SettingsController.getSetting("debug")) {
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
 	                  title: M.I18N.l('offlineWork')
 	                , message: fromwhere + reason
