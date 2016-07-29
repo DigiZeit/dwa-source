@@ -1499,14 +1499,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		var that = DigiWebApp.ApplicationController;
 		
 		// TODO: Exception vom Zeitserver auswerten
-		var reason = "";
-		if (typeof(exceptionMessage) == "string" && exceptionMessage.length > 0) {
-			reason = ": " + exceptionMessage;
-		}
+        // Bisher wird exceptionMessage von keinem Aufrufer übergeben, Auswertung überflüssig
+		//var reason = "";
+		//if (typeof(exceptionMessage) == "string" && exceptionMessage.length > 0) {
+		//	reason = ": " + exceptionMessage;
+		//}
 
 		that.enforceChefToolOnly();
-    	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));    	
-    	if (!ChefToolOnly) {
+    	var chefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
+      	var bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
+    	if (!chefToolOnly) {
 
 	        // check order
 	        if (DigiWebApp.Order.findSorted().length > 0) {
@@ -1527,15 +1529,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        if (DigiWebApp.Features.find().length > 0) {
 	            that.setCallbackStatus('features', 'local', YES);
 	        }
-	
-            if (DigiWebApp.SettingsController.getSetting("debug")) {
-	            DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                  title: M.I18N.l('offlineWork')
-	                , message: fromwhere + reason
-	            });
-	        }
+
+	        writeToLog("proceedWithLocalData(fromwhere=" + fromwhere + ")");
+
+	        //if (DigiWebApp.SettingsController.globalDebugMode) {
+	        //    DigiWebApp.ApplicationController.nativeAlertDialogView({
+	        //          title: M.I18N.l('offlineWork')
+	        //        , message: fromwhere + reason
+	        //    });
+	        //}
 	        
-	        if(that.isReadyToProceed()) {
+	        if (that.isReadyToProceed()) {
 	            DigiWebApp.NavigationController.toBookTimePage(YES);
 	
 	            //M.DialogView.alert({
@@ -1544,9 +1548,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                , message: M.I18N.l('offlineWorkMsg')
 	            });
 	        } else {
-	        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
-	        	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-	    		if (ChefToolOnly && Bautagebuch) {
+	    		if (chefToolOnly && bautagebuch) {
 	        		DigiWebApp.NavigationController.startBautagebuch();    			
 	    		} else {
 					if (DigiWebApp.SettingsController.featureAvailable('404')) {
@@ -1562,9 +1564,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            });
 	        }
     	} else {
-        	var Bautagebuch = (DigiWebApp.SettingsController.featureAvailable('412'));
-        	var ChefToolOnly = (DigiWebApp.SettingsController.featureAvailable('409'));
-    		if (ChefToolOnly && Bautagebuch) {
+    		if (chefToolOnly && bautagebuch) {
         		DigiWebApp.NavigationController.startBautagebuch();    			
     		} else {
 				if (DigiWebApp.SettingsController.featureAvailable('404')) {
