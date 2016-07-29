@@ -263,24 +263,24 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		} 
 
 		, hide: function () {
-            if (DigiWebApp.SettingsController.getSetting("debug")) {
-                writeToLog("DigiLoaderView.hide() loaderMessage = '" + this.loaderMessage
-                    + "' timeoutId = " + this.timeoutId);
-            }
+            //if (DigiWebApp.SettingsController.getSetting("debug")) {
+            //    writeToLog("DigiLoaderView.hide() loaderMessage = '" + this.loaderMessage
+            //        + "' timeoutId = " + this.timeoutId);
+            //}
 			this.loaderMessage = " ";
 			this.loaderTitle = "";
 			window.clearTimeout(this.timeoutId);
 			this.timeoutId = null;
 			if (this.nativeLoaderAvailable()) {
-                if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.hide() native");
-                }
+                //if (DigiWebApp.SettingsController.getSetting("debug")) {
+                //    writeToLog("DigiLoaderView.hide() native");
+                //}
 				navigator.notification.activityStop();
 				return true;
 			} else {
-                if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.hide() HTML");
-                }
+                //if (DigiWebApp.SettingsController.getSetting("debug")) {
+                //    writeToLog("DigiLoaderView.hide() HTML");
+                //}
 				return M.LoaderView.hide(true);
 			}
 		}
@@ -313,16 +313,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			this.timeoutId = window.setTimeout(myTimeout, this.hide);
 			
 			if (this.nativeLoaderAvailable()) {
-                if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.show() native loaderMessage = '" + this.loaderMessage
-                        + "' timeoutId = " + this.timeoutId);
-                }
+                //if (DigiWebApp.SettingsController.getSetting("debug")) {
+                //    writeToLog("DigiLoaderView.show() native loaderMessage = '" + this.loaderMessage
+                //        + "' timeoutId = " + this.timeoutId);
+                //}
 				navigator.notification.activityStart(this.loaderTitle, this.loaderMessage);
 			} else {
-                if (DigiWebApp.SettingsController.getSetting("debug")) {
-                    writeToLog("DigiLoaderView.show() HTML loaderMessage = '" + this.loaderMessage
-                        + "' timeoutId = " + this.timeoutId);
-                }
+                //if (DigiWebApp.SettingsController.getSetting("debug")) {
+                //    writeToLog("DigiLoaderView.show() HTML loaderMessage = '" + this.loaderMessage
+                //        + "' timeoutId = " + this.timeoutId);
+                //}
 				M.LoaderView.show(this.loaderMessage);
 			}
 		}
