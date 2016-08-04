@@ -262,7 +262,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			return M.LoaderView.refCount !== 0;
 		} 
 
-		, hide: function () {
+		, hide: function() {
             //if (DigiWebApp.SettingsController.getSetting("debug")) {
             //    writeToLog("DigiLoaderView.hide() loaderMessage = '" + this.loaderMessage
             //        + "' timeoutId = " + this.timeoutId);
