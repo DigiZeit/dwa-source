@@ -198,6 +198,6 @@
   <gap:splash src="theme/images/splash_ios_640x1136_DSO.png" gap:platform="ios" width="640" height="1136" />
 
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
-  <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
+  <!-- <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" /> -->
 
 </widget>
