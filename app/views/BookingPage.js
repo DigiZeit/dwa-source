@@ -14,8 +14,11 @@ DigiWebApp.BookingPage = M.PageView.design({
 
     , events: {
 		  pagebeforeshow: {
-			action: function() {	
-				// Gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
+		      action: function () {
+		        if (DigiWebApp.SettingsController.getSetting("debug")) {
+		            writeToLog("BookingPage.pagebeforeshow()");
+		        }
+		        // Gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
 				DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
 				DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
 				

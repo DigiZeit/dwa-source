@@ -15,6 +15,14 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
     , events: {
 		pagebeforeshow: {
 		    action: function () {
+		        if (DigiWebApp.SettingsController.getSetting("debug")) {
+		            writeToLog("BookingPageWithIconsScholpp.pagebeforeshow()");
+		        }
+
+		        // Gemäß Freischaltung 429 "mehrstufige Auftragsauswahl" initialisieren (Button ODER ComboBoxen)
+				DigiWebApp.BookingPage.doHideShowOrderCombobox(true);
+				DigiWebApp.BookingPage.doHideShowPositionCombobox(true);
+
 		        if (!DigiWebApp.SettingsController.featureAvailable('424')) {
             		if (DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen")) {
 		                $('#' + DigiWebApp.BookingPageWithIconsScholpp.content.fahrzeit_arbeitszeit_spezial_ButtonGrid.fahrzeitButtonGrid.button.id).show();
@@ -25,6 +33,10 @@ DigiWebApp.BookingPageWithIconsScholpp = M.PageView.design({
                     }
 		        }
 		        DigiWebApp.BookingController.init();
+
+        		// Nur einmal die Auswahl anzeigen. Wenn der User aus dem Buchen-Screen raus und wieder rein geht,
+        		// soll die aktuelle Buchung kommen, damit er sich diese wieder anzeigen lassen kann. 
+        		DigiWebApp.SelectionController.useSelections = NO;
 		    }
         }
         , pageshow: {
