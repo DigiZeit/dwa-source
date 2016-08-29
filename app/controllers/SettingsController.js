@@ -44,7 +44,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , bautagebuchLimit_autoStartUhrzeit: false
         , datatransfer_min_delay: 10000
         , branding: DigiWebApp.ApplicationController.CONSTDefaultBranding // Bugfix 2142
-        , GPSTimeOut: 60000
+        , GPSTimeOut: 30000
         , WebserviceTimeOut: 30000
         , LoaderTimeOut: 30000
         , silentLoader: false

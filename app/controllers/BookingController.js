@@ -587,12 +587,15 @@ DigiWebApp.BookingController = M.Controller.extend({
     		
     		var nowTimestamp = new Date().getTime();
     		
-    		if (parseIntRadixTen(that.startGetLocationTimestamp) + parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut')) < nowTimestamp) {
-    			successCallback();
-    		}
+    		//if (parseIntRadixTen(that.startGetLocationTimestamp) 
+            //        + parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut')) < nowTimestamp) {
+    		//	successCallback();
+    		//}
     		//alert("typeof(nextOptions): '" + typeof(nextOptions) + "', typeof(nextFunction): '" + typeof(nextFunction) + "'");
 
-    		DigiWebApp.ApplicationController.DigiLoaderView.show(M.I18N.l('getGPSPositionMsg'), DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
+    		DigiWebApp.ApplicationController.DigiLoaderView.show(
+                M.I18N.l('getGPSPositionMsg'), 
+                DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
             /*var getLocationOptions =  { 
             		enableHighAccuracy: YES, 
