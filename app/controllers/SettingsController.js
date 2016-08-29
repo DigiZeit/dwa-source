@@ -91,6 +91,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , benutzeHttps: false
         , doScr: true
         , logfilesLoeschenNachTagen: 40
+        , offlineMeldungAnzeigen: true
     }
 
     , defaultsettings: null
@@ -414,6 +415,14 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) { }
 
+            //, offlineMeldungAnzeigen: true
+            var offlineMeldungAnzeigen = DigiWebApp.SettingsController.defaultsettings.get("offlineMeldungAnzeigen");
+            try {
+	            if (typeof(record.record.offlineMeldungAnzeigen) !== "undefined") {
+	            	offlineMeldungAnzeigen = record.get("offlineMeldungAnzeigen");
+	            }
+            } catch (e) { }
+
             // Bugfix 2142: get branding from local storage
             var branding = DigiWebApp.SettingsController.defaultsettings.get("branding");
             try {
@@ -579,6 +588,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                   value: record.get('auftragsDetailsKoppeln')
 	                 , label: M.I18N.l('auftragsDetailsKoppeln')
 	                 , isSelected: record.get('auftragsDetailsKoppeln')
+	           }]
+               , offlineMeldungAnzeigen: [{
+	                   value: record.get('offlineMeldungAnzeigen')
+	                 , label: M.I18N.l('settingsOfflineMessage')
+	                 , isSelected: record.get('offlineMeldungAnzeigen')
 	           }]
                , vibrationsDauer: vibrationsDauer
 	           , terminliste_keineKuenstlichenTermine: [{
@@ -794,6 +808,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , kannReisezeitBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannReisezeitBuchen')
                , doScr: DigiWebApp.SettingsController.defaultsettings.get('doScr')
                , logfilesLoeschenNachTagen: DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen')
+               , offlineMeldungAnzeigen: DigiWebApp.SettingsController.defaultsettings.get('offlineMeldungAnzeigen')
             }; // settings = {
             
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
@@ -816,13 +831,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				workerId = QueryString.w;
 			if (typeof(QueryString.v) != 'undefined')
 				connectionCode = QueryString.v;
-			
-			if (false) {
-				company = unScrStr(unescape(company), 4711);
-				password = unScrStr(unescape(password), 4711);
-				workerId = unScrStr(unescape(workerId), 4711);
-				connectionCode = unScrStr(unescape(connectionCode), 4711);
-			}
 			
 			$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val(company);
 			$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val(password);
@@ -962,6 +970,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var benutzeHttps				   = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'benutzeHttps');
         var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
+        var offlineMeldungAnzeigen         = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'offlineMeldungAnzeigen');
 
         var remarkIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'remarkIsMandatory') !== null) {
@@ -1216,6 +1225,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('benutzeHttps', benutzeHttps);
                                                     record.set('doScr', doScr);
                                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                                    record.set('offlineMeldungAnzeigen', offlineMeldungAnzeigen);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1321,6 +1331,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('benutzeHttps', benutzeHttps);
                                     record.set('doScr', doScr);
                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                    record.set('offlineMeldungAnzeigen', offlineMeldungAnzeigen);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1400,6 +1411,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('benutzeHttps', benutzeHttps);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                record.set('offlineMeldungAnzeigen', offlineMeldungAnzeigen);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1479,6 +1491,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('benutzeHttps', benutzeHttps);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                record.set('offlineMeldungAnzeigen', offlineMeldungAnzeigen);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1560,6 +1573,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , benutzeHttps: benutzeHttps
                                 , doScr: doScr
                                 , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
+                                , offlineMeldungAnzeigen: offlineMeldungAnzeigen
                             }); // record =
 
                             /* now save */

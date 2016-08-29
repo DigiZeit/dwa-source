@@ -2287,22 +2287,24 @@ DigiWebApp.BookingController = M.Controller.extend({
                            } else {
                         	   startSyncFunc();
                            }
-        		  }
-        		  , function() {
-                      DigiWebApp.ApplicationController.DigiLoaderView.hide();
-                        // Bugfix: Fehlermeldung nicht zeigen, wenn danach kein Stammdatenabgleich gemacht werden soll
-                      	if (doSync) {
-		              		// die Buchung(en) konnte(n) nicht gesendet werden
-		                    DigiWebApp.ApplicationController.nativeAlertDialogView({
-		                        title: M.I18N.l('sendDataFail'),
-		                        message: M.I18N.l('sendDataFailMsg')
-		                    });
-                      	}
-	              }
-        		  , isClosingDay
-        		  , doSync
-        	);
-
+        		}
+        		, function() {
+                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
+        		    // Bugfix: Fehlermeldung nicht zeigen, wenn danach kein
+                    // Stammdatenabgleich gemacht werden soll
+                    if (doSync 
+                        && parseBool(DigiWebApp.SettingsController.getSetting('offlineMeldungAnzeigen')
+                    )) {
+		              	// die Buchung(en) konnte(n) nicht gesendet werden
+		                DigiWebApp.ApplicationController.nativeAlertDialogView({
+		                    title: M.I18N.l('sendDataFail'),
+		                    message: M.I18N.l('sendDataFailMsg')
+		                });
+                    }
+	            }
+        		, isClosingDay
+        		, doSync
+        	); // sendeZeitdaten()
         } else {
         	// Keine Buchungen zum Verarbeiten vorhanden --> Es gibt nichts weiter zu tun
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -2336,7 +2338,9 @@ DigiWebApp.BookingController = M.Controller.extend({
     , uebernachtungOptionen: null
     
     , startBrowserBookingNotificationTimeout: null
+
     , startBrowserBookingNotificationObject: null
+
     , startBrowserBookingNotification: function(myDate) {
     	var that = this;
     		
@@ -2408,22 +2412,22 @@ DigiWebApp.BookingController = M.Controller.extend({
 	, startBookingNotification: function(myDate) {	
 		if (!onIOS && !onAndroid23) {
 			try { // keinesfalls den regulären Betrieb stören
-				
-				var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
-		    	if (hourSetting == 0) {
-		    		return false;
-		    	}
-		    	
-				var that = this;
-				
-				that.clearBookingNotification();
-				
-				// notification.local is supposed to reside in "window.plugin"
-				var pluginObj = window.plugin;
-				if (typeof(pluginObj) == "undefined") {
-					pluginObj = window.plugins;
-				}
-		
+
+			    var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
+			    if (hourSetting == 0) {
+			        return false;
+			    }
+
+			    var that = this;
+
+			    that.clearBookingNotification();
+
+			    // notification.local is supposed to reside in "window.plugin"
+			    var pluginObj = window.plugin;
+			    if (typeof(pluginObj) == "undefined") {
+			        pluginObj = window.plugins;
+			    }
+
 				var alleBookings = DigiWebApp.Booking.find().concat(DigiWebApp.SentBooking.find());
 				var feierabendBookings = [];
 				if (alleBookings.length > 0) feierabendBookings = _.filter(alleBookings, function(booking) { return booking.get('istFeierabend'); });

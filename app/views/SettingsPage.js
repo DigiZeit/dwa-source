@@ -58,7 +58,8 @@ DigiWebApp.SettingsPage = M.PageView.design({
             + ' detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer'
             + ' bautagebuchLimit_autoStartUhrzeit ServiceApp_ermittleGeokoordinate ServiceApp_datenUebertragen'
             + ' ServiceApp_engeKopplung ServiceApp_PORTGrid ServiceApp_FallBack auftragsDetailsKoppeln'
-            + ' vibrationsDauerSliderContainer terminlisteEinstellungen festePauseStornierenEinstellungen grid'
+            + ' offlineMessage vibrationsDauerSliderContainer terminlisteEinstellungen'
+            + ' festePauseStornierenEinstellungen grid'
         , daysToHoldBookingsOnDeviceSliderContainer: M.ContainerView.design({
       	  		  childViews: 'daysToHoldBookingsOnDeviceSlider'
 		        , daysToHoldBookingsOnDeviceSlider: M.SliderView.design({
@@ -208,6 +209,13 @@ DigiWebApp.SettingsPage = M.PageView.design({
                 target: DigiWebApp.SettingsController
               , property: 'settings.detailierteZeitdaten'
           }
+        })
+        , offlineMessage: M.SelectionListView.design({
+              selectionMode: M.MULTIPLE_SELECTION
+            , contentBinding: {
+                  target: DigiWebApp.SettingsController
+                , property: 'settings.offlineMeldungAnzeigen'
+            }
         })
         , useTransitionsSetting: M.SelectionListView.design({
               selectionMode: M.MULTIPLE_SELECTION

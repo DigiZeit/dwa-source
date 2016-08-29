@@ -106,9 +106,6 @@ M.I18N.de_de = {
 	, noActSelectedMsg: "Bitte wählen Sie eine Tätigkeit aus."
 	, doubleBooking: "Hinweis"
 	, doubleBookingMsg: "Es wurde keine Buchung durchgeführt, da die Daten der noch offenen Zeitbuchung entsprechen."
-	, sendConfigurationMsg: "Sende Einstellungen"
-	, sendConfigurationFail: "Keine Verbindung"
-	, sendConfigurationFailMsg: "Datenübertragung nicht möglich. Überprüfen Sie Ihre Datenverbindung oder versuchen sie es später erneut. Sie können weiterhin buchen."
 	, sendDataMsg: "Sende Daten"
 	, sendDataFail: "Keine Verbindung"
 	, sendDataFailMsg: "Datenübertragung nicht möglich. Überprüfen Sie Ihre Datenverbindung oder versuchen sie es später erneut. Sie können weiterhin buchen."
@@ -582,4 +579,6 @@ M.I18N.de_de = {
 
     , bautagebuchWeitereMaterialbuchung: "Weitere Materialbuchung?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Weitere Materialbuchung für diese Auswahl anlegen?"
+
+    , settingsOfflineMessage: "Offline-Meldung anzeigen"
 };

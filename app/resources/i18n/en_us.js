@@ -106,9 +106,6 @@ M.I18N.en_us = {
 	, noActSelectedMsg: "Please choose an activity"
 	, doubleBooking: "Hint"
 	, doubleBookingMsg: "No new booking as the selected data is the same as the current booking."
-	, sendConfigurationMsg: "Send configuration"
-	, sendConfigurationFail: "Transmission error"
-	, sendConfigurationFailMsg: "The settings could not be transmitted. Check your internet connection and try again later."
 	, sendDataMsg: "Sending Data"
 	, sendDataFail: "No Connection"
 	, sendDataFailMsg: "The data could not be transmitted. Check your internet connection and try again later."
@@ -583,4 +580,6 @@ M.I18N.en_us = {
 
     , bautagebuchWeitereMaterialbuchung: "Additional material booking?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
+
+    , settingsOfflineMessage: "Show offline message"
 };
