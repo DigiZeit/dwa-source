@@ -728,10 +728,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 			&& DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
 				if (DigiWebApp.SettingsController.getSetting("ServiceApp_FallBack")) {
 		            DigiWebApp.ServiceAppController.knockknock(function(data) {
-		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is available");
+		            	if (DigiWebApp.SettingsController.getSetting("debug")) {
+			                writeToLog("ServiceApp ist erreichbar.");
+			            }
 		            	mysuccessCallback();
 		            }, function() {
-		            	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("ServiceApp is NOT available");
+		            	if (DigiWebApp.SettingsController.getSetting("debug")) {
+			                writeToLog("ServiceApp ist NICHT erreichbar!");
+			            }
 		            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
 		            	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
 		    	            var nextLocationOptions =  { 
@@ -750,6 +754,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 			} else if (DigiWebApp.SettingsController.getSetting('autoSaveGPSData')) {
             	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
             	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
+		            if (DigiWebApp.SettingsController.getSetting("debug")) {
+			            writeToLog("Positionsermittlung mit GPSenableHighAccuracyFallback");
+			        }
     	            var nextLocationOptions =  { 
     	            		enableHighAccuracy: YES
     	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
@@ -757,6 +764,9 @@ DigiWebApp.BookingController = M.Controller.extend({
     	            };
             		getLocationNow(mysuccessCallback, nextLocationOptions, getLocationNow);
             	} else {
+		            if (DigiWebApp.SettingsController.getSetting("debug")) {
+			            writeToLog("Positionsermittlung ohne GPSenableHighAccuracyFallback");
+			        }
             		getLocationNow(mysuccessCallback);
             	}
 			} else {
