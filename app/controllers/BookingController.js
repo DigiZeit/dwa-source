@@ -738,6 +738,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 			            }
 		            	if (!parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy")) 
 		            	&& parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracyFallback"))) {
+		                    if (DigiWebApp.SettingsController.getSetting("debug")) {
+			                    writeToLog("Positionsermittlung mit GPSenableHighAccuracyFallback");
+			                }
 		    	            var nextLocationOptions =  { 
 		    	            		enableHighAccuracy: YES
 		    	            	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
@@ -745,6 +748,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    	            };
 		            		getLocationNow(mysuccessCallback, nextLocationOptions, getLocationNow);
 		            	} else {
+		                    if (DigiWebApp.SettingsController.getSetting("debug")) {
+			                    writeToLog("Positionsermittlung ohne GPSenableHighAccuracyFallback");
+			                }
 		            		getLocationNow(mysuccessCallback);
 		            	}
 		            });
