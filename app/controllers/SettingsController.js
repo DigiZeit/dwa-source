@@ -465,7 +465,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) {}
 
 			settings = {
-            	  debug: [{
+            	debug: [{
                       value: record.get('debug')
                     , label: 'debug'
                     , isSelected: record.get('debug')
@@ -541,6 +541,11 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('remarkIsOptional')
 	                 , isSelected: record.get('remarkIsOptional')
 	            }]
+                , offlineMeldungAnzeigen: [{
+	                   value: offlineMeldungAnzeigen
+	                 , label: M.I18N.l('settingsOfflineMessage')
+	                 , isSelected: offlineMeldungAnzeigen
+	            }]
                 , detailierteZeitdaten: [{
  	                   value: record.get('detailierteZeitdaten')
  	                 , label: M.I18N.l('detailierteZeitdaten')
@@ -588,11 +593,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                   value: record.get('auftragsDetailsKoppeln')
 	                 , label: M.I18N.l('auftragsDetailsKoppeln')
 	                 , isSelected: record.get('auftragsDetailsKoppeln')
-	           }]
-               , offlineMeldungAnzeigen: [{
-	                   value: record.get('offlineMeldungAnzeigen')
-	                 , label: M.I18N.l('settingsOfflineMessage')
-	                 , isSelected: record.get('offlineMeldungAnzeigen')
 	           }]
                , vibrationsDauer: vibrationsDauer
 	           , terminliste_keineKuenstlichenTermine: [{
