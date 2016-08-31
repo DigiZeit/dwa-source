@@ -91,7 +91,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , benutzeHttps: false
         , doScr: true
         , logfilesLoeschenNachTagen: 40
-        , offlineMeldungAnzeigen: true
+        , offlineMeldungAnzeigen: false
     }
 
     , defaultsettings: null
@@ -415,7 +415,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) { }
 
-            //, offlineMeldungAnzeigen: true
+            //, offlineMeldungAnzeigen: false
             var offlineMeldungAnzeigen = DigiWebApp.SettingsController.defaultsettings.get("offlineMeldungAnzeigen");
             try {
 	            if (typeof(record.record.offlineMeldungAnzeigen) !== "undefined") {
@@ -541,11 +541,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                 , label: M.I18N.l('remarkIsOptional')
 	                 , isSelected: record.get('remarkIsOptional')
 	            }]
-                , offlineMeldungAnzeigen: [{
-	                   value: offlineMeldungAnzeigen
-	                 , label: M.I18N.l('settingsOfflineMessage')
-	                 , isSelected: offlineMeldungAnzeigen
-	            }]
                 , detailierteZeitdaten: [{
  	                   value: record.get('detailierteZeitdaten')
  	                 , label: M.I18N.l('detailierteZeitdaten')
@@ -650,6 +645,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , kannReisezeitBuchen: kannReisezeitBuchen
                , doScr: doScr
                , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
+               , offlineMeldungAnzeigen: offlineMeldungAnzeigen
 			}; // settings = {
         /* default values */
         } else {
@@ -970,7 +966,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var benutzeHttps				   = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'benutzeHttps');
         var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var offlineMeldungAnzeigen         = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'offlineMeldungAnzeigen');
 
         var remarkIsMandatory = NO;
         if (M.ViewManager.getView('settingsPage', 'remarkIsMandatory') !== null) {
@@ -1084,6 +1079,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var kannReisezeitBuchen             = DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen");
         var doScr                           = DigiWebApp.SettingsController.getSetting("doScr");
         var logfilesLoeschenNachTagen       = DigiWebApp.SettingsController.getSetting("logfilesLoeschenNachTagen");
+        var offlineMeldungAnzeigen          = DigiWebApp.SettingsController.getSetting("offlineMeldungAnzeigen");
 
         if (company) {
             if(!numberRegex.test(company)) {

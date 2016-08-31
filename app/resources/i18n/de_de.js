@@ -579,6 +579,4 @@ M.I18N.de_de = {
 
     , bautagebuchWeitereMaterialbuchung: "Weitere Materialbuchung?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Weitere Materialbuchung für diese Auswahl anlegen?"
-
-    , settingsOfflineMessage: "Offline-Meldung bei Datenübertragung anzeigen"
 };

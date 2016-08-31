@@ -585,23 +585,10 @@ DigiWebApp.BookingController = M.Controller.extend({
     	// Get GPS-Position if set in Settings
     	var getLocationNow = function(successCallback, nextOptions, nextFunction) {
     		
-    		var nowTimestamp = new Date().getTime();
-    		
-    		//if (parseIntRadixTen(that.startGetLocationTimestamp) 
-            //        + parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSTimeOut')) < nowTimestamp) {
-    		//	successCallback();
-    		//}
-    		//alert("typeof(nextOptions): '" + typeof(nextOptions) + "', typeof(nextFunction): '" + typeof(nextFunction) + "'");
-
     		DigiWebApp.ApplicationController.DigiLoaderView.show(
                 M.I18N.l('getGPSPositionMsg'), 
                 DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 	
-            /*var getLocationOptions =  { 
-            		enableHighAccuracy: YES, 
-            		maximumAge: 0, 
-            		timeout: 240000 
-            };*/
             var getLocationOptions =  { 
             		enableHighAccuracy: parseBool(DigiWebApp.SettingsController.getSetting("GPSenableHighAccuracy"))
             	  , maximumAge: parseIntRadixTen(DigiWebApp.SettingsController.getSetting('GPSmaximumAgeMinutes')) * 60000
@@ -612,8 +599,6 @@ DigiWebApp.BookingController = M.Controller.extend({
             	getLocationOptions.maximumAge = nextOptions.maximumAge;
             	getLocationOptions.timeout = nextOptions.timeout;
             }
-		        	
-    		//alert("enableHighAccuracy: " + getLocationOptions.enableHighAccuracy + ", timeout: " + getLocationOptions.timeout);
     		
     		M.LocationManager.getLocation(that, successCallback, function(error) {
                 	if ( error === M.LOCATION_POSITION_UNAVAILABLE ) {

@@ -1392,7 +1392,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.daysToHoldBookingsOnDeviceSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.auftragsDetailsKoppeln.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.detailierteZeitdaten.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-            try { $('[id=' + DigiWebApp.SettingsPage.content.offlineMessage.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
 			try{$('[id=' + DigiWebApp.SettingsPage.content.vibrationsDauerSliderContainer.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -1423,7 +1422,6 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (DigiWebApp.SettingsController.featureAvailable('406')) { 
 				try{$('[id=' + DigiWebApp.SettingsPage.content.auftragsDetailsKoppeln.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			}
-            try { $('[id=' + DigiWebApp.SettingsPage.content.offlineMessage.id + ']').each(function () { $(this).show(); }); } catch (e) { }
 			try{$('[id=' + DigiWebApp.SettingsPage.content.vibrationsDauerSliderContainer.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracy.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSenableHighAccuracyFallback.id  + ']').each(function() { $(this).show(); });}catch(e){}
@@ -1544,12 +1542,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        if (that.isReadyToProceed()) {
 	            DigiWebApp.NavigationController.toBookTimePage(YES);
 
-	            if (parseBool(DigiWebApp.SettingsController.getSetting('offlineMeldungAnzeigen'))) {
-	                DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                    title: M.I18N.l('offlineWork'),
-	                    message: M.I18N.l('offlineWorkMsg')
-	                });
-	            }
+	            DigiWebApp.ApplicationController.nativeAlertDialogView({
+	                title: M.I18N.l('offlineWork'),
+	                message: M.I18N.l('offlineWorkMsg')
+	            });
 	        } else {
 	    		if (chefToolOnly && bautagebuch) {
 	        		DigiWebApp.NavigationController.startBautagebuch();    			
