@@ -153,7 +153,5 @@ DigiWebApp.Settings = M.Model.create({
     , doScr: M.Model.attr('Boolean')
 
     , logfilesLoeschenNachTagen: M.Model.attr('Integer')
-
-    , offlineMeldungAnzeigen: M.Model.attr('Boolean')
     
 }, M.DataProviderLocalStorage);

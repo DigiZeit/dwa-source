@@ -1541,10 +1541,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        
 	        if (that.isReadyToProceed()) {
 	            DigiWebApp.NavigationController.toBookTimePage(YES);
-
+	
+	            //M.DialogView.alert({
 	            DigiWebApp.ApplicationController.nativeAlertDialogView({
-	                title: M.I18N.l('offlineWork'),
-	                message: M.I18N.l('offlineWorkMsg')
+	                  title: M.I18N.l('offlineWork')
+	                , message: M.I18N.l('offlineWorkMsg')
 	            });
 	        } else {
 	    		if (chefToolOnly && bautagebuch) {
