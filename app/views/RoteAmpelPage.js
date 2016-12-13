@@ -91,7 +91,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 		                    			var s = DigiWebApp.SelectionController.selections;
 		                    			s.order = M.ViewManager.getView('roteAmpelPage', 'order').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    			M.ViewManager.getView(SelectionController.getPageToUse(), 'order')
+		                    			M.ViewManager.getView(DigiWebApp.SelectionController.getPageToUse(), 'order')
                                             .setSelection(
                                                 M.ViewManager.getView('roteAmpelPage', 'order').getSelection());
 		                    			DigiWebApp.SelectionController.setPositions(null, null, YES);
@@ -132,7 +132,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                                             s.position = M.ViewManager.getView('roteAmpelPage', 'position')
                                                 .getSelection();
                                             DigiWebApp.SelectionController.set('selections', s);
-                                            M.ViewManager.getView(SelectionController.getPageToUse(), 'position')
+                                            M.ViewManager.getView(DigiWebApp.SelectionController.getPageToUse(), 'position')
                                                 .setSelection(
                                                     M.ViewManager.getView('roteAmpelPage', 'position').getSelection());
                                             DigiWebApp.SelectionController.setActivities(YES, YES);
