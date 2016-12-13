@@ -9,129 +9,9 @@
 DigiWebApp.RoteAmpelPage = M.PageView.design({
 
       events: {
-		  pagebeforeshow: {
-            action: function() {
-					DigiWebApp.RoteAmpelPage.backDone = false;
-					// verfügbare Positionen kopieren und ausgewählte selektieren
-					var itemSelected = NO;
-					var relevantDetailsController = DigiWebApp.RoteAmpelController;
-					
-					if (relevantDetailsController.auftragId) {
-						relevantDetailsController.set("auftraegeList", 
-                            DigiWebApp.Order.getList({selectedId: relevantDetailsController.auftragId}));
-					} else if (DigiWebApp.BookingController.currentBooking) {
-						if (DigiWebApp.BookingController.currentBooking.get('handOrderId')) {
-							relevantDetailsController.set("auftraegeList", 
-                                DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('handOrderId')}));
-							relevantDetailsController.set('handOrderId', 
-                                DigiWebApp.BookingController.currentBooking.get('handOrderId'));
-							relevantDetailsController.set('handOrderVaterId', 
-                                DigiWebApp.BookingController.currentBooking.get('handOrderVaterId'));
-							relevantDetailsController.set('handOrderName', 
-                                DigiWebApp.BookingController.currentBooking.get('handOrderName'));
-						} else {
-							relevantDetailsController.set("auftraegeList", 
-                                DigiWebApp.Order.getList({selectedId: DigiWebApp.BookingController.currentBooking.get('orderId')}));
-							relevantDetailsController.set('auftragId', 
-                                DigiWebApp.BookingController.currentBooking.get('orderId'));
-							relevantDetailsController.set('auftragName', 
-                                DigiWebApp.BookingController.currentBooking.get('orderName'));
-						}
-					} else {
-						relevantDetailsController.set("auftraegeList", DigiWebApp.Order.getList());
-					}
-
-					_.each(relevantDetailsController.auftraegeList, function(a) {
-						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
-							relevantDetailsController.set('auftragId', parseIntRadixTen(a.value));
-							relevantDetailsController.set('auftragName', a.label);
-						}
-					});
-
-					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.RoteAmpelController.positionenList));
-					_.each(myPositionenList, function(p) {
-						if (parseIntRadixTen(p.value) !== 0) {
-							p.isSelected = NO;
-						} else {
-							p.isSelected = YES;
-						}
-					});
-					var positionenArray = _.map(myPositionenList, function(o) {
-					    if ( typeof(o) === "undefined" ) {
-					    	console.log("UNDEFINED position");
-					    } else {    
-							if (relevantDetailsController.positionId) {
-								o.isSelected = (o.value === relevantDetailsController.positionId);
-								if (o.isSelected) { itemSelected = YES; }
-							}
-					        return o;
-					    }
-					});
-					if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
-						positionenArray = _.map(positionenArray, function(o) {
-							if (DigiWebApp.RoteAmpelController.positionId) {
-								o.isSelected = (o.value === DigiWebApp.RoteAmpelController.positionId);
-								if (o.isSelected) { itemSelected = YES; 
-									relevantDetailsController.set("positionId", o.value);
-									relevantDetailsController.set("positionName", o.label);
-								}
-							}
-					        return o;
-						});
-					}
-					positionenArray = _.compact(positionenArray);
-					if (positionenArray.length > 1) {
-					    positionenArray.push({label: M.I18N.l('selectSomething'), value: '0', isSelected: !itemSelected});
-					}
-					if (!itemSelected && positionenArray.length == 1) {
-					    positionenArray[0].isSelected = YES;
-					    relevantDetailsController.set("positionId", positionenArray[0].value);
-					    relevantDetailsController.set("positionName", positionenArray[0].label);
-					}
-					relevantDetailsController.set("positionenList", positionenArray);
-					    					
-					_.each(relevantDetailsController.positionenList, function(a) {
-						if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
-							relevantDetailsController.set('positionId', parseIntRadixTen(a.value));
-							relevantDetailsController.set('positionName', a.label);
-						}
-					});
-					relevantDetailsController.set('positionenList', relevantDetailsController.positionenList);
-
-					relevantDetailsController.setTaetigkeiten(relevantDetailsController.positionId);
-					
-					try {
-						_.each(relevantDetailsController.activityList, function(a) {
-							if (a.isSelected == YES && parseIntRadixTen(a.value) != 0) {
-								relevantDetailsController.set('activityId', parseIntRadixTen(a.value));
-								relevantDetailsController.set('activityName', a.label);
-							}
-						});
-            		} catch (e) {trackError(e);}
-            
-					M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue(DigiWebApp.RoteAmpelController.data);
-
-                    // TODO Wahrsch. unnötig weil nie ausgegraut wird
-					//$("#" + DigiWebApp.RoteAmpelPage.content.speichernButton.id).show();
-					
-               		//$('#' + DigiWebApp.RoteAmpelPage.content.auftragComboBox.id + "_container").show();
-
-	            	if (relevantDetailsController.get('handOrderId')) {
-	            		$('#' + DigiWebApp.RoteAmpelPage.content.positionComboBox.id + "_container").hide();
-	            	} else {
-	            		$('#' + DigiWebApp.RoteAmpelPage.content.positionComboBox.id + "_container").show();
-	            	}
-					DigiWebApp.ApplicationController.DigiLoaderView.hide();
-					// Bugfix 2108: Rename in order to be consistent with DSO
-					if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-                            DigiWebApp.RoteAmpelPage.content.auftragComboBox.id, M.I18N.l('dtc6Ordner'));
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-                            DigiWebApp.RoteAmpelPage.content.positionComboBox.id, M.I18N.l('dtc6Auftrag'));
-						DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-                            DigiWebApp.RoteAmpelPage.content.activityComboBox.id, M.I18N.l('dtc6Leistung'));
-					}
-			}
+        pagebeforeshow: {
+            target: DigiWebApp.RoteAmpelController,
+            action: 'init'
         }
 		, pageshow: {
 		    action: function() {
@@ -140,7 +20,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
         , pagehide: {
             action: function() {
         		// reset auto-grow
-        		M.ViewManager.getView('roteAmpelPage', 'dataInput').setCssProperty("height", "200px");
+        		M.ViewManager.getView('roteAmpelPage', 'dataInput').setCssProperty("height", "100px");
         	}
         }
     }
@@ -182,127 +62,121 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 
     , content: M.ScrollView.design({
 
-    	  childViews: 'auftragComboBox positionComboBox activityComboBox dataInput speichernButton'
+        childViews: 'order position dataInput speichernButton'
         	  
         , cssClass: 'content'
     	
-        , auftragComboBox: M.SelectionListView.design({
-
-            /* renders a selection view like check boxes */
-                selectionMode: M.SINGLE_SELECTION_DIALOG
-            , initialText: M.I18N.l('noData')
-            , label: M.I18N.l('order')
-            , applyTheme: NO
-            /* this selection view has no static entries, instead it is filled via content binding. */
-            , contentBinding: {
-                    target: DigiWebApp.RoteAmpelController
-                , property: 'auftraegeList'
-            }
-            , events: {
+	    , order: M.SelectionListView.design({
+	        selectionMode: M.SINGLE_SELECTION_DIALOG
+	        , initialText: M.I18N.l('noData')
+	        , label: M.I18N.l('order')
+	        //, cssClass: 'marginBottom25'
+	        , applyTheme: NO
+	        , contentBinding: {
+	            target: DigiWebApp.RoteAmpelController,
+	            property: 'orders'
+	        }
+	        , events: {
+	            change: {
+	                target: DigiWebApp.RoteAmpelController,
+	                action: function() {
+		                var orderId = M.ViewManager.getView('orderInfoPage', 'order').getSelection(YES).value;
+		                if (orderId) {
+		                	// we need to check handOrders also
+			                var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
+			                _.each(orders, function(order) {
+		                    	if (order.get('id') == orderId) {
+		                    		DigiWebApp.RoteAmpelController.set('activeOrder', [order]);
+		                    		if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+		                    			var s = DigiWebApp.SelectionController.selections;
+		                    			s.order = M.ViewManager.getView('orderInfoPage', 'order').getSelection();
+		                    			DigiWebApp.SelectionController.set('selections', s);
+		                    		    // TODO Es ist nicht immer die bookingPage, es sollte 
+                                        // SelectionController.getPageToUse() verwendet werden
+		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(
+		                    					M.ViewManager.getView('orderInfoPage', 'order').getSelection());
+		                    			DigiWebApp.SelectionController.setPositions(null, null, YES);
+		                    			DigiWebApp.SelectionController.useSelections = YES;
+		                    		}
+		                    	}
+			                });
+			                DigiWebApp.RoteAmpelController.setPositions();
+		                }
+		                DigiWebApp.RoteAmpelController.setItem();
+	                }
+	            }
+	        }
+	    })
+	    
+	    , position: M.SelectionListView.design({
+	        selectionMode: M.SINGLE_SELECTION_DIALOG
+	        , initialText: M.I18N.l('noData')
+	        , label: M.I18N.l('position')
+	        //, cssClass: 'marginBottom25'
+	        , applyTheme: NO
+	        , contentBinding: {
+	            target: DigiWebApp.RoteAmpelController,
+	            property: 'positions'
+	        }
+	        , events: {
                 change: {
-                    /* executed in scope of DOMWindow because no target defined */
-                    action: function(selectedValue, selectedItem) {
-                		var mySelection = M.ViewManager.getView('roteAmpelPage', 'auftragComboBox').getSelection(YES);
-                		if (mySelection.label == mySelection.value || isGUID(mySelection.value)) {
-			      			DigiWebApp.RoteAmpelController.set("auftragId", null);
-			      			DigiWebApp.RoteAmpelController.set("auftragName", null);
-	        				var handOrderObj = _.select(DigiWebApp.HandOrder.findSorted(), function(ord) {
-	        					if (ord) return ord.get('id') == mySelection.value || ord.get('name') == mySelection.label;
-	        				})[0];
-			      			DigiWebApp.RoteAmpelController.set("handOrderId", handOrderObj.get("id"));
-			      			DigiWebApp.RoteAmpelController.set("handOrderVaterId", handOrderObj.get("vaterId"));
-			      			DigiWebApp.RoteAmpelController.set("handOrderName", handOrderObj.get("name"));
-                        	$('#' + DigiWebApp.RoteAmpelPage.content.positionComboBox.id + "_container").hide();
-                		} else {
-    		      			DigiWebApp.RoteAmpelController.set("auftragId", mySelection.value);
-    		      			DigiWebApp.RoteAmpelController.set("auftragName", mySelection.label);
-			      			DigiWebApp.RoteAmpelController.set("handOrderId", null);
-			      			DigiWebApp.RoteAmpelController.set("handOrderVaterId", null);
-			      			DigiWebApp.RoteAmpelController.set("handOrderName", null);
-                        	$('#' + DigiWebApp.RoteAmpelPage.content.positionComboBox.id + "_container").show();
-                		}
-		      			DigiWebApp.RoteAmpelController.setPositionen(
-                            M.ViewManager.getView('roteAmpelPage', 'auftragComboBox').getSelection(YES).value);
-                    }
-                }
-            }
-        })
-        
-        , positionComboBox: M.SelectionListView.design({
-            /* renders a selection view like check boxes */
-                selectionMode: M.SINGLE_SELECTION_DIALOG
-            , initialText: M.I18N.l('noData')
-            , label: M.I18N.l('position')
-            , applyTheme: NO
-            /* this seleciton view has no static entries, instead it is filled via content binding. */
-            , contentBinding: {
-                    target: DigiWebApp.RoteAmpelController
-                , property: 'positionenList'
-            }
-            , events: {
-                change: {
-                    /* executed in scope of DOMWindow because no target defined */
-                    action: function(selectedValue, selectedItem) {
-		      			DigiWebApp.RoteAmpelController.set("positionId", 
-                            M.ViewManager.getView('roteAmpelPage', 'positionComboBox').getSelection(YES).value);
-		      			DigiWebApp.RoteAmpelController.set("positionName", 
-                            M.ViewManager.getView('roteAmpelPage', 'positionComboBox').getSelection(YES).label);
-		      			DigiWebApp.RoteAmpelController.setTaetigkeiten(
-                            M.ViewManager.getView('roteAmpelPage', 'positionComboBox').getSelection(YES).value);
-                    }
-                }
-            }
-        })
-            	
-        , activityComboBox: M.SelectionListView.design({
-            /* renders a selection view like check boxes */
-                selectionMode: M.SINGLE_SELECTION_DIALOG
-            , initialText: M.I18N.l('noData')
-            , label: M.I18N.l('activity')
-            , applyTheme: NO
-            /* this seleciton view has no static entries, instead it is filled via content binding. */
-            , contentBinding: {
-                    target: DigiWebApp.RoteAmpelController
-                , property: 'activityList'
-            }
-            , events: {
-                change: {
-                    /* executed in scope of DOMWindow because no target defined */
-                    action: function(selectedValue, selectedItem) {
-		      			DigiWebApp.RoteAmpelController.set("activityId", 
-                            M.ViewManager.getView('roteAmpelPage', 'activityComboBox').getSelection(YES).value);
-		      			DigiWebApp.RoteAmpelController.set("activityName", 
-                            M.ViewManager.getView('roteAmpelPage', 'activityComboBox').getSelection(YES).label);
+                    target: DigiWebApp.RoteAmpelController,
+                    action: function() {
+                        var positionId = M.ViewManager.getView('orderInfoPage', 'position').getSelection(YES).value;
+                        if (positionId) {
+                            var positions = DigiWebApp.Position.findSorted();
+                            _.each(positions,
+                                function(position) {
+                                    if (position.get('id') == positionId) {
+                                        DigiWebApp.RoteAmpelController.set('activePosition', [position]);
+                                        if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
+                                            var s = DigiWebApp.SelectionController.selections;
+                                            s.position = M.ViewManager.getView('orderInfoPage', 'position')
+                                                .getSelection();
+                                            DigiWebApp.SelectionController.set('selections', s);
+                                            // TODO Es ist nicht immer die bookingPage, es sollte 
+                                            // SelectionController.getPageToUse() verwendet werden
+                                            M.ViewManager.getView('bookingPage', 'position')
+                                                .setSelection(
+                                                    M.ViewManager.getView('orderInfoPage', 'position').getSelection());
+                                            DigiWebApp.SelectionController.setActivities(YES, YES);
+                                            DigiWebApp.SelectionController.useSelections = YES;
+                                        }
+                                    }
+                                });
+                        }
+                        DigiWebApp.RoteAmpelController.setItem();
                     }
                 }
             }
         })
             	
         , dataInput: M.TextFieldView.design({
-                  label: M.I18N.l('roteAmpelNachricht')
-                , cssClass: 'dataInput'
-                , cssClassOnInit: 'dataInputInitial'
-                , hasMultipleLines: YES
-                , initialText: "Max. 200 " + M.I18N.l('characters')
-                , numberOfChars: 200
-	   	        , events: {
-	           		keyup: {
-	   	                /* executed in scope of DOMWindow because no target defined */
-	   	            	action: function(selectedValue, selectedItem) {
-        						var myValue = M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue();
-        						if (myValue.length <= 200) {
-        							DigiWebApp.RoteAmpelController.set("data", 
-                                        M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue());
-        						} else {
-        							M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue(DigiWebApp.RoteAmpelController.data);
-        				            DigiWebApp.ApplicationController.nativeAlertDialogView({
-        				                title: M.I18N.l('maximaleFeldlaengeErreicht')
-        				              , message: M.I18N.l('maximaleFeldlaengeErreichtMsg')
-        				            });
-        						}
-	   	            	}
+            label: M.I18N.l('roteAmpelNachricht')
+            , cssClass: 'dataInput'
+            , cssClassOnInit: 'dataInputInitial'
+            , hasMultipleLines: YES
+            , initialText: "Max. 200 " + M.I18N.l('characters')
+            // Nicht 200, sonst sperrt das TextField selbst die Eingabe von mehr als 200 Z.
+            , numberOfChars: 220
+	   	    , events: {
+	           	keyup: {
+	   	            /* executed in scope of DOMWindow because no target defined */
+	   	            action: function(selectedValue, selectedItem) {
+        				var myValue = M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue();
+        				if (myValue.length <= 200) {
+        					DigiWebApp.RoteAmpelController.set("data", 
+                                M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue());
+        				} else {
+        					M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue(DigiWebApp.RoteAmpelController.data);
+        				    DigiWebApp.ApplicationController.nativeAlertDialogView({
+        				        title: M.I18N.l('maximaleFeldlaengeErreicht')
+        				        , message: M.I18N.l('maximaleFeldlaengeErreichtMsg')
+        				    });
+        				}
 	   	            }
-	   	    	}
+	   	        }
+	   	    }
         })
             
         , speichernButton: M.GridView.design({
