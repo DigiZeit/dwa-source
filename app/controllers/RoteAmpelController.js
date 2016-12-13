@@ -21,7 +21,6 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	, init: function() {
 		DigiWebApp.RoteAmpelController.set('activeOrder', null);
 		DigiWebApp.RoteAmpelController.set('activePosition', null);
-		DigiWebApp.RoteAmpelController.set('items', []);
 
         // we need to check handOrders also
 		var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());

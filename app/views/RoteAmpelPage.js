@@ -154,8 +154,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 	   	            action: function(selectedValue, selectedItem) {
         				var myValue = M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue();
         				if (myValue.length <= 200) {
-        					DigiWebApp.RoteAmpelController.set("data", 
-                                M.ViewManager.getView('roteAmpelPage', 'dataInput').getValue());
+        					DigiWebApp.RoteAmpelController.set("data", myValue);
         				} else {
         					M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue(DigiWebApp.RoteAmpelController.data);
         				    DigiWebApp.ApplicationController.nativeAlertDialogView({
@@ -185,7 +184,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                     tap: {
 		                action: function() {
             				DigiWebApp.ApplicationController.vibrate();
-		                    DigiWebApp.RoteAmpelController.set("data", "");
+		                    this.data = "";
             				//DigiWebApp.RoteAmpelController.save();
                 		    DigiWebApp.NavigationController.backToDashboardPagePOP();
             			}
