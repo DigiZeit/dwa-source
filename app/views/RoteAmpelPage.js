@@ -48,7 +48,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 						}
 					});
 
-					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.BautagebuchBautagesberichtDetailsController.positionenList));
+					var myPositionenList = JSON.parse(JSON.stringify(DigiWebApp.RoteAmpelController.positionenList));
 					_.each(myPositionenList, function(p) {
 						if (parseIntRadixTen(p.value) !== 0) {
 							p.isSelected = NO;
@@ -69,8 +69,8 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 					});
 					if (!itemSelected && DigiWebApp.BautagebuchEinstellungenController.settings.positionVorselektieren) {
 						positionenArray = _.map(positionenArray, function(o) {
-							if (DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId) {
-								o.isSelected = (o.value === DigiWebApp.BautagebuchBautagesberichtDetailsController.positionId);
+							if (DigiWebApp.RoteAmpelController.positionId) {
+								o.isSelected = (o.value === DigiWebApp.RoteAmpelController.positionId);
 								if (o.isSelected) { itemSelected = YES; 
 									relevantDetailsController.set("positionId", o.value);
 									relevantDetailsController.set("positionName", o.label);
@@ -112,13 +112,9 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 					M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue(DigiWebApp.RoteAmpelController.data);
 
                     // TODO Wahrsch. unnötig weil nie ausgegraut wird
-					$("#" + DigiWebApp.RoteAmpelPage.content.speichernButton.id).show();
+					//$("#" + DigiWebApp.RoteAmpelPage.content.speichernButton.id).show();
 					
-                	if (myTyp == "<notizen_only>") {
-                		$('#' + DigiWebApp.RoteAmpelPage.content.auftragComboBox.id + "_container").show();
-                	} else {
-                		$('#' + DigiWebApp.RoteAmpelPage.content.auftragComboBox.id + "_container").hide();
-                	}
+               		//$('#' + DigiWebApp.RoteAmpelPage.content.auftragComboBox.id + "_container").show();
 
 	            	if (relevantDetailsController.get('handOrderId')) {
 	            		$('#' + DigiWebApp.RoteAmpelPage.content.positionComboBox.id + "_container").hide();
@@ -197,7 +193,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
             , initialText: M.I18N.l('noData')
             , label: M.I18N.l('order')
             , applyTheme: NO
-            /* this seleciton view has no static entries, instead it is filled via content binding. */
+            /* this selection view has no static entries, instead it is filled via content binding. */
             , contentBinding: {
                     target: DigiWebApp.RoteAmpelController
                 , property: 'auftraegeList'
@@ -319,15 +315,15 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                 }
             }
             , button: M.ButtonView.design({
-                  value: M.I18N.l('save')
+                  value: M.I18N.l('roteAmpelAbschicken')
                 , cssClass: 'digiButton green_background'
                 , anchorLocation: M.RIGHT
                 , events: {
                     tap: {
-		                target: DigiWebApp.RoteAmpelController,
 		                action: function() {
             				DigiWebApp.ApplicationController.vibrate();
-            				this.save();
+            				//DigiWebApp.RoteAmpelController.save();
+                		    DigiWebApp.NavigationController.backToDashboardPagePOP();
             			}
                     }
                 }

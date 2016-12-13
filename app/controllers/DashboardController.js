@@ -638,8 +638,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
 		    DigiWebApp.BautagebuchBautagesberichteListeController.neu(
                 "<notizen_only>", YES, M.I18N.l('BautagebuchNotizen'));
 	      	DigiWebApp.BautagebuchBautagesberichtDetailsController.save(
-                DigiWebApp.BautagebuchNotizenListeController.neu, function() {
-            }, YES);
+                DigiWebApp.BautagebuchNotizenListeController.neu, function() {}, YES);
 		}
 	}
 
