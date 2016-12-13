@@ -138,6 +138,11 @@ DigiWebApp.DashboardController = M.Controller.extend({
 	                    , id: 'handOrder'
 	                }
 	                , {
+	                    label: M.I18N.l('roteAmpel'),
+	                    icon: '48x48_plain_led_red.png',
+	                    id: 'roteAmpel'
+	                }
+                    , {
 	                      label: M.I18N.l('timeData')
 	                    , icon: '48x48_plain_note_view.png'
 	                    , id: 'timeData'
@@ -172,12 +177,13 @@ DigiWebApp.DashboardController = M.Controller.extend({
         	}
 
     	    // Menüpunkt "Rote Ampel" nur anzeigen wenn Freischaltung 432 aktiv
-    	    if (DigiWebApp.SettingsController.featureAvailable('432')) {
-	            items.push({
-	                label: M.I18N.l('roteAmpel'),
-	                icon: '48x48_plain_led_red.png',
-	                id: 'roteAmpel'
-	            });
+    	    if (DigiWebApp.SettingsController.featureAvailable('432') == false) {
+        	    items = _.map(items, function (item) {
+        	        if (item.id !== "roteAmpel") {
+	                    return item;
+	                }
+        	    });
+        	    items = _.compact(items);
 	        }
         	
     	    // Menüpunkt "Kolonne ändern" nur anzeigen wenn Kolonnenauswahl aktiv
@@ -524,7 +530,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
     }
 
     , roteAmpel: function() {
-        writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
+        writeToLog("Hauptmenü: 'Rote Ampel' gedrückt");
         DigiWebApp.NavigationController.toRoteAmpelPage();
     }
 

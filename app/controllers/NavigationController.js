@@ -283,6 +283,10 @@ DigiWebApp.NavigationController = M.Controller.extend({
     	DigiWebApp.NavigationController.switchToPage('timeDataPage', M.TRANSITION.SLIDEUP, YES);
     }
 
+    , toRoteAmpelPage: function() {
+    	DigiWebApp.NavigationController.switchToPage('roteAmpelPage', M.TRANSITION.POP, NO);	      
+	}
+
     , toEmployeePage: function() {
     	DigiWebApp.NavigationController.switchToPage('employeePage', M.TRANSITION.POP, NO);
     }
