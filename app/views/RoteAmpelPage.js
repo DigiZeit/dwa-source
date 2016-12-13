@@ -42,14 +42,8 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
             , anchorLocation: M.LEFT
             , events: {
                 tap: {
-					action: function(m_id, event) {
-                        DigiWebApp.ApplicationController.vibrate();
-						if (DigiWebApp.RoteAmpelPage.backDone) {
-						    return;
-						}
-						DigiWebApp.RoteAmpelPage.backDone = true;
-        				history.back();
-        			}
+                    target: DigiWebApp.NavigationController,
+                    action: 'backIgnoreDuplicateCalls'
                 }
             }
         })
