@@ -185,6 +185,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                     tap: {
 		                action: function() {
             				DigiWebApp.ApplicationController.vibrate();
+		                    DigiWebApp.RoteAmpelController.set("data", "");
             				//DigiWebApp.RoteAmpelController.save();
                 		    DigiWebApp.NavigationController.backToDashboardPagePOP();
             			}
