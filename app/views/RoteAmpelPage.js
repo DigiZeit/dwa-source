@@ -102,7 +102,6 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 			                });
 			                DigiWebApp.RoteAmpelController.setPositions();
 		                }
-		                DigiWebApp.RoteAmpelController.setItem();
 	                }
 	            }
 	        }
@@ -145,7 +144,6 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                                     }
                                 });
                         }
-                        DigiWebApp.RoteAmpelController.setItem();
                     }
                 }
             }

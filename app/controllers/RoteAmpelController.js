@@ -123,7 +123,6 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
         this.set('orders', orderArray);
         this.set('positions', positionArray);
         
-        this.setItem();
         // Bugfix 2108: Rename in order to be consistent with DSO
         if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
@@ -163,6 +162,5 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 
         M.ViewManager.getView('orderInfoPage', 'position').resetSelection();
         this.set('positions', positions);
-        this.setItem();
     }
 });
