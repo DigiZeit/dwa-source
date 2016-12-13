@@ -583,4 +583,8 @@ M.I18N.en_us = {
 
     , bautagebuchWeitereMaterialbuchung: "Additional material booking?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
+
+    , roteAmpel: "Red flag"
+    , roteAmpelNachricht: "Message"
+    , roteAmpelAbschicken: "Send"
 };

@@ -102,7 +102,8 @@ DigiWebApp.BookingPage = M.PageView.design({
             , events: {
                 tap: {
         			action: function() {
-        				try{DigiWebApp.ApplicationController.vibrate();}catch(e2){}
+        				try { DigiWebApp.ApplicationController.vibrate(); } catch(e2) { }
+                		writeToLog("BookingPage: Feierabendbutton gedrückt");
         				DigiWebApp.BookingController.closeDay();
 					}
                 }

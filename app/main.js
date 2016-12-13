@@ -1052,6 +1052,10 @@ if (searchForFeature(431)) { // Bohle-Reisekostenabwicklung
     DigiWebAppOrdinaryDesign.editTimeDataPage = DigiWebApp.EditTimeDataPage;
 }
 
+if (searchForFeature(432)) { // Rote Ampel
+    DigiWebAppOrdinaryDesign.roteAmpelPage = DigiWebApp.RoteAmpelPage;
+}
+
 var restartOnBlackBerry = true;
 if (navigator.platform === "BlackBerry" && restartOnBlackBerry) {
 	if (navigator.appVersion.indexOf("Version/") !== -1) {

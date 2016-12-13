@@ -582,4 +582,8 @@ M.I18N.de_de = {
 
     , bautagebuchWeitereMaterialbuchung: "Weitere Materialbuchung?"
 	, bautagebuchWeitereMaterialbuchungMsg: "Weitere Materialbuchung für diese Auswahl anlegen?"
+
+    , roteAmpel: "Rote Ampel"
+    , roteAmpelNachricht: "Nachricht"
+    , roteAmpelAbschicken: "Abschicken"
 };
