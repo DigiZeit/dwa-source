@@ -284,7 +284,7 @@ DigiWebApp.NavigationController = M.Controller.extend({
     }
 
     , toRoteAmpelPage: function() {
-    	DigiWebApp.NavigationController.switchToPage('roteAmpelPage', M.TRANSITION.POP, NO);	      
+        DigiWebApp.NavigationController.switchToPage('roteAmpelPage', M.TRANSITION.NONE, NO);
 	}
 
     , toEmployeePage: function() {
