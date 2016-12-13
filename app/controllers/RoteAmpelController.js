@@ -18,7 +18,7 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 
     , data: null
 
-	, init: function(isFirstLoad) {
+	, init: function() {
 		DigiWebApp.RoteAmpelController.set('activeOrder', null);
 		DigiWebApp.RoteAmpelController.set('activePosition', null);
 		DigiWebApp.RoteAmpelController.set('items', []);
@@ -132,9 +132,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
         // Bugfix 2108: Rename in order to be consistent with DSO
         if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-              DigiWebApp.RoteAmpelPage.selectionContent.order.id, M.I18N.l('dtc6Ordner'));
+              DigiWebApp.RoteAmpelPage.content.order.id, M.I18N.l('dtc6Ordner'));
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-              DigiWebApp.RoteAmpelPage.selectionContent.position.id, M.I18N.l('dtc6Auftrag'));
+              DigiWebApp.RoteAmpelPage.content.position.id, M.I18N.l('dtc6Auftrag'));
         }
 	}
 
