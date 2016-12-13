@@ -80,7 +80,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 	            change: {
 	                target: DigiWebApp.RoteAmpelController,
 	                action: function() {
-		                var orderId = M.ViewManager.getView('orderInfoPage', 'order').getSelection(YES).value;
+		                var orderId = M.ViewManager.getView('roteAmpelPage', 'order').getSelection(YES).value;
 		                if (orderId) {
 		                	// we need to check handOrders also
 			                var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
@@ -89,12 +89,11 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 		                    		DigiWebApp.RoteAmpelController.set('activeOrder', [order]);
 		                    		if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 		                    			var s = DigiWebApp.SelectionController.selections;
-		                    			s.order = M.ViewManager.getView('orderInfoPage', 'order').getSelection();
+		                    			s.order = M.ViewManager.getView('roteAmpelPage', 'order').getSelection();
 		                    			DigiWebApp.SelectionController.set('selections', s);
-		                    		    // TODO Es ist nicht immer die bookingPage, es sollte 
-                                        // SelectionController.getPageToUse() verwendet werden
-		                    			M.ViewManager.getView('bookingPage', 'order').setSelection(
-		                    					M.ViewManager.getView('orderInfoPage', 'order').getSelection());
+		                    			M.ViewManager.getView(SelectionController.getPageToUse(), 'order')
+                                            .setSelection(
+                                                M.ViewManager.getView('roteAmpelPage', 'order').getSelection());
 		                    			DigiWebApp.SelectionController.setPositions(null, null, YES);
 		                    			DigiWebApp.SelectionController.useSelections = YES;
 		                    		}
@@ -121,7 +120,7 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                 change: {
                     target: DigiWebApp.RoteAmpelController,
                     action: function() {
-                        var positionId = M.ViewManager.getView('orderInfoPage', 'position').getSelection(YES).value;
+                        var positionId = M.ViewManager.getView('roteAmpelPage', 'position').getSelection(YES).value;
                         if (positionId) {
                             var positions = DigiWebApp.Position.findSorted();
                             _.each(positions,
@@ -130,14 +129,12 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                                         DigiWebApp.RoteAmpelController.set('activePosition', [position]);
                                         if (DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
                                             var s = DigiWebApp.SelectionController.selections;
-                                            s.position = M.ViewManager.getView('orderInfoPage', 'position')
+                                            s.position = M.ViewManager.getView('roteAmpelPage', 'position')
                                                 .getSelection();
                                             DigiWebApp.SelectionController.set('selections', s);
-                                            // TODO Es ist nicht immer die bookingPage, es sollte 
-                                            // SelectionController.getPageToUse() verwendet werden
-                                            M.ViewManager.getView('bookingPage', 'position')
+                                            M.ViewManager.getView(SelectionController.getPageToUse(), 'position')
                                                 .setSelection(
-                                                    M.ViewManager.getView('orderInfoPage', 'position').getSelection());
+                                                    M.ViewManager.getView('roteAmpelPage', 'position').getSelection());
                                             DigiWebApp.SelectionController.setActivities(YES, YES);
                                             DigiWebApp.SelectionController.useSelections = YES;
                                         }

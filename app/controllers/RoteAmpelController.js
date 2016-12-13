@@ -19,9 +19,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
     , data: null
 
 	, init: function(isFirstLoad) {
-		DigiWebApp.OrderInfoController.set('activeOrder', null);
-		DigiWebApp.OrderInfoController.set('activePosition', null);
-		DigiWebApp.OrderInfoController.set('items', []);
+		DigiWebApp.RoteAmpelController.set('activeOrder', null);
+		DigiWebApp.RoteAmpelController.set('activePosition', null);
+		DigiWebApp.RoteAmpelController.set('items', []);
 
         // we need to check handOrders also
 		var orders = DigiWebApp.HandOrder.findSorted().concat(DigiWebApp.Order.findSorted());
@@ -32,7 +32,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
         var positionArray;
         if (!DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
 	        orderArray = _.map(orders, function(order) {
-	        	if (!(order)) return;
+	        	if (!(order)) {
+		            return null;
+		        }
 	            var obj =  { label: order.get('name'), value: order.get('id') };
 	            if ( DigiWebApp.BookingController.currentBooking !== null ) {
 	            	if (    (obj.value === DigiWebApp.BookingController.currentBooking.get('orderId'))
@@ -41,7 +43,7 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	            	{
 	            		obj.isSelected = YES;
 	            		itemSelected = YES;
-	            		DigiWebApp.OrderInfoController.set('activeOrder', [order]);
+	            		DigiWebApp.RoteAmpelController.set('activeOrder', [order]);
 	            	}
 	            }
 	            return obj;
@@ -55,8 +57,8 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	        itemSelected = NO;
 	        positionArray = _.map(positions, function(pos) {
 	        	if (!(pos)) return;
-	        	if (DigiWebApp.OrderInfoController.activeOrder !== null) {
-	        		if (pos.get('orderId') !== DigiWebApp.OrderInfoController.activeOrder[0].get('id')) {
+	        	if (DigiWebApp.RoteAmpelController.activeOrder !== null) {
+	        		if (pos.get('orderId') !== DigiWebApp.RoteAmpelController.activeOrder[0].get('id')) {
 	        			return null;
 	        		}
 	        	} else {
@@ -67,7 +69,7 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	            	if (obj.value === DigiWebApp.BookingController.currentBooking.get('positionId')) {
 	            		obj.isSelected = YES;
 	            		itemSelected = YES;
-	            		DigiWebApp.OrderInfoController.set('activePosition', [pos]);
+	            		DigiWebApp.RoteAmpelController.set('activePosition', [pos]);
 	            	}
 	            }
 	        	return obj;
@@ -79,12 +81,14 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	        }
         } else {
 	        orderArray = _.map(orders, function(order) {
-	        	if (!(order)) return;
+	        	if (!(order)) {
+		            return null;
+		        }
 	            var obj =  { label: order.get('name'), value: order.get('id') };
             	if (obj.value === M.ViewManager.getView('bookingPage', 'order').getSelection()) {
             		obj.isSelected = YES;
             		itemSelected = YES;
-            		DigiWebApp.OrderInfoController.set('activeOrder', [order]);
+            		DigiWebApp.RoteAmpelController.set('activeOrder', [order]);
             	}
 	            return obj;
 	        });
@@ -96,9 +100,11 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	        
 	        itemSelected = NO;
 	        positionArray = _.map(positions, function(pos) {
-	        	if (!(pos)) return;
-	        	if (DigiWebApp.OrderInfoController.activeOrder !== null) {
-	        		if (pos.get('orderId') !== DigiWebApp.OrderInfoController.activeOrder[0].get('id')) {
+	        	if (!(pos)) {
+		            return null;
+		        }
+	        	if (DigiWebApp.RoteAmpelController.activeOrder !== null) {
+	        		if (pos.get('orderId') !== DigiWebApp.RoteAmpelController.activeOrder[0].get('id')) {
 	        			return null;
 	        		}
 	        	} else {
@@ -108,7 +114,7 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
             	if (obj.value === M.ViewManager.getView('bookingPage', 'position').getSelection()) {
             		obj.isSelected = YES;
             		itemSelected = YES;
-            		DigiWebApp.OrderInfoController.set('activePosition', [pos]);
+            		DigiWebApp.RoteAmpelController.set('activePosition', [pos]);
             	}
 	        	return obj;
 	        });
@@ -126,9 +132,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
         // Bugfix 2108: Rename in order to be consistent with DSO
         if (DigiWebApp.SettingsController.getSetting('DTC6aktiv')) {
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-              DigiWebApp.OrderInfoPage.selectionContent.order.id, M.I18N.l('dtc6Ordner'));
+              DigiWebApp.RoteAmpelPage.selectionContent.order.id, M.I18N.l('dtc6Ordner'));
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
-              DigiWebApp.OrderInfoPage.selectionContent.position.id, M.I18N.l('dtc6Auftrag'));
+              DigiWebApp.RoteAmpelPage.selectionContent.position.id, M.I18N.l('dtc6Auftrag'));
         }
 	}
 
@@ -141,10 +147,12 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 
         var i = 0;
         positions = _.map(positions, function(pos) {
-        	if (!(pos)) return;
+        	if (!(pos)) {
+	            return null;
+	        }
             if (parseIntRadixTen(pos.get('orderId')) === parseIntRadixTen(orderId)) {
                 var obj = { label: pos.get('name'), value: pos.get('id') };
-                if(i === 0) {
+                if (i === 0) {
                     obj.isSelected = YES;
             		DigiWebApp.RoteAmpelController.set('activePosition', [pos]);
                 }
@@ -160,7 +168,7 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
             DigiWebApp.RoteAmpelController.set('activePosition', null);
         }
 
-        M.ViewManager.getView('orderInfoPage', 'position').resetSelection();
+        M.ViewManager.getView('roteAmpelPage', 'position').resetSelection();
         this.set('positions', positions);
     }
 });
