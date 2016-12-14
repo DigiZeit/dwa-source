@@ -88,9 +88,9 @@
   <!-- <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" /> -->
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
-  <!-- Nicht aktualisieren, 0.8.1 hat Bauprobleme -->
-  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.7.5" /> -->
-  <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" />
+  <!-- Nicht aktualisieren, ab 0.8 muss mit Gradle statt Ant gebaut werden. -->
+  <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.7.5" />
+  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" /> -->
 
   <!-- prevent screen-sleep -->
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
