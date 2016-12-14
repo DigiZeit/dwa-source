@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7166"
-	version 	= "1.8.8.7166">
+	versionCode = "7167"
+	version 	= "1.8.8.7167">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -83,8 +83,9 @@
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
 
-  <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
-  <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" />
+  <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" />
+  <!-- Das Plugin von wellbload ist nicht mehr erhältlich, bei Github kommt ein 404-Fehler. -->
+  <!-- <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" /> -->
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
   <!-- Nicht aktualisieren, 0.8.1 hat Bauprobleme -->
@@ -118,7 +119,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7166</string>
+    <string>7167</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
