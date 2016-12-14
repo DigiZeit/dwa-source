@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7168"
-	version 	= "1.8.8.7168">
+	versionCode = "7169"
+	version 	= "1.8.8.7169">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -89,9 +89,8 @@
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
   <!-- Nicht aktualisieren, 0.8.1 hat Bauprobleme -->
-  <gap:plugin name="cordova.plugin.local-notification" source="npm" version="0.7.5" />
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.7.5" /> -->
-  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" /> -->
+  <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.4" />
 
   <!-- prevent screen-sleep -->
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
@@ -120,7 +119,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7168</string>
+    <string>7169</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
