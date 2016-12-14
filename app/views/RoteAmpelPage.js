@@ -17,12 +17,6 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
 		    action: function() {
 			}
 		}
-        , pagehide: {
-            action: function() {
-        		// reset auto-grow
-        		M.ViewManager.getView('roteAmpelPage', 'dataInput').setCssProperty("height", "100px");
-        	}
-        }
     }
 
 	, backDone: false
@@ -184,8 +178,8 @@ DigiWebApp.RoteAmpelPage = M.PageView.design({
                     tap: {
 		                action: function() {
             				DigiWebApp.ApplicationController.vibrate();
-		                    M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue('');
             				//DigiWebApp.RoteAmpelController.save();
+		                    M.ViewManager.getView('roteAmpelPage', 'dataInput').setValue('');
                 		    DigiWebApp.NavigationController.backToDashboardPagePOP();
             			}
                     }

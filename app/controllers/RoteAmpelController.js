@@ -55,7 +55,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
 	        
 	        itemSelected = NO;
 	        positionArray = _.map(positions, function(pos) {
-	        	if (!(pos)) return;
+	        	if (!(pos)) {
+		            return null;
+		        }
 	        	if (DigiWebApp.RoteAmpelController.activeOrder !== null) {
 	        		if (pos.get('orderId') !== DigiWebApp.RoteAmpelController.activeOrder[0].get('id')) {
 	        			return null;
@@ -135,6 +137,9 @@ DigiWebApp.RoteAmpelController = M.Controller.extend({
   		  DigiWebApp.ApplicationController.dtc6AktivRenameHelper(
               DigiWebApp.RoteAmpelPage.content.position.id, M.I18N.l('dtc6Auftrag'));
         }
+
+        // Specific height of input field
+   		M.ViewManager.getView('roteAmpelPage', 'dataInput').setCssProperty("height", "100px");
 	}
 
     , setPositions: function() {
