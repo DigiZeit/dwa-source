@@ -26,7 +26,7 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-6.0.0" />
+  <preference name="phonegap-version" value="cli-6.4.0" />
   <!-- android: Minimum Android SDK version. 8 = Android 2.2 -->
   <preference name="android-minSdkVersion" value="8" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
