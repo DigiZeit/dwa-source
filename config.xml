@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7181"
-	version 	= "1.8.8.7181">
+	versionCode = "7182"
+	version 	= "1.8.8.7182">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -26,7 +26,7 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-6.0.0" />
+  <preference name="phonegap-version" value="cli-5.4.1" />
   <!-- android: Minimum Android SDK version. 9 = Android 2.3 -->
   <preference name="android-minSdkVersion" value="9" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
@@ -89,7 +89,7 @@
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
   <!-- Nicht aktualisieren, ab 0.8 muss mit Gradle statt Ant gebaut werden. -->
-  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.7.5" /> -->
+  <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
   <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" />
 
   <!-- prevent screen-sleep -->
@@ -119,7 +119,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7181</string>
+    <string>7182</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
