@@ -141,6 +141,8 @@
     <param name="ios-package" value="CDVStatusBar" onload="true" />
   </feature>
 
+  <preference name="StatusBarStyle" value="blackopaque" />
+
   <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>
