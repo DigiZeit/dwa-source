@@ -132,12 +132,10 @@
     <true/>
   </gap:config-file>
 
-<!--
   <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-    2015-10: false since new styling
+    <!-- 2015-10: false since new styling -->
     <false/>
   </gap:config-file>
--->
 
   <gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
     <array>

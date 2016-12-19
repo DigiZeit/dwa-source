@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7190"
-	version 	= "1.8.8.7190">
+	versionCode = "7191"
+	version 	= "1.8.8.7191">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -124,7 +124,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7190</string>
+    <string>7191</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -132,12 +132,10 @@
     <true/>
   </gap:config-file>
 
-<!--
   <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
-    2015-10: false since new styling
+    <!-- 2015-10: false since new styling -->
     <false/>
   </gap:config-file>
--->
 
   <gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
     <array>
