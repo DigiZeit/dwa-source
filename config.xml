@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7185"
-	version 	= "1.8.8.7185">
+	versionCode = "7186"
+	version 	= "1.8.8.7186">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -18,7 +18,7 @@
   </author>
 
   <gap:platform name="ios" />
-  <gap:platform name="android" minVersion="2.3" />
+  <gap:platform name="android" minVersion="2.2" />
   <gap:platform name="winphone" />
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
@@ -26,9 +26,9 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-5.4.1" />
-  <!-- android: Minimum Android SDK version. 9 = Android 2.3 -->
-  <preference name="android-minSdkVersion" value="9" />
+  <preference name="phonegap-version" value="cli-5.2.0" />
+  <!-- android: Minimum Android SDK version. 8 = Android 2.2 -->
+  <preference name="android-minSdkVersion" value="8" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-installLocation" value="auto" />
   <!-- all: hides the status bar at the top of the screen -->
@@ -88,7 +88,7 @@
   <!-- <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" /> -->
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
 
-  <!-- Nicht aktualisieren, ab 0.8 muss mit Gradle statt Ant gebaut werden. -->
+  <!-- Nicht aktualisieren, ab 0.8 muss mit Gradle statt Ant gebaut werden, was Phonegap >= 6.0 erfordert. -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" /> -->
   <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git#0.7.5" source="git" />
@@ -120,7 +120,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7185</string>
+    <string>7186</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
