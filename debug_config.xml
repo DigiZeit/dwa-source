@@ -37,7 +37,8 @@
   <platform name="ios">
     <preference name="orientation" value="portrait" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarStyle" value="default" />
+    <preference name="StatusBarBackgroundColor" value="#000000"/>
+    <preference name="StatusBarStyle" value="blackopaque" />
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
