@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7186"
-	version 	= "1.8.8.7186">
+	versionCode = "7187"
+	version 	= "1.8.8.7187">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -36,6 +36,7 @@
   <preference name="autorotate" value="true" readonly="false" />
   <platform name="ios">
     <preference name="orientation" value="portrait" />
+    <preference name="StatusBarStyle" value="blackopaque" />
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
@@ -70,6 +71,7 @@
   which PhoneGap requires. -->
   <preference name="permissions" value="none" />
 
+  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->  
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
   <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
@@ -120,19 +122,19 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7186</string>
+    <string>7187</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
     <!-- 2015-10: true since new styling -->
     <true/>
   </gap:config-file>
-
+<!--
   <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
     <!-- 2015-10: false since new styling -->
     <false/>
   </gap:config-file>
-
+-->
   <gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
     <array>
     </array>
@@ -141,8 +143,6 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true" />
   </feature>
-
-  <preference name="StatusBarStyle" value="blackopaque" />
 
   <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>
