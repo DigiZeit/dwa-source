@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7188"
-	version 	= "1.8.8.7188">
+	versionCode = "7189"
+	version 	= "1.8.8.7189">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -36,7 +36,8 @@
   <preference name="autorotate" value="true" readonly="false" />
   <platform name="ios">
     <preference name="orientation" value="portrait" />
-    <preference name="StatusBarStyle" value="blackopaque" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="default" />
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
@@ -122,7 +123,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7188</string>
+    <string>7189</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
