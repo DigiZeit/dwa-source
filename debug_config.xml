@@ -18,7 +18,7 @@
   </author>
 
   <gap:platform name="ios" />
-  <gap:platform name="android" minVersion="2.2" />
+  <gap:platform name="android" minVersion="2.3" />
   <gap:platform name="winphone" />
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
@@ -27,8 +27,8 @@
   <icon src="theme/images/Icon.png" gap:role="default" />
 
   <preference name="phonegap-version" value="cli-6.3.0" />
-  <!-- android: Minimum Android SDK version. 8 = Android 2.2 -->
-  <preference name="android-minSdkVersion" value="8" />
+  <!-- android: Minimum Android SDK version. 9 = Android 2.3 -->
+  <preference name="android-minSdkVersion" value="9" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-installLocation" value="auto" />
   <!-- all: hides the status bar at the top of the screen -->
