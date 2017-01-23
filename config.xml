@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7195"
-	version 	= "1.8.8.7195">
+	versionCode = "7196"
+	version 	= "1.8.8.7196">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -75,7 +75,7 @@
 
   <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->  
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
-  <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+  <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
   </gap:plugin>
@@ -127,7 +127,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7195</string>
+    <string>7196</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
