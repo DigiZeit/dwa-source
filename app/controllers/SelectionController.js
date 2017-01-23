@@ -253,20 +253,17 @@ DigiWebApp.SelectionController = M.Controller.extend({
     , updatePositions: function(positionId, activityId, canUseCurrentBooking) {
     	var that = this;
     	
-    	var mySelectionObj = that.getSelectedOrderItem(YES);
-        var isHandauftrag = NO;
-    	if (hasValue(mySelectionObj)) {
-    	    isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value));
-    	}
+        var istHandauftrag = this.isHandauftrag();
 
-        DigiWebApp.BookingPage.doHideShowPositionCombobox(!isHandauftrag);
+        DigiWebApp.BookingPage.doHideShowPositionCombobox(!istHandauftrag);
 		
-		if (!isHandauftrag) {
+		if (!istHandauftrag) {
 		    return that.setPositions(positionId, activityId, canUseCurrentBooking);
 		} else {
 			// Sicherstellen dass beim Handauftrag nicht parallel ein Auftrag gesetzt ist
 		    that.setSelectedPosition(0, canUseCurrentBooking);
 			
+            var mySelectionObj = that.getSelectedOrderItem(YES);
 			M.ViewManager.getView('bookingPage', 'orderButton').setValue(mySelectionObj.label);
 			return that.setActivities(YES, canUseCurrentBooking, activityId);
 		}
@@ -375,7 +372,6 @@ DigiWebApp.SelectionController = M.Controller.extend({
     	var orderId = that.getSelectedOrderItem();
     	var activities = [];
     	if (posId) {
-
     	    // Freischaltung 406 "Auftragsinfo"
 			if (DigiWebApp.SettingsController.featureAvailable('406') 
 			 && DigiWebApp.SettingsController.getSetting("auftragsDetailsKoppeln")) {
@@ -386,12 +382,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
 				DigiWebApp.OrderInfoController.setItem();
 			}
 	
-	        var workPlans = []; 
-	        _.each(DigiWebApp.WorkPlan.find(),function(wp){
-	        	if (wp.get("id") == posId) workPlans.push(wp);
-	        });
+	        var workPlans = [];
+            // Bei Handauftrag verhindern, dass der Arbeitsplan des Auftrags hinter posId verwendet wird.
+            if (!this.isHandauftrag()) {
+	            _.each(DigiWebApp.WorkPlan.find(), function(wp) {
+	        	    if (wp.get("id") == posId) workPlans.push(wp);
+	            });
+            }
 	
-	        // Wenn ein Arbeitsplan exisitiert dann nur die Leistungen verwenden die im Arbeitsplan sind.
+	        // Wenn ein Arbeitsplan existiert, dann nur die Leistungen verwenden, die im Arbeitsplan sind.
 	        if (workPlans.length === 1) {
 	            activities = DigiWebApp.SelectionController.getActivitiesFromWorkplan(workPlans[0]);
 	        } else {
@@ -531,6 +530,15 @@ DigiWebApp.SelectionController = M.Controller.extend({
         } else {
             return NO;
         }
+    }
+
+    , isHandauftrag: function() {
+        var mySelectionObj = this.getSelectedOrderItem(YES);
+        var isHandauftrag = NO;
+    	if (hasValue(mySelectionObj)) {
+    	    isHandauftrag = (mySelectionObj.label == mySelectionObj.value || isGUID(mySelectionObj.value));
+    	}
+        return isHandauftrag;
     }
 
     , saveSelection: function() {
