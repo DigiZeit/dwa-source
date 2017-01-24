@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7207"
-	version 	= "1.8.8.7207">
+	versionCode = "7208"
+	version 	= "1.8.8.7208">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -75,20 +75,23 @@
 
   <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->  
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
+  <!-- Das Kamera-Plugin muss bei Android auf 2.2.0 bleiben, weil neuere Versionen den Gradle-Build brauchen.
+       Den gibt es erst mit PhoneGap >= 6.0, unter dem aber das telerik-wkwebview-Plugin nicht mehr baut. -->
+  <platform name="android">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
+  </platform>
   <platform name="ios">
     <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
       <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
       <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
     </gap:plugin>
   </platform>
-  <!-- Das Kamera-Plugin muss bei Android auf 2.2.0 bleiben weil neuere Versionen den gradle-Build brauchen,
-       den es erst mit PhoneGap >= 6.0 gibt, unter dem aber das telerik-wkwebview-Plugin nicht mehr baut. -->
-  <platform name="android">
-    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
+  <platform name="winphone">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1" />
   </platform>
   <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
-  <gap:plugin name="cordova-plugin-contacts" source="npm" version="0.2.13" />
-  <gap:plugin name="cordova-plugin-device" source="npm" version="0.2.12" />
+  <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.2.1" />
+  <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.1" />
   <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
@@ -97,8 +100,6 @@
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
 
-  <!-- <gap:plugin name="cordova-plugin-ahlidap-background-geolocation-phonegapbuild" source="npm" version="1.0.0" /> -->
-  <!-- Dieses Plugin baut mit PhoneGap >= 6.0 nicht. -->
   <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" />
   <!-- Das Plugin von wellbload ist nicht mehr erhältlich, bei Github kommt ein 404-Fehler. -->
   <!-- <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" /> -->
@@ -138,7 +139,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7207</string>
+    <string>7208</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
