@@ -90,7 +90,9 @@
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
 
-  <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" />
+  <gap:plugin name="cordova-plugin-ahlidap-background-geolocation-phonegapbuild" source="npm" version="1.0.0" />
+  <!-- Dieses Plugin baut mit PhoneGap >= 6.0 nicht. -->
+  <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
   <!-- Das Plugin von wellbload ist nicht mehr erhältlich, bei Github kommt ein 404-Fehler. -->
   <!-- <gap:plugin name="wellbload.cordova.background-geolocation" source="npm" version="0.3.4" /> -->
   <!-- <gap:plugin name="org.transistorsoft.cordova.background-geolocation" version="0.3.5" /> -->
