@@ -135,15 +135,15 @@ DigiWebApp.BookingController = M.Controller.extend({
 		}
 	
         if (this.isBackFromEmployeePage) {
-			this.refreshCurrentBooking(false);
+			this.refreshCurrentBooking();
             DigiWebApp.BookingController.set('isBackFromEmployeePage', false);
         } else if (this.isBackFromRemarkPage) {
-			this.refreshCurrentBooking(false);
+			this.refreshCurrentBooking();
             DigiWebApp.BookingController.set('isBackFromRemarkPage', false);
         } else {
             // Optimierung: Parameter setSelection = true ist unnötig, weil die Auswahllisten im 
             // folgenden if/else-Block in jedem Fall gefüllt werden.
-            this.refreshCurrentBooking(true);
+            this.refreshCurrentBooking();
 
             if (DigiWebApp.SelectionController.useSelections) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
@@ -153,10 +153,8 @@ DigiWebApp.BookingController = M.Controller.extend({
                 DigiWebApp.SelectionController.showHandOrderFirst = NO;
                 DigiWebApp.SelectionController.setSelectionWithCurrentHandOrderFirst();
             } else {
-                if (this.currentBooking) {
-                    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('useCurrentBooking');
-                    DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-                } else {
+                DigiWebApp.SelectionController.setSelectionByCurrentBooking();
+                if (!this.currentBooking) {
                     DigiWebApp.SelectionController.initSelection();
                 }
             }
@@ -168,7 +166,7 @@ DigiWebApp.BookingController = M.Controller.extend({
      * angezeigte Meldung (currentBookingStr).
      * Wird von init() und book() aufgerufen, um Änderungen im LocalStorage zu berücksichtigen.
      */
-    , refreshCurrentBooking: function (setSelection) {
+    , refreshCurrentBooking: function () {
     	
         var bookings = DigiWebApp.Booking.find();
         var openBookings = null;
@@ -187,11 +185,6 @@ DigiWebApp.BookingController = M.Controller.extend({
             this.set('currentBookingStr', this.buildBookingStr(this.currentBooking));
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
-
-        	// Performance Weyer: folgendes setSelection führt zu einem unnötigen neu-rendern
-            if (setSelection) {
-            	DigiWebApp.SelectionController.setSelectionByCurrentBooking();
-            }
         }
     }
 

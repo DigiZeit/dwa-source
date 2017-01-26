@@ -542,7 +542,7 @@ DigiWebApp.DashboardController = M.Controller.extend({
         if (DigiWebApp.BookingController.currentBooking) {
             writeToLog("Hauptmenü: 'Kolonne ändern' gedrückt");
             DigiWebApp.BookingController.istKolonnenaenderung = true;
-    		DigiWebApp.BookingController.refreshCurrentBooking(false);
+    		DigiWebApp.BookingController.refreshCurrentBooking();
             if (DigiWebApp.BookingController.istEditTimeDataNoetig()) {
                 DigiWebApp.NavigationController.toRemarkPage(function () {
                     DigiWebApp.ApplicationController.DigiLoaderView.hide();
