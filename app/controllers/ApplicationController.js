@@ -1333,9 +1333,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            } else {
 	                writeToLog('isCurrentBookingAvailable === NO');
 	            	DigiWebApp.NavigationController.toBookTimePage();
-	                DigiWebApp.BookingController.sendBookings(NO, YES);
+	            	if (parseBool(DigiWebApp.SettingsController.getSetting('stammdatenabgleichBeiArbeitsbeginn'))) {
+    	                DigiWebApp.BookingController.sendBookings(NO, YES);
+	            	}
 	            }
 	        } else if (
+                // Freischaltung 402: Materialerfassung only
+                // Freischaltung 426: Notizen only
 	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
 		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
 	        ) {
@@ -1386,6 +1390,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeiArbeitsbeginn.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
             try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
 			try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -1408,6 +1413,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).show(); }); } catch (e) { }
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeiArbeitsbeginn.id + ']').each(function () { $(this).show(); }); } catch (e) { }
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).show(); }); } catch (e) { }
             // Freischaltung 403: Bemerkungsfeld
 			if (DigiWebApp.SettingsController.featureAvailable('403')) { 
