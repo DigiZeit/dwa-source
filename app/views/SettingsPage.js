@@ -51,9 +51,13 @@ DigiWebApp.SettingsPage = M.PageView.design({
 
     , content: M.ScrollView.design({
         childViews: 'companyGrid passwordGrid connectionCodeGrid workerIdGrid'
-            + ' autoTransferAfterBookTimeCheck autoTransferAfterClosingDayCheck closeAppAfterCloseDay'
-            + ' autoSyncAfterBookTimeCheck stammdatenabgleichBeiArbeitsbeginnCheck'
-            + ' stammdatenabgleichBeimAppStartCheck benutzeHttps'
+            + ' autoTransferAfterBookTimeCheck'
+            + ' autoSyncAfterBookTimeCheck'
+            + ' stammdatenabgleichBeiArbeitsbeginnCheck'
+            + ' stammdatenabgleichBeimAppStartCheck'
+            + ' autoTransferAfterClosingDayCheck'
+            + ' closeAppAfterCloseDay'
+            + ' benutzeHttps'
             + ' BookingReminderHoursGrid remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy'
             + ' GPSenableHighAccuracyFallback GPSmaximumAgeMinutesGrid GPSBackgroundService'
             + ' detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer'
