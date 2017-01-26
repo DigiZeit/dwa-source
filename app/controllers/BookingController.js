@@ -143,7 +143,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         } else {
             // Optimierung: Parameter setSelection = true ist unnötig, weil die Auswahllisten im 
             // folgenden if/else-Block in jedem Fall gefüllt werden.
-            this.refreshCurrentBooking(true);
+            this.refreshCurrentBooking(false);
 
             if (DigiWebApp.SelectionController.useSelections) {
             	//if (DigiWebApp.SettingsController.globalDebugMode) console.log('useSelections');
