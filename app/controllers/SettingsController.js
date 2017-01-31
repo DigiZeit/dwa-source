@@ -368,7 +368,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannFahrtkostenBuchen: false, nur für Bohle
-            var kannFahrtkostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
+            var kannFahrtkostenBuchen = 
+                DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
             try {
                 if (typeof (record.record.kannFahrtkostenBuchen) !== "undefined") {
                     kannFahrtkostenBuchen = record.get('kannFahrtkostenBuchen');
@@ -376,7 +377,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannUebernachtungskostenBuchen: false, nur für Bohle
-            var kannUebernachtungskostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
+            var kannUebernachtungskostenBuchen = 
+                DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
             try {
                 if (typeof (record.record.kannUebernachtungskostenBuchen) !== "undefined") {
                     kannUebernachtungskostenBuchen = record.get('kannUebernachtungskostenBuchen');
@@ -384,7 +386,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
             
             //, kannReisezeitBuchen: true, nur für Scholpp
-            var kannReisezeitBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannReisezeitBuchen");
+            var kannReisezeitBuchen = 
+                DigiWebApp.SettingsController.defaultsettings.get("kannReisezeitBuchen");
             try {
                 if (typeof (record.record.kannReisezeitBuchen) !== "undefined") {
                     kannReisezeitBuchen = record.get('kannReisezeitBuchen');
@@ -408,10 +411,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, logfilesLoeschenNachTagen: 40
-            var logfilesLoeschenNachTagen = DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
+            var logfilesLoeschenNachTagen = 
+                DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
             try {
 	            if (typeof(record.record.logfilesLoeschenNachTagen) !== "undefined") {
 	            	logfilesLoeschenNachTagen = record.get('logfilesLoeschenNachTagen');
+	            }
+            } catch (e) { }
+
+            //, stammdatenabgleichBeiArbeitsbeginn: true
+            var stammdatenabgleichBeiArbeitsbeginn = 
+                DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeiArbeitsbeginn");
+            try {
+	            if (typeof(record.record.stammdatenabgleichBeiArbeitsbeginn) !== "undefined") {
+	            	stammdatenabgleichBeiArbeitsbeginn = record.get('stammdatenabgleichBeiArbeitsbeginn');
 	            }
             } catch (e) { }
 
@@ -504,9 +517,9 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                , isSelected: record.get('stammdatenabgleichBeimAppStart')
 	            }]
 	            , stammdatenabgleichBeiArbeitsbeginn: [{
-	                  value: record.get('stammdatenabgleichBeiArbeitsbeginn')
+	                  value: stammdatenabgleichBeiArbeitsbeginn
 	                , label: M.I18N.l('stammdatenabgleichBeiArbeitsbeginn')
-	                , isSelected: record.get('stammdatenabgleichBeiArbeitsbeginn')
+	                , isSelected: stammdatenabgleichBeiArbeitsbeginn
 	            }]
                 , benutzeHttps: [{
                     value: benutzeHttps
