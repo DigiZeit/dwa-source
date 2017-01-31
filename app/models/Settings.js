@@ -44,8 +44,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , stammdatenabgleichBeimAppStart: M.Model.attr('Boolean')
     
-    , stammdatenabgleichBeiArbeitsbeginn: M.Model.attr('Boolean')
-    
     , autoSaveGPSData: M.Model.attr('Boolean')
 
     , GPSDataIsMandatory: M.Model.attr('Boolean')
@@ -155,5 +153,7 @@ DigiWebApp.Settings = M.Model.create({
     , doScr: M.Model.attr('Boolean')
 
     , logfilesLoeschenNachTagen: M.Model.attr('Integer')
+    
+    , stammdatenabgleichBeiArbeitsbeginn: M.Model.attr('Boolean')
     
 }, M.DataProviderLocalStorage);
