@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	versionCode = "7225"
-	version 	= "1.8.9.7225">
+	versionCode = "7226"
+	version 	= "1.8.9.7226">
 
 	<name>DIGI-WebApp</name>
 
@@ -139,7 +139,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7225</string>
+    <string>7226</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
