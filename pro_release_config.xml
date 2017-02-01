@@ -82,8 +82,8 @@
   </platform>
   <platform name="ios">
     <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
-      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
-      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+      <param name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
     </gap:plugin>
   </platform>
   <platform name="winphone">
