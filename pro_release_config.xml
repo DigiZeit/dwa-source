@@ -182,6 +182,7 @@
   <icon src="theme/images/icon_ios_114.png" gap:platform="ios" width="114" height="114" />
   <icon src="theme/images/icon_ios_120.png" gap:platform="ios" width="120" height="120" />
   <icon src="theme/images/icon_ios_144.png" gap:platform="ios" width="144" height="144" />
+  <icon src="theme/images/icon_ios_152.png" gap:platform="ios" width="152" height="152" />
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respecitvely. -->
   <icon src="theme/images/ic_launcher_ldpi.png" gap:platform="android" gap:density="ldpi" />
@@ -215,6 +216,6 @@
   <gap:splash src="theme/images/splash_ios_640x1136_DSO.png" gap:platform="ios" width="640" height="1136" />
 
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
-  <!-- <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" /> -->
+  <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
 
 </widget>
