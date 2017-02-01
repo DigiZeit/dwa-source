@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	versionCode = "7231"
-	version 	= "1.8.9.7231">
+	versionCode = "7232"
+	version 	= "1.8.9.7232">
 
 	<name>DIGI-WebApp</name>
 
@@ -78,7 +78,10 @@
   <!-- Das Kamera-Plugin muss bei Android auf 2.2.0 bleiben, weil neuere Versionen den Gradle-Build brauchen.
        Den gibt es erst mit PhoneGap >= 6.0, unter dem aber das telerik-wkwebview-Plugin nicht mehr baut. -->
   <platform name="android">
-    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+    </gap:plugin>
   </platform>
   <platform name="ios">
     <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
@@ -87,7 +90,10 @@
     </gap:plugin>
   </platform>
   <platform name="winphone">
-    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+    </gap:plugin>
   </platform>
   <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
   <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.2.1" />
@@ -139,7 +145,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7231</string>
+    <string>7232</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
