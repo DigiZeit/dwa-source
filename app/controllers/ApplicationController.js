@@ -758,7 +758,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		if (!onIOS && !onAndroid23) {
+		if (!onAndroid23) {
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
 			if (that.notificationMessage == null) {
 				that.notificationMessage = M.I18N.l('abwesend');
@@ -798,19 +798,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		//		    , ongoing:    Boolean // Prevent clearing of notification (Android only)
 		//		});
 			} catch(e) {}
-			try {
-							
-				try{window.plugin.notification.local.cancel('4711');}catch(e){}
+
+			try {				
+				try { window.plugin.notification.local.cancel('4711'); } catch(e) {}
 				pluginObj.notification.local.add({
 				      id:         '4711'
 				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
+                    , badge:      1 //TODO Hier 0, passt das?
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
 				});
 				//alert("added notification '" + that.notificationMessage + "'");
-			}catch(e){trackError(e);}
+			} catch(e) { trackError(e); }
 		}
 	}
 
