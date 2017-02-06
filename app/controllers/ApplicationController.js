@@ -932,13 +932,16 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (onIOS || onAndroid23) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
-			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-			//DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
-			DigiWebApp.ApplicationController.startNotification();
 		}
+
+        if (onAndroid23) {
+        	try { $('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); }); } catch(e) {}
+			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+        } else {
+			DigiWebApp.ApplicationController.startNotification();
+        }
 
 		inDebug();
 		
