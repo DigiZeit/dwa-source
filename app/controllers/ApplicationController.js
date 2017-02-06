@@ -805,7 +805,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 			    var badge = 0;
                 if (hasValue(DigiWebApp.BookingController.timeData)) {
-			        badge = timeData.length;
+			        badge = DigiWebApp.BookingController.timeData.length;
 			    }
 
 			    writeToLog("Application.startNotification() add notification id=4711, title=DIGI-WebApp, message=" 

@@ -2490,8 +2490,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    notificationOptions.date = myDate;
 					}
 			        var badge = 0;
-                    if (hasValue(DigiWebApp.BookingController.timeData)) {
-			            badge = timeData.length;
+                    if (hasValue(that.timeData)) {
+			            badge = that.timeData.length;
 			        }
 				    notificationOptions.badge = badge;
 
