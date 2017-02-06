@@ -78,7 +78,7 @@
   <!-- Das Kamera-Plugin muss bei Android auf 2.2.0 bleiben, weil neuere Versionen den Gradle-Build brauchen.
        Den gibt es erst mit PhoneGap >= 6.0, unter dem aber das telerik-wkwebview-Plugin nicht mehr baut. -->
   <platform name="android">
-    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0">
       <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
       <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
     </gap:plugin>
