@@ -2481,15 +2481,19 @@ DigiWebApp.BookingController = M.Controller.extend({
 					      id:         '4712'
 					    , title:      M.I18N.l('BookingReminderTitle')  // The title of the message
 					    , message:    myReminderMessage  // The message that is displayed
-                        , badge:      1
 					    , repeat:     'hourly' // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
 					    , autoCancel: true // Setting this flag and the notification is automatically canceled when the user clicks it
 					    , ongoing:    false // Prevent clearing of notification (Android only)
 					}
 					var nowTimestamp = new Date().getTime();
 					if (myDate.getTime() > nowTimestamp) {
-						notificationOptions.date = myDate
+					    notificationOptions.date = myDate;
 					}
+			        var badge = 0;
+                    if (hasValue(DigiWebApp.BookingController.timeData)) {
+			            badge = timeData.length;
+			        }
+				    notificationOptions.badge = badge;
 
 			        writeToLog("Application.startNotification() add notification id=4711, title="
                         + notificationOptions.title 

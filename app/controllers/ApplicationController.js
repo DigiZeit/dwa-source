@@ -770,13 +770,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
 				that.notificationInitiated = YES;
-				try{pluginObj.notification.local.cancel('4711');}catch(e){}
-				try{pluginObj.notification.local.cancel('4712');}catch(e){}
-				//try{pluginObj.notification.local.cancelAll();}catch(e){}
+				try { pluginObj.notification.local.cancel('4711'); } catch(e) {}
+				try { pluginObj.notification.local.cancel('4712'); } catch(e) {}
 				DigiWebApp.BookingController.startBookingNotification();
 			}
 	
-			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
+			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" 
+                || typeof(pluginObj.notification.local) == "undefined") {
+
 				return false;
 			}
 			
@@ -799,15 +800,21 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		//		});
 			} catch(e) {}
 
-			try {				
+			try {
 				try { window.plugin.notification.local.cancel('4711'); } catch(e) {}
+
+			    var badge = 0;
+                if (hasValue(DigiWebApp.BookingController.timeData)) {
+			        badge = timeData.length;
+			    }
+
 			    writeToLog("Application.startNotification() add notification id=4711, title=DIGI-WebApp, message=" 
-                    + that.notificationMessage + ", badge=1, sound=null, autoCancel=false, ongoing=true");
+                    + that.notificationMessage + ", badge=" + badge + ", sound=null, autoCancel=false, ongoing=true");
 				pluginObj.notification.local.add({
 				      id:         '4711'
 				    , title:      'DIGI-WebApp'  // The title of the message
 				    , message:    that.notificationMessage  // The message that is displayed
-                    , badge:      1 //TODO Hier 0, passt das?
+                    , badge:      badge
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
