@@ -804,15 +804,19 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				try { window.plugin.notification.local.cancel('4711'); } catch(e) {}
 
 			    var badge = 0;
-                if (hasValue(DigiWebApp.BookingController.timeData)) {
-			        badge = DigiWebApp.BookingController.timeData.length;
+                //if (hasValue(DigiWebApp.BookingController.timeData)) {
+			    //    badge = DigiWebApp.BookingController.timeData.length;
+			    //}
+			    var bookings = DigiWebApp.Booking.find();
+                if (hasValue(bookings)) {
+			        badge = bookings.length;
 			    }
 
 			    writeToLog("Application.startNotification() add notification id=4711, title=DIGI-WebApp, message=" 
                     + that.notificationMessage + ", badge=" + badge + ", sound=null, autoCancel=false, ongoing=true");
 				pluginObj.notification.local.add({
 				      id:         '4711'
-				    , title:      'DIGI-WebApp'  // The title of the message
+				    , title:      '4711 DIGI-WebApp'  // The title of the message
 				    , message:    that.notificationMessage  // The message that is displayed
                     , badge:      badge
 				    , sound:      null  // A sound to be played
@@ -1481,8 +1485,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         var isClosingDay = (!DigiWebApp.BookingController.currentBooking);
         var mySonderbuchungen = _.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return !parseBool(n.get("uebertragen")) });
         DigiWebApp.JSONDatenuebertragungController.sendeSonderbuchungen(mySonderbuchungen, contSync, contSync, isClosingDay);
-            	
-    }
+        
+        // Anzahl nicht übertragener Buchungen könnte sich geändert haben, also muss die
+        // Notification aktualisiert werden.
+	    that.startNotification();
+	}
     
     /**
      * Simply displays an alert dialog indicating an connection error.

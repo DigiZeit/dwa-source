@@ -2479,7 +2479,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'currentBookingNotificationTimestamp', myDate.getTime());
 					var notificationOptions = {
 					      id:         '4712'
-					    , title:      M.I18N.l('BookingReminderTitle')  // The title of the message
+					    , title:      "4712 "+ M.I18N.l('BookingReminderTitle')  // The title of the message
 					    , message:    myReminderMessage  // The message that is displayed
 					    , repeat:     'hourly' // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
 					    , autoCancel: true // Setting this flag and the notification is automatically canceled when the user clicks it
@@ -2490,9 +2490,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    notificationOptions.date = myDate;
 					}
 			        var badge = 0;
-                    if (hasValue(that.timeData)) {
-			            badge = that.timeData.length;
+			        var bookings = DigiWebApp.Booking.find();
+                    if (hasValue(bookings)) {
+			            badge = bookings.length;
 			        }
+                    //if (hasValue(that.timeData)) {
+			        //    badge = that.timeData.length;
+			        //}
 				    notificationOptions.badge = badge;
 
 			        writeToLog("Application.startNotification() add notification id=4711, title="
