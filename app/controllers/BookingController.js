@@ -2455,7 +2455,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 						return false;
 					}
 					myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
-					//myDate = myDate.addMinutes(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'))); // debug
 					myDate = myDate.date;
 				}
 				
@@ -2491,6 +2490,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (myDate.getTime() > nowTimestamp) {
 						notificationOptions.date = myDate
 					}
+
+			        writeToLog("Application.startNotification() add notification id=4711, title="
+                        + notificationOptions.title 
+                        + ", message=" + notificationOptions.message
+                        + ", badge=" + notificationOptions.badge
+                        + ", repeat=" + notificationOptions.repeat
+                        + ", autoCancel=" + notificationOptions.autoCancel
+                        + ", ongoing=" + notificationOptions.ongoing);
 					pluginObj.notification.local.add(notificationOptions);
 				} catch(e) { trackError(e); }
 			} catch(e) { trackError(e); }

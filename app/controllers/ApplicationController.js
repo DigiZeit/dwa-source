@@ -801,10 +801,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
 			try {				
 				try { window.plugin.notification.local.cancel('4711'); } catch(e) {}
+			    writeToLog("Application.startNotification() add notification id=4711, title=DIGI-WebApp, message=" 
+                    + that.notificationMessage + ", badge=1, sound=null, autoCancel=false, ongoing=true");
 				pluginObj.notification.local.add({
 				      id:         '4711'
-				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
+				    , message:    that.notificationMessage  // The message that is displayed
                     , badge:      1 //TODO Hier 0, passt das?
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
