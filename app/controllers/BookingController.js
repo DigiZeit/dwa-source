@@ -2504,6 +2504,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 			        writeToLog("BookingController.startBookingNotification() add notification id=" 
                         + notificationOptions.id 
+                        + ", date=" + notificationOptions.date
                         + ", title=" + notificationOptions.title 
                         + ", message=" + notificationOptions.message
                         + ", badge=" + notificationOptions.badge
