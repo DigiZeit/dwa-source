@@ -117,7 +117,7 @@
     <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git#0.7.5" source="git" />
   </platform>
   <platform name="ios">
-    <plugin name="https://github.com/katzer/cordova-plugin-local-notifications#ios10" source="git" />
+    <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications#ios10" source="git" />
     <!-- <plugin name="de.appplant.cordova.plugin.local-notification" source="npm" spec="0.8.4" /> -->
   </platform>
   <platform name="winphone">
