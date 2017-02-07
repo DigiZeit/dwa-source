@@ -2415,7 +2415,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 				
 				var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
 		    	if (hourSetting == 0) {
-		    		return false;
+		    		return;
 		    	}
 		    	
 				var that = this;
@@ -2452,14 +2452,17 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (typeof(startBooking) != "undefined") {
 						myDate = D8.create(startBooking.get('timeStampStart'));
 					} else {
-						return false;
+						return;
 					}
 					myDate = myDate.addHours(parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours')));
 					myDate = myDate.date;
 				}
 				
-				if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
-					return that.startBrowserBookingNotification(myDate);
+				if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" 
+                    || typeof(pluginObj.notification.local) == "undefined") {
+
+					that.startBrowserBookingNotification(myDate);
+				    return;
 				}
 		
 				try {
@@ -2467,7 +2470,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    // console.log('Permission has been granted: ' + granted);
 					});
 					pluginObj.notification.local.promptForPermission();
-				} catch(e) {}
+				} catch(e1) {}
 				
 				var myReminderMessage = M.I18N.l('BookingReminderMessage') + hourSetting;
 				if (hourSetting == 1) {
@@ -2499,16 +2502,18 @@ DigiWebApp.BookingController = M.Controller.extend({
 			        //}
 				    notificationOptions.badge = badge;
 
-			        writeToLog("Application.startNotification() add notification id=4711, title="
-                        + notificationOptions.title 
+			        writeToLog("BookingController.startBookingNotification() add notification id=" 
+                        + notificationOptions.id 
+                        + ", title=" + notificationOptions.title 
                         + ", message=" + notificationOptions.message
                         + ", badge=" + notificationOptions.badge
                         + ", repeat=" + notificationOptions.repeat
                         + ", autoCancel=" + notificationOptions.autoCancel
                         + ", ongoing=" + notificationOptions.ongoing);
+
 					pluginObj.notification.local.add(notificationOptions);
-				} catch(e) { trackError(e); }
-			} catch(e) { trackError(e); }
+				} catch(e2) { trackError(e2); }
+			} catch(e3) { trackError(e3); }
 		}
 	}
 	

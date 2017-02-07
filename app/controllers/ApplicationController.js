@@ -778,7 +778,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" 
                 || typeof(pluginObj.notification.local) == "undefined") {
 
-				return false;
+				return;
 			}
 			
 			try {
@@ -812,9 +812,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			        badge = bookings.length;
 			    }
 
-			    writeToLog("Application.startNotification() add notification id=4711, title=DIGI-WebApp, message=" 
-                    + that.notificationMessage + ", badge=" + badge + ", sound=null, autoCancel=false, ongoing=true");
-				pluginObj.notification.local.add({
+        		var notificationOptions = {
 				      id:         '4711'
 				    , title:      '4711 DIGI-WebApp'  // The title of the message
 				    , message:    that.notificationMessage  // The message that is displayed
@@ -822,9 +820,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
-				});
-				//alert("added notification '" + that.notificationMessage + "'");
-			} catch(e) { trackError(e); }
+				};
+
+		        writeToLog("ApplicationController.startNotification() add notification id=" 
+                        + notificationOptions.id 
+                        + ", title=" + notificationOptions.title 
+                        + ", message=" + notificationOptions.message
+                        + ", badge=" + notificationOptions.badge
+                        + ", repeat=" + notificationOptions.repeat
+                        + ", autoCancel=" + notificationOptions.autoCancel
+                        + ", ongoing=" + notificationOptions.ongoing);
+
+			    pluginObj.notification.local.add(notificationOptions);
+			    //alert("added notification '" + that.notificationMessage + "'");
+			} catch(e2) { trackError(e2); }
 		}
 	}
 
