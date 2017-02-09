@@ -758,7 +758,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, startNotification: function() {
 		var that = this;
 
-		if (!onAndroid23) {
+		if (!onIOS && !onAndroid23) {
 			that.notificationMessage = localStorage.getItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage');
 			if (that.notificationMessage == null) {
 				that.notificationMessage = M.I18N.l('abwesend');
@@ -770,15 +770,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			}
 			if (!that.notificationInitiated && that.notificationMessage != M.I18N.l('abwesend')) {
 				that.notificationInitiated = YES;
-				try { pluginObj.notification.local.cancel('4711'); } catch(e) {}
-				try { pluginObj.notification.local.cancel('4712'); } catch(e) {}
+				try{pluginObj.notification.local.cancel('4711');}catch(e){}
+				try{pluginObj.notification.local.cancel('4712');}catch(e){}
+				//try{pluginObj.notification.local.cancelAll();}catch(e){}
 				DigiWebApp.BookingController.startBookingNotification();
 			}
 	
-			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" 
-                || typeof(pluginObj.notification.local) == "undefined") {
-
-				return;
+			if (typeof(pluginObj) == 'undefined' || typeof(pluginObj.notification) == "undefined" || typeof(pluginObj.notification.local) == "undefined") {
+				return false;
 			}
 			
 			try {
@@ -799,41 +798,19 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		//		    , ongoing:    Boolean // Prevent clearing of notification (Android only)
 		//		});
 			} catch(e) {}
-
 			try {
-				try { window.plugin.notification.local.cancel('4711'); } catch(e) {}
-
-			    var badge = 0;
-                //if (hasValue(DigiWebApp.BookingController.timeData)) {
-			    //    badge = DigiWebApp.BookingController.timeData.length;
-			    //}
-			    var bookings = DigiWebApp.Booking.find();
-                if (hasValue(bookings)) {
-			        badge = bookings.length;
-			    }
-
-        		var notificationOptions = {
+							
+				try{window.plugin.notification.local.cancel('4711');}catch(e){}
+				pluginObj.notification.local.add({
 				      id:         '4711'
-				    , title:      '4711 DIGI-WebApp'  // The title of the message
 				    , message:    that.notificationMessage  // The message that is displayed
-                    , badge:      badge
+				    , title:      'DIGI-WebApp'  // The title of the message
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
-				};
-
-		        writeToLog("ApplicationController.startNotification() add notification id=" 
-                        + notificationOptions.id 
-                        + ", title=" + notificationOptions.title 
-                        + ", message=" + notificationOptions.message
-                        + ", badge=" + notificationOptions.badge
-                        + ", repeat=" + notificationOptions.repeat
-                        + ", autoCancel=" + notificationOptions.autoCancel
-                        + ", ongoing=" + notificationOptions.ongoing);
-
-			    pluginObj.notification.local.add(notificationOptions);
-			    //alert("added notification '" + that.notificationMessage + "'");
-			} catch(e2) { trackError(e2); }
+				});
+				//alert("added notification '" + that.notificationMessage + "'");
+			}catch(e){trackError(e);}
 		}
 	}
 
@@ -954,16 +931,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		if (onIOS || onAndroid23) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
+			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+			//DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
-		}
-
-        if (onAndroid23) {
-        	try { $('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); }); } catch(e) {}
-			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-        } else {
 			DigiWebApp.ApplicationController.startNotification();
-        }
+		}
 
 		inDebug();
 		
@@ -1359,9 +1333,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            } else {
 	                writeToLog('isCurrentBookingAvailable === NO');
 	            	DigiWebApp.NavigationController.toBookTimePage();
-	                DigiWebApp.BookingController.sendBookings(NO, YES);
+	            	if (parseBool(DigiWebApp.SettingsController.getSetting('stammdatenabgleichBeiArbeitsbeginn'))) {
+    	                DigiWebApp.BookingController.sendBookings(NO, YES);
+	            	}
 	            }
 	        } else if (
+                // Freischaltung 402: Materialerfassung only
+                // Freischaltung 426: Notizen only
 	           (DigiWebApp.SettingsController.featureAvailable("402") && !DigiWebApp.BookingController.currentBooking) 
 		    || (DigiWebApp.SettingsController.featureAvailable("426") && !DigiWebApp.BookingController.currentBooking) 
 	        ) {
@@ -1412,6 +1390,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeiArbeitsbeginnCheck.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
             try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).hide(); }); } catch (e) { }
 			try{$('[id=' + DigiWebApp.SettingsPage.content.remarkIsMandatory.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSaveGPSData.id  + ']').each(function() { $(this).hide(); });}catch(e){}
@@ -1434,6 +1413,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoTransferAfterClosingDayCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 			try{$('[id=' + DigiWebApp.SettingsPage.content.autoSyncAfterBookTimeCheck.id  + ']').each(function() { $(this).show(); });}catch(e){}
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeimAppStartCheck.id + ']').each(function () { $(this).show(); }); } catch (e) { }
+		    try { $('[id=' + DigiWebApp.SettingsPage.content.stammdatenabgleichBeiArbeitsbeginnCheck.id + ']').each(function () { $(this).show(); }); } catch (e) { }
 		    try { $('[id=' + DigiWebApp.SettingsPage.content.benutzeHttps.id + ']').each(function () { $(this).show(); }); } catch (e) { }
             // Freischaltung 403: Bemerkungsfeld
 			if (DigiWebApp.SettingsController.featureAvailable('403')) { 
@@ -1488,11 +1468,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         var isClosingDay = (!DigiWebApp.BookingController.currentBooking);
         var mySonderbuchungen = _.filter(DigiWebApp.Sonderbuchung.find(), function(n) { return !parseBool(n.get("uebertragen")) });
         DigiWebApp.JSONDatenuebertragungController.sendeSonderbuchungen(mySonderbuchungen, contSync, contSync, isClosingDay);
-        
-        // Anzahl nicht übertragener Buchungen könnte sich geändert haben, also muss die
-        // Notification aktualisiert werden.
-	    that.startNotification();
-	}
+            	
+    }
     
     /**
      * Simply displays an alert dialog indicating an connection error.

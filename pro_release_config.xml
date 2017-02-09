@@ -25,8 +25,8 @@
 	<!-- <gap:platform name="blackberry" project="widgets" /> -->
 
 	<icon src="theme/images/Icon.png" gap:role="default" />
-	
-  <preference name="phonegap-version" value="cli-5.2.0" />
+
+  <preference name="phonegap-version" value="cli-5.4.1" />
   <!-- android: Minimum Android SDK version. 8 = Android 2.2 -->
   <preference name="android-minSdkVersion" value="8" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
@@ -67,7 +67,7 @@
 
 	<!-- iOS 9 WKWebView -->
   <preference name="WKWebViewPluginEmbeddedServerPort" value="12344" />
-	
+
   <!-- If you do not want any permissions to be added to your app, add the following tag to 
   your config.xml instead; you will still have the INTERNET permission on your app,
   which PhoneGap requires. -->
@@ -75,17 +75,33 @@
 
   <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
-  <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
-    <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
-    <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
-  </gap:plugin>
+  <!-- Das Kamera-Plugin muss bei Android auf 2.2.0 bleiben, weil neuere Versionen den Gradle-Build brauchen.
+       Den gibt es erst mit PhoneGap >= 6.0, unter dem aber das telerik-wkwebview-Plugin nicht mehr baut. -->
+  <platform name="android">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0">
+      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+    </gap:plugin>
+  </platform>
+  <platform name="ios">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+    </gap:plugin>
+  </platform>
+  <platform name="winphone">
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="2.3.1">
+      <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
+      <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
+    </gap:plugin>
+  </platform>
   <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
   <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.1" />
   <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
-  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.4.0" />
+  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.6.1" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
@@ -100,7 +116,7 @@
   <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" version="0.8.4" /> -->
   <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git#0.7.5" source="git" />
 
-  <!-- prevent screen-sleep --> 
+  <!-- prevent screen-sleep -->
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
   <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
@@ -108,8 +124,10 @@
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
   <!-- iOS9 -->
-  <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" />
-  <!-- <gap:plugin name="cordova-plugin-wkwebview" source='npm' version='0.6.9' /> -->
+  <platform name="ios">
+    <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" />
+    <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->
+  </platform>
 
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
@@ -170,6 +188,7 @@
   <icon src="theme/images/icon_ios_114.png" gap:platform="ios" width="114" height="114" />
   <icon src="theme/images/icon_ios_120.png" gap:platform="ios" width="120" height="120" />
   <icon src="theme/images/icon_ios_144.png" gap:platform="ios" width="144" height="144" />
+  <icon src="theme/images/icon_ios_152.png" gap:platform="ios" width="152" height="152" />
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respecitvely. -->
   <icon src="theme/images/ic_launcher_ldpi.png" gap:platform="android" gap:density="ldpi" />

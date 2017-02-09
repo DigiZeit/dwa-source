@@ -154,4 +154,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , logfilesLoeschenNachTagen: M.Model.attr('Integer')
     
+    , stammdatenabgleichBeiArbeitsbeginn: M.Model.attr('Boolean')
+    
 }, M.DataProviderLocalStorage);
