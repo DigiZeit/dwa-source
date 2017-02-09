@@ -65,7 +65,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , terminliste_keineKuenstlichenTermine: false
         , terminliste_ignoriereAuftragszeitraum: true
         , stammdatenabgleichBeimAppStart: false
-        , stammdatenabgleichBeiArbeitsbeginn: true
         , festePauseStornieren_nurAktuellerTag: true
         , startTimeout: 10000
         , GPSenableHighAccuracy: false
@@ -368,8 +367,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannFahrtkostenBuchen: false, nur für Bohle
-            var kannFahrtkostenBuchen = 
-                DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
+            var kannFahrtkostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
             try {
                 if (typeof (record.record.kannFahrtkostenBuchen) !== "undefined") {
                     kannFahrtkostenBuchen = record.get('kannFahrtkostenBuchen');
@@ -377,8 +375,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannUebernachtungskostenBuchen: false, nur für Bohle
-            var kannUebernachtungskostenBuchen = 
-                DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
+            var kannUebernachtungskostenBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
             try {
                 if (typeof (record.record.kannUebernachtungskostenBuchen) !== "undefined") {
                     kannUebernachtungskostenBuchen = record.get('kannUebernachtungskostenBuchen');
@@ -386,8 +383,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
             
             //, kannReisezeitBuchen: true, nur für Scholpp
-            var kannReisezeitBuchen = 
-                DigiWebApp.SettingsController.defaultsettings.get("kannReisezeitBuchen");
+            var kannReisezeitBuchen = DigiWebApp.SettingsController.defaultsettings.get("kannReisezeitBuchen");
             try {
                 if (typeof (record.record.kannReisezeitBuchen) !== "undefined") {
                     kannReisezeitBuchen = record.get('kannReisezeitBuchen');
@@ -411,20 +407,10 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, logfilesLoeschenNachTagen: 40
-            var logfilesLoeschenNachTagen = 
-                DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
+            var logfilesLoeschenNachTagen = DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
             try {
 	            if (typeof(record.record.logfilesLoeschenNachTagen) !== "undefined") {
 	            	logfilesLoeschenNachTagen = record.get('logfilesLoeschenNachTagen');
-	            }
-            } catch (e) { }
-
-            //, stammdatenabgleichBeiArbeitsbeginn: true
-            var stammdatenabgleichBeiArbeitsbeginn = 
-                DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeiArbeitsbeginn");
-            try {
-	            if (typeof(record.record.stammdatenabgleichBeiArbeitsbeginn) !== "undefined") {
-	            	stammdatenabgleichBeiArbeitsbeginn = record.get('stammdatenabgleichBeiArbeitsbeginn');
 	            }
             } catch (e) { }
 
@@ -517,11 +503,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: record.get('stammdatenabgleichBeimAppStart')
 	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
 	                , isSelected: record.get('stammdatenabgleichBeimAppStart')
-	            }]
-	            , stammdatenabgleichBeiArbeitsbeginn: [{
-	                  value: stammdatenabgleichBeiArbeitsbeginn
-	                , label: M.I18N.l('stammdatenabgleichBeiArbeitsbeginn')
-	                , isSelected: stammdatenabgleichBeiArbeitsbeginn
 	            }]
                 , benutzeHttps: [{
                     value: benutzeHttps
@@ -700,10 +681,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , stammdatenabgleichBeimAppStart: [{
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeimAppStart")
 	                , label: M.I18N.l('stammdatenabgleichBeimAppStart')
-                }]
-                , stammdatenabgleichBeiArbeitsbeginn: [{
-	                  value: DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeiArbeitsbeginn")
-	                , label: M.I18N.l('stammdatenabgleichBeiArbeitsbeginn')
                 }]
    	            , benutzeHttps: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps")
@@ -984,7 +961,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var autoTransferAfterClosingDay    = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterClosingDayCheck').id    + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var autoSyncAfterBookTime          = $('#' + M.ViewManager.getView('settingsPage', 'autoSyncAfterBookTimeCheck').id          + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var stammdatenabgleichBeimAppStart = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeimAppStartCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var stammdatenabgleichBeiArbeitsbeginn = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeiArbeitsbeginnCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var benutzeHttps				   = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'benutzeHttps');
         var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
@@ -1188,7 +1164,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
                                                     record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                                     record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
-                                                    record.set('stammdatenabgleichBeiArbeitsbeginn', stammdatenabgleichBeiArbeitsbeginn);
                                                     record.set('autoSaveGPSData', autoSaveGPSData);
                                                     record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -1294,7 +1269,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
                                     record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                     record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
-                                    record.set('stammdatenabgleichBeiArbeitsbeginn', stammdatenabgleichBeiArbeitsbeginn);
                                     record.set('autoSaveGPSData', autoSaveGPSData);
                                     record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                     record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -1374,7 +1348,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
                                 record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                 record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
-                                record.set('stammdatenabgleichBeiArbeitsbeginn', stammdatenabgleichBeiArbeitsbeginn);
                                 record.set('autoSaveGPSData', autoSaveGPSData);
                                 record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -1454,7 +1427,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
                                 record.set('autoSyncAfterBookTime', autoSyncAfterBookTime);
                                 record.set('stammdatenabgleichBeimAppStart', stammdatenabgleichBeimAppStart);
-                                record.set('stammdatenabgleichBeiArbeitsbeginn', stammdatenabgleichBeiArbeitsbeginn);
                                 record.set('autoSaveGPSData', autoSaveGPSData);
                                 record.set('bautagebuchLimit_autoStartUhrzeit', bautagebuchLimit_autoStartUhrzeit);
                                 record.set('GPSDataIsMandatory', GPSDataIsMandatory);
@@ -1536,7 +1508,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , autoTransferAfterClosingDay: autoTransferAfterClosingDay
                                 , autoSyncAfterBookTime: autoSyncAfterBookTime
                                 , stammdatenabgleichBeimAppStart: stammdatenabgleichBeimAppStart
-                                , stammdatenabgleichBeiArbeitsbeginn: stammdatenabgleichBeiArbeitsbeginn
                                 , autoSaveGPSData: autoSaveGPSData
                                 , GPSDataIsMandatory: GPSDataIsMandatory
                                 , bautagebuchLimit_autoStartUhrzeit: bautagebuchLimit_autoStartUhrzeit
