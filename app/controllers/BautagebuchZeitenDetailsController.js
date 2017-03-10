@@ -49,12 +49,6 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 		//var that = this;
 	}
 
-	, pageshow: {
-		action: function() {
-      		M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'remarkInput').setCssProperty("height", "80px");
-		}
-	}
-
 	, load: function(myItem) {
 		var that = this;
 		that.set("item", myItem);
