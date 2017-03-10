@@ -51,7 +51,7 @@ DigiWebApp.BautagebuchZeitenDetailsController = M.Controller.extend({
 
 	, pageshow: {
 		action: function() {
-      		M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'remarkInput').setCssProperty("height", "40px");
+      		M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'remarkInput').setCssProperty("height", "80px");
 		}
 	}
 
