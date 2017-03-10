@@ -808,6 +808,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
             , cssClass: 'remarkInput'
             , cssClassOnInit: 'remarkInputInitial'
             , initialText: "max. 255 " + M.I18N.l('characters')
+            , numberOfChars: 255
             , hasMultipleLines: YES
 //            , contentBinding: {
 //		            target: DigiWebApp.BautagebuchZeitenDetailsController
