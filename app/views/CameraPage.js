@@ -148,7 +148,7 @@ DigiWebApp.CameraPage = M.PageView.design({
               label: M.I18N.l('remark')
             , cssClass: 'remarkInput'
             , hasMultipleLines: YES
-            , numberOfChars: 255
+            , numberOfChars: 600 // Damit die Höhe des Textfelds vergrößert wird
         })
 
 //        , imageContainer: M.ContainerView.design({

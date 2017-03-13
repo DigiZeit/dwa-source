@@ -564,7 +564,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             , cssClass: 'remarkInput'
             , hasMultipleLines: YES
             , initialText: "Max. 255 " + M.I18N.l('characters')
-            , numberOfChars: 255
+            , numberOfChars: 600 // Damit die Höhe des Textfelds vergrößert wird
         })
 
         , fahrtzeitPrivatLabel: M.LabelView.design({
