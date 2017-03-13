@@ -67,6 +67,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		}
 						
 			    // Bemerkung laden
+                var ri = M.ViewManager.getView('editTimeDataPage', 'remarkInput');
         		if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
                         && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
                 ) {
@@ -74,16 +75,17 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
                             && DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark') !== null) {
         		        $('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).val(
                             DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark'));
-						M.ViewManager.getView('editTimeDataPage', 'remarkInput').value =
+						ri.value =
                             DigiWebApp.EditTimeDataPage.bookingToEdit.get('remark');
 					} else {
 						$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).val("");
-						M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = "";
+						ri.value = "";
 					}
 				} else {
 					$('#' + DigiWebApp.EditTimeDataPage.content.remarkInput.id).val("");
-					M.ViewManager.getView('editTimeDataPage', 'remarkInput').value = "";
+					ri.value = "";
 				}
+                ri.setCssProperty("height", "100px");
         		
         		if (typeof (DigiWebApp.EditTimeDataPage.bookingToEdit) !== "undefined"
                         && DigiWebApp.EditTimeDataPage.bookingToEdit !== null
@@ -563,8 +565,8 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
             label: M.I18N.l('remark')
             , cssClass: 'remarkInput'
             , hasMultipleLines: YES
-            , initialText: "Max. 255 " + M.I18N.l('characters')
-            , numberOfChars: 600 // Damit die Höhe des Textfelds vergrößert wird
+            , initialText: "max. 255 " + M.I18N.l('characters')
+            , numberOfChars: 255
         })
 
         , fahrtzeitPrivatLabel: M.LabelView.design({

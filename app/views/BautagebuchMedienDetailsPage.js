@@ -107,8 +107,11 @@ DigiWebApp.BautagebuchMedienDetailsPage = M.PageView.design({
 					});
         		} catch (e) {trackError(e);}
 
-				M.ViewManager.getView('bautagebuchMedienDetailsPage', 'remarkInput').setValue(DigiWebApp.BautagebuchMedienDetailsController.remark);
-				//$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].focus();
+                var ri = M.ViewManager.getView('bautagebuchMedienDetailsPage', 'remarkInput');
+                ri.setValue(DigiWebApp.BautagebuchMedienDetailsController.remark);
+                ri.setCssProperty("height", "100px");
+
+                //$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].focus();
 				//$('#' + DigiWebApp.BautagebuchMedienDetailsPage.content.remarkInput.id)[0].blur();
 
 				if (DigiWebApp.BautagebuchBautagesberichtDetailsController.item.get("abgeschlossen")) {

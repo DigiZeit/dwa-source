@@ -176,7 +176,7 @@ DigiWebApp.EditPicturePage = M.PageView.design({
 		        label: M.I18N.l('remark')
 		      , cssClass: 'remarkInput'
 		      , hasMultipleLines: YES
-              , numberOfChars: 600 // Damit die Höhe des Textfelds vergrößert wird
+              , numberOfChars: 255
 		  })
 	
 	//      , imageContainer: M.ContainerView.design({

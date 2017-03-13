@@ -43,7 +43,9 @@ DigiWebApp.EditPicturePageController = M.Controller.extend({
 	  $('#' + DigiWebApp.EditPicturePage.content.remarkInput.id).val("");
 	  M.ViewManager.getView('editPicturePage', 'remarkInput').value = "";
 	  $('#' + DigiWebApp.EditPicturePage.content.remarkInput.id).val(that.myMediaFile.get('remark'));
-	  M.ViewManager.getView('editPicturePage', 'remarkInput').value = that.myMediaFile.get('remark');
+      var ri = M.ViewManager.getView('editPicturePage', 'remarkInput');
+      ri.value = that.myMediaFile.get('remark');
+      ri.setCssProperty("height", "100px");
 
       var image = document.getElementById(DigiWebApp.EditPicturePage.content.image.id);
       image.src = '';
