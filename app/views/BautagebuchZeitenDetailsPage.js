@@ -121,7 +121,7 @@ DigiWebApp.BautagebuchZeitenDetailsPage = M.PageView.design({
 
                 var ri = M.ViewManager.getView('bautagebuchZeitenDetailsPage', 'remarkInput');
                 ri.setValue(DigiWebApp.BautagebuchZeitenDetailsController.remark);
-                ri.setHeight(120);
+                ri.setCssProperty("height", "100px");
 
 				DigiWebApp.BautagebuchZeitenDetailsController.setDauer();		  		
 				DigiWebApp.BautagebuchZeitenDetailsController.setVonBis();		  		
