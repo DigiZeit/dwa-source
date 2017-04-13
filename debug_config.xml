@@ -135,6 +135,7 @@
 
   <access origin="*" subdomains="true" />
   <access origin="http://127.0.0.1*" subdomains="true" />
+  <access origin="tel:*" launch-external="yes" />
 
   <allow-navigation href="*://*.digi-gateway.de/*" />
   <allow-navigation href="*://*.digi-zeitserver.de/*" />

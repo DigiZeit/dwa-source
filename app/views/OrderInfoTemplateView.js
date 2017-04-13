@@ -82,7 +82,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    			if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
 	    				return '';
 	    			} else {
-	    				return M.I18N.l('phone') + ": " + v;
+	    				return "a href=\"tel:" + v + "\">" + M.I18N.l('phone') + ": " + v + "</a";
 	    			}
 	        	  }
 	    	  }
