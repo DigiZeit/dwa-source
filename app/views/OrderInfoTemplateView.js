@@ -110,7 +110,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
 							return '';
 						} else {
-							return M.I18N.l('email') + ": " + v;
+							return "<a href=\"mailto:" + v + "\">" + M.I18N.l('email') + ": " + v + "</a>";
 						}
 				  } 
 	    	  }
