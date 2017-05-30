@@ -114,6 +114,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						}
 				  } 
 	    	  }
+            , hyperlinkTarget: 'mailto:m.baeurle@digi-zeiterfassung.de'
+            , hyperlinkType: M.HYPERLINK_EMAIL
 	    })
 
     	, spacerNachEmail: M.LabelView.design({

@@ -587,4 +587,6 @@ M.I18N.de_de = {
     , roteAmpel: "Rote Ampel"
     , roteAmpelNachricht: "Nachricht"
     , roteAmpelAbschicken: "Abschicken"
+
+    , datenschutzerklaerung: "Datenschutzerklärung"
 };

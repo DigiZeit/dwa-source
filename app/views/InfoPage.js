@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7269'
+              value: 'Build: 7270'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -417,6 +417,12 @@ DigiWebApp.InfoPage = M.PageView.design({
 	            }
 	        }
         })
+
+		, datenschutzButton: M.ButtonView.design({
+			value: M.I18N.l('datenschutzerklaerung')
+			, hyperlinkTarget: 'datenschutzerklaerung.html'
+			, hyperlinkType: M.HYPERLINK_WEBSITE
+		})
     })
 
     , tabBar: DigiWebApp.TabBar

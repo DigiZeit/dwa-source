@@ -588,4 +588,6 @@ M.I18N.en_us = {
     , roteAmpel: "Red flag"
     , roteAmpelNachricht: "Message"
     , roteAmpelAbschicken: "Send"
+
+    , datenschutzerklaerung: "Data privacy statement"
 };
