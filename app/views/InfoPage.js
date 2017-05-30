@@ -90,7 +90,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 
           childViews: 'logo languageSelection spacer8 companyIdLabel mitarbeiterNameVornameLabel'
 			+ ' spacer9 versionLabel spacer2 companyLabel streetLabel cityLabel phoneLabel'
-			+ ' emailLabel1 spacer1 emailLabel2 spacer3 deviceinfo spacer5'
+			+ ' emailLabel1 spacer1 emailLabel2 spacer3 datenschutzButton spacer4 deviceinfo spacer5'
 			+ ' connectioninfo spacer6 cordovaVersionLabel environmentinfo spacer7'
 			+ ' localStorageUsage spacer10 toggleWeinreButton'
 
@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7270'
+              value: 'Build: 7271'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
