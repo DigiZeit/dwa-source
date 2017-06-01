@@ -1195,7 +1195,7 @@ label.ui-input-text, .ui-controlgroup-label {
 , .orderInfoPage .ui-listview .positionEmail a:active
 , .orderInfoPage .ui-listview .positionEmail a:visited
 {
-    font-size: 12px !important;
+    font-size: 18px !important;
     font-weight: bold;
     color: #000000 !important;
 }
