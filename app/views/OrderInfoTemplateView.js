@@ -75,7 +75,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    })
 	    
 	    , positionTelefon: M.LabelView.design({
-	          cssClass: 'positionName' 
+	          cssClass: 'positionName unselectable' 
             ,  value: '<a href="tel:+49711709600">+49-711-70960-0</a>'
 	        //, computedValue: {
 	        //	  valuePattern: '<%= positionTelefon %>'
@@ -104,7 +104,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    })
 	    
         , positionEmail: M.LabelView.design({
-	          cssClass: 'positionName' 
+	          cssClass: 'positionName unselectable' 
             , value: 'm.baeurle@digi-zeiterfassung.de'
 	        //, computedValue: {
 	        //	  valuePattern: '<%= positionEmail %>'
