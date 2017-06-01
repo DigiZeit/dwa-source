@@ -89,7 +89,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , kannFahrtkostenBuchen: false // Nur Bohle
         , kannUebernachtungskostenBuchen: false // Nur Bohle
         , kannReisezeitBuchen: true // Nur Scholpp
-        , benutzeHttps: false
+        , benutzeHttps: true
         , doScr: true
         , logfilesLoeschenNachTagen: 40
     }
@@ -394,7 +394,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 }
             } catch (e) { }
             
-            //, benutzeHttps: false
+            //, benutzeHttps: true
             var benutzeHttps = DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps");
             try {
 	            if (typeof(record.record.benutzeHttps) !== "undefined") {
