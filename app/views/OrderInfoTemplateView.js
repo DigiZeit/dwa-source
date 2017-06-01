@@ -82,7 +82,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    			if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
 	    				return '';
 	    			} else {
-	    				return "<a href=\"tel:" + v + "\">" + M.I18N.l('phone') + ": " + v + "</a>";
+	    				return M.I18N.l('phone') + ": <a href=\"tel:" + v + "\">" + v + "</a>";
 	    			}
 	        	  }
 	    	  }
@@ -104,18 +104,19 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    
         , positionEmail: M.LabelView.design({
 	          cssClass: 'positionName' 
-	        , computedValue: {
-	        	  valuePattern: '<%= positionEmail %>'
-	        	, operation: function(v) {
-						if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
-							return '';
-						} else {
-							return "<a href=\"mailto:" + v + "\">" + M.I18N.l('email') + ": " + v + "</a>";
-						}
-				  } 
-	    	  }
-            , hyperlinkTarget: 'mailto:m.baeurle@digi-zeiterfassung.de'
-            , hyperlinkType: M.HYPERLINK_EMAIL
+            , value: 'mailto:m.baeurle@digi-zeiterfassung.de'
+	        //, computedValue: {
+	        //	  valuePattern: '<%= positionEmail %>'
+	        //	, operation: function(v) {
+			//			if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
+			//				return '';
+			//			} else {
+			//				return M.I18N.l('email') + ": <a href=\"mailto:" + v + "\">" + v + "</a>";
+			//			}
+			//	  } 
+	    	//  }
+            //, hyperlinkTarget: 'mailto:m.baeurle@digi-zeiterfassung.de'
+            //, hyperlinkType: M.HYPERLINK_EMAIL
 	    })
 
     	, spacerNachEmail: M.LabelView.design({
