@@ -133,7 +133,7 @@
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
 
-  <access origin="*" subdomains="true" />
+  <!--<access origin="*" subdomains="true" />-->
   <access origin="http://127.0.0.1*" subdomains="true" />
   <access origin="tel:*" launch-external="yes" />
   <access origin="mailto:*" launch-external="yes" />
