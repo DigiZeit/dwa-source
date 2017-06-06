@@ -496,11 +496,11 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 					alert("Error: " + e5.message);
 			}
 			try {
-				writeToLog("plugins.childBrowser.showWebPage(), url=" + myUrl);
+				writeToLog("plugins.childBrowser.showWebPage(), myUrl=" + myUrl);
 			    plugins.childBrowser.showWebPage(myUrl, { showNavigationBar: true });
 			} catch(e6) { alert("Error: " + e6.message); }
 		} else {
-    		writeToLog("window.open(), childBrowser=" + childBrowser + ", url=" + myUrl);
+    		writeToLog("window.open(), childBrowser=" + childBrowser + ", myUrl=" + myUrl);
             if (childBrowser) {
                 DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                     myUrl,
