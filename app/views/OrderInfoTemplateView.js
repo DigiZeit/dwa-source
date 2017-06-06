@@ -8,7 +8,7 @@
 
 DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 
-      isSelectable: YES
+      isSelectable: NO
     
     , hasSingleAction: NO
 
