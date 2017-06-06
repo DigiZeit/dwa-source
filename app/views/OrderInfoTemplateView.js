@@ -16,7 +16,9 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
     	
     //, container: M.ContainerView.design({
     	
-	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer positionPLZundORT positionLand positionTelefon positionFax positionEmail spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
+	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer '
+            + 'positionPLZundORT positionLand positionTelefon positionFax positionEmail '
+            + 'tel_email_ButtonGrid spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
 
 	    , orderName: M.LabelView.design({
 	          cssClass: 'orderName'
@@ -77,14 +79,13 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    
 	    , positionTelefon: M.LabelView.design({
 	          cssClass: 'positionName' 
-            //,  value: '<a href="tel:+49711709600">+49-711-70960-0</a>'
 	        , computedValue: {
 	        	  valuePattern: '<%= positionTelefon %>'
 	        	, operation: function(v) {
 	    			if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
 	    				return '';
 	    			} else {
-	    				return M.I18N.l('phone') + ": <a href=\"tel:" + v + "\">" + v + "</a>";
+	    				return M.I18N.l('phone') + ": " + v;
 	    			}
 	        	  }
 	    	  }
@@ -106,19 +107,16 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    
         , positionEmail: M.LabelView.design({
 	          cssClass: 'positionName' 
-            //, value: 'm.baeurle@digi-zeiterfassung.de'
 	        , computedValue: {
 	        	  valuePattern: '<%= positionEmail %>'
 	        	, operation: function(v) {
 						if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
 							return '';
 						} else {
-							return M.I18N.l('email') + ": <a href=\"mailto:" + v + "\">" + v + "</a>";
+							return M.I18N.l('email') + ": " + v;
 						}
 				  } 
 	    	  }
-            //, hyperlinkTarget: 'm.baeurle@digi-zeiterfassung.de" onclick="return DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000);"'
-            //, hyperlinkType: M.HYPERLINK_EMAIL
 	    })
 
     	, spacerNachEmail: M.LabelView.design({
@@ -254,8 +252,40 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	          value: ' '
 	        , cssClass: 'marginBottom12'
 	    })
-		
-	    , saveAsContactButton: M.ButtonView.design({
+
+        , tel_email_ButtonGrid: M.GridView.design({
+            childViews: 'telButton emailButton',
+            layout: M.TWO_COLUMNS,
+
+            telButton: M.ButtonView.design({
+                isIconOnly: YES,
+                icon: 'theme/images/48x48_plain_phone_call.png',
+                events: {
+                    tap: {
+                        target: DigiWebApp.OrderInfoController,
+                        action: function() {
+                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
+                            this.callPhone();
+                        }
+                    }
+                }
+        }),
+        emailButton: M.ButtonView.design({
+            isIconOnly: YES,
+            icon: 'theme/images/48x48_plain_mail.png',
+            events: {
+                tap: {
+                    target: DigiWebApp.OrderInfoController,
+                    action: function() {
+                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
+                        this.sendMail();
+                    }
+                }
+            }
+            })
+        })
+
+        , saveAsContactButton: M.ButtonView.design({
 	          value: M.I18N.l('saveAsContact')
 	        //, cssClass: 'digiButton'
 	        //, anchorLocation: M.CENTER
