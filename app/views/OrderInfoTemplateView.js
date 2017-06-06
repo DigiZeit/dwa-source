@@ -8,7 +8,7 @@
 
 DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 
-      isSelectable: NO
+      isSelectable: YES
     
     , hasSingleAction: NO
 
@@ -16,7 +16,12 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
     	
     //, container: M.ContainerView.design({
     	
-	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer positionPLZundORT positionLand positionTelefon positionFax positionEmail spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
+	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer ' +
+            + 'positionPLZundORT positionLand positionTelefon positionFax positionEmail '
+            + 'spacerNachEmail positionAnsprechpartner positionKundenname spacer3 '
+            + 'positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 '
+            + 'arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton '
+            + 'saveAsContactButton showAddressInMapButton'
 
 	    , orderName: M.LabelView.design({
 	          cssClass: 'orderName'
@@ -34,7 +39,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	              valuePattern: '<%= positionName %>'
 	            , operation: function(v) {
 	    			// Bugfix 2108: Rename in order to be consistent with DSO
-	    			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
+	    			var dtc6Auftrag = (DigiWebApp.SettingsController.getSetting('DTC6aktiv') === YES) 
+                        ? M.I18N.l('dtc6Auftrag') : M.I18N.l('position');
 					if (v === '' || v === null) {
 						return dtc6Auftrag + ": " + M.I18N.l('noData');
 					} else {
@@ -76,17 +82,17 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    
 	    , positionTelefon: M.LabelView.design({
 	          cssClass: 'positionName unselectable' 
-            ,  value: '<a href="tel:+49711709600">+49-711-70960-0</a>'
-	        //, computedValue: {
-	        //	  valuePattern: '<%= positionTelefon %>'
-	        //	, operation: function(v) {
-	    	//		if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
-	    	//			return '';
-	    	//		} else {
-	    	//			return M.I18N.l('phone') + ": <a href=\"tel:" + v + "\">" + v + "</a>";
-	    	//		}
-	        //	  }
-	    	//  }
+            //,  value: '<a href="tel:+49711709600">+49-711-70960-0</a>'
+	        , computedValue: {
+	        	  valuePattern: '<%= positionTelefon %>'
+	        	, operation: function(v) {
+	    			if (v === '' || v === null || v === "undefined" || typeof(v) === "undefined") {
+	    				return '';
+	    			} else {
+	    				return M.I18N.l('phone') + ": <a href=\"tel:" + v + "\">" + v + "</a>";
+	    			}
+	        	  }
+	    	  }
 	    })
 	    
 	    , positionFax: M.LabelView.design({
