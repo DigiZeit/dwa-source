@@ -111,7 +111,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    
         , positionEmail: M.LabelView.design({
 	          cssClass: 'positionName unselectable' 
-            , value: 'm.baeurle@digi-zeiterfassung.de'
+            //, value: 'm.baeurle@digi-zeiterfassung.de'
 	        , computedValue: {
 	        	  valuePattern: '<%= positionEmail %>'
 	        	, operation: function(v) {
@@ -122,7 +122,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						}
 				  } 
 	    	  }
-            , hyperlinkTarget: 'm.baeurle@digi-zeiterfassung.de" onclick="return DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000);"'
+            //, hyperlinkTarget: 'm.baeurle@digi-zeiterfassung.de" onclick="return DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000);"'
             //, hyperlinkType: M.HYPERLINK_EMAIL
 	    })
 
