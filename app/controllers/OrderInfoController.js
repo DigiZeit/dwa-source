@@ -180,14 +180,16 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 			DigiWebApp.OrderInfoController.set('items', [item]);
 		}
 
-        var telEmailButtonGrid = M.ViewManager.getView('orderInfoPage', 'tel_email_ButtonGrid');
-        if (telEmailButtonGrid != null && typeof(telEmailButtonGrid) !== "undefined") {
-            if (item.positionTelefon === '' && item.positionEmail === '') {
-    			try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).show(); }); } catch(e) {}
-            } else {
-			    try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).hide(); }); } catch(e) {}
-            }
-        }
+        // tel_email_ButtonGrid wird leider nicht gefunden, vermutlich weil
+        // OrderInfoTemplateView dynamisch eingefügt wird.
+        //var telEmailButtonGrid = M.ViewManager.getView('orderInfoPage', 'tel_email_ButtonGrid');
+        //if (telEmailButtonGrid != null && typeof(telEmailButtonGrid) !== "undefined") {
+        //    if (item.positionTelefon === '' && item.positionEmail === '') {
+    	//		try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).show(); }); } catch(e) {}
+        //    } else {
+		//	    try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).hide(); }); } catch(e) {}
+        //    }
+        //}
       }
     
     , setPositions: function() {
@@ -462,7 +464,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
                 writeToLog('OrderInfoController.callPhone(), myUrl=' + myUrl);
             }
 
-            DigiWebApp.OrderInfoController.openUrl(myUrl);
+            DigiWebApp.OrderInfoController.openUrl(myUrl, false);
         }
       }
 
@@ -481,11 +483,12 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
                 writeToLog('OrderInfoController.sendMail(), myUrl=' + myUrl);
             }
 
-            DigiWebApp.OrderInfoController.openUrl(myUrl);
+            DigiWebApp.OrderInfoController.openUrl(myUrl, false);
         }
     }
     
-    , openUrl: function(myUrl) {
+    , openUrl: function(myUrl, childBrowser) {
+        myUrl = encodeURI(myUrl);
 		if (typeof(plugins) !== "undefined" && typeof(plugins.childBrowser) !== "undefined") {
 			try {
 				plugins.childBrowser.close();
@@ -493,14 +496,19 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 					alert("Error: " + e5.message);
 			}
 			try {
-				writeToLog("plugins.childBrowser.showWebPage(), url="
-					+ encodeURI(myUrl));
-			    plugins.childBrowser.showWebPage(encodeURI(
-                    myUrl), { showNavigationBar: true });
+				writeToLog("plugins.childBrowser.showWebPage(), url=" + myUrl);
+			    plugins.childBrowser.showWebPage(myUrl, { showNavigationBar: true });
 			} catch(e6) { alert("Error: " + e6.message); }
 		} else {
-    		writeToLog("window.open(), url=" + encodeURI(myUrl));
-			DigiWebApp.ApplicationController.inAppBrowser_var = window.open(myUrl, '_system');
+    		writeToLog("window.open(), childBrowser=" + childBrowser + ", url=" + myUrl);
+            if (childBrowser) {
+                DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                    myUrl,
+                    'childBrowser',
+                    'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+            } else {
+    			DigiWebApp.ApplicationController.inAppBrowser_var = window.open(myUrl, '_system');            
+            }
 		}
     }
 });

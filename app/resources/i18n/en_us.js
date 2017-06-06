@@ -33,7 +33,7 @@ M.I18N.en_us = {
 	, orderDescription: "Order description"
 	, positionInfo: "Position info"
 	, positionNumber: "Position-No."
-	, positionDescription: "Position description"
+	, positionDescription: "Description"
 	, doBooking: "Booking takes place..."
 	, bookingDone: "The booking has been saved"
 	, handApplication: "Handorder"

@@ -33,7 +33,7 @@ M.I18N.de_de = {
 	, orderDescription: "Auftragsbeschreibung"
 	, positionInfo: "Positionsinfo"
 	, positionNumber: "Positions-Nr."
-	, positionDescription: "Positionsbeschreibung"
+	, positionDescription: "Beschreibung"
 	, doBooking: "Buchung wird durchgeführt..."
 	, bookingDone: "Die Buchung wurde erfolgreich durchgeführt."
 	, handApplication: "Handauftrag"

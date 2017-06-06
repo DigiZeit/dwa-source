@@ -319,9 +319,11 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var street = DigiWebApp.OrderInfoController.items[0].positionStrasse;
 						var housenumber = DigiWebApp.OrderInfoController.items[0].positionHausnummer;
 
+                        // Wenn wir weder PLZ noch Stadt noch Straﬂe haben, macht eine Suche
+                        // definitiv keinen Sinn.
                         if ((!hasValue(zip) || zip === '') 
                             && (!hasValue(city) || city === '') 
-                            && (!hasValue(street) || street === '') 
+                            && (!hasValue(street) || street === '' || street === ' ') 
                             && (!hasValue(housenumber) || housenumber === '')) {
                             return false;
                         }
