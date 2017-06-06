@@ -16,12 +16,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
     	
     //, container: M.ContainerView.design({
     	
-	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer ' +
-            + 'positionPLZundORT positionLand positionTelefon positionFax positionEmail '
-            + 'spacerNachEmail positionAnsprechpartner positionKundenname spacer3 '
-            + 'positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 '
-            + 'arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton '
-            + 'saveAsContactButton showAddressInMapButton'
+	    , childViews: 'orderName positionName spacer1 positionStrasseUndHausnummer positionPLZundORT positionLand positionTelefon positionFax positionEmail spacerNachEmail positionAnsprechpartner positionKundenname spacer3 positionBeschreibung spacer4 positionLongitude positionLatitude spacer5 arbeitsbeginn arbeitsende spacer6 showCoordinatesInMapButton saveAsContactButton showAddressInMapButton'
 
 	    , orderName: M.LabelView.design({
 	          cssClass: 'orderName'
