@@ -238,6 +238,16 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     		return;
     	}
     	var item = DigiWebApp.OrderInfoController.items[0];
+
+        // Wenn wir weder PLZ noch Stadt noch Straße haben, macht eine Suche
+        // definitiv keinen Sinn.
+        if ((!hasValue(item.positionPLZ) || item.positionPLZ === '') 
+            && (!hasValue(item.positionOrt) || item.positionOrt === '') 
+            && (!hasValue(item.positionStrasse) || item.positionStrasse === '' || item.positionStrasse === ' ')
+        ) {
+            return;
+        }
+
     	// Try to load the contact to prevent duplicates
     	var options = new ContactFindOptions();
     	options.filter = item.orderName + ", " + item.positionName; 

@@ -327,8 +327,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
                         // definitiv keinen Sinn.
                         if ((!hasValue(zip) || zip === '') 
                             && (!hasValue(city) || city === '') 
-                            && (!hasValue(street) || street === '' || street === ' ') 
-                            && (!hasValue(housenumber) || housenumber === '')) {
+                            && (!hasValue(street) || street === '' || street === ' ')
+                        ) {
                             return false;
                         }
 
