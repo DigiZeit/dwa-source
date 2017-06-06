@@ -437,4 +437,48 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		//	, message: M.I18N.l('saveAsContactError')
 		//});
     }
+
+    , callPhone: function() {
+    	var item = DigiWebApp.OrderInfoController.items[0];
+
+        var myEmail = '';
+        if (item != null) {
+            myEmail = item.positionEmail;
+        }
+
+        if (myEmail !== '') {
+            var myUrl = 'tel:' + myEmail;
+
+            if (inDebug()) {
+                writeToLog('OrderInfoController.callPhone(), myUrl=' + myUrl);
+            }
+
+            DigiWebApp.OrderInfoController.openUrl(myUrl);
+        }
+      }
+
+    , sendMail: function() {          
+    }
+    
+    , openUrl: function(myUrl) {
+		if (typeof(plugins) !== "undefined" && typeof(plugins.childBrowser) !== "undefined") {
+			try {
+				plugins.childBrowser.close();
+			} catch (e5) {
+					alert("Error: " + e5.message);
+			}
+			try {
+				writeToLog("plugins.childBrowser.showWebPage(), url="
+					+ encodeURI(myUrl));
+			    plugins.childBrowser.showWebPage(encodeURI(
+                    myUrl), { showNavigationBar: true });
+			} catch(e6) { alert("Error: " + e6.message); }
+		} else {
+    		writeToLog("window.open(), url=" + encodeURI(myUrl));
+			DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                myUrl,
+                'childBrowser',
+                'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+		}
+    }
 });

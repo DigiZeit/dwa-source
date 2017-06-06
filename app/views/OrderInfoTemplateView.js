@@ -119,6 +119,40 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	    	  }
 	    })
 
+        , tel_email_ButtonGrid: M.GridView.design({
+            childViews: 'telButton emailButton',
+            layout: M.TWO_COLUMNS,
+
+            telButton: M.ButtonView.design({
+                isIconOnly: YES,
+                icon: 'theme/images/48x48_plain_phone_call.png',
+                events: {
+                    tap: {
+                        target: DigiWebApp.OrderInfoController,
+                        action: function() {
+                            try {
+                                DigiWebApp.ApplicationController.vibrate();
+                            } catch (e2) {
+                            }
+                            this.callPhone();
+                        }
+                    }
+                }
+            })
+            , emailButton: M.ImageView.design({
+                value: 'theme/images/48x48_plain_mail.png',
+                events: {
+                    tap: {
+                        target: DigiWebApp.OrderInfoController,
+                        action: function() {
+                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
+                            this.sendMail();
+                        }
+                    }
+                }
+            })
+        })
+
     	, spacerNachEmail: M.LabelView.design({
     		  value: ' '
   	        , cssClass: 'marginBottom12' 
@@ -252,38 +286,6 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	          value: ' '
 	        , cssClass: 'marginBottom12'
 	    })
-
-        , tel_email_ButtonGrid: M.GridView.design({
-            childViews: 'telButton emailButton',
-            layout: M.TWO_COLUMNS,
-
-            telButton: M.ButtonView.design({
-                isIconOnly: YES,
-                icon: 'theme/images/48x48_plain_phone_call.png',
-                events: {
-                    tap: {
-                        target: DigiWebApp.OrderInfoController,
-                        action: function() {
-                            try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
-                            this.callPhone();
-                        }
-                    }
-                }
-        }),
-        emailButton: M.ButtonView.design({
-            isIconOnly: YES,
-            icon: 'theme/images/48x48_plain_mail.png',
-            events: {
-                tap: {
-                    target: DigiWebApp.OrderInfoController,
-                    action: function() {
-                        try { DigiWebApp.ApplicationController.vibrate(); } catch (e2) {}
-                        this.sendMail();
-                    }
-                }
-            }
-            })
-        })
 
         , saveAsContactButton: M.ButtonView.design({
 	          value: M.I18N.l('saveAsContact')
