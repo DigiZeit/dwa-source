@@ -441,13 +441,13 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
     , callPhone: function() {
     	var item = DigiWebApp.OrderInfoController.items[0];
 
-        var myEmail = '';
+        var myTel = '';
         if (item != null) {
-            myEmail = item.positionEmail;
+            myTel = item.positionTelefon;
         }
 
-        if (myEmail !== '') {
-            var myUrl = 'tel:' + myEmail;
+        if (myTel !== '') {
+            var myUrl = 'tel:' + myTel;
 
             if (inDebug()) {
                 writeToLog('OrderInfoController.callPhone(), myUrl=' + myUrl);
@@ -458,6 +458,22 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
       }
 
     , sendMail: function() {          
+    	var item = DigiWebApp.OrderInfoController.items[0];
+
+        var myEmail = '';
+        if (item != null) {
+            myEmail = item.positionEmail;
+        }
+
+        if (myEmail !== '') {
+            var myUrl = 'mailto:' + myEmail;
+
+            if (inDebug()) {
+                writeToLog('OrderInfoController.sendMail(), myUrl=' + myUrl);
+            }
+
+            DigiWebApp.OrderInfoController.openUrl(myUrl);
+        }
     }
     
     , openUrl: function(myUrl) {

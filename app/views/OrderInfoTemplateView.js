@@ -124,8 +124,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
             layout: M.TWO_COLUMNS,
 
             telButton: M.ButtonView.design({
-                isIconOnly: YES,
-                icon: 'theme/images/48x48_plain_phone_call.png',
+                value: M.I18N.l('phone'),
                 events: {
                     tap: {
                         target: DigiWebApp.OrderInfoController,
@@ -139,8 +138,8 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
                     }
                 }
             })
-            , emailButton: M.ImageView.design({
-                value: 'theme/images/48x48_plain_mail.png',
+            , emailButton: M.ButtonView.design({
+                value: M.I18N.l('email'),
                 events: {
                     tap: {
                         target: DigiWebApp.OrderInfoController,
