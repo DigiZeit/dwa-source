@@ -500,10 +500,7 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 			} catch(e6) { alert("Error: " + e6.message); }
 		} else {
     		writeToLog("window.open(), url=" + encodeURI(myUrl));
-			DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
-                myUrl,
-                'childBrowser',
-                'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+			DigiWebApp.ApplicationController.inAppBrowser_var = window.open(myUrl, '_system');
 		}
     }
 });
