@@ -179,7 +179,16 @@ DigiWebApp.OrderInfoController = M.Controller.extend({
 		} else {
 			DigiWebApp.OrderInfoController.set('items', [item]);
 		}
-    }
+
+        var telEmailButtonGrid = M.ViewManager.getView('orderInfoPage', 'tel_email_ButtonGrid');
+        if (telEmailButtonGrid != null && typeof(telEmailButtonGrid) !== "undefined") {
+            if (item.positionTelefon === '' && item.positionEmail === '') {
+    			try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).show(); }); } catch(e) {}
+            } else {
+			    try { $('[id=' + telEmailButtonGrid.id  + ']').each(function() { $(this).hide(); }); } catch(e) {}
+            }
+        }
+      }
     
     , setPositions: function() {
         var orderId = M.ViewManager.getView('orderInfoPage', 'order').getSelection(YES).value;

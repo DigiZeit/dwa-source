@@ -191,7 +191,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , computedValue: {
 	    		  valuePattern: '<%= positionLongitude %>'
 	        	, operation: function(v) {
-    				if (v === '0.0' || v === 0 || v === null || v === "undefined" || typeof(v) === "undefined") {
+    				if (!hasValue(v) || v === '0.0' || v === 0 || v === '') {
     					return '';
     				} else {
     					return M.I18N.l('longitude') + ": " + v;
@@ -205,7 +205,7 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 	        , computedValue: {
 		          valuePattern: '<%= positionLatitude %>'
 	        	, operation: function(v) {
-					if (v === '0.0' || v === 0 || v === null || v === "undefined" || typeof(v) === "undefined") {
+    				if (!hasValue(v) || v === '0.0' || v === 0 || v === '') {
 						return '';
 					} else {
 						return M.I18N.l('latitude') + ": " + v;
@@ -318,6 +318,14 @@ DigiWebApp.OrderInfoTemplateView = M.ListItemView.design({
 						var city = DigiWebApp.OrderInfoController.items[0].positionOrt;
 						var street = DigiWebApp.OrderInfoController.items[0].positionStrasse;
 						var housenumber = DigiWebApp.OrderInfoController.items[0].positionHausnummer;
+
+                        if ((!hasValue(zip) || zip === '') 
+                            && (!hasValue(city) || city === '') 
+                            && (!hasValue(street) || street === '') 
+                            && (!hasValue(housenumber) || housenumber === '')) {
+                            return false;
+                        }
+
 						var addressdetails = '0';
 						var urlByAddress = 'https://';
                         if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
