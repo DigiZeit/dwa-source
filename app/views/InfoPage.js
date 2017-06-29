@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7296'
+              value: 'Build: 7297'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -420,8 +420,18 @@ DigiWebApp.InfoPage = M.PageView.design({
 
 		, datenschutzButton: M.ButtonView.design({
 			value: M.I18N.l('datenschutzerklaerung')
-			, hyperlinkTarget: 'Datenschutzerklaerung_DIGI-Apps.html'
-			, hyperlinkType: M.HYPERLINK_WEBSITE
+	        , events: {
+	            tap: {
+	                action: function() {
+						var url = "Datenschutzerklaerung_DIGI-Apps.html";
+						writeToLog("window.open(), url=" + url);
+			    		DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
+                            url,
+                            'childBrowser',
+                            'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+					}
+				}
+			}
 		})
     })
 
