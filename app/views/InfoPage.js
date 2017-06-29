@@ -206,7 +206,7 @@ DigiWebApp.InfoPage = M.PageView.design({
         })
 
         , buildLabel: M.LabelView.design({
-              value: 'Build: 7298'
+              value: 'Build: 7299'
             , cssClass: 'infoLabel marginBottom25 unselectable'
         })
 
@@ -428,7 +428,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 			    		DigiWebApp.ApplicationController.inAppBrowser_var = window.open(
                             url,
                             'childBrowser',
-                            'width=800,height=600,menubar=no,status=no,location=yes,copyhistory=no,directories=no');
+                            'menubar=no,status=no,location=no,copyhistory=no,directories=no');
 					}
 				}
 			}
