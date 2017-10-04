@@ -166,15 +166,18 @@ DigiWebApp.BookingController = M.Controller.extend({
     /**
      * Aktualisiert die laufende Buchung (currentBooking) sowie die im Buchungsscreen
      * angezeigte Meldung (currentBookingStr).
+     * Dafür wird die neueste offene Buchung verwendet.
      * Wird von init() und book() aufgerufen, um Änderungen im LocalStorage zu berücksichtigen.
      */
     , refreshCurrentBooking: function (setSelection) {
     	
-        var bookings = DigiWebApp.Booking.find();
+    	var bookingsSorted = _.sortBy(DigiWebApp.Booking.find(), function (booking) {
+	        	return booking.get("timeStampStart");
+	    });
         var openBookings = null;
 
-        if (bookings.length > 0) {
-            openBookings = _.select(bookings, function(b) {
+        if (bookingsSorted.length > 0) {
+            openBookings = _.select(bookingsSorted, function(b) {
                 if (b) return b.get('isCurrent') === true;
             });
         }
@@ -183,7 +186,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr was ' + this.get('currentBookingStr'));
 
-            this.set('currentBooking', openBookings[0]);
+            this.set('currentBooking', openBookings[openBookings.length - 1]);
             this.set('currentBookingStr', this.buildBookingStr(this.currentBooking));
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
@@ -967,7 +970,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    // close open booking 
 	    if (that.currentBooking) {
 
-	    	bookingWasClosed = that.currentBooking.closeBooking(location)
+	        bookingWasClosed = that.currentBooking.closeBooking(location);
 
 	    	if (bookingWasClosed) {
 	    		
@@ -1092,6 +1095,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 	    DigiWebApp.SelectionController.useSelections = NO;
 
 	    var finishBooking = function() {
+            // Nur die neueste offene Buchung ist korrekt, evtl. vorhandene ältere löschen.
+	        that.loescheOffeneBuchungen(true);
+
 	    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 	    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("Kommunikation mit ServiceApp beendet");
 		    if (that.autoSend()) {
@@ -1150,9 +1156,14 @@ DigiWebApp.BookingController = M.Controller.extend({
 						finishBooking();
 					};
 					var idsToPoll = [];
-					if (DigiWebApp.BookingController.currentBooking !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBooking.m_id); }
-					if (DigiWebApp.BookingController.currentBookingClosed !== null) { idsToPoll.push(DigiWebApp.BookingController.currentBookingClosed.m_id); }
-					DigiWebApp.ServiceAppController.pollBookings(idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
+					if (DigiWebApp.BookingController.currentBooking !== null) {
+					    idsToPoll.push(DigiWebApp.BookingController.currentBooking.m_id);
+					}
+					if (DigiWebApp.BookingController.currentBookingClosed !== null) {
+					    idsToPoll.push(DigiWebApp.BookingController.currentBookingClosed.m_id);
+					}
+					DigiWebApp.ServiceAppController.pollBookings(
+                        idsToPoll, checkForOK, finishBooking, DigiWebApp.SettingsController.getSetting('GPSTimeOut'));
 				};
 				var continueFunc = function() {
 					if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("put currentBooking");
@@ -1811,16 +1822,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , closeDay: function() {
     	var that = DigiWebApp.BookingController;
-    	try{DigiWebApp.ApplicationController.vibrate();}catch(e19){}
+    	try { DigiWebApp.ApplicationController.vibrate(); } catch(e19) {}
         if (that.currentBooking) {
-        	        	
-    		var myTimeStampEnd = null;
-//    		try {
-//    			myTimeStampEnd = DigiWebApp.BookingController.currentBookingTimesStampBook.getTime();
-//    		} catch (e2) {
-    			var timeEnd = new Date();
-    			myTimeStampEnd = timeEnd.getTime();
-//    		}
+
+    		var timeEnd = new Date();
+  			var myTimeStampEnd = timeEnd.getTime();
 
     		if (
     		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
@@ -1832,7 +1838,10 @@ DigiWebApp.BookingController = M.Controller.extend({
     			    window.clearTimeout(t1);
     			    $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('red');
 			    }, 500);
-    			if (DigiWebApp.DashboardPage.content.list.selectedItem) $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+    			if (DigiWebApp.DashboardPage.content.list.selectedItem) {
+                    $('#' + DigiWebApp.DashboardPage.content.list.selectedItem.id).removeClass('selected');
+                }
+                writeToLog("BookingController.closeDay(): Feierabendbuchung zu kurz");
     			DigiWebApp.ApplicationController.nativeAlertDialogView({
 		              title: M.I18N.l('bookingTooShort')
 		            , message: M.I18N.l('bookingTooShortMsg')
@@ -1884,7 +1893,13 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        	}
 	        }	        
         } else {
-        	that.closeDayWithRemark();           					
+            writeToLog("BookingController: Keine Buchung offen für Feierabendbuchung");
+
+    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
+            DigiWebApp.ApplicationController.nativeAlertDialogView({
+                  title: M.I18N.l('hint')
+                , message: M.I18N.l('noOpenBookings')
+            });
         }
     }
     
@@ -1904,21 +1919,23 @@ DigiWebApp.BookingController = M.Controller.extend({
             bookingWasClosed = that.currentBooking.closeBooking(location);
 
 	    	if (bookingWasClosed) {
-	    		
-				that.currentBooking.removeAsCurrent();
-				
-			} else {
+		        that.currentBooking.removeAsCurrent();
+		    } else {
+                writeToLog("BookingController.closeDayWithRemarkWithPosition(): Feierabendbuchung zu kurz");
 				
 		        DigiWebApp.ApplicationController.nativeAlertDialogView({
 		              title: M.I18N.l('bookingTooShort')
 		            , message: M.I18N.l('bookingTooShortMsg')
 		        });
-		        
 			}
 	    	
 			that.currentBooking.save();
+
+            // Evtl. noch vorhandene Buchungen mit "isCurrent = true" löschen 
+            // - nach Feierabend darf es diese nicht geben.
+            that.loescheOffeneBuchungen(false);
 			
-        	try{that.clearBookingNotification();}catch(e){}
+        	try { that.clearBookingNotification(); } catch(e) {}
 
 			if (bookingWasClosed) {
 				that.currentBookingClosed = that.currentBooking;
@@ -1927,12 +1944,6 @@ DigiWebApp.BookingController = M.Controller.extend({
         	DigiWebApp.SettingsController.setSetting("currentTimezoneOffset", null);
 	    	DigiWebApp.SettingsController.setSetting("currentTimezone", null);
         } else {
-            //M.DialogView.alert({
-    		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-            DigiWebApp.ApplicationController.nativeAlertDialogView({
-                  title: M.I18N.l('hint')
-                , message: M.I18N.l('noOpenBookings')
-            });
             return;
         }
 
@@ -1970,7 +1981,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                     localStorage.getItem(DigiWebApp.EmployeeController.empSelectionKey));
 	            localStorage.removeItem(DigiWebApp.EmployeeController.empSelectionKey);
 	            // set employee state back
-	            if(DigiWebApp.EmployeeController.getEmployeeState() == 2) {
+	            if (DigiWebApp.EmployeeController.getEmployeeState() == 2) {
 	                DigiWebApp.EmployeeController.setEmployeeState(1);
 	            }
 	            //M.DialogView.alert({
@@ -1993,7 +2004,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 						if (DigiWebApp.SettingsController.getSetting("debug"))  console.log(datensaetze.length + " Datensätze empfangen");
 						_.each(datensaetze, function(datensatzObj) {
 							try {
-								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("speichere gepullten Datensatz " + datensatzObj.m_id);
+								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("speichere gepollten Datensatz " + datensatzObj.m_id);
 								var modelBooking = _.find(DigiWebApp.Booking.find(), function(b) { return (b.m_id === datensatzObj.m_id);});
 								var datensatz = datensatzObj.record;
 								if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("modelBooking: ", modelBooking);
@@ -2053,6 +2064,37 @@ DigiWebApp.BookingController = M.Controller.extend({
 				finishBooking();
 			}
 		}
+    }
+
+    , loescheOffeneBuchungen: function(nichtNeueste) {
+    	var bookingsSorted = _.sortBy(DigiWebApp.Booking.find(), function (booking) {
+	        	return booking.get("timeStampStart");
+	    });
+        var openBookings = null;
+
+        if (bookingsSorted.length > 0) {
+            openBookings = _.select(bookingsSorted, function(b) {
+                if (b != null) {
+                    return b.get('isCurrent') === true;
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        if (openBookings && openBookings.length > 0) {
+            var ende = openBookings.length;
+            if (nichtNeueste === true) {
+                ende -= 1;
+            }
+            for (var i = 0; i < ende; i++) {
+                writeToLog("BookingController.loescheOffeneBuchungen(" + nichtNeueste + ") Loesche Buchung"
+                    + " timeStampStart=" + openBookings[i].timeStampStart 
+                    + " positionId=" + openBookings[i].positionId
+                    + " activityId=" + openBookings[i].activityId);
+                openBookings[i].del();
+            }
+        }
     }
     
     , loadSignatures: function(bookings, successCallback) {
