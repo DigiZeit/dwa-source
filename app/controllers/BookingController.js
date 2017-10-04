@@ -1858,8 +1858,6 @@ DigiWebApp.BookingController = M.Controller.extend({
                     return;
                 }
 
-		        that.feierabendbuchungInBearbeitung = true;
-
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
     			var t2 = window.setTimeout(function() {
     			    window.clearTimeout(t2);
@@ -1876,7 +1874,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (that.istEditTimeDataNoetig() || featureUebernachtungskosten) {
 						// if remark or related feature active: go to remark page
 						that.refreshCurrentBooking(false);
-        //TODO Was wenn der Benutzer von RemarkPage oder SpesenPage woanders hingeht???
 						DigiWebApp.NavigationController.toRemarkPage(function () {
                             // Freischaltung 404: Button-Menü
 			    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
@@ -1884,12 +1881,10 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    			} else {
 				        		DigiWebApp.NavigationController.backToDashboardPagePOP();
 			    			}
-			    			that.closeDayWithRemark();           					
-    		                that.feierabendbuchungInBearbeitung = false;
+			    			that.closeDayWithRemark();
 						}, /* istFeierabendBuchung */ true);
 			        } else {
 			        	that.closeDayWithRemark();
-    		            that.feierabendbuchungInBearbeitung = false;
 			        }
 	        	};
 
@@ -1922,7 +1917,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , closeDayWithRemark: function() {
     	var that = this;
     	that.currentBookingTimesStampBook = new Date();
-        //TODO feierabendbuchung... erst hier auf true setzen?
+        that.feierabendbuchungInBearbeitung = true;
 
     	that.getBookingLocation(that.closeDayWithRemarkWithPosition);
     }
@@ -1975,9 +1970,9 @@ DigiWebApp.BookingController = M.Controller.extend({
 		}
 		
         var finishBooking = function() {
-            //TODO Hier feierabendbuchung... auf false setzen?
-
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
+
+            that.feierabendbuchungInBearbeitung = false;
 
             var notificationMessage = M.I18N.l('abwesend');
     		localStorage.setItem(DigiWebApp.ApplicationController.storagePrefix + '_' + 'notificationMessage', notificationMessage);
