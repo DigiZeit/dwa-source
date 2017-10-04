@@ -54,6 +54,11 @@ DigiWebApp.BookingController = M.Controller.extend({
      */
     , istKolonnenaenderung: false
 
+    /** Flag, ob aktuell eine Feierabendbuchung in Bearbeitung ist.
+     * Dient zum Verhindern doppelter Buchungsvorgänge.
+     */
+    , feierabendbuchungInBearbeitung: false
+
     /**
      * Arrays of booking objects (model records).
      * Data for listview on time data page (open bookings)
@@ -1099,7 +1104,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 	        that.loescheOffeneBuchungen(true);
 
 	    	DigiWebApp.ApplicationController.DigiLoaderView.hide();
-	    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("Kommunikation mit ServiceApp beendet");
+	    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("BookingController finishBooking");
 		    if (that.autoSend()) {
 		    	that.sendCurrentBookings();
 		    } else {
@@ -1828,10 +1833,10 @@ DigiWebApp.BookingController = M.Controller.extend({
     		var timeEnd = new Date();
   			var myTimeStampEnd = timeEnd.getTime();
 
-    		if (
-    		      (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
-    		   && ((that.currentBooking.get("timeStampEnd") == null) || (that.currentBooking.get("timeStampEnd") == "") || (parseIntRadixTen(that.currentBooking.get("timeStampEnd")) == 0))
-    		
+    		if (  (M.Date.create(that.currentBooking.get("timeStampStart")).format('HH:MM') == M.Date.create(myTimeStampEnd).format('HH:MM')) 
+    		   && ((that.currentBooking.get("timeStampEnd") == null) 
+                    || (that.currentBooking.get("timeStampEnd") == "") 
+                    || (parseIntRadixTen(that.currentBooking.get("timeStampEnd")) == 0))
     		) {
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('red');
     			var t1 = window.setTimeout(function() {
@@ -1846,13 +1851,21 @@ DigiWebApp.BookingController = M.Controller.extend({
 		              title: M.I18N.l('bookingTooShort')
 		            , message: M.I18N.l('bookingTooShortMsg')
 		        });
-		        return null;
+		        return;
 	        } else {
+                if (that.feierabendbuchungInBearbeitung === true) {
+                    writeToLog("BookingController.closeDay() Feierabendbuchung schon in Bearbeitung!");
+                    return;
+                }
+
+		        that.feierabendbuchungInBearbeitung = true;
+
     			$('#' + DigiWebApp.BookingPage.content.grid.id).addClass('green');
     			var t2 = window.setTimeout(function() {
     			    window.clearTimeout(t2);
     			    $('#' + DigiWebApp.BookingPage.content.grid.id).removeClass('green');
 			    }, 500);
+
     			var buchenCallback = function () {
     			    // Bei Feierabendbuchung aus den normalen Gründen (siehe istEditTimeDataNoetig())
     			    // auf die EditTimeDataPage gehen, und zusätzlich wenn Bohle-Reisekostenabwicklung 
@@ -1863,6 +1876,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					if (that.istEditTimeDataNoetig() || featureUebernachtungskosten) {
 						// if remark or related feature active: go to remark page
 						that.refreshCurrentBooking(false);
+        //TODO Was wenn der Benutzer von RemarkPage oder SpesenPage woanders hingeht???
 						DigiWebApp.NavigationController.toRemarkPage(function () {
                             // Freischaltung 404: Button-Menü
 			    			if (DigiWebApp.SettingsController.featureAvailable('404')) {
@@ -1871,9 +1885,11 @@ DigiWebApp.BookingController = M.Controller.extend({
 				        		DigiWebApp.NavigationController.backToDashboardPagePOP();
 			    			}
 			    			that.closeDayWithRemark();           					
+    		                that.feierabendbuchungInBearbeitung = false;
 						}, /* istFeierabendBuchung */ true);
 			        } else {
 			        	that.closeDayWithRemark();
+    		            that.feierabendbuchungInBearbeitung = false;
 			        }
 	        	};
 
@@ -1906,6 +1922,8 @@ DigiWebApp.BookingController = M.Controller.extend({
     , closeDayWithRemark: function() {
     	var that = this;
     	that.currentBookingTimesStampBook = new Date();
+        //TODO feierabendbuchung... erst hier auf true setzen?
+
     	that.getBookingLocation(that.closeDayWithRemarkWithPosition);
     }
             
@@ -1957,6 +1975,8 @@ DigiWebApp.BookingController = M.Controller.extend({
 		}
 		
         var finishBooking = function() {
+            //TODO Hier feierabendbuchung... auf false setzen?
+
         	DigiWebApp.ApplicationController.DigiLoaderView.hide();
 
             var notificationMessage = M.I18N.l('abwesend');
