@@ -2089,9 +2089,9 @@ DigiWebApp.BookingController = M.Controller.extend({
             }
             for (var i = 0; i < ende; i++) {
                 writeToLog("BookingController.loescheOffeneBuchungen(" + nichtNeueste + ") Loesche Buchung"
-                    + " timeStampStart=" + openBookings[i].timeStampStart 
-                    + " positionId=" + openBookings[i].positionId
-                    + " activityId=" + openBookings[i].activityId);
+                    + " timeStampStart=" + openBookings[i].get('timeStampStart') 
+                    + " positionId=" + openBookings[i].get('positionId')
+                    + " activityId=" + openBookings[i].get('activityId'));
                 openBookings[i].del();
             }
         }
