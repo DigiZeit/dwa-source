@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7315"
-	version 	= "1.9.0.7315">
+	versionCode = "7316"
+	version 	= "1.9.0.7316">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -128,7 +128,8 @@
 
   <!-- iOS9 -->
   <platform name="ios">
-    <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" />
+    <plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" />
+    <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" />
     <content src="http://localhost:12344" />
     <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
     <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->
@@ -153,7 +154,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7315</string>
+    <string>7316</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
