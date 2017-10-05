@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "7309"
-	version 	= "1.9.0.7309">
+	versionCode = "7310"
+	version 	= "1.9.0.7310">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -18,7 +18,7 @@
   </author>
 
   <gap:platform name="ios" />
-  <gap:platform name="android" minVersion="2.2" />
+  <gap:platform name="android" minVersion="4.0" />
   <gap:platform name="winphone" />
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
@@ -28,7 +28,7 @@
 
   <preference name="phonegap-version" value="cli-6.5.0" />
   <!-- android: Minimum Android SDK version. 8 = Android 2.2 -->
-  <preference name="android-minSdkVersion" value="8" />
+  <preference name="android-minSdkVersion" value="14" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-installLocation" value="auto" />
   <!-- all: hides the status bar at the top of the screen -->
@@ -149,7 +149,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>7309</string>
+    <string>7310</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
