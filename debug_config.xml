@@ -42,6 +42,7 @@
   </platform>
   <platform name="android">
     <preference name="orientation" value="default" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
