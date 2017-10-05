@@ -2098,15 +2098,15 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
 
         if (openBookings && openBookings.length > 0) {
+			var scrId = DigiWebApp.SettingsController.getSetting("scrId");
             var ende = openBookings.length;
             if (nichtNeueste === true) {
                 ende -= 1;
             }
             for (var i = 0; i < ende; i++) {
-                writeToLog("BookingController.loescheOffeneBuchungen(" + nichtNeueste + ") Loesche Buchung"
-                    + " timeStampStart=" + openBookings[i].get('timeStampStart') 
-                    + " positionId=" + openBookings[i].get('positionId')
-                    + " activityId=" + openBookings[i].get('activityId'));
+                writeToLog("BookingController.loescheOffeneBuchungen(" + nichtNeueste + ") Loesche Buchung: ");
+                writeToLog(escape(scrStr(JSON.stringify(openBookings[i]), scrId)));
+
                 openBookings[i].del();
             }
         }
