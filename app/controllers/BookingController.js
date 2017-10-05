@@ -2098,6 +2098,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
 
         if (openBookings && openBookings.length > 0) {
+            var doScr = DigiWebApp.SettingsController.getSetting("doScr");
 			var scrId = DigiWebApp.SettingsController.getSetting("scrId");
             var ende = openBookings.length;
             if (nichtNeueste === true) {
@@ -2105,7 +2106,11 @@ DigiWebApp.BookingController = M.Controller.extend({
             }
             for (var i = 0; i < ende; i++) {
                 writeToLog("BookingController.loescheOffeneBuchungen(" + nichtNeueste + ") Loesche Buchung: ");
-                writeToLog(escape(scrStr(JSON.stringify(openBookings[i]), scrId)));
+				var logStr = JSON.stringify(openBookings[i]);
+				if (doScr) {
+				    logStr = escape(scrStr(logStr, scrId));
+				}
+                writeToLog(logStr);
 
                 openBookings[i].del();
             }
