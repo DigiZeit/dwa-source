@@ -116,6 +116,11 @@
     <content src="http://localhost:12344" />
     <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
     <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->
+    <feature name="CDVWKWebViewEngine">
+      <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
   </platform>
 
   <!-- Plugin and config to enable and restrict network access -->
