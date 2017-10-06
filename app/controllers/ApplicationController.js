@@ -805,7 +805,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				      id:         '4711'
 				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
-                    , icon:       'res://Icon'
+                    , icon:       'res://theme/images/Icon.png'
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
