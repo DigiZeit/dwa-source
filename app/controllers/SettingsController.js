@@ -1847,8 +1847,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
             else {
                 writeToLog("Keine Settings mit altem Präfix gefunden");
             }
+            result = that.HasCredentials(); 
         }
-        result = that.HasCredentials(); 
     	if (!result) {
     		if (that.showCredentialsAlert) {
 				DigiWebApp.ApplicationController.enforceChefToolOnly();

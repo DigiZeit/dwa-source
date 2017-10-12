@@ -1374,14 +1374,19 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 
     , loggeDateinamen: function() {
-        var myErrorCallback = function() {
-            writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir()");
+        var myErrorCallback = function(error) {
+            writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir(): " + error.code);
         }
 	    var operation = function(dir) {
-	        writeToLog("Inhalt des Verzeichnisses " + dir);
+	        if (typeof(dir) != "object" || typeof(dir.createReader) != "function") {
+	            return;
+	        }
+
+	        writeToLog("Inhalt des Verzeichnisses");
+
 	        dir.createReader().readEntries(function(entries) {
 	            _.each(entries, function(entry) {
-	                writeToLog(entry);
+	                writeToLog(entry.name);
 	            });
 	        });
 	    }
