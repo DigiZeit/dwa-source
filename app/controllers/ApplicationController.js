@@ -805,7 +805,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				      id:         '4711'
 				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
-                    , icon:       'res://theme/images/Icon.png'
+                    , icon:       'res://icon.png'
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
@@ -1260,6 +1260,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        writeToLog('Connection type: ' + navigator.connection.type);
 	    }
 
+	    this.loggeDateinamen();
+
         DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
             if (this.page) {
                 M.Controller.switchToTab(this,YES);
@@ -1360,6 +1362,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         	DigiWebApp.ApplicationController.updateModels(fortfahren);
         }         
     }
+
+    , loggeDateinamen: function() {
+	    //if (typeof (navigator.connection) !== "undefined") {
+	    //    writeToLog('Connection type: ' + navigator.connection.type);
+	    //}
+
+        //logDirectory.createReader().readEntries(function(entries){
+		//	_.each(entries, function(entry) {
+		//	    writeToLog(entry);
+		//	});
+	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
      *  die GUI-Elemente der SettingsPage je nach Situation aus- oder einzublenden.
