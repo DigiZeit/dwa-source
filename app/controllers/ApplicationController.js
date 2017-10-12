@@ -1260,6 +1260,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        writeToLog('Connection type: ' + navigator.connection.type);
 	    }
 
+	    this.loggeLocalStorage();
+
 	    this.loggeDateinamen();
 
         DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
@@ -1363,20 +1365,27 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         }         
     }
 
+    , loggeLocalStorage: function() {
+        writeToLog("LocalStorage:");
+	    for (var i = 0; i < localStorage.length; i++) {
+	        var k = localStorage.key(i);
+	        writeToLog(k + ": " + localStorage.getItem(k));
+	    }
+	}
+
     , loggeDateinamen: function() {
         var myErrorCallback = function() {
             writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir()");
         }
 	    var operation = function(dir) {
-	        var rootDir = "/mnt/sdcard";
-	        writeToLog("Inhalt des Verzeichnisses " + rootDir);
-	        rootDir.createReader().readEntries(function(entries) {
+	        writeToLog("Inhalt des Verzeichnisses " + dir);
+	        dir.createReader().readEntries(function(entries) {
 	            _.each(entries, function(entry) {
 	                writeToLog(entry);
 	            });
 	        });
 	    }
-	    getDir("", operation, myErrorCallback);
+	    getDir(".", operation, myErrorCallback);
 
 	    //if (typeof (navigator.connection) !== "undefined") {
 	    //    writeToLog('Connection type: ' + navigator.connection.type);
