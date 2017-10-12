@@ -37,7 +37,7 @@ var YES = true;
  */
 var NO = false;
 
-M.LOCAL_STORAGE_PREFIX = '#m#';
+M.LOCAL_STORAGE_PREFIX = '#mo#';
 M.LOCAL_STORAGE_SUFFIX = '_';
 
 /* TODO: evaluate if the timestamp constants could be included in config file, for user's customization */

@@ -1364,14 +1364,23 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
     , loggeDateinamen: function() {
+        var myErrorCallback = function() {
+            writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir()");
+        }
+	    var operation = function(dir) {
+	        var rootDir = "/mnt/sdcard";
+	        writeToLog("Inhalt des Verzeichnisses " + rootDir);
+	        rootDir.createReader().readEntries(function(entries) {
+	            _.each(entries, function(entry) {
+	                writeToLog(entry);
+	            });
+	        });
+	    }
+	    getDir("", operation, myErrorCallback);
+
 	    //if (typeof (navigator.connection) !== "undefined") {
 	    //    writeToLog('Connection type: ' + navigator.connection.type);
 	    //}
-
-        //logDirectory.createReader().readEntries(function(entries){
-		//	_.each(entries, function(entry) {
-		//	    writeToLog(entry);
-		//	});
 	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
