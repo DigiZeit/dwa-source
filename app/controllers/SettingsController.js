@@ -1819,17 +1819,22 @@ DigiWebApp.SettingsController = M.Controller.extend({
     	var result = that.HasCredentials();
         if (!result) {
             // Keine Zugangsdaten -> gibt es welche mit dem alten Localstorage-Präfix?
-            var settings = JSON.parse(localStorage.getItem("#m#" + M.Application.name 
-                + M.LOCAL_STORAGE_SUFFIX + "Settings"));
+            var settings = null;
+            for (var i = 0; i < localStorage.length; i++) {
+                var k = localStorage.key(i);
+                if (k.indexOf("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX + "Settings") > -1) {
+                    settings = JSON.parse(localStorage.getItem(k));
+                }
+            }
             if (hasValue(settings)) {
                 var company = settings.company;
                 var password = settings.password;
-                var connectionCode = "";
-                var workerId = "";
+                var connectionCode = settings.connectionCode;
+                var workerId = settings.workerId;
                 if (hasValue(company) && hasValue(password) && hasValue(connectionCode) && hasValue(workerId)) {
                     writeToLog("Übernehme Zugangsdaten aus Settings mit altem Präfix: company=" 
                         + company + ", password=" + password + ", connectionCode=" + connectionCode 
-                        + ", workedId=" + workerId);
+                        + ", workerId=" + workerId);
                     that.setSetting("company", company);
                     that.setSetting("password", password);
                     that.setSetting("connectionCode", connectionCode);
