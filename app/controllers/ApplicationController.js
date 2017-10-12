@@ -1385,11 +1385,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            });
 	        });
 	    }
-	    getDir(".", operation, myErrorCallback);
-
-	    //if (typeof (navigator.connection) !== "undefined") {
-	    //    writeToLog('Connection type: ' + navigator.connection.type);
-	    //}
+	    getDir("DIGIWebAppLogs", operation, myErrorCallback);
 	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
