@@ -890,7 +890,40 @@ function searchForFeature(featureId) {
     return false;    
 }
 
-if(localStorage) {
+if (localStorage) {
+    // Prüfen, ob im LocalStorage der neue Präfix verwendet wird.
+    var neuerPraefix = false;
+    for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k.startsWith(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
+            neuerPraefix = true;
+            writeToLog("LocalStorage: Neuer Präfix wird verwendet");
+            break;
+        }
+    }
+    
+    // Wenn nein, schauen, ob Daten mit dem alten Präfix kopiert werden können.
+    if (!neuerPraefix) {
+        var keysToCopy = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var k = localStorage.key(i);
+            if (k.startsWith("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
+                keysToCopy.push(k);
+            }
+        }
+
+        if (keysToCopy.length > 0) {
+            writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
+            _.each(keysToCopy, function(key) {
+                var val = localStorage.getItem(key);
+                var keyNeu = key.replace("#m#", M.LOCAL_STORAGE_PREFIX);
+                localStorage.setItem(keyNeu, val);
+            });
+        } else {
+            writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
+        }
+    }
+
 	var language = null;
 	M.I18N.defaultLanguage = "de_de";
 	language = localStorage.getItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang');

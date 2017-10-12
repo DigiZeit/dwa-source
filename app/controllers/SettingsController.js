@@ -1804,51 +1804,51 @@ DigiWebApp.SettingsController = M.Controller.extend({
     		if (company && password && workerId) {
     			return true;
     		}
-    	    if (!that.credentialsAlertShown) {
-    		    that.showCredentialsAlert = YES;
-    		    that.credentialsAlertShown = true;
-    	    }
 		} catch(e7) { 
 			trackError(e7);
 		}
+    	if (!that.credentialsAlertShown) {
+    		that.showCredentialsAlert = YES;
+    		that.credentialsAlertShown = true;
+    	}
 		return false;
     }
 
     , EnforceCredentials: function() {
     	var that = this;
     	var result = that.HasCredentials();
-        if (!result) {
-            // Keine Zugangsdaten -> gibt es welche mit dem alten Localstorage-Präfix?
-            var settings = null;
-            for (var i = 0; i < localStorage.length; i++) {
-                var k = localStorage.key(i);
-                if (k.indexOf("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX + "Settings") > -1) {
-                    settings = JSON.parse(localStorage.getItem(k));
-                }
-            }
-            if (hasValue(settings)) {
-                var company = settings.company;
-                var password = settings.password;
-                var connectionCode = settings.connectionCode;
-                var workerId = settings.workerId;
-                if (hasValue(company) && hasValue(password) && hasValue(connectionCode) && hasValue(workerId)) {
-                    writeToLog("Übernehme Zugangsdaten aus Settings mit altem Präfix: company=" 
-                        + company + ", password=" + password + ", connectionCode=" + connectionCode 
-                        + ", workerId=" + workerId);
-                    that.setSetting("company", company);
-                    that.setSetting("password", password);
-                    that.setSetting("connectionCode", connectionCode);
-                    that.setSetting("workerId", workerId);
-                }
-                else {
-                    writeToLog("Keine Zugangsdaten in Settings mit altem Präfix gefunden");
-                }
-            }
-            else {
-                writeToLog("Keine Settings mit altem Präfix gefunden");
-            }
-            result = that.HasCredentials(); 
-        }
+        //if (!result) {
+        //    // Keine Zugangsdaten -> gibt es welche mit dem alten Localstorage-Präfix?
+        //    var settings = null;
+        //    for (var i = 0; i < localStorage.length; i++) {
+        //        var k = localStorage.key(i);
+        //        if (k.indexOf("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX + "Settings") > -1) {
+        //            settings = JSON.parse(localStorage.getItem(k));
+        //        }
+        //    }
+        //    if (hasValue(settings)) {
+        //        var company = settings.company;
+        //        var password = settings.password;
+        //        var connectionCode = settings.connectionCode;
+        //        var workerId = settings.workerId;
+        //        if (hasValue(company) && hasValue(password) && hasValue(connectionCode) && hasValue(workerId)) {
+        //            writeToLog("Übernehme Zugangsdaten aus Settings mit altem Präfix: company=" 
+        //                + company + ", password=" + password + ", connectionCode=" + connectionCode 
+        //                + ", workerId=" + workerId);
+        //            that.setSetting("company", company);
+        //            that.setSetting("password", password);
+        //            that.setSetting("connectionCode", connectionCode);
+        //            that.setSetting("workerId", workerId);
+        //        }
+        //        else {
+        //            writeToLog("Keine Zugangsdaten in Settings mit altem Präfix gefunden");
+        //        }
+        //    }
+        //    else {
+        //        writeToLog("Keine Settings mit altem Präfix gefunden");
+        //    }
+        //    result = that.HasCredentials(); 
+        //}
     	if (!result) {
     		if (that.showCredentialsAlert) {
 				DigiWebApp.ApplicationController.enforceChefToolOnly();

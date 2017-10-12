@@ -1390,7 +1390,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	            });
 	        });
 	    }
-	    getDir("DIGIWebAppLogs", operation, myErrorCallback);
+	    getDir("/..", operation, myErrorCallback);
 	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
