@@ -29,6 +29,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , workerId: ''
         , platform: ''
         , userAgent: ''
+        , localStoragePrefix: ''
         , skipEvents: ''
         , timeouthappened: ''
         , mapType: 'Google' // or OSM for OpenStreetMap
@@ -495,6 +496,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         		, skipEvents: DigiWebApp.ApplicationController.skipEvents
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
+                , localStoragePrefix: M.LOCAL_STORAGE_PREFIX
                 , mapType: record.get('mapType')
                 , autoTransferAfterBookTime: [{
                       value: record.get('autoTransferAfterBookTime')
@@ -682,6 +684,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             	, skipEvents: DigiWebApp.ApplicationController.skipEvents
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
+                , localStoragePrefix: M.LOCAL_STORAGE_PREFIX
                 , mapType: DigiWebApp.SettingsController.defaultsettings.get("mapType")
                 , autoTransferAfterBookTime: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoTransferAfterBookTime")
@@ -977,6 +980,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var skipEvents                     = DigiWebApp.ApplicationController.skipEvents;
         var platform                       = M.Environment.getPlatform();
         var userAgent                      = navigator.userAgent;
+        var localStoragePrefix             = M.LOCAL_STORAGE_PREFIX;
     	var mapType                        = DigiWebApp.SettingsController.getSetting('mapType');
         var autoTransferAfterBookTime      = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterBookTimeCheck').id      + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var autoTransferAfterClosingDay    = $('#' + M.ViewManager.getView('settingsPage', 'autoTransferAfterClosingDayCheck').id    + ' label.ui-checkbox-on').length > 0 ? YES : NO;
@@ -1181,6 +1185,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('skipEvents', skipEvents);
                                                     record.set('platform', platform);
                                                     record.set('userAgent', userAgent);
+                                                    record.set('localStoragePrefix', localStoragePrefix);
                                                     record.set('mapType', mapType);
                                                     record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
@@ -1287,6 +1292,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('skipEvents', skipEvents);
                                     record.set('platform', platform);
                                     record.set('userAgent', userAgent);
+                                    record.set('localStoragePrefix', localStoragePrefix);
                                     record.set('mapType', mapType);
                                     record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                     record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
@@ -1367,6 +1373,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('skipEvents', skipEvents);
                                 record.set('platform', platform);
                                 record.set('userAgent', userAgent);
+                                record.set('localStoragePrefix', localStoragePrefix);
                                 record.set('mapType', mapType);
                                 record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
@@ -1447,6 +1454,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('skipEvents', skipEvents);
                                 record.set('platform', platform);
                                 record.set('userAgent', userAgent);
+                                record.set('localStoragePrefix', localStoragePrefix);
                                 record.set('mapType', mapType);
                                 record.set('autoTransferAfterBookTime', autoTransferAfterBookTime);
                                 record.set('autoTransferAfterClosingDay', autoTransferAfterClosingDay);
@@ -1529,6 +1537,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                             	, skipEvents: skipEvents
                                 , platform: platform
                                 , userAgent: userAgent
+                                , localStoragePrefix: localStoragePrefix
                                 , mapType: mapType
                                 , autoTransferAfterBookTime: autoTransferAfterBookTime
                                 , autoTransferAfterClosingDay: autoTransferAfterClosingDay
@@ -1817,38 +1826,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
     , EnforceCredentials: function() {
     	var that = this;
     	var result = that.HasCredentials();
-        //if (!result) {
-        //    // Keine Zugangsdaten -> gibt es welche mit dem alten Localstorage-Präfix?
-        //    var settings = null;
-        //    for (var i = 0; i < localStorage.length; i++) {
-        //        var k = localStorage.key(i);
-        //        if (k.indexOf("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX + "Settings") > -1) {
-        //            settings = JSON.parse(localStorage.getItem(k));
-        //        }
-        //    }
-        //    if (hasValue(settings)) {
-        //        var company = settings.company;
-        //        var password = settings.password;
-        //        var connectionCode = settings.connectionCode;
-        //        var workerId = settings.workerId;
-        //        if (hasValue(company) && hasValue(password) && hasValue(connectionCode) && hasValue(workerId)) {
-        //            writeToLog("Übernehme Zugangsdaten aus Settings mit altem Präfix: company=" 
-        //                + company + ", password=" + password + ", connectionCode=" + connectionCode 
-        //                + ", workerId=" + workerId);
-        //            that.setSetting("company", company);
-        //            that.setSetting("password", password);
-        //            that.setSetting("connectionCode", connectionCode);
-        //            that.setSetting("workerId", workerId);
-        //        }
-        //        else {
-        //            writeToLog("Keine Zugangsdaten in Settings mit altem Präfix gefunden");
-        //        }
-        //    }
-        //    else {
-        //        writeToLog("Keine Settings mit altem Präfix gefunden");
-        //    }
-        //    result = that.HasCredentials(); 
-        //}
     	if (!result) {
     		if (that.showCredentialsAlert) {
 				DigiWebApp.ApplicationController.enforceChefToolOnly();

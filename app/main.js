@@ -891,39 +891,42 @@ function searchForFeature(featureId) {
 }
 
 if (localStorage) {
-    // Prüfen, ob im LocalStorage der neue Präfix verwendet wird.
-    var neuerPraefix = false;
-    for (var i = 0; i < localStorage.length; i++) {
-        var k = localStorage.key(i);
-        if (k.startsWith(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
-            neuerPraefix = true;
-            // Logging ist zu diesem Zeitpunkt noch nicht möglich, verursacht:
-            // "Uncaught TypeError: window.requestFileSystem is not a function"
-            //writeToLog("LocalStorage: Neuer Präfix wird verwendet");
-            break;
+    // Prüfen, ob im LocalStorage ein geänderter Präfix verwendet wird.
+    var currentPrefix = localStorage.getItem(
+        M.Application.name + M.LOCAL_STORAGE_SUFFIX + DigiWebApp.ApplicationController.CONSTKeyLocalStoragePrefix);
+
+    var lastWebViewStr = localStorage.getItem(
+        M.Application.name + M.LOCAL_STORAGE_SUFFIX + DigiWebApp.ApplicationController.CONSTKeyLastWebViewVersion);
+    var lastWebView = null;
+    if (hasValue(lastWebViewStr)) {
+        lastWebView = parseInt(lastWebViewStr);
+    }
+    var newWebView = getWebViewVersion();
+    localStorage.setItem(
+        M.Application.name + M.LOCAL_STORAGE_SUFFIX + DigiWebApp.ApplicationController.CONSTKeyLastWebViewVersion, 
+        newWebView.toString());
+
+    // Logging ist zu diesem Zeitpunkt noch nicht möglich, verursacht:
+    // "Uncaught TypeError: window.requestFileSystem is not a function"
+    //writeToLog("LastWebViewVersion: " + newWebView);
+    
+    // Wenn ein geänderter Präfix verwendet wird, dann wurde kopiert und weitere Prüfungen erübrigen sich.
+    // Wenn nein, dann prüfen, ob ein Wechsel von einem älteren zum problematischen WebView 61
+    // stattgefunden hat.
+    if (!hasValue(currentPrefix)) {
+        if (  (!hasValue(lastWebView) && newWebView >= 61 * 100 * 10000 * 1000)
+            || (hasValue(lastWebView) && lastWebView < 61 * 100 * 10000 * 1000 && newWebView >= 61 * 100 * 10000 * 1000)) {
+            // Es gab den Wechsel, also Kopie mit geändertem Präfix anlegen und diesen Präfix merken.
+            currentPrefix = "#mo#";
+            copyLocalStorage(M.LOCAL_STORAGE_PREFIX, currentPrefix);
+            localStorage.setItem(
+                M.Application.name + M.LOCAL_STORAGE_SUFFIX + DigiWebApp.ApplicationController.CONSTKeyLocalStoragePrefix, 
+                currentPrefix);
         }
     }
-    
-    // Wenn nein, schauen, ob Daten mit dem alten Präfix kopiert werden können.
-    if (!neuerPraefix) {
-        var keysToCopy = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            var k = localStorage.key(i);
-            if (k.startsWith("#m#" + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
-                keysToCopy.push(k);
-            }
-        }
 
-        if (keysToCopy.length > 0) {
-            //writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
-            _.each(keysToCopy, function(key) {
-                var val = localStorage.getItem(key);
-                var keyNeu = key.replace("#m#", M.LOCAL_STORAGE_PREFIX);
-                localStorage.setItem(keyNeu, val);
-            });
-        } else {
-            //writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
-        }
+    if (hasValue(currentPrefix)) {
+        M.LOCAL_STORAGE_PREFIX = currentPrefix;
     }
 
 	var language = null;
@@ -933,6 +936,41 @@ if (localStorage) {
 		localStorage.setItem(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX + 'lang', 'de_de');
 		try{location.reload()}catch(e){}
 	}
+}
+
+function getWebViewVersion() {
+    var versionStr = navigator.userAgent.match(/.*Chrome\/(.*)\s+.*/)[1];
+    var versions = versionStr.split(".");
+    if (versions.length !== 4) {
+        // Version ist nicht vorhanden oder nicht wie erwartet aufgebaut.
+        return 0;
+    }
+    var versionNumber = parseInt(versions[0]) * 100 * 10000 * 1000 +
+        parseInt(versions[1]) * 10000 * 1000 +
+        parseInt(versions[2]) * 1000 +
+        parseInt(versions[3]);
+    return versionNumber;
+}
+
+function copyLocalStorage(oldPrefix, newPrefix) {
+    var keysToCopy = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k.startsWith(oldPrefix + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
+            keysToCopy.push(k);
+        }
+    }
+
+    if (keysToCopy.length > 0) {
+        //writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
+        _.each(keysToCopy, function(key) {
+            var val = localStorage.getItem(key);
+            var keyNeu = key.replace(oldPrefix, newPrefix);
+            localStorage.setItem(keyNeu, val);
+        });
+    } else {
+        //writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
+    }
 }
 
 // reduce pre-rendering on BlackBerry to reduce time spent on native-splash

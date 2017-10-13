@@ -21,6 +21,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	, CONSTApplicationQuota: 20*1024*1024
 	
 	, CONSTVibrateDuration: 100
+
+    , CONSTKeyLocalStoragePrefix: "LocalStoragePrefix"
+
+    , CONSTKeyLastWebViewVersion: "LastWebViewVersion"
 	
 	// Namespace for XML-Results in IE
 	// gets reset in getOrdersFromRemoteSuccess
@@ -1141,9 +1145,8 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                 confirm: {
                       target: this
                     , action: function() {
-                        // only clears entries of the app
-                        // (with prefix: M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX)            
-        				var zuruecksetzen = function(mycompany, mypassword, myconnectionCode, myworkerId) {
+        				var zuruecksetzen = function(mycompany, mypassword, myconnectionCode, 
+                                                     myworkerId, myStoragePrefix, myWebViewVersion) {
         					writeToLog("DIGI-WebApp wird zurückgesetzt");
         					DigiWebApp.SettingsController.credentialsAlertShown = false;
 	    					DigiWebApp.ApplicationController.deleteAllData(); 
@@ -1158,12 +1161,24 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                    	DigiWebApp.SettingsController.showIOSMessage = false;
 	                    	//console.log(mycompany, mypassword, myconnectionCode, myworkerId);
 	                    	if (mycompany !== null && mypassword !== null && myconnectionCode !== null && myworkerId !== null) {
-	        					writeToLog("Zugangsdaten blieben erhalten");
+	        					writeToLog("Zugangsdaten, LocalStoragePrefix und LastWebViewVersion blieben erhalten");
 	                    		DigiWebApp.SettingsController.init(YES,YES,YES);
 								DigiWebApp.SettingsController.setSetting("company", mycompany, YES);
 								DigiWebApp.SettingsController.setSetting("password", mypassword, YES);
 								DigiWebApp.SettingsController.setSetting("connectionCode", myconnectionCode, YES);
 								DigiWebApp.SettingsController.setSetting("workerId", myworkerId, YES);
+                                if (hasValue(localStorage)) {
+                                    if (hasValue(myStoragePrefix)) {
+                                        localStorage.setItem(M.Application.name + M.LOCAL_STORAGE_SUFFIX +
+                                            DigiWebApp.ApplicationController.CONSTKeyLocalStoragePrefix,
+                                            myStoragePrefix);
+                                    }
+                                    if (hasValue(myWebViewVersion)) {
+                                        localStorage.setItem(M.Application.name + M.LOCAL_STORAGE_SUFFIX +
+                                            DigiWebApp.ApplicationController.CONSTKeyLastWebViewVersion,
+                                            myWebViewVersion);
+                                    }
+                                }
 								DigiWebApp.ApplicationController.doRestartApp();
 	                    	}
 	                        DigiWebApp.ApplicationController.init(true);
@@ -1177,11 +1192,20 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		        	                  confirm: {
 			    	                        target: this
 			    	                      , action: function() {
-			    								var Scompany = DigiWebApp.SettingsController.getSetting("company");
-			    								var Spassword = DigiWebApp.SettingsController.getSetting("password");
-			    								var SconnectionCode = DigiWebApp.SettingsController.getSetting("connectionCode");
-			    								var SworkerId = DigiWebApp.SettingsController.getSetting("workerId");
-			    								zuruecksetzen(Scompany, Spassword, SconnectionCode, SworkerId);
+			    								var savedCompany = DigiWebApp.SettingsController.getSetting("company");
+			    								var savedPassword = DigiWebApp.SettingsController.getSetting("password");
+			    								var savedConnectionCode = DigiWebApp.SettingsController.getSetting("connectionCode");
+			    								var savedWorkerId = DigiWebApp.SettingsController.getSetting("workerId");
+				                                var savedLocalStoragePrefix =
+				                                    localStorage.getItem(
+				                                        M.Application.name + M.LOCAL_STORAGE_SUFFIX + 
+                                                        DigiWebApp.ApplicationController.CONSTKeyLocalStoragePrefix);
+                                                var savedLastWebViewVersion = 
+				                                    localStorage.getItem(
+				                                        M.Application.name + M.LOCAL_STORAGE_SUFFIX + 
+                                                        DigiWebApp.ApplicationController.CONSTKeyLastWebViewVersion);
+			    								zuruecksetzen(savedCompany, savedPassword, savedConnectionCode, 
+                                                              savedWorkerId, savedLocalStoragePrefix, savedLastWebViewVersion);
 			    	            		  }
 		        	            	}
 			                        , cancel: {
