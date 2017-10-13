@@ -307,7 +307,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 	    // open filesystem
 		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
 			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-			    window.webkitRequestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    window.webkitRequestFileSystem(window.PERSISTENT, grantedBytes, function(fileSystem) {
 			    	
 			    	// get dataDirectory from filesystem (create if not exists)
 			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
@@ -346,7 +346,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 
 		} else {
 	    
-		    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		    window.requestFileSystem(window.PERSISTENT, 0, function(fileSystem) {
 		    	
 		    	// get dataDirectory from filesystem (create if not exists)
 		    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {
