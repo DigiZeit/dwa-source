@@ -1393,7 +1393,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	                return;
 	            }
 
-	            writeToLog("Inhalt des Verzeichnisses " + dir.name);
+	            writeToLog("Inhalt des Verzeichnisses '" + dir.name + "'");
 		        var typ = "F";
 
 	            dir.createReader().readEntries(function(entries) {
@@ -1401,7 +1401,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                         if (entry.isDirectory) {
                             typ = "D ";
                         } else {
-                            type = "F ";
+                            typ = "F ";
                         }
 	                    writeToLog(typ + entry.name);
 	                });
