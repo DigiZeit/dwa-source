@@ -1380,13 +1380,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir(): " + error.code);
         }
 
-	    // check if LocalFileSystem is defined
 	    if (typeof(window.requestFileSystem) == "undefined") {
             writeToLog("Inhalt des Verzeichnisses auslesen: window.requestFileSystem undefined");
             return;
         }
 
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+		window.requestFileSystem(window.PERSISTENT, 0, function(fileSystem) {
 
 	    	fileSystem.root.getDirectory("/.", {create: false, exclusive: true}, function(dir) {
 	    		
