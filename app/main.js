@@ -297,7 +297,6 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 			
 		var fileName = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2) + "-" + ("0" + now.getDate()).slice(-2) + "_DIGI-WebApp.log.txt";
 			
-		// check if LocalFileSystem is defined
 		if (typeof(window.requestFileSystem) == "undefined" && typeof(navigator.webkitPersistentStorage) == "undefined") {
 			// ohne filesystem kein logging möglich: logging-anfragen ohne Fehler ignorieren
 			successCallback("no filesystem available");
@@ -308,7 +307,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 	    // open filesystem
 		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
 			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-			    window.requestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
+			    window.webkitRequestFileSystem(PERSISTENT, grantedBytes, function(fileSystem) {
 			    	
 			    	// get dataDirectory from filesystem (create if not exists)
 			    	fileSystem.root.getDirectory("DIGIWebAppLogs", {create: true, exclusive: false}, function(dataDirectory) {

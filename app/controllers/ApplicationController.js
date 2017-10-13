@@ -805,7 +805,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				      id:         '4711'
 				    , message:    that.notificationMessage  // The message that is displayed
 				    , title:      'DIGI-WebApp'  // The title of the message
-                    , icon:       'res://icon.png'
+                    , icon:       'file:///android_asset/www/theme/images/Icon.png'
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
@@ -1260,11 +1260,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        writeToLog('Connection type: ' + navigator.connection.type);
 	    }
 
-	    this.loggeLocalStorage();
+	    if (DigiWebApp.SettingsController.getSetting("debug")) {
+	        this.loggeLocalStorage();
 
-	    this.loggeDateinamen();
+	        this.loggeDateinamen();
+	    }
 
-        DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
+	    DigiWebApp.TabBar.tabItem1.internalEvents.tap.action = function () {
             if (this.page) {
                 M.Controller.switchToTab(this,YES);
             } else {
@@ -1377,20 +1379,38 @@ DigiWebApp.ApplicationController = M.Controller.extend({
         var myErrorCallback = function(error) {
             writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir(): " + error.code);
         }
-	    var operation = function(dir) {
-	        if (typeof(dir) != "object" || typeof(dir.createReader) != "function") {
-	            return;
-	        }
 
-	        writeToLog("Inhalt des Verzeichnisses");
+	    // check if LocalFileSystem is defined
+	    if (typeof(window.requestFileSystem) == "undefined") {
+            writeToLog("Inhalt des Verzeichnisses auslesen: window.requestFileSystem undefined");
+            return;
+        }
 
-	        dir.createReader().readEntries(function(entries) {
-	            _.each(entries, function(entry) {
-	                writeToLog(entry.name);
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+
+	    	fileSystem.root.getDirectory("/.", {create: false, exclusive: true}, function(dir) {
+	    		
+	            if (typeof(dir) != "object" || typeof(dir.createReader) != "function") {
+	                return;
+	            }
+
+	            writeToLog("Inhalt des Verzeichnisses " + dir.name);
+		        var typ = "F";
+
+	            dir.createReader().readEntries(function(entries) {
+	                _.each(entries, function(entry) {
+                        if (entry.isDirectory) {
+                            typ = "D ";
+                        } else {
+                            type = "F ";
+                        }
+	                    writeToLog(typ + entry.name);
+	                });
 	            });
-	        });
-	    }
-	    getDir("/..", operation, myErrorCallback);
+	
+		   	}, myErrorCallback); // fileSystem.root.getDirectory
+
+		}, myErrorCallback); // window.requestFileSystem
 	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
