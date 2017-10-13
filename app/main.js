@@ -897,7 +897,9 @@ if (localStorage) {
         var k = localStorage.key(i);
         if (k.startsWith(M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX)) {
             neuerPraefix = true;
-            writeToLog("LocalStorage: Neuer Präfix wird verwendet");
+            // Logging ist zu diesem Zeitpunkt noch nicht möglich, verursacht:
+            // "Uncaught TypeError: window.requestFileSystem is not a function"
+            //writeToLog("LocalStorage: Neuer Präfix wird verwendet");
             break;
         }
     }
@@ -913,14 +915,14 @@ if (localStorage) {
         }
 
         if (keysToCopy.length > 0) {
-            writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
+            //writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
             _.each(keysToCopy, function(key) {
                 var val = localStorage.getItem(key);
                 var keyNeu = key.replace("#m#", M.LOCAL_STORAGE_PREFIX);
                 localStorage.setItem(keyNeu, val);
             });
         } else {
-            writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
+            //writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
         }
     }
 

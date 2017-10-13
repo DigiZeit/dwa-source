@@ -1379,39 +1379,33 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 
     , loggeDateinamen: function() {
         var myErrorCallback = function(error) {
-            writeToLog("Inhalt des Verzeichnisses auslesen: Fehler in getDir(): " + error.code);
+            writeToLog("Inhalt des Verzeichnisses auslesen: Fehler: " + error.code);
         }
 
-	    if (typeof(window.requestFileSystem) == "undefined") {
-            writeToLog("Inhalt des Verzeichnisses auslesen: window.requestFileSystem undefined");
+	    if (typeof(window.resolveLocalFileSystemURL) == "undefined") {
+            writeToLog("Inhalt des Verzeichnisses auslesen: window.resolveLocalFileSystemURL undefined");
             return;
         }
 
-		window.requestFileSystem(window.PERSISTENT, 0, function(fileSystem) {
+        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dirEntry) {
+	        if (typeof(dirEntry) != "object" || typeof(dirEntry.createReader) != "function") {
+	            return;
+	        }
 
-	    	fileSystem.root.getDirectory("/.", {create: false, exclusive: true}, function(dir) {
-	    		
-	            if (typeof(dir) != "object" || typeof(dir.createReader) != "function") {
-	                return;
-	            }
+	        writeToLog("Inhalt des Verzeichnisses '" + dirEntry.fullPath + "'");
+		    var typ = "F";
 
-	            writeToLog("Inhalt des Verzeichnisses '" + dir.fullPath + "'");
-		        var typ = "F";
-
-	            dir.createReader().readEntries(function(entries) {
-	                _.each(entries, function(entry) {
-                        if (entry.isDirectory) {
-                            typ = "D ";
-                        } else {
-                            typ = "F ";
-                        }
-	                    writeToLog(typ + entry.name);
-	                });
+	        dirEntry.createReader().readEntries(function(entries) {
+	            _.each(entries, function(entry) {
+                    if (entry.isDirectory) {
+                        typ = "D ";
+                    } else {
+                        typ = "F ";
+                    }
+	                writeToLog(typ + entry.name);
 	            });
-	
-		   	}, myErrorCallback); // fileSystem.root.getDirectory
-
-		}, myErrorCallback); // window.requestFileSystem
+	        });
+		}, myErrorCallback); // window.resolveLocalFileSystemURL
 	}
     
     /** Diese Funktion ist nicht mehr nur für das Feature Cheftool, sondern dient generell dazu, 
