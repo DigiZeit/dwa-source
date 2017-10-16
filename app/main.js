@@ -916,9 +916,9 @@ if (localStorage) {
     if (!hasValue(currentPrefix)) {
         if (  (!hasValue(lastWebView) && newWebView >= 61 * 100 * 10000 * 1000)
             || (hasValue(lastWebView) && lastWebView < 61 * 100 * 10000 * 1000 && newWebView >= 61 * 100 * 10000 * 1000)) {
-            // Es gab den Wechsel, also Kopie mit geändertem Präfix anlegen und diesen Präfix merken.
+            // Es gab den Wechsel, also geänderten Präfix verwenden und diesen Präfix merken.
             currentPrefix = "#mo#";
-            copyLocalStorage(M.LOCAL_STORAGE_PREFIX, currentPrefix);
+            moveLocalStorage(M.LOCAL_STORAGE_PREFIX, currentPrefix);
             localStorage.setItem(
                 M.Application.name + M.LOCAL_STORAGE_SUFFIX + DigiWebApp.ApplicationController.CONSTKeyLocalStoragePrefix, 
                 currentPrefix);
@@ -954,7 +954,7 @@ function getWebViewVersion() {
     return versionNumber;
 }
 
-function copyLocalStorage(oldPrefix, newPrefix) {
+function moveLocalStorage(oldPrefix, newPrefix) {
     var keysToCopy = [];
     for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
@@ -964,14 +964,15 @@ function copyLocalStorage(oldPrefix, newPrefix) {
     }
 
     if (keysToCopy.length > 0) {
-        //writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix");
+        //writeToLog("LocalStorage: Kopiere Einträge von altem zu neuem Präfix und lösche alte Einträge");
         _.each(keysToCopy, function(key) {
             var val = localStorage.getItem(key);
             var keyNeu = key.replace(oldPrefix, newPrefix);
             localStorage.setItem(keyNeu, val);
+            localStorage.removeItem(key);
         });
-    } else {
-        //writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
+    //} else {
+    //    writeToLog("LocalStorage: Keine Einträge mit altem Präfix vorhanden");           
     }
 }
 
