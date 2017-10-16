@@ -927,6 +927,8 @@ if (localStorage) {
 
     if (hasValue(currentPrefix)) {
         M.LOCAL_STORAGE_PREFIX = currentPrefix;
+        DigiWebApp.ApplicationController.storagePrefix = 
+            M.LOCAL_STORAGE_PREFIX + M.Application.name + M.LOCAL_STORAGE_SUFFIX;
     }
 
 	var language = null;
