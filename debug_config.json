@@ -26,7 +26,7 @@
     "application": {
         "version": "@version@.@versionCode@ beta",
         "debugMode": "true",
-        "keyPrefix": "#mo#",
+        "keyPrefix": "#m#",
         "keySuffix": "_",
         "timeStampCreated": "created_at",
         "timeStampUpdated": "updated_at",

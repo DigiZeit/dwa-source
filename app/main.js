@@ -307,7 +307,7 @@ function writeToLogFromQueue(writeContentObj, mySuccessCallback, myErrorCallback
 	    // open filesystem
 		if (typeof(navigator.webkitPersistentStorage) !== "undefined") {
 			navigator.webkitPersistentStorage.requestQuota(myQuota, function(grantedBytes) {
-                // window.webkitRequestFileSystem
+                // window.webkitRequestFileSystem im Browser?
 			    window.requestFileSystem(window.PERSISTENT, grantedBytes, function(fileSystem) {
 			    	
 			    	// get dataDirectory from filesystem (create if not exists)
@@ -941,8 +941,14 @@ if (localStorage) {
 }
 
 function getWebViewVersion() {
-    var versionStr = navigator.userAgent.match(/.*Chrome\/(.*)\s+.*/)[1];
-    var versions = versionStr.split(".");
+    var m = navigator.userAgent.match(/.*Chrome\/(.*)\s+.*/);
+    if (!hasValue(m)) {
+        return 0;
+    }
+    if (m.length < 2) {
+        return 0;
+    }
+    var versions = m[1].split(".");
     if (versions.length !== 4) {
         // Version ist nicht vorhanden oder nicht wie erwartet aufgebaut.
         return 0;
