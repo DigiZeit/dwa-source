@@ -34,6 +34,8 @@ DigiWebApp.Settings = M.Model.create({
 
     , userAgent: M.Model.attr('String')
 
+    , localStoragePrefix: M.Model.attr('String')
+
     , mapType: M.Model.attr('String')
 
     , autoTransferAfterBookTime: M.Model.attr('Boolean')

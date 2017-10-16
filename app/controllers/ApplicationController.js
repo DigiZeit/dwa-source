@@ -1286,6 +1286,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	        writeToLog('Connection type: ' + navigator.connection.type);
 	    }
 
+        var savedLastWebViewVersion = 
+			localStorage.getItem(
+				M.Application.name + M.LOCAL_STORAGE_SUFFIX + 
+                DigiWebApp.ApplicationController.CONSTKeyLastWebViewVersion);
+	    writeToLog('LastWebViewVersion: ' + savedLastWebViewVersion);
+
 	    if (DigiWebApp.SettingsController.getSetting("debug")) {
 	        this.loggeLocalStorage();
 
