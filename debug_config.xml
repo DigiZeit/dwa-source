@@ -44,6 +44,8 @@
     <preference name="orientation" value="default" />
     <!-- Aktiviert das alte Verhalten von cordova-plugin-file. -->
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
+    <preference name="loadUrlTimeoutValue" value="700000" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
