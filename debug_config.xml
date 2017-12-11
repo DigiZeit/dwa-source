@@ -3,7 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	versionCode = "@versionCode@"
+  android-versionCode = "@versionCode@"
+  versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
   <name>DIGI-WebApp Beta</name>
