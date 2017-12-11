@@ -46,6 +46,8 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <!-- Urplötzlich nimmt PhoneGap für den Android-Versioncode nicht mehr @versionCode@, sondern die Version (1.9.0 -> 10900) -->
+    <preference name="android-versionCode" value="@versionCode@" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
