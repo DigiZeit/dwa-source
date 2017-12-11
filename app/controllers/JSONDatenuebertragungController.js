@@ -919,7 +919,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 					DigiWebApp.ApplicationController.DigiProgressView.increase();
 					DigiWebApp.Employee.createRecord({
 						  id: el.mitarbeiterId
-						, name: el.vorname + ' ' + el.nachname
+						, name: el.nachname + ', ' + el.vorname
 						, kolonnenId: ''
 						, isSelected: NO
 					}).saveSorted();	

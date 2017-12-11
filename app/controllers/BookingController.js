@@ -2433,7 +2433,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 			    		if (status === "granted") {
 							that.startBrowserBookingNotificationObject = new Notification(M.I18N.l('BookingReminderTitle'), {
 									  body: myReminderMessage
-									, icon: "theme/images/Icon.png"
+									, icon: "res://icon"
 									, tag: '2'
 								}
 							);

@@ -811,7 +811,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 				    , title:      'DIGI-WebApp'  // The title of the message
                     // Man muss seit Cordova 6 wohl noch mehr tun, siehe:
                     // https://github.com/katzer/cordova-plugin-local-notifications/issues/1222
-                    , icon:       'file://theme/images/Icon.png'
+                    , icon:       'res://icon'
 				    , sound:      null  // A sound to be played
 					, autoCancel: false // Setting this flag and the notification is automatically canceled when the user clicks it
 				    , ongoing:    true // Prevent clearing of notification (Android only)
