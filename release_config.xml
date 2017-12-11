@@ -3,6 +3,7 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
+  android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
@@ -26,7 +27,7 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <preference name="phonegap-version" value="cli-6.5.0" />
   <!-- android: Minimum Android SDK version. 14 = Android 4.0 -->
   <preference name="android-minSdkVersion" value="14" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
@@ -114,8 +115,8 @@
 
   <!-- iOS9 -->
   <platform name="ios">
-    <plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" />
-    <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" />
+    <!-- <plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" /> -->
+    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" /> -->
     <content src="http://localhost:12344" />
     <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
     <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->

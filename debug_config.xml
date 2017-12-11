@@ -3,7 +3,7 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-  android-versionCode = "7355"
+  android-versionCode = "@versionCode@"
   versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
@@ -59,9 +59,6 @@
   <preference name="keepRunning" value="true" />
   <preference name="BackgroundColor" value="0xffffffff"/>
 
-  <!-- Urplötzlich nimmt PhoneGap für den Android-Versioncode nicht mehr @versionCode@, sondern die Version (1.9.0 -> 10900) -->
-  <preference name="android-versionCode" value="7354" />
-  
   <!-- ios: smartphone and tablet -->
   <preference name="target-device" value="universal" />
 
