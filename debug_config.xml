@@ -59,6 +59,9 @@
   <preference name="keepRunning" value="true" />
   <preference name="BackgroundColor" value="0xffffffff"/>
 
+  <!-- Urplötzlich nimmt PhoneGap für den Android-Versioncode nicht mehr @versionCode@, sondern die Version (1.9.0 -> 10900) -->
+  <preference name="android-versionCode" value="@versionCode@" />
+  
   <!-- ios: smartphone and tablet -->
   <preference name="target-device" value="universal" />
 
