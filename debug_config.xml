@@ -113,7 +113,7 @@
 
   <!-- iOS9 -->
   <platform name="ios">
-    <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" />
+    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" /> -->
     <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" /> -->
     <content src="http://localhost:12344" />
     <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
