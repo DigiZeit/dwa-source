@@ -2406,7 +2406,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     , startBrowserBookingNotification: function(myDate) {
     	var that = this;
     		
-		if (!onIOS && !onAndroid23) {
+		if (!onAndroid23) {
 	    	if (that.startBrowserBookingNotificationTimeout != null) {
 	    		window.clearTimeout(that.startBrowserBookingNotificationTimeout);
 	    		that.startBrowserBookingNotificationTimeout = null;
@@ -2472,7 +2472,7 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
 	, startBookingNotification: function(myDate) {	
-		if (!onIOS && !onAndroid23) {
+		if (!onAndroid23) {
 			try { // keinesfalls den regulären Betrieb stören
 				
 				var hourSetting = parseIntRadixTen(DigiWebApp.SettingsController.getSetting('BookingReminderHours'));
@@ -2539,7 +2539,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 					    , title:      M.I18N.l('BookingReminderTitle')  // The title of the message
 					    , message:    myReminderMessage  // The message that is displayed
 					    , repeat:     'hourly' // Either 'secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly' or 'yearly'
-					    , autoCancel: true // Setting this flag and the notification is automatically canceled when the user clicks it
+					    , autoCancel: true  // Setting this flag and the notification is automatically canceled when the user clicks it
 					    , ongoing:    false // Prevent clearing of notification (Android only)
 					}
 					var nowTimestamp = new Date().getTime();
