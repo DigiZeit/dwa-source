@@ -23,7 +23,9 @@ DigiWebApp.CameraPage = M.PageView.design({
     , savePicture: function() {
     	
     	var myRemark = '';
-    	if ((M.ViewManager.getView('cameraPage', 'remarkInput').value !== null) && (typeof(M.ViewManager.getView('cameraPage', 'remarkInput').value) !== "undefined")) {
+    	if ((M.ViewManager.getView('cameraPage', 'remarkInput').value !== null) 
+	        && (typeof(M.ViewManager.getView('cameraPage', 'remarkInput').value) !== "undefined"))
+	    {
     		myRemark = M.ViewManager.getView('cameraPage', 'remarkInput').value;
     	}
     			
@@ -43,9 +45,17 @@ DigiWebApp.CameraPage = M.PageView.design({
                     , message: M.I18N.l('specialCharProblemMsg')
                 });
             } else {
-            	DigiWebApp.CameraController.savePicture();
+                var selectedOrder = DigiWebApp.CameraPage.content.order.getSelection();
+                if (hasValue(selectedOrder) && selectedOrder !== "0") {
+                    DigiWebApp.CameraController.savePicture();
+                } else {
+                    DigiWebApp.ApplicationController.DigiLoaderView.hide();
+                    DigiWebApp.ApplicationController.nativeAlertDialogView({
+                        title: M.I18N.l('noOrderSelected')
+                        , message: M.I18N.l('noOrderSelectedMsg')
+                    });
+                }
             }
-
 		}
     }
 
