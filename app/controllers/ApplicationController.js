@@ -941,12 +941,14 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.SettingsController.setSetting('closeAppAfterCloseDay', NO);
 		}
 
+		if (onAndroid23) {
+		    try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
+		    DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
+		}
+
 		if (onIOS || onAndroid23) {
 			try{$('[id=' + DigiWebApp.SettingsPage.content.GPSBackgroundService.id  + ']').each(function() { $(this).hide(); });}catch(e){}
 			DigiWebApp.SettingsController.setSetting('GPSBackgroundService', NO);
-			try{$('[id=' + DigiWebApp.SettingsPage.content.BookingReminderHoursGrid.id  + ']').each(function() { $(this).hide(); });}catch(e){}
-			DigiWebApp.SettingsController.setSetting('BookingReminderHours', 0);
-			//DigiWebApp.ApplicationController.startNotification();
 		} else {
 			DigiWebApp.ApplicationController.startBgGeo();
 			DigiWebApp.ApplicationController.startNotification();

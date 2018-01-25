@@ -102,8 +102,10 @@ DigiWebApp.BautagebuchBautagesberichtDetailsController = M.Controller.extend({
 		var that = this;
 		
 		if (!skipChecks) {
-		    var orderSelected = (M.ViewManager.getView(
-                'bautagebuchBautagesberichtDetailsPage', 'auftragComboBox').getSelection() !== "0");
+		    var selectedOrder = M.ViewManager.getView(
+		        'bautagebuchBautagesberichtDetailsPage',
+		        'auftragComboBox').getSelection();
+		    var orderSelected = (hasValue(selectedOrder) && selectedOrder !== "0");
 		    var projektleiterSelected = (M.ViewManager.getView(
                 'bautagebuchBautagesberichtDetailsPage', 'projektleiterComboBox').getSelection() !== "0");
 		    var mitarbeiterSelected
