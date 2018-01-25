@@ -2,21 +2,21 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		    = "com.digi.webappbeta"
-  android-versionCode = "10903"
-  versionCode = "10903"
-	version 	= "1.9.0.10903">
+	id		    = "com.digi.webapp"
+  android-versionCode = "10904"
+	versionCode = "10904"
+	version 	= "1.9.0.10904">
 
-  <name>DIGI-WebApp Beta</name>
+	<name>DIGI-WebApp</name>
 
-  <description>
-    Die mobile Zeiterfassung für das Handwerk!
-  </description>
+	<description>
+		Die mobile Zeiterfassung für das Handwerk!
+	</description>
 
-  <author href="http://www.digi-zeiterfassung.de"
+	<author href="http://www.digi-zeiterfassung.de"
 		email="support@digi-zeiterfassung.de">
-    DIGI Zeiterfassung GmbH
-  </author>
+		DIGI Zeiterfassung GmbH
+	</author>
 
   <gap:platform name="ios" />
   <gap:platform name="android" minVersion="4.0" />
@@ -78,7 +78,7 @@
   which PhoneGap requires. -->
   <preference name="permissions" value="none" />
 
-  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->  
+  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-camera" source="npm" version="2.4.1">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
@@ -109,12 +109,13 @@
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
   <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
-  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
+  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> -->
+  <!-- yet incompatible with BlackBerry prior 10 -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
   <!-- iOS9 -->
   <platform name="ios">
-    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" /> -->
+    <!-- <plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" /> -->
     <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" /> -->
     <content src="http://localhost:12344" />
     <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
@@ -145,7 +146,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10903</string>
+    <string>10904</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
