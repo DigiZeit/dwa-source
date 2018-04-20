@@ -2417,7 +2417,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                           if (namen !== '') {
                               namen += "; ";
                           }
-                          namen += emp.name;
+                          namen += emp.get('name');
                       }
                   });
           }
