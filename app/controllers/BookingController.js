@@ -2415,7 +2415,7 @@ DigiWebApp.BookingController = M.Controller.extend({
                   function(emp) {
                       if (emp.get('isSelected') === true) {
                           if (namen !== '') {
-                              namen += "; ";
+                              namen += " / ";
                           }
                           namen += emp.get('name');
                       }
