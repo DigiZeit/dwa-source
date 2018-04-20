@@ -199,7 +199,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             this.set('currentBooking', openBookings[openBookings.length - 1]);
             this.set('currentBookingStr', this.buildBookingStr(this.currentBooking));
-            this.set('kolonneStr', 'A. Maier, A. Müller, A. Wischewski, K. Koch, L. Lehmann, P.M. Krause, P. Müller-Fahrenschön');
+            this.set('kolonneStr', this.buildKolonneStr(this.currentBooking));
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
@@ -1097,8 +1097,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    that.currentBooking.save();
 
             that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
-	        that.set('kolonneStr',
-	            'B. Maier, B. Müller, J. Wischewski, K. Koch, L. Lehmann, P.M. Krause, P. Müller-Fahrenschön');
+            that.set('kolonneStr', that.buildKolonneStr(that.currentBooking));
 
 		    DigiWebApp.ApplicationController.startNotification();
 
@@ -2407,7 +2406,26 @@ DigiWebApp.BookingController = M.Controller.extend({
         
         return bookingStr;
     }
-    
+
+    , buildKolonneStr: function (booking) {
+          var namen = '';
+          var employees = DigiWebApp.Employee.findSorted();
+          if (employees.length > 0) {
+              _each(employees,
+                  function(emp) {
+                      if (emp.get('isSelected') === true) {
+                          if (namen !== '') {
+                              namen += "; ";
+                          }
+                          namen += emp.name;
+                      }
+                  });
+          }
+          //var namen = 
+          //    'B. Koch-Bauer, P. Krause, L. Lehmann-Auwärter, A. Maier, W. Müller, P. Müller-Fahrenschön, A. Wischnewski';
+          return namen;
+      }
+
     , spesenOptionen: null
     
     , uebernachtungOptionen: null
