@@ -268,6 +268,24 @@ DigiWebApp.BookingPage = M.PageView.design({
                 }
             }
         })
+
+        , kolonneLabel: M.LabelView.design({
+            cssClass: 'marginTop25 whiteLabel unselectable'
+            , computedValue: {
+                contentBinding: {
+                    target: DigiWebApp.BookingController
+                    , property: 'kolonneStr'
+                }
+                , value: ''
+                , operation: function (v) {
+                    if (v !== "") {
+                        return M.I18N.l('kolonne') + ' &nbsp;' + v;
+                    } else {
+                        return '';
+                    }
+                }
+            }
+        })
     })
 
     , tabBar: DigiWebApp.TabBar

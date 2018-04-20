@@ -30,7 +30,13 @@ DigiWebApp.BookingController = M.Controller.extend({
      * setting a new value to this property will change the label's value
      */
     , currentBookingStr: ''
-    	
+
+    /**
+     * Namen der Kolonnenmitglieder zur Anzeige auf der BookingPage.
+     * Leer, falls das Anzeige nicht aktiviert wurde oder aktive Buchung != Kolonnenbuchung
+     */
+    , kolonneStr: 'A. Maier'
+
     /**
      * Der Zeitstempel zum Zeitpunkt des Buchens durch den Benutzer
      */
