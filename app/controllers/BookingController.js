@@ -2411,7 +2411,7 @@ DigiWebApp.BookingController = M.Controller.extend({
           var namen = '';
           var employees = DigiWebApp.Employee.findSorted();
           if (employees.length > 0) {
-              _each(employees,
+              _.each(employees,
                   function(emp) {
                       if (emp.get('isSelected') === true) {
                           if (namen !== '') {
