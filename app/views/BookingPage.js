@@ -118,7 +118,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 		// position:    Combobox für Auftragsauswahl (DTC5: Position)
 		// activity:    Combobox für Leistungsauswahl (DTC5: Tätigkeit)
 		// currentBookingLabel: Anzeige der laufenden Buchung unterhalb des Buchen-Buttons
-          childViews: 'orderButton order position activity grid currentBookingLabel'
+        childViews: 'orderButton order position activity grid currentBookingLabel kolonneLabel'
         , cssClass: 'unselectable'
 
 		, orderButton: M.ButtonView.design({
