@@ -2408,6 +2408,11 @@ DigiWebApp.BookingController = M.Controller.extend({
     }
 
     , buildKolonneStr: function (booking) {
+          // Kolonnen-Mitarbeiter nur anzeigen, wenn Freischaltung 433 aktiv ist
+          if (!DigiWebApp.SettingsController.featureAvailable('433')) {
+              return '';
+          }
+
           var namen = '';
           var employees = DigiWebApp.Employee.findSorted();
           if (employees.length > 0) {
@@ -2421,8 +2426,6 @@ DigiWebApp.BookingController = M.Controller.extend({
                       }
                   });
           }
-          //var namen = 
-          //    'B. Koch-Bauer, P. Krause, L. Lehmann-Auwärter, A. Maier, W. Müller, P. Müller-Fahrenschön, A. Wischnewski';
           return namen;
       }
 
