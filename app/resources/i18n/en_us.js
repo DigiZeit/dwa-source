@@ -574,7 +574,7 @@ M.I18N.en_us = {
     , fs431UebernachtungZahltFirma: "Room paid by company"
     , fs431UebernachtungSelbstBezahlt: "Room paid by yourself (bill to be turned in as photo)"
 
-    , kolonne: "Crew: "
+    , kolonne: "Crew:"
     , kolonneAendern: "Change crew"
     , kolonneOhneBuchung: "There is no open booking."
     , kolonneAktuelleBuchungGeaendert: "The crew selection was changed for the booking that was just started."

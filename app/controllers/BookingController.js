@@ -33,7 +33,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     /**
      * Namen der Kolonnenmitglieder zur Anzeige auf der BookingPage.
-     * Leer, falls das Anzeige nicht aktiviert wurde oder aktive Buchung != Kolonnenbuchung
+     * Leer, falls die Anzeige nicht aktiviert wurde oder aktive Buchung != Kolonnenbuchung
      */
     , kolonneStr: ''
 
