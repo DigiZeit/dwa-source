@@ -112,19 +112,20 @@
   <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
-  <!-- iOS9 -->
+  <!-- iOS9
   <platform name="ios">
-    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" /> -->
-    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" /> -->
+    <plugin spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" source="git" />
+    <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" />
     <content src="http://localhost:12344" />
-    <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
-    <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->
+    <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" />
+    <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" />
     <feature name="CDVWKWebViewEngine">
       <param name="ios-package" value="CDVWKWebViewEngine" />
     </feature>
 
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
   </platform>
+  -->
 
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
