@@ -160,9 +160,6 @@
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTop" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleInstance" /></gap:config-file> -->
 
-  <!-- if a single icon is specified then Build will use it for all platforms -->
-  <icon src="icon.png" />
-
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
   <icon src="theme/images/Icon.png" gap:platform="blackberry" />
