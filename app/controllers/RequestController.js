@@ -13,7 +13,7 @@ DigiWebApp.RequestController = M.Controller.extend({
 //	, DatabaseServer: null
 //	, DatabaseServerTimestamp: null
     
-      softwareVersion: 10925
+      softwareVersion: 10926
 
     , getDatabaseServer: function(myFunc, obj) {
     	
