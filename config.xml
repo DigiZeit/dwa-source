@@ -3,11 +3,11 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-  android-versionCode = "10926"
-  ios-CFBundleVersion="1.9.0.10926"
-  ios-CFBundleShortVersionString="10926"
-	versionCode = "10926"
-	version 	= "1.9.0.10926">
+  android-versionCode = "10927"
+  ios-CFBundleVersion="1.9.0.10927"
+  ios-CFBundleShortVersionString="10927"
+	versionCode = "10927"
+	version 	= "1.9.0.10927">
 
 	<name>DIGI-WebApp</name>
 
@@ -29,7 +29,7 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-7.1.0" />
+  <preference name="phonegap-version" value="cli-7.0.1" />
   <!-- android: Minimum Android SDK version. 14 = Android 4.0 -->
   <preference name="android-minSdkVersion" value="14" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
@@ -134,7 +134,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10926</string>
+    <string>10927</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
