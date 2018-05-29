@@ -3,9 +3,7 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapppro"
-  android-versionCode = "@versionCode@"
-  ios-CFBundleVersion="@version@.@versionCode@"
-  ios-CFBundleShortVersionString="@versionCode@"
+	android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 

@@ -3,8 +3,8 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-  android-versionCode = "@versionCode@"
-  versionCode = "@versionCode@"
+	android-versionCode = "@versionCode@"
+	versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
   <name>DIGI-WebApp Beta</name>
@@ -157,9 +157,6 @@
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTask" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTop" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleInstance" /></gap:config-file> -->
-
-  <!-- if a single icon is specified then Build will use it for all platforms -->
-  <icon src="icon.png" />
 
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
