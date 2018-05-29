@@ -7,7 +7,7 @@
   ios-CFBundleVersion="@version@.@versionCode@"
   ios-CFBundleShortVersionString="@versionCode@"
 	versionCode = "@versionCode@"
-	version 	= "@version@.@versionCode@">
+	version 	= "@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
