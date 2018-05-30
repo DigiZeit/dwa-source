@@ -2159,6 +2159,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    					if (el.keyId === "430") DigiWebApp.ApplicationController.restartApp = YES;		// Handpositionen
 	    					if (el.keyId === "431") DigiWebApp.ApplicationController.restartApp = YES;		// Bohle-Reisekostenabwicklung
 	    					if (el.keyId === "432") DigiWebApp.ApplicationController.restartApp = YES;		// Rote Ampel
+					        if (el.keyId === "433") DigiWebApp.ApplicationController.restartApp = YES;		// Kolonnen-Mitarbeiter anzeigen
                         }
 	    			}
 	    			DigiWebApp.ApplicationController.triggerUpdate = YES;
