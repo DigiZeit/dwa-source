@@ -118,7 +118,7 @@ DigiWebApp.BookingPage = M.PageView.design({
 		// position:    Combobox für Auftragsauswahl (DTC5: Position)
 		// activity:    Combobox für Leistungsauswahl (DTC5: Tätigkeit)
 		// currentBookingLabel: Anzeige der laufenden Buchung unterhalb des Buchen-Buttons
-        childViews: 'orderButton order position activity grid currentBookingLabel kolonneLabel'
+          childViews: 'orderButton order position activity grid currentBookingLabel'
         , cssClass: 'unselectable'
 
 		, orderButton: M.ButtonView.design({
@@ -264,24 +264,6 @@ DigiWebApp.BookingPage = M.PageView.design({
                     	return M.I18N.l('bookingRunningSince') + ' &nbsp;' + v;
                     } else {
                     	return '';
-                    }
-                }
-            }
-        })
-
-        , kolonneLabel: M.LabelView.design({
-            cssClass: 'marginTop25 whiteLabel unselectable'
-            , computedValue: {
-                contentBinding: {
-                    target: DigiWebApp.BookingController
-                    , property: 'kolonneStr'
-                }
-                , value: ''
-                , operation: function (v) {
-                    if (v !== "") {
-                        return M.I18N.l('kolonne') + ' &nbsp;' + v;
-                    } else {
-                        return '';
                     }
                 }
             }

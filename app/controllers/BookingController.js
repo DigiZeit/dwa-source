@@ -30,13 +30,7 @@ DigiWebApp.BookingController = M.Controller.extend({
      * setting a new value to this property will change the label's value
      */
     , currentBookingStr: ''
-
-    /**
-     * Namen der Kolonnenmitglieder zur Anzeige auf der BookingPage.
-     * Leer, falls die Anzeige nicht aktiviert wurde oder aktive Buchung != Kolonnenbuchung
-     */
-    , kolonneStr: ''
-
+    	
     /**
      * Der Zeitstempel zum Zeitpunkt des Buchens durch den Benutzer
      */
@@ -176,7 +170,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     /**
      * Aktualisiert die laufende Buchung (currentBooking) sowie die im Buchungsscreen
-     * angezeigten Meldungen (currentBookingStr und kolonneStr).
+     * angezeigte Meldung (currentBookingStr).
      * Dafür wird die neueste offene Buchung verwendet.
      * Wird von init() und book() aufgerufen, um Änderungen im LocalStorage zu berücksichtigen.
      */
@@ -199,7 +193,6 @@ DigiWebApp.BookingController = M.Controller.extend({
 
             this.set('currentBooking', openBookings[openBookings.length - 1]);
             this.set('currentBookingStr', this.buildBookingStr(this.currentBooking));
-            this.set('kolonneStr', this.buildKolonneStr(this.currentBooking));
 
             //if (DigiWebApp.SettingsController.globalDebugMode) console.log('currentBookingStr is now ' + this.get('currentBookingStr'));
 
@@ -1096,8 +1089,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 		    //if (DigiWebApp.SettingsController.globalDebugMode) console.log('saving new ' + that.currentBooking.get('orderId'));
 		    that.currentBooking.save();
 
-            that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
-            that.set('kolonneStr', that.buildKolonneStr(that.currentBooking));
+		    that.set('currentBookingStr', that.buildBookingStr(that.currentBooking));
 
 		    DigiWebApp.ApplicationController.startNotification();
 
@@ -1969,8 +1961,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         }
 
 		if (bookingWasClosed) {
-            that.set('currentBookingStr', '');
-            that.set('kolonneStr', '');
+	        that.set('currentBookingStr', '');
 	
 	        // reset selections to show "Bitte wählen: "
 	        DigiWebApp.SelectionController.resetSelection();
@@ -2318,8 +2309,7 @@ DigiWebApp.BookingController = M.Controller.extend({
 
 		                  // falls Feierabend gebucht wurde: aufräumen
 		                  if (isClosingDay) {
-                              that.set('currentBookingStr', '');
-		                      that.set('kolonneStr', '');
+		                	  that.set('currentBookingStr', '');
 		
 		                      if (DigiWebApp.EmployeeController.getEmployeeState() == 2) {
 		                          DigiWebApp.EmployeeController.setEmployeeState(1);
@@ -2406,29 +2396,7 @@ DigiWebApp.BookingController = M.Controller.extend({
         
         return bookingStr;
     }
-
-    , buildKolonneStr: function (booking) {
-          // Kolonnen-Mitarbeiter nur anzeigen, wenn Freischaltung 433 aktiv ist
-          if (!DigiWebApp.SettingsController.featureAvailable('433')) {
-              return '';
-          }
-
-          var namen = '';
-          var employees = DigiWebApp.Employee.findSorted();
-          if (employees.length > 0) {
-              _.each(employees,
-                  function(emp) {
-                      if (emp.get('isSelected') === true) {
-                          if (namen !== '') {
-                              namen += " / ";
-                          }
-                          namen += emp.get('name');
-                      }
-                  });
-          }
-          return namen;
-      }
-
+    
     , spesenOptionen: null
     
     , uebernachtungOptionen: null

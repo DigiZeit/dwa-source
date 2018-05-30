@@ -573,7 +573,6 @@ M.I18N.de_de = {
     , fs431UebernachtungZahltFirma: "Zimmer zahlt Firma"
     , fs431UebernachtungSelbstBezahlt: "Zimmer selbst bezahlt (Rechnung ist als Foto einzureichen)"
 
-    , kolonne: "Kolonne:"
     , kolonneAendern: "Kolonne ändern"
     , kolonneOhneBuchung: "Es gibt keine offene Buchung."
     , kolonneAktuelleBuchungGeaendert: "Die Kolonnenauswahl für die soeben begonnene Zeitbuchung wurde geändert."

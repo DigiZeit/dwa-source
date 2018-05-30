@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	android-versionCode = "@versionCode@"
+  android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
-	version 	= "@versionCode@">
+	version 	= "@version@.@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
@@ -89,9 +89,7 @@
   <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.3" />
-  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0">
-    <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste." />
-  </gap:plugin>
+  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
   <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.6.1" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
@@ -114,6 +112,20 @@
   <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> -->
   <!-- yet incompatible with BlackBerry prior 10 -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
+
+  <!-- iOS9 -->
+  <platform name="ios">
+    <!-- <plugin spec="https://github.com/apache/cordova-plugin-wkwebview-engine.git" source="git" /> -->
+    <!-- <plugin spec="https://github.com/apache/cordova-plugins.git#local-webserver" source="git" /> -->
+    <content src="http://localhost:12344" />
+    <!-- <plugin spec="https://github.com/DigiZeit/WKWebView.git" source="git" /> -->
+    <!-- <gap:plugin name="cordova-plugin-wkwebview" source="npm" version="0.6.9" /> -->
+    <feature name="CDVWKWebViewEngine">
+      <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+  </platform>
 
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
@@ -161,6 +173,9 @@
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTop" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleInstance" /></gap:config-file> -->
 
+  <!-- if a single icon is specified then Build will use it for all platforms -->
+  <icon src="icon.png" />
+
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
   <icon src="theme/images/Icon.png" gap:platform="blackberry" />
@@ -168,11 +183,9 @@
 
   <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
       Screens, and iPad screen respectively -->
-  <icon src="theme/images/icon_ios_40.png" gap:platform="ios" width="40" height="40" />
   <icon src="theme/images/icon_ios_57.png" gap:platform="ios" width="57" height="57" />
   <icon src="theme/images/icon_ios_72.png" gap:platform="ios" width="72" height="72" />
   <icon src="theme/images/icon_ios_76.png" gap:platform="ios" width="76" height="76" />
-  <icon src="theme/images/icon_ios_80.png" gap:platform="ios" width="80" height="80" />
   <icon src="theme/images/icon_ios_114.png" gap:platform="ios" width="114" height="114" />
   <icon src="theme/images/icon_ios_120.png" gap:platform="ios" width="120" height="120" />
   <icon src="theme/images/icon_ios_144.png" gap:platform="ios" width="144" height="144" />

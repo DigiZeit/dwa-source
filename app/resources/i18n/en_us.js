@@ -574,7 +574,6 @@ M.I18N.en_us = {
     , fs431UebernachtungZahltFirma: "Room paid by company"
     , fs431UebernachtungSelbstBezahlt: "Room paid by yourself (bill to be turned in as photo)"
 
-    , kolonne: "Crew:"
     , kolonneAendern: "Change crew"
     , kolonneOhneBuchung: "There is no open booking."
     , kolonneAktuelleBuchungGeaendert: "The crew selection was changed for the booking that was just started."
@@ -584,7 +583,7 @@ M.I18N.en_us = {
     , distanceTooFarMessage: "The distance you entered is too big (max. 99999 km)."
 
     , bautagebuchWeitereMaterialbuchung: "Additional material booking?"
-    , bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
+	, bautagebuchWeitereMaterialbuchungMsg: "Add another material booking using this selection?"
 
     , roteAmpel: "Red flag"
     , roteAmpelNachricht: "Message"
