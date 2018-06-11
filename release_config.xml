@@ -5,7 +5,7 @@
 	id		    = "com.digi.webapp"
 	android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
-	version 	= "@version@.@versionCode@">
+	version 	= "@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
@@ -30,6 +30,8 @@
   <preference name="phonegap-version" value="cli-7.1.0" />
   <!-- android: Minimum Android SDK version. 14 = Android 4.0 -->
   <preference name="android-minSdkVersion" value="14" />
+  <!-- android: Android target SDK version. 26 = Android 8.0 -->
+  <preference name="android-targetSdkVersion" value="26" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-installLocation" value="auto" />
   <!-- all: hides the status bar at the top of the screen -->
@@ -84,7 +86,6 @@
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
   </gap:plugin>
-  <gap:plugin name="cordova-plugin-console" source="npm" version="0.2.11" />
   <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
@@ -94,6 +95,10 @@
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="5.0.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
+
+  <plugin name="cordova-android-support-gradle-release">
+    <variable name="ANDROID_SUPPORT_VERSION" value="26.0.0"/>
+  </plugin>
 
   <!-- Baut mit PhoneGap 6 nicht mehr und wird nicht mehr gepflegt. -->
   <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
@@ -109,8 +114,7 @@
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
   <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
-  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> -->
-  <!-- yet incompatible with BlackBerry prior 10 -->
+  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
   <!-- Plugin and config to enable and restrict network access -->
@@ -204,8 +208,8 @@
   <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
 
   <platform name="ios">
-    <!--  iOS Launch Storyboard universal image 2732x2732 -->
-    <splash src="www/splash/ios/Default@2x~universal~anyany.png" />
+    <!-- iOS Launch Storyboard universal image 2732x2732 -->
+    <splash src="theme/images/Default@2x~universal~anyany.png" />
   </platform>
 
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->

@@ -80,7 +80,7 @@
   which PhoneGap requires. -->
   <preference name="permissions" value="none" />
 
-  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->  
+  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->
   <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-camera" source="npm" version="2.4.1">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
@@ -95,6 +95,10 @@
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="5.0.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
+
+  <plugin name="cordova-android-support-gradle-release">
+    <variable name="ANDROID_SUPPORT_VERSION" value="26.0.0"/>
+  </plugin>
 
   <!-- Baut mit PhoneGap 6 nicht mehr und wird nicht mehr gepflegt. -->
   <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
@@ -204,7 +208,7 @@
   <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
 
   <platform name="ios">
-    <!--  iOS Launch Storyboard universal image 2732x2732 -->
+    <!-- iOS Launch Storyboard universal image 2732x2732 -->
     <splash src="theme/images/Default@2x~universal~anyany.png" />
   </platform>
 
