@@ -196,7 +196,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		    }
 		}
 		
-        myUrl = 'https://' + databaseServer + '/WebAppServices/' + webservice
+        var myUrl = 'https://' + databaseServer + '/WebAppServices/' + webservice
             + '?modus=' + myModus
             + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
