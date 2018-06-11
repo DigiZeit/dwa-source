@@ -86,7 +86,6 @@
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
   </gap:plugin>
-  <gap:plugin name="cordova-plugin-console" source="npm" version="2.0.0" />
   <gap:plugin name="cordova-plugin-contacts" source="npm" version="2.2.1" />
   <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
