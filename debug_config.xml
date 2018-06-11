@@ -204,7 +204,7 @@
 
   <platform name="ios">
     <!--  iOS Launch Storyboard universal image 2732x2732 -->
-    <splash src="www/splash/ios/Default@2x~universal~anyany.png" />
+    <splash src="theme/images/Default@2x~universal~anyany.png" />
   </platform>
 
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
