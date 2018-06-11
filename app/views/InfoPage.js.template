@@ -291,7 +291,7 @@ DigiWebApp.InfoPage = M.PageView.design({
 
         , webLabel2: M.LabelView.design({
               value: 'www.digi-zeiterfassung.de'
-            , hyperlinkTarget: 'http://www.digi-zeiterfassung.de" onclick="return DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000);"'
+            , hyperlinkTarget: 'https://www.digi-zeiterfassung.de" onclick="return DigiWebApp.InfoPage.lastTimePageWasLoaded < (+new Date() - 1000);"'
             , hyperlinkType: M.HYPERLINK_WEBSITE
             , cssClass: 'infoLabel unselectable'
             , isInline: YES

@@ -65,11 +65,7 @@ DigiWebApp.Anwesenheitsliste = M.Model.create({
     , responsePath: 'anwesenheitsliste'
 
     , url: function () {
-        var myUrl = 'https://';
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            myUrl = 'http://';
-        }
-        myUrl = myUrl + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
+        var myUrl = 'https://' + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
             + '/WebAppServices/anwesenheitsliste?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')

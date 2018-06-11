@@ -66,11 +66,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		var timeout = sendObj['timeout'] ? sendObj['timeout'] : timeoutSetting;
 		var omitLoaderHide = sendObj['omitLoaderHide'] ? sendObj['omitLoaderHide'] : false;
 
-		var myUrl = 'https://';
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            myUrl = 'http://';
-        }
-        myUrl = myUrl + that.DatabaseServer + '/WebAppServices/' + webservice
+        var myUrl = 'https://' + that.DatabaseServer + '/WebAppServices/' + webservice
             + '?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')
@@ -200,11 +196,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		    }
 		}
 		
-		var myUrl = 'https://';
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            myUrl = 'http://';
-        }
-		myUrl = myUrl + databaseServer + '/WebAppServices/' + webservice
+        myUrl = 'https://' + databaseServer + '/WebAppServices/' + webservice
             + '?modus=' + myModus
             + '&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')

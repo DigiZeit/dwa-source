@@ -65,7 +65,6 @@ M.I18N.de_de = {
 	, autoTransferAfterClosingDayCheck: "Datenabgleich nach Feierabend"
 	, stammdatenabgleichBeimAppStart: "Datenabgleich bei jedem App-Start"
 	, stammdatenabgleichBeiArbeitsbeginn: "Datenabgleich bei Arbeitsbeginn"
-    , benutzeHttps: "Verschlüsselte Datenübertragung (HTTPS)"
 	, autoSaveGPSData: "GPS-Daten beim Buchen speichern"
 	, listOfTimeData: "Liste aller gebuchten Zeitdaten"
 	, selectSomething: "Bitte wählen..."

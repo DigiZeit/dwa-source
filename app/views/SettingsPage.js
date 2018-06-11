@@ -57,7 +57,6 @@ DigiWebApp.SettingsPage = M.PageView.design({
             + ' stammdatenabgleichBeimAppStartCheck'
             + ' autoTransferAfterClosingDayCheck'
             + ' closeAppAfterCloseDay'
-            + ' benutzeHttps'
             + ' BookingReminderHoursGrid remarkIsMandatory remarkIsOptional autoSaveGPSData GPSenableHighAccuracy'
             + ' GPSenableHighAccuracyFallback GPSmaximumAgeMinutesGrid GPSBackgroundService'
             + ' detailierteZeitdaten useTransitionsSetting daysToHoldBookingsOnDeviceSliderContainer'
@@ -188,13 +187,6 @@ DigiWebApp.SettingsPage = M.PageView.design({
             , contentBinding: {
                   target: DigiWebApp.SettingsController
                 , property: 'settings.autoSyncAfterBookTime'
-            }
-        })
-        , benutzeHttps: M.SelectionListView.design({
-              selectionMode: M.MULTIPLE_SELECTION
-            , contentBinding: {
-                  target: DigiWebApp.SettingsController
-                , property: 'settings.benutzeHttps'
             }
         })
         , remarkIsMandatory: M.SelectionListView.design({

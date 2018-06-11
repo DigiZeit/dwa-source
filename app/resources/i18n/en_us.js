@@ -65,7 +65,6 @@ M.I18N.en_us = {
 	, autoTransferAfterClosingDayCheck: "Transfer data after closing day"
 	, stammdatenabgleichBeimAppStart: "Transfer data upon each app start"
 	, stammdatenabgleichBeiArbeitsbeginn: "Transfer data when beginning work"
-    , benutzeHttps: "Encrypt transmitted data (HTTPS)"
 	, autoSaveGPSData: "Save GPS-Data in bookings"
 	, listOfTimeData: "List of all bookings"
 	, selectSomething: "Select something..."

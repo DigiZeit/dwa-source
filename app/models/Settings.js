@@ -150,8 +150,6 @@ DigiWebApp.Settings = M.Model.create({
 
     , kannReisezeitBuchen: M.Model.attr('Boolean')
 
-    , benutzeHttps: M.Model.attr('Boolean')
-
     , doScr: M.Model.attr('Boolean')
 
     , logfilesLoeschenNachTagen: M.Model.attr('Integer')

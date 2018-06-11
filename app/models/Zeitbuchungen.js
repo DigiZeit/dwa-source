@@ -64,11 +64,7 @@ DigiWebApp.Zeitbuchungen = M.Model.create({
     , responsePath: 'zeitbuchungen'
 
     , url: function (datum, mitarbeiterID) {
-        var myUrl = 'https://';
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            myUrl = 'http://';
-        }
-        myUrl = myUrl + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
+        var myUrl = 'https://' + DigiWebApp.JSONDatenuebertragungController.DatabaseServer
             + '/WebAppServices/zeitdaten?modus=0&firmenId=' + DigiWebApp.SettingsController.getSetting('company')
             + '&kennwort=' + DigiWebApp.SettingsController.getSetting('password')
             + '&geraeteId=' + DigiWebApp.SettingsController.getSetting('workerId')

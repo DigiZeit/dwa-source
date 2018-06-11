@@ -90,7 +90,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , kannFahrtkostenBuchen: false // Nur Bohle
         , kannUebernachtungskostenBuchen: false // Nur Bohle
         , kannReisezeitBuchen: true // Nur Scholpp
-        , benutzeHttps: true
         , doScr: true
         , logfilesLoeschenNachTagen: 40
     }
@@ -395,14 +394,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 }
             } catch (e) { }
             
-            //, benutzeHttps: true
-            var benutzeHttps = DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps");
-            try {
-	            if (typeof(record.record.benutzeHttps) !== "undefined") {
-	            	benutzeHttps = record.get('benutzeHttps');
-	            }
-            } catch (e) { }
-
             //, doScr: true
             var doScr = DigiWebApp.SettingsController.defaultsettings.get("doScr");
             try {
@@ -524,11 +515,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	                  value: stammdatenabgleichBeiArbeitsbeginn
 	                , label: M.I18N.l('stammdatenabgleichBeiArbeitsbeginn')
 	                , isSelected: stammdatenabgleichBeiArbeitsbeginn
-	            }]
-                , benutzeHttps: [{
-                    value: benutzeHttps
-	                , label: M.I18N.l('benutzeHttps')
-                    , isSelected: benutzeHttps
 	            }]
                 , autoSaveGPSData: [{
                       value: record.get('autoSaveGPSData')
@@ -707,10 +693,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , stammdatenabgleichBeiArbeitsbeginn: [{
 	                  value: DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeiArbeitsbeginn")
 	                , label: M.I18N.l('stammdatenabgleichBeiArbeitsbeginn')
-                }]
-   	            , benutzeHttps: [{
-                      value: DigiWebApp.SettingsController.defaultsettings.get("benutzeHttps")
-                    , label: M.I18N.l('benutzeHttps')
                 }]
                 , autoSaveGPSData: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("autoSaveGPSData")
@@ -989,7 +971,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var autoSyncAfterBookTime          = $('#' + M.ViewManager.getView('settingsPage', 'autoSyncAfterBookTimeCheck').id          + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var stammdatenabgleichBeimAppStart = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeimAppStartCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var stammdatenabgleichBeiArbeitsbeginn = $('#' + M.ViewManager.getView('settingsPage', 'stammdatenabgleichBeiArbeitsbeginnCheck').id + ' label.ui-checkbox-on').length > 0 ? YES : NO;
-        var benutzeHttps				   = DigiWebApp.SettingsController.getCheckboxValue('settingsPage', 'benutzeHttps');
         var autoSaveGPSData                = $('#' + M.ViewManager.getView('settingsPage', 'autoSaveGPSData').id                     + ' label.ui-checkbox-on').length > 0 ? YES : NO;
         var useTransitionsSetting          = $('#' + M.ViewManager.getView('settingsPage', 'useTransitionsSetting').id               + ' label.ui-checkbox-on').length > 0 ? YES : NO;
 
@@ -1245,7 +1226,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
-                                                    record.set('benutzeHttps', benutzeHttps);
                                                     record.set('doScr', doScr);
                                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
@@ -1352,7 +1332,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                     record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
-                                    record.set('benutzeHttps', benutzeHttps);
                                     record.set('doScr', doScr);
                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
@@ -1433,7 +1412,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
-                                record.set('benutzeHttps', benutzeHttps);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
@@ -1514,7 +1492,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannFahrtkostenBuchen', kannFahrtkostenBuchen);
                                 record.set('kannUebernachtungskostenBuchen', kannUebernachtungskostenBuchen);
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
-                                record.set('benutzeHttps', benutzeHttps);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
 
@@ -1597,7 +1574,6 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , kannFahrtkostenBuchen: kannFahrtkostenBuchen
                                 , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
                                 , kannReisezeitBuchen: kannReisezeitBuchen
-                                , benutzeHttps: benutzeHttps
                                 , doScr: doScr
                                 , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
                             }); // record =

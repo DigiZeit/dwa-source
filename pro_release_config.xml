@@ -89,9 +89,7 @@
   <gap:plugin name="cordova-plugin-device" source="npm" version="1.1.4" />
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.3" />
-  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0">
-    <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste." />
-  </gap:plugin>
+  <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
   <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.6.1" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
@@ -150,6 +148,10 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true" />
   </feature>
+
+  <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+  </edit-config>
 
   <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>

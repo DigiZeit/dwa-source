@@ -502,9 +502,6 @@ DigiWebApp.ZeitbuchungDetailsPage = M.PageView.design({
             return;
         }
         var urlByCoordinates = "https://";
-        if (DigiWebApp.SettingsController.getSetting('benutzeHttps') === false) {
-            urlByCoordinates = 'http://';
-        }
         switch (DigiWebApp.SettingsController.getSetting('mapType')) {
         case "OSM":
             if (DigiWebApp.SettingsController.featureAvailable('419')) {
