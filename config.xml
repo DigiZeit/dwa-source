@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	android-versionCode = "10944"
-	versionCode = "10944"
-	version 	= "1.9.0.10944">
+	android-versionCode = "10945"
+	versionCode = "10945"
+	version 	= "1.9.0.10945">
 
 	<name>DIGI-WebApp</name>
 
@@ -91,7 +91,7 @@
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.3" />
   <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
-  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.6.1" />
+  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="3.0.0" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="5.0.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
@@ -136,7 +136,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10944</string>
+    <string>10945</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">

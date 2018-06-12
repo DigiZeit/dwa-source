@@ -91,7 +91,7 @@
   <gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-file" source="npm" version="4.3.3" />
   <gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
-  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.6.1" />
+  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="3.0.0" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
   <gap:plugin name="cordova-plugin-splashscreen" source="npm" version="5.0.2" />
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
