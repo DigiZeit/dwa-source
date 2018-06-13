@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	android-versionCode = "10946"
-	versionCode = "10946"
-	version 	= "10946">
+	android-versionCode = "10947"
+	versionCode = "10947"
+	version 	= "1.9.0.10947">
 
 	<name>DIGI-WebApp</name>
 
@@ -136,7 +136,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10946</string>
+    <string>10947</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -208,16 +208,15 @@
   <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="port-xhdpi" />
   <gap:splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
 
-  <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
-       Screens, and iPad screen respectively -->
-  <gap:splash src="theme/images/splash_ios_320x480_DSO.png" gap:platform="ios" width="320" height="480" />
-  <gap:splash src="theme/images/splash_ios_640x960_DSO.png" gap:platform="ios" width="640" height="960" />
-  <gap:splash src="theme/images/splash_ios_768x1024_DSO.png" gap:platform="ios" width="768" height="1024" />
-  <gap:splash src="theme/images/splash_ios_1024x768_DSO.png" gap:platform="ios" width="1024" height="768" />
-  <gap:splash src="theme/images/splash_ios_640x1136_DSO.png" gap:platform="ios" width="640" height="1136" />
-  <!-- iPhone X -->
-  <gap:splash src="theme/images/splash_ios_1125x2436.png" gap:platform="ios" width="1125" height="2436" />
-
+  <platform name="ios">
+    <!-- Die Dateien müssen genau so heißen -->
+    <splash src="theme/images/Default@2x~iphone~anyany.png"/>
+    <splash src="theme/images/Default@2x~iphone~comany.png"/>
+    <splash src="theme/images/Default@3x~iphone~anyany.png"/>
+    <splash src="theme/images/Default@3x~iphone~comany.png"/>
+    <splash src="theme/images/Default@2x~ipad~anyany.png"/>
+    <splash src="theme/images/Default@2x~ipad~comany.png"/>
+  </platform>
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
   <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
 
