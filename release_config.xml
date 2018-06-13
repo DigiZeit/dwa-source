@@ -57,7 +57,7 @@
   <preference name="SplashScreenDelay" value="60000"/>
   <preference name="FadeSplashScreen" value="false"/>
   <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
-  <preference name="show-splash-screen-spinner" value="true" />
+  <preference name="show-splash-screen-spinner" value="false" />
   <preference name="keepRunning" value="true" />
   <preference name="BackgroundColor" value="0xffffffff"/>
 
