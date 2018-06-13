@@ -1630,8 +1630,6 @@ label.ui-input-text, .ui-controlgroup-label {
 .ui-footer {
     border-color: #0d0d0d;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(1, #000000), color-stop(0.51, #000000), color-stop(0.5, #151515), color-stop(0, #2d2d2d));
-    margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
-    margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
 }
 
 .ui-footer .ui-btn {
