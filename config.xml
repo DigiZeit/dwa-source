@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
-	android-versionCode = "10952"
-	versionCode = "10952"
-	version 	= "10952">
+	android-versionCode = "10953"
+	versionCode = "10953"
+	version 	= "1.9.0.10953">
 
 	<name>DIGI-WebApp</name>
 
@@ -136,7 +136,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10952</string>
+    <string>10953</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -172,7 +172,7 @@
   <icon src="theme/images/Icon.png" gap:platform="blackberry" />
   <icon src="theme/images/Icon.png" gap:platform="blackberry" gap:state="hover" />
 
-  <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
+  <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina 
       Screens, and iPad screen respectively -->
   <icon src="theme/images/icon_ios_40.png" gap:platform="ios" width="40" height="40" />
   <icon src="theme/images/icon_ios_57.png" gap:platform="ios" width="57" height="57" />
@@ -218,6 +218,7 @@
     <splash src="theme/images/Default@2x~ipad~anyany.png"/>
     <splash src="theme/images/Default@2x~ipad~comany.png"/>
   </platform>
+
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
   <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
 

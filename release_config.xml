@@ -5,7 +5,7 @@
 	id		    = "com.digi.webapp"
 	android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
-	version 	= "@versionCode@">
+	version 	= "@version@.@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
@@ -172,7 +172,7 @@
   <icon src="theme/images/Icon.png" gap:platform="blackberry" />
   <icon src="theme/images/Icon.png" gap:platform="blackberry" gap:state="hover" />
 
-  <!-- iOS requires specific dimensions for splash screens; classic iPhone screens, Retina 
+  <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina 
       Screens, and iPad screen respectively -->
   <icon src="theme/images/icon_ios_40.png" gap:platform="ios" width="40" height="40" />
   <icon src="theme/images/icon_ios_57.png" gap:platform="ios" width="57" height="57" />
@@ -218,6 +218,7 @@
     <splash src="theme/images/Default@2x~ipad~anyany.png"/>
     <splash src="theme/images/Default@2x~ipad~comany.png"/>
   </platform>
+
   <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
   <gap:splash src="theme/images/splash_winphone_480x800_DSO.jpg" gap:platform="winphone" />
 
