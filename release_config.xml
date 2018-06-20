@@ -5,7 +5,7 @@
 	id		    = "com.digi.webapp"
 	android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
-	version 	= "@versionCode@">
+	version 	= "@version@.@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
@@ -80,8 +80,11 @@
   which PhoneGap requires. -->
   <preference name="permissions" value="none" />
 
-  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, Ersatz ist cordova-plugin-statusbar. -->
-  <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.1" />
+  <!-- Das Plugin com.phonegap.plugin.statusbar gibt es bei npm nicht, 
+  Ersatz ist cordova-plugin-statusbar. 
+  Muss Version 2.2.0 sein, sonst wird nach der Rückkehr von der Kamera bei iOS die App oben und 
+  unten teilweise verdeckt. -->
+  <gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.2.0" />
   <gap:plugin name="cordova-plugin-camera" source="npm" version="2.4.1">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Kamera." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Für die Fotofunktion benötigt die App Zugriff auf die Fotogalerie." />
