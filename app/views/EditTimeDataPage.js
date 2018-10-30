@@ -243,7 +243,7 @@ DigiWebApp.EditTimeDataPage = M.PageView.design({
         		) {
         			// Unterschrift laden
         			DigiWebApp.EditTimeDataPage.bookingToEdit.readFromFile(function(fileContent) {
-        				if (fileContent && (fileContent !== "")) {
+        				if (hasValue(fileContent) && fileContent.length > 0) {
         				    DigiWebApp.EditTimeDataPage.signaturePadAPI.regenerate(fileContent);
         				} else {
         				    DigiWebApp.EditTimeDataPage.signaturePadAPI.clearCanvas();
