@@ -46,7 +46,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , datatransfer_min_delay: 10000
         , branding: DigiWebApp.ApplicationController.CONSTDefaultBranding // Bugfix 2142
         , GPSTimeOut: 30000
-        , WebserviceTimeOut: 30000
+        , WebserviceTimeOut: 120000
         , LoaderTimeOut: 30000
         , silentLoader: false
         , currentTimezoneOffset: null
