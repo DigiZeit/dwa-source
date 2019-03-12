@@ -785,29 +785,31 @@ DigiWebApp.BookingController = M.Controller.extend({
 
     // Prüft, ob alle Voraussetzungen für eine Zeitbuchung erfüllt sind
     , checkBooking: function(skipSelection) {
-    	if (DigiWebApp.SettingsController.getSetting("debug"))  console.log("in checkBooking");
-		
-        // Prüfen, ob order (Ordner/Auftrag), position (Auftrag/Position) 
-    	// und activity (Leistung/Tätigkeit) ausgewählt wurden.
-    	var orderId;
-    	if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
+        if (DigiWebApp.SettingsController.getSetting("debug")) {
+            console.log("in checkBooking");
+        }
+
+        // Prüfen, ob order (Ordner/Auftrag), position (Auftrag/Position)
+        // und activity (Leistung/Tätigkeit) ausgewählt wurden.
+        var orderId;
+        if (typeof(DigiWebAppOrdinaryDesign.bookingPageWithIconsScholpp) !== "undefined") {
             orderId = M.ViewManager.getView('bookingPageWithIconsScholpp', 'order').getSelection();
-    	} else {
+        } else {
             orderId = M.ViewManager.getView('bookingPage', 'order').getSelection();
-    	}
-        if (!orderId || (orderId && parseIntRadixTen(orderId) === 0)) {
-            //M.DialogView.alert({
+        }
+        var istHandauftrag = this.isHandOrder(orderId);
+        if (!istHandauftrag
+            && (!orderId || (orderId && parseIntRadixTen(orderId) === 0))) {
             DigiWebApp.ApplicationController.nativeAlertDialogView({
                   title: M.I18N.l('noOrderSelected')
                 , message: M.I18N.l('noOrderSelectedMsg')
             });
             return false;
         } else {
-        	// if it is not a hand order, position and activity must be selected
-            if (!this.isHandOrder(orderId)) {
+            // if it is not a hand order, position and activity must be selected
+            if (!istHandauftrag) {
                 // check if position is set
                 if (!DigiWebApp.SelectionController.isPositionSelected()) {
-                    //M.DialogView.alert({
                     DigiWebApp.ApplicationController.nativeAlertDialogView({
                           title: M.I18N.l('noPosSelected')
                         , message: M.I18N.l('noPosSelectedMsg')
@@ -816,7 +818,6 @@ DigiWebApp.BookingController = M.Controller.extend({
                 } else {
                     // check if activity is set
                     if(!DigiWebApp.SelectionController.isActivitySelected()) {
-                        //M.DialogView.alert({
                         DigiWebApp.ApplicationController.nativeAlertDialogView({
                               title: M.I18N.l('noActSelected')
                             , message: M.I18N.l('noActSelectedMsg')
@@ -827,7 +828,6 @@ DigiWebApp.BookingController = M.Controller.extend({
             } else {
                 // check if activity is set
                 if(!DigiWebApp.SelectionController.isActivitySelected()) {
-                    //M.DialogView.alert({
                     DigiWebApp.ApplicationController.nativeAlertDialogView({
                           title: M.I18N.l('noActSelected')
                         , message: M.I18N.l('noActSelectedMsg')
