@@ -424,7 +424,7 @@ DigiWebApp.CameraController = M.Controller.extend({
         			if (zugeordnet) {
         				return act;
         			} else {
-        				return null;	
+        				return null;
         			}
             	}
             });
@@ -434,58 +434,43 @@ DigiWebApp.CameraController = M.Controller.extend({
     }
 
     , takePicture: function() {
-//			navigator.camera.getPicture(
-//	  			  DigiWebApp.CameraController.cameraSuccessBase64
-//	  			, DigiWebApp.CameraController.cameraError
-//	  			, { 
-//						  quality: 40
-//	   				, allowEdit: true
-//	   				, destinationType : navigator.camera.DestinationType.DATA_URL
-//	   				//, destinationType: navigator.camera.DestinationType.FILE_URI
-//	   				, encodingType: navigator.camera.EncodingType.JPEG
-//	   				, sourceType: navigator.camera.PictureSourceType.CAMERA 
-//	   				, mediaType: navigator.camera.MediaType.PICTURE
-//	   				, saveToPhotoAlbum: false
-//	  			  }
-//				);
-    	
-			var myEncodingQuality = parseIntRadixTen(DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
-    		var myEncodingQualitySetting = DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
-    		if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
-    			myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
-    		}
-    		
-    		var myEncodingType = navigator.camera.EncodingType.JPEG;
-    		if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
-    			myEncodingType = navigator.camera.EncodingType.PNG;
-    		}
-    		
-    		var mySuccessHandler = DigiWebApp.CameraController.cameraSuccessBase64;
-    		var myDestinationType = navigator.camera.DestinationType.DATA_URL;
-//    		var myDestinationType = navigator.camera.DestinationType.FILE_URI;
-//    		var myDestinationType = navigator.camera.DestinationType.NATIVE_URI;
-    		if (myDestinationType == navigator.camera.DestinationType.DATA_URL) {
-    			mySuccessHandler = DigiWebApp.CameraController.cameraSuccessBase64;
-    		} else {
-    			mySuccessHandler = DigiWebApp.CameraController.cameraSuccessURI;
-    		}
-    		var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
-    		
-			navigator.camera.getPicture(
-				  mySuccessHandler
-	  			, DigiWebApp.CameraController.cameraError
-	  			, { 
-					  quality: myEncodingQuality
-	   				, allowEdit: myAllowEdit
-	   				, destinationType : myDestinationType
-	   				, encodingType: myEncodingType
-	   				, sourceType: navigator.camera.PictureSourceType.CAMERA 
-	   				, mediaType: navigator.camera.MediaType.PICTURE
-	   				, saveToPhotoAlbum: false
-	  			  }
-				);    	
+        var myEncodingQuality = parseIntRadixTen(
+            DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
+        var myEncodingQualitySetting =
+            DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+        if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
+            myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
+        }
+
+        var myEncodingType = navigator.camera.EncodingType.JPEG;
+        if (DigiWebApp.SettingsController.getSetting('pictureEncodingType') == "PNG") {
+            myEncodingType = navigator.camera.EncodingType.PNG;
+        }
+
+        var mySuccessHandler = DigiWebApp.CameraController.cameraSuccessBase64;
+        var myDestinationType = navigator.camera.DestinationType.DATA_URL;
+        if (myDestinationType == navigator.camera.DestinationType.DATA_URL) {
+            mySuccessHandler = DigiWebApp.CameraController.cameraSuccessBase64;
+        } else {
+            mySuccessHandler = DigiWebApp.CameraController.cameraSuccessURI;
+        }
+        var myAllowEdit = parseBool(DigiWebApp.SettingsController.getSetting('pictureAllowEdit'));
+
+        navigator.camera.getPicture(
+              mySuccessHandler
+            , DigiWebApp.CameraController.cameraError
+            , {
+                  quality: myEncodingQuality
+                , allowEdit: myAllowEdit
+                , destinationType : myDestinationType
+                , encodingType: myEncodingType
+                , sourceType: navigator.camera.PictureSourceType.CAMERA
+                , mediaType: navigator.camera.MediaType.PICTURE
+                , saveToPhotoAlbum: false
+              }
+            );
     }
-    
+
     , useLoadedPicture: function() {
     	//console.log("useLoadedPicture");
     	//console.log(DigiWebApp.CameraController.loadedPicture);

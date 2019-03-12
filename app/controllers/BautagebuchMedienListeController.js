@@ -64,13 +64,19 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 		DigiWebApp.BautagebuchMedienDetailsController.set("remark", null);
 		DigiWebApp.BautagebuchMedienDetailsController.set("fileType",
             DigiWebApp.ApplicationController.getImageFiletype());
-		    		    		
+
 		var libraryFunc = function() {
 	  		// unterscheiden: auf Gerät oder im Browser?
-	  		if (typeof navigator.camera !== 'undefined' 
+	  		if (typeof navigator.camera !== 'undefined'
 	  		    && typeof navigator.camera.getPicture !== 'undefined') {
-	  		    		        		
 	  		    // auf Geraet:
+                var myEncodingQuality = parseIntRadixTen(
+                    DigiWebApp.SettingsController.defaultsettings.get("pictureEncodingQuality"));
+                var myEncodingQualitySetting =
+                    DigiWebApp.SettingsController.getSetting('pictureEncodingQuality');
+                if (parseIntRadixTen(myEncodingQualitySetting) > 9) {
+                    myEncodingQuality = parseIntRadixTen(myEncodingQualitySetting);
+                }
 	  		    navigator.camera.getPicture(
 	  	    		    function(imgData) {
 	  	    		        var that = DigiWebApp.BautagebuchMedienDetailsController;
@@ -94,22 +100,20 @@ DigiWebApp.BautagebuchMedienListeController = M.Controller.extend({
 	  				    DigiWebApp.ApplicationController.nativeAlertDialogView({
 	  					    title: M.I18N.l('error')
 	  					    , message: M.I18N.l('noPicLoaded') + ": " + err
-	  					});	    		        					
+	  					});
 	  	    		}
 	  	    		, {
-	  	    		      quality: 40
+                        quality: myEncodingQuality
 	  	    		    , allowEdit: true
 	  	    		    , destinationType : navigator.camera.DestinationType.DATA_URL
 	  	    		    //, destinationType: navigator.camera.DestinationType.FILE_URI
 	  	    		    , encodingType: navigator.camera.EncodingType.JPEG
-	  	    		    , sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
+	  	    		    , sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 	  	    		    , mediaType: navigator.camera.MediaType.PICTURE
 	  	    		    , saveToPhotoAlbum: false
 	  	    		}
 	  		    );
-	  		    		        		
 	  		} else {
-	  		    		        	
 	  			// im Browser:
 	  			DigiWebApp.FileChooserPage.set("successCallback", function(imgData, fileName) {
 	  			    var that = DigiWebApp.BautagebuchMedienDetailsController;
