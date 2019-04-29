@@ -4,8 +4,8 @@
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
 	android-versionCode = "@versionCode@"
-	versionCode = "@versionCode@"
-	version 	= "@version@.@versionCode@">
+	version = "@versionCode@"
+	versionCode = "@version@.@versionCode@">
 
 	<name>DIGI-WebApp</name>
 
