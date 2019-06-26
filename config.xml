@@ -4,8 +4,8 @@
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webapp"
 	android-versionCode = "10963"
-	version = "10963"
-	versionCode = "1.9.0.10963">
+	versionCode = "10963"
+	version 	= "1.9.0.10963">
 
 	<name>DIGI-WebApp</name>
 
@@ -156,11 +156,15 @@
     <param name="ios-package" value="CDVStatusBar" onload="true" />
   </feature>
 
-  <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+  <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
+      <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
   </edit-config>
 
-  <!-- geolocation on ios8 -->
+  <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+    </edit-config>
+
+    <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationUsageDescription" overwrite="false"></gap:config-file>
