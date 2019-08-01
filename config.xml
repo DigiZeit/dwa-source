@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10971"
-	versionCode = "10971"
-	version 	= "1.9.0.10971">
+	android-versionCode = "10972"
+	versionCode = "10972"
+	version 	= "1.9.0.10972">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -142,7 +142,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10971</string>
+    <string>10972</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -197,7 +197,7 @@
   <icon src="theme/images/icon_appstore_1024.png" gap:platform="ios" width="1024" height="1024"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <platform name="ios">
+  <platform name="android">
     <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
     <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
     <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />

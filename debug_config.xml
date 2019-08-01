@@ -197,7 +197,7 @@
   <icon src="theme/images/icon_appstore_1024.png" gap:platform="ios" width="1024" height="1024"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <platform name="ios">
+  <platform name="android">
     <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
     <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
     <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
