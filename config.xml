@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10972"
-	versionCode = "10972"
-	version 	= "1.9.0.10972">
+	android-versionCode = "10973"
+	versionCode = "10973"
+	version 	= "1.9.0.10973">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -124,7 +124,7 @@
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
 
   <!-- Plugin to send intent on Android to ensure ServiceApp is running-->
-  <gap:plugin spec="https://github.com/cordova-misc/cordova-webintent.git#v2.0.0" source="git" />
+  <!--<gap:plugin spec="https://github.com/cordova-misc/cordova-webintent.git#v2.0.0" source="git" />-->
 
   <!--<access origin="*" subdomains="true" />-->
   <access origin="http://127.0.0.1*" subdomains="true" />
@@ -142,7 +142,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10972</string>
+    <string>10973</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
