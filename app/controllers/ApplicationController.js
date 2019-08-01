@@ -955,8 +955,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 
 		inDebug();
-		
+
 		try {
+            // Freischaltung 417: ServiceApp
 			if (DigiWebApp.SettingsController.featureAvailable('417')) {
 				var fileNamesToDelete = [];
 				DigiWebApp.ServiceAppController.listDirectory(function(results) {
@@ -967,11 +968,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 							fileNamesToDelete.push(fileName);
 						}
 					});
-					DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function(data){
-						DigiWebApp.ApplicationController.realDeviceReadyHandler();
-					}, function(){
-						DigiWebApp.ApplicationController.realDeviceReadyHandler();
-					});
+                    DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function (data) {
+                        DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
+                        DigiWebApp.ApplicationController.realDeviceReadyHandler();
+                    }, function(){
+                        DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
+                        DigiWebApp.ApplicationController.realDeviceReadyHandler();
+                    });
 				});
 			} else {
 				DigiWebApp.ApplicationController.realDeviceReadyHandler();
@@ -980,7 +983,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			DigiWebApp.ApplicationController.realDeviceReadyHandler();
 		}
 	}
-	
+
+    , ensureServiceAppIsRunning: function() {
+        window.plugins.webintent.startActivity({
+                action: window.plugins.webintent.ACTION_VIEW,
+                url: 'geo:0,0?q=' + 'Paris'
+            },
+            function () { },
+            function() { alert('Failed to open URL via Android Intent'); }
+        );
+    }
+
 	, realdevicereadyhandlerDone: false
 
 	, realDeviceReadyHandler: function() {
@@ -996,13 +1009,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     	writeToLog("DIGI-WebApp deviceReady " + new Date().toString());
 
 		DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		
+
 		try {
 			navigator.splashscreen.hide();
 		} catch(e) {
 			console.log("unable to hide splashscreen");
 		}
-		
+
 		if ( M.Environment.getPlatform().substr(0,10) === "BlackBerry" ) {
     		// unfix header
 			_.each(DigiWebApp.app.pages, function(myPage) {
@@ -1019,13 +1032,13 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			// refresh fixed toolbars every second
 			//DigiWebApp.ApplicationController.fixToobarsIntervalVar = setInterval(function() {try { $.mobile.fixedToolbars.show(); } catch(e) { trackError(e); };}, 1000);
 		}
-    	
+
     	if (DigiWebApp.ApplicationController.timeoutdeviceready_var !== null) {
 	        clearTimeout(DigiWebApp.ApplicationController.timeoutdeviceready_var);
 	    }
-		
+
     	DigiWebApp.ApplicationController.setImageClass();
-	
+
     	DigiWebApp.ApplicationController.init(true);
 
     	if ((this.skipEvents !== true)
@@ -1041,11 +1054,11 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     }
 
   	, pausehandler: function() {
-        writeToLog("pause");	      
+        writeToLog("pause");
 	}
-	
+
 	, inAppBrowser_var: null
-	
+
 	, closeChildbrowser: function() {
 		try {
 			plugins.childBrowser.close();
@@ -2093,7 +2106,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	    		DigiWebApp.SettingsController.setSetting(
                     'logfilesLoeschenNachTagen',
                     DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen'));
-	    		DigiWebApp.ApplicationController.triggerUpdate = NO;
+                DigiWebApp.SettingsController.setSetting(
+                    'syncKolonne',
+                    DigiWebApp.SettingsController.defaultsettings.get('syncKolonne'));
+                DigiWebApp.ApplicationController.triggerUpdate = NO;
 
 	    		// create a record for each feature returned from the server and save it
 	    		_.each(configurations, function(el) {
@@ -2214,44 +2230,54 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 			});
 		}
     }
-    
-    /**
-     * Calls getKolonne on DigiWebApp.RequestController.
-     * Success callback proceeds received kolonnen data.
-     * Error callback calls proceedWithLocalData to check whether offline work is possible.
-     */
-    , getKolonneFromRemote: function() {
-    	// Bugfix 2631: Sorting Mitarbeiter by Nachname first
-    	// In case of same Nachname then Firstname
-    	DigiWebApp.JSONDatenuebertragungController.empfangeKolonne(
-    		function() {
-    			var that = DigiWebApp.ApplicationController;
-    			var empfangeBautagebuch = function() {
-    	            if (DigiWebApp.SettingsController.featureAvailable('412') || DigiWebApp.SettingsController.featureAvailable('402')) {
-    	    	    	DigiWebApp.BautagebuchDatenuebertragungController.empfangen(that.afterTransfer, that.afterTransfer);
-    	        	} else {
-    	        		that.afterTransfer();
-    	        	}
-    	        }
 
-    	        var empfangeFestepausendefinitionen = function() {
-    	            if (DigiWebApp.SettingsController.featureAvailable('425')) {
-    	            	DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(empfangeBautagebuch, empfangeBautagebuch); 
-    	        	} else {
-    	        		empfangeBautagebuch();
-    	        	}
-    	        }
-    	    	
-    	        empfangeFestepausendefinitionen();
-    	        
-    		}
-    	   , function() {
-    		   this.setCallbackStatus('kolonne', 'remote', NO);
-    		   this.proceedWithLocalData("getKolonneFromRemote");
-    	   }
-    	);
-    }
-    
+    /**
+     * Ruft empfangeKolonne in DigiWebApp.JSONDatenuebertragungController auf,
+     * sofern das Setting "syncKolonne" gesetzt ist (fast immer so).
+     * Success callback: Weiter mit empfangeFestepausendefinitionen
+     * Error callback: Ruft proceedWithLocalData() auf, um zu prüfen, ob Offline-Buchen möglich ist.
+     */
+    , getKolonneFromRemote: function () {
+        var successFunc = function() {
+            var that = DigiWebApp.ApplicationController;
+            var empfangeBautagebuch = function() {
+              if (DigiWebApp.SettingsController.featureAvailable('412') ||
+                  DigiWebApp.SettingsController.featureAvailable('402')) {
+                  DigiWebApp.BautagebuchDatenuebertragungController.empfangen(
+                      that.afterTransfer,
+                      that.afterTransfer);
+              } else {
+                  that.afterTransfer();
+              }
+            };
+
+            var empfangeFestepausendefinitionen = function() {
+              if (DigiWebApp.SettingsController.featureAvailable('425')) {
+                  DigiWebApp.JSONDatenuebertragungController.empfangeFestepausendefinitionen(
+                      empfangeBautagebuch,
+                      empfangeBautagebuch);
+              } else {
+                  empfangeBautagebuch();
+              }
+            };
+
+            empfangeFestepausendefinitionen();
+        };
+
+        // Übertragungsschritt überspringen, falls das entspr. Setting false ist.
+        if (DigiWebApp.SettingsController.getSetting('syncKolonne') === NO) {
+            successFunc();
+        } else {
+            DigiWebApp.JSONDatenuebertragungController.empfangeKolonne(
+                successFunc,
+                function () {
+                    this.setCallbackStatus('kolonne', 'remote', NO);
+                    this.proceedWithLocalData("getKolonneFromRemote");
+                }
+            );
+        }
+      }
+
     , afterTransfer: function() {
 		DigiWebApp.ApplicationController.DigiProgressView.hide(); // just in case
 		var that = DigiWebApp.ApplicationController;

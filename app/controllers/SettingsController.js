@@ -92,6 +92,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
         , kannReisezeitBuchen: true // Nur Scholpp
         , doScr: true
         , logfilesLoeschenNachTagen: 40
+        , syncKolonne: true // Fuer Scholpp implementiert, dort auf dem Server auf false gesetzt
     }
 
     , defaultsettings: null
@@ -368,7 +369,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannFahrtkostenBuchen: false, nur für Bohle
-            var kannFahrtkostenBuchen = 
+            var kannFahrtkostenBuchen =
                 DigiWebApp.SettingsController.defaultsettings.get("kannFahrtkostenBuchen");
             try {
                 if (typeof (record.record.kannFahrtkostenBuchen) !== "undefined") {
@@ -377,47 +378,56 @@ DigiWebApp.SettingsController = M.Controller.extend({
             } catch (e) { }
 
             //, kannUebernachtungskostenBuchen: false, nur für Bohle
-            var kannUebernachtungskostenBuchen = 
+            var kannUebernachtungskostenBuchen =
                 DigiWebApp.SettingsController.defaultsettings.get("kannUebernachtungskostenBuchen");
             try {
                 if (typeof (record.record.kannUebernachtungskostenBuchen) !== "undefined") {
                     kannUebernachtungskostenBuchen = record.get('kannUebernachtungskostenBuchen');
                 }
             } catch (e) { }
-            
+
             //, kannReisezeitBuchen: true, nur für Scholpp
-            var kannReisezeitBuchen = 
+            var kannReisezeitBuchen =
                 DigiWebApp.SettingsController.defaultsettings.get("kannReisezeitBuchen");
             try {
                 if (typeof (record.record.kannReisezeitBuchen) !== "undefined") {
                     kannReisezeitBuchen = record.get('kannReisezeitBuchen');
                 }
             } catch (e) { }
-            
+
             //, doScr: true
             var doScr = DigiWebApp.SettingsController.defaultsettings.get("doScr");
             try {
-	            if (typeof(record.record.doScr) !== "undefined") {
-	            	doScr = record.get('doScr');
-	            }
+                if (typeof(record.record.doScr) !== "undefined") {
+                    doScr = record.get('doScr');
+                }
             } catch (e) { }
 
             //, logfilesLoeschenNachTagen: 40
-            var logfilesLoeschenNachTagen = 
+            var logfilesLoeschenNachTagen =
                 DigiWebApp.SettingsController.defaultsettings.get("logfilesLoeschenNachTagen");
             try {
-	            if (typeof(record.record.logfilesLoeschenNachTagen) !== "undefined") {
-	            	logfilesLoeschenNachTagen = record.get('logfilesLoeschenNachTagen');
-	            }
+                if (typeof(record.record.logfilesLoeschenNachTagen) !== "undefined") {
+                    logfilesLoeschenNachTagen = record.get('logfilesLoeschenNachTagen');
+                }
             } catch (e) { }
 
             //, stammdatenabgleichBeiArbeitsbeginn: true
-            var stammdatenabgleichBeiArbeitsbeginn = 
+            var stammdatenabgleichBeiArbeitsbeginn =
                 DigiWebApp.SettingsController.defaultsettings.get("stammdatenabgleichBeiArbeitsbeginn");
             try {
-	            if (typeof(record.record.stammdatenabgleichBeiArbeitsbeginn) !== "undefined") {
-	            	stammdatenabgleichBeiArbeitsbeginn = record.get('stammdatenabgleichBeiArbeitsbeginn');
-	            }
+                if (typeof(record.record.stammdatenabgleichBeiArbeitsbeginn) !== "undefined") {
+                    stammdatenabgleichBeiArbeitsbeginn = record.get('stammdatenabgleichBeiArbeitsbeginn');
+                }
+            } catch (e) { }
+
+            //, syncKolonne: true
+            var syncKolonne =
+                DigiWebApp.SettingsController.defaultsettings.get("syncKolonne");
+            try {
+                if (typeof (record.record.syncKolonne) !== "undefined") {
+                    syncKolonne = record.get('syncKolonne');
+                }
             } catch (e) { }
 
             // Bugfix 2142: get branding from local storage
@@ -463,8 +473,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
 	            }
             } catch (e) {}
 
-			settings = {
-            	  debug: [{
+            settings = {
+                debug: [{
                       value: record.get('debug')
                     , label: 'debug'
                     , isSelected: record.get('debug')
@@ -486,7 +496,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , settingsPassword: record.get('settingsPassword')
                 , workerId: record.get('workerId')
                 , timeouthappened: DigiWebApp.ApplicationController.timeouthappened
-        		, skipEvents: DigiWebApp.ApplicationController.skipEvents
+                , skipEvents: DigiWebApp.ApplicationController.skipEvents
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
                 , localStoragePrefix: M.LOCAL_STORAGE_PREFIX
@@ -560,95 +570,96 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , currentTimezoneOffset: record.get('currentTimezoneOffset')
                 , currentTimezone: record.get('currentTimezone')
                 , ServiceApp_ermittleGeokoordinate: [{
-	                   value: record.get('ServiceApp_ermittleGeokoordinate')
-	                 , label: M.I18N.l('ServiceApp_ermittleGeokoordinate')
-	                 , isSelected: record.get('ServiceApp_ermittleGeokoordinate')
-	            }]
+                       value: record.get('ServiceApp_ermittleGeokoordinate')
+                     , label: M.I18N.l('ServiceApp_ermittleGeokoordinate')
+                     , isSelected: record.get('ServiceApp_ermittleGeokoordinate')
+                }]
                 , ServiceApp_datenUebertragen: [{
- 	                   value: record.get('ServiceApp_datenUebertragen')
- 	                 , label: M.I18N.l('ServiceApp_datenUebertragen')
- 	                 , isSelected: record.get('ServiceApp_datenUebertragen')
- 	            }]
-               , ServiceApp_engeKopplung: [{
-	                   value: record.get('ServiceApp_engeKopplung')
-	                 , label: M.I18N.l('ServiceApp_engeKopplung')
-	                 , isSelected: record.get('ServiceApp_engeKopplung')
-	            }]
-               , ServiceApp_FallBack: [{
-	                   value: record.get('ServiceApp_FallBack')
-	                 , label: M.I18N.l('ServiceApp_FallBack')
-	                 , isSelected: record.get('ServiceApp_FallBack')
-	            }]
-               , ServiceApp_PORT: record.get('ServiceApp_PORT')
-               , debugDatabaseServer: record.get('debugDatabaseServer')
-               , mitarbeiterVorname: record.get('mitarbeiterVorname')
-               , mitarbeiterNachname: record.get('mitarbeiterNachname')
-               , mitarbeiterId: record.get('mitarbeiterId')
-	           , auftragsDetailsKoppeln: [{
-	                   value: record.get('auftragsDetailsKoppeln')
-	                 , label: M.I18N.l('auftragsDetailsKoppeln')
-	                 , isSelected: record.get('auftragsDetailsKoppeln')
-	           }]
-               , vibrationsDauer: vibrationsDauer
-	           , terminliste_keineKuenstlichenTermine: [{
-	                   value: terminliste_keineKuenstlichenTermine
-	                 , label: M.I18N.l('terminliste_keineKuenstlichenTermine')
-	                 , isSelected: terminliste_keineKuenstlichenTermine
-	           }]
-    	       , terminliste_ignoriereAuftragszeitraum: [{
-	                   value: terminliste_ignoriereAuftragszeitraum
-	                 , label: M.I18N.l('terminliste_ignoriereAuftragszeitraum')
-	                 , isSelected: terminliste_ignoriereAuftragszeitraum
-	           }]
-    	       , festePauseStornieren_nurAktuellerTag: [{
-	                   value: festePauseStornieren_nurAktuellerTag
-	                 , label: M.I18N.l('festePauseStornieren_nurAktuellerTag')
-	                 , isSelected: festePauseStornieren_nurAktuellerTag
-    	       }]
-    	       , startTimeout: record.get('startTimeout')
-               , GPSenableHighAccuracy: [{
-	                   value: GPSenableHighAccuracy
-	                 , label: M.I18N.l('GPSenableHighAccuracy')
-	                 , isSelected: GPSenableHighAccuracy
-               }]
-               , GPSenableHighAccuracyFallback: [{
-	                   value: GPSenableHighAccuracyFallback
-	                 , label: M.I18N.l('GPSenableHighAccuracyFallback')
-	                 , isSelected: GPSenableHighAccuracyFallback
-               }]
-               , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
-               , GPSBackgroundService: [{
-	                   value: GPSBackgroundService
-	                 , label: M.I18N.l('GPSBackgroundService')
-	                 , isSelected: GPSBackgroundService
-	           }]
-               , BookingReminderHours: BookingReminderHours
-               , closeAppAfterCloseDay: [{
-	                   value: closeAppAfterCloseDay
-	                 , label: M.I18N.l('closeAppAfterCloseDay')
-	                 , isSelected: closeAppAfterCloseDay
-	           }]
-	           , DTC6aktiv: DTC6aktiv
-	           , useNativeLoader: useNativeLoader
-	           , pictureEncodingType: pictureEncodingType
-	           , pictureEncodingQuality: pictureEncodingQuality
-	           , pictureAllowEdit: pictureAllowEdit
-	           , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
-	           , scrId: scrId
-	           , overrideApplicationQuota: overrideApplicationQuota
-	           , logWriterInterval: logWriterInterval
-	           , progressViewVerwendenAb: progressViewVerwendenAb
-	           , logDelete: logDelete
-	           , logSave: logSave
-               , kannFahrtkostenBuchen: kannFahrtkostenBuchen
-               , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
-               , kannReisezeitBuchen: kannReisezeitBuchen
-               , doScr: doScr
-               , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
-			}; // settings = {
-        /* default values */
+                       value: record.get('ServiceApp_datenUebertragen')
+                     , label: M.I18N.l('ServiceApp_datenUebertragen')
+                     , isSelected: record.get('ServiceApp_datenUebertragen')
+                }]
+                , ServiceApp_engeKopplung: [{
+                       value: record.get('ServiceApp_engeKopplung')
+                     , label: M.I18N.l('ServiceApp_engeKopplung')
+                     , isSelected: record.get('ServiceApp_engeKopplung')
+                }]
+                , ServiceApp_FallBack: [{
+                       value: record.get('ServiceApp_FallBack')
+                     , label: M.I18N.l('ServiceApp_FallBack')
+                     , isSelected: record.get('ServiceApp_FallBack')
+                }]
+                , ServiceApp_PORT: record.get('ServiceApp_PORT')
+                , debugDatabaseServer: record.get('debugDatabaseServer')
+                , mitarbeiterVorname: record.get('mitarbeiterVorname')
+                , mitarbeiterNachname: record.get('mitarbeiterNachname')
+                , mitarbeiterId: record.get('mitarbeiterId')
+                , auftragsDetailsKoppeln: [{
+                       value: record.get('auftragsDetailsKoppeln')
+                     , label: M.I18N.l('auftragsDetailsKoppeln')
+                     , isSelected: record.get('auftragsDetailsKoppeln')
+                }]
+                , vibrationsDauer: vibrationsDauer
+                , terminliste_keineKuenstlichenTermine: [{
+                       value: terminliste_keineKuenstlichenTermine
+                     , label: M.I18N.l('terminliste_keineKuenstlichenTermine')
+                     , isSelected: terminliste_keineKuenstlichenTermine
+                }]
+                , terminliste_ignoriereAuftragszeitraum: [{
+                       value: terminliste_ignoriereAuftragszeitraum
+                     , label: M.I18N.l('terminliste_ignoriereAuftragszeitraum')
+                     , isSelected: terminliste_ignoriereAuftragszeitraum
+                }]
+                , festePauseStornieren_nurAktuellerTag: [{
+                       value: festePauseStornieren_nurAktuellerTag
+                     , label: M.I18N.l('festePauseStornieren_nurAktuellerTag')
+                     , isSelected: festePauseStornieren_nurAktuellerTag
+                }]
+                , startTimeout: record.get('startTimeout')
+                , GPSenableHighAccuracy: [{
+                       value: GPSenableHighAccuracy
+                     , label: M.I18N.l('GPSenableHighAccuracy')
+                     , isSelected: GPSenableHighAccuracy
+                }]
+                , GPSenableHighAccuracyFallback: [{
+                       value: GPSenableHighAccuracyFallback
+                     , label: M.I18N.l('GPSenableHighAccuracyFallback')
+                     , isSelected: GPSenableHighAccuracyFallback
+                }]
+                , GPSmaximumAgeMinutes: GPSmaximumAgeMinutes
+                , GPSBackgroundService: [{
+                       value: GPSBackgroundService
+                     , label: M.I18N.l('GPSBackgroundService')
+                     , isSelected: GPSBackgroundService
+                }]
+                , BookingReminderHours: BookingReminderHours
+                , closeAppAfterCloseDay: [{
+                       value: closeAppAfterCloseDay
+                     , label: M.I18N.l('closeAppAfterCloseDay')
+                     , isSelected: closeAppAfterCloseDay
+                }]
+                , DTC6aktiv: DTC6aktiv
+                , useNativeLoader: useNativeLoader
+                , pictureEncodingType: pictureEncodingType
+                , pictureEncodingQuality: pictureEncodingQuality
+                , pictureAllowEdit: pictureAllowEdit
+                , mengeneingabeMitTelKeyboard: mengeneingabeMitTelKeyboard
+                , scrId: scrId
+                , overrideApplicationQuota: overrideApplicationQuota
+                , logWriterInterval: logWriterInterval
+                , progressViewVerwendenAb: progressViewVerwendenAb
+                , logDelete: logDelete
+                , logSave: logSave
+                , kannFahrtkostenBuchen: kannFahrtkostenBuchen
+                , kannUebernachtungskostenBuchen: kannUebernachtungskostenBuchen
+                , kannReisezeitBuchen: kannReisezeitBuchen
+                , doScr: doScr
+                , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
+                , syncKolonne: syncKolonne
+            }; // settings = {
         } else {
-        	//console.log("using default settings");
+            /* default values */
+            //console.log("using default settings");
             settings = {
                   debug: [{
                       value: DigiWebApp.SettingsController.defaultsettings.get("debug")
@@ -669,7 +680,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                 , settingsPassword: DigiWebApp.SettingsController.defaultsettings.get("settingsPassword")
                 , workerId: DigiWebApp.SettingsController.defaultsettings.get("workerId")
                 , timeouthappened: DigiWebApp.ApplicationController.timeouthappened
-            	, skipEvents: DigiWebApp.ApplicationController.skipEvents
+                , skipEvents: DigiWebApp.ApplicationController.skipEvents
                 , platform: M.Environment.getPlatform()
                 , userAgent: navigator.userAgent
                 , localStoragePrefix: M.LOCAL_STORAGE_PREFIX
@@ -797,18 +808,19 @@ DigiWebApp.SettingsController = M.Controller.extend({
                , overrideApplicationQuota: DigiWebApp.SettingsController.defaultsettings.get("overrideApplicationQuota")
                , logWriterInterval: DigiWebApp.SettingsController.defaultsettings.get("logWriterInterval")
                , progressViewVerwendenAb: DigiWebApp.SettingsController.defaultsettings.get("progressViewVerwendenAb")
-	           , logDelete: DigiWebApp.SettingsController.defaultsettings.get("logDelete")
-	           , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
+               , logDelete: DigiWebApp.SettingsController.defaultsettings.get("logDelete")
+               , logSave: DigiWebApp.SettingsController.defaultsettings.get("logSave")
                , kannFahrtkostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannFahrtkostenBuchen')
                , kannUebernachtungskostenBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannUebernachtungskostenBuchen')
                , kannReisezeitBuchen: DigiWebApp.SettingsController.defaultsettings.get('kannReisezeitBuchen')
                , doScr: DigiWebApp.SettingsController.defaultsettings.get('doScr')
-               , logfilesLoeschenNachTagen: DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen')
+                , logfilesLoeschenNachTagen: DigiWebApp.SettingsController.defaultsettings.get('logfilesLoeschenNachTagen')
+                , syncKolonne: DigiWebApp.SettingsController.defaultsettings.get('syncKolonne')
             }; // settings = {
-            
+
             record = DigiWebApp.Settings.createRecord(DigiWebApp.SettingsController.defaultsettings_object).save();
         } // end default settings
-                
+
         that.set('settings', settings);
 		if (typeof window.logDelete != "undefined") { window.logDelete = parseBool(settings.logDelete); }
 		if (typeof window.logSave != "undefined") { window.logSave = parseBool(settings.logSave); }
@@ -826,20 +838,20 @@ DigiWebApp.SettingsController = M.Controller.extend({
 				workerId = QueryString.w;
 			if (typeof(QueryString.v) != 'undefined')
 				connectionCode = QueryString.v;
-			
+
 			if (false) {
 				company = unScrStr(unescape(company), 4711);
 				password = unScrStr(unescape(password), 4711);
 				workerId = unScrStr(unescape(workerId), 4711);
 				connectionCode = unScrStr(unescape(connectionCode), 4711);
 			}
-			
+
 			$('#' + DigiWebApp.SettingsPage.content.companyGrid.companyInput.id).val(company);
 			$('#' + DigiWebApp.SettingsPage.content.passwordGrid.passwordInput.id).val(password);
 			$('#' + DigiWebApp.SettingsPage.content.workerIdGrid.workerIdInput.id).val(workerId);
 			$('#' + DigiWebApp.SettingsPage.content.connectionCodeGrid.connectionCodeInput.id).val(connectionCode);
 		}
-		
+
 		var fileNamesToDelete = [];
 		var cleanDataDirectory = function() {
 			var refreshWAIT = function() {
@@ -1085,7 +1097,8 @@ DigiWebApp.SettingsController = M.Controller.extend({
         var kannUebernachtungskostenBuchen  = DigiWebApp.SettingsController.getSetting("kannUebernachtungskostenBuchen");
         var kannReisezeitBuchen             = DigiWebApp.SettingsController.getSetting("kannReisezeitBuchen");
         var doScr                           = DigiWebApp.SettingsController.getSetting("doScr");
-        var logfilesLoeschenNachTagen       = DigiWebApp.SettingsController.getSetting("logfilesLoeschenNachTagen");
+        var logfilesLoeschenNachTagen = DigiWebApp.SettingsController.getSetting("logfilesLoeschenNachTagen");
+        var syncKolonne = DigiWebApp.SettingsController.getSetting("syncKolonne");
 
         if (company) {
             if(!numberRegex.test(company)) {
@@ -1228,6 +1241,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                                     record.set('doScr', doScr);
                                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                                    record.set('syncKolonne', syncKolonne);
 
                                                     /* now save */
                                                     //alert("saveSettings (if(record) == true)");
@@ -1334,6 +1348,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                     record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                     record.set('doScr', doScr);
                                     record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                    record.set('syncKolonne', syncKolonne);
 
                                     /* now save */
                                     //alert("saveSettings (if(record) == false)");
@@ -1414,6 +1429,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                record.set('syncKolonne', syncKolonne);
 
                                 /* now save */
                                 //alert("saveSettings (isNew)");
@@ -1494,6 +1510,7 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 record.set('kannReisezeitBuchen', kannReisezeitBuchen);
                                 record.set('doScr', doScr);
                                 record.set('logfilesLoeschenNachTagen', logfilesLoeschenNachTagen);
+                                record.set('syncKolonne', syncKolonne);
 
                                 /* now save */
                                 //alert("saveSettings (not isNew)");
@@ -1576,18 +1593,19 @@ DigiWebApp.SettingsController = M.Controller.extend({
                                 , kannReisezeitBuchen: kannReisezeitBuchen
                                 , doScr: doScr
                                 , logfilesLoeschenNachTagen: logfilesLoeschenNachTagen
+                                , syncKolonne: syncKolonne
                             }); // record =
 
                             /* now save */
                             //alert("saveSettings (createNewOne)");
                             DigiWebApp.SettingsController.saveSettings(record);
-                    		DigiWebApp.SettingsController.saveDone = YES;
+                            DigiWebApp.SettingsController.saveDone = YES;
                         }
                     }
                 }
                 , cancel: {
                     action: function() {
-            			DigiWebApp.SettingsController.saveDone = YES;
+                        DigiWebApp.SettingsController.saveDone = YES;
                         return;
                     }
                 }

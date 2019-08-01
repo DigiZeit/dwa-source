@@ -123,6 +123,9 @@
   <!-- Plugin and config to enable and restrict network access -->
   <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
 
+  <!-- Plugin to send intent on Android to ensure ServiceApp is running-->
+  <plugin spec="https://github.com/cordova-misc/cordova-webintent.git#v2.0.0" source="git" />
+
   <!--<access origin="*" subdomains="true" />-->
   <access origin="http://127.0.0.1*" subdomains="true" />
   <access origin="http://localhost" subdomains="true" />

@@ -1,0 +1,17 @@
+Bauen für Android:
+1) ./espresso_build_release.sh deploy /cygdrive/d/Dropbox laufen lassen (ggf. Dropbox-Pfad anpassen)
+2) Auf build.phonegap.com App erstellen lassen
+3) Datei runterladen, in P:\DIGI-WebApp\Buildarchiv\automatischeBuilds ablegen
+4) Datei in der Google Play Console hochladen
+
+Bauen für iOS:
+1) In release-config.xml folgende Zeile ändern:
+   Vorher: version 	= "@version@.@versionCode@"
+   Nachher: version 	= "@versionCode@"
+   Grund: Das wird für den CFBundleShortVersionString verwendet, und für den schreibt Apple vor, dass er aus maximal drei, mit Punkten getrennten Zahlen bestehen muss, wir hätten aber vier.
+2) ./espresso_build_release.sh deploy /cygdrive/d/Dropbox laufen lassen (ggf. Dropbox-Pfad anpassen)
+3) Auf build.phonegap.com App erstellen lassen
+4) Datei runterladen, in P:\DIGI-WebApp\Buildarchiv\automatischeBuilds ablegen
+5) Datei auf dem Mac mini mit dem Application Loader hochladen
+6) App-Version auf appstoreconnect.apple.com anlegen, zur Prüfung einreichen
+7) release_config.xml wieder zurück ändern
