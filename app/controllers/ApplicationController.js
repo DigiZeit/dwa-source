@@ -987,11 +987,12 @@ DigiWebApp.ApplicationController = M.Controller.extend({
     , ensureServiceAppIsRunning: function () {
         if (hasValue(window.plugins) && hasValue(window.plugins.webintent)) {
             window.plugins.webintent.startActivity({
-                action: window.plugins.webintent.ACTION_VIEW,
-                url: 'geo:0,0?q=' + 'Paris'
+                action: 'android.intent.action.MAIN',
+                category: 'android.intent.category.LAUNCHER',
+                componentName: 'de.digi.digiServiceApp.activity.MainActivity'
               },
               function() {},
-              function() { alert('Failed to open URL via Android Intent'); }
+              function() { alert('Starten der ServiceApp fehlgeschlagen.'); }
             );
         }
       }
