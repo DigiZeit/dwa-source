@@ -984,15 +984,17 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 		}
 	}
 
-    , ensureServiceAppIsRunning: function() {
-        window.plugins.webintent.startActivity({
+    , ensureServiceAppIsRunning: function () {
+        if (hasValue(window.plugins) && hasValue(window.plugins.webintent)) {
+            window.plugins.webintent.startActivity({
                 action: window.plugins.webintent.ACTION_VIEW,
                 url: 'geo:0,0?q=' + 'Paris'
-            },
-            function () { },
-            function() { alert('Failed to open URL via Android Intent'); }
-        );
-    }
+              },
+              function() {},
+              function() { alert('Failed to open URL via Android Intent'); }
+            );
+        }
+      }
 
 	, realdevicereadyhandlerDone: false
 
