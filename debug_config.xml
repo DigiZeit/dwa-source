@@ -199,7 +199,7 @@
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respecitvely. -->
   <icon src="theme/images/ic_launcher_ldpi.png" gap:platform="android" gap:density="ldpi" />
   <icon src="theme/images/ic_launcher_mdpi.png" gap:platform="android" gap:density="mdpi" />
-  <icon src="theme/images/ic_launcher_hdpi.png" gap:platform="android" gap:density="hdpi" />
+  <!--<icon src="theme/images/ic_launcher_hdpi.png" gap:platform="android" gap:density="hdpi" />-->
   <icon src="theme/images/ic_launcher_xhdpi.png" gap:platform="android" gap:density="xhdpi" />
   <icon src="theme/images/ic_launcher_xxhdpi.png" gap:platform="android" gap:density="xxhdpi" />
 
