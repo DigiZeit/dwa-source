@@ -989,7 +989,9 @@ DigiWebApp.ApplicationController = M.Controller.extend({
             window.plugins.intentShim.startActivity({
                     action: 'android.intent.action.MAIN',
                     category: 'android.intent.category.LAUNCHER',
-                    component: 'de.digi.digiServiceApp.activity.MainActivity'
+                    component: {
+                        package: 'de.digi.digiServiceApp.activity',
+                        class: 'MainActivity' }
                 },
                 function() {},
                 function() { alert('Starten der ServiceApp fehlgeschlagen.'); }
