@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10989"
-	versionCode = "10989"
-	version 	= "1.9.0.10989">
+	android-versionCode = "10990"
+	versionCode = "10990"
+	version 	= "1.9.0.10990">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -18,9 +18,6 @@
     DIGI Zeiterfassung GmbH
   </author>
 
-  <gap:platform name="ios" />
-  <gap:platform name="android" minVersion="4.0" />
-  <gap:platform name="winphone" />
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
   <!-- <gap:platform name="blackberry" project="widgets" /> -->
@@ -45,12 +42,23 @@
     <preference name="StatusBarBackgroundColor" value="#000000"/>
     <preference name="StatusBarStyle" value="blackopaque" />
   </platform>
-  <platform name="android">
+  <platform name="android" minVersion="4.0">
     <preference name="orientation" value="default" />
     <!-- Aktiviert das alte Verhalten von cordova-plugin-file. -->
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
+    <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
+    <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
+    <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
+    <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
+    <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
+    <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
+    <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
+    <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
+    <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
+    <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
@@ -144,7 +152,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10989</string>
+    <string>10990</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -211,17 +219,6 @@
   </platform>
 
   <platform name="android">
-  <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
-  <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
-  <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
-  <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
-  <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
-  <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
-  <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
-  <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
-  <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
-  <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
   </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
