@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10982"
-	versionCode = "10982"
-	version 	= "1.9.0.10982">
+	android-versionCode = "10983"
+	versionCode = "10983"
+	version 	= "1.9.0.10983">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -27,7 +27,9 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-9.0.0" />
+  <!-- Auf 9.0.0 zu gehen ist nicht möglich, weil dann das Plugin
+       local-notification bei iOS nicht mehr baut. -->
+  <preference name="phonegap-version" value="cli-7.1.0" />
   <!-- android: Minimum Android SDK version. 14 = Android 4.0 -->
   <preference name="android-minSdkVersion" value="14" />
   <!-- android: Android target SDK version. 28 = Android 9.0 -->
@@ -142,7 +144,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10982</string>
+    <string>10983</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -198,11 +200,11 @@
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
   <platform name="android">
-    <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
-    <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
-    <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
-    <icon src="theme/images/ic_launcher_xhdpi.png" density="xhdpi" />
-    <icon src="theme/images/ic_launcher_xxhdpi.png" density="xxhdpi" />
+    <icon src="theme/images/ic_launcher_ldpi.png" gap:qualifier="ldpi" />
+    <icon src="theme/images/ic_launcher_mdpi.png" gap:qualifier="mdpi" />
+    <icon src="theme/images/ic_launcher_hdpi.png" gap:qualifier="hdpi" />
+    <icon src="theme/images/ic_launcher_xhdpi.png" gap:qualifier="xhdpi" />
+    <icon src="theme/images/ic_launcher_xxhdpi.png" gap:qualifier="xxhdpi" />
   </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
@@ -215,7 +217,7 @@
 
   <gap:splash src="theme/images/splash_default_320x426_DSO.png" gap:platform="blackberry" />
 
-  <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" gap:platform="android" gap:density="ldpi" />
+  <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" gap:platform="android" gap:qualifier="port-ldpi" />
   <gap:splash src="theme/images/splash_mdpi_320x470_DSO.9.png" gap:platform="android" gap:qualifier="port-mdpi" />
   <gap:splash src="theme/images/splash_hdpi_480x640_DSO.9.png" gap:platform="android" gap:qualifier="port-hdpi" />
   <gap:splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" gap:platform="android" gap:qualifier="port-xhdpi" />
