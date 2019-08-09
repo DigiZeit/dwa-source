@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10988"
-	versionCode = "10988"
-	version 	= "1.9.0.10988">
+	android-versionCode = "10989"
+	versionCode = "10989"
+	version 	= "1.9.0.10989">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -102,7 +102,7 @@
   <gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
 
   <plugin name="cordova-android-support-gradle-release">
-    <variable name="ANDROID_SUPPORT_VERSION" value="26.0.0"/>
+    <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
   </plugin>
 
   <!-- Baut mit PhoneGap 6 nicht mehr und wird nicht mehr gepflegt. -->
@@ -144,7 +144,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10988</string>
+    <string>10989</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -212,11 +212,11 @@
 
   <platform name="android">
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
-  <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
-  <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
-  <icon src="theme/images/ic_launcher_xhdpi.png" density="xhdpi" />
-  <icon src="theme/images/ic_launcher_xxhdpi.png" density="xxhdpi" />
+  <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
+  <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
+  <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
+  <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
+  <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
   <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
   <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
   <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
