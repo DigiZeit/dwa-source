@@ -212,11 +212,11 @@
 
   <platform name="android">
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <icon src="theme/images/ic_launcher_ldpi.png" platform="android" qualifier="ldpi" />
-  <icon src="theme/images/ic_launcher_mdpi.png" platform="android" qualifier="mdpi" />
-  <icon src="theme/images/ic_launcher_hdpi.png" platform="android" qualifier="hdpi" />
-  <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" qualifier="xhdpi" />
-  <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" qualifier="xxhdpi" />
+  <icon src="theme/images/ic_launcher_ldpi.png" qualifier="ldpi" />
+  <icon src="theme/images/ic_launcher_mdpi.png" qualifier="mdpi" />
+  <icon src="theme/images/ic_launcher_hdpi.png" qualifier="hdpi" />
+  <icon src="theme/images/ic_launcher_xhdpi.png" qualifier="xhdpi" />
+  <icon src="theme/images/ic_launcher_xxhdpi.png" qualifier="xxhdpi" />
   <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" qualifier="port-ldpi" />
   <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" qualifier="port-mdpi" />
   <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" qualifier="port-hdpi" />
