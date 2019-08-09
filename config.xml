@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10981"
-	versionCode = "10981"
-	version 	= "1.9.0.10981">
+	android-versionCode = "10982"
+	versionCode = "10982"
+	version 	= "1.9.0.10982">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -27,11 +27,11 @@
 
   <icon src="theme/images/Icon.png" gap:role="default" />
 
-  <preference name="phonegap-version" value="cli-7.1.0" />
+  <preference name="phonegap-version" value="cli-9.0.0" />
   <!-- android: Minimum Android SDK version. 14 = Android 4.0 -->
   <preference name="android-minSdkVersion" value="14" />
   <!-- android: Android target SDK version. 28 = Android 9.0 -->
-  <preference name="android-targetSdkVersion" value="26" />
+  <preference name="android-targetSdkVersion" value="28" />
   <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
   <preference name="android-installLocation" value="auto" />
   <!-- all: hides the status bar at the top of the screen -->
@@ -142,7 +142,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10981</string>
+    <string>10982</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -197,13 +197,13 @@
   <icon src="theme/images/icon_appstore_1024.png" gap:platform="ios" width="1024" height="1024"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <!--<platform name="android">
+  <platform name="android">
     <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
     <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
     <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
     <icon src="theme/images/ic_launcher_xhdpi.png" density="xhdpi" />
     <icon src="theme/images/ic_launcher_xxhdpi.png" density="xxhdpi" />
-  </platform>-->
+  </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
   <icon src="theme/images/icon-winphone.png" gap:platform="winphone" />
