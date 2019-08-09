@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10983"
-	versionCode = "10983"
-	version 	= "1.9.0.10983">
+	android-versionCode = "10984"
+	versionCode = "10984"
+	version 	= "1.9.0.10984">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -144,7 +144,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10983</string>
+    <string>10984</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -199,13 +199,11 @@
   <icon src="theme/images/icon_appstore_1024.png" gap:platform="ios" width="1024" height="1024"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <platform name="android">
-    <icon src="theme/images/ic_launcher_ldpi.png" gap:qualifier="ldpi" />
-    <icon src="theme/images/ic_launcher_mdpi.png" gap:qualifier="mdpi" />
-    <icon src="theme/images/ic_launcher_hdpi.png" gap:qualifier="hdpi" />
-    <icon src="theme/images/ic_launcher_xhdpi.png" gap:qualifier="xhdpi" />
-    <icon src="theme/images/ic_launcher_xxhdpi.png" gap:qualifier="xxhdpi" />
-  </platform>
+  <icon src="theme/images/ic_launcher_ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
+  <icon src="theme/images/ic_launcher_mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
+  <icon src="theme/images/ic_launcher_hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
+  <icon src="theme/images/ic_launcher_xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+  <icon src="theme/images/ic_launcher_xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
   <icon src="theme/images/icon-winphone.png" gap:platform="winphone" />
