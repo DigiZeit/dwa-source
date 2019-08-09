@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10985"
-	versionCode = "10985"
-	version 	= "1.9.0.10985">
+	android-versionCode = "10986"
+	versionCode = "10986"
+	version 	= "1.9.0.10986">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -144,7 +144,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10985</string>
+    <string>10986</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -181,11 +181,15 @@
 
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
-  <icon src="theme/images/Icon.png" platform="blackberry" />
-  <icon src="theme/images/Icon.png" platform="blackberry" state="hover" />
+  <platform name="blackberry">
+    <icon src="theme/images/Icon.png" />
+    <icon src="theme/images/Icon.png" state="hover" />
+    <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
+  </platform>
 
   <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina
       Screens, and iPad screen respectively -->
+  <platform name="ios">
   <icon src="theme/images/icon_ios_40.png" platform="ios" width="40" height="40" />
   <icon src="theme/images/icon_ios_57.png" platform="ios" width="57" height="57" />
   <icon src="theme/images/icon_ios_72.png" platform="ios" width="72" height="72" />
@@ -197,41 +201,36 @@
   <icon src="theme/images/icon_ios_152.png" platform="ios" width="152" height="152" />
   <icon src="theme/images/icon_ios_167.png" platform="ios" width="167" height="167" />
   <icon src="theme/images/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
+  <!-- Die Dateien müssen genau so heißen -->
+  <splash src="theme/images/Default@2x~iphone~anyany.png"/>
+  <splash src="theme/images/Default@2x~iphone~comany.png"/>
+  <splash src="theme/images/Default@3x~iphone~anyany.png"/>
+  <splash src="theme/images/Default@3x~iphone~comany.png"/>
+  <splash src="theme/images/Default@2x~ipad~anyany.png"/>
+  <splash src="theme/images/Default@2x~ipad~comany.png"/>
+  </platform>
 
+  <platform name="android">
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
   <icon src="theme/images/ic_launcher_ldpi.png" platform="android" qualifier="ldpi" />
   <icon src="theme/images/ic_launcher_mdpi.png" platform="android" qualifier="mdpi" />
   <icon src="theme/images/ic_launcher_hdpi.png" platform="android" qualifier="hdpi" />
   <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" qualifier="xhdpi" />
   <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" qualifier="xxhdpi" />
-
-  <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <icon src="theme/images/icon-winphone.png" platform="winphone" />
-  <icon src="theme/images/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
-
-  <!-- if a single splash screen is specified the build will use it for all builds.
-      Currently, all platforms except iOS use a single splash screen. -->
-  <!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> -->
-
-  <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
-
   <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" qualifier="port-ldpi" />
   <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" qualifier="port-mdpi" />
   <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" qualifier="port-hdpi" />
   <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" qualifier="port-xhdpi" />
   <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" qualifier="port-xxhdpi" />
-
-  <platform name="ios">
-    <!-- Die Dateien müssen genau so heißen -->
-    <splash src="theme/images/Default@2x~iphone~anyany.png"/>
-    <splash src="theme/images/Default@2x~iphone~comany.png"/>
-    <splash src="theme/images/Default@3x~iphone~anyany.png"/>
-    <splash src="theme/images/Default@3x~iphone~comany.png"/>
-    <splash src="theme/images/Default@2x~ipad~anyany.png"/>
-    <splash src="theme/images/Default@2x~ipad~comany.png"/>
   </platform>
 
-  <!-- Windows Phone 7 requires a specific dimension or platform attribute -->
+  <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
+  <platform name="winphone">
+  <icon src="theme/images/icon-winphone.png" platform="winphone" />
+  <icon src="theme/images/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
   <splash src="theme/images/splash_winphone_480x800_DSO.jpg" platform="winphone" />
+  </platform>
+
+  <!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> -->
 
 </widget>
