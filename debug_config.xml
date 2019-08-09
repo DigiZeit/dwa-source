@@ -49,16 +49,16 @@
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
     <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-    <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
-    <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
-    <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
-    <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
-    <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
-    <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
-    <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
-    <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
-    <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
-    <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
+    <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
+    <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
+    <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
+    <icon src="theme/images/ic_launcher_xhdpi.png" density="xhdpi" />
+    <icon src="theme/images/ic_launcher_xxhdpi.png" density="xxhdpi" />
+    <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" density="port-ldpi" />
+    <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" density="port-mdpi" />
+    <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" density="port-hdpi" />
+    <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" density="port-xhdpi" />
+    <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" density="port-xxhdpi" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
@@ -216,9 +216,6 @@
   <splash src="theme/images/Default@3x~iphone~comany.png"/>
   <splash src="theme/images/Default@2x~ipad~anyany.png"/>
   <splash src="theme/images/Default@2x~ipad~comany.png"/>
-  </platform>
-
-  <platform name="android">
   </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
