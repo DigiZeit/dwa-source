@@ -990,8 +990,7 @@ DigiWebApp.ApplicationController = M.Controller.extend({
                     action: 'android.intent.action.MAIN',
                     category: 'android.intent.category.LAUNCHER',
                     component: {
-                        package: 'de.digi.digiServiceApp.activity',
-                        class: 'MainActivity' }
+                        package: 'de.digi.digiServiceApp.activity'}
                 },
                 function() {},
                 function() { alert('Starten der ServiceApp fehlgeschlagen.'); }
