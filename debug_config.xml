@@ -222,7 +222,7 @@
   </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <icon src="res/icon-winphone.png" platform="winphone" />
+  <!--<icon src="res/icon-winphone.png" platform="winphone" />
   <icon src="res/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
-  <splash src="res/splash_winphone_480x800_DSO.jpg" platform="winphone" />
+  <splash src="res/splash_winphone_480x800_DSO.jpg" platform="winphone" />-->
 </widget>
