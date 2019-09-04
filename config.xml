@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10994"
-	versionCode = "10994"
-	version 	= "1.9.0.10994">
+	android-versionCode = "10995"
+	versionCode = "10995"
+	version 	= "1.9.0.10995">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -14,7 +14,7 @@
   </description>
 
   <author href="http://www.digi-zeiterfassung.de"
-		email="support@digi-zeiterfassung.de">
+        email="support@digi-zeiterfassung.de">
     DIGI Zeiterfassung GmbH
   </author>
 
@@ -48,17 +48,6 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
-    <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-    <icon src="theme/images/ic_launcher_ldpi.png" density="ldpi" />
-    <icon src="theme/images/ic_launcher_mdpi.png" density="mdpi" />
-    <icon src="theme/images/ic_launcher_hdpi.png" density="hdpi" />
-    <icon src="theme/images/ic_launcher_xhdpi.png" density="xhdpi" />
-    <icon src="theme/images/ic_launcher_xxhdpi.png" density="xxhdpi" />
-    <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" density="port-ldpi" />
-    <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" density="port-mdpi" />
-    <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" density="port-hdpi" />
-    <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" density="port-xhdpi" />
-    <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" density="port-xxhdpi" />
   </platform>
   <platform name="winphone">
     <preference name="orientation" value="default" />
@@ -127,7 +116,8 @@
   <gap:plugin name="cordova-plugin-insomnia" source="npm" version="4.0.1" />
 
   <!-- <gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
-  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> --> <!-- yet incompatible with BlackBerry prior 10 -->
+  <!-- <gap:plugin name="com.adobe.plugins.pushplugin" /> -->
+  <!-- yet incompatible with BlackBerry prior 10 -->
   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
 
   <!-- Plugin and config to enable and restrict network access -->
@@ -152,7 +142,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10994</string>
+    <string>10995</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -170,7 +160,7 @@
   </feature>
 
   <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-      <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
   </edit-config>
 
   <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
@@ -190,15 +180,14 @@
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
   <!--<platform name="blackberry">
-    <icon src="theme/images/Icon.png" />
-    <icon src="theme/images/Icon.png" state="hover" />
-    <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
+  <icon src="theme/images/Icon.png" />
+  <icon src="theme/images/Icon.png" state="hover" />
+  <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
   </platform>
   -->
 
   <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina
       Screens, and iPad screen respectively -->
-  <platform name="ios">
   <icon src="theme/images/icon_ios_40.png" platform="ios" width="40" height="40" />
   <icon src="theme/images/icon_ios_57.png" platform="ios" width="57" height="57" />
   <icon src="theme/images/icon_ios_72.png" platform="ios" width="72" height="72" />
@@ -211,21 +200,27 @@
   <icon src="theme/images/icon_ios_167.png" platform="ios" width="167" height="167" />
   <icon src="theme/images/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
   <!-- Die Dateien müssen genau so heißen -->
-  <splash src="theme/images/Default@2x~iphone~anyany.png"/>
-  <splash src="theme/images/Default@2x~iphone~comany.png"/>
-  <splash src="theme/images/Default@3x~iphone~anyany.png"/>
-  <splash src="theme/images/Default@3x~iphone~comany.png"/>
-  <splash src="theme/images/Default@2x~ipad~anyany.png"/>
-  <splash src="theme/images/Default@2x~ipad~comany.png"/>
-  </platform>
+  <splash platform="ios" src="theme/images/Default@2x~iphone~anyany.png"/>
+  <splash platform="ios" src="theme/images/Default@2x~iphone~comany.png"/>
+  <splash platform="ios" src="theme/images/Default@3x~iphone~anyany.png"/>
+  <splash platform="ios" src="theme/images/Default@3x~iphone~comany.png"/>
+  <splash platform="ios" src="theme/images/Default@2x~ipad~anyany.png"/>
+  <splash platform="ios" src="theme/images/Default@2x~ipad~comany.png"/>
+
+  <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
+  <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
+  <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
+  <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
+  <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
+  <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
+  <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
+  <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
+  <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
+  <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
+  <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <platform name="winphone">
   <icon src="theme/images/icon-winphone.png" platform="winphone" />
   <icon src="theme/images/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
   <splash src="theme/images/splash_winphone_480x800_DSO.jpg" platform="winphone" />
-  </platform>
-
-  <!-- <gap:splash src="theme/images/splash_ldpi_320x426_DSO.9.png" /> -->
-
 </widget>
