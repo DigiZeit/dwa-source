@@ -24,7 +24,7 @@
         , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.9.0.10998 beta",
+        "version": "1.9.0.10999 beta",
         "debugMode": "true",
         "keyPrefix": "#m#",
         "keySuffix": "_",
