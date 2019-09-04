@@ -969,10 +969,10 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 						}
 					});
                     DigiWebApp.ServiceAppController.deleteFilesInServiceApp(fileNamesToDelete, function (data) {
-                        DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
+                        //DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
                         DigiWebApp.ApplicationController.realDeviceReadyHandler();
                     }, function(){
-                        DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
+                        //DigiWebApp.ApplicationController.ensureServiceAppIsRunning();
                         DigiWebApp.ApplicationController.realDeviceReadyHandler();
                     });
 				});
