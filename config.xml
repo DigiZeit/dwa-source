@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "10995"
-	versionCode = "10995"
-	version 	= "1.9.0.10995">
+	android-versionCode = "10996"
+	versionCode = "10996"
+	version 	= "1.9.0.10996">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -22,7 +22,7 @@
   <!-- <gap:platform name="symbian" /> -->
   <!-- <gap:platform name="blackberry" project="widgets" /> -->
 
-  <!--<icon src="theme/images/Icon.png" role="default" />-->
+  <!--<icon src="res/Icon.png" role="default" />-->
 
   <!-- Auf 9.0.0 zu gehen ist nicht möglich, weil dann das Plugin
        local-notification bei iOS nicht mehr baut. -->
@@ -142,7 +142,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>10995</string>
+    <string>10996</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -180,47 +180,47 @@
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
   <!--<platform name="blackberry">
-  <icon src="theme/images/Icon.png" />
-  <icon src="theme/images/Icon.png" state="hover" />
-  <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
+  <icon src="res/Icon.png" />
+  <icon src="res/Icon.png" state="hover" />
+  <splash src="res/splash_default_320x426_DSO.png" platform="blackberry" />
   </platform>
   -->
 
   <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina
       Screens, and iPad screen respectively -->
-  <icon src="theme/images/icon_ios_40.png" platform="ios" width="40" height="40" />
-  <icon src="theme/images/icon_ios_57.png" platform="ios" width="57" height="57" />
-  <icon src="theme/images/icon_ios_72.png" platform="ios" width="72" height="72" />
-  <icon src="theme/images/icon_ios_76.png" platform="ios" width="76" height="76" />
-  <icon src="theme/images/icon_ios_80.png" platform="ios" width="80" height="80" />
-  <icon src="theme/images/icon_ios_114.png" platform="ios" width="114" height="114" />
-  <icon src="theme/images/icon_ios_120.png" platform="ios" width="120" height="120" />
-  <icon src="theme/images/icon_ios_144.png" platform="ios" width="144" height="144" />
-  <icon src="theme/images/icon_ios_152.png" platform="ios" width="152" height="152" />
-  <icon src="theme/images/icon_ios_167.png" platform="ios" width="167" height="167" />
-  <icon src="theme/images/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
+  <icon src="res/icon_ios_40.png" platform="ios" width="40" height="40" />
+  <icon src="res/icon_ios_57.png" platform="ios" width="57" height="57" />
+  <icon src="res/icon_ios_72.png" platform="ios" width="72" height="72" />
+  <icon src="res/icon_ios_76.png" platform="ios" width="76" height="76" />
+  <icon src="res/icon_ios_80.png" platform="ios" width="80" height="80" />
+  <icon src="res/icon_ios_114.png" platform="ios" width="114" height="114" />
+  <icon src="res/icon_ios_120.png" platform="ios" width="120" height="120" />
+  <icon src="res/icon_ios_144.png" platform="ios" width="144" height="144" />
+  <icon src="res/icon_ios_152.png" platform="ios" width="152" height="152" />
+  <icon src="res/icon_ios_167.png" platform="ios" width="167" height="167" />
+  <icon src="res/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
   <!-- Die Dateien müssen genau so heißen -->
-  <splash platform="ios" src="theme/images/Default@2x~iphone~anyany.png"/>
-  <splash platform="ios" src="theme/images/Default@2x~iphone~comany.png"/>
-  <splash platform="ios" src="theme/images/Default@3x~iphone~anyany.png"/>
-  <splash platform="ios" src="theme/images/Default@3x~iphone~comany.png"/>
-  <splash platform="ios" src="theme/images/Default@2x~ipad~anyany.png"/>
-  <splash platform="ios" src="theme/images/Default@2x~ipad~comany.png"/>
+  <splash platform="ios" src="res/Default@2x~iphone~anyany.png"/>
+  <splash platform="ios" src="res/Default@2x~iphone~comany.png"/>
+  <splash platform="ios" src="res/Default@3x~iphone~anyany.png"/>
+  <splash platform="ios" src="res/Default@3x~iphone~comany.png"/>
+  <splash platform="ios" src="res/Default@2x~ipad~anyany.png"/>
+  <splash platform="ios" src="res/Default@2x~ipad~comany.png"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <icon src="theme/images/ic_launcher_ldpi.png" platform="android" density="ldpi" />
-  <icon src="theme/images/ic_launcher_mdpi.png" platform="android" density="mdpi" />
-  <icon src="theme/images/ic_launcher_hdpi.png" platform="android" density="hdpi" />
-  <icon src="theme/images/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
-  <icon src="theme/images/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
-  <splash src="theme/images/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
-  <splash src="theme/images/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
-  <splash src="theme/images/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
-  <splash src="theme/images/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
-  <splash src="theme/images/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
+  <icon src="res/ic_launcher_ldpi.png" platform="android" density="ldpi" />
+  <icon src="res/ic_launcher_mdpi.png" platform="android" density="mdpi" />
+  <icon src="res/ic_launcher_hdpi.png" platform="android" density="hdpi" />
+  <icon src="res/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
+  <icon src="res/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
+  <splash src="res/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
+  <splash src="res/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
+  <splash src="res/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
+  <splash src="res/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
+  <splash src="res/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <icon src="theme/images/icon-winphone.png" platform="winphone" />
-  <icon src="theme/images/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
-  <splash src="theme/images/splash_winphone_480x800_DSO.jpg" platform="winphone" />
+  <icon src="res/icon-winphone.png" platform="winphone" />
+  <icon src="res/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
+  <splash src="res/splash_winphone_480x800_DSO.jpg" platform="winphone" />
 </widget>

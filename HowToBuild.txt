@@ -1,5 +1,9 @@
+Voraussetzungen:
+- Cygwin muss installiert sein
+- NPM-Package "Espresso" muss installiert sein
+
 Bauen für Android:
-1) ./espresso_build_release.sh deploy /cygdrive/d/Dropbox laufen lassen (ggf. Dropbox-Pfad anpassen)
+1) In Cygwin-Shell ./espresso_build_release.sh deploy /cygdrive/d/Dropbox laufen lassen (ggf. Dropbox-Pfad anpassen)
 2) Auf build.phonegap.com App erstellen lassen
 3) Datei runterladen, in P:\DIGI-WebApp\Buildarchiv\automatischeBuilds ablegen
 4) Datei in der Google Play Console hochladen
