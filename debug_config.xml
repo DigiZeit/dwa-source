@@ -22,7 +22,7 @@
   <!-- <gap:platform name="symbian" /> -->
   <!-- <gap:platform name="blackberry" project="widgets" /> -->
 
-  <icon src="theme/images/Icon.png" role="default" />
+  <!--<icon src="theme/images/Icon.png" role="default" />-->
 
   <!-- Auf 9.0.0 zu gehen ist nicht möglich, weil dann das Plugin
        local-notification bei iOS nicht mehr baut. -->
@@ -189,11 +189,12 @@
 
   <!-- the following is useful for Build when you have many icons; this way
     Blackberry will use the correct icon -->
-  <platform name="blackberry">
+  <!--<platform name="blackberry">
     <icon src="theme/images/Icon.png" />
     <icon src="theme/images/Icon.png" state="hover" />
     <splash src="theme/images/splash_default_320x426_DSO.png" platform="blackberry" />
   </platform>
+  -->
 
   <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina
       Screens, and iPad screen respectively -->
