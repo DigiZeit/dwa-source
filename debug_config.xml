@@ -208,13 +208,12 @@
   <splash platform="ios" src="res/Default@2x~ipad~comany.png"/>
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
-  <!--  density="ldpi" />-->
   <platform name="android">
-      <icon src="res/ic_launcher_ldpi.png" platform="android" />
-      <icon src="res/ic_launcher_mdpi.png" platform="android" />
-      <icon src="res/ic_launcher_hdpi.png" platform="android" />
-      <icon src="res/ic_launcher_xhdpi.png" platform="android" />
-      <icon src="res/ic_launcher_xxhdpi.png" platform="android" />
+      <icon src="res/ic_launcher_ldpi.png" platform="android" density="ldpi" />
+      <icon src="res/ic_launcher_mdpi.png" platform="android" density="mdpi" />
+      <icon src="res/ic_launcher_hdpi.png" platform="android" density="hdpi" />
+      <icon src="res/ic_launcher_xhdpi.png" platform="android" density="xhdpi" />
+      <icon src="res/ic_launcher_xxhdpi.png" platform="android" density="xxhdpi" />
       <splash src="res/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
       <splash src="res/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
       <splash src="res/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
