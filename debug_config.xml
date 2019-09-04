@@ -209,16 +209,18 @@
 
   <!-- Android requires specific dimensions; ldpi, mdpi, and hdpi respectively. -->
   <!--  density="ldpi" />-->
-  <icon src="res/ic_launcher_ldpi.png" platform="android" />
-  <icon src="res/ic_launcher_mdpi.png" platform="android" />
-  <icon src="res/ic_launcher_hdpi.png" platform="android" />
-  <icon src="res/ic_launcher_xhdpi.png" platform="android" />
-  <icon src="res/ic_launcher_xxhdpi.png" platform="android" />
-  <splash src="res/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
-  <splash src="res/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
-  <splash src="res/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
-  <splash src="res/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
-  <splash src="res/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
+  <platform name="android">
+      <icon src="res/ic_launcher_ldpi.png" platform="android" />
+      <icon src="res/ic_launcher_mdpi.png" platform="android" />
+      <icon src="res/ic_launcher_hdpi.png" platform="android" />
+      <icon src="res/ic_launcher_xhdpi.png" platform="android" />
+      <icon src="res/ic_launcher_xxhdpi.png" platform="android" />
+      <splash src="res/splash_ldpi_320x426_DSO.9.png" platform="android" density="port-ldpi" />
+      <splash src="res/splash_mdpi_320x470_DSO.9.png" platform="android" density="port-mdpi" />
+      <splash src="res/splash_hdpi_480x640_DSO.9.png" platform="android" density="port-hdpi" />
+      <splash src="res/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
+      <splash src="res/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
+  </platform>
 
   <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
   <icon src="res/icon-winphone.png" platform="winphone" />
