@@ -22,8 +22,6 @@
   <!-- <gap:platform name="symbian" /> -->
   <!-- <gap:platform name="blackberry" project="widgets" /> -->
 
-  <!--<icon src="res/Icon.png" role="default" />-->
-
   <!-- Auf 9.0.0 zu gehen ist nicht möglich, weil dann das Plugin
        local-notification bei iOS nicht mehr baut. -->
   <preference name="phonegap-version" value="cli-7.1.0" />
@@ -176,15 +174,6 @@
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTask" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleTop" /></gap:config-file> -->
   <!-- <gap:config-file platform="android" parent="/manifest/application"><activity android:launchMode="singleInstance" /></gap:config-file> -->
-
-  <!-- the following is useful for Build when you have many icons; this way
-    Blackberry will use the correct icon -->
-  <!--<platform name="blackberry">
-  <icon src="res/Icon.png" />
-  <icon src="res/Icon.png" state="hover" />
-  <splash src="res/splash_default_320x426_DSO.png" platform="blackberry" />
-  </platform>
-  -->
 
   <!-- iOS requires specific dimensions for app icons; classic iPhone screens, Retina
       Screens, and iPad screen respectively -->
