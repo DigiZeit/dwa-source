@@ -2,21 +2,21 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		    = "com.digi.webapp"
-	android-versionCode = "11009"
-	versionCode = "11009"
-	version 	= "1.9.0.11009">
+	id		    = "com.digi.webappbeta"
+	android-versionCode = "11010"
+	versionCode = "11010"
+	version 	= "1.9.0.11010">
 
-	<name>DIGI-WebApp</name>
+  <name>DIGI-WebApp Beta</name>
 
-	<description>
-		Die mobile Zeiterfassung für das Handwerk!
-	</description>
+  <description>
+    Die mobile Zeiterfassung für das Handwerk!
+  </description>
 
-	<author href="http://www.digi-zeiterfassung.de"
-		email="support@digi-zeiterfassung.de">
-		DIGI Zeiterfassung GmbH
-	</author>
+  <author href="http://www.digi-zeiterfassung.de"
+        email="support@digi-zeiterfassung.de">
+    DIGI Zeiterfassung GmbH
+  </author>
 
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
@@ -140,7 +140,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>11009</string>
+    <string>11010</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -158,14 +158,14 @@
   </feature>
 
   <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-      <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
   </edit-config>
 
   <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-        <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
-    </edit-config>
+    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+  </edit-config>
 
-    <!-- geolocation on ios8 -->
+  <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationUsageDescription" overwrite="false"></gap:config-file>
@@ -188,7 +188,7 @@
   <icon src="res/icon_ios_152.png" platform="ios" width="152" height="152" />
   <icon src="res/icon_ios_167.png" platform="ios" width="167" height="167" />
   <icon src="res/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
-    <!-- Die Dateien müssen genau so heißen -->
+  <!-- Die Dateien müssen genau so heißen -->
   <splash platform="ios" src="res/Default@2x~iphone~anyany.png"/>
   <splash platform="ios" src="res/Default@2x~iphone~comany.png"/>
   <splash platform="ios" src="res/Default@3x~iphone~anyany.png"/>
