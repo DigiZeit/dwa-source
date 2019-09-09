@@ -985,18 +985,18 @@ DigiWebApp.ApplicationController = M.Controller.extend({
 	}
 
     , ensureServiceAppIsRunning: function () {
-        //if (hasValue(window.plugins) && hasValue(window.plugins.intentShim)) {
-        //    window.plugins.intentShim.startActivity({
-        //            action: 'android.intent.action.MAIN',
-        //            category: 'android.intent.category.LAUNCHER',
-        //            component: {
-        //                package: 'de.digi.digiServiceApp.activity',
-        //                "class": 'EinstellungenActivity' }
-        //        },
-        //        function() {},
-        //        function() { alert('Starten der ServiceApp fehlgeschlagen.'); }
-        //    );
-        //}
+        if (hasValue(window.plugins) && hasValue(window.plugins.intentShim)) {
+            window.plugins.intentShim.startActivity({
+                    action: 'android.intent.action.MAIN',
+                    category: 'android.intent.category.LAUNCHER',
+                    component: {
+                        package: 'de.digi.digiServiceApp.activity',
+                        "class": 'EinstellungenActivity' }
+                },
+                function() {},
+                function() { alert('Starten der ServiceApp fehlgeschlagen.'); }
+            );
+        }
     }
 
 	, realdevicereadyhandlerDone: false
