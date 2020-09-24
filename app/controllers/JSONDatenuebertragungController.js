@@ -21,13 +21,13 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
 		}
-		if (!that.DatabaseServer 
-		|| (that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		if (!that.DatabaseServer
+            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
 		{
 		  	that.empfangeUrl(function(obj) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
-		  		that.sendDataWithServer(sendObj);
-		  	});
+				that.sendDataWithServer(sendObj);
+			});
 		} else {
 			DigiWebApp.ApplicationController.DigiLoaderView.hide();
 			that.sendDataWithServer(sendObj);
@@ -131,8 +131,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			writeToLog("Daten konnten nicht empfangen werden! Falsche Übergabe an recieveData.");
 			return;
 		}
-		if (!that.DatabaseServer 
-		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		if (!that.DatabaseServer
+            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
 		{
 			that.empfangeUrl(function() {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -250,25 +250,21 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 	, setDatabaseServer: function(server) {
 		var that = this;
 		that.DatabaseServer = server;
-		//DigiWebApp.RequestController.DatabaseServer = that.DatabaseServer;
 	}
 	
 	, setGatewayServer: function(server) {
 		var that = this;
 		that.GatewayServer = server;
-		//DigiWebApp.RequestController.GatewayServer = that.GatewayServer;
 	}
 	
 	, setDatabaseServerTimestamp: function(timestamp) {
 		var that = this;
 		that.DatabaseServerTimestamp = timestamp;
-		//DigiWebApp.RequestController.DatabaseServerTimestamp = that.DatabaseServerTimestamp;
 	}
 	
 	, setAuthentifizierenCode: function(code) {
 		var that = this;		
 		that.AuthentifizierenCode = code;
-		//DigiWebApp.RequestController.AuthentifizierenCode = that.AuthentifizierenCode;
 	}
 
 	, empfangeUrl: function(callback) {
@@ -276,8 +272,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 		if (typeof(callback) != "function") callback = function(){};
 		
-		if (!that.DatabaseServer 
-		|| (that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		if (!that.DatabaseServer
+            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
 		{
 			// do it
 		} else {
@@ -408,8 +404,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (!DigiWebApp.SettingsController.EnforceCredentials()) {
 			return;
 		}
-		if (!that.DatabaseServer 
-		|| ( that.DatabaseServerTimestamp && (that.DatabaseServerTimestamp - new Date().getTime() > 60000))) 
+		if (!that.DatabaseServer
+            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
 		{
 			that.empfangeUrl(function() {
 		  		that.authentifizierenWithServer(callback);
