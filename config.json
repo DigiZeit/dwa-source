@@ -1,9 +1,9 @@
 {
     "name" : "DigiWebApp",
-    "mode": "debug",
-    "debugLevel": 1,
+    "mode": "production",
+    "debugLevel": 0,
     "eliminate": false,
-    "minify": false,
+    "minify": true,
     "proxies": [
         {
             "baseUrl": "http://www.digi-gps.de/Handy2WebServices",
@@ -16,23 +16,23 @@
     ],
     "defaultLanguage": "de_de",
     "htmlHeader": [
-          "<meta charset=\"utf-8\">"
-        , "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">"
-        , "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">"
-        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />"
-        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />"
-        , "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
+        "<meta charset=\"utf-8\">",
+        "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">",
+        "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon-72.png\" />",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon.png\" />",
+        "<link rel=\"apple-touch-icon\" href=\"theme/images/Icon_2x.png\" />"
     ],
     "application": {
-        "version": "1.9.0.11013 beta",
-        "debugMode": "true",
+        "version": "1.9.0.11014",
+        "debugMode": "false",
         "keyPrefix": "#m#",
         "keySuffix": "_",
         "timeStampCreated": "created_at",
         "timeStampUpdated": "updated_at",
         "m_id": "m_id"
     },
-    "defaultDeployTarget": "digi-gps.de-testing",
+    "defaultDeployTarget": "digi-gps.de-latest",
     "deploy": {
         "digi-gps.de-testing": {
             "method": "ftp",
@@ -57,7 +57,7 @@
                 "debugLevel": 0
             }
         }
-    },
+    },    
     "libraries": [
           {"name": "xml2json", "refs": ["jquery.xml2json_1.3.js"]}
         , {"name": "cordova", "refs": ["cordova.js", "childbrowser.js", "barcodescanner.js"]}
