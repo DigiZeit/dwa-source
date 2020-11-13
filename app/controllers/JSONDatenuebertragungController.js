@@ -1,6 +1,6 @@
 // ==========================================================================
 // The M-Project - Mobile HTML5 Application Framework
-// Generated with: Espresso 
+// Generated with: Espresso
 //
 // Project: DigiWebApp
 // Controller: JSONDatenuebertragungController
@@ -8,23 +8,25 @@
 // manuell var-checked
 DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
-	  consoleLogOutput: YES
-	, GatewayServer: 'primary-gateway.digi-zeitserver.de'
-	, GatewayPool: 'gateway.digi-zeitserver.de'
-	, DatabaseServer: null
-	, DatabaseServerTimestamp: null
-	, AuthentifizierenCode: null
-	
-	, sendData: function(sendObj) {
+    consoleLogOutput: YES
+    , empfangeUrlInterval: 60000
+    , GatewayServer: 'primary-gateway.digi-zeitserver.de'
+    , GatewayPool: 'gateway.digi-zeitserver.de'
+    , DatabaseServer: null
+    , DatabaseServerTimestamp: null
+    , AuthentifizierenCode: null
+
+    , sendData: function(sendObj) {
 		var that = this;
 		if (!sendObj) {
 			writeToLog("Daten konnten nicht gesendet werden! Falsche Übergabe an sendData.");
 			return;
 		}
 		if (!that.DatabaseServer
-            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
-		{
-		  	that.empfangeUrl(function(obj) {
+            || (that.DatabaseServerTimestamp
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
+        {
+            that.empfangeUrl(function (obj) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
 				that.sendDataWithServer(sendObj);
 			});
@@ -132,7 +134,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			return;
 		}
 		if (!that.DatabaseServer
-            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
+            || (that.DatabaseServerTimestamp
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
 		{
 			that.empfangeUrl(function() {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -273,7 +276,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		if (typeof(callback) != "function") callback = function(){};
 		
 		if (!that.DatabaseServer
-            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
+            || (that.DatabaseServerTimestamp
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
 		{
 			// do it
 		} else {
@@ -405,7 +409,8 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 			return;
 		}
 		if (!that.DatabaseServer
-            || (that.DatabaseServerTimestamp && (new Date().getTime() - that.DatabaseServerTimestamp > 60000)))
+            || (that.DatabaseServerTimestamp
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
 		{
 			that.empfangeUrl(function() {
 		  		that.authentifizierenWithServer(callback);
