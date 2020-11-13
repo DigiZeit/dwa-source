@@ -9,7 +9,7 @@
 DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 
     consoleLogOutput: YES
-    , empfangeUrlInterval: 60000
+    , EmpfangeUrlInterval: 60000
     , GatewayServer: 'primary-gateway.digi-zeitserver.de'
     , GatewayPool: 'gateway.digi-zeitserver.de'
     , DatabaseServer: null
@@ -24,7 +24,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		if (!that.DatabaseServer
             || (that.DatabaseServerTimestamp
-                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.EmpfangeUrlInterval))
         {
             that.empfangeUrl(function (obj) {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -135,7 +135,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		if (!that.DatabaseServer
             || (that.DatabaseServerTimestamp
-                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.EmpfangeUrlInterval))
 		{
 			that.empfangeUrl(function() {
 				DigiWebApp.ApplicationController.DigiLoaderView.hide();
@@ -277,7 +277,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		
 		if (!that.DatabaseServer
             || (that.DatabaseServerTimestamp
-                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.EmpfangeUrlInterval))
 		{
 			// do it
 		} else {
@@ -410,7 +410,7 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
 		}
 		if (!that.DatabaseServer
             || (that.DatabaseServerTimestamp
-                && new Date().getTime() - that.DatabaseServerTimestamp > that.empfangeUrlInterval))
+                && new Date().getTime() - that.DatabaseServerTimestamp > that.EmpfangeUrlInterval))
 		{
 			that.empfangeUrl(function() {
 		  		that.authentifizierenWithServer(callback);
@@ -541,7 +541,6 @@ DigiWebApp.JSONDatenuebertragungController = M.Controller.extend({
         		, additionalQueryParameter : ''
         		, geraeteIdOverride: false
         };
-		//if (inDebug() && staticDebugging) alert(navigator.platform + ", JSONDatenuebertragungController.empfangeUrl " + "vor recieveData ");
 		that.recieveDataWithServerAuthenticated(receiveObj);
 	}
 
