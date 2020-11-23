@@ -2,12 +2,12 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		    = "com.digi.webappprodash"
+	id		    = "com.digi.webapppro"
 	android-versionCode = "@versionCode@"
 	versionCode = "@versionCode@"
 	version 	= "@version@.@versionCode@">
 
-	<name>-DIGI-WebApp Pro-</name>
+	<name>DIGI-WebApp Pro</name>
 
 	<description>
 		Die mobile Zeiterfassung für das Handwerk!
