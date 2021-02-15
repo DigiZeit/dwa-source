@@ -102,10 +102,7 @@
 
   <!-- Das Setting requestLegacyExternalStorage wird benötigt, damit bei Android 10
        kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
-  <edit-config file="app/src/main/AndroidManifest.xml"
-               mode="merge"
-               target="/manifest/application"
-               xmlns:android="http://schemas.android.com/apk/res/android">
+  <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
       <application android:requestLegacyExternalStorage="true" />
   </edit-config>
 
