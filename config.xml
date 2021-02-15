@@ -2,21 +2,21 @@
 <widget xmlns	= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
-	id		    = "com.digi.webappbeta"
-	android-versionCode = "11026"
-	versionCode = "11026"
-	version 	= "1.9.0.11026">
+	id		    = "com.digi.webapp"
+	android-versionCode = "11027"
+	versionCode = "11027"
+	version 	= "1.9.0.11027">
 
-  <name>DIGI-WebApp Beta</name>
+	<name>DIGI-WebApp</name>
 
-  <description>
-    Die mobile Zeiterfassung für das Handwerk!
-  </description>
+	<description>
+		Die mobile Zeiterfassung für das Handwerk!
+	</description>
 
-  <author href="http://www.digi-zeiterfassung.de"
-        email="support@digi-zeiterfassung.de">
-    DIGI Zeiterfassung GmbH
-  </author>
+	<author href="http://www.digi-zeiterfassung.de"
+		email="support@digi-zeiterfassung.de">
+		DIGI Zeiterfassung GmbH
+	</author>
 
   <!-- <gap:platform name="webos" /> -->
   <!-- <gap:platform name="symbian" /> -->
@@ -49,14 +49,10 @@
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
     <!-- Das Setting requestLegacyExternalStorage wird benötigt, damit bei Android 10
-       kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
+         kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
     <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
         <application android:requestLegacyExternalStorage="true" />
     </edit-config>
-  </platform>
-
-  <platform name="winphone">
-    <preference name="orientation" value="default" />
   </platform>
 
   <preference name="load-url-timeout" value="60000" />
@@ -109,6 +105,15 @@
     <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
   </plugin>
 
+  <!-- Das Setting requestLegacyExternalStorage wird benötigt, damit bei Android 10
+       kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
+  <edit-config file="app/src/main/AndroidManifest.xml"
+               mode="merge"
+               target="/manifest/application"
+               xmlns:android="http://schemas.android.com/apk/res/android">
+      <application android:requestLegacyExternalStorage="true" />
+  </edit-config>
+
   <!-- Baut mit PhoneGap 6 nicht mehr und wird nicht mehr gepflegt. -->
   <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
   <!-- Das Plugin von wellbload ist nicht mehr erhältlich, bei Github kommt ein 404-Fehler. -->
@@ -149,7 +154,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>11026</string>
+    <string>11027</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -167,14 +172,14 @@
   </feature>
 
   <edit-config target="NSLocationAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+      <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
   </edit-config>
 
   <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
-  </edit-config>
+        <string>Zum Erfassen von Zeitbuchungen mit Positionsangabe benötigt die App Zugriff auf die Ortungsdienste.</string>
+    </edit-config>
 
-  <!-- geolocation on ios8 -->
+    <!-- geolocation on ios8 -->
   <gap:config-file platform="ios" parent="NSLocationAlwaysUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationWhenInUseUsageDescription" overwrite="false"></gap:config-file>
   <gap:config-file platform="ios" parent="NSLocationUsageDescription" overwrite="false"></gap:config-file>
@@ -197,7 +202,7 @@
   <icon src="res/icon_ios_152.png" platform="ios" width="152" height="152" />
   <icon src="res/icon_ios_167.png" platform="ios" width="167" height="167" />
   <icon src="res/icon_appstore_1024.png" platform="ios" width="1024" height="1024"/>
-  <!-- Die Dateien müssen genau so heißen -->
+    <!-- Die Dateien müssen genau so heißen -->
   <splash platform="ios" src="res/Default@2x~iphone~anyany.png"/>
   <splash platform="ios" src="res/Default@2x~iphone~comany.png"/>
   <splash platform="ios" src="res/Default@3x~iphone~anyany.png"/>
@@ -218,9 +223,4 @@
       <splash src="res/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
       <splash src="res/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
   </platform>
-
-  <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <!--<icon src="res/icon-winphone.png" platform="winphone" />
-  <icon src="res/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
-  <splash src="res/splash_winphone_480x800_DSO.jpg" platform="winphone" />-->
 </widget>

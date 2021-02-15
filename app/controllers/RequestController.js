@@ -8,7 +8,7 @@
 // manuell var-checked
 DigiWebApp.RequestController = M.Controller.extend({
 
-      softwareVersion: 11026
+      softwareVersion: 11027
 
     , getDatabaseServer: function(myFunc, obj) {
         return DigiWebApp.JSONDatenuebertragungController.empfangeUrl(function(){

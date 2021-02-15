@@ -49,14 +49,10 @@
     <!-- Längerer Timeout für den App-Start auf langsamen Geräten (z.B. Xcover 2) -->
     <preference name="loadUrlTimeoutValue" value="700000" />
     <!-- Das Setting requestLegacyExternalStorage wird benötigt, damit bei Android 10
-       kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
+         kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
     <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
         <application android:requestLegacyExternalStorage="true" />
     </edit-config>
-  </platform>
-
-  <platform name="winphone">
-    <preference name="orientation" value="default" />
   </platform>
 
   <preference name="load-url-timeout" value="60000" />
@@ -218,9 +214,4 @@
       <splash src="res/splash_xhdpi_720x960_DSO.9.png" platform="android" density="port-xhdpi" />
       <splash src="res/splash_xxhdpi_1080x1920_DSO.9.png" platform="android" density="port-xxhdpi" />
   </platform>
-
-  <!-- Windows Phone 7 requires specific dimensions or platform and role attributes -->
-  <!--<icon src="res/icon-winphone.png" platform="winphone" />
-  <icon src="res/winphone_small_tile_110x110_DSO.png" platform="winphone" role="background" />
-  <splash src="res/splash_winphone_480x800_DSO.jpg" platform="winphone" />-->
 </widget>
