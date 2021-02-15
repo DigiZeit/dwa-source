@@ -253,9 +253,8 @@ DigiWebApp.MediaFile = M.Model.create({
 		} catch(e3) {
 			errorCallback(e3);
 		}
-
     }
-	
+
 	, readFromFile: function(successCallback, myErrorCallback) {
 		var that = this;
 		

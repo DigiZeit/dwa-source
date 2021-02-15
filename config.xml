@@ -3,9 +3,9 @@
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	xmlns:android = "http://schemas.android.com/apk/res/android"
 	id		    = "com.digi.webappbeta"
-	android-versionCode = "11021"
-	versionCode = "11021"
-	version 	= "1.9.0.11021">
+	android-versionCode = "11022"
+	versionCode = "11022"
+	version 	= "1.9.0.11022">
 
   <name>DIGI-WebApp Beta</name>
 
@@ -100,6 +100,15 @@
     <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
   </plugin>
 
+  <!-- Das Setting requestLegacyExternalStorage wird benötigt, damit bei Android 10
+       kein "scoped storage" verwendet wird. Nötig bei TargetSdk 29. -->
+  <edit-config file="app/src/main/AndroidManifest.xml"
+               mode="merge"
+               target="/manifest/application"
+               xmlns:android="http://schemas.android.com/apk/res/android">
+      <application android:requestLegacyExternalStorage="true" />
+  </edit-config>
+
   <!-- Baut mit PhoneGap 6 nicht mehr und wird nicht mehr gepflegt. -->
   <!-- <gap:plugin name="cordova-plugin-background-geolocation" source="npm" version="1.0.6" /> -->
   <!-- Das Plugin von wellbload ist nicht mehr erhältlich, bei Github kommt ein 404-Fehler. -->
@@ -140,7 +149,7 @@
   <allow-intent href="https://*/*" />
 
   <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>11021</string>
+    <string>11022</string>
   </gap:config-file>
 
   <gap:config-file platform="ios" parent="UIStatusBarHidden">
