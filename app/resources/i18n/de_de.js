@@ -304,8 +304,8 @@ M.I18N.de_de = {
 	, camera: "Kamera öffnen"
 	, noCamera: "Keine Kamera vorhanden."
 	, noPicLoaded: "Es wurde kein Foto geladen. Erlaubt sind jpg, png und bmp."
-    , errorWhileRequestingQuota: "Nicht genug Speicherplatz verfügbar"
-    , errorWhileSavingFile: "Fehler beim Speichern einer Mediendatei: "
+    , errorWhileRequestingQuota: "Nicht genug Speicherplatz verfügbar!"
+    , errorWhileSavingFile: "Fehler beim Speichern einer Mediendatei."
     , ungueltigeZahl : 'Falsches Zahlenformat'
 	, ungueltigeZahlMsg: 'Sie können nicht . und , gleichzeitig verwenden!'
 	, notActivated: 'Fehlende Freischaltung!'

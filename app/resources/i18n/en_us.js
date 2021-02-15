@@ -304,8 +304,8 @@ M.I18N.en_us = {
 	, camera: "Open camera"
 	, noCamera: "No camera available"
 	, noPicLoaded: "No picture (jpg, png or bmp) has been loaded."
-    , errorWhileRequestingQuota: "Not enough space available"
-    , errorWhileSavingFile: "Error while writing a media file: "
+    , errorWhileRequestingQuota: "Not enough space available!"
+    , errorWhileSavingFile: "Error while writing a media file."
 	, ungueltigeZahl : 'Wrong number format'
 	, ungueltigeZahlMsg: 'You cannot use . and , at the same time!'
 	, notActivated: 'Missing feature activation!'

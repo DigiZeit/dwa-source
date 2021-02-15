@@ -160,7 +160,7 @@ DigiWebApp.MediaFile = M.Model.create({
                 trackError("saveToFileError");
                 DigiWebApp.ApplicationController.nativeAlertDialogView({
                     title: M.I18N.l('error'),
-                    message: M.I18N.l('errorWhileSavingFile') + err
+                    message: M.I18N.l('errorWhileSavingFile')
                 });
             };
         } else {
@@ -214,7 +214,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
-			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+			              , message: M.I18N.l('errorWhileRequestingQuota')
 			            });
 				});
 
@@ -324,7 +324,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
-			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+			              , message: M.I18N.l('errorWhileRequestingQuota')
 			            });
 				});
 			} else {
@@ -415,7 +415,7 @@ DigiWebApp.MediaFile = M.Model.create({
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
-			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
+			              , message: M.I18N.l('errorWhileRequestingQuota')
 			            });
 				});
 			} else {
