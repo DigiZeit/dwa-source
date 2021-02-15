@@ -133,13 +133,12 @@ DigiWebApp.MediaFile = M.Model.create({
 		} else {
 			return YES;
 		}
-    	
     }
-    
-    , saveToFile: function(myWriteContent, successCallback, myErrorCallback) {		
+
+    , saveToFile: function(myWriteContent, successCallback, myErrorCallback) {
 		var that = this;
 		var writeContent = new String(myWriteContent);
-		
+
 		// check if fileName is set
 		//if ((!(that.get('fileName'))) || (that.get('fileName') && (that.get('fileName').length === 0))) {
 		if (!that.hasFileName()) {
@@ -147,24 +146,28 @@ DigiWebApp.MediaFile = M.Model.create({
 			//alert("saving with fileName " + that.get("fileName"));
 			that.save();
 	    }
-	
+
 		// check for successCallback is a function
 		if (typeof successCallback !== "function") {
 			trackError("saveToFileError: successCallback is not a function");
 	        return false;
-	    }
-	
-		// check for errorCallback is a function (optional)
-		var errorCallback;
-	    if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
-	    	errorCallback = function(evt) {
-	    		trackError("saveToFileError");
-	    	};
-	    } else {
-	    	errorCallback = myErrorCallback;
-	    }
-		
-		// check if LocalFileSystem is defined
+        }
+
+        // check for errorCallback is a function (optional)
+        var errorCallback;
+        if (!myErrorCallback || (typeof myErrorCallback !== "function")) {
+            errorCallback = function(err) {
+                trackError("saveToFileError");
+                DigiWebApp.ApplicationController.nativeAlertDialogView({
+                    title: M.I18N.l('error'),
+                    message: M.I18N.l('errorWhileSavingFile') + err
+                });
+            };
+        } else {
+            errorCallback = myErrorCallback;
+        }
+
+        // check if LocalFileSystem is defined
 		if (typeof window.requestFileSystem === "undefined") {
 			trackError("saveToFileError: no LocalFileSystem available");
 			successCallback("");
@@ -207,12 +210,12 @@ DigiWebApp.MediaFile = M.Model.create({
 					   		}, errorCallback);     // dataDirectory.getFile
 					   	}, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
-				}, function(e) {
+				}, function(err) {
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-			            });	    		        					
+			            });
 				});
 
 			} else {
@@ -317,12 +320,12 @@ DigiWebApp.MediaFile = M.Model.create({
 					    	}, errorCallback);     // dataDirectory.getFile
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
-				}, function(e) {
+				}, function(err) {
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-			            });	    		        					
+			            });
 				});
 			} else {
 
@@ -408,12 +411,12 @@ DigiWebApp.MediaFile = M.Model.create({
 					    	}, errorCallback);     // dataDirectory.getFile
 					    }, errorCallback);         // fileSystem.root.getDirectory
 				    }, errorCallback);             // window.requestFileSystem
-				}, function(e) {
+				}, function(err) {
 					  trackError('Error while requesting Quota');
 	  		            DigiWebApp.ApplicationController.nativeAlertDialogView({
 			                title: M.I18N.l('error')
 			              , message: M.I18N.l('errorWhileRequestingQuota') + ": " + err
-			            });	    		        					
+			            });
 				});
 			} else {
 				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {

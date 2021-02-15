@@ -245,8 +245,8 @@ M.I18N.de_de = {
 	, dauer: "Dauer"
 	, forward: "Vor"
 	, backward: "Zurück"
-	, lastWorkday: "Letzter Arbeitstag"		
-	, buchungskoordinaten: "Buchungskoordinaten"		
+	, lastWorkday: "Letzter Arbeitstag"
+	, buchungskoordinaten: "Buchungskoordinaten"
 	, auftragskoordinaten: "Auftraggskoordinaten"
 	, Monday: "Montag"
 	, Tuesday: "Dienstag"
@@ -274,7 +274,7 @@ M.I18N.de_de = {
 	, language_nl_nl: "Nederlands"
 	, refresh: "Akt."
 	, cancel: "Abbrechen"
-		
+
 	, selectSomethingOptional: "Bitte wählen... (optional)"
 	, bookingFrom: "Von"
 	, bookingTo: "Bis"
@@ -304,26 +304,27 @@ M.I18N.de_de = {
 	, camera: "Kamera öffnen"
 	, noCamera: "Keine Kamera vorhanden."
 	, noPicLoaded: "Es wurde kein Foto geladen. Erlaubt sind jpg, png und bmp."
-	, errorWhileRequestingQuota: "Nicht genug Speicherplatz verfügbar!"
-	, ungueltigeZahl : 'Falsches Zahlenformat'
+    , errorWhileRequestingQuota: "Nicht genug Speicherplatz verfügbar"
+    , errorWhileSavingFile: "Fehler beim Speichern einer Mediendatei: "
+    , ungueltigeZahl : 'Falsches Zahlenformat'
 	, ungueltigeZahlMsg: 'Sie können nicht . und , gleichzeitig verwenden!'
 	, notActivated: 'Fehlende Freischaltung!'
 	, notActivatedMsg: 'Diese Funktion ist nicht freigeschaltet!'
 	, starteDatenuebertragung: "Starte Datenübertragung"
 	, bucheFeierabend: "Buche Feierabend"
-		
+
     , ServiceApp_ermittleGeokoordinate: 'ServiceApp: Geokoordinaten'
     , ServiceApp_datenUebertragen: 'ServiceApp: Datenübertragung'
 	, ServiceApp_engeKopplung: 'ServiceApp: enge Kopplung'
 	, ServiceApp_PORT: 'ServiceApp: Port'
 	, ServiceAppKommunikation: 'Kommunikation mit ServiceApp'
 	, ServiceApp_FallBack: 'Auf aktive ServiceApp prüfen'
-	
+
 	, Spesen_Ausloese: 'Spesen/Auslöse'
 	, Spesen: 'Spesen'
 	, Uebernachtung: 'Übernachtung'
 	, SpeichernUndBuchen: 'Speichern und fortfahren'
-		
+
 	, second: "Sekunde"
 	, seconds: "Sekunden"
 	, minute: "Minute"
